@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: July 26, 2013
+# Last Change: July 28, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -18,7 +18,8 @@ import coloredlogs
 from debian.deb822 import Deb822
 
 # Modules included in our package.
-from deb_pkg_tools.control import parse_control_fields, merge_control_fields
+from deb_pkg_tools.control import (merge_control_fields, parse_control_fields,
+                                   unparse_control_fields)
 from deb_pkg_tools.repo import update_repository, FailedToSignRelease
 from deb_pkg_tools.package import build_package, inspect_package
 
@@ -33,18 +34,27 @@ class DebPkgToolsTestCase(unittest.TestCase):
 
     def test_control_field_parsing(self):
         deb822_package = Deb822(['Package: python-py2deb',
-                                 'Depends: python-deb-pkg-tools, python-pip, python-pip-accel'])
-        self.assertEqual(parse_control_fields(deb822_package),
-                         dict(Package='python-py2deb',
-                              Depends=['python-deb-pkg-tools', 'python-pip', 'python-pip-accel']))
+                                 'Depends: python-deb-pkg-tools, python-pip, python-pip-accel',
+                                 'Installed-Size: 42'])
+        parsed_info = parse_control_fields(deb822_package)
+        self.assertEqual(parsed_info,
+                         {'Package': 'python-py2deb',
+                          'Depends': ['python-deb-pkg-tools', 'python-pip', 'python-pip-accel'],
+                          'Installed-Size': 42})
+        self.assertEqual(unparse_control_fields(parsed_info), deb822_package)
 
     def test_control_field_merging(self):
         defaults = Deb822(['Package: python-py2deb',
-                           'Depends: python-deb-pkg-tools'])
-        overrides = Deb822(['Depends: python-pip, python-pip-accel'])
+                           'Depends: python-deb-pkg-tools',
+                           'Architecture: all'])
+        overrides = Deb822(['Version: 1.0',
+                            'Depends: python-pip, python-pip-accel',
+                            'Architecture: amd64'])
         self.assertEqual(merge_control_fields(defaults, overrides),
                          Deb822(['Package: python-py2deb',
-                                 'Depends: python-deb-pkg-tools, python-pip, python-pip-accel']))
+                                 'Version: 1.0',
+                                 'Depends: python-deb-pkg-tools, python-pip, python-pip-accel',
+                                 'Architecture: amd64']))
 
     def test_package_building(self, repository=None):
         directory = tempfile.mkdtemp()
