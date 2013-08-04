@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: July 28, 2013
+# Last Change: August 4, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -10,7 +10,6 @@ import logging
 import os
 import shutil
 import tempfile
-import textwrap
 import unittest
 
 # External dependencies.
@@ -20,12 +19,20 @@ from debian.deb822 import Deb822
 # Modules included in our package.
 from deb_pkg_tools.control import (merge_control_fields, parse_control_fields,
                                    unparse_control_fields)
-from deb_pkg_tools.repo import update_repository, FailedToSignRelease
+from deb_pkg_tools.repo import (activate_repository, deactivate_repository,
+                                update_repository, FailedToSignRelease)
 from deb_pkg_tools.package import build_package, inspect_package
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
+
+TEST_PACKAGE_NAME = 'deb-pkg-tools-demo-package'
+TEST_PACKAGE_FIELDS = Deb822(dict(Architecture='all',
+                                  Description='Nothing to see here, move along',
+                                  Maintainer='Peter Odding',
+                                  Package=TEST_PACKAGE_NAME,
+                                  Version='0.1'))
 
 class DebPkgToolsTestCase(unittest.TestCase):
 
@@ -63,27 +70,18 @@ class DebPkgToolsTestCase(unittest.TestCase):
             # Create the package template.
             os.mkdir(os.path.join(directory, 'DEBIAN'))
             with open(os.path.join(directory, 'DEBIAN', 'control'), 'w') as handle:
-                handle.write(textwrap.dedent('''
-                    Architecture: all
-                    Description: Nothing to see here, move along
-                    Maintainer: Peter Odding
-                    Package: just-a-test
-                    Version: 0.1
-                ''').strip())
+                TEST_PACKAGE_FIELDS.dump(handle)
             # Build the package (without any contents :-).
             package_file = build_package(directory)
             self.assertTrue(os.path.isfile(package_file))
             if repository:
                 shutil.move(package_file, repository)
-                return
-            destructors.append(functools.partial(os.unlink, package_file))
-            # Verify the package metadata.
-            fields = inspect_package(package_file)
-            self.assertEqual(fields['Architecture'], 'all')
-            self.assertEqual(fields['Description'], 'Nothing to see here, move along')
-            self.assertEqual(fields['Maintainer'], 'Peter Odding')
-            self.assertEqual(fields['Package'], 'just-a-test')
-            self.assertEqual(fields['Version'], '0.1')
+            else:
+                destructors.append(functools.partial(os.unlink, package_file))
+                # Verify the package metadata.
+                fields = inspect_package(package_file)
+                for name in TEST_PACKAGE_FIELDS:
+                    self.assertEqual(fields[name], TEST_PACKAGE_FIELDS[name])
         finally:
             for partial in destructors:
                 partial()
@@ -97,12 +95,16 @@ class DebPkgToolsTestCase(unittest.TestCase):
             self.test_package_building(repository)
             try:
                 update_repository(repository)
-                self.assertTrue(os.path.isfile(os.path.join(repository, 'Release.gpg')))
             except FailedToSignRelease:
-                logger.warn("Failed to sign `Release' file; assuming you don't have a private GPG key.")
+                logger.warn("Failed to sign `Release' file! (assuming you don't have a private GPG key)")
+                was_signed = False
+            else:
+                self.assertTrue(os.path.isfile(os.path.join(repository, 'Release.gpg')))
+                was_signed = True
             self.assertTrue(os.path.isfile(os.path.join(repository, 'Packages')))
             self.assertTrue(os.path.isfile(os.path.join(repository, 'Packages.gz')))
             self.assertTrue(os.path.isfile(os.path.join(repository, 'Release')))
+            return repository, was_signed
         finally:
             for partial in destructors:
                 partial()
@@ -111,6 +113,20 @@ class DebPkgToolsTestCase(unittest.TestCase):
         """
         To-do: Only when os.getuid() == 0?
         """
+        if os.getuid() != 0:
+            logger.warn("Skipping repository activation test because it requires root access!")
+        else:
+            repository, was_signed = self.test_repository_creation(preserve=True)
+            if not was_signed:
+                logger.warn("Skipping repository activation test because it requires a signed repository!")
+            else:
+                activate_repository(repository)
+                try:
+                    handle = os.popen('apt-cache show %s' % TEST_PACKAGE_NAME)
+                    fields = Deb822(handle)
+                    self.assertEqual(fields['Package'], TEST_PACKAGE_NAME)
+                finally:
+                    deactivate_repository(repository)
 
 if __name__ == '__main__':
     unittest.main()
