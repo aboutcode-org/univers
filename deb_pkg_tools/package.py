@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: July 26, 2013
+# Last Change: August 5, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -62,13 +62,13 @@ def inspect_package(archive):
     command_line = 'ar p %s control.tar.gz | tar xzO ./control' % pipes.quote(archive)
     return Deb822(StringIO.StringIO(execute(command_line, capture=True)))
 
-def build_package(directory, repository=None):
+def build_package(directory, repository=None, check_package=True):
     """
     Create a Debian package using the ``dpkg-deb --build`` command. The
     ``dpkg-deb --build`` command requires a certain directory tree layout and
     specific files; for more information about this topic please refer to the
-    `Debian Binary Package Building HOWTO`_. This function performs the
-    following steps to build a package:
+    `Debian Binary Package Building HOWTO`_. The :py:func:`build_package()`
+    function performs the following steps to build a package:
 
     1. Copies the files in the source directory to a temporary build directory.
     2. Updates the Installed-Size_ field in the ``DEBIAN/control`` file
@@ -80,6 +80,10 @@ def build_package(directory, repository=None):
        :py:func:`build_package()`.
     4. Runs the command ``fakeroot dpkg-deb --build`` to generate a Debian
        package from the files in the build directory.
+    5. Runs Lintian_ to check the resulting package archive for possible
+       issues. The result of Lintian is purely informational: If 'errors' are
+       reported and Lintian exits with a nonzero status code, this is ignored
+       by :py:func:`build_package()`.
 
     If any of the external commands invoked by this function fail,
     :py:exc:`deb_pkg_tools.utils.ExternalCommandFailed` is raised. If this
@@ -92,10 +96,13 @@ def build_package(directory, repository=None):
     :param repository: The pathname of an existing directory where the
                        generated ``*.deb`` archive should be stored (defaults
                        to the system wide temporary directory).
+    :param check_package: If ``True`` (the default) Lintian_ is run to check
+                          the resulting package archive for possible issues.
     :returns: The pathname of the generated ``*.deb`` archive.
 
     .. _Debian Binary Package Building HOWTO: http://tldp.org/HOWTO/html_single/Debian-Binary-Package-Building-HOWTO/
     .. _Installed-Size: http://www.debian.org/doc/debian-policy/ch-controlfields.html#s-f-Installed-Size
+    .. _Lintian: http://lintian.debian.org/
     """
     build_directory = tempfile.mkdtemp()
     logger.debug("Created build directory: %s", format_path(build_directory))
@@ -113,6 +120,18 @@ def build_package(directory, repository=None):
         # Build the package using `dpkg-deb'.
         logger.info("Building package in %s ..", format_path(build_directory))
         execute('fakeroot dpkg-deb --build %s %s' % (pipes.quote(build_directory), pipes.quote(package_file)))
+        # Check the package for possible issues using Lintian?
+        if check_package:
+            if not os.access('/usr/bin/lintian', os.X_OK):
+                logger.warn("Lintian is not installed, skipping sanity check.")
+            else:
+                logger.info("Checking package for issues using Lintian ..")
+                lintian_command = ['lintian']
+                if os.getuid() == 0:
+                    lintian_command.append('--allow-root')
+                lintian_command.append('--color=auto')
+                lintian_command.append(pipes.quote(package_file))
+                execute(' '.join(lintian_command), check=False)
         return package_file
     finally:
         logger.debug("Removing build directory: %s", build_directory)

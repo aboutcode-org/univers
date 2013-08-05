@@ -1,7 +1,7 @@
 # Debian packaging tools: Utility functions.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: July 25, 2013
+# Last Change: August 5, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -48,7 +48,7 @@ def same_filesystem(path1, path2):
     except Exception:
         return False
 
-def execute(command, directory='.', capture=False):
+def execute(command, directory='.', check=True, capture=False):
     """
     Execute an external command and make sure it succeeded. Raises
     :py:class:`ExternalCommandFailed` when the command exits with
@@ -56,6 +56,12 @@ def execute(command, directory='.', capture=False):
 
     :param command: The shell command to execute (a string).
     :param directory: The working directory for the external command (a string).
+    :param check: If ``True`` (the default) and the external command exits with
+                  a nonzero status code, an exception is raised.
+    :param capture: If ``True`` (not the default) the standard output of the
+                    external command is returned as a string.
+    :returns: If ``capture=True`` the standard output of the external command
+              is returned as a string.
     """
     logger.info("Executing external command: %s", command)
     kw = dict(cwd=directory)
@@ -63,7 +69,7 @@ def execute(command, directory='.', capture=False):
         kw['stdout'] = subprocess.PIPE
     shell = subprocess.Popen(['bash', '-c', command], **kw)
     stdout, stderr = shell.communicate()
-    if shell.wait() != 0:
+    if check and shell.returncode != 0:
         msg = "External command failed with exit code %s! (command: %s)"
         raise ExternalCommandFailed, msg % (shell.returncode, command)
     if capture:

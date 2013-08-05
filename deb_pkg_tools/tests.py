@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: August 4, 2013
+# Last Change: August 5, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -30,9 +30,11 @@ logger.setLevel(logging.DEBUG)
 TEST_PACKAGE_NAME = 'deb-pkg-tools-demo-package'
 TEST_PACKAGE_FIELDS = Deb822(dict(Architecture='all',
                                   Description='Nothing to see here, move along',
-                                  Maintainer='Peter Odding',
+                                  Maintainer='Peter Odding <peter@peterodding.com>',
                                   Package=TEST_PACKAGE_NAME,
-                                  Version='0.1'))
+                                  Version='0.1',
+                                  Section='misc',
+                                  Priority='optional'))
 
 class DebPkgToolsTestCase(unittest.TestCase):
 
