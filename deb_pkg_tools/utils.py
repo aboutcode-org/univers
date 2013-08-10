@@ -17,6 +17,7 @@ modules in the `deb-pkg-tools` package.
 import hashlib
 import logging
 import os
+import pipes
 import subprocess
 
 # Initialize a logger.
@@ -48,7 +49,7 @@ def same_filesystem(path1, path2):
     except Exception:
         return False
 
-def execute(command, directory='.', check=True, capture=False):
+def execute(*command, **options):
     """
     Execute an external command and make sure it succeeded. Raises
     :py:class:`ExternalCommandFailed` when the command exits with
@@ -63,16 +64,20 @@ def execute(command, directory='.', check=True, capture=False):
     :returns: If ``capture=True`` the standard output of the external command
               is returned as a string.
     """
+    if len(command) == 1:
+        command = command[0]
+    else:
+        command = ' '.join(pipes.quote(a) for a in command)
     logger.debug("Executing external command: %s", command)
-    kw = dict(cwd=directory)
-    if capture:
+    kw = dict(cwd=options.get('directory', '.'))
+    if options.get('capture', False):
         kw['stdout'] = subprocess.PIPE
     shell = subprocess.Popen(['bash', '-c', command], **kw)
     stdout, stderr = shell.communicate()
-    if check and shell.returncode != 0:
+    if options.get('check', True) and shell.returncode != 0:
         msg = "External command failed with exit code %s! (command: %s)"
         raise ExternalCommandFailed, msg % (shell.returncode, command)
-    if capture:
+    if options.get('capture', False):
         return stdout.strip()
 
 class ExternalCommandFailed(Exception):

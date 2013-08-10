@@ -59,8 +59,7 @@ def inspect_package(archive):
      'Suggests': 'python2.7-doc, binutils',
      'Version': '2.7.3-0ubuntu3.2'}
     """
-    command_line = 'dpkg-deb -f %s' % pipes.quote(archive)
-    return Deb822(StringIO.StringIO(execute(command_line, capture=True)))
+    return Deb822(StringIO.StringIO(execute('dpkg-deb', '-f', archive, capture=True)))
 
 def build_package(directory, repository=None, check_package=True):
     """
@@ -116,10 +115,10 @@ def build_package(directory, repository=None, check_package=True):
         # Make sure all files included in the package are owned by `root'
         # (the only account guaranteed to exist on all systems).
         logger.debug("Resetting file ownership (to root:root) ..")
-        execute('fakeroot chown -R root:root %s' % pipes.quote(build_directory))
+        execute('fakeroot', 'chown', '-R', 'root:root', build_directory)
         # Build the package using `dpkg-deb'.
         logger.info("Building package in %s ..", format_path(build_directory))
-        execute('fakeroot dpkg-deb --build %s %s' % (pipes.quote(build_directory), pipes.quote(package_file)))
+        execute('fakeroot', 'dpkg-deb', '--build', build_directory, package_file)
         # Check the package for possible issues using Lintian?
         if check_package:
             if not os.access('/usr/bin/lintian', os.X_OK):
@@ -130,8 +129,8 @@ def build_package(directory, repository=None, check_package=True):
                 if os.getuid() == 0:
                     lintian_command.append('--allow-root')
                 lintian_command.append('--color=auto')
-                lintian_command.append(pipes.quote(package_file))
-                execute(' '.join(lintian_command), check=False)
+                lintian_command.append(package_file)
+                execute(*lintian_command, check=False)
         return package_file
     finally:
         logger.debug("Removing build directory: %s", build_directory)
@@ -203,7 +202,7 @@ def update_installed_size(directory):
     os.unlink(control_file)
     # Find the installed size of the package (a rough estimate is fine).
     logger.debug("Finding installed size of package ..")
-    output = execute('du -sB 1024 %s' % pipes.quote(directory), capture=True)
+    output = execute('du', '-sB', '1024', directory, capture=True)
     installed_size = output.split()[0]
     # Update the Installed-Size field in the DEBIAN/control file.
     control_fields['Installed-Size'] = installed_size
