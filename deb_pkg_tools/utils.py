@@ -1,7 +1,7 @@
 # Debian packaging tools: Utility functions.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: August 5, 2013
+# Last Change: August 10, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -63,7 +63,7 @@ def execute(command, directory='.', check=True, capture=False):
     :returns: If ``capture=True`` the standard output of the external command
               is returned as a string.
     """
-    logger.info("Executing external command: %s", command)
+    logger.debug("Executing external command: %s", command)
     kw = dict(cwd=directory)
     if capture:
         kw['stdout'] = subprocess.PIPE
