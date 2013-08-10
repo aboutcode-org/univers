@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: August 5, 2013
+# Last Change: August 10, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -59,7 +59,7 @@ def inspect_package(archive):
      'Suggests': 'python2.7-doc, binutils',
      'Version': '2.7.3-0ubuntu3.2'}
     """
-    command_line = 'ar p %s control.tar.gz | tar xzO ./control' % pipes.quote(archive)
+    command_line = 'dpkg-deb -f %s' % pipes.quote(archive)
     return Deb822(StringIO.StringIO(execute(command_line, capture=True)))
 
 def build_package(directory, repository=None, check_package=True):
