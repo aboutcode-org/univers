@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: August 5, 2013
+# Last Change: August 10, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -18,7 +18,7 @@ from debian.deb822 import Deb822
 
 # Modules included in our package.
 from deb_pkg_tools.control import (merge_control_fields, parse_control_fields,
-                                   unparse_control_fields)
+                                   patch_control_file, unparse_control_fields)
 from deb_pkg_tools.repo import (activate_repository, deactivate_repository,
                                 update_repository, FailedToSignRelease)
 from deb_pkg_tools.package import build_package, inspect_package
@@ -64,6 +64,22 @@ class DebPkgToolsTestCase(unittest.TestCase):
                                  'Version: 1.0',
                                  'Depends: python-deb-pkg-tools, python-pip, python-pip-accel',
                                  'Architecture: amd64']))
+
+    def test_control_file_patching(self):
+        deb822_package = Deb822(['Package: unpatched-example',
+                                 'Depends: some-dependency'])
+        control_file = tempfile.mktemp()
+        try:
+            with open(control_file, 'w') as handle:
+                deb822_package.dump(handle)
+            patch_control_file(control_file, dict(Package='patched-example',
+                                                  Depends='another-dependency'))
+            with open(control_file) as handle:
+                patched_fields = Deb822(handle)
+            self.assertEqual(patched_fields['Package'], 'patched-example')
+            self.assertEqual(patched_fields['Depends'], 'another-dependency, some-dependency')
+        finally:
+            os.unlink(control_file)
 
     def test_package_building(self, repository=None):
         directory = tempfile.mkdtemp()

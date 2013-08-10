@@ -1,7 +1,7 @@
 # Debian packaging tools: Control file manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: July 25, 2013
+# Last Change: August 10, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -19,6 +19,7 @@ package.
 
 # Standard library modules.
 import logging
+import os
 
 # External dependencies.
 from debian.deb822 import Deb822
@@ -30,6 +31,27 @@ logger.setLevel(logging.DEBUG)
 # Control file fields that are like `Depends:' (they contain a comma
 # separated list of package names with optional version specifications).
 DEPENDS_LIKE_FIELDS = ('conflicts', 'depends', 'provides', 'replaces', 'suggests')
+
+def patch_control_file(control_file, overrides):
+    """
+    Patch the fields of a Debian control file.
+
+    :param control_file: The filename of the control file to patch (a string).
+    :param overrides: A dictionary with fields that should override default
+                      name/value pairs. Values of the fields `Depends`,
+                      `Provides`, `Replaces` and `Conflicts` are merged
+                      while values of other fields are overwritten.
+    """
+    # Read the control file.
+    with open(control_file) as handle:
+        defaults = Deb822(handle)
+    # Apply the patches.
+    patched = merge_control_fields(defaults, overrides)
+    # Break the hard link chain.
+    os.unlink(control_file)
+    # Patch the control file.
+    with open(control_file, 'w') as handle:
+        patched.dump(handle)
 
 def merge_control_fields(defaults, overrides):
     """
