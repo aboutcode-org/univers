@@ -13,6 +13,7 @@ This module provides functions to build and inspect Debian package archives
 """
 
 # Standard library modules.
+import fnmatch
 import logging
 import os.path
 import pipes
@@ -30,6 +31,25 @@ from deb_pkg_tools.utils import execute, same_filesystem
 # Initialize a logger.
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
+
+# http://lintian.debian.org/tags/package-contains-vcs-control-dir.html
+DIRECTORIES_TO_REMOVE = ('.bzr', # Bazaar
+                         '.git', # Git
+                         '.hg',  # Mercurial
+                         '.svn') # SVN
+
+FILES_TO_REMOVE = ('*.pyc',            # Python byte code files (http://lintian.debian.org/tags/package-installs-python-bytecode.html)
+                   '*.pyo',            # Python optimized byte code files (http://lintian.debian.org/tags/package-installs-python-bytecode.html)
+                   '*~',               # Emacs/Vim backup files (http://lintian.debian.org/tags/backup-file-in-package.html)
+                   '.*.s??',           # Vim named swap files
+                   '.bzrignore',       # Bazaar ignore files (http://lintian.debian.org/tags/package-contains-vcs-control-file.html)
+                   '.DS_Store',        # Mac OS X custom folder attributes (http://lintian.debian.org/tags/macos-ds-store-file-in-package.html)
+                   '.DS_Store.gz',     # Mac OS X custom folder attributes (http://lintian.debian.org/tags/macos-ds-store-file-in-package.html)
+                   '._*',              # Mac OS X resource fork (http://lintian.debian.org/tags/macos-resource-fork-file-in-package.html)
+                   '.gitignore',       # Git ignore files (http://lintian.debian.org/tags/package-contains-vcs-control-file.html)
+                   '.hg_archival.txt', # Artefact of `hg archive' (http://lintian.debian.org/tags/package-contains-vcs-control-file.html)
+                   '.hgignore',        # Mercurial ignore files (http://lintian.debian.org/tags/package-contains-vcs-control-file.html)
+                   '.s??')             # Vim anonymous swap files
 
 def inspect_package(archive):
     """
@@ -181,21 +201,32 @@ def copy_package_files(source_directory, build_directory):
                 format_path(source_directory), format_path(build_directory))
     execute(' '.join(command))
 
-def clean_package_tree(directory):
+def clean_package_tree(directory, remove_dirs=DIRECTORIES_TO_REMOVE, remove_files=FILES_TO_REMOVE):
     """
-    Cleanup files that should not be included in a Debian package from the
-    given directory.
+    Clean up files that should not be included in a Debian package from the
+    given directory. Uses the :py:mod:`fnmatch` module for directory and
+    filename matching. Matching is done on the base name of each directory and
+    file. This function assumes it is safe to unlink files from the given
+    directory (which it should be when :py:func:`copy_package_files()` was
+    previously used, e.g. by :py:func:`build_package()`).
 
     :param directory: The pathname of the directory to clean (a string).
+    :param remove_dirs: An iterable with filename patterns of directories that
+                        should not be included in the package (e.g. version
+                        control directories like ``.git`` and ``.hg``).
+    :param remove_files: An iterable with filename patterns of files that
+                         should not be included in the package (e.g. version
+                         control files like ``.gitignore`` and
+                         ``.hgignore``).
     """
     for root, dirs, files in os.walk(directory):
         for name in dirs:
-            if name in ('.bzr', '.git', '.hg', '.svn'):
+            if any(fnmatch.fnmatch(name, p) for p in remove_dirs):
                 pathname = os.path.join(root, name)
                 logger.debug("Cleaning up directory: %s", pathname)
                 shutil.rmtree(pathname)
         for name in files:
-            if name in ('.gitignore', '.hgignore', '.hg_archival.txt'):
+            if any(fnmatch.fnmatch(name, p) for p in remove_files):
                 pathname = os.path.join(root, name)
                 logger.debug("Cleaning up file: %s", pathname)
                 os.unlink(pathname)
