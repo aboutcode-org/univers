@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: August 10, 2013
+# Last Change: August 11, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -111,6 +111,7 @@ def build_package(directory, repository=None, check_package=True):
     logger.debug("Preparing to build package: %s", format_path(package_file))
     try:
         copy_package_files(directory, build_directory)
+        clean_package_tree(build_directory)
         update_installed_size(build_directory)
         # Make sure all files included in the package are owned by `root'
         # (the only account guaranteed to exist on all systems).
@@ -179,6 +180,25 @@ def copy_package_files(source_directory, build_directory):
     logger.info("Copying package files (%s) to build directory (%s) ..",
                 format_path(source_directory), format_path(build_directory))
     execute(' '.join(command))
+
+def clean_package_tree(directory):
+    """
+    Cleanup files that should not be included in a Debian package from the
+    given directory.
+
+    :param directory: The pathname of the directory to clean (a string).
+    """
+    for root, dirs, files in os.walk(directory):
+        for name in dirs:
+            if name in ('.bzr', '.git', '.hg', '.svn'):
+                pathname = os.path.join(root, name)
+                logger.debug("Cleaning up directory: %s", pathname)
+                shutil.rmtree(pathname)
+        for name in files:
+            if name in ('.gitignore', '.hgignore', '.hg_archival.txt'):
+                pathname = os.path.join(root, name)
+                logger.debug("Cleaning up file: %s", pathname)
+                os.unlink(pathname)
 
 def update_installed_size(directory):
     """
