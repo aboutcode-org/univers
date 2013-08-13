@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: August 12, 2013
+# Last Change: August 13, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -26,6 +26,7 @@ from debian.deb822 import Deb822
 from humanfriendly import format_path
 
 # Modules included in our package.
+from deb_pkg_tools.control import patch_control_file
 from deb_pkg_tools.utils import execute, same_filesystem
 
 # Initialize a logger.
@@ -245,27 +246,16 @@ def update_installed_size(directory):
 
     :param directory: The pathname of a directory tree suitable for packaging
                       with ``dpkg-deb --build``.
-    :returns: The parsed control file fields (an instance
-              of :py:func:`debian.deb822.Deb822`).
 
     .. _Installed-Size: http://www.debian.org/doc/debian-policy/ch-controlfields.html#s-f-Installed-Size
     """
-    control_file = os.path.join(directory, 'DEBIAN', 'control')
-    logger.debug("Reading control file: %s", format_path(control_file))
-    with open(control_file) as handle:
-        control_fields = Deb822(handle)
-    # Prepare to overwrite the control file by making
-    # sure we dereference the hard link (see copy_package_files).
-    os.unlink(control_file)
     # Find the installed size of the package (a rough estimate is fine).
     logger.debug("Finding installed size of package ..")
     output = execute('du', '-sB', '1024', directory, capture=True)
     installed_size = output.split()[0]
-    # Update the Installed-Size field in the DEBIAN/control file.
-    control_fields['Installed-Size'] = installed_size
-    logger.debug("Writing control file: %s", format_path(control_file))
-    with open(control_file, 'w') as handle:
-        control_fields.dump(handle)
-    return control_fields
+    # Patch the DEBIAN/control file.
+    control_file = os.path.join(directory, 'DEBIAN', 'control')
+    logger.debug("Patching control file: %s", format_path(control_file))
+    patch_control_file(control_file, {'Installed-Size': installed_size})
 
 # vim: ts=4 sw=4 et
