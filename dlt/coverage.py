@@ -13,6 +13,7 @@
 # limitations under the License.
 import fnmatch
 import os
+from os.path import join, normpath, abspath, relpath, basename, dirname
 from dlt import utils
 
 
@@ -21,6 +22,7 @@ class Coverage(object):
         self._paragraphs = paragraphs
         self._directory = directory
         self._unmatch = set()
+        self._match = {}
 
     def show_msg(self):
         if len(self._unmatch) > 0:
@@ -29,29 +31,33 @@ class Coverage(object):
             print('\t{}'.format(filename_unmatch))
 
     def get_rule_associated(self, filename):
-        filename = os.path.abspath(os.path.normpath(filename))
-        root = os.path.relpath(os.path.dirname(filename), self._directory)
-        filename = os.path.join(root, os.path.basename(filename))
-        for paragraph in utils.get_by_type(self._paragraphs, "files"):
-            if fnmatch.filter(paragraph.match, filename):
-                return paragraph
+        filename = abspath(normpath(filename))
+        root = relpath(dirname(filename), self._directory)
+        filename = join(root, basename(filename))
+        match = fnmatch.filter(self._match.keys(), filename)
+        if match:
+            return self._match[match[0]]
+        return None
+
 
     def apply(self):
         self._get_matches()
-        return bool(len(self._unmatch))
+        return not bool(len(self._unmatch))
 
     def _get_matches(self):
         paragraphs = []
         for paragraph in utils.get_by_type(self._paragraphs, "files"):
             paragraphs.append((paragraph, paragraph.patterns))
-            paragraph.match = []
         for root, dirs, files in os.walk(self._directory, topdown=True):
-            root = os.path.relpath(root, self._directory)
-            paths = [os.path.join(root, filename) for filename in files]
+            root = relpath(root, self._directory)
+            paths = [join(root, filename) for filename in files]
             self._unmatch |= set(paths)
             for paragraph, patterns in paragraphs:
                 for pattern in patterns:
-                    goodfiles = fnmatch.filter(paths, pattern)
+                    goodfiles = []
+                    if pattern.find(os.path.sep) == -1:
+                        pattern_norm = os.path.join(os.path.curdir, pattern)
+                        goodfiles.extend(fnmatch.filter(paths, pattern_norm))
+                    goodfiles.extend(fnmatch.filter(paths, pattern))
                     self._unmatch -= set(goodfiles)
-                    #goodfiles = [os.path.normpath(f) for f in goodfiles]
-                    paragraph.match.extend(goodfiles)
+                    self._match.update({f: paragraph for f in goodfiles})
