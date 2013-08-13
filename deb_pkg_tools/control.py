@@ -1,7 +1,7 @@
 # Debian packaging tools: Control file manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: August 10, 2013
+# Last Change: August 13, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -30,7 +30,7 @@ logger.setLevel(logging.DEBUG)
 
 # Control file fields that are like `Depends:' (they contain a comma
 # separated list of package names with optional version specifications).
-DEPENDS_LIKE_FIELDS = ('conflicts', 'depends', 'provides', 'replaces', 'suggests')
+DEPENDS_LIKE_FIELDS = ('Conflicts', 'Depends', 'Provides', 'Replaces', 'Suggests')
 
 def patch_control_file(control_file, overrides):
     """
@@ -72,7 +72,7 @@ def merge_control_fields(defaults, overrides):
     logger.debug("Merging control files (%i default fields, %i override fields)", len(defaults), len(overrides))
     merged = {}
     for name in (set(defaults.keys()) | set(overrides.keys())):
-        if name.lower() in DEPENDS_LIKE_FIELDS:
+        if name in DEPENDS_LIKE_FIELDS:
             # Dependencies are merged instead of overridden.
             dependencies = set()
             dependencies.update(defaults.get(name, []))
@@ -153,9 +153,10 @@ def parse_control_fields(input_fields):
     logger.debug("Parsing %i control fields ..", len(input_fields))
     output_fields = {}
     for name, unparsed_value in input_fields.iteritems():
-        if name.lower() in DEPENDS_LIKE_FIELDS:
+        name = normalize_control_field_name(name)
+        if name in DEPENDS_LIKE_FIELDS:
             parsed_value = [s.strip() for s in unparsed_value.split(',') if s and not s.isspace()]
-        elif name.lower() == 'installed-size':
+        elif name == 'Installed-Size':
             parsed_value = int(unparsed_value)
         else:
             parsed_value = unparsed_value
@@ -178,9 +179,10 @@ def unparse_control_fields(input_fields):
     logger.debug("Unparsing %i control fields ..", len(input_fields))
     output_fields = Deb822()
     for name, parsed_value in input_fields.iteritems():
-        if name.lower() in DEPENDS_LIKE_FIELDS:
+        name = normalize_control_field_name(name)
+        if name in DEPENDS_LIKE_FIELDS:
             unparsed_value = ', '.join(parsed_value)
-        elif name.lower() == 'installed-size':
+        elif name == 'Installed-Size':
             unparsed_value = str(parsed_value)
         else:
             unparsed_value = parsed_value
@@ -190,5 +192,26 @@ def unparse_control_fields(input_fields):
             logger.debug("Unparsed field %s: %r", name, unparsed_value)
         output_fields[name] = unparsed_value
     return output_fields
+
+def normalize_control_field_name(name):
+    """
+    Normalize the case of a field name in a Debian control file to simplify
+    control file manipulation and in particular the merging of control files.
+
+    According to the Debian Policy Manual (section 5.1, `Syntax of control
+    files`_) field names are not case-sensitive, however in my experience
+    deviating from the standard capitalization can break things. Hence this
+    function (which is used by the other functions in the
+    :py:mod:`deb_pkg_tools.control` module).
+
+    This function doesn't adhere 100% to the Debian policy because it lacks
+    special casing (no pun intended ;-) for fields like ``DM-Upload-Allowed``.
+    It's not clear to me if this will ever become a relevant problem for
+    building simple binary packages... (which explains why I didn't bother to
+    implement special casing)
+
+    .. _Syntax of control files: http://www.debian.org/doc/debian-policy/ch-controlfields.html#s-controlsyntax
+    """
+    return '-'.join(w.capitalize() for w in name.split('-'))
 
 # vim: ts=4 sw=4 et

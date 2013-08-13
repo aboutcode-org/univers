@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: August 10, 2013
+# Last Change: August 13, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -56,9 +56,12 @@ class DebPkgToolsTestCase(unittest.TestCase):
         defaults = Deb822(['Package: python-py2deb',
                            'Depends: python-deb-pkg-tools',
                            'Architecture: all'])
-        overrides = Deb822(['Version: 1.0',
-                            'Depends: python-pip, python-pip-accel',
-                            'Architecture: amd64'])
+        # The field names of the dictionary with overrides are lower case on
+        # purpose; control file merging should work properly regardless of
+        # field name casing.
+        overrides = Deb822(dict(version='1.0',
+                                depends='python-pip, python-pip-accel',
+                                architecture='amd64'))
         self.assertEqual(merge_control_fields(defaults, overrides),
                          Deb822(['Package: python-py2deb',
                                  'Version: 1.0',
