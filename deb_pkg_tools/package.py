@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: August 11, 2013
+# Last Change: August 12, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -137,6 +137,12 @@ def build_package(directory, repository=None, check_package=True):
         # (the only account guaranteed to exist on all systems).
         logger.debug("Resetting file ownership (to root:root) ..")
         execute('fakeroot', 'chown', '-R', 'root:root', build_directory)
+        # System packages generally install files that are read only and
+        # readable (and possibly executable) for everyone (owner, group and
+        # world) so we'll go ahead and remove some potentially harmful
+        # permission bits (harmful enough that Lintian complains about them).
+        logger.debug("Resetting file modes (go-w) ..")
+        execute('fakeroot', 'chmod', '-R', 'go-w', build_directory)
         # Build the package using `dpkg-deb'.
         logger.info("Building package in %s ..", format_path(build_directory))
         execute('fakeroot', 'dpkg-deb', '--build', build_directory, package_file)
