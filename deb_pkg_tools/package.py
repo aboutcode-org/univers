@@ -255,7 +255,6 @@ def update_installed_size(directory):
     installed_size = output.split()[0]
     # Patch the DEBIAN/control file.
     control_file = os.path.join(directory, 'DEBIAN', 'control')
-    logger.debug("Patching control file: %s", format_path(control_file))
     patch_control_file(control_file, {'Installed-Size': installed_size})
 
 # vim: ts=4 sw=4 et

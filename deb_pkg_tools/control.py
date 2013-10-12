@@ -1,7 +1,7 @@
 # Debian packaging tools: Control file manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: August 13, 2013
+# Last Change: October 12, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -23,6 +23,7 @@ import os
 
 # External dependencies.
 from debian.deb822 import Deb822
+from humanfriendly import format_path
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
@@ -42,6 +43,7 @@ def patch_control_file(control_file, overrides):
                       `Provides`, `Replaces` and `Conflicts` are merged
                       while values of other fields are overwritten.
     """
+    logger.debug("Patching control file: %s", format_path(control_file))
     # Read the control file.
     with open(control_file) as handle:
         defaults = Deb822(handle)
@@ -172,6 +174,10 @@ def unparse_control_fields(input_fields):
     Convert a :py:class:`dict` returned by :py:func:`parse_control_fields()`
     back into a :py:class:`debian.deb822.Deb822` object.
 
+    Note that fields with an empty value are omitted. This makes it possible to
+    delete fields from a control file with :py:func:`patch_control_file()` by
+    setting the value of a field to ``None`` in the overrides...
+
     :param input_fields: A :py:class:`dict` object previously returned by
                          :py:func:`parse_control_fields()`.
     :returns: A :py:class:`debian.deb822.Deb822` object.
@@ -190,7 +196,8 @@ def unparse_control_fields(input_fields):
             logger.debug("Unparsed field %s: %r -> %r", name, parsed_value, unparsed_value)
         else:
             logger.debug("Unparsed field %s: %r", name, unparsed_value)
-        output_fields[name] = unparsed_value
+        if unparsed_value:
+            output_fields[name] = unparsed_value
     return output_fields
 
 def normalize_control_field_name(name):
