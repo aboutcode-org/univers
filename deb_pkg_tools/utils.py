@@ -1,7 +1,7 @@
 # Debian packaging tools: Utility functions.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: August 10, 2013
+# Last Change: October 12, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -55,14 +55,19 @@ def execute(*command, **options):
     :py:class:`ExternalCommandFailed` when the command exits with
     a nonzero exit code.
 
-    :param command: The shell command to execute (a string).
-    :param directory: The working directory for the external command (a string).
+    :param command: The command to execute. If this is a single string it is
+                    assumed to be a shell command and executed directly.
+                    Otherwise it should be a tuple of strings, in this case
+                    each string will be quoted individually using
+                    :py:func:`pipes.quote()`.
+    :param directory: The working directory for the external command (a string,
+                      defaults to the current working directory).
     :param check: If ``True`` (the default) and the external command exits with
                   a nonzero status code, an exception is raised.
     :param capture: If ``True`` (not the default) the standard output of the
                     external command is returned as a string.
     :returns: If ``capture=True`` the standard output of the external command
-              is returned as a string.
+              is returned as a string, otherwise ``None`` is returned.
     """
     if len(command) == 1:
         command = command[0]
