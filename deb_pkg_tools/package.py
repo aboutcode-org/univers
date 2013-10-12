@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: August 13, 2013
+# Last Change: September 29, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -161,7 +161,7 @@ def build_package(directory, repository=None, check_package=True):
                 execute(*lintian_command, check=False)
         return package_file
     finally:
-        logger.debug("Removing build directory: %s", build_directory)
+        logger.debug("Removing build directory: %s", format_path(build_directory))
         shutil.rmtree(build_directory)
 
 def determine_package_archive(directory):
@@ -230,12 +230,12 @@ def clean_package_tree(directory, remove_dirs=DIRECTORIES_TO_REMOVE, remove_file
         for name in dirs:
             if any(fnmatch.fnmatch(name, p) for p in remove_dirs):
                 pathname = os.path.join(root, name)
-                logger.debug("Cleaning up directory: %s", pathname)
+                logger.debug("Cleaning up directory: %s", format_path(pathname))
                 shutil.rmtree(pathname)
         for name in files:
             if any(fnmatch.fnmatch(name, p) for p in remove_files):
                 pathname = os.path.join(root, name)
-                logger.debug("Cleaning up file: %s", pathname)
+                logger.debug("Cleaning up file: %s", format_path(pathname))
                 os.unlink(pathname)
 
 def update_installed_size(directory):
