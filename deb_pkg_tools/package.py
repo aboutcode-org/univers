@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: September 29, 2013
+# Last Change: October 12, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -80,7 +80,7 @@ def inspect_package(archive):
      'Suggests': 'python2.7-doc, binutils',
      'Version': '2.7.3-0ubuntu3.2'}
     """
-    return Deb822(StringIO.StringIO(execute('dpkg-deb', '-f', archive, capture=True)))
+    return Deb822(StringIO.StringIO(execute('dpkg-deb', '-f', archive, logger=logger, capture=True)))
 
 def build_package(directory, repository=None, check_package=True):
     """
@@ -137,16 +137,16 @@ def build_package(directory, repository=None, check_package=True):
         # Make sure all files included in the package are owned by `root'
         # (the only account guaranteed to exist on all systems).
         logger.debug("Resetting file ownership (to root:root) ..")
-        execute('fakeroot', 'chown', '-R', 'root:root', build_directory)
+        execute('fakeroot', 'chown', '-R', 'root:root', build_directory, logger=logger)
         # System packages generally install files that are read only and
         # readable (and possibly executable) for everyone (owner, group and
         # world) so we'll go ahead and remove some potentially harmful
         # permission bits (harmful enough that Lintian complains about them).
         logger.debug("Resetting file modes (go-w) ..")
-        execute('fakeroot', 'chmod', '-R', 'go-w', build_directory)
+        execute('fakeroot', 'chmod', '-R', 'go-w', build_directory, logger=logger)
         # Build the package using `dpkg-deb'.
         logger.info("Building package in %s ..", format_path(build_directory))
-        execute('fakeroot', 'dpkg-deb', '--build', build_directory, package_file)
+        execute('fakeroot', 'dpkg-deb', '--build', build_directory, package_file, logger=logger)
         # Check the package for possible issues using Lintian?
         if check_package:
             if not os.access('/usr/bin/lintian', os.X_OK):
@@ -158,7 +158,7 @@ def build_package(directory, repository=None, check_package=True):
                     lintian_command.append('--allow-root')
                 lintian_command.append('--color=auto')
                 lintian_command.append(package_file)
-                execute(*lintian_command, check=False)
+                execute(*lintian_command, logger=logger, check=False)
         return package_file
     finally:
         logger.debug("Removing build directory: %s", format_path(build_directory))
@@ -206,7 +206,7 @@ def copy_package_files(source_directory, build_directory):
     command.append(pipes.quote(build_directory))
     logger.info("Copying package files (%s) to build directory (%s) ..",
                 format_path(source_directory), format_path(build_directory))
-    execute(' '.join(command))
+    execute(' '.join(command), logger=logger)
 
 def clean_package_tree(directory, remove_dirs=DIRECTORIES_TO_REMOVE, remove_files=FILES_TO_REMOVE):
     """
@@ -251,7 +251,7 @@ def update_installed_size(directory):
     """
     # Find the installed size of the package (a rough estimate is fine).
     logger.debug("Finding installed size of package ..")
-    output = execute('du', '-sB', '1024', directory, capture=True)
+    output = execute('du', '-sB', '1024', directory, logger=logger, capture=True)
     installed_size = output.split()[0]
     # Patch the DEBIAN/control file.
     control_file = os.path.join(directory, 'DEBIAN', 'control')

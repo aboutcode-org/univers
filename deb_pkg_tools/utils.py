@@ -66,14 +66,20 @@ def execute(*command, **options):
                   a nonzero status code, an exception is raised.
     :param capture: If ``True`` (not the default) the standard output of the
                     external command is returned as a string.
+    :param logger: Specifies the custom logger to use (optional).
+    :param sudo: If ``True`` (the default is ``False``) and we're not running
+                 with ``root`` privileges the command is prefixed with ``sudo``.
     :returns: If ``capture=True`` the standard output of the external command
               is returned as a string, otherwise ``None`` is returned.
     """
+    custom_logger = options.get('logger', logger)
     if len(command) == 1:
         command = command[0]
     else:
         command = ' '.join(pipes.quote(a) for a in command)
-    logger.debug("Executing external command: %s", command)
+    if options.get('sudo', False) and os.getuid() != 0:
+        command = 'sudo sh -c %s' % pipes.quote(command)
+    custom_logger.debug("Executing external command: %s", command)
     kw = dict(cwd=options.get('directory', '.'))
     if options.get('capture', False):
         kw['stdout'] = subprocess.PIPE
