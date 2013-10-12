@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: August 13, 2013
+# Last Change: October 12, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -20,12 +20,11 @@ from debian.deb822 import Deb822
 from deb_pkg_tools.control import (merge_control_fields, parse_control_fields,
                                    patch_control_file, unparse_control_fields)
 from deb_pkg_tools.repo import (activate_repository, deactivate_repository,
-                                update_repository, FailedToSignRelease)
+                                update_repository)
 from deb_pkg_tools.package import build_package, inspect_package
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
 
 TEST_PACKAGE_NAME = 'deb-pkg-tools-demo-package'
 TEST_PACKAGE_FIELDS = Deb822(dict(Architecture='all',
@@ -40,6 +39,7 @@ class DebPkgToolsTestCase(unittest.TestCase):
 
     def setUp(self):
         coloredlogs.install()
+        coloredlogs.set_level(logging.DEBUG)
 
     def test_control_field_parsing(self):
         deb822_package = Deb822(['Package: python-py2deb',
@@ -114,18 +114,12 @@ class DebPkgToolsTestCase(unittest.TestCase):
             destructors.append(functools.partial(shutil.rmtree, repository))
         try:
             self.test_package_building(repository)
-            try:
-                update_repository(repository)
-            except FailedToSignRelease:
-                logger.warn("Failed to sign `Release' file! (assuming you don't have a private GPG key)")
-                was_signed = False
-            else:
-                self.assertTrue(os.path.isfile(os.path.join(repository, 'Release.gpg')))
-                was_signed = True
+            update_repository(repository)
             self.assertTrue(os.path.isfile(os.path.join(repository, 'Packages')))
             self.assertTrue(os.path.isfile(os.path.join(repository, 'Packages.gz')))
             self.assertTrue(os.path.isfile(os.path.join(repository, 'Release')))
-            return repository, was_signed
+            self.assertTrue(os.path.isfile(os.path.join(repository, 'Release.gpg')))
+            return repository
         finally:
             for partial in destructors:
                 partial()
@@ -137,17 +131,14 @@ class DebPkgToolsTestCase(unittest.TestCase):
         if os.getuid() != 0:
             logger.warn("Skipping repository activation test because it requires root access!")
         else:
-            repository, was_signed = self.test_repository_creation(preserve=True)
-            if not was_signed:
-                logger.warn("Skipping repository activation test because it requires a signed repository!")
-            else:
-                activate_repository(repository)
-                try:
-                    handle = os.popen('apt-cache show %s' % TEST_PACKAGE_NAME)
-                    fields = Deb822(handle)
-                    self.assertEqual(fields['Package'], TEST_PACKAGE_NAME)
-                finally:
-                    deactivate_repository(repository)
+            repository = self.test_repository_creation(preserve=True)
+            activate_repository(repository)
+            try:
+                handle = os.popen('apt-cache show %s' % TEST_PACKAGE_NAME)
+                fields = Deb822(handle)
+                self.assertEqual(fields['Package'], TEST_PACKAGE_NAME)
+            finally:
+                deactivate_repository(repository)
 
 if __name__ == '__main__':
     unittest.main()
