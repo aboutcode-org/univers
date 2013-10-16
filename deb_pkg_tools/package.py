@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: October 12, 2013
+# Last Change: October 16, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -23,7 +23,7 @@ import tempfile
 
 # External dependencies.
 from debian.deb822 import Deb822
-from humanfriendly import format_path
+from humanfriendly import format_path, pluralize
 
 # Modules included in our package.
 from deb_pkg_tools.control import patch_control_file
@@ -50,6 +50,7 @@ FILES_TO_REMOVE = ('*.pyc',            # Python byte code files (http://lintian.
                    '.gitignore',       # Git ignore files (http://lintian.debian.org/tags/package-contains-vcs-control-file.html)
                    '.hg_archival.txt', # Artefact of `hg archive' (http://lintian.debian.org/tags/package-contains-vcs-control-file.html)
                    '.hgignore',        # Mercurial ignore files (http://lintian.debian.org/tags/package-contains-vcs-control-file.html)
+                   '.hgtags',          # Mercurial ignore files (http://lintian.debian.org/tags/package-contains-vcs-control-file.html)
                    '.s??')             # Vim anonymous swap files
 
 def inspect_package(archive):
@@ -133,6 +134,7 @@ def build_package(directory, repository=None, check_package=True):
     try:
         copy_package_files(directory, build_directory)
         clean_package_tree(build_directory)
+        update_conffiles(build_directory)
         update_installed_size(build_directory)
         # Make sure all files included in the package are owned by `root'
         # (the only account guaranteed to exist on all systems).
@@ -237,6 +239,47 @@ def clean_package_tree(directory, remove_dirs=DIRECTORIES_TO_REMOVE, remove_file
                 pathname = os.path.join(root, name)
                 logger.debug("Cleaning up file: %s", format_path(pathname))
                 os.unlink(pathname)
+
+def update_conffiles(directory):
+    """
+    Given a directory tree suitable for packaging with ``dpkg-deb --build``
+    this function updates the entries in the ``DEBIAN/conffiles`` file. This
+    function is used by :py:func:`build_package()`.
+
+    :param directory: The pathname of a directory tree suitable for packaging
+                      with ``dpkg-deb --build``.
+
+    """
+    conffiles = set()
+    conffiles_file = os.path.join(directory, 'DEBIAN', 'conffiles')
+    # Read the existing DEBIAN/conffiles entries (if any).
+    if os.path.isfile(conffiles_file):
+        logger.debug("Reading existing entries from %s ..", conffiles_file)
+        with open(conffiles_file) as handle:
+            for line in handle:
+                filename = line.strip()
+                pathname = os.path.join(directory, os.path.relpath(filename, '/'))
+                # Validate existing entries.
+                if os.path.isfile(pathname):
+                    conffiles.add(filename)
+                else:
+                    logger.warn("Stripping invalid entry: %s", filename)
+        os.unlink(conffiles_file)
+    # Make sure all regular files in /etc/ are marked as configuration files.
+    for root, dirs, files in os.walk(os.path.join(directory, 'etc')):
+        for filename in files:
+            pathname = os.path.join(root, filename)
+            if os.path.isfile(pathname) and not os.path.islink(pathname):
+                relpath = '/' + os.path.relpath(pathname, directory)
+                if relpath not in conffiles:
+                    logger.debug("Marking configuration file: %s", relpath)
+                    conffiles.add(relpath)
+    # Update DEBIAN/conffiles.
+    if conffiles:
+        with open(conffiles_file, 'w') as handle:
+            for filename in sorted(conffiles):
+                handle.write("%s\n" % filename)
+        logger.debug("Wrote %s to %s!", pluralize(len(conffiles), "entry", "entries"), conffiles_file)
 
 def update_installed_size(directory):
     """
