@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: October 16, 2013
+# Last Change: October 19, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -27,7 +27,7 @@ from humanfriendly import format_path, pluralize
 
 # Modules included in our package.
 from deb_pkg_tools.control import patch_control_file
-from deb_pkg_tools.utils import execute, same_filesystem
+from deb_pkg_tools.utils import execute
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
@@ -197,11 +197,22 @@ def copy_package_files(source_directory, build_directory):
                             (expected to already exist).
     """
     command = ['cp', '-a']
-    if same_filesystem(source_directory, build_directory):
-        # If the directories reside on the same file system we'll use hard
-        # links to speed up the copy (this matters for large packages).
+    # Check whether we can use hard links to speed up the copy. In the past
+    # this used the following simple and obvious check:
+    #
+    #   os.stat(source_directory).st_dev == os.stat(build_directory).st_dev
+    #
+    # However this expression holds true inside schroot, yet `cp -al' fails
+    # when trying to create the hard links! This is why the following code now
+    # tries to create an actual hard link to verify that `cp -al' can be used.
+    try:
+        test_file = os.path.join(build_directory, 'hard-link-test')
+        os.link(os.path.join(source_directory, 'DEBIAN', 'control'), test_file)
+        os.unlink(test_file)
         logger.debug("Speeding up copying using hard links ..")
         command.append('-l')
+    except OSError:
+        pass
     # I know this looks really funky, but I'm 99% sure this is a valid
     # use of shell escaping and globbing (obviously I tested it ;-).
     command.append('%s/*' % pipes.quote(source_directory))
@@ -217,7 +228,7 @@ def clean_package_tree(directory, remove_dirs=DIRECTORIES_TO_REMOVE, remove_file
     filename matching. Matching is done on the base name of each directory and
     file. This function assumes it is safe to unlink files from the given
     directory (which it should be when :py:func:`copy_package_files()` was
-    previously used, e.g. by :py:func:`build_package()`).
+    previously called, e.g. by :py:func:`build_package()`).
 
     :param directory: The pathname of the directory to clean (a string).
     :param remove_dirs: An iterable with filename patterns of directories that

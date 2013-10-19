@@ -1,7 +1,7 @@
 # Debian packaging tools: Utility functions.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: October 12, 2013
+# Last Change: October 19, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -34,20 +34,6 @@ def sha1(text):
     context = hashlib.sha1()
     context.update(text)
     return context.hexdigest()
-
-def same_filesystem(path1, path2):
-    """
-    Check whether two pathnames reside on the same file system.
-
-    :param path1: The pathname of an existing file or directory.
-    :param path2: The pathname of an existing file or directory.
-    :returns: ``True`` if the pathnames reside on the same file system,
-              ``False`` otherwise.
-    """
-    try:
-        return os.stat(path1).st_dev == os.stat(path2).st_dev
-    except Exception:
-        return False
 
 def execute(*command, **options):
     """
