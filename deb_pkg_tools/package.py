@@ -82,7 +82,7 @@ def inspect_package(archive):
     """
     return Deb822(StringIO.StringIO(execute('dpkg-deb', '-f', archive, logger=logger, capture=True)))
 
-def build_package(directory, repository=None, check_package=True):
+def build_package(directory, repository=None, check_package=True, copy_files=True):
     """
     Create a Debian package using the ``dpkg-deb --build`` command. The
     ``dpkg-deb --build`` command requires a certain directory tree layout and
@@ -118,6 +118,10 @@ def build_package(directory, repository=None, check_package=True):
                        to the system wide temporary directory).
     :param check_package: If ``True`` (the default) Lintian_ is run to check
                           the resulting package archive for possible issues.
+    :param copy_files: If ``True`` (the default) the package's files are copied
+                       to a temporary directory before being modified. You can
+                       set this to ``False`` if you're already working on a
+                       copy and don't want yet another copy to be made.
     :returns: The pathname of the generated ``*.deb`` archive.
 
     .. _Debian Binary Package Building HOWTO: http://tldp.org/HOWTO/html_single/Debian-Binary-Package-Building-HOWTO/
