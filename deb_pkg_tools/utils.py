@@ -18,6 +18,7 @@ import hashlib
 import logging
 import os
 import pipes
+import pwd
 import subprocess
 import sys
 import time
@@ -43,6 +44,17 @@ def sha1(text):
     context = hashlib.sha1()
     context.update(text)
     return context.hexdigest()
+
+def find_home_directory():
+    """
+    Determine the home directory of the current user.
+    """
+    try:
+        home = os.path.realpath(os.environ['HOME'])
+        assert os.path.isdir(home)
+        return home
+    except Exception:
+        return pwd.getpwuid(os.getuid()).pw_dir
 
 def execute(*command, **options):
     """
