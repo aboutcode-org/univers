@@ -272,7 +272,7 @@ def update_conffiles(directory):
         with open(conffiles_file) as handle:
             for line in handle:
                 filename = line.strip()
-                pathname = os.path.join(directory, os.path.relpath(filename, '/'))
+                pathname = os.path.join(directory, filename.lstrip('/'))
                 # Validate existing entries.
                 if os.path.isfile(pathname):
                     conffiles.add(filename)
