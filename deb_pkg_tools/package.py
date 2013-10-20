@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: October 19, 2013
+# Last Change: October 20, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -31,7 +31,6 @@ from deb_pkg_tools.utils import execute
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
 
 # http://lintian.debian.org/tags/package-contains-vcs-control-dir.html
 DIRECTORIES_TO_REMOVE = ('.bzr', # Bazaar

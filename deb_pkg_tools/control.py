@@ -1,7 +1,7 @@
 # Debian packaging tools: Control file manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: October 12, 2013
+# Last Change: October 20, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -27,7 +27,6 @@ from humanfriendly import format_path
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
 
 # Control file fields that are like `Depends:' (they contain a comma
 # separated list of package names with optional version specifications).
