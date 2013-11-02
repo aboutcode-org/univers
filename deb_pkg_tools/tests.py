@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: October 12, 2013
+# Last Change: November 2, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -19,7 +19,9 @@ from debian.deb822 import Deb822
 # Modules included in our package.
 from deb_pkg_tools.control import (merge_control_fields, parse_control_fields,
                                    patch_control_file, unparse_control_fields)
-from deb_pkg_tools.repo import (activate_repository, deactivate_repository,
+from deb_pkg_tools.repo import (activate_repository,
+                                apt_supports_trusted_option,
+                                deactivate_repository,
                                 update_repository)
 from deb_pkg_tools.package import build_package, inspect_package
 
@@ -118,7 +120,8 @@ class DebPkgToolsTestCase(unittest.TestCase):
             self.assertTrue(os.path.isfile(os.path.join(repository, 'Packages')))
             self.assertTrue(os.path.isfile(os.path.join(repository, 'Packages.gz')))
             self.assertTrue(os.path.isfile(os.path.join(repository, 'Release')))
-            self.assertTrue(os.path.isfile(os.path.join(repository, 'Release.gpg')))
+            if not apt_supports_trusted_option():
+                self.assertTrue(os.path.isfile(os.path.join(repository, 'Release.gpg')))
             return repository
         finally:
             for partial in destructors:
