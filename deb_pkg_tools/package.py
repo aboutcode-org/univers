@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: October 20, 2013
+# Last Change: November 3, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -17,6 +17,7 @@ import fnmatch
 import logging
 import os.path
 import pipes
+import random
 import shutil
 import StringIO
 import tempfile
@@ -186,7 +187,7 @@ def determine_package_archive(directory):
         components.append(architecture)
     return '%s.deb' % '_'.join(components)
 
-def copy_package_files(source_directory, build_directory):
+def copy_package_files(from_directory, to_directory):
     """
     Copy a directory tree suitable for packaging with ``dpkg-deb --build`` to a
     temporary build directory so that individual files can be replaced without
@@ -194,12 +195,15 @@ def copy_package_files(source_directory, build_directory):
     file system as the source directory, hard links are used to speed up the
     copy. This function is used by :py:func:`build_package()`.
 
-    :param source_directory: The pathname of a directory tree suitable for
-                             packaging with ``dpkg-deb --build``.
-    :param build_directory: The pathname of a temporary build directory
-                            (expected to already exist).
+    :param from_directory: The pathname of a directory tree suitable for
+                           packaging with ``dpkg-deb --build``.
+    :param to_directory: The pathname of a temporary build directory.
     """
+    logger.info("Copying files (%s) to temporary directory (%s) ..",
+                format_path(from_directory), format_path(to_directory))
     command = ['cp', '-a']
+    if not os.path.isdir(to_directory):
+        os.makedirs(to_directory)
     # Check whether we can use hard links to speed up the copy. In the past
     # this used the following simple and obvious check:
     #
@@ -208,20 +212,33 @@ def copy_package_files(source_directory, build_directory):
     # However this expression holds true inside schroot, yet `cp -al' fails
     # when trying to create the hard links! This is why the following code now
     # tries to create an actual hard link to verify that `cp -al' can be used.
+    test_file_from = None
+    test_file_to = None
     try:
-        test_file = os.path.join(build_directory, 'hard-link-test')
-        os.link(os.path.join(source_directory, 'DEBIAN', 'control'), test_file)
-        os.unlink(test_file)
-        logger.debug("Speeding up copying using hard links ..")
+        # Find a unique filename that we can create and destroy without
+        # touching any of the caller's files.
+        while True:
+            test_name = 'deb-pkg-tools-hard-link-test-%d' % random.randint(1, 1000)
+            test_file_from = os.path.join(from_directory, test_name)
+            test_file_to = os.path.join(to_directory, test_name)
+            if not os.path.isfile(test_file_from):
+                break
+        # Create the test file.
+        with open(test_file_from, 'w') as handle:
+            handle.write('test')
+        os.link(test_file_from, test_file_to)
+        logger.debug("Speeding up file copy using hard links ..")
         command.append('-l')
     except OSError:
         pass
+    finally:
+        for test_file in [test_file_from, test_file_to]:
+            if test_file and os.path.isfile(test_file):
+                os.unlink(test_file)
     # I know this looks really funky, but I'm 99% sure this is a valid
     # use of shell escaping and globbing (obviously I tested it ;-).
-    command.append('%s/*' % pipes.quote(source_directory))
-    command.append(pipes.quote(build_directory))
-    logger.info("Copying package files (%s) to build directory (%s) ..",
-                format_path(source_directory), format_path(build_directory))
+    command.append('%s/*' % pipes.quote(from_directory))
+    command.append(pipes.quote(to_directory))
     execute(' '.join(command), logger=logger)
 
 def clean_package_tree(directory, remove_dirs=DIRECTORIES_TO_REMOVE, remove_files=FILES_TO_REMOVE):
