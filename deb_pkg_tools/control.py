@@ -1,7 +1,7 @@
 # Debian packaging tools: Control file manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: October 20, 2013
+# Last Change: November 16, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -115,7 +115,7 @@ def parse_control_fields(input_fields):
 
     >>> from deb_pkg_tools.control import parse_control_fields
     >>> from deb_pkg_tools.package import inspect_package
-    >>> fields = inspect_package('/var/cache/apt/archives/python2.7_2.7.3-0ubuntu3.2_amd64.deb')
+    >>> fields, contents = inspect_package('/var/cache/apt/archives/python2.7_2.7.3-0ubuntu3.2_amd64.deb')
     >>> parse_control_fields(fields)
     {'Architecture': u'amd64',
      'Conflicts': [u'python-profiler (<= 2.7.1-2)'],

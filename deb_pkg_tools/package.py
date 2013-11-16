@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: November 3, 2013
+# Last Change: November 16, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -13,11 +13,13 @@ This module provides functions to build and inspect Debian package archives
 """
 
 # Standard library modules.
+import collections
 import fnmatch
 import logging
 import os.path
 import pipes
 import random
+import re
 import shutil
 import StringIO
 import tempfile
@@ -54,34 +56,65 @@ FILES_TO_REMOVE = ('*.pyc',            # Python byte code files (http://lintian.
                    '.s??')             # Vim anonymous swap files
 
 def inspect_package(archive):
-    """
-    Get the metadata from a ``*.deb`` archive.
+    r"""
+    Get the metadata and contents from a ``*.deb`` archive.
 
     :param archive: The pathname of an existing ``*.deb`` archive.
-    :returns: A dictionary with control file fields (an instance
-              of :py:func:`debian.deb822.Deb822`).
+    :returns: A tuple with two dictionaries:
+
+              1. A dictionary with control file fields (an instance of
+                 :py:func:`debian.deb822.Deb822`).
+              2. A dictionary with the directories and files contained in the
+                 package. The dictionary keys are the absolute pathnames and
+                 the dictionary values are named tuples with five fields:
+                 permissions, owner, group, size, modified (see the example
+                 below).
 
     To give you an idea of what the result looks like:
 
     >>> from deb_pkg_tools.package import inspect_package
-    >>> inspect_package('/var/cache/apt/archives/python2.7_2.7.3-0ubuntu3.2_amd64.deb')
-    {'Architecture': 'amd64',
-     'Conflicts': 'python-profiler (<= 2.7.1-2)',
-     'Depends': 'python2.7-minimal (= 2.7.3-0ubuntu3.2), mime-support, libbz2-1.0, libc6 (>= 2.15), libdb5.1, libexpat1 (>= 1.95.8), libgcc1 (>= 1:4.1.1), libncursesw5 (>= 5.6+20070908), libreadline6 (>= 6.0), libsqlite3-0 (>= 3.5.9), libtinfo5',
-     'Description': 'Interactive high-level object-oriented language ...',
-     'Installed-Size': '8779',
-     'Maintainer': 'Ubuntu Core Developers <ubuntu-devel-discuss@lists.ubuntu.com>',
-     'Multi-Arch': 'allowed',
-     'Original-Maintainer': 'Matthias Klose <doko@debian.org>',
-     'Package': 'python2.7',
-     'Priority': 'optional',
-     'Provides': 'python-argparse, python2.7-argparse, python2.7-celementtree, python2.7-cjkcodecs, python2.7-ctypes, python2.7-elementtree, python2.7-profiler, python2.7-wsgiref',
-     'Replaces': 'python-profiler (<= 2.7.1-2)',
-     'Section': 'python',
-     'Suggests': 'python2.7-doc, binutils',
-     'Version': '2.7.3-0ubuntu3.2'}
+    >>> fields, contents = inspect_package('/var/cache/apt/archives/python2.7_2.7.3-0ubuntu3.4_amd64.deb')
+    >>> print fields
+    {'Architecture': u'amd64',
+     'Conflicts': u'python-profiler (<= 2.7.1-2)',
+     'Depends': u'python2.7-minimal (= 2.7.3-0ubuntu3.4), mime-support, libbz2-1.0, libc6 (>= 2.15), libdb5.1, libexpat1 (>= 1.95.8), libgcc1 (>= 1:4.1.1), libncursesw5 (>= 5.6+20070908), libreadline6 (>= 6.0), libsqlite3-0 (>= 3.5.9), libtinfo5',
+     'Description': u'Interactive high-level object-oriented language (version 2.7)\n Version 2.7 of the high-level, interactive object oriented language,\n includes an extensive class library with lots of goodies for\n network programming, system administration, sounds and graphics.',
+     'Installed-Size': u'8779',
+     'Maintainer': u'Ubuntu Core Developers <ubuntu-devel-discuss@lists.ubuntu.com>',
+     'Multi-Arch': u'allowed',
+     'Original-Maintainer': u'Matthias Klose <doko@debian.org>',
+     'Package': u'python2.7',
+     'Priority': u'optional',
+     'Provides': u'python-argparse, python2.7-argparse, python2.7-celementtree, python2.7-cjkcodecs, python2.7-ctypes, python2.7-elementtree, python2.7-profiler, python2.7-wsgiref',
+     'Replaces': u'python-profiler (<= 2.7.1-2)',
+     'Section': u'python',
+     'Suggests': u'python2.7-doc, binutils',
+     'Version': u'2.7.3-0ubuntu3.4'}
+    >>> print contents
+    {'/usr/lib/python2.7/email/mime/': ArchiveEntry(permissions='drwxr-xr-x', owner='root', group='root', size=0, modified='2013-09-26 22:28'),
+     '/usr/lib/python2.7/encodings/gbk.py': ArchiveEntry(permissions='-rw-r--r--', owner='root', group='root', size=1015, modified='2013-09-26 22:28'),
+     '/usr/lib/python2.7/multiprocessing/managers.py': ArchiveEntry(permissions='-rw-r--r--', owner='root', group='root', size=36586, modified='2013-09-26 22:28'),
+     '/usr/lib/python2.7/sqlite3/dbapi2.py': ArchiveEntry(permissions='-rw-r--r--', owner='root', group='root', size=2615, modified='2013-09-26 22:28'),
+     '/usr/lib/python2.7/uuid.py': ArchiveEntry(permissions='-rw-r--r--', owner='root', group='root', size=21095, modified='2013-09-26 22:28'),
+     ...}
     """
-    return Deb822(StringIO.StringIO(execute('dpkg-deb', '-f', archive, logger=logger, capture=True)))
+    metadata = Deb822(StringIO.StringIO(execute('dpkg-deb', '-f', archive, logger=logger, capture=True)))
+    contents = {}
+    for line in execute('dpkg-deb', '-c', archive, logger=logger, capture=True).splitlines():
+        # Example output of dpkg-deb -c archive.deb:
+        # drwxr-xr-x root/root 0 2013-07-08 17:49 ./usr/share/doc/
+        # lrwxrwxrwx root/root 0 2013-09-26 22:29 ./usr/bin/pdb2.7 -> ../lib/python2.7/pdb.py
+        fields = line.split(None, 5)
+        permissions = fields[0]
+        owner, group = fields[1].split('/')
+        size = int(fields[2])
+        modified = fields[3] + ' ' + fields[4]
+        pathname = re.sub('^./', '/', fields[5])
+        pathname, _, target = pathname.partition(' -> ')
+        contents[pathname] = ArchiveEntry(permissions, owner, group, size, modified, target)
+    return metadata, contents
+
+ArchiveEntry = collections.namedtuple('ArchiveEntry', 'permissions, owner, group, size, modified, target')
 
 def build_package(directory, repository=None, check_package=True, copy_files=True):
     """

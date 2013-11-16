@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: November 2, 2013
+# Last Change: November 16, 2013
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -102,9 +102,13 @@ class DebPkgToolsTestCase(unittest.TestCase):
             else:
                 destructors.append(functools.partial(os.unlink, package_file))
                 # Verify the package metadata.
-                fields = inspect_package(package_file)
+                fields, contents = inspect_package(package_file)
                 for name in TEST_PACKAGE_FIELDS:
                     self.assertEqual(fields[name], TEST_PACKAGE_FIELDS[name])
+                self.assertEqual(len(contents), 1)
+                self.assertEqual(contents['/'].permissions[0], 'd')
+                self.assertEqual(contents['/'].owner, 'root')
+                self.assertEqual(contents['/'].group, 'root')
         finally:
             for partial in destructors:
                 partial()
