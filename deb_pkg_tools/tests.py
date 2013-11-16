@@ -94,6 +94,18 @@ class DebPkgToolsTestCase(unittest.TestCase):
             os.mkdir(os.path.join(directory, 'DEBIAN'))
             with open(os.path.join(directory, 'DEBIAN', 'control'), 'w') as handle:
                 TEST_PACKAGE_FIELDS.dump(handle)
+            with open(os.path.join(directory, 'DEBIAN', 'conffiles'), 'w') as handle:
+                handle.write('/etc/file1\n')
+                handle.write('/etc/file2\n')
+            # Create the directory with configuration files.
+            os.mkdir(os.path.join(directory, 'etc'))
+            touch(os.path.join(directory, 'etc', 'file1'))
+            touch(os.path.join(directory, 'etc', 'file3'))
+            # Create a directory that should be cleaned up by clean_package_tree().
+            os.makedirs(os.path.join(directory, 'tmp', '.git'))
+            # Create a file that should be cleaned up by clean_package_tree().
+            with open(os.path.join(directory, 'tmp', '.gitignore'), 'w') as handle:
+                handle.write('\n')
             # Build the package (without any contents :-).
             package_file = build_package(directory)
             self.assertTrue(os.path.isfile(package_file))
@@ -105,10 +117,18 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 fields, contents = inspect_package(package_file)
                 for name in TEST_PACKAGE_FIELDS:
                     self.assertEqual(fields[name], TEST_PACKAGE_FIELDS[name])
-                self.assertEqual(len(contents), 1)
+                # Verify that the package contains the `/' and `/tmp'
+                # directories (since it doesn't contain any actual files).
                 self.assertEqual(contents['/'].permissions[0], 'd')
                 self.assertEqual(contents['/'].owner, 'root')
                 self.assertEqual(contents['/'].group, 'root')
+                self.assertEqual(contents['/tmp/'].permissions[0], 'd')
+                self.assertEqual(contents['/tmp/'].owner, 'root')
+                self.assertEqual(contents['/tmp/'].group, 'root')
+                # Verify that clean_package_tree() cleaned up properly
+                # (`/tmp/.git' and `/tmp/.gitignore' have been cleaned up).
+                self.assertFalse('/tmp/.git/' in contents)
+                self.assertFalse('/tmp/.gitignore' in contents)
         finally:
             for partial in destructors:
                 partial()
@@ -132,9 +152,6 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 partial()
 
     def test_repository_activation(self):
-        """
-        To-do: Only when os.getuid() == 0?
-        """
         if os.getuid() != 0:
             logger.warn("Skipping repository activation test because it requires root access!")
         else:
@@ -146,6 +163,17 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 self.assertEqual(fields['Package'], TEST_PACKAGE_NAME)
             finally:
                 deactivate_repository(repository)
+            # XXX If we skipped the GPG key handling because apt supports the
+            # [trusted=yes] option, re-run the test *including* GPG key
+            # handling (we want this to be tested...).
+            import deb_pkg_tools
+            if deb_pkg_tools.repo.apt_supports_trusted_option():
+                deb_pkg_tools.repo.trusted_option_supported = False
+                self.test_repository_activation()
+
+def touch(filename, contents='\n'):
+    with open(filename, 'w') as handle:
+        handle.write(contents)
 
 if __name__ == '__main__':
     unittest.main()
