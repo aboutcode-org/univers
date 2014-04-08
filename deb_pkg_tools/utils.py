@@ -84,9 +84,9 @@ def execute(*command, **options):
     stdout, stderr = shell.communicate()
     if options.get('check', True) and shell.returncode != 0:
         msg = "External command failed with exit code %s! (command: %s)"
-        raise ExternalCommandFailed, msg % (shell.returncode, command)
+        raise ExternalCommandFailed(msg % (shell.returncode, command))
     if options.get('capture', False):
-        return stdout.strip()
+        return stdout.strip().decode('ascii')
 
 class ExternalCommandFailed(Exception):
     """

@@ -21,7 +21,10 @@ import pipes
 import random
 import re
 import shutil
-import StringIO
+try:
+    import StringIO
+except ImportError:
+    from io import StringIO
 import tempfile
 
 # External dependencies.
@@ -38,22 +41,22 @@ logger = logging.getLogger(__name__)
 # http://lintian.debian.org/tags/package-contains-vcs-control-dir.html
 DIRECTORIES_TO_REMOVE = ('.bzr', # Bazaar
                          '.git', # Git
-                         '.hg',  # Mercurial
+                         '.hg', # Mercurial
                          '.svn') # SVN
 
-FILES_TO_REMOVE = ('*.pyc',            # Python byte code files (http://lintian.debian.org/tags/package-installs-python-bytecode.html)
-                   '*.pyo',            # Python optimized byte code files (http://lintian.debian.org/tags/package-installs-python-bytecode.html)
-                   '*~',               # Emacs/Vim backup files (http://lintian.debian.org/tags/backup-file-in-package.html)
-                   '.*.s??',           # Vim named swap files
-                   '.bzrignore',       # Bazaar ignore files (http://lintian.debian.org/tags/package-contains-vcs-control-file.html)
-                   '.DS_Store',        # Mac OS X custom folder attributes (http://lintian.debian.org/tags/macos-ds-store-file-in-package.html)
-                   '.DS_Store.gz',     # Mac OS X custom folder attributes (http://lintian.debian.org/tags/macos-ds-store-file-in-package.html)
-                   '._*',              # Mac OS X resource fork (http://lintian.debian.org/tags/macos-resource-fork-file-in-package.html)
-                   '.gitignore',       # Git ignore files (http://lintian.debian.org/tags/package-contains-vcs-control-file.html)
+FILES_TO_REMOVE = ('*.pyc', # Python byte code files (http://lintian.debian.org/tags/package-installs-python-bytecode.html)
+                   '*.pyo', # Python optimized byte code files (http://lintian.debian.org/tags/package-installs-python-bytecode.html)
+                   '*~', # Emacs/Vim backup files (http://lintian.debian.org/tags/backup-file-in-package.html)
+                   '.*.s??', # Vim named swap files
+                   '.bzrignore', # Bazaar ignore files (http://lintian.debian.org/tags/package-contains-vcs-control-file.html)
+                   '.DS_Store', # Mac OS X custom folder attributes (http://lintian.debian.org/tags/macos-ds-store-file-in-package.html)
+                   '.DS_Store.gz', # Mac OS X custom folder attributes (http://lintian.debian.org/tags/macos-ds-store-file-in-package.html)
+                   '._*', # Mac OS X resource fork (http://lintian.debian.org/tags/macos-resource-fork-file-in-package.html)
+                   '.gitignore', # Git ignore files (http://lintian.debian.org/tags/package-contains-vcs-control-file.html)
                    '.hg_archival.txt', # Artefact of `hg archive' (http://lintian.debian.org/tags/package-contains-vcs-control-file.html)
-                   '.hgignore',        # Mercurial ignore files (http://lintian.debian.org/tags/package-contains-vcs-control-file.html)
-                   '.hgtags',          # Mercurial ignore files (http://lintian.debian.org/tags/package-contains-vcs-control-file.html)
-                   '.s??')             # Vim anonymous swap files
+                   '.hgignore', # Mercurial ignore files (http://lintian.debian.org/tags/package-contains-vcs-control-file.html)
+                   '.hgtags', # Mercurial ignore files (http://lintian.debian.org/tags/package-contains-vcs-control-file.html)
+                   '.s??') # Vim anonymous swap files
 
 def inspect_package(archive):
     r"""
@@ -98,7 +101,7 @@ def inspect_package(archive):
      '/usr/lib/python2.7/uuid.py': ArchiveEntry(permissions='-rw-r--r--', owner='root', group='root', size=21095, modified='2013-09-26 22:28'),
      ...}
     """
-    metadata = Deb822(StringIO.StringIO(execute('dpkg-deb', '-f', archive, logger=logger, capture=True)))
+    metadata = Deb822(StringIO(execute('dpkg-deb', '-f', archive, logger=logger, capture=True)))
     contents = {}
     for line in execute('dpkg-deb', '-c', archive, logger=logger, capture=True).splitlines():
         # Example output of dpkg-deb -c archive.deb:

@@ -75,7 +75,7 @@ class DebPkgToolsTestCase(unittest.TestCase):
                                  'Depends: some-dependency'])
         control_file = tempfile.mktemp()
         try:
-            with open(control_file, 'w') as handle:
+            with open(control_file, 'wb') as handle:
                 deb822_package.dump(handle)
             patch_control_file(control_file, dict(Package='patched-example',
                                                   Depends='another-dependency'))
@@ -92,11 +92,11 @@ class DebPkgToolsTestCase(unittest.TestCase):
         try:
             # Create the package template.
             os.mkdir(os.path.join(directory, 'DEBIAN'))
-            with open(os.path.join(directory, 'DEBIAN', 'control'), 'w') as handle:
+            with open(os.path.join(directory, 'DEBIAN', 'control'), 'wb') as handle:
                 TEST_PACKAGE_FIELDS.dump(handle)
-            with open(os.path.join(directory, 'DEBIAN', 'conffiles'), 'w') as handle:
-                handle.write('/etc/file1\n')
-                handle.write('/etc/file2\n')
+            with open(os.path.join(directory, 'DEBIAN', 'conffiles'), 'wb') as handle:
+                handle.write(b'/etc/file1\n')
+                handle.write(b'/etc/file2\n')
             # Create the directory with configuration files.
             os.mkdir(os.path.join(directory, 'etc'))
             touch(os.path.join(directory, 'etc', 'file1'))
