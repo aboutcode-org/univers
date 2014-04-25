@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: November 16, 2013
+# Last Change: April 28, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -19,11 +19,12 @@ from debian.deb822 import Deb822
 # Modules included in our package.
 from deb_pkg_tools.control import (merge_control_fields, parse_control_fields,
                                    patch_control_file, unparse_control_fields)
+from deb_pkg_tools.gpg import GPGKey
+from deb_pkg_tools.package import build_package, inspect_package
 from deb_pkg_tools.repo import (activate_repository,
                                 apt_supports_trusted_option,
                                 deactivate_repository,
                                 update_repository)
-from deb_pkg_tools.package import build_package, inspect_package
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
@@ -170,6 +171,18 @@ class DebPkgToolsTestCase(unittest.TestCase):
             if deb_pkg_tools.repo.apt_supports_trusted_option():
                 deb_pkg_tools.repo.trusted_option_supported = False
                 self.test_repository_activation()
+
+    def test_gpg_key_generation(self):
+        working_directory = tempfile.mkdtemp()
+        secret_key_file = os.path.join(working_directory, 'test.sec')
+        public_key_file = os.path.join(working_directory, 'test.pub')
+        try:
+            GPGKey(name="test-key",
+                   description="GPG key pair generated for unit tests",
+                   secret_key_file=secret_key_file,
+                   public_key_file=public_key_file)
+        finally:
+            shutil.rmtree(working_directory)
 
 def touch(filename, contents='\n'):
     with open(filename, 'w') as handle:
