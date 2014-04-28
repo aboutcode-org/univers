@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: November 16, 2013
+# Last Change: April 26, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -162,14 +162,17 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
     .. _Installed-Size: http://www.debian.org/doc/debian-policy/ch-controlfields.html#s-f-Installed-Size
     .. _Lintian: http://lintian.debian.org/
     """
-    build_directory = tempfile.mkdtemp()
-    logger.debug("Created build directory: %s", format_path(build_directory))
     if not repository:
         repository = tempfile.gettempdir()
     package_file = os.path.join(repository, determine_package_archive(directory))
     logger.debug("Preparing to build package: %s", format_path(package_file))
     try:
-        copy_package_files(directory, build_directory)
+        if copy_files:
+            build_directory = tempfile.mkdtemp()
+            logger.debug("Created build directory: %s", format_path(build_directory))
+            copy_package_files(directory, build_directory)
+        else:
+            build_directory = directory
         clean_package_tree(build_directory)
         update_conffiles(build_directory)
         update_installed_size(build_directory)
@@ -200,8 +203,9 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
                 execute(*lintian_command, logger=logger, check=False)
         return package_file
     finally:
-        logger.debug("Removing build directory: %s", format_path(build_directory))
-        shutil.rmtree(build_directory)
+        if copy_files:
+            logger.debug("Removing build directory: %s", format_path(build_directory))
+            shutil.rmtree(build_directory)
 
 def determine_package_archive(directory):
     """
