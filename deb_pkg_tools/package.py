@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: April 26, 2014
+# Last Change: May 4, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -26,11 +26,11 @@ import tempfile
 
 # External dependencies.
 from debian.deb822 import Deb822
+from executor import execute
 from humanfriendly import format_path, pluralize
 
 # Modules included in our package.
 from deb_pkg_tools.control import patch_control_file
-from deb_pkg_tools.utils import execute
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
@@ -140,9 +140,9 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
        by :py:func:`build_package()`.
 
     If any of the external commands invoked by this function fail,
-    :py:exc:`deb_pkg_tools.utils.ExternalCommandFailed` is raised. If this
-    function returns without raising an exception, the generated Debian package
-    can be found in the parent directory of the directory given as the first
+    :py:exc:`executor.ExternalCommandFailed` is raised. If this function
+    returns without raising an exception, the generated Debian package can be
+    found in the parent directory of the directory given as the first
     argument.
 
     :param directory: The pathname of a directory tree suitable for packaging
