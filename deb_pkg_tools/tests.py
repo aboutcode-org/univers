@@ -189,14 +189,20 @@ class DebPkgToolsTestCase(unittest.TestCase):
 
     def test_gpg_key_generation(self):
         working_directory = tempfile.mkdtemp()
-        secret_key_file = os.path.join(working_directory, 'test.sec')
-        public_key_file = os.path.join(working_directory, 'test.pub')
+        secret_key_file = os.path.join(working_directory, 'subdirectory', 'test.sec')
+        public_key_file = os.path.join(working_directory, 'subdirectory', 'test.pub')
         try:
-            # Generate a GPG key on the spot.
-            GPGKey(name="test-key",
-                   description="GPG key pair generated for unit tests",
+            # Generate a named GPG key on the spot.
+            GPGKey(name="named-test-key",
+                   description="GPG key pair generated for unit tests (named key)",
                    secret_key_file=secret_key_file,
                    public_key_file=public_key_file)
+            # Generate a default GPG key on the spot.
+            default_key = GPGKey(name="default-test-key",
+                                 description="GPG key pair generated for unit tests (default key)")
+            self.assertEquals(os.path.basename(default_key.secret_key_file), 'secring.gpg')
+            self.assertEquals(os.path.basename(default_key.public_key_file), 'pubring.gpg')
+            # Test error handling related to GPG keys.
             self.assertRaises(Exception, GPGKey, secret_key_file=secret_key_file)
             self.assertRaises(Exception, GPGKey, public_key_file=public_key_file)
             missing_secret_key_file = '/tmp/deb-pkg-tools-%i.sec' % random.randint(1, 1000)
@@ -204,7 +210,10 @@ class DebPkgToolsTestCase(unittest.TestCase):
             self.assertRaises(Exception, GPGKey, key_id='12345', secret_key_file=missing_secret_key_file, public_key_file=missing_public_key_file)
             os.unlink(secret_key_file)
             self.assertRaises(Exception, GPGKey, name="test-key", description="Whatever", secret_key_file=secret_key_file, public_key_file=public_key_file)
+            touch(secret_key_file)
             os.unlink(public_key_file)
+            self.assertRaises(Exception, GPGKey, name="test-key", description="Whatever", secret_key_file=secret_key_file, public_key_file=public_key_file)
+            os.unlink(secret_key_file)
             self.assertRaises(Exception, GPGKey, secret_key_file=secret_key_file, public_key_file=public_key_file)
         finally:
             shutil.rmtree(working_directory)
