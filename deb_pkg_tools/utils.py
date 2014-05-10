@@ -1,7 +1,7 @@
 # Debian packaging tools: Utility functions.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: May 4, 2014
+# Last Change: May 10, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -26,7 +26,7 @@ def sha1(text):
     :returns: The fingerprint of the text (a string).
     """
     context = hashlib.sha1()
-    context.update(text)
+    context.update(text.encode('utf-8'))
     return context.hexdigest()
 
 def find_home_directory():
