@@ -38,6 +38,7 @@ TEST_PACKAGE_FIELDS = Deb822(dict(Architecture='all',
                                   Section='misc',
                                   Priority='optional'))
 TEST_REPO_ORIGIN = 'DebPkgToolsTestCase'
+TEST_REPO_DESCRIPTION = 'Description of test repository'
 
 class DebPkgToolsTestCase(unittest.TestCase):
 
@@ -136,22 +137,31 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 partial()
 
     def test_repository_creation(self, preserve=False):
-        repository = tempfile.mkdtemp()
+        config_dir = tempfile.mkdtemp()
+        repo_dir = tempfile.mkdtemp()
         destructors = []
         if not preserve:
-            destructors.append(functools.partial(shutil.rmtree, repository))
+            destructors.append(functools.partial(shutil.rmtree, config_dir))
+            destructors.append(functools.partial(shutil.rmtree, repo_dir))
+        from deb_pkg_tools import repo
+        repo.USER_CONFIG_DIR = config_dir
+        with open(os.path.join(config_dir, repo.CONFIG_FILE), 'w') as handle:
+            handle.write('[test]\n')
+            handle.write('directory = %s\n' % repo_dir)
+            handle.write('release-origin = %s\n' % TEST_REPO_ORIGIN)
         try:
-            self.test_package_building(repository)
-            update_repository(repository, release_fields=dict(Origin=TEST_REPO_ORIGIN))
-            self.assertTrue(os.path.isfile(os.path.join(repository, 'Packages')))
-            self.assertTrue(os.path.isfile(os.path.join(repository, 'Packages.gz')))
-            self.assertTrue(os.path.isfile(os.path.join(repository, 'Release')))
-            with open(os.path.join(repository, 'Release')) as handle:
+            self.test_package_building(repo_dir)
+            update_repository(repo_dir, release_fields=dict(description=TEST_REPO_DESCRIPTION))
+            self.assertTrue(os.path.isfile(os.path.join(repo_dir, 'Packages')))
+            self.assertTrue(os.path.isfile(os.path.join(repo_dir, 'Packages.gz')))
+            self.assertTrue(os.path.isfile(os.path.join(repo_dir, 'Release')))
+            with open(os.path.join(repo_dir, 'Release')) as handle:
                 fields = Deb822(handle)
                 self.assertEquals(fields['Origin'], TEST_REPO_ORIGIN)
+                self.assertEquals(fields['Description'], TEST_REPO_DESCRIPTION)
             if not apt_supports_trusted_option():
-                self.assertTrue(os.path.isfile(os.path.join(repository, 'Release.gpg')))
-            return repository
+                self.assertTrue(os.path.isfile(os.path.join(repo_dir, 'Release.gpg')))
+            return repo_dir
         finally:
             for partial in destructors:
                 partial()
