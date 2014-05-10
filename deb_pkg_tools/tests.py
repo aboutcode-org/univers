@@ -9,22 +9,31 @@ import functools
 import logging
 import os
 import random
+import re
 import shutil
+import sys
 import tempfile
 import unittest
+
+try:
+    # Python 2.x.
+    from StringIO import StringIO
+except ImportError:
+    # Python 3.x.
+    from io import StringIO
 
 # External dependencies.
 import coloredlogs
 from debian.deb822 import Deb822
 
 # Modules included in our package.
-from deb_pkg_tools.control import (merge_control_fields, parse_control_fields,
-                                   patch_control_file, unparse_control_fields)
+from deb_pkg_tools.cli import main
+from deb_pkg_tools.control import (merge_control_fields,
+                                   parse_control_fields,
+                                   unparse_control_fields)
 from deb_pkg_tools.gpg import GPGKey
-from deb_pkg_tools.package import build_package, inspect_package
-from deb_pkg_tools.repo import (activate_repository,
-                                apt_supports_trusted_option,
-                                deactivate_repository,
+from deb_pkg_tools.package import inspect_package
+from deb_pkg_tools.repo import (apt_supports_trusted_option,
                                 update_repository)
 
 # Initialize a logger.
@@ -81,8 +90,9 @@ class DebPkgToolsTestCase(unittest.TestCase):
         try:
             with open(control_file, 'wb') as handle:
                 deb822_package.dump(handle)
-            patch_control_file(control_file, dict(Package='patched-example',
-                                                  Depends='another-dependency'))
+            call('--patch=%s' % control_file,
+                 '--set=Package: patched-example',
+                 '--set=Depends: another-dependency')
             with open(control_file) as handle:
                 patched_fields = Deb822(handle)
             self.assertEqual(patched_fields['Package'], 'patched-example')
@@ -111,10 +121,15 @@ class DebPkgToolsTestCase(unittest.TestCase):
             with open(os.path.join(directory, 'tmp', '.gitignore'), 'w') as handle:
                 handle.write('\n')
             # Build the package (without any contents :-).
-            package_file = build_package(directory)
+            call('--build', directory)
+            package_file = os.path.join(tempfile.gettempdir(),
+                                        '%s_%s_%s.deb' % (TEST_PACKAGE_FIELDS['Package'],
+                                                          TEST_PACKAGE_FIELDS['Version'],
+                                                          TEST_PACKAGE_FIELDS['Architecture']))
             self.assertTrue(os.path.isfile(package_file))
             if repository:
                 shutil.move(package_file, repository)
+                return os.path.join(repository, os.path.basename(package_file))
             else:
                 destructors.append(functools.partial(os.unlink, package_file))
                 # Verify the package metadata.
@@ -133,6 +148,23 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 # (`/tmp/.git' and `/tmp/.gitignore' have been cleaned up).
                 self.assertFalse('/tmp/.git/' in contents)
                 self.assertFalse('/tmp/.gitignore' in contents)
+                return package_file
+        finally:
+            for partial in destructors:
+                partial()
+
+    def test_command_line_interface(self):
+        directory = tempfile.mkdtemp()
+        destructors = [functools.partial(shutil.rmtree, directory)]
+        try:
+            # Test `deb-pkg-tools --inspect PKG'.
+            package_file = self.test_package_building(directory)
+            lines = call('--inspect', package_file).splitlines()
+            for field, value in TEST_PACKAGE_FIELDS.items():
+                self.assertEqual(match('^ - %s: (.+)$' % field, lines), value)
+            # Test `deb-pkg-tools --with-repo=DIR CMD' (we simply check whether
+            # apt-cache sees the package).
+            call('--with-repo=%s' % directory, 'apt-cache show %s' % TEST_PACKAGE_NAME)
         finally:
             for partial in destructors:
                 partial()
@@ -172,13 +204,13 @@ class DebPkgToolsTestCase(unittest.TestCase):
             logger.warn("Skipping repository activation test because it requires root access!")
         else:
             repository = self.test_repository_creation(preserve=True)
-            activate_repository(repository)
+            call('--activate-repo=%s' % repository)
             try:
                 handle = os.popen('apt-cache show %s' % TEST_PACKAGE_NAME)
                 fields = Deb822(handle)
                 self.assertEqual(fields['Package'], TEST_PACKAGE_NAME)
             finally:
-                deactivate_repository(repository)
+                call('--deactivate-repo=%s' % repository)
             # XXX If we skipped the GPG key handling because apt supports the
             # [trusted=yes] option, re-run the test *including* GPG key
             # handling (we want this to be tested...).
@@ -221,6 +253,24 @@ class DebPkgToolsTestCase(unittest.TestCase):
 def touch(filename, contents='\n'):
     with open(filename, 'w') as handle:
         handle.write(contents)
+
+def call(*arguments):
+    saved_stdout = sys.stdout
+    saved_argv = sys.argv
+    try:
+        sys.stdout = StringIO()
+        sys.argv = [sys.argv[0]] + list(arguments)
+        main()
+        return sys.stdout.getvalue()
+    finally:
+        sys.stdout = saved_stdout
+        sys.argv = saved_argv
+
+def match(pattern, lines):
+    for line in lines:
+        m = re.match(pattern, line)
+        if m:
+            return m.group(1)
 
 if __name__ == '__main__':
     unittest.main()
