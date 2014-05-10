@@ -8,6 +8,7 @@
 import functools
 import logging
 import os
+import random
 import shutil
 import tempfile
 import unittest
@@ -191,10 +192,20 @@ class DebPkgToolsTestCase(unittest.TestCase):
         secret_key_file = os.path.join(working_directory, 'test.sec')
         public_key_file = os.path.join(working_directory, 'test.pub')
         try:
+            # Generate a GPG key on the spot.
             GPGKey(name="test-key",
                    description="GPG key pair generated for unit tests",
                    secret_key_file=secret_key_file,
                    public_key_file=public_key_file)
+            self.assertRaises(Exception, GPGKey, secret_key_file=secret_key_file)
+            self.assertRaises(Exception, GPGKey, public_key_file=public_key_file)
+            missing_secret_key_file = '/tmp/deb-pkg-tools-%i.sec' % random.randint(1, 1000)
+            missing_public_key_file = '/tmp/deb-pkg-tools-%i.pub' % random.randint(1, 1000)
+            self.assertRaises(Exception, GPGKey, key_id='12345', secret_key_file=missing_secret_key_file, public_key_file=missing_public_key_file)
+            os.unlink(secret_key_file)
+            self.assertRaises(Exception, GPGKey, name="test-key", description="Whatever", secret_key_file=secret_key_file, public_key_file=public_key_file)
+            os.unlink(public_key_file)
+            self.assertRaises(Exception, GPGKey, secret_key_file=secret_key_file, public_key_file=public_key_file)
         finally:
             shutil.rmtree(working_directory)
 
