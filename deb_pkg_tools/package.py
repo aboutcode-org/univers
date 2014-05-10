@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: May 4, 2014
+# Last Change: May 10, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -21,8 +21,14 @@ import pipes
 import random
 import re
 import shutil
-import StringIO
 import tempfile
+
+try:
+    # Python 2.x.
+    from StringIO import StringIO
+except ImportError:
+    # Python 3.x.
+    from io import StringIO
 
 # External dependencies.
 from debian.deb822 import Deb822
@@ -98,7 +104,7 @@ def inspect_package(archive):
      '/usr/lib/python2.7/uuid.py': ArchiveEntry(permissions='-rw-r--r--', owner='root', group='root', size=21095, modified='2013-09-26 22:28'),
      ...}
     """
-    metadata = Deb822(StringIO.StringIO(execute('dpkg-deb', '-f', archive, logger=logger, capture=True)))
+    metadata = Deb822(StringIO(execute('dpkg-deb', '-f', archive, logger=logger, capture=True)))
     contents = {}
     for line in execute('dpkg-deb', '-c', archive, logger=logger, capture=True).splitlines():
         # Example output of dpkg-deb -c archive.deb:

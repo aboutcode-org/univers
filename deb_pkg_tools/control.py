@@ -51,7 +51,7 @@ def patch_control_file(control_file, overrides):
     # Break the hard link chain.
     os.unlink(control_file)
     # Patch the control file.
-    with open(control_file, 'w') as handle:
+    with open(control_file, 'wb') as handle:
         patched.dump(handle)
 
 def merge_control_fields(defaults, overrides):
@@ -153,7 +153,7 @@ def parse_control_fields(input_fields):
     """
     logger.debug("Parsing %i control fields ..", len(input_fields))
     output_fields = {}
-    for name, unparsed_value in input_fields.iteritems():
+    for name, unparsed_value in input_fields.items():
         name = normalize_control_field_name(name)
         if name in DEPENDS_LIKE_FIELDS:
             parsed_value = [s.strip() for s in unparsed_value.split(',') if s and not s.isspace()]
@@ -183,7 +183,7 @@ def unparse_control_fields(input_fields):
     """
     logger.debug("Unparsing %i control fields ..", len(input_fields))
     output_fields = Deb822()
-    for name, parsed_value in input_fields.iteritems():
+    for name, parsed_value in input_fields.items():
         name = normalize_control_field_name(name)
         if name in DEPENDS_LIKE_FIELDS:
             unparsed_value = ', '.join(parsed_value)
