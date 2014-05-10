@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: April 28, 2014
+# Last Change: May 10, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -37,6 +37,7 @@ TEST_PACKAGE_FIELDS = Deb822(dict(Architecture='all',
                                   Version='0.1',
                                   Section='misc',
                                   Priority='optional'))
+TEST_REPO_ORIGIN = 'DebPkgToolsTestCase'
 
 class DebPkgToolsTestCase(unittest.TestCase):
 
@@ -141,10 +142,13 @@ class DebPkgToolsTestCase(unittest.TestCase):
             destructors.append(functools.partial(shutil.rmtree, repository))
         try:
             self.test_package_building(repository)
-            update_repository(repository)
+            update_repository(repository, release_fields=dict(Origin=TEST_REPO_ORIGIN))
             self.assertTrue(os.path.isfile(os.path.join(repository, 'Packages')))
             self.assertTrue(os.path.isfile(os.path.join(repository, 'Packages.gz')))
             self.assertTrue(os.path.isfile(os.path.join(repository, 'Release')))
+            with open(os.path.join(repository, 'Release')) as handle:
+                fields = Deb822(handle)
+                self.assertEquals(fields['Origin'], TEST_REPO_ORIGIN)
             if not apt_supports_trusted_option():
                 self.assertTrue(os.path.isfile(os.path.join(repository, 'Release.gpg')))
             return repository
