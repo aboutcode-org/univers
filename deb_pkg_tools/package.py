@@ -72,9 +72,8 @@ def inspect_package(archive):
                  :py:func:`debian.deb822.Deb822`).
               2. A dictionary with the directories and files contained in the
                  package. The dictionary keys are the absolute pathnames and
-                 the dictionary values are named tuples with five fields:
-                 permissions, owner, group, size, modified (see the example
-                 below).
+                 the dictionary values are :py:class:`ArchiveEntry` objects
+                 (see the example below).
 
     To give you an idea of what the result looks like:
 
@@ -120,7 +119,32 @@ def inspect_package(archive):
         contents[pathname] = ArchiveEntry(permissions, owner, group, size, modified, target)
     return metadata, contents
 
-ArchiveEntry = collections.namedtuple('ArchiveEntry', 'permissions, owner, group, size, modified, target')
+class ArchiveEntry(collections.namedtuple('ArchiveEntry', 'permissions, owner, group, size, modified, target')):
+    """
+    The function :py:func:`inspect_package()` reports the contents of package
+    archives as a dictionary containing named tuples. Here are the fields
+    supported by those named tuples:
+
+    .. py:attribute:: permissions
+
+       The entry type and permission bits just like ``ls -l`` prints them (a string like `drwxr-xr-x`).
+
+    .. py:attribute:: owner
+
+       The username of the owner of the entry (a string).
+
+    .. py:attribute:: group
+
+       The group name of group owning the entry (a string).
+
+    .. py:attribute:: size
+
+       The size of the entry in bytes (an integer).
+
+    .. py:attribute:: modified
+
+       A string like ``2013-09-26 22:28``.
+    """
 
 def build_package(directory, repository=None, check_package=True, copy_files=True):
     """
