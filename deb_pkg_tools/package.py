@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: May 10, 2014
+# Last Change: May 16, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -60,6 +60,49 @@ FILES_TO_REMOVE = ('*.pyc',            # Python byte code files (http://lintian.
                    '.hgignore',        # Mercurial ignore files (http://lintian.debian.org/tags/package-contains-vcs-control-file.html)
                    '.hgtags',          # Mercurial ignore files (http://lintian.debian.org/tags/package-contains-vcs-control-file.html)
                    '.s??')             # Vim anonymous swap files
+
+def parse_filename(filename):
+    """
+    Parse the filename of a Debian binary package archive into three fields:
+    the name of the package, its version and its architecture. See also
+    :py:func:`determine_package_archive()`.
+
+    Here's an example:
+
+    >>> from deb_pkg_tools.package import parse_filename
+    >>> components = parse_filename('/var/cache/apt/archives/python2.7_2.7.3-0ubuntu3.4_amd64.deb')
+    >>> print components
+    PackageFile(name='python2.7', version='2.7.3-0ubuntu3.4', architecture='amd64')
+
+    :param filename: The pathname of a ``*.deb`` archive (a string).
+    :returns: A :py:class:`PackageFile` object.
+    """
+    basename, extension = os.path.splitext(os.path.basename(filename))
+    if extension != '.deb':
+        raise ValueError("Refusing to parse filename that doesn't have `.deb' extension! (%r)" % filename)
+    components = basename.split('_')
+    if len(components) != 3:
+        raise ValueError("Filename doesn't have three underscore separated components! (%r)" % filename)
+    return PackageFile(*components)
+
+class PackageFile(collections.namedtuple('PackageFile', 'name, version, architecture')):
+    """
+    The function :py:func:`parse_filename()` reports the fields of a package
+    archive's filename as a named tuple. Here are the fields supported by those
+    named tuples:
+
+    .. py:attribute:: name
+
+       The name of the package (a string).
+
+    .. py:attribute:: version
+
+       The version of the package (a string).
+
+    .. py:attribute:: architecture
+
+       The architecture of the package (a string).
+    """
 
 def inspect_package(archive):
     r"""
@@ -240,7 +283,8 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
 def determine_package_archive(directory):
     """
     Determine the name of the ``*.deb`` package archive that will be generated
-    from a directory tree suitable for packaging with ``dpkg-deb --build``.
+    from a directory tree suitable for packaging with ``dpkg-deb --build``. See
+    also :py:func:`parse_filename()`.
 
     :param source_directory: The pathname of a directory tree suitable for
                              packaging with ``dpkg-deb --build``.

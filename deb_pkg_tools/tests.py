@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: May 10, 2014
+# Last Change: May 16, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -32,7 +32,7 @@ from deb_pkg_tools.control import (merge_control_fields,
                                    parse_control_fields,
                                    unparse_control_fields)
 from deb_pkg_tools.gpg import GPGKey
-from deb_pkg_tools.package import inspect_package
+from deb_pkg_tools.package import inspect_package, parse_filename
 from deb_pkg_tools.repo import (apt_supports_trusted_option,
                                 update_repository)
 
@@ -99,6 +99,17 @@ class DebPkgToolsTestCase(unittest.TestCase):
             self.assertEqual(patched_fields['Depends'], 'another-dependency, some-dependency')
         finally:
             os.unlink(control_file)
+
+    def test_filename_parsing(self):
+        # Test the happy path.
+        components = parse_filename('/var/cache/apt/archives/python2.7_2.7.3-0ubuntu3.4_amd64.deb')
+        self.assertEqual(components.name, 'python2.7')
+        self.assertEqual(components.version, '2.7.3-0ubuntu3.4')
+        self.assertEqual(components.architecture, 'amd64')
+        self.assertEqual(components, ('python2.7', '2.7.3-0ubuntu3.4', 'amd64'))
+        # Test the unhappy paths.
+        self.assertRaises(ValueError, parse_filename, 'python2.7_2.7.3-0ubuntu3.4_amd64.not-a-deb')
+        self.assertRaises(ValueError, parse_filename, 'python2.7.deb')
 
     def test_package_building(self, repository=None):
         directory = tempfile.mkdtemp()
