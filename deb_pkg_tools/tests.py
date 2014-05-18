@@ -250,25 +250,22 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 partial()
 
     def test_command_line_interface(self):
-        if SKIP_SLOW_TESTS:
-            return
-        directory = tempfile.mkdtemp()
-        destructors = [functools.partial(shutil.rmtree, directory)]
-        try:
-            # Test `deb-pkg-tools --inspect PKG'.
-            package_file = self.test_package_building(directory)
-            lines = call('--inspect', package_file).splitlines()
-            for field, value in TEST_PACKAGE_FIELDS.items():
-                self.assertEqual(match('^ - %s: (.+)$' % field, lines), value)
-            # Test `deb-pkg-tools --with-repo=DIR CMD' (we simply check whether
-            # apt-cache sees the package).
-            if os.getuid() != 0:
-                logger.warning("Skipping repository activation test because it requires root access!")
-            else:
-                call('--with-repo=%s' % directory, 'apt-cache show %s' % TEST_PACKAGE_NAME)
-        finally:
-            for partial in destructors:
-                partial()
+        if not SKIP_SLOW_TESTS:
+            directory = tempfile.mkdtemp()
+            destructors = [functools.partial(shutil.rmtree, directory)]
+            try:
+                # Test `deb-pkg-tools --inspect PKG'.
+                package_file = self.test_package_building(directory)
+                lines = call('--inspect', package_file).splitlines()
+                for field, value in TEST_PACKAGE_FIELDS.items():
+                    self.assertEqual(match('^ - %s: (.+)$' % field, lines), value)
+                # Test `deb-pkg-tools --with-repo=DIR CMD' (we simply check whether
+                # apt-cache sees the package).
+                if os.getuid() == 0:
+                    call('--with-repo=%s' % directory, 'apt-cache show %s' % TEST_PACKAGE_NAME)
+            finally:
+                for partial in destructors:
+                    partial()
 
     def test_collect_packages(self):
         directory = tempfile.mkdtemp()
@@ -284,43 +281,38 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 partial()
 
     def test_repository_creation(self, preserve=False):
-        if SKIP_SLOW_TESTS:
-            return
-        config_dir = tempfile.mkdtemp()
-        repo_dir = tempfile.mkdtemp()
-        destructors = []
-        if not preserve:
-            destructors.append(functools.partial(shutil.rmtree, config_dir))
-            destructors.append(functools.partial(shutil.rmtree, repo_dir))
-        from deb_pkg_tools import repo
-        repo.USER_CONFIG_DIR = config_dir
-        with open(os.path.join(config_dir, repo.CONFIG_FILE), 'w') as handle:
-            handle.write('[test]\n')
-            handle.write('directory = %s\n' % repo_dir)
-            handle.write('release-origin = %s\n' % TEST_REPO_ORIGIN)
-        try:
-            self.test_package_building(repo_dir)
-            update_repository(repo_dir, release_fields=dict(description=TEST_REPO_DESCRIPTION))
-            self.assertTrue(os.path.isfile(os.path.join(repo_dir, 'Packages')))
-            self.assertTrue(os.path.isfile(os.path.join(repo_dir, 'Packages.gz')))
-            self.assertTrue(os.path.isfile(os.path.join(repo_dir, 'Release')))
-            with open(os.path.join(repo_dir, 'Release')) as handle:
-                fields = Deb822(handle)
-                self.assertEqual(fields['Origin'], TEST_REPO_ORIGIN)
-                self.assertEqual(fields['Description'], TEST_REPO_DESCRIPTION)
-            if not apt_supports_trusted_option():
-                self.assertTrue(os.path.isfile(os.path.join(repo_dir, 'Release.gpg')))
-            return repo_dir
-        finally:
-            for partial in destructors:
-                partial()
+        if not SKIP_SLOW_TESTS:
+            config_dir = tempfile.mkdtemp()
+            repo_dir = tempfile.mkdtemp()
+            destructors = []
+            if not preserve:
+                destructors.append(functools.partial(shutil.rmtree, config_dir))
+                destructors.append(functools.partial(shutil.rmtree, repo_dir))
+            from deb_pkg_tools import repo
+            repo.USER_CONFIG_DIR = config_dir
+            with open(os.path.join(config_dir, repo.CONFIG_FILE), 'w') as handle:
+                handle.write('[test]\n')
+                handle.write('directory = %s\n' % repo_dir)
+                handle.write('release-origin = %s\n' % TEST_REPO_ORIGIN)
+            try:
+                self.test_package_building(repo_dir)
+                update_repository(repo_dir, release_fields=dict(description=TEST_REPO_DESCRIPTION))
+                self.assertTrue(os.path.isfile(os.path.join(repo_dir, 'Packages')))
+                self.assertTrue(os.path.isfile(os.path.join(repo_dir, 'Packages.gz')))
+                self.assertTrue(os.path.isfile(os.path.join(repo_dir, 'Release')))
+                with open(os.path.join(repo_dir, 'Release')) as handle:
+                    fields = Deb822(handle)
+                    self.assertEqual(fields['Origin'], TEST_REPO_ORIGIN)
+                    self.assertEqual(fields['Description'], TEST_REPO_DESCRIPTION)
+                if not apt_supports_trusted_option():
+                    self.assertTrue(os.path.isfile(os.path.join(repo_dir, 'Release.gpg')))
+                return repo_dir
+            finally:
+                for partial in destructors:
+                    partial()
 
     def test_repository_activation(self):
-        if SKIP_SLOW_TESTS:
-            return
-        if os.getuid() != 0:
-            logger.warning("Skipping repository activation test because it requires root access!")
-        else:
+        if not SKIP_SLOW_TESTS and os.getuid() == 0:
             repository = self.test_repository_creation(preserve=True)
             call('--activate-repo=%s' % repository)
             try:
@@ -338,37 +330,36 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 self.test_repository_activation()
 
     def test_gpg_key_generation(self):
-        if SKIP_SLOW_TESTS:
-            return
-        working_directory = tempfile.mkdtemp()
-        secret_key_file = os.path.join(working_directory, 'subdirectory', 'test.sec')
-        public_key_file = os.path.join(working_directory, 'subdirectory', 'test.pub')
-        try:
-            # Generate a named GPG key on the spot.
-            GPGKey(name="named-test-key",
-                   description="GPG key pair generated for unit tests (named key)",
-                   secret_key_file=secret_key_file,
-                   public_key_file=public_key_file)
-            # Generate a default GPG key on the spot.
-            default_key = GPGKey(name="default-test-key",
-                                 description="GPG key pair generated for unit tests (default key)")
-            self.assertEqual(os.path.basename(default_key.secret_key_file), 'secring.gpg')
-            self.assertEqual(os.path.basename(default_key.public_key_file), 'pubring.gpg')
-            # Test error handling related to GPG keys.
-            self.assertRaises(Exception, GPGKey, secret_key_file=secret_key_file)
-            self.assertRaises(Exception, GPGKey, public_key_file=public_key_file)
-            missing_secret_key_file = '/tmp/deb-pkg-tools-%i.sec' % random.randint(1, 1000)
-            missing_public_key_file = '/tmp/deb-pkg-tools-%i.pub' % random.randint(1, 1000)
-            self.assertRaises(Exception, GPGKey, key_id='12345', secret_key_file=missing_secret_key_file, public_key_file=missing_public_key_file)
-            os.unlink(secret_key_file)
-            self.assertRaises(Exception, GPGKey, name="test-key", description="Whatever", secret_key_file=secret_key_file, public_key_file=public_key_file)
-            touch(secret_key_file)
-            os.unlink(public_key_file)
-            self.assertRaises(Exception, GPGKey, name="test-key", description="Whatever", secret_key_file=secret_key_file, public_key_file=public_key_file)
-            os.unlink(secret_key_file)
-            self.assertRaises(Exception, GPGKey, secret_key_file=secret_key_file, public_key_file=public_key_file)
-        finally:
-            shutil.rmtree(working_directory)
+        if not SKIP_SLOW_TESTS:
+            working_directory = tempfile.mkdtemp()
+            secret_key_file = os.path.join(working_directory, 'subdirectory', 'test.sec')
+            public_key_file = os.path.join(working_directory, 'subdirectory', 'test.pub')
+            try:
+                # Generate a named GPG key on the spot.
+                GPGKey(name="named-test-key",
+                       description="GPG key pair generated for unit tests (named key)",
+                       secret_key_file=secret_key_file,
+                       public_key_file=public_key_file)
+                # Generate a default GPG key on the spot.
+                default_key = GPGKey(name="default-test-key",
+                                     description="GPG key pair generated for unit tests (default key)")
+                self.assertEqual(os.path.basename(default_key.secret_key_file), 'secring.gpg')
+                self.assertEqual(os.path.basename(default_key.public_key_file), 'pubring.gpg')
+                # Test error handling related to GPG keys.
+                self.assertRaises(Exception, GPGKey, secret_key_file=secret_key_file)
+                self.assertRaises(Exception, GPGKey, public_key_file=public_key_file)
+                missing_secret_key_file = '/tmp/deb-pkg-tools-%i.sec' % random.randint(1, 1000)
+                missing_public_key_file = '/tmp/deb-pkg-tools-%i.pub' % random.randint(1, 1000)
+                self.assertRaises(Exception, GPGKey, key_id='12345', secret_key_file=missing_secret_key_file, public_key_file=missing_public_key_file)
+                os.unlink(secret_key_file)
+                self.assertRaises(Exception, GPGKey, name="test-key", description="Whatever", secret_key_file=secret_key_file, public_key_file=public_key_file)
+                touch(secret_key_file)
+                os.unlink(public_key_file)
+                self.assertRaises(Exception, GPGKey, name="test-key", description="Whatever", secret_key_file=secret_key_file, public_key_file=public_key_file)
+                os.unlink(secret_key_file)
+                self.assertRaises(Exception, GPGKey, secret_key_file=secret_key_file, public_key_file=public_key_file)
+            finally:
+                shutil.rmtree(working_directory)
 
 def touch(filename, contents='\n'):
     with open(filename, 'w') as handle:
@@ -409,8 +400,5 @@ def remove_unicode_prefixes(expression):
     strings are the default and no prefix is emitted by :py:func:`repr()`).
     """
     return re.sub(r'\bu([\'"])', r'\1', expression)
-
-if __name__ == '__main__':
-    unittest.main()
 
 # vim: ts=4 sw=4 et
