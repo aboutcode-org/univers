@@ -173,15 +173,15 @@ class DebPkgToolsTestCase(unittest.TestCase):
     def test_custom_pretty_printer(self):
         printer = CustomPrettyPrinter()
         # Test pretty printing of debian.deb822.Deb822 objects.
-        self.assertEqual(printer.pformat(deb822_from_string('''
+        self.assertEqual(remove_unicode_prefixes(printer.pformat(deb822_from_string('''
             Package: pretty-printed-control-fields
             Version: 1.0
             Architecture: all
-        ''')), dedent('''
+        '''))), remove_unicode_prefixes(dedent('''
             {'Architecture': u'all',
              'Package': u'pretty-printed-control-fields',
              'Version': u'1.0'}
-        '''))
+        ''')))
         # Test pretty printing of RelationshipSet objects.
         depends_line = 'python-deb-pkg-tools, python-pip, python-pip-accel'
         self.assertEqual(printer.pformat(parse_depends(depends_line)), dedent('''
@@ -403,7 +403,19 @@ def dedent(string):
     return textwrap.dedent(string).strip()
 
 def compact(string):
+    """
+    Compact all whitespace sequences to single spaces and strip all leading and
+    trailing whitespace.
+    """
     return ' '.join(string.split())
+
+def remove_unicode_prefixes(expression):
+    """
+    Enable string comparison between :py:func:`repr()` output on Python 2.x
+    (where Unicode strings have the ``u`` prefix) and Python 3.x (where Unicode
+    strings are the default and no prefix is emitted by :py:func:`repr()`).
+    """
+    return re.sub(r'\bu([\'"])', r'\1', expression)
 
 if __name__ == '__main__':
     unittest.main()
