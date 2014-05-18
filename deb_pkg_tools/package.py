@@ -15,7 +15,6 @@ This module provides functions to build and inspect Debian package archives
 # Standard library modules.
 import collections
 import fnmatch
-import functools
 import glob
 import logging
 import os.path
@@ -39,7 +38,7 @@ from humanfriendly import format_path, pluralize
 
 # Modules included in our package.
 from deb_pkg_tools.control import parse_control_fields, patch_control_file
-from deb_pkg_tools.utils import dpkg_compare_versions
+from deb_pkg_tools.utils import dpkg_compare_versions, total_ordering
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
@@ -93,7 +92,7 @@ def parse_filename(filename):
         raise ValueError("Filename doesn't have three underscore separated components! (%r)" % pathname)
     return PackageFile(pathname, *components)
 
-@functools.total_ordering
+@total_ordering
 class PackageFile(collections.namedtuple('PackageFile', 'filename, name, version, architecture')):
 
     """
