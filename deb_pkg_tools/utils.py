@@ -69,6 +69,7 @@ def str_compatible(class_to_decorate):
     if sys.version_info[0] == 2:
         class_to_decorate.__str__ = lambda self: unicode(self).encode('utf-8')
     elif sys.version_info[0] == 3:
+        class_to_decorate.__str__ = class_to_decorate.__unicode__
         class_to_decorate.__bytes__ = lambda self: str(self).encode('utf-8')
     return class_to_decorate
 
