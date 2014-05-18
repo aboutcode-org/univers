@@ -20,6 +20,7 @@ package.
 # Standard library modules.
 import logging
 import os
+import textwrap
 
 try:
     # Python 2.x.
@@ -257,6 +258,6 @@ def deb822_from_string(string):
     :param string: The string containing the control fields to parse.
     :returns: A :py:class:`debian.deb822.Deb822` object.
     """
-    return Deb822(StringIO(string))
+    return Deb822(StringIO(textwrap.dedent(string).strip()))
 
 # vim: ts=4 sw=4 et
