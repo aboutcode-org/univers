@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: May 16, 2014
+# Last Change: May 18, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -39,6 +39,10 @@ from deb_pkg_tools.repo import (apt_supports_trusted_option,
 # Initialize a logger.
 logger = logging.getLogger(__name__)
 
+# Improvised slow test marker.
+SKIP_SLOW_TESTS = False
+
+# Configuration defaults.
 TEST_PACKAGE_NAME = 'deb-pkg-tools-demo-package'
 TEST_PACKAGE_FIELDS = Deb822(dict(Architecture='all',
                                   Description='Nothing to see here, move along',
@@ -112,6 +116,8 @@ class DebPkgToolsTestCase(unittest.TestCase):
         self.assertRaises(ValueError, parse_filename, 'python2.7.deb')
 
     def test_package_building(self, repository=None):
+        if SKIP_SLOW_TESTS:
+            return
         directory = tempfile.mkdtemp()
         destructors = [functools.partial(shutil.rmtree, directory)]
         try:
@@ -165,6 +171,8 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 partial()
 
     def test_command_line_interface(self):
+        if SKIP_SLOW_TESTS:
+            return
         directory = tempfile.mkdtemp()
         destructors = [functools.partial(shutil.rmtree, directory)]
         try:
@@ -181,6 +189,8 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 partial()
 
     def test_repository_creation(self, preserve=False):
+        if SKIP_SLOW_TESTS:
+            return
         config_dir = tempfile.mkdtemp()
         repo_dir = tempfile.mkdtemp()
         destructors = []
@@ -211,6 +221,8 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 partial()
 
     def test_repository_activation(self):
+        if SKIP_SLOW_TESTS:
+            return
         if os.getuid() != 0:
             logger.warn("Skipping repository activation test because it requires root access!")
         else:
@@ -231,6 +243,8 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 self.test_repository_activation()
 
     def test_gpg_key_generation(self):
+        if SKIP_SLOW_TESTS:
+            return
         working_directory = tempfile.mkdtemp()
         secret_key_file = os.path.join(working_directory, 'subdirectory', 'test.sec')
         public_key_file = os.path.join(working_directory, 'subdirectory', 'test.pub')
