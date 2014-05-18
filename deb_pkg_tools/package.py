@@ -368,7 +368,7 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
         # Check the package for possible issues using Lintian?
         if check_package:
             if not os.access('/usr/bin/lintian', os.X_OK):
-                logger.warn("Lintian is not installed, skipping sanity check.")
+                logger.warning("Lintian is not installed, skipping sanity check.")
             else:
                 logger.info("Checking package for issues using Lintian ..")
                 lintian_command = ['lintian']
@@ -508,7 +508,7 @@ def update_conffiles(directory):
                 if os.path.isfile(pathname):
                     conffiles.add(filename)
                 else:
-                    logger.warn("Stripping invalid entry: %s", filename)
+                    logger.warning("Stripping invalid entry: %s", filename)
         os.unlink(conffiles_file)
     # Make sure all regular files in /etc/ are marked as configuration files.
     for root, dirs, files in os.walk(os.path.join(directory, 'etc')):

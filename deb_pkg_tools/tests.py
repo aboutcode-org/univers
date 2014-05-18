@@ -248,7 +248,7 @@ class DebPkgToolsTestCase(unittest.TestCase):
             # Test `deb-pkg-tools --with-repo=DIR CMD' (we simply check whether
             # apt-cache sees the package).
             if os.getuid() != 0:
-                logger.warn("Skipping repository activation test because it requires root access!")
+                logger.warning("Skipping repository activation test because it requires root access!")
             else:
                 call('--with-repo=%s' % directory, 'apt-cache show %s' % TEST_PACKAGE_NAME)
         finally:
@@ -303,7 +303,7 @@ class DebPkgToolsTestCase(unittest.TestCase):
         if SKIP_SLOW_TESTS:
             return
         if os.getuid() != 0:
-            logger.warn("Skipping repository activation test because it requires root access!")
+            logger.warning("Skipping repository activation test because it requires root access!")
         else:
             repository = self.test_repository_creation(preserve=True)
             call('--activate-repo=%s' % repository)
