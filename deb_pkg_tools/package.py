@@ -174,7 +174,7 @@ def collect_related_packages(filename):
         filename = packages_to_scan.pop(0)
         logger.info("Scanning %s ..", format_path(filename))
         # Find the relationships of the given package.
-        fields, contents = inspect_package(filename)
+        fields = inspect_package_fields(filename)
         if 'Depends' in fields:
             relationship_sets.append(fields['Depends'])
         # Collect all related packages from the given directory.
@@ -203,24 +203,29 @@ def find_latest_version(packages):
     return sorted(map(parse_filename, packages))[-1]
 
 def inspect_package(archive):
-    r"""
+    """
     Get the metadata and contents from a ``*.deb`` archive.
 
     :param archive: The pathname of an existing ``*.deb`` archive.
     :returns: A tuple with two dictionaries:
 
-              1. A dictionary with control file fields (the result of
-                 :py:func:`deb_pkg_tools.control.parse_control_fields()`).
-              2. A dictionary with the directories and files contained in the
-                 package. The dictionary keys are the absolute pathnames and
-                 the dictionary values are :py:class:`ArchiveEntry` objects
-                 (see the example below).
+              1. The result of :py:func:`inspect_package_fields()`.
+              2. The result of :py:func:`inspect_package_contents()`.
+    """
+    return inspect_package_fields(archive), inspect_package_contents(archive)
 
-    To give you an idea of what the result looks like:
+def inspect_package_fields(archive):
+    r"""
+    Get the fields (metadata) from a ``*.deb`` archive.
 
-    >>> from deb_pkg_tools.package import inspect_package
-    >>> fields, contents = inspect_package('python3.4-minimal_3.4.0-1+precise1_amd64.deb')
-    >>> print repr(fields)
+    :param archive: The pathname of an existing ``*.deb`` archive.
+    :returns: A dictionary with control file fields (the result of
+              :py:func:`deb_pkg_tools.control.parse_control_fields()`).
+
+    Here's an example:
+
+    >>> from deb_pkg_tools.package import inspect_package_fields
+    >>> print repr(inspect_package_fields('python3.4-minimal_3.4.0-1+precise1_amd64.deb'))
     {'Architecture': u'amd64',
      'Conflicts': RelationshipSet(VersionedRelationship(name=u'binfmt-support', operator=u'<<', version=u'1.1.2')),
      'Depends': RelationshipSet(VersionedRelationship(name=u'libexpat1', operator=u'>=', version=u'1.95.8'),
@@ -240,7 +245,24 @@ def inspect_package(archive):
      'Source': u'python3.4',
      'Suggests': RelationshipSet(Relationship(name=u'binfmt-support')),
      'Version': u'3.4.0-1+precise1'}
-    >>> print repr(contents)
+
+    """
+    return parse_control_fields(deb822_from_string(execute('dpkg-deb', '-f', archive, logger=logger, capture=True)))
+
+def inspect_package_contents(archive):
+    """
+    Get the contents from a ``*.deb`` archive.
+
+    :param archive: The pathname of an existing ``*.deb`` archive.
+    :returns: A dictionary with the directories and files contained in the
+              package. The dictionary keys are the absolute pathnames and the
+              dictionary values are :py:class:`ArchiveEntry` objects (see the
+              example below).
+
+    An example:
+
+    >>> from deb_pkg_tools.package import inspect_package_contents
+    >>> print repr(inspect_package_contents('python3.4-minimal_3.4.0-1+precise1_amd64.deb'))
     {u'/': ArchiveEntry(permissions=u'drwxr-xr-x', owner=u'root', group=u'root', size=0, modified=u'2014-03-20 23:54', target=u''),
      u'/usr/': ArchiveEntry(permissions=u'drwxr-xr-x', owner=u'root', group=u'root', size=0, modified=u'2014-03-20 23:52', target=u''),
      u'/usr/bin/': ArchiveEntry(permissions=u'drwxr-xr-x', owner=u'root', group=u'root', size=0, modified=u'2014-03-20 23:54', target=u''),
@@ -260,7 +282,6 @@ def inspect_package(archive):
      u'/usr/share/man/man1/python3.4m.1.gz': ArchiveEntry(permissions=u'lrwxrwxrwx', owner=u'root', group=u'root', size=0, modified=u'2014-03-20 23:54', target=u'python3.4.1.gz')}
 
     """
-    metadata = parse_control_fields(deb822_from_string(execute('dpkg-deb', '-f', archive, logger=logger, capture=True)))
     contents = {}
     for line in execute('dpkg-deb', '-c', archive, logger=logger, capture=True).splitlines():
         # Example output of dpkg-deb -c archive.deb:
@@ -277,7 +298,7 @@ def inspect_package(archive):
             pathname, _, target = pathname.partition(' link to ')
             target = re.sub('^./', '/', target)
         contents[pathname] = ArchiveEntry(permissions, owner, group, size, modified, target)
-    return metadata, contents
+    return contents
 
 class ArchiveEntry(collections.namedtuple('ArchiveEntry', 'permissions, owner, group, size, modified, target')):
     """
