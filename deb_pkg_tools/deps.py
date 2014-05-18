@@ -348,11 +348,14 @@ class RelationshipSet(OrderedObject):
         """
         return u', '.join(map(unicode, self.relationships))
 
-    def __repr__(self):
+    def __repr__(self, indent=0):
         """
         Serialize a :py:class:`RelationshipSet` object to a Python expression.
         """
-        return "%s(%s)" % (self.__class__.__name__, ', '.join(repr(r) for r in self.relationships))
+        prefix = '%s(' % self.__class__.__name__
+        indent += len(prefix)
+        delimiter = ',\n%s' % (' ' * indent)
+        return prefix + delimiter.join(repr(r) for r in self.relationships) + ')'
 
     def _key(self):
         """

@@ -129,7 +129,7 @@ class DebPkgToolsTestCase(unittest.TestCase):
     def test_relationship_unparsing(self):
         relationship_set = parse_depends('foo, bar(>=1)|baz')
         self.assertEqual(unicode(relationship_set), 'foo, bar (>= 1) | baz')
-        self.assertEqual(repr(relationship_set), "RelationshipSet(Relationship(name='foo'), AlternativeRelationship(VersionedRelationship(name='bar', operator='>=', version='1'), Relationship(name='baz')))")
+        self.assertEqual(compact(repr(relationship_set)), "RelationshipSet(Relationship(name='foo'), AlternativeRelationship(VersionedRelationship(name='bar', operator='>=', version='1'), Relationship(name='baz')))")
 
     def test_relationship_evaluation(self):
         # Relationships without versions.
@@ -375,6 +375,9 @@ def match(pattern, lines):
         m = re.match(pattern, line)
         if m:
             return m.group(1)
+
+def compact(string):
+    return ' '.join(string.split())
 
 if __name__ == '__main__':
     unittest.main()

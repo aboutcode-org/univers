@@ -17,6 +17,7 @@ modules in the `deb-pkg-tools` package.
 import hashlib
 import logging
 import os
+import pprint
 import pwd
 import sys
 
@@ -27,6 +28,7 @@ else:
     unicode = str
 
 # External dependencies.
+from debian.deb822 import Deb822
 from executor import execute
 
 # Initialize a logger.
@@ -83,6 +85,24 @@ def dpkg_compare_versions(version1, operator, version2):
     if key not in _comparison_cache:
         _comparison_cache[key] = execute('dpkg', '--compare-versions', version1, operator, version2, check=False, logger=logger)
     return _comparison_cache[key]
+
+def patch_pprint():
+    """
+    Monkey patch the :py:mod:`pprint` module so it knows how to pretty print
+    :py:class:`debian.deb822.Deb822` and :py:class:`deb_pkg_tools.deps.RelationshipSet`
+    objects. Useful during testing and documenting.
+    """
+    from deb_pkg_tools.deps import RelationshipSet
+    original_printer = pprint.PrettyPrinter
+    class CustomPrettyPrinter(original_printer):
+        def _format(self, obj, stream, indent, *args):
+            if isinstance(obj, RelationshipSet):
+                stream.write(obj.__repr__(indent=indent))
+            elif isinstance(obj, Deb822):
+                original_printer._format(self, dict(obj), stream, indent, *args)
+            else:
+                original_printer._format(self, obj, stream, indent, *args)
+    pprint.PrettyPrinter = CustomPrettyPrinter
 
 # Copied from http://hg.python.org/cpython/file/2.7/Lib/functools.py#l53 for Python 2.6 compatibility.
 
