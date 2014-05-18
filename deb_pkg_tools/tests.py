@@ -183,7 +183,10 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 self.assertEqual(match('^ - %s: (.+)$' % field, lines), value)
             # Test `deb-pkg-tools --with-repo=DIR CMD' (we simply check whether
             # apt-cache sees the package).
-            call('--with-repo=%s' % directory, 'apt-cache show %s' % TEST_PACKAGE_NAME)
+            if os.getuid() != 0:
+                logger.warn("Skipping repository activation test because it requires root access!")
+            else:
+                call('--with-repo=%s' % directory, 'apt-cache show %s' % TEST_PACKAGE_NAME)
         finally:
             for partial in destructors:
                 partial()
