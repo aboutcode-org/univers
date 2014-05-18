@@ -16,19 +16,13 @@ import tempfile
 import textwrap
 import unittest
 
-try:
-    # Python 2.x.
-    from StringIO import StringIO
-except ImportError:
-    # Python 3.x.
-    from io import StringIO
-
 # External dependencies.
 import coloredlogs
 from debian.deb822 import Deb822
 
 # Modules included in our package.
 from deb_pkg_tools.cli import main
+from deb_pkg_tools.compat import StringIO, unicode
 from deb_pkg_tools.control import (deb822_from_string,
                                    merge_control_fields,
                                    parse_control_fields,
@@ -39,7 +33,6 @@ from deb_pkg_tools.gpg import GPGKey
 from deb_pkg_tools.package import collect_related_packages, inspect_package, parse_filename
 from deb_pkg_tools.printer import CustomPrettyPrinter
 from deb_pkg_tools.repo import apt_supports_trusted_option, update_repository
-from deb_pkg_tools.utils import unicode
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)

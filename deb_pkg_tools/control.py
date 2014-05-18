@@ -22,20 +22,13 @@ import logging
 import os
 import textwrap
 
-try:
-    # Python 2.x.
-    from StringIO import StringIO
-except ImportError:
-    # Python 3.x.
-    from io import StringIO
-
 # External dependencies.
 from debian.deb822 import Deb822
 from humanfriendly import format_path
 
 # Modules included in our package.
+from deb_pkg_tools.compat import StringIO, unicode
 from deb_pkg_tools.deps import parse_depends, RelationshipSet
-from deb_pkg_tools.utils import unicode
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
@@ -241,11 +234,11 @@ def normalize_control_field_name(name):
     function (which is used by the other functions in the
     :py:mod:`deb_pkg_tools.control` module).
 
-    This function doesn't adhere 100% to the Debian policy because it lacks
-    special casing (no pun intended ;-) for fields like ``DM-Upload-Allowed``.
-    It's not clear to me if this will ever become a relevant problem for
-    building simple binary packages... (which explains why I didn't bother to
-    implement special casing)
+    .. note:: This function doesn't adhere 100% to the Debian policy because it
+              lacks special casing (no pun intended ;-) for fields like
+              ``DM-Upload-Allowed``. It's not clear to me if this will ever
+              become a relevant problem for building simple binary packages...
+              (which explains why I didn't bother to implement special casing)
 
     .. _Syntax of control files: http://www.debian.org/doc/debian-policy/ch-controlfields.html#s-controlsyntax
     """

@@ -55,8 +55,8 @@ import logging
 import re
 
 # Modules included in our package.
-from deb_pkg_tools.utils import (dpkg_compare_versions, OrderedObject,
-                                 str_compatible, unicode)
+from deb_pkg_tools.compat import str_compatible, unicode
+from deb_pkg_tools.utils import dpkg_compare_versions, OrderedObject
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
