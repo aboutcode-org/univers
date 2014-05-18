@@ -135,7 +135,7 @@ def parse_relationship(expression):
     elif len(tokens) != 2:
         # Encountered something unexpected!
         msg = "Corrupt package relationship expression: Splitting name from relationship resulted in more than two tokens! (expression: %r, tokens: %r)"
-        raise ValueError, msg % (expression, tokens)
+        raise ValueError(msg % (expression, tokens))
     else:
         # Package name followed by relationship to specific version(s) of package.
         name, relationship = tokens
@@ -143,7 +143,7 @@ def parse_relationship(expression):
         if len(tokens) != 2:
             # Encountered something unexpected!
             msg = "Corrupt package relationship expression: Splitting operator from version resulted in more than two tokens! (expression: %r, tokens: %r)"
-            raise ValueError, msg % (relationship, tokens)
+            raise ValueError(msg % (relationship, tokens))
         return VersionedRelationship(name, *tokens)
 
 @str_compatible
