@@ -37,7 +37,9 @@ from executor import execute
 from humanfriendly import format_path, pluralize
 
 # Modules included in our package.
-from deb_pkg_tools.control import parse_control_fields, patch_control_file
+from deb_pkg_tools.control import (deb822_from_string,
+                                   parse_control_fields,
+                                   patch_control_file)
 from deb_pkg_tools.utils import dpkg_compare_versions, total_ordering
 
 # Initialize a logger.
@@ -262,6 +264,9 @@ def inspect_package(archive):
         modified = fields[3] + ' ' + fields[4]
         pathname = re.sub('^./', '/', fields[5])
         pathname, _, target = pathname.partition(' -> ')
+        if not target:
+            pathname, _, target = pathname.partition(' link to ')
+            target = re.sub('^./', '/', target)
         contents[pathname] = ArchiveEntry(permissions, owner, group, size, modified, target)
     return metadata, contents
 
