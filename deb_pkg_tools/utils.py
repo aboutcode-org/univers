@@ -50,16 +50,30 @@ def find_home_directory():
     except Exception:
         return pwd.getpwuid(os.getuid()).pw_dir
 
-_comparison_cache = {}
-
-def dpkg_compare_versions(version1, operator, version2):
-    """
-    Run ``dpkg --compare-versions ...`` and return the result.
-    """
-    key = (version1, operator, version2)
-    if key not in _comparison_cache:
-        _comparison_cache[key] = execute('dpkg', '--compare-versions', version1, operator, version2, check=False, logger=logger)
-    return _comparison_cache[key]
+try:
+    # Version comparison using the python-apt binding.
+    from apt import VersionCompare
+    def dpkg_compare_versions(version1, operator, version2):
+        """
+        Compare Debian package versions using :py:func:`apt.VersionCompare()`.
+        """
+        vc = VersionCompare(version1, version2)
+        return ((operator == '<<' and vc < 0) or
+                (operator == '>>' and vc > 0) or
+                (operator in ('<', '<=') and vc <= 0) or
+                (operator in ('>', '>=') and vc >= 0) or
+                (operator == '=' and vc == 0))
+except ImportError:
+    # Version comparison using the `dpkg --compare-versions ...' command.
+    _comparison_cache = {}
+    def dpkg_compare_versions(version1, operator, version2):
+        """
+        Compare Debian package versions using ``dpkg --compare-versions ...``.
+        """
+        key = (version1, operator, version2)
+        if key not in _comparison_cache:
+            _comparison_cache[key] = execute('dpkg', '--compare-versions', version1, operator, version2, check=False, logger=logger)
+        return _comparison_cache[key]
 
 @total_ordering
 class OrderedObject(object):
