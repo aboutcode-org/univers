@@ -1,7 +1,7 @@
 # Debian packaging tools: Control file manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: November 16, 2013
+# Last Change: May 18, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -24,6 +24,10 @@ import os
 # External dependencies.
 from debian.deb822 import Deb822
 from humanfriendly import format_path
+
+# Modules included in our package.
+from deb_pkg_tools.deps import parse_depends, RelationshipSet
+from deb_pkg_tools.utils import unicode
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
@@ -75,10 +79,11 @@ def merge_control_fields(defaults, overrides):
     for name in (set(defaults.keys()) | set(overrides.keys())):
         if name in DEPENDS_LIKE_FIELDS:
             # Dependencies are merged instead of overridden.
-            dependencies = set()
-            dependencies.update(defaults.get(name, []))
-            dependencies.update(overrides.get(name, []))
-            merged[name] = sorted(dependencies, key=lambda s: s.lower())
+            relationships = set()
+            for source in [defaults, overrides]:
+                if name in source:
+                    relationships.update(source[name].relationships)
+            merged[name] = RelationshipSet(*sorted(relationships))
             logger.debug("Merged field %s: %r", name, merged[name])
         elif name not in overrides:
             logger.debug("Field %s only present in defaults: %r", name, defaults[name])
@@ -156,7 +161,7 @@ def parse_control_fields(input_fields):
     for name, unparsed_value in input_fields.items():
         name = normalize_control_field_name(name)
         if name in DEPENDS_LIKE_FIELDS:
-            parsed_value = [s.strip() for s in unparsed_value.split(',') if s and not s.isspace()]
+            parsed_value = parse_depends(unparsed_value)
         elif name == 'Installed-Size':
             parsed_value = int(unparsed_value)
         else:
@@ -186,7 +191,12 @@ def unparse_control_fields(input_fields):
     for name, parsed_value in input_fields.items():
         name = normalize_control_field_name(name)
         if name in DEPENDS_LIKE_FIELDS:
-            unparsed_value = ', '.join(parsed_value)
+            if isinstance(parsed_value, RelationshipSet):
+                # New interface.
+                unparsed_value = unicode(parsed_value)
+            else:
+                # Backwards compatibility.
+                unparsed_value = ', '.join(parsed_value)
         elif name == 'Installed-Size':
             unparsed_value = str(parsed_value)
         else:

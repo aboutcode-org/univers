@@ -31,10 +31,13 @@ from deb_pkg_tools.cli import main
 from deb_pkg_tools.control import (merge_control_fields,
                                    parse_control_fields,
                                    unparse_control_fields)
+from deb_pkg_tools.deps import (AlternativeRelationship, VersionedRelationship,
+                                parse_depends, Relationship, RelationshipSet)
 from deb_pkg_tools.gpg import GPGKey
 from deb_pkg_tools.package import inspect_package, parse_filename
 from deb_pkg_tools.repo import (apt_supports_trusted_option,
                                 update_repository)
+from deb_pkg_tools.utils import unicode
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
@@ -67,8 +70,14 @@ class DebPkgToolsTestCase(unittest.TestCase):
         parsed_info = parse_control_fields(deb822_package)
         self.assertEqual(parsed_info,
                          {'Package': 'python-py2deb',
-                          'Depends': ['python-deb-pkg-tools', 'python-pip', 'python-pip-accel'],
+                          'Depends': RelationshipSet(
+                              Relationship(name=u'python-deb-pkg-tools'),
+                              Relationship(name=u'python-pip'),
+                              Relationship(name=u'python-pip-accel')),
                           'Installed-Size': 42})
+        # Test backwards compatibility with the old interface where `Depends'
+        # like fields were represented as a list of strings (shallow parsed).
+        parsed_info['Depends'] = [unicode(r) for r in parsed_info['Depends']]
         self.assertEqual(unparse_control_fields(parsed_info), deb822_package)
 
     def test_control_field_merging(self):
@@ -103,6 +112,61 @@ class DebPkgToolsTestCase(unittest.TestCase):
             self.assertEqual(patched_fields['Depends'], 'another-dependency, some-dependency')
         finally:
             os.unlink(control_file)
+
+    def test_relationship_parsing(self):
+        # Happy path (no parsing errors).
+        relationship_set = parse_depends('foo, bar (>= 1) | baz')
+        self.assertEqual(relationship_set.relationships[0].relationships[0].name, 'bar')
+        self.assertEqual(relationship_set.relationships[0].relationships[0].operator, '>=')
+        self.assertEqual(relationship_set.relationships[0].relationships[0].version, '1')
+        self.assertEqual(relationship_set.relationships[0].relationships[1].name, 'baz')
+        self.assertEqual(relationship_set.relationships[1].name, 'foo')
+        self.assertEqual(parse_depends('foo (=1.0)'), RelationshipSet(VersionedRelationship(name='foo', operator='=', version='1.0')))
+        # Unhappy path (parsing errors).
+        self.assertRaises(ValueError, parse_depends, 'foo (bar) (baz)')
+        self.assertRaises(ValueError, parse_depends, 'foo (bar baz qux)')
+
+    def test_relationship_unparsing(self):
+        relationship_set = parse_depends('foo, bar (>= 1) | baz')
+        self.assertEqual(unicode(relationship_set), 'bar (>= 1) | baz, foo')
+        self.assertEqual(repr(relationship_set), "RelationshipSet(AlternativeRelationship(VersionedRelationship(name='bar', operator='>=', version='1'), Relationship(name='baz')), Relationship(name='foo'))")
+
+    def test_relationship_evaluation(self):
+        # Relationships without versions.
+        relationship_set = parse_depends('python')
+        self.assertTrue(relationship_set.matches('python'))
+        self.assertFalse(relationship_set.matches('python2.7'))
+        # Alternatives (OR) without versions.
+        relationship_set = parse_depends('python2.6 | python2.7')
+        self.assertFalse(relationship_set.matches('python2.5'))
+        self.assertTrue(relationship_set.matches('python2.6'))
+        self.assertTrue(relationship_set.matches('python2.7'))
+        self.assertFalse(relationship_set.matches('python3.0'))
+        # Combinations (AND) with versions.
+        relationship_set = parse_depends('python (>= 2.6), python (<< 3) | python (>= 3.4)')
+        self.assertFalse(relationship_set.matches('python', '2.5'))
+        self.assertTrue(relationship_set.matches('python', '2.6'))
+        self.assertTrue(relationship_set.matches('python', '2.7'))
+        self.assertFalse(relationship_set.matches('python', '3.0'))
+        self.assertTrue(relationship_set.matches('python', '3.4'))
+        # Testing for matches without providing a version is valid (should not
+        # raise an error) but will never match a relationship with a version.
+        relationship_set = parse_depends('python (>= 2.6), python (<< 3)')
+        self.assertTrue(relationship_set.matches('python', '2.7'))
+        self.assertFalse(relationship_set.matches('python'))
+        # Distinguishing between packages whose name was matched but whose
+        # version didn't match vs packages whose name wasn't matched.
+        relationship_set = parse_depends('python (>= 2.6), python (<< 3) | python (>= 3.4)')
+        self.assertEquals(relationship_set.matches('python', '2.7'), True) # name and version match
+        self.assertEquals(relationship_set.matches('python', '2.5'), False) # name matched, version didn't
+        self.assertEquals(relationship_set.matches('python2.6'), None) # name didn't match
+        self.assertEquals(relationship_set.matches('python', '3.0'), False) # name in alternative matched, version didn't
+
+    def test_relationship_sorting(self):
+        relationship_set = parse_depends('foo | bar, baz | qux')
+        self.assertEquals(relationship_set, RelationshipSet(
+            AlternativeRelationship(Relationship(name='baz'), Relationship(name='qux')),
+            AlternativeRelationship(Relationship(name='foo'), Relationship(name='bar'))))
 
     def test_filename_parsing(self):
         # Test the happy path.

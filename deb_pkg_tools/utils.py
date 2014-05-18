@@ -1,7 +1,7 @@
 # Debian packaging tools: Utility functions.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: May 10, 2014
+# Last Change: May 18, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -14,9 +14,17 @@ modules in the `deb-pkg-tools` package.
 """
 
 # Standard library modules.
+import functools
 import hashlib
 import os
 import pwd
+import sys
+
+# Alias for unicode() in Python 2.x and str() in Python 3.x.
+if sys.version_info.major == 2:
+    unicode = unicode
+else:
+    unicode = str
 
 def sha1(text):
     """
@@ -39,3 +47,51 @@ def find_home_directory():
         return home
     except Exception:
         return pwd.getpwuid(os.getuid()).pw_dir
+
+def str_compatible(class_to_decorate):
+    """
+    Class decorator that makes it easy to implement human readable object
+    representations containing Unicode characters that are compatible with both
+    Python 2.x (with its :py:func:`object.__unicode__()` and
+    :py:func:`object.__str__()` methods) and Python 3.x (with its
+    :py:func:`object.__str__()` and :py:func:`object.__bytes__()` methods).
+
+    This decorator expects the ``__unicode__()`` method to return a Unicode
+    string (i.e. you write Python 2.x compatible code). The missing part will
+    be filled in automatically by encoding the Unicode string to UTF-8.
+    """
+    if sys.version_info.major == 2:
+        class_to_decorate.__str__ = lambda self: unicode(self).encode('utf-8')
+    elif sys.version_info.major == 3:
+        class_to_decorate.__bytes__ = lambda self: str(self).encode('utf-8')
+    return class_to_decorate
+
+@functools.total_ordering
+class OrderedObject(object):
+
+    def __eq__(self, other):
+        """
+        Enables equality comparison between objects.
+        """
+        return type(self) is type(other) and self._key() == other._key()
+
+    def __lt__(self, other):
+        """
+        Enables rich comparison between objects.
+        """
+        return isinstance(other, OrderedObject) and self._key() < other._key()
+
+    def __hash__(self):
+        """
+        Enables adding objects to sets.
+        """
+        return hash(self.__class__) ^ hash(self._key())
+
+    def _key(self):
+        """
+        Get the comparison key of this object. Used to implement the equality
+        and rich comparison operations.
+        """
+        raise NotImplemented
+
+# vim: ts=4 sw=4 et
