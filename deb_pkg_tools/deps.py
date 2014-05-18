@@ -313,6 +313,7 @@ class AlternativeRelationship(Relationship):
         """
         return sorted(self.relationships)
 
+@str_compatible
 class RelationshipSet(OrderedObject):
 
     """
