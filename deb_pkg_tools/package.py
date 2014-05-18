@@ -24,13 +24,6 @@ import re
 import shutil
 import tempfile
 
-try:
-    # Python 2.x.
-    from StringIO import StringIO
-except ImportError:
-    # Python 3.x.
-    from io import StringIO
-
 # External dependencies.
 from debian.deb822 import Deb822
 from executor import execute
@@ -75,7 +68,7 @@ def parse_filename(filename):
 
     >>> from deb_pkg_tools.package import parse_filename
     >>> components = parse_filename('/var/cache/apt/archives/python2.7_2.7.3-0ubuntu3.4_amd64.deb')
-    >>> print components
+    >>> print repr(components)
     PackageFile(filename='/var/cache/apt/archives/python2.7_2.7.3-0ubuntu3.4_amd64.deb',
                 name='python2.7', version='2.7.3-0ubuntu3.4', architecture='amd64')
 
@@ -175,7 +168,7 @@ def collect_related_packages(filename):
     packages_to_scan = [filename]
     related_packages = collections.defaultdict(list)
     # Preparations.
-    available_packages = map(parse_filename, glob.glob(os.path.join(os.path.dirname(filename), '*.deb')))
+    available_packages = list(map(parse_filename, glob.glob(os.path.join(os.path.dirname(filename), '*.deb'))))
     # Loop to collect the related packages.
     while packages_to_scan:
         filename = packages_to_scan.pop(0)
@@ -226,32 +219,48 @@ def inspect_package(archive):
     To give you an idea of what the result looks like:
 
     >>> from deb_pkg_tools.package import inspect_package
-    >>> fields, contents = inspect_package('/var/cache/apt/archives/python2.7_2.7.3-0ubuntu3.4_amd64.deb')
-    >>> print fields
+    >>> fields, contents = inspect_package('python3.4-minimal_3.4.0-1+precise1_amd64.deb')
+    >>> print repr(fields)
     {'Architecture': u'amd64',
-     'Conflicts': u'python-profiler (<= 2.7.1-2)',
-     'Depends': u'python2.7-minimal (= 2.7.3-0ubuntu3.4), mime-support, libbz2-1.0, libc6 (>= 2.15), libdb5.1, libexpat1 (>= 1.95.8), libgcc1 (>= 1:4.1.1), libncursesw5 (>= 5.6+20070908), libreadline6 (>= 6.0), libsqlite3-0 (>= 3.5.9), libtinfo5',
-     'Description': u'Interactive high-level object-oriented language (version 2.7)\n Version 2.7 of the high-level, interactive object oriented language,\n includes an extensive class library with lots of goodies for\n network programming, system administration, sounds and graphics.',
-     'Installed-Size': u'8779',
-     'Maintainer': u'Ubuntu Core Developers <ubuntu-devel-discuss@lists.ubuntu.com>',
+     'Conflicts': RelationshipSet(VersionedRelationship(name=u'binfmt-support', operator=u'<<', version=u'1.1.2')),
+     'Depends': RelationshipSet(VersionedRelationship(name=u'libexpat1', operator=u'>=', version=u'1.95.8'),
+                                VersionedRelationship(name=u'libgcc1', operator=u'>=', version=u'1:4.1.1'),
+                                VersionedRelationship(name=u'libpython3.4-minimal', operator=u'=', version=u'3.4.0-1+precise1'),
+                                VersionedRelationship(name=u'zlib1g', operator=u'>=', version=u'1:1.2.0')),
+     'Description': u'Minimal subset of the Python language (version 3.4)\n This package contains the interpreter and some essential modules.  It can\n be used in the boot process for some basic tasks.\n See /usr/share/doc/python3.4-minimal/README.Debian for a list of the modules\n contained in this package.',
+     'Installed-Size': 3586,
+     'Maintainer': u'Felix Krull <f_krull@gmx.de>',
      'Multi-Arch': u'allowed',
      'Original-Maintainer': u'Matthias Klose <doko@debian.org>',
-     'Package': u'python2.7',
+     'Package': u'python3.4-minimal',
+     'Pre-Depends': u'libc6 (>= 2.15)',
      'Priority': u'optional',
-     'Provides': u'python-argparse, python2.7-argparse, python2.7-celementtree, python2.7-cjkcodecs, python2.7-ctypes, python2.7-elementtree, python2.7-profiler, python2.7-wsgiref',
-     'Replaces': u'python-profiler (<= 2.7.1-2)',
+     'Recommends': u'python3.4',
      'Section': u'python',
-     'Suggests': u'python2.7-doc, binutils',
-     'Version': u'2.7.3-0ubuntu3.4'}
-    >>> print contents
-    {'/usr/lib/python2.7/email/mime/': ArchiveEntry(permissions='drwxr-xr-x', owner='root', group='root', size=0, modified='2013-09-26 22:28'),
-     '/usr/lib/python2.7/encodings/gbk.py': ArchiveEntry(permissions='-rw-r--r--', owner='root', group='root', size=1015, modified='2013-09-26 22:28'),
-     '/usr/lib/python2.7/multiprocessing/managers.py': ArchiveEntry(permissions='-rw-r--r--', owner='root', group='root', size=36586, modified='2013-09-26 22:28'),
-     '/usr/lib/python2.7/sqlite3/dbapi2.py': ArchiveEntry(permissions='-rw-r--r--', owner='root', group='root', size=2615, modified='2013-09-26 22:28'),
-     '/usr/lib/python2.7/uuid.py': ArchiveEntry(permissions='-rw-r--r--', owner='root', group='root', size=21095, modified='2013-09-26 22:28'),
-     ...}
+     'Source': u'python3.4',
+     'Suggests': RelationshipSet(Relationship(name=u'binfmt-support')),
+     'Version': u'3.4.0-1+precise1'}
+    >>> print repr(contents)
+    {u'/': ArchiveEntry(permissions=u'drwxr-xr-x', owner=u'root', group=u'root', size=0, modified=u'2014-03-20 23:54', target=u''),
+     u'/usr/': ArchiveEntry(permissions=u'drwxr-xr-x', owner=u'root', group=u'root', size=0, modified=u'2014-03-20 23:52', target=u''),
+     u'/usr/bin/': ArchiveEntry(permissions=u'drwxr-xr-x', owner=u'root', group=u'root', size=0, modified=u'2014-03-20 23:54', target=u''),
+     u'/usr/bin/python3.4': ArchiveEntry(permissions=u'-rwxr-xr-x', owner=u'root', group=u'root', size=3536680, modified=u'2014-03-20 23:54', target=u''),
+     u'/usr/bin/python3.4m': ArchiveEntry(permissions=u'hrwxr-xr-x', owner=u'root', group=u'root', size=0, modified=u'2014-03-20 23:54', target=u'/usr/bin/python3.4'),
+     u'/usr/share/': ArchiveEntry(permissions=u'drwxr-xr-x', owner=u'root', group=u'root', size=0, modified=u'2014-03-20 23:53', target=u''),
+     u'/usr/share/binfmts/': ArchiveEntry(permissions=u'drwxr-xr-x', owner=u'root', group=u'root', size=0, modified=u'2014-03-20 23:53', target=u''),
+     u'/usr/share/binfmts/python3.4': ArchiveEntry(permissions=u'-rw-r--r--', owner=u'root', group=u'root', size=72, modified=u'2014-03-20 23:53', target=u''),
+     u'/usr/share/doc/': ArchiveEntry(permissions=u'drwxr-xr-x', owner=u'root', group=u'root', size=0, modified=u'2014-03-20 23:53', target=u''),
+     u'/usr/share/doc/python3.4-minimal/': ArchiveEntry(permissions=u'drwxr-xr-x', owner=u'root', group=u'root', size=0, modified=u'2014-03-20 23:54', target=u''),
+     u'/usr/share/doc/python3.4-minimal/README.Debian': ArchiveEntry(permissions=u'-rw-r--r--', owner=u'root', group=u'root', size=3779, modified=u'2014-03-20 23:52', target=u''),
+     u'/usr/share/doc/python3.4-minimal/changelog.Debian.gz': ArchiveEntry(permissions=u'-rw-r--r--', owner=u'root', group=u'root', size=28528, modified=u'2014-03-20 22:32', target=u''),
+     u'/usr/share/doc/python3.4-minimal/copyright': ArchiveEntry(permissions=u'-rw-r--r--', owner=u'root', group=u'root', size=51835, modified=u'2014-03-20 20:37', target=u''),
+     u'/usr/share/man/': ArchiveEntry(permissions=u'drwxr-xr-x', owner=u'root', group=u'root', size=0, modified=u'2014-03-20 23:52', target=u''),
+     u'/usr/share/man/man1/': ArchiveEntry(permissions=u'drwxr-xr-x', owner=u'root', group=u'root', size=0, modified=u'2014-03-20 23:54', target=u''),
+     u'/usr/share/man/man1/python3.4.1.gz': ArchiveEntry(permissions=u'-rw-r--r--', owner=u'root', group=u'root', size=5340, modified=u'2014-03-20 23:30', target=u''),
+     u'/usr/share/man/man1/python3.4m.1.gz': ArchiveEntry(permissions=u'lrwxrwxrwx', owner=u'root', group=u'root', size=0, modified=u'2014-03-20 23:54', target=u'python3.4.1.gz')}
+
     """
-    metadata = parse_control_fields(Deb822(StringIO(execute('dpkg-deb', '-f', archive, logger=logger, capture=True))))
+    metadata = parse_control_fields(deb822_from_string(execute('dpkg-deb', '-f', archive, logger=logger, capture=True)))
     contents = {}
     for line in execute('dpkg-deb', '-c', archive, logger=logger, capture=True).splitlines():
         # Example output of dpkg-deb -c archive.deb:

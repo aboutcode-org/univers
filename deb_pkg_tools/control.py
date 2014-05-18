@@ -21,6 +21,13 @@ package.
 import logging
 import os
 
+try:
+    # Python 2.x.
+    from StringIO import StringIO
+except ImportError:
+    # Python 3.x.
+    from io import StringIO
+
 # External dependencies.
 from debian.deb822 import Deb822
 from humanfriendly import format_path
@@ -99,9 +106,9 @@ def merge_control_fields(defaults, overrides):
     return unparse_control_fields(merged)
 
 def parse_control_fields(input_fields):
-    """
+    r"""
     The :py:class:`debian.deb822.Deb822` class can be used to parse Debian
-    control files but the result is simple a :py:class:`dict` with string
+    control files but the result is a simple :py:class:`dict` with string
     name/value pairs. This function takes an existing :py:class:`debian.deb822.Deb822`
     instance and converts known fields into friendlier formats, for example:
 
@@ -115,46 +122,59 @@ def parse_control_fields(input_fields):
                          to be).
     :returns: A :py:class:`dict` object with the converted fields.
 
-    Here's an example of what the result looks like (to see the unparsed
-    values, take a look at the example under :py:func:`deb_pkg_tools.package.inspect_package()`):
+    Let's look at an example. We start with the raw control file contents so
+    you can see the complete input:
+
+    >>> from deb_pkg_tools.control import deb822_from_string
+    >>> unparsed_fields = deb822_from_string('''
+    ... Package: python3.4-minimal
+    ... Version: 3.4.0-1+precise1
+    ... Architecture: amd64
+    ... Installed-Size: 3586
+    ... Pre-Depends: libc6 (>= 2.15)
+    ... Depends: libpython3.4-minimal (= 3.4.0-1+precise1), libexpat1 (>= 1.95.8), libgcc1 (>= 1:4.1.1), zlib1g (>= 1:1.2.0), foo | bar
+    ... Recommends: python3.4
+    ... Suggests: binfmt-support
+    ... Conflicts: binfmt-support (<< 1.1.2)
+    ... ''')
+
+    Here are the control file fields as parsed by the
+    :py:class:`debian.deb822` module:
+
+    >>> print repr(unparsed_fields)
+    {'Architecture': u'amd64',
+     'Conflicts': u'binfmt-support (<< 1.1.2)',
+     'Depends': u'libpython3.4-minimal (= 3.4.0-1+precise1), libexpat1 (>= 1.95.8), libgcc1 (>= 1:4.1.1), zlib1g (>= 1:1.2.0), foo | bar',
+     'Installed-Size': u'3586',
+     'Package': u'python3.4-minimal',
+     'Pre-Depends': u'libc6 (>= 2.15)',
+     'Recommends': u'python3.4',
+     'Suggests': u'binfmt-support',
+     'Version': u'3.4.0-1+precise1'}
+
+    Notice the value of the `Depends` line is a comma separated string, i.e. it
+    hasn't been parsed. Now here are the control file fields parsed by the
+    :py:func:`parse_control_fields()` function:
 
     >>> from deb_pkg_tools.control import parse_control_fields
-    >>> from deb_pkg_tools.package import inspect_package
-    >>> fields, contents = inspect_package('/var/cache/apt/archives/python2.7_2.7.3-0ubuntu3.2_amd64.deb')
-    >>> parse_control_fields(fields)
+    >>> parsed_fields = parse_control_fields(unparsed_fields)
+    >>> print repr(parsed_fields)
     {'Architecture': u'amd64',
-     'Conflicts': [u'python-profiler (<= 2.7.1-2)'],
-     'Depends': [u'python2.7-minimal (= 2.7.3-0ubuntu3.2)',
-                 u'mime-support',
-                 u'libbz2-1.0',
-                 u'libc6 (>= 2.15)',
-                 u'libdb5.1',
-                 u'libexpat1 (>= 1.95.8)',
-                 u'libgcc1 (>= 1:4.1.1)',
-                 u'libncursesw5 (>= 5.6+20070908)',
-                 u'libreadline6 (>= 6.0)',
-                 u'libsqlite3-0 (>= 3.5.9)',
-                 u'libtinfo5'],
-     'Description': u'Interactive high-level object-oriented language ...',
-     'Installed-Size': 8779,
-     'Maintainer': u'Ubuntu Core Developers <ubuntu-devel-discuss@lists.ubuntu.com>',
-     'Multi-Arch': u'allowed',
-     'Original-Maintainer': u'Matthias Klose <doko@debian.org>',
-     'Package': u'python2.7',
-     'Priority': u'optional',
-     'Provides': [u'python-argparse',
-                  u'python2.7-argparse',
-                  u'python2.7-celementtree',
-                  u'python2.7-cjkcodecs',
-                  u'python2.7-ctypes',
-                  u'python2.7-elementtree',
-                  u'python2.7-profiler',
-                  u'python2.7-wsgiref'],
-     'Replaces': [u'python-profiler (<= 2.7.1-2)'],
-     'Section': u'python',
-     'Suggests': [u'python2.7-doc',
-                  u'binutils'],
-     'Version': u'2.7.3-0ubuntu3.2'}
+     'Conflicts': RelationshipSet(VersionedRelationship(name=u'binfmt-support', operator=u'<<', version=u'1.1.2')),
+     'Depends': RelationshipSet(VersionedRelationship(name=u'libexpat1', operator=u'>=', version=u'1.95.8'),
+                                VersionedRelationship(name=u'libgcc1', operator=u'>=', version=u'1:4.1.1'),
+                                VersionedRelationship(name=u'libpython3.4-minimal', operator=u'=', version=u'3.4.0-1+precise1'),
+                                VersionedRelationship(name=u'zlib1g', operator=u'>=', version=u'1:1.2.0'),
+                                AlternativeRelationship(Relationship(name=u'bar'), Relationship(name=u'foo'))),
+     'Installed-Size': 3586,
+     'Package': u'python3.4-minimal',
+     'Pre-Depends': u'libc6 (>= 2.15)',
+     'Recommends': u'python3.4',
+     'Suggests': RelationshipSet(Relationship(name=u'binfmt-support')),
+     'Version': u'3.4.0-1+precise1'}
+
+    For more information about fields like `Depends` and `Suggests` please
+    refer to the documentation of :py:func:`deb_pkg_tools.deps.parse_depends()`.
     """
     logger.debug("Parsing %i control fields ..", len(input_fields))
     output_fields = {}
@@ -229,5 +249,14 @@ def normalize_control_field_name(name):
     .. _Syntax of control files: http://www.debian.org/doc/debian-policy/ch-controlfields.html#s-controlsyntax
     """
     return '-'.join(w.capitalize() for w in name.split('-'))
+
+def deb822_from_string(string):
+    """
+    Create a :py:class:`debian.deb822.Deb822` object from a string.
+
+    :param string: The string containing the control fields to parse.
+    :returns: A :py:class:`debian.deb822.Deb822` object.
+    """
+    return Deb822(StringIO(string))
 
 # vim: ts=4 sw=4 et

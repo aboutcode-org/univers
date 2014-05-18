@@ -116,20 +116,20 @@ class DebPkgToolsTestCase(unittest.TestCase):
     def test_relationship_parsing(self):
         # Happy path (no parsing errors).
         relationship_set = parse_depends('foo, bar (>= 1) | baz')
-        self.assertEqual(relationship_set.relationships[0].relationships[0].name, 'bar')
-        self.assertEqual(relationship_set.relationships[0].relationships[0].operator, '>=')
-        self.assertEqual(relationship_set.relationships[0].relationships[0].version, '1')
-        self.assertEqual(relationship_set.relationships[0].relationships[1].name, 'baz')
-        self.assertEqual(relationship_set.relationships[1].name, 'foo')
+        self.assertEqual(relationship_set.relationships[0].name, 'foo')
+        self.assertEqual(relationship_set.relationships[1].relationships[0].name, 'bar')
+        self.assertEqual(relationship_set.relationships[1].relationships[0].operator, '>=')
+        self.assertEqual(relationship_set.relationships[1].relationships[0].version, '1')
+        self.assertEqual(relationship_set.relationships[1].relationships[1].name, 'baz')
         self.assertEqual(parse_depends('foo (=1.0)'), RelationshipSet(VersionedRelationship(name='foo', operator='=', version='1.0')))
         # Unhappy path (parsing errors).
         self.assertRaises(ValueError, parse_depends, 'foo (bar) (baz)')
         self.assertRaises(ValueError, parse_depends, 'foo (bar baz qux)')
 
     def test_relationship_unparsing(self):
-        relationship_set = parse_depends('foo, bar (>= 1) | baz')
-        self.assertEqual(unicode(relationship_set), 'bar (>= 1) | baz, foo')
-        self.assertEqual(repr(relationship_set), "RelationshipSet(AlternativeRelationship(VersionedRelationship(name='bar', operator='>=', version='1'), Relationship(name='baz')), Relationship(name='foo'))")
+        relationship_set = parse_depends('foo, bar(>=1)|baz')
+        self.assertEqual(unicode(relationship_set), 'foo, bar (>= 1) | baz')
+        self.assertEqual(repr(relationship_set), "RelationshipSet(Relationship(name='foo'), AlternativeRelationship(VersionedRelationship(name='bar', operator='>=', version='1'), Relationship(name='baz')))")
 
     def test_relationship_evaluation(self):
         # Relationships without versions.
@@ -157,14 +157,14 @@ class DebPkgToolsTestCase(unittest.TestCase):
         # Distinguishing between packages whose name was matched but whose
         # version didn't match vs packages whose name wasn't matched.
         relationship_set = parse_depends('python (>= 2.6), python (<< 3) | python (>= 3.4)')
-        self.assertEquals(relationship_set.matches('python', '2.7'), True) # name and version match
-        self.assertEquals(relationship_set.matches('python', '2.5'), False) # name matched, version didn't
-        self.assertEquals(relationship_set.matches('python2.6'), None) # name didn't match
-        self.assertEquals(relationship_set.matches('python', '3.0'), False) # name in alternative matched, version didn't
+        self.assertEqual(relationship_set.matches('python', '2.7'), True) # name and version match
+        self.assertEqual(relationship_set.matches('python', '2.5'), False) # name matched, version didn't
+        self.assertEqual(relationship_set.matches('python2.6'), None) # name didn't match
+        self.assertEqual(relationship_set.matches('python', '3.0'), False) # name in alternative matched, version didn't
 
     def test_relationship_sorting(self):
         relationship_set = parse_depends('foo | bar, baz | qux')
-        self.assertEquals(relationship_set, RelationshipSet(
+        self.assertEqual(relationship_set, RelationshipSet(
             AlternativeRelationship(Relationship(name='baz'), Relationship(name='qux')),
             AlternativeRelationship(Relationship(name='foo'), Relationship(name='bar'))))
 
@@ -290,8 +290,8 @@ class DebPkgToolsTestCase(unittest.TestCase):
             self.assertTrue(os.path.isfile(os.path.join(repo_dir, 'Release')))
             with open(os.path.join(repo_dir, 'Release')) as handle:
                 fields = Deb822(handle)
-                self.assertEquals(fields['Origin'], TEST_REPO_ORIGIN)
-                self.assertEquals(fields['Description'], TEST_REPO_DESCRIPTION)
+                self.assertEqual(fields['Origin'], TEST_REPO_ORIGIN)
+                self.assertEqual(fields['Description'], TEST_REPO_DESCRIPTION)
             if not apt_supports_trusted_option():
                 self.assertTrue(os.path.isfile(os.path.join(repo_dir, 'Release.gpg')))
             return repo_dir
@@ -336,8 +336,8 @@ class DebPkgToolsTestCase(unittest.TestCase):
             # Generate a default GPG key on the spot.
             default_key = GPGKey(name="default-test-key",
                                  description="GPG key pair generated for unit tests (default key)")
-            self.assertEquals(os.path.basename(default_key.secret_key_file), 'secring.gpg')
-            self.assertEquals(os.path.basename(default_key.public_key_file), 'pubring.gpg')
+            self.assertEqual(os.path.basename(default_key.secret_key_file), 'secring.gpg')
+            self.assertEqual(os.path.basename(default_key.public_key_file), 'pubring.gpg')
             # Test error handling related to GPG keys.
             self.assertRaises(Exception, GPGKey, secret_key_file=secret_key_file)
             self.assertRaises(Exception, GPGKey, public_key_file=public_key_file)

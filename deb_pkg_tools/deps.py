@@ -31,13 +31,11 @@ True
 >>> dependencies.matches('python', '3.4')
 True
 >>> print repr(dependencies)
-RelationshipSet(
-    AlternativeRelationship(
-        VersionedRelationship(name='python', operator='<<', version='3'),
-        VersionedRelationship(name='python', operator='>=', version='3.4')),
-    VersionedRelationship(name='python', operator='>=', version='2.6'))
->>> print unicode(dependencies)
-python (<< 3) | python (>= 3.4), python (>= 2.6)
+RelationshipSet(VersionedRelationship(name='python', operator='>=', version='2.6'),
+                AlternativeRelationship(VersionedRelationship(name='python', operator='<<', version='3'),
+                                        VersionedRelationship(name='python', operator='>=', version='3.4')))
+>>> print str(dependencies)
+python (>= 2.6), python (<< 3) | python (>= 3.4)
 
 As you can see the :py:func:`repr()` output of the relationship set shows the
 object tree and the :py:func:`unicode()` output (:py:func:`str()` in Python
@@ -139,7 +137,7 @@ def parse_relationship(expression):
     else:
         # Package name followed by relationship to specific version(s) of package.
         name, relationship = tokens
-        tokens = [t.strip() for t in re.split('([0-9A-Za-z_~:.-]+)', relationship) if t and not t.isspace()]
+        tokens = [t.strip() for t in re.split('([<>=]+)', relationship) if t and not t.isspace()]
         if len(tokens) != 2:
             # Encountered something unexpected!
             msg = "Corrupt package relationship expression: Splitting operator from version resulted in more than two tokens! (expression: %r, tokens: %r)"
@@ -271,7 +269,7 @@ class AlternativeRelationship(Relationship):
 
         :param relationships: One or more :py:class:`Relationship` objects.
         """
-        self.relationships = sorted(relationships)
+        self.relationships = tuple(sorted(relationships))
 
     def matches(self, name, version=None):
         """
@@ -311,7 +309,7 @@ class AlternativeRelationship(Relationship):
         Get the comparison key of this :py:class:`AlternativeRelationship` object. Used to
         implement the equality and rich comparison operations.
         """
-        return sorted(self.relationships)
+        return self.relationships
 
 @str_compatible
 class RelationshipSet(OrderedObject):
@@ -326,7 +324,7 @@ class RelationshipSet(OrderedObject):
 
         :param relationships: One or more :py:class:`Relationship` objects.
         """
-        self.relationships = sorted(relationships)
+        self.relationships = tuple(sorted(relationships))
 
     def matches(self, name, version=None):
         """
