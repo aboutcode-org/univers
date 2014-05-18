@@ -15,8 +15,8 @@ returns a :py:class:`RelationshipSet` object. The
 :py:func:`RelationshipSet.matches()` function can be used to evaluate
 relationship expressions. The relationship parsing is implemented in pure
 Python (no external dependencies) but relationship evaluation uses the external
-command ``dpkg --compare-versions`` to ensure compatibility with apt's version
-comparison algorithm.
+command ``dpkg --compare-versions`` to ensure compatibility with Debian's
+package version comparison algorithm.
 
 To give you an impression of how to use this module:
 
@@ -56,11 +56,9 @@ object tree and the :py:func:`unicode()` output (:py:func:`str()` in Python
 import logging
 import re
 
-# External dependencies.
-from executor import execute
-
 # Modules included in our package.
-from deb_pkg_tools.utils import OrderedObject, str_compatible, unicode
+from deb_pkg_tools.utils import (dpkg_compare_versions, OrderedObject,
+                                 str_compatible, unicode)
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
@@ -216,12 +214,12 @@ class VersionedRelationship(Relationship):
         self.name = name
         self.operator = operator
         self.version = version
-        self._evaluation_cache = {}
 
     def matches(self, name, version=None):
         """
         Check if the relationship matches a given package and version. Uses the
-        external command ``dpkg --compare-versions`` to compare versions.
+        external command ``dpkg --compare-versions`` to ensure compatibility
+        with Debian's package version comparison algorithm.
 
         :param name: The name of a package (a string).
         :param version: The version number of a package (a string, optional).
@@ -230,10 +228,7 @@ class VersionedRelationship(Relationship):
         """
         if self.name == name:
             if version:
-                key = (name, version)
-                if key not in self._evaluation_cache:
-                    self._evaluation_cache[key] = execute('dpkg', '--compare-versions', version, self.operator, self.version, check=False, logger=logger)
-                return self._evaluation_cache[key]
+                return dpkg_compare_versions(version, self.operator, self.version)
             else:
                 return False
 

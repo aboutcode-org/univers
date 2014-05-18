@@ -34,7 +34,7 @@ from deb_pkg_tools.control import (merge_control_fields,
 from deb_pkg_tools.deps import (AlternativeRelationship, VersionedRelationship,
                                 parse_depends, Relationship, RelationshipSet)
 from deb_pkg_tools.gpg import GPGKey
-from deb_pkg_tools.package import inspect_package, parse_filename
+from deb_pkg_tools.package import collect_related_packages, inspect_package, parse_filename
 from deb_pkg_tools.repo import (apt_supports_trusted_option,
                                 update_repository)
 from deb_pkg_tools.utils import unicode
@@ -43,7 +43,7 @@ from deb_pkg_tools.utils import unicode
 logger = logging.getLogger(__name__)
 
 # Improvised slow test marker.
-SKIP_SLOW_TESTS = False
+SKIP_SLOW_TESTS = 'SKIP_SLOW_TESTS' in os.environ
 
 # Configuration defaults.
 TEST_PACKAGE_NAME = 'deb-pkg-tools-demo-package'
@@ -170,25 +170,25 @@ class DebPkgToolsTestCase(unittest.TestCase):
 
     def test_filename_parsing(self):
         # Test the happy path.
-        components = parse_filename('/var/cache/apt/archives/python2.7_2.7.3-0ubuntu3.4_amd64.deb')
+        filename = '/var/cache/apt/archives/python2.7_2.7.3-0ubuntu3.4_amd64.deb'
+        components = parse_filename(filename)
+        self.assertEqual(components.filename, filename)
         self.assertEqual(components.name, 'python2.7')
         self.assertEqual(components.version, '2.7.3-0ubuntu3.4')
         self.assertEqual(components.architecture, 'amd64')
-        self.assertEqual(components, ('python2.7', '2.7.3-0ubuntu3.4', 'amd64'))
         # Test the unhappy paths.
         self.assertRaises(ValueError, parse_filename, 'python2.7_2.7.3-0ubuntu3.4_amd64.not-a-deb')
         self.assertRaises(ValueError, parse_filename, 'python2.7.deb')
 
-    def test_package_building(self, repository=None):
-        if SKIP_SLOW_TESTS:
-            return
+    def test_package_building(self, repository=None, overrides={}):
         directory = tempfile.mkdtemp()
         destructors = [functools.partial(shutil.rmtree, directory)]
         try:
+            control_fields = merge_control_fields(TEST_PACKAGE_FIELDS, overrides)
             # Create the package template.
             os.mkdir(os.path.join(directory, 'DEBIAN'))
             with open(os.path.join(directory, 'DEBIAN', 'control'), 'wb') as handle:
-                TEST_PACKAGE_FIELDS.dump(handle)
+                control_fields.dump(handle)
             with open(os.path.join(directory, 'DEBIAN', 'conffiles'), 'wb') as handle:
                 handle.write(b'/etc/file1\n')
                 handle.write(b'/etc/file2\n')
@@ -204,9 +204,9 @@ class DebPkgToolsTestCase(unittest.TestCase):
             # Build the package (without any contents :-).
             call('--build', directory)
             package_file = os.path.join(tempfile.gettempdir(),
-                                        '%s_%s_%s.deb' % (TEST_PACKAGE_FIELDS['Package'],
-                                                          TEST_PACKAGE_FIELDS['Version'],
-                                                          TEST_PACKAGE_FIELDS['Architecture']))
+                                        '%s_%s_%s.deb' % (control_fields['Package'],
+                                                          control_fields['Version'],
+                                                          control_fields['Architecture']))
             self.assertTrue(os.path.isfile(package_file))
             if repository:
                 shutil.move(package_file, repository)
@@ -251,6 +251,18 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 logger.warn("Skipping repository activation test because it requires root access!")
             else:
                 call('--with-repo=%s' % directory, 'apt-cache show %s' % TEST_PACKAGE_NAME)
+        finally:
+            for partial in destructors:
+                partial()
+
+    def test_collect_packages(self):
+        directory = tempfile.mkdtemp()
+        destructors = [functools.partial(shutil.rmtree, directory)]
+        try:
+            package1 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-1', Depends='deb-pkg-tools-package-2'))
+            package2 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-2', Depends='deb-pkg-tools-package-3'))
+            package3 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-3'))
+            self.assertEqual(sorted(p.filename for p in collect_related_packages(package1)), [package2, package3])
         finally:
             for partial in destructors:
                 partial()

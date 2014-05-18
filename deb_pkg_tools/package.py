@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: May 16, 2014
+# Last Change: May 18, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -15,6 +15,8 @@ This module provides functions to build and inspect Debian package archives
 # Standard library modules.
 import collections
 import fnmatch
+import functools
+import glob
 import logging
 import os.path
 import pipes
@@ -36,7 +38,8 @@ from executor import execute
 from humanfriendly import format_path, pluralize
 
 # Modules included in our package.
-from deb_pkg_tools.control import patch_control_file
+from deb_pkg_tools.control import parse_control_fields, patch_control_file
+from deb_pkg_tools.utils import dpkg_compare_versions
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
@@ -72,24 +75,35 @@ def parse_filename(filename):
     >>> from deb_pkg_tools.package import parse_filename
     >>> components = parse_filename('/var/cache/apt/archives/python2.7_2.7.3-0ubuntu3.4_amd64.deb')
     >>> print components
-    PackageFile(name='python2.7', version='2.7.3-0ubuntu3.4', architecture='amd64')
+    PackageFile(filename='/var/cache/apt/archives/python2.7_2.7.3-0ubuntu3.4_amd64.deb',
+                name='python2.7', version='2.7.3-0ubuntu3.4', architecture='amd64')
 
     :param filename: The pathname of a ``*.deb`` archive (a string).
     :returns: A :py:class:`PackageFile` object.
     """
-    basename, extension = os.path.splitext(os.path.basename(filename))
+    if isinstance(filename, PackageFile):
+        return filename
+    pathname = os.path.abspath(filename)
+    filename = os.path.basename(pathname)
+    basename, extension = os.path.splitext(filename)
     if extension != '.deb':
-        raise ValueError("Refusing to parse filename that doesn't have `.deb' extension! (%r)" % filename)
+        raise ValueError("Refusing to parse filename that doesn't have `.deb' extension! (%r)" % pathname)
     components = basename.split('_')
     if len(components) != 3:
-        raise ValueError("Filename doesn't have three underscore separated components! (%r)" % filename)
-    return PackageFile(*components)
+        raise ValueError("Filename doesn't have three underscore separated components! (%r)" % pathname)
+    return PackageFile(pathname, *components)
 
-class PackageFile(collections.namedtuple('PackageFile', 'name, version, architecture')):
+@functools.total_ordering
+class PackageFile(collections.namedtuple('PackageFile', 'filename, name, version, architecture')):
+
     """
     The function :py:func:`parse_filename()` reports the fields of a package
-    archive's filename as a named tuple. Here are the fields supported by those
-    named tuples:
+    archive's filename as a :py:class:`PackageFile` object (a named tuple).
+    Here are the fields supported by these named tuples:
+
+    .. py:attribute:: filename
+
+       The absolute pathname of the package archive (a string).
 
     .. py:attribute:: name
 
@@ -102,7 +116,97 @@ class PackageFile(collections.namedtuple('PackageFile', 'name, version, architec
     .. py:attribute:: architecture
 
        The architecture of the package (a string).
+
+    :py:class:`PackageFile` objects support sorting according to Debian's
+    package version comparison algorithm as implemented in ``dpkg
+    --compare-versions``.
     """
+
+    def __lt__(self, other):
+        """
+        Enables rich comparison between :py:class:`PackageFile` objects.
+        """
+        if type(self) is type(other):
+            if self.name < other.name:
+                return True
+            elif self.name == other.name:
+                return dpkg_compare_versions(self.version, '<<', other.version)
+
+def collect_related_packages(filename):
+    """
+    Collect the package archive(s) related to the given package archive. This
+    works by parsing and resolving the dependencies of the given package to
+    filenames of package archives, then parsing and resolving the dependencies
+    of those package archives, etc. until no more relationships can be resolved
+    to existing package archives.
+
+    :param filename: The filename of an existing ``*.deb`` archive (a string).
+    :returns: A list of :py:class:`PackageFile` objects.
+
+    This function is used to implement the ``deb-pkg-tools --collect`` command:
+
+    .. code-block:: sh
+
+       $ deb-pkg-tools -c /tmp python-deb-pkg-tools_1.13-1_all.deb
+       2014-05-18 08:33:42 deb_pkg_tools.package INFO Collecting packages related to ~/python-deb-pkg-tools_1.13-1_all.deb ..
+       2014-05-18 08:33:42 deb_pkg_tools.package INFO Scanning ~/python-deb-pkg-tools_1.13-1_all.deb ..
+       2014-05-18 08:33:42 deb_pkg_tools.package INFO Scanning ~/python-coloredlogs_0.4.8-1_all.deb ..
+       2014-05-18 08:33:42 deb_pkg_tools.package INFO Scanning ~/python-chardet_2.2.1-1_all.deb ..
+       2014-05-18 08:33:42 deb_pkg_tools.package INFO Scanning ~/python-humanfriendly_1.7.1-1_all.deb ..
+       2014-05-18 08:33:42 deb_pkg_tools.package INFO Scanning ~/python-debian_0.1.21-1_all.deb ..
+       Found 5 package archives:
+        - ~/python-chardet_2.2.1-1_all.deb
+        - ~/python-coloredlogs_0.4.8-1_all.deb
+        - ~/python-deb-pkg-tools_1.13-1_all.deb
+        - ~/python-humanfriendly_1.7.1-1_all.deb
+        - ~/python-debian_0.1.21-1_all.deb
+       Copy 5 package archives to /tmp? [Y/n] y
+       2014-05-18 08:33:44 deb_pkg_tools.cli INFO Done! Copied 5 package archives to /tmp.
+
+    .. note:: The implementation of this function can be somewhat slow when
+              you're dealing with a lot of packages, but this function is meant
+              to be used interactively so I don't think it will be a big issue.
+    """
+    filename = os.path.abspath(filename)
+    logger.info("Collecting packages related to %s ..", format_path(filename))
+    # Internal state.
+    relationship_sets = []
+    packages_to_scan = [filename]
+    related_packages = collections.defaultdict(list)
+    # Preparations.
+    available_packages = map(parse_filename, glob.glob(os.path.join(os.path.dirname(filename), '*.deb')))
+    # Loop to collect the related packages.
+    while packages_to_scan:
+        filename = packages_to_scan.pop(0)
+        logger.info("Scanning %s ..", format_path(filename))
+        # Find the relationships of the given package.
+        fields, contents = inspect_package(filename)
+        if 'Depends' in fields:
+            relationship_sets.append(fields['Depends'])
+        # Collect all related packages from the given directory.
+        for package in available_packages:
+            logger.debug("Checking %s ..", package.filename)
+            results = [r.matches(package.name, package.version) for r in relationship_sets]
+            matches = [r for r in results if r is not None]
+            if matches and all(matches):
+                logger.debug("Package archive matched all relationships: %s", package.filename)
+                if package not in related_packages[package.name]:
+                    related_packages[package.name].append(package)
+                    packages_to_scan.append(package.filename)
+    # Pick the latest version of the collected packages.
+    return map(find_latest_version, related_packages.values())
+
+def find_latest_version(packages):
+    """
+    Find the package archive with the highest version number. Uses ``dpkg
+    --compare-versions ...`` for version comparison.
+
+    :param packages: A list of filenames (strings) and/or
+                     :py:class:`PackageFile` objects.
+    :returns: The :py:class:`PackageFile` with
+              the highest version number.
+    """
+    return sorted(map(parse_filename, packages))[-1]
 
 def inspect_package(archive):
     r"""
@@ -111,8 +215,8 @@ def inspect_package(archive):
     :param archive: The pathname of an existing ``*.deb`` archive.
     :returns: A tuple with two dictionaries:
 
-              1. A dictionary with control file fields (an instance of
-                 :py:func:`debian.deb822.Deb822`).
+              1. A dictionary with control file fields (the result of
+                 :py:func:`deb_pkg_tools.control.parse_control_fields()`).
               2. A dictionary with the directories and files contained in the
                  package. The dictionary keys are the absolute pathnames and
                  the dictionary values are :py:class:`ArchiveEntry` objects
@@ -146,7 +250,7 @@ def inspect_package(archive):
      '/usr/lib/python2.7/uuid.py': ArchiveEntry(permissions='-rw-r--r--', owner='root', group='root', size=21095, modified='2013-09-26 22:28'),
      ...}
     """
-    metadata = Deb822(StringIO(execute('dpkg-deb', '-f', archive, logger=logger, capture=True)))
+    metadata = parse_control_fields(Deb822(StringIO(execute('dpkg-deb', '-f', archive, logger=logger, capture=True))))
     contents = {}
     for line in execute('dpkg-deb', '-c', archive, logger=logger, capture=True).splitlines():
         # Example output of dpkg-deb -c archive.deb:

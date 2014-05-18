@@ -16,6 +16,7 @@ modules in the `deb-pkg-tools` package.
 # Standard library modules.
 import functools
 import hashlib
+import logging
 import os
 import pwd
 import sys
@@ -25,6 +26,12 @@ if sys.version_info.major == 2:
     unicode = unicode
 else:
     unicode = str
+
+# External dependencies.
+from executor import execute
+
+# Initialize a logger.
+logger = logging.getLogger(__name__)
 
 def sha1(text):
     """
@@ -66,8 +73,25 @@ def str_compatible(class_to_decorate):
         class_to_decorate.__bytes__ = lambda self: str(self).encode('utf-8')
     return class_to_decorate
 
+_comparison_cache = {}
+
+def dpkg_compare_versions(version1, operator, version2):
+    """
+    Run ``dpkg --compare-versions ...`` and return the result.
+    """
+    key = (version1, operator, version2)
+    if key not in _comparison_cache:
+        _comparison_cache[key] = execute('dpkg', '--compare-versions', version1, operator, version2, check=False, logger=logger)
+    return _comparison_cache[key]
+
 @functools.total_ordering
 class OrderedObject(object):
+
+    """
+    By inheriting from this class and implementing :py:func:`OrderedObject._key()`
+    objects gain support for equality comparison, rich comparison and a hash
+    method that allows objects to be added to sets and used as dictionary keys.
+    """
 
     def __eq__(self, other):
         """
