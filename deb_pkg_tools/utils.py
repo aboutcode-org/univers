@@ -22,7 +22,7 @@ import pwd
 import sys
 
 # Alias for unicode() in Python 2.x and str() in Python 3.x.
-if sys.version_info.major == 2:
+if sys.version_info[0] == 2:
     unicode = unicode
 else:
     unicode = str
@@ -67,9 +67,9 @@ def str_compatible(class_to_decorate):
     string (i.e. you write Python 2.x compatible code). The missing part will
     be filled in automatically by encoding the Unicode string to UTF-8.
     """
-    if sys.version_info.major == 2:
+    if sys.version_info[0] == 2:
         class_to_decorate.__str__ = lambda self: unicode(self).encode('utf-8')
-    elif sys.version_info.major == 3:
+    elif sys.version_info[0] == 3:
         class_to_decorate.__bytes__ = lambda self: str(self).encode('utf-8')
     return class_to_decorate
 
