@@ -262,7 +262,8 @@ class DebPkgToolsTestCase(unittest.TestCase):
             package1 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-1', Depends='deb-pkg-tools-package-2'))
             package2 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-2', Depends='deb-pkg-tools-package-3'))
             package3 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-3'))
-            self.assertEqual(sorted(p.filename for p in collect_related_packages(package1)), [package2, package3])
+            package4 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-3', Version='0.2'))
+            self.assertEqual(sorted(p.filename for p in collect_related_packages(package1)), [package2, package4])
         finally:
             for partial in destructors:
                 partial()
