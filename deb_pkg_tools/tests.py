@@ -13,6 +13,7 @@ import re
 import shutil
 import sys
 import tempfile
+import textwrap
 import unittest
 
 try:
@@ -28,15 +29,16 @@ from debian.deb822 import Deb822
 
 # Modules included in our package.
 from deb_pkg_tools.cli import main
-from deb_pkg_tools.control import (merge_control_fields,
+from deb_pkg_tools.control import (deb822_from_string,
+                                   merge_control_fields,
                                    parse_control_fields,
                                    unparse_control_fields)
 from deb_pkg_tools.deps import (AlternativeRelationship, VersionedRelationship,
                                 parse_depends, Relationship, RelationshipSet)
 from deb_pkg_tools.gpg import GPGKey
 from deb_pkg_tools.package import collect_related_packages, inspect_package, parse_filename
-from deb_pkg_tools.repo import (apt_supports_trusted_option,
-                                update_repository)
+from deb_pkg_tools.printer import CustomPrettyPrinter
+from deb_pkg_tools.repo import apt_supports_trusted_option, update_repository
 from deb_pkg_tools.utils import unicode
 
 # Initialize a logger.
@@ -167,6 +169,26 @@ class DebPkgToolsTestCase(unittest.TestCase):
         self.assertEqual(relationship_set, RelationshipSet(
             AlternativeRelationship(Relationship(name='baz'), Relationship(name='qux')),
             AlternativeRelationship(Relationship(name='foo'), Relationship(name='bar'))))
+
+    def test_custom_pretty_printer(self):
+        printer = CustomPrettyPrinter()
+        # Test pretty printing of debian.deb822.Deb822 objects.
+        self.assertEqual(printer.pformat(deb822_from_string('''
+            Package: pretty-printed-control-fields
+            Version: 1.0
+            Architecture: all
+        ''')), dedent('''
+            {'Architecture': u'all',
+             'Package': u'pretty-printed-control-fields',
+             'Version': u'1.0'}
+        '''))
+        # Test pretty printing of RelationshipSet objects.
+        depends_line = 'python-deb-pkg-tools, python-pip, python-pip-accel'
+        self.assertEqual(printer.pformat(parse_depends(depends_line)), dedent('''
+            RelationshipSet(Relationship(name='python-deb-pkg-tools'),
+                            Relationship(name='python-pip'),
+                            Relationship(name='python-pip-accel'))
+        '''))
 
     def test_filename_parsing(self):
         # Test the happy path.
@@ -376,6 +398,9 @@ def match(pattern, lines):
         m = re.match(pattern, line)
         if m:
             return m.group(1)
+
+def dedent(string):
+    return textwrap.dedent(string).strip()
 
 def compact(string):
     return ' '.join(string.split())
