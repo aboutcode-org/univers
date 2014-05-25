@@ -30,11 +30,11 @@ False
 True
 >>> dependencies.matches('python', '3.4')
 True
->>> print repr(dependencies)
+>>> print(repr(dependencies))
 RelationshipSet(VersionedRelationship(name='python', operator='>=', version='2.6'),
                 AlternativeRelationship(VersionedRelationship(name='python', operator='<<', version='3'),
                                         VersionedRelationship(name='python', operator='>=', version='3.4')))
->>> print str(dependencies)
+>>> print(str(dependencies))
 python (>= 2.6), python (<< 3) | python (>= 3.4)
 
 As you can see the :py:func:`repr()` output of the relationship set shows the
@@ -71,7 +71,7 @@ def parse_depends(relationships):
 
     >>> from deb_pkg_tools.deps import parse_depends
     >>> dependencies = parse_depends('python (>= 2.6), python (<< 3)')
-    >>> print repr(dependencies)
+    >>> print(repr(dependencies))
     RelationshipSet(VersionedRelationship(name='python', operator='<<', version='3'),
                     VersionedRelationship(name='python', operator='>=', version='2.6'))
     >>> dependencies.matches('python', '2.5')

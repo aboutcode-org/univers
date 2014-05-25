@@ -68,7 +68,7 @@ def parse_filename(filename):
 
     >>> from deb_pkg_tools.package import parse_filename
     >>> components = parse_filename('/var/cache/apt/archives/python2.7_2.7.3-0ubuntu3.4_amd64.deb')
-    >>> print repr(components)
+    >>> print(repr(components))
     PackageFile(filename='/var/cache/apt/archives/python2.7_2.7.3-0ubuntu3.4_amd64.deb',
                 name='python2.7',
                 version='2.7.3-0ubuntu3.4',
@@ -219,7 +219,7 @@ def inspect_package_fields(archive):
     Here's an example:
 
     >>> from deb_pkg_tools.package import inspect_package_fields
-    >>> print repr(inspect_package_fields('python3.4-minimal_3.4.0-1+precise1_amd64.deb'))
+    >>> print(repr(inspect_package_fields('python3.4-minimal_3.4.0-1+precise1_amd64.deb')))
     {'Architecture': u'amd64',
      'Conflicts': RelationshipSet(VersionedRelationship(name=u'binfmt-support', operator=u'<<', version=u'1.1.2')),
      'Depends': RelationshipSet(VersionedRelationship(name=u'libexpat1', operator=u'>=', version=u'1.95.8'),
@@ -256,7 +256,7 @@ def inspect_package_contents(archive):
     An example:
 
     >>> from deb_pkg_tools.package import inspect_package_contents
-    >>> print repr(inspect_package_contents('python3.4-minimal_3.4.0-1+precise1_amd64.deb'))
+    >>> print(repr(inspect_package_contents('python3.4-minimal_3.4.0-1+precise1_amd64.deb')))
     {u'/': ArchiveEntry(permissions=u'drwxr-xr-x', owner=u'root', group=u'root', size=0, modified=u'2014-03-20 23:54', target=u''),
      u'/usr/': ArchiveEntry(permissions=u'drwxr-xr-x', owner=u'root', group=u'root', size=0, modified=u'2014-03-20 23:52', target=u''),
      u'/usr/bin/': ArchiveEntry(permissions=u'drwxr-xr-x', owner=u'root', group=u'root', size=0, modified=u'2014-03-20 23:54', target=u''),

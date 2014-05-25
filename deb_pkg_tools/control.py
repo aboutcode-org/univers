@@ -1,7 +1,7 @@
 # Debian packaging tools: Control file manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: May 18, 2014
+# Last Change: May 25, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -135,7 +135,7 @@ def parse_control_fields(input_fields):
     Here are the control file fields as parsed by the
     :py:class:`debian.deb822` module:
 
-    >>> print repr(unparsed_fields)
+    >>> print(repr(unparsed_fields))
     {'Architecture': u'amd64',
      'Conflicts': u'binfmt-support (<< 1.1.2)',
      'Depends': u'libpython3.4-minimal (= 3.4.0-1+precise1), libexpat1 (>= 1.95.8), libgcc1 (>= 1:4.1.1), zlib1g (>= 1:1.2.0), foo | bar',
@@ -152,7 +152,7 @@ def parse_control_fields(input_fields):
 
     >>> from deb_pkg_tools.control import parse_control_fields
     >>> parsed_fields = parse_control_fields(unparsed_fields)
-    >>> print repr(parsed_fields)
+    >>> print(repr(parsed_fields))
     {'Architecture': u'amd64',
      'Conflicts': RelationshipSet(VersionedRelationship(name=u'binfmt-support', operator=u'<<', version=u'1.1.2')),
      'Depends': RelationshipSet(VersionedRelationship(name=u'libexpat1', operator=u'>=', version=u'1.95.8'),
