@@ -29,9 +29,8 @@ logger = logging.getLogger(__name__)
 # Optional external dependency on python-apt.
 try:
     # The new name of the version comparison function.
-    import apt_pkg
-    apt_pkg.InitSystem()
-    apt_version_compare = apt_pkg.version_compare
+    from apt_pkg import InitSystem, version_compare as apt_version_compare
+    InitSystem()
     have_python_apt = True
 except ImportError:
     try:
