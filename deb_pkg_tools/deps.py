@@ -1,7 +1,7 @@
 # Debian packaging tools: Relationship parsing and evaluation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: May 18, 2014
+# Last Change: May 25, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -56,7 +56,8 @@ import re
 
 # Modules included in our package.
 from deb_pkg_tools.compat import str_compatible, unicode
-from deb_pkg_tools.utils import dpkg_compare_versions, OrderedObject
+from deb_pkg_tools.utils import OrderedObject
+from deb_pkg_tools.version import compare_versions
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
@@ -226,7 +227,7 @@ class VersionedRelationship(Relationship):
         """
         if self.name == name:
             if version:
-                return dpkg_compare_versions(version, self.operator, self.version)
+                return compare_versions(version, self.operator, self.version)
             else:
                 return False
 

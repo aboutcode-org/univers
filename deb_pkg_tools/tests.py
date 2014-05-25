@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: May 18, 2014
+# Last Change: May 25, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -21,6 +21,7 @@ import coloredlogs
 from debian.deb822 import Deb822
 
 # Modules included in our package.
+from deb_pkg_tools import version
 from deb_pkg_tools.cli import main
 from deb_pkg_tools.compat import StringIO, unicode
 from deb_pkg_tools.control import (deb822_from_string,
@@ -107,6 +108,50 @@ class DebPkgToolsTestCase(unittest.TestCase):
             self.assertEqual(patched_fields['Depends'], 'another-dependency, some-dependency')
         finally:
             os.unlink(control_file)
+
+    def test_version_comparison(self):
+        self.version_comparison_helper()
+        if version.have_python_apt:
+            version.have_python_apt = False
+            self.version_comparison_helper()
+            self.assertRaises(NotImplementedError, version.compare_versions_with_python_apt, '0.1', '<<', '0.2')
+            version.have_python_apt = True
+
+    def version_comparison_helper(self):
+        # V() shortcut for deb_pkg_tools.version.Version().
+        V = version.Version
+        # Check version sorting implemented on top of `=' and `<<' comparisons.
+        expected_order = ['0.1', '0.5', '1.0', '2.0', '3.0', '1:0.4', '2:0.3']
+        self.assertNotEqual(list(sorted(expected_order)), expected_order)
+        self.assertEqual(list(sorted(map(V, expected_order))), expected_order)
+        # Check each individual operator (to make sure the two implementations
+        # agree). We use the Version() class for this so that we test both
+        # compare_versions() and the Version() wrapper.
+        # Test `>'.
+        self.assertTrue(V('1.0') > V('0.5')) # usual semantics
+        self.assertTrue(V('1:0.5') > V('2.0')) # unusual semantics
+        self.assertFalse(V('0.5') > V('2.0')) # sanity check
+        # Test `>='.
+        self.assertTrue(V('0.75') >= V('0.5')) # usual semantics
+        self.assertTrue(V('0.50') >= V('0.5')) # usual semantics
+        self.assertTrue(V('1:0.5') >= V('5.0')) # unusual semantics
+        self.assertFalse(V('0.2') >= V('0.5')) # sanity check
+        # Test `<'.
+        self.assertTrue(V('0.5') < V('1.0')) # usual semantics
+        self.assertTrue(V('2.0') < V('1:0.5')) # unusual semantics
+        self.assertFalse(V('2.0') < V('0.5')) # sanity check
+        # Test `<='.
+        self.assertTrue(V('0.5') <= V('0.75')) # usual semantics
+        self.assertTrue(V('0.5') <= V('0.50')) # usual semantics
+        self.assertTrue(V('5.0') <= V('1:0.5')) # unusual semantics
+        self.assertFalse(V('0.5') <= V('0.2')) # sanity check
+        # Test `=='.
+        self.assertTrue(V('42') == V('42')) # usual semantics
+        self.assertTrue(V('0.5') == V('0:0.5')) # unusual semantics
+        self.assertFalse(V('0.5') == V('1.0')) # sanity check
+        # Test `!='.
+        self.assertTrue(V('1') != V('0')) # usual semantics
+        self.assertFalse(V('0.5') != V('0:0.5')) # unusual semantics
 
     def test_relationship_parsing(self):
         # Happy path (no parsing errors).

@@ -1,7 +1,7 @@
 # Debian packaging tools: Utility functions.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: May 18, 2014
+# Last Change: May 25, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -15,18 +15,11 @@ modules in the `deb-pkg-tools` package.
 
 # Standard library modules.
 import hashlib
-import logging
 import os
 import pwd
 
-# External dependencies.
-from executor import execute
-
 # Modules included in our package.
 from deb_pkg_tools.compat import total_ordering
-
-# Initialize a logger.
-logger = logging.getLogger(__name__)
 
 def sha1(text):
     """
@@ -49,31 +42,6 @@ def find_home_directory():
         return home
     except Exception:
         return pwd.getpwuid(os.getuid()).pw_dir
-
-try:
-    # Version comparison using the python-apt binding.
-    from apt import VersionCompare
-    def dpkg_compare_versions(version1, operator, version2):
-        """
-        Compare Debian package versions using :py:func:`apt.VersionCompare()`.
-        """
-        vc = VersionCompare(version1, version2)
-        return ((operator == '<<' and vc < 0) or
-                (operator == '>>' and vc > 0) or
-                (operator in ('<', '<=') and vc <= 0) or
-                (operator in ('>', '>=') and vc >= 0) or
-                (operator == '=' and vc == 0))
-except ImportError:
-    # Version comparison using the `dpkg --compare-versions ...' command.
-    _comparison_cache = {}
-    def dpkg_compare_versions(version1, operator, version2):
-        """
-        Compare Debian package versions using ``dpkg --compare-versions ...``.
-        """
-        key = (version1, operator, version2)
-        if key not in _comparison_cache:
-            _comparison_cache[key] = execute('dpkg', '--compare-versions', version1, operator, version2, check=False, logger=logger)
-        return _comparison_cache[key]
 
 @total_ordering
 class OrderedObject(object):
@@ -107,6 +75,6 @@ class OrderedObject(object):
         Get the comparison key of this object. Used to implement the equality
         and rich comparison operations.
         """
-        raise NotImplemented
+        raise NotImplementedError
 
 # vim: ts=4 sw=4 et

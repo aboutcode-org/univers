@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: May 18, 2014
+# Last Change: May 25, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -33,7 +33,7 @@ from humanfriendly import format_path, pluralize
 from deb_pkg_tools.control import (deb822_from_string,
                                    parse_control_fields,
                                    patch_control_file)
-from deb_pkg_tools.utils import dpkg_compare_versions, total_ordering
+from deb_pkg_tools.version import Version
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
@@ -70,7 +70,9 @@ def parse_filename(filename):
     >>> components = parse_filename('/var/cache/apt/archives/python2.7_2.7.3-0ubuntu3.4_amd64.deb')
     >>> print repr(components)
     PackageFile(filename='/var/cache/apt/archives/python2.7_2.7.3-0ubuntu3.4_amd64.deb',
-                name='python2.7', version='2.7.3-0ubuntu3.4', architecture='amd64')
+                name='python2.7',
+                version='2.7.3-0ubuntu3.4',
+                architecture='amd64')
 
     :param filename: The pathname of a ``*.deb`` archive (a string).
     :returns: A :py:class:`PackageFile` object.
@@ -85,9 +87,11 @@ def parse_filename(filename):
     components = basename.split('_')
     if len(components) != 3:
         raise ValueError("Filename doesn't have three underscore separated components! (%r)" % pathname)
-    return PackageFile(pathname, *components)
+    return PackageFile(pathname,
+                       name=components[0],
+                       version=Version(components[1]),
+                       architecture=components[2])
 
-@total_ordering
 class PackageFile(collections.namedtuple('PackageFile', 'filename, name, version, architecture')):
 
     """
@@ -105,7 +109,7 @@ class PackageFile(collections.namedtuple('PackageFile', 'filename, name, version
 
     .. py:attribute:: version
 
-       The version of the package (a string).
+       The version of the package (a :py:class:`deb_pkg_tools.version.Version` object).
 
     .. py:attribute:: architecture
 
@@ -115,16 +119,6 @@ class PackageFile(collections.namedtuple('PackageFile', 'filename, name, version
     package version comparison algorithm as implemented in ``dpkg
     --compare-versions``.
     """
-
-    def __lt__(self, other):
-        """
-        Enables rich comparison between :py:class:`PackageFile` objects.
-        """
-        if type(self) is type(other):
-            if self.name < other.name:
-                return True
-            elif self.name == other.name:
-                return dpkg_compare_versions(self.version, '<<', other.version)
 
 def collect_related_packages(filename):
     """
