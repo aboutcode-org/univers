@@ -70,10 +70,10 @@ def parse_filename(filename):
     >>> from deb_pkg_tools.package import parse_filename
     >>> components = parse_filename('/var/cache/apt/archives/python2.7_2.7.3-0ubuntu3.4_amd64.deb')
     >>> print(repr(components))
-    PackageFile(filename='/var/cache/apt/archives/python2.7_2.7.3-0ubuntu3.4_amd64.deb',
-                name='python2.7',
+    PackageFile(name='python2.7',
                 version='2.7.3-0ubuntu3.4',
-                architecture='amd64')
+                architecture='amd64',
+                filename='/var/cache/apt/archives/python2.7_2.7.3-0ubuntu3.4_amd64.deb')
 
     :param filename: The pathname of a ``*.deb`` archive (a string).
     :returns: A :py:class:`PackageFile` object.
@@ -88,21 +88,17 @@ def parse_filename(filename):
     components = basename.split('_')
     if len(components) != 3:
         raise ValueError("Filename doesn't have three underscore separated components! (%r)" % pathname)
-    return PackageFile(pathname,
-                       name=components[0],
+    return PackageFile(name=components[0],
                        version=Version(components[1]),
-                       architecture=components[2])
+                       architecture=components[2],
+                       filename=pathname)
 
-class PackageFile(collections.namedtuple('PackageFile', 'filename, name, version, architecture')):
+class PackageFile(collections.namedtuple('PackageFile', 'name, version, architecture, filename')):
 
     """
     The function :py:func:`parse_filename()` reports the fields of a package
     archive's filename as a :py:class:`PackageFile` object (a named tuple).
     Here are the fields supported by these named tuples:
-
-    .. py:attribute:: filename
-
-       The absolute pathname of the package archive (a string).
 
     .. py:attribute:: name
 
@@ -115,6 +111,10 @@ class PackageFile(collections.namedtuple('PackageFile', 'filename, name, version
     .. py:attribute:: architecture
 
        The architecture of the package (a string).
+
+    .. py:attribute:: filename
+
+       The absolute pathname of the package archive (a string).
 
     :py:class:`PackageFile` objects support sorting according to Debian's
     package version comparison algorithm as implemented in ``dpkg
