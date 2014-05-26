@@ -61,7 +61,8 @@ FILES_TO_REMOVE = ('*.pyc',            # Python byte code files (http://lintian.
 def parse_filename(filename):
     """
     Parse the filename of a Debian binary package archive into three fields:
-    the name of the package, its version and its architecture. See also
+    the name of the package, its version and its architecture. Raises
+    :py:exc:`ValueError` when the given filename cannot be parsed. See also
     :py:func:`determine_package_archive()`.
 
     Here's an example:
