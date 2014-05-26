@@ -1,7 +1,7 @@
 # Debian packaging tools: Relationship parsing and evaluation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: May 25, 2014
+# Last Change: May 26, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -55,7 +55,7 @@ import logging
 import re
 
 # Modules included in our package.
-from deb_pkg_tools.compat import str_compatible, unicode
+from deb_pkg_tools.compat import basestring, str_compatible, unicode
 from deb_pkg_tools.utils import OrderedObject
 from deb_pkg_tools.version import compare_versions
 
@@ -83,11 +83,14 @@ def parse_depends(relationships):
     >>> dependencies.matches('python', '3.0')
     False
 
-    :param relationships: A list of package relationships (a list of strings).
+    :param relationships: A string containing one or more comma separated
+                          package relationships or a list of strings with
+                          package relationships.
     :returns: A :py:class:`RelationshipSet` object.
     """
-    tokens = [r for r in relationships.split(',') if r and not r.isspace()]
-    return RelationshipSet(*map(parse_alternatives, tokens))
+    if isinstance(relationships, basestring):
+        relationships = [r for r in relationships.split(',') if r and not r.isspace()]
+    return RelationshipSet(*map(parse_alternatives, relationships))
 
 def parse_alternatives(expression):
     """
