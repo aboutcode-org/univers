@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: May 26, 2014
+# Last Change: May 28, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -197,10 +197,11 @@ def find_latest_version(packages):
     :returns: The :py:class:`PackageFile` with
               the highest version number.
     """
-    packages = list(map(parse_filename, packages))
-    names = sorted(set(p.name for p in packages))
+    packages = sorted(map(parse_filename, packages))
+    names = set(p.name for p in packages)
     if len(names) > 1:
-        raise ValueError("Refusing to compare unrelated packages! (%s)" % concatenate(names))
+        msg = "Refusing to compare unrelated packages! (%s)"
+        raise ValueError(msg % concatenate(sorted(names)))
     return packages[-1]
 
 def inspect_package(archive):
