@@ -1,7 +1,7 @@
 # Debian packaging tools: Relationship parsing and evaluation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: May 26, 2014
+# Last Change: May 28, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -352,13 +352,13 @@ class RelationshipSet(OrderedObject):
         """
         return u', '.join(map(unicode, self.relationships))
 
-    def __repr__(self, indent=0):
+    def __repr__(self, pretty=False, indent=0):
         """
         Serialize a :py:class:`RelationshipSet` object to a Python expression.
         """
         prefix = '%s(' % self.__class__.__name__
         indent += len(prefix)
-        delimiter = ',\n%s' % (' ' * indent)
+        delimiter = ',\n%s' % (' ' * indent) if pretty else ', '
         return prefix + delimiter.join(repr(r) for r in self.relationships) + ')'
 
     def _key(self):
