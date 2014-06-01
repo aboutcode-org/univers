@@ -27,7 +27,7 @@ from debian.deb822 import Deb822
 from humanfriendly import format_path
 
 # Modules included in our package.
-from deb_pkg_tools.compat import StringIO, unicode
+from deb_pkg_tools.compat import basestring, StringIO, unicode
 from deb_pkg_tools.deps import parse_depends, RelationshipSet
 
 # Initialize a logger.
