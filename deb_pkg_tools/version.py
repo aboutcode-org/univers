@@ -1,7 +1,7 @@
 # Debian packaging tools: Version comparison.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: May 25, 2014
+# Last Change: June 1, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -94,7 +94,9 @@ def compare_versions(version1, operator, version2):
     :param version2: The version on the right side of the comparison (a string).
     :returns: ``True`` if the comparison succeeds, ``False`` if it fails.
     """
-    if have_python_apt:
+    if operator == '=' and str(version1) == str(version2):
+        return True
+    elif have_python_apt:
         return compare_versions_with_python_apt(version1, operator, version2)
     else:
         return compare_versions_with_dpkg(version1, operator, version2)
