@@ -1,7 +1,7 @@
 # Debian packaging tools: Control file manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: May 25, 2014
+# Last Change: June 1, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -206,11 +206,15 @@ def unparse_control_fields(input_fields):
         name = normalize_control_field_name(name)
         if name in DEPENDS_LIKE_FIELDS:
             if isinstance(parsed_value, RelationshipSet):
-                # New interface.
+                # New interface (a RelationshipSet object).
                 unparsed_value = unicode(parsed_value)
-            else:
-                # Backwards compatibility.
+            elif not isinstance(parsed_value, basestring):
+                # Backwards compatibility  with old interface (list of strings).
                 unparsed_value = ', '.join(parsed_value)
+            else:
+                # Compatibility with callers that set one of the Depends-like
+                # fields to a string value (which is fine).
+                unparsed_value = parsed_value
         elif name == 'Installed-Size':
             unparsed_value = str(parsed_value)
         else:
@@ -242,7 +246,8 @@ def normalize_control_field_name(name):
 
     .. _Syntax of control files: http://www.debian.org/doc/debian-policy/ch-controlfields.html#s-controlsyntax
     """
-    return '-'.join(w.capitalize() for w in name.split('-'))
+    special_cases = dict(md5sum='MD5sum', sha1='SHA1', sha256='SHA256')
+    return '-'.join(special_cases.get(w.lower(), w.capitalize()) for w in name.split('-'))
 
 def deb822_from_string(string):
     """

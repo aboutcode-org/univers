@@ -1,7 +1,7 @@
 # Debian packaging tools: Utility functions.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: May 25, 2014
+# Last Change: June 1, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -42,6 +42,42 @@ def find_home_directory():
         return home
     except Exception:
         return pwd.getpwuid(os.getuid()).pw_dir
+
+class atomic_lock(object):
+
+    """
+    Atomic locking for files and directories. Exploits the fact that
+    :py:func:`os.mkdir()` is atomic. This is UNIX only.
+    """
+
+    def __init__(self, pathname):
+        """
+        Atomically lock the given pathname.
+
+        :param pathname: The pathname of a file or directory (a string).
+        """
+        self.pathname = pathname
+        self.lock_directory = '%s.lock' % self.pathname
+
+    def __enter__(self):
+        try:
+            os.mkdir(self.lock_directory)
+        except OSError, e:
+            if e.errno == 17: # EEXIST
+                msg = "Failed to lock %s for exclusive access!"
+                raise ResourceLockedException(msg % self.pathname)
+            raise
+
+    def __exit__(self, exc_type=None, exc_value=None, traceback=None):
+        if os.path.isdir(self.lock_directory):
+            os.rmdir(self.lock_directory)
+
+class ResourceLockedException(Exception):
+
+    """
+    Raised by :py:class:`atomic_lock()` when the lock cannot be created because
+    another process has claimed the lock.
+    """
 
 @total_ordering
 class OrderedObject(object):

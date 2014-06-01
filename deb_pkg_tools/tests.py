@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: May 25, 2014
+# Last Change: June 1, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -333,9 +333,9 @@ class DebPkgToolsTestCase(unittest.TestCase):
             if not preserve:
                 destructors.append(functools.partial(shutil.rmtree, config_dir))
                 destructors.append(functools.partial(shutil.rmtree, repo_dir))
-            from deb_pkg_tools import repo
-            repo.USER_CONFIG_DIR = config_dir
-            with open(os.path.join(config_dir, repo.CONFIG_FILE), 'w') as handle:
+            from deb_pkg_tools import config
+            config.user_config_directory = config_dir
+            with open(os.path.join(config_dir, config.repo_config_file), 'w') as handle:
                 handle.write('[test]\n')
                 handle.write('directory = %s\n' % repo_dir)
                 handle.write('release-origin = %s\n' % TEST_REPO_ORIGIN)
