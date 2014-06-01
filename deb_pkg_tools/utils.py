@@ -58,6 +58,9 @@ class atomic_lock(object):
         """
         self.pathname = pathname
         self.lock_directory = '%s.lock' % self.pathname
+        parent_directory = os.path.dirname(pathname)
+        if not os.path.isdir(parent_directory):
+            os.makedirs(parent_directory)
 
     def __enter__(self):
         try:
