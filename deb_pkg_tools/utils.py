@@ -65,7 +65,7 @@ class atomic_lock(object):
     def __enter__(self):
         try:
             os.mkdir(self.lock_directory)
-        except OSError, e:
+        except OSError as e:
             if e.errno == 17: # EEXIST
                 msg = "Failed to lock %s for exclusive access!"
                 raise ResourceLockedException(msg % self.pathname)
