@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: May 28, 2014
+# Last Change: June 1, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -15,7 +15,6 @@ This module provides functions to build and inspect Debian package archives
 # Standard library modules.
 import collections
 import fnmatch
-import glob
 import logging
 import os.path
 import pipes
@@ -121,6 +120,21 @@ class PackageFile(collections.namedtuple('PackageFile', 'name, version, architec
     --compare-versions``.
     """
 
+def find_package_archives(directory):
+    """
+    Find the Debian package archive(s) in the given directory.
+
+    :param directory: The pathname of a directory (a string).
+    :returns: A sorted list of :py:class:`PackageFile` objects.
+    """
+    archives = []
+    for entry in os.listdir(directory):
+        if entry.endswith('.deb'):
+            pathname = os.path.join(directory, entry)
+            if os.path.isfile(pathname):
+                archives.append(parse_filename(pathname))
+    return sorted(archives)
+
 def collect_related_packages(filename):
     """
     Collect the package archive(s) related to the given package archive. This
@@ -163,7 +177,7 @@ def collect_related_packages(filename):
     packages_to_scan = [filename]
     related_packages = collections.defaultdict(list)
     # Preparations.
-    available_packages = list(map(parse_filename, glob.glob(os.path.join(os.path.dirname(filename), '*.deb'))))
+    available_packages = find_package_archives(os.path.dirname(filename))
     # Loop to collect the related packages.
     while packages_to_scan:
         filename = packages_to_scan.pop(0)
