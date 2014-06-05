@@ -1,7 +1,7 @@
 # Debian packaging tools: Control file manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: June 1, 2014
+# Last Change: June 5, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -36,6 +36,16 @@ logger = logging.getLogger(__name__)
 # Control file fields that are like `Depends:' (they contain a comma
 # separated list of package names with optional version specifications).
 DEPENDS_LIKE_FIELDS = ('Conflicts', 'Depends', 'Provides', 'Replaces', 'Suggests')
+
+def load_control_file(control_file):
+    """
+    Load a control file and return the parsed control fields.
+
+    :param control_file: The filename of the control file to load (a string).
+    :returns: A dictionary created by :py:func:`parse_control_fields()`.
+    """
+    with open(control_file) as handle:
+        return parse_control_fields(Deb822(handle))
 
 def patch_control_file(control_file, overrides):
     """

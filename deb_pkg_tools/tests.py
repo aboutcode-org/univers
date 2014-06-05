@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: June 1, 2014
+# Last Change: June 5, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -25,6 +25,7 @@ from deb_pkg_tools import version
 from deb_pkg_tools.cli import main
 from deb_pkg_tools.compat import StringIO, unicode
 from deb_pkg_tools.control import (deb822_from_string,
+                                   load_control_file,
                                    merge_control_fields,
                                    parse_control_fields,
                                    unparse_control_fields)
@@ -92,7 +93,7 @@ class DebPkgToolsTestCase(unittest.TestCase):
                                  'Depends: python-deb-pkg-tools, python-pip, python-pip-accel',
                                  'Architecture: amd64']))
 
-    def test_control_file_patching(self):
+    def test_control_file_patching_and_loading(self):
         deb822_package = Deb822(['Package: unpatched-example',
                                  'Depends: some-dependency'])
         control_file = tempfile.mktemp()
@@ -102,10 +103,9 @@ class DebPkgToolsTestCase(unittest.TestCase):
             call('--patch=%s' % control_file,
                  '--set=Package: patched-example',
                  '--set=Depends: another-dependency')
-            with open(control_file) as handle:
-                patched_fields = Deb822(handle)
+            patched_fields = load_control_file(control_file)
             self.assertEqual(patched_fields['Package'], 'patched-example')
-            self.assertEqual(patched_fields['Depends'], 'another-dependency, some-dependency')
+            self.assertEqual(str(patched_fields['Depends']), 'another-dependency, some-dependency')
         finally:
             os.unlink(control_file)
 
