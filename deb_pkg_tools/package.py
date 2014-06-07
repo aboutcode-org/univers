@@ -413,7 +413,7 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
         #     the RPM the 0700 mode is actually applied to the system where you
         #     install the package. As you can imagine, the results are
         #     disastrous...
-        os.chmod(build_directory, 0755)
+        os.chmod(build_directory, 0o755)
         # Make sure all files included in the package are owned by `root'
         # (the only account guaranteed to exist on all systems).
         logger.debug("Resetting file ownership (to root:root) ..")
