@@ -1,7 +1,7 @@
 # Debian packaging tools: Relationship parsing and evaluation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: May 28, 2014
+# Last Change: June 7, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -164,6 +164,15 @@ class Relationship(OrderedObject):
         """
         self.name = name
 
+    @property
+    def names(self):
+        """
+        Get the name(s) of the packages in the relationship.
+
+        :returns: A set of package names (strings).
+        """
+        return set([self.name])
+
     def matches(self, name, version=None):
         """
         Check if the relationship matches a given package and version.
@@ -275,6 +284,18 @@ class AlternativeRelationship(Relationship):
         """
         self.relationships = tuple(sorted(relationships))
 
+    @property
+    def names(self):
+        """
+        Get the name(s) of the packages in the alternative relationship.
+
+        :returns: A set of package names (strings).
+        """
+        names = set()
+        for relationship in self.relationships:
+            names |= relationship.names
+        return names
+
     def matches(self, name, version=None):
         """
         Check if the relationship matches a given package and version.
@@ -329,6 +350,18 @@ class RelationshipSet(OrderedObject):
         :param relationships: One or more :py:class:`Relationship` objects.
         """
         self.relationships = tuple(sorted(relationships))
+
+    @property
+    def names(self):
+        """
+        Get the name(s) of the packages in the relationship set.
+
+        :returns: A set of package names (strings).
+        """
+        names = set()
+        for relationship in self.relationships:
+            names |= relationship.names
+        return names
 
     def matches(self, name, version=None):
         """

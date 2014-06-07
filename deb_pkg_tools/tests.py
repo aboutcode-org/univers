@@ -176,12 +176,14 @@ class DebPkgToolsTestCase(unittest.TestCase):
         relationship_set = parse_depends('python')
         self.assertTrue(relationship_set.matches('python'))
         self.assertFalse(relationship_set.matches('python2.7'))
+        self.assertEqual(list(relationship_set.names), ['python'])
         # Alternatives (OR) without versions.
         relationship_set = parse_depends('python2.6 | python2.7')
         self.assertFalse(relationship_set.matches('python2.5'))
         self.assertTrue(relationship_set.matches('python2.6'))
         self.assertTrue(relationship_set.matches('python2.7'))
         self.assertFalse(relationship_set.matches('python3.0'))
+        self.assertEqual(sorted(relationship_set.names), ['python2.6', 'python2.7'])
         # Combinations (AND) with versions.
         relationship_set = parse_depends('python (>= 2.6), python (<< 3) | python (>= 3.4)')
         self.assertFalse(relationship_set.matches('python', '2.5'))
@@ -189,11 +191,13 @@ class DebPkgToolsTestCase(unittest.TestCase):
         self.assertTrue(relationship_set.matches('python', '2.7'))
         self.assertFalse(relationship_set.matches('python', '3.0'))
         self.assertTrue(relationship_set.matches('python', '3.4'))
+        self.assertEqual(list(relationship_set.names), ['python'])
         # Testing for matches without providing a version is valid (should not
         # raise an error) but will never match a relationship with a version.
         relationship_set = parse_depends('python (>= 2.6), python (<< 3)')
         self.assertTrue(relationship_set.matches('python', '2.7'))
         self.assertFalse(relationship_set.matches('python'))
+        self.assertEqual(list(relationship_set.names), ['python'])
         # Distinguishing between packages whose name was matched but whose
         # version didn't match vs packages whose name wasn't matched.
         relationship_set = parse_depends('python (>= 2.6), python (<< 3) | python (>= 3.4)')
@@ -201,6 +205,7 @@ class DebPkgToolsTestCase(unittest.TestCase):
         self.assertEqual(relationship_set.matches('python', '2.5'), False) # name matched, version didn't
         self.assertEqual(relationship_set.matches('python2.6'), None) # name didn't match
         self.assertEqual(relationship_set.matches('python', '3.0'), False) # name in alternative matched, version didn't
+        self.assertEqual(list(relationship_set.names), ['python'])
 
     def test_relationship_sorting(self):
         relationship_set = parse_depends('foo | bar, baz | qux')
