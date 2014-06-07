@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: June 5, 2014
+# Last Change: June 7, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -280,6 +280,7 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 # Verify that the package contains the `/' and `/tmp'
                 # directories (since it doesn't contain any actual files).
                 self.assertEqual(contents['/'].permissions[0], 'd')
+                self.assertEqual(contents['/'].permissions[1:], 'rwxr-xr-x')
                 self.assertEqual(contents['/'].owner, 'root')
                 self.assertEqual(contents['/'].group, 'root')
                 self.assertEqual(contents['/tmp/'].permissions[0], 'd')

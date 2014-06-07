@@ -403,6 +403,17 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
         clean_package_tree(build_directory)
         update_conffiles(build_directory)
         update_installed_size(build_directory)
+        # Sanitize the permission bits of the root directory. Most build
+        # directories will have been created with tempfile.mkdtemp() which
+        # creates the directory with mode 0700. The Debian packaging system
+        # really doesn't care about any of this, but:
+        #
+        #  1. It looks weird in the output of ``deb-pkg-tools -i`` :-)
+        #  2. When you convert a ``*.deb`` to ``*.rpm`` with Alien and install
+        #     the RPM the 0700 mode is actually applied to the system where you
+        #     install the package. As you can imagine, the results are
+        #     disastrous...
+        os.chmod(build_directory, 0755)
         # Make sure all files included in the package are owned by `root'
         # (the only account guaranteed to exist on all systems).
         logger.debug("Resetting file ownership (to root:root) ..")
