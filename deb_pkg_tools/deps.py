@@ -1,7 +1,7 @@
 # Debian packaging tools: Relationship parsing and evaluation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: June 7, 2014
+# Last Change: June 8, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -349,6 +349,7 @@ class RelationshipSet(OrderedObject):
 
         :param relationships: One or more :py:class:`Relationship` objects.
         """
+        self.cache = {}
         self.relationships = tuple(sorted(relationships))
 
     @property
@@ -372,11 +373,17 @@ class RelationshipSet(OrderedObject):
         :returns: ``True`` if all matched relationships evaluate to true,
                   ``False`` if a relationship is matched and evaluates to false,
                   ``None`` otherwise.
+
+        .. warning:: Results are cached in the assumption that
+                     :py:class:RelationshipSet` objects are
+                     immutable. This is not enforced.
         """
-        results = [r.matches(name, version) for r in self.relationships]
-        matches = [r for r in results if r is not None]
-        if matches:
-            return all(matches)
+        key = (name, version)
+        if key not in self.cache:
+            results = [r.matches(name, version) for r in self.relationships]
+            matches = [r for r in results if r is not None]
+            self.cache[key] = all(matches) if matches else None
+        return self.cache[key]
 
     def __unicode__(self):
         """
