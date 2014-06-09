@@ -22,18 +22,17 @@ from debian.deb822 import Deb822
 
 # Modules included in our package.
 from deb_pkg_tools import version
-from deb_pkg_tools.cache import get_default_cache
+from deb_pkg_tools.cache import PackageCache
+from deb_pkg_tools.checks import check_duplicate_files, DuplicateFilesFound
 from deb_pkg_tools.cli import main
 from deb_pkg_tools.compat import StringIO, unicode
-from deb_pkg_tools.control import (deb822_from_string,
-                                   load_control_file,
-                                   merge_control_fields,
-                                   parse_control_fields,
+from deb_pkg_tools.control import (deb822_from_string, load_control_file,
+                                   merge_control_fields, parse_control_fields,
                                    unparse_control_fields)
 from deb_pkg_tools.deps import (AlternativeRelationship, VersionedRelationship,
                                 parse_depends, Relationship, RelationshipSet)
 from deb_pkg_tools.gpg import GPGKey
-from deb_pkg_tools.package import collect_related_packages, inspect_package, parse_filename
+from deb_pkg_tools.package import collect_related_packages, find_package_archives, inspect_package, parse_filename
 from deb_pkg_tools.printer import CustomPrettyPrinter
 from deb_pkg_tools.repo import apt_supports_trusted_option, update_repository
 
@@ -60,10 +59,12 @@ class DebPkgToolsTestCase(unittest.TestCase):
     def setUp(self):
         coloredlogs.install()
         coloredlogs.set_level(logging.DEBUG)
-        self.package_cache = get_default_cache()
+        self.db_directory = tempfile.mkdtemp()
+        self.package_cache = PackageCache(os.path.join(self.db_directory, 'package-cache.sqlite3'))
 
     def tearDown(self):
         self.package_cache.collect_garbage(force=True)
+        shutil.rmtree(self.db_directory)
 
     def test_control_field_parsing(self):
         deb822_package = Deb822(['Package: python-py2deb',
@@ -80,6 +81,9 @@ class DebPkgToolsTestCase(unittest.TestCase):
         # Test backwards compatibility with the old interface where `Depends'
         # like fields were represented as a list of strings (shallow parsed).
         parsed_info['Depends'] = [unicode(r) for r in parsed_info['Depends']]
+        self.assertEqual(unparse_control_fields(parsed_info), deb822_package)
+        # Test compatibility with fields like `Depends' containing a string.
+        parsed_info['Depends'] = deb822_package['Depends']
         self.assertEqual(unparse_control_fields(parsed_info), deb822_package)
 
     def test_control_field_merging(self):
@@ -101,8 +105,9 @@ class DebPkgToolsTestCase(unittest.TestCase):
     def test_control_file_patching_and_loading(self):
         deb822_package = Deb822(['Package: unpatched-example',
                                  'Depends: some-dependency'])
-        control_file = tempfile.mktemp()
-        try:
+        with Context() as finalizers:
+            control_file = tempfile.mktemp()
+            finalizers.register(os.unlink, control_file)
             with open(control_file, 'wb') as handle:
                 deb822_package.dump(handle)
             call('--patch=%s' % control_file,
@@ -111,8 +116,6 @@ class DebPkgToolsTestCase(unittest.TestCase):
             patched_fields = load_control_file(control_file)
             self.assertEqual(patched_fields['Package'], 'patched-example')
             self.assertEqual(str(patched_fields['Depends']), 'another-dependency, some-dependency')
-        finally:
-            os.unlink(control_file)
 
     def test_version_comparison(self):
         self.version_comparison_helper()
@@ -250,29 +253,37 @@ class DebPkgToolsTestCase(unittest.TestCase):
         self.assertRaises(ValueError, parse_filename, 'python2.7_2.7.3-0ubuntu3.4_amd64.not-a-deb')
         self.assertRaises(ValueError, parse_filename, 'python2.7.deb')
 
-    def test_package_building(self, repository=None, overrides={}):
-        directory = tempfile.mkdtemp()
-        destructors = [functools.partial(shutil.rmtree, directory)]
-        try:
+    def test_package_building(self, repository=None, overrides={}, contents={}):
+        with Context() as finalizers:
+            build_directory = finalizers.mkdtemp()
             control_fields = merge_control_fields(TEST_PACKAGE_FIELDS, overrides)
             # Create the package template.
-            os.mkdir(os.path.join(directory, 'DEBIAN'))
-            with open(os.path.join(directory, 'DEBIAN', 'control'), 'wb') as handle:
+            os.mkdir(os.path.join(build_directory, 'DEBIAN'))
+            with open(os.path.join(build_directory, 'DEBIAN', 'control'), 'wb') as handle:
                 control_fields.dump(handle)
-            with open(os.path.join(directory, 'DEBIAN', 'conffiles'), 'wb') as handle:
-                handle.write(b'/etc/file1\n')
-                handle.write(b'/etc/file2\n')
-            # Create the directory with configuration files.
-            os.mkdir(os.path.join(directory, 'etc'))
-            touch(os.path.join(directory, 'etc', 'file1'))
-            touch(os.path.join(directory, 'etc', 'file3'))
-            # Create a directory that should be cleaned up by clean_package_tree().
-            os.makedirs(os.path.join(directory, 'tmp', '.git'))
-            # Create a file that should be cleaned up by clean_package_tree().
-            with open(os.path.join(directory, 'tmp', '.gitignore'), 'w') as handle:
-                handle.write('\n')
+            if contents:
+                for filename, data in contents.items():
+                    filename = os.path.join(build_directory, filename)
+                    directory = os.path.dirname(filename)
+                    if not os.path.isdir(directory):
+                        os.makedirs(directory)
+                    with open(filename, 'w') as handle:
+                        handle.write(data)
+            else:
+                with open(os.path.join(build_directory, 'DEBIAN', 'conffiles'), 'wb') as handle:
+                    handle.write(b'/etc/file1\n')
+                    handle.write(b'/etc/file2\n')
+                # Create the directory with configuration files.
+                os.mkdir(os.path.join(build_directory, 'etc'))
+                touch(os.path.join(build_directory, 'etc', 'file1'))
+                touch(os.path.join(build_directory, 'etc', 'file3'))
+                # Create a directory that should be cleaned up by clean_package_tree().
+                os.makedirs(os.path.join(build_directory, 'tmp', '.git'))
+                # Create a file that should be cleaned up by clean_package_tree().
+                with open(os.path.join(build_directory, 'tmp', '.gitignore'), 'w') as handle:
+                    handle.write('\n')
             # Build the package (without any contents :-).
-            call('--build', directory)
+            call('--build', build_directory)
             package_file = os.path.join(tempfile.gettempdir(),
                                         '%s_%s_%s.deb' % (control_fields['Package'],
                                                           control_fields['Version'],
@@ -282,7 +293,7 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 shutil.move(package_file, repository)
                 return os.path.join(repository, os.path.basename(package_file))
             else:
-                destructors.append(functools.partial(os.unlink, package_file))
+                finalizers.register(os.unlink, package_file)
                 # Verify the package metadata.
                 fields, contents = inspect_package(package_file)
                 for name in TEST_PACKAGE_FIELDS:
@@ -301,15 +312,11 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 self.assertFalse('/tmp/.git/' in contents)
                 self.assertFalse('/tmp/.gitignore' in contents)
                 return package_file
-        finally:
-            for partial in destructors:
-                partial()
 
     def test_command_line_interface(self):
         if not SKIP_SLOW_TESTS:
-            directory = tempfile.mkdtemp()
-            destructors = [functools.partial(shutil.rmtree, directory)]
-            try:
+            with Context() as finalizers:
+                directory = finalizers.mkdtemp()
                 # Test `deb-pkg-tools --inspect PKG'.
                 package_file = self.test_package_building(directory)
                 lines = call('--inspect', package_file).splitlines()
@@ -319,38 +326,65 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 # apt-cache sees the package).
                 if os.getuid() == 0:
                     call('--with-repo=%s' % directory, 'apt-cache show %s' % TEST_PACKAGE_NAME)
-            finally:
-                for partial in destructors:
-                    partial()
+
+    def test_duplicates_check(self):
+        with Context() as finalizers:
+            # Check that duplicate files raise an exception.
+            directory = finalizers.mkdtemp()
+            # Build a package containing some files.
+            self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-1', Version='1'))
+            # Build an unrelated package containing the same files.
+            self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-2'))
+            # Build two versions of one package.
+            duplicate_contents = {'foo/bar': 'some random file'}
+            self.test_package_building(directory,
+                                       overrides=dict(Package='deb-pkg-tools-package-3', Version='1'),
+                                       contents=duplicate_contents)
+            self.test_package_building(directory,
+                                       overrides=dict(Package='deb-pkg-tools-package-3', Version='2'),
+                                       contents=duplicate_contents)
+            # Build two packages related by their `Conflicts' and `Provides' fields.
+            virtual_package = 'deb-pkg-tools-virtual-package'
+            duplicate_contents = {'foo/baz': 'another random file'}
+            self.test_package_building(directory,
+                                       overrides=dict(Package='deb-pkg-tools-package-4',
+                                                      Conflicts=virtual_package,
+                                                      Provides=virtual_package),
+                                       contents=duplicate_contents)
+            self.test_package_building(directory,
+                                       overrides=dict(Package='deb-pkg-tools-package-5',
+                                                      Conflicts=virtual_package,
+                                                      Provides=virtual_package),
+                                       contents=duplicate_contents)
+            # Test the duplicate files check.
+            package_archives = find_package_archives(directory)
+            self.assertRaises(DuplicateFilesFound, check_duplicate_files, package_archives)
+            # Verify that invalid arguments are checked.
+            self.assertRaises(ValueError, check_duplicate_files, [])
 
     def test_collect_packages(self):
-        directory = tempfile.mkdtemp()
-        destructors = [functools.partial(shutil.rmtree, directory)]
-        try:
+        with Context() as finalizers:
+            directory = finalizers.mkdtemp()
             package1 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-1', Depends='deb-pkg-tools-package-2'))
             package2 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-2', Depends='deb-pkg-tools-package-3'))
-            package3 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-3'))
+            self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-3'))
             package4 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-3', Version='0.2'))
             self.assertEqual(sorted(p.filename for p in collect_related_packages(package1, cache=self.package_cache)), [package2, package4])
-        finally:
-            for partial in destructors:
-                partial()
 
     def test_repository_creation(self, preserve=False):
         if not SKIP_SLOW_TESTS:
-            config_dir = tempfile.mkdtemp()
-            repo_dir = tempfile.mkdtemp()
-            destructors = []
-            if not preserve:
-                destructors.append(functools.partial(shutil.rmtree, config_dir))
-                destructors.append(functools.partial(shutil.rmtree, repo_dir))
-            from deb_pkg_tools import config
-            config.user_config_directory = config_dir
-            with open(os.path.join(config_dir, config.repo_config_file), 'w') as handle:
-                handle.write('[test]\n')
-                handle.write('directory = %s\n' % repo_dir)
-                handle.write('release-origin = %s\n' % TEST_REPO_ORIGIN)
-            try:
+            with Context() as finalizers:
+                config_dir = tempfile.mkdtemp()
+                repo_dir = tempfile.mkdtemp()
+                if not preserve:
+                    finalizers.register(shutil.rmtree, config_dir)
+                    finalizers.register(shutil.rmtree, repo_dir)
+                from deb_pkg_tools import config
+                config.user_config_directory = config_dir
+                with open(os.path.join(config_dir, config.repo_config_file), 'w') as handle:
+                    handle.write('[test]\n')
+                    handle.write('directory = %s\n' % repo_dir)
+                    handle.write('release-origin = %s\n' % TEST_REPO_ORIGIN)
                 self.test_package_building(repo_dir)
                 update_repository(repo_dir, release_fields=dict(description=TEST_REPO_DESCRIPTION), cache=self.package_cache)
                 self.assertTrue(os.path.isfile(os.path.join(repo_dir, 'Packages')))
@@ -363,9 +397,6 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 if not apt_supports_trusted_option():
                     self.assertTrue(os.path.isfile(os.path.join(repo_dir, 'Release.gpg')))
                 return repo_dir
-            finally:
-                for partial in destructors:
-                    partial()
 
     def test_repository_activation(self):
         if not SKIP_SLOW_TESTS and os.getuid() == 0:
@@ -387,10 +418,10 @@ class DebPkgToolsTestCase(unittest.TestCase):
 
     def test_gpg_key_generation(self):
         if not SKIP_SLOW_TESTS:
-            working_directory = tempfile.mkdtemp()
-            secret_key_file = os.path.join(working_directory, 'subdirectory', 'test.sec')
-            public_key_file = os.path.join(working_directory, 'subdirectory', 'test.pub')
-            try:
+            with Context() as finalizers:
+                working_directory = finalizers.mkdtemp()
+                secret_key_file = os.path.join(working_directory, 'subdirectory', 'test.sec')
+                public_key_file = os.path.join(working_directory, 'subdirectory', 'test.pub')
                 # Generate a named GPG key on the spot.
                 GPGKey(name="named-test-key",
                        description="GPG key pair generated for unit tests (named key)",
@@ -414,8 +445,6 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 self.assertRaises(Exception, GPGKey, name="test-key", description="Whatever", secret_key_file=secret_key_file, public_key_file=public_key_file)
                 os.unlink(secret_key_file)
                 self.assertRaises(Exception, GPGKey, secret_key_file=secret_key_file, public_key_file=public_key_file)
-            finally:
-                shutil.rmtree(working_directory)
 
 def touch(filename, contents='\n'):
     with open(filename, 'w') as handle:
@@ -456,5 +485,26 @@ def remove_unicode_prefixes(expression):
     strings are the default and no prefix is emitted by :py:func:`repr()`).
     """
     return re.sub(r'\bu([\'"])', r'\1', expression)
+
+class Context(object):
+
+    def __init__(self):
+        self.finalizers = []
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type=None, exc_value=None, traceback=None):
+        for finalizer in reversed(self.finalizers):
+            finalizer()
+        self.finalizers = []
+
+    def register(self, *args, **kw):
+        self.finalizers.append(functools.partial(*args, **kw))
+
+    def mkdtemp(self, *args, **kw):
+        directory = tempfile.mkdtemp(*args, **kw)
+        self.register(shutil.rmtree, directory)
+        return directory
 
 # vim: ts=4 sw=4 et
