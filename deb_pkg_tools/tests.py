@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: June 7, 2014
+# Last Change: June 9, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -22,6 +22,7 @@ from debian.deb822 import Deb822
 
 # Modules included in our package.
 from deb_pkg_tools import version
+from deb_pkg_tools.cache import get_default_cache
 from deb_pkg_tools.cli import main
 from deb_pkg_tools.compat import StringIO, unicode
 from deb_pkg_tools.control import (deb822_from_string,
@@ -59,6 +60,10 @@ class DebPkgToolsTestCase(unittest.TestCase):
     def setUp(self):
         coloredlogs.install()
         coloredlogs.set_level(logging.DEBUG)
+        self.package_cache = get_default_cache()
+
+    def tearDown(self):
+        self.package_cache.collect_garbage(force=True)
 
     def test_control_field_parsing(self):
         deb822_package = Deb822(['Package: python-py2deb',
@@ -326,7 +331,7 @@ class DebPkgToolsTestCase(unittest.TestCase):
             package2 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-2', Depends='deb-pkg-tools-package-3'))
             package3 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-3'))
             package4 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-3', Version='0.2'))
-            self.assertEqual(sorted(p.filename for p in collect_related_packages(package1)), [package2, package4])
+            self.assertEqual(sorted(p.filename for p in collect_related_packages(package1, cache=self.package_cache)), [package2, package4])
         finally:
             for partial in destructors:
                 partial()
@@ -347,7 +352,7 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 handle.write('release-origin = %s\n' % TEST_REPO_ORIGIN)
             try:
                 self.test_package_building(repo_dir)
-                update_repository(repo_dir, release_fields=dict(description=TEST_REPO_DESCRIPTION))
+                update_repository(repo_dir, release_fields=dict(description=TEST_REPO_DESCRIPTION), cache=self.package_cache)
                 self.assertTrue(os.path.isfile(os.path.join(repo_dir, 'Packages')))
                 self.assertTrue(os.path.isfile(os.path.join(repo_dir, 'Packages.gz')))
                 self.assertTrue(os.path.isfile(os.path.join(repo_dir, 'Release')))

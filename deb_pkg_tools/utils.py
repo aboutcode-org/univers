@@ -18,6 +18,7 @@ import errno
 import hashlib
 import os
 import pwd
+import random
 import tempfile
 import time
 
@@ -67,6 +68,27 @@ def makedirs(directory):
             return False
         else:
             raise
+
+def optimize_order(package_archives):
+    """
+    Shuffle a list of package archives in random order.
+
+    Usually when scanning a large group of package archives, it really doesn't
+    matter in which order we scan them. However the progress reported using
+    :py:class:`humanfriendly.Spinner` can be more accurate when we shuffle the
+    order. Why would that happen? When the following conditions are met:
+
+    1. The package repository contains multiple versions of the same packages;
+    2. The package repository contains both small and (very) big packages.
+
+    If you scan the package archives in usual sorting order you will first hit
+    a batch of multiple versions of the same small package which can be scanned
+    very quickly (the progress counter will jump). Then you'll hit a batch of
+    multiple versions of the same big package and scanning becomes much slower
+    (the progress counter will hang). Shuffling mostly avoids this effect.
+    """
+    random.shuffle(package_archives)
+    return package_archives
 
 class atomic_lock(object):
 
