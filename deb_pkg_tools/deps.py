@@ -1,7 +1,7 @@
 # Debian packaging tools: Relationship parsing and evaluation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: June 8, 2014
+# Last Change: June 9, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -375,7 +375,7 @@ class RelationshipSet(OrderedObject):
                   ``None`` otherwise.
 
         .. warning:: Results are cached in the assumption that
-                     :py:class:RelationshipSet` objects are
+                     :py:class:`RelationshipSet` objects are
                      immutable. This is not enforced.
         """
         key = (name, version)

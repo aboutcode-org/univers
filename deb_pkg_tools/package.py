@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: June 7, 2014
+# Last Change: June 9, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -26,7 +26,7 @@ import tempfile
 # External dependencies.
 from debian.deb822 import Deb822
 from executor import execute
-from humanfriendly import concatenate, format_path, pluralize
+from humanfriendly import concatenate, format_path, pluralize, Spinner
 
 # Modules included in our package.
 from deb_pkg_tools.control import (deb822_from_string,
@@ -105,7 +105,7 @@ class PackageFile(collections.namedtuple('PackageFile', 'name, version, architec
 
     .. py:attribute:: version
 
-       The version of the package (a :py:class:`deb_pkg_tools.version.Version` object).
+       The version of the package (a :py:class:`.Version` object).
 
     .. py:attribute:: architecture
 
@@ -135,7 +135,7 @@ def find_package_archives(directory):
                 archives.append(parse_filename(pathname))
     return sorted(archives)
 
-def collect_related_packages(filename):
+def collect_related_packages(filename, cache=None):
     """
     Collect the package archive(s) related to the given package archive. This
     works by parsing and resolving the dependencies of the given package to
@@ -144,6 +144,7 @@ def collect_related_packages(filename):
     to existing package archives.
 
     :param filename: The filename of an existing ``*.deb`` archive (a string).
+    :param cache: The :py:class:`.PackageCache` to use (defaults to ``None``).
     :returns: A list of :py:class:`PackageFile` objects.
 
     This function is used to implement the ``deb-pkg-tools --collect`` command:
@@ -179,11 +180,13 @@ def collect_related_packages(filename):
     # Preparations.
     available_packages = find_package_archives(os.path.dirname(filename))
     # Loop to collect the related packages.
+    num_scanned_packages = 0
+    spinner = Spinner(total=len(available_packages) / 2)
     while packages_to_scan:
         filename = packages_to_scan.pop(0)
-        logger.info("Scanning %s ..", format_path(filename))
+        logger.debug("Scanning %s ..", format_path(filename))
         # Find the relationships of the given package.
-        fields = inspect_package_fields(filename)
+        fields = inspect_package_fields(filename, cache)
         if 'Depends' in fields:
             relationship_sets.append(fields['Depends'])
         # Collect all related packages from the given directory.
@@ -196,15 +199,18 @@ def collect_related_packages(filename):
                 if package not in related_packages[package.name]:
                     related_packages[package.name].append(package)
                     packages_to_scan.append(package.filename)
+            spinner.step(label="Collecting related packages", progress=num_scanned_packages)
+        num_scanned_packages += 1
+    spinner.clear()
     # Pick the latest version of the collected packages.
     return map(find_latest_version, related_packages.values())
 
 def find_latest_version(packages):
     """
     Find the package archive with the highest version number. Uses
-    :py:class:`deb_pkg_tools.version.Version` objects for version comparison.
-    Raises :py:exc:`ValueError` when not all of the given package archives
-    share the same package name.
+    :py:class:`.Version` objects for version comparison. Raises
+    :py:exc:`ValueError` when not all of the given package archives share the
+    same package name.
 
     :param packages: A list of filenames (strings) and/or
                      :py:class:`PackageFile` objects.
@@ -218,25 +224,28 @@ def find_latest_version(packages):
         raise ValueError(msg % concatenate(sorted(names)))
     return packages[-1]
 
-def inspect_package(archive):
+def inspect_package(archive, cache=None):
     """
     Get the metadata and contents from a ``*.deb`` archive.
 
     :param archive: The pathname of an existing ``*.deb`` archive.
+    :param cache: The :py:class:`.PackageCache` to use (defaults to ``None``).
     :returns: A tuple with two dictionaries:
 
               1. The result of :py:func:`inspect_package_fields()`.
               2. The result of :py:func:`inspect_package_contents()`.
     """
-    return inspect_package_fields(archive), inspect_package_contents(archive)
+    return (inspect_package_fields(archive, cache),
+            inspect_package_contents(archive, cache))
 
-def inspect_package_fields(archive):
+def inspect_package_fields(archive, cache=None):
     r"""
     Get the fields (metadata) from a ``*.deb`` archive.
 
     :param archive: The pathname of an existing ``*.deb`` archive.
+    :param cache: The :py:class:`.PackageCache` to use (defaults to ``None``).
     :returns: A dictionary with control file fields (the result of
-              :py:func:`deb_pkg_tools.control.parse_control_fields()`).
+              :py:func:`.parse_control_fields()`).
 
     Here's an example:
 
@@ -263,13 +272,18 @@ def inspect_package_fields(archive):
      'Version': u'3.4.0-1+precise1'}
 
     """
-    return parse_control_fields(deb822_from_string(execute('dpkg-deb', '-f', archive, logger=logger, capture=True)))
+    if cache:
+        return cache[archive].control_fields
+    listing = execute('dpkg-deb', '-f', archive, logger=logger, capture=True)
+    raw_control_fields = deb822_from_string(listing)
+    return parse_control_fields(raw_control_fields)
 
-def inspect_package_contents(archive):
+def inspect_package_contents(archive, cache=None):
     """
     Get the contents from a ``*.deb`` archive.
 
     :param archive: The pathname of an existing ``*.deb`` archive.
+    :param cache: The :py:class:`.PackageCache` to use (defaults to ``None``).
     :returns: A dictionary with the directories and files contained in the
               package. The dictionary keys are the absolute pathnames and the
               dictionary values are :py:class:`ArchiveEntry` objects (see the
@@ -298,6 +312,8 @@ def inspect_package_contents(archive):
      u'/usr/share/man/man1/python3.4m.1.gz': ArchiveEntry(permissions=u'lrwxrwxrwx', owner=u'root', group=u'root', size=0, modified=u'2014-03-20 23:54', target=u'python3.4.1.gz')}
 
     """
+    if cache:
+        return cache[archive].contents
     contents = {}
     for line in execute('dpkg-deb', '-c', archive, logger=logger, capture=True).splitlines():
         # Example output of dpkg-deb -c archive.deb:

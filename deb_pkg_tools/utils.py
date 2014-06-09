@@ -1,7 +1,7 @@
 # Debian packaging tools: Utility functions.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: June 8, 2014
+# Last Change: June 9, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -71,8 +71,18 @@ def makedirs(directory):
 class atomic_lock(object):
 
     """
-    Atomic locking for files and directories. Exploits the fact that
-    :py:func:`os.mkdir()` is atomic. This is UNIX only.
+    Context manager for atomic locking of files and directories.
+
+    This context manager exploits the fact that :py:func:`os.mkdir()` on UNIX
+    is an atomic operation, which means it will only work on UNIX.
+
+    Intended to be used with Python's :py:keyword:`with` statement:
+
+    .. code-block:: python
+
+       with atomic_lock('/var/www/apt-archive/some/repository'):
+          # Inside the with block you have exclusive access.
+          pass
     """
 
     def __init__(self, pathname, wait=True):
@@ -82,6 +92,10 @@ class atomic_lock(object):
         :param pathname: The pathname of a file or directory (a string).
         :param wait: Block until the lock can be claimed (a boolean, defaults
                      to ``True``).
+
+        If ``wait=False`` and the file or directory cannot be locked,
+        :py:exc:`ResourceLockedException` will be raised when entering the
+        :py:keyword:`with` block.
         """
         self.wait = bool(wait)
         self.pathname = os.path.realpath(pathname)
@@ -97,7 +111,7 @@ class atomic_lock(object):
             if makedirs(self.lock_directory):
                 return
             elif self.wait:
-                spinner.step("Waiting for lock on %s: %s .." % (self.pathname, timer))
+                spinner.step(label="Waiting for lock on %s: %s .." % (self.pathname, timer))
                 time.sleep(0.1)
             else:
                 msg = "Failed to lock %s for exclusive access!"

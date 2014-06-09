@@ -1,7 +1,7 @@
 # Debian packaging tools: Control file manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: June 5, 2014
+# Last Change: June 9, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -178,7 +178,7 @@ def parse_control_fields(input_fields):
      'Version': u'3.4.0-1+precise1'}
 
     For more information about fields like `Depends` and `Suggests` please
-    refer to the documentation of :py:func:`deb_pkg_tools.deps.parse_depends()`.
+    refer to the documentation of :py:func:`.parse_depends()`.
     """
     logger.debug("Parsing %i control fields ..", len(input_fields))
     output_fields = {}
