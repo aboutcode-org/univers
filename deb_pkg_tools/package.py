@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: June 9, 2014
+# Last Change: June 15, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -41,7 +41,8 @@ logger = logging.getLogger(__name__)
 DIRECTORIES_TO_REMOVE = ('.bzr', # Bazaar
                          '.git', # Git
                          '.hg',  # Mercurial
-                         '.svn') # SVN
+                         '.svn', # SVN
+                         '__pycache__') # Python 3.x byte code files (http://lintian.debian.org/tags/package-installs-python-pycache-dir.html)
 
 FILES_TO_REMOVE = ('*.pyc',            # Python byte code files (http://lintian.debian.org/tags/package-installs-python-bytecode.html)
                    '*.pyo',            # Python optimized byte code files (http://lintian.debian.org/tags/package-installs-python-bytecode.html)
