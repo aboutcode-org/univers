@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: June 15, 2014
+# Last Change: June 25, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -224,6 +224,21 @@ def find_latest_version(packages):
         msg = "Refusing to compare unrelated packages! (%s)"
         raise ValueError(msg % concatenate(sorted(names)))
     return packages[-1]
+
+def group_by_latest_versions(packages):
+    """
+    Group package archives by name of package and find latest version of each.
+
+    :param packages: A list of filenames (strings) and/or
+                     :py:class:`PackageFile` objects.
+    :returns: A dictionary with package names as keys and
+              :py:class:`PackageFile` objects as values.
+    """
+    grouped_packages = collections.defaultdict(set)
+    for value in packages:
+        package = parse_filename(value)
+        grouped_packages[package.name].add(package)
+    return dict((n, find_latest_version(p)) for n, p in grouped_packages.items())
 
 def inspect_package(archive, cache=None):
     """
