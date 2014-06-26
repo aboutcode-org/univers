@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: June 25, 2014
+# Last Change: June 27, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -537,7 +537,7 @@ def copy_package_files(from_directory, to_directory):
         os.link(test_file_from, test_file_to)
         logger.debug("Speeding up file copy using hard links ..")
         command.append('-l')
-    except OSError:
+    except (IOError, OSError):
         pass
     finally:
         for test_file in [test_file_from, test_file_to]:
