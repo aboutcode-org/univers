@@ -16,7 +16,7 @@ This module provides functions to build and inspect Debian package archives
 import collections
 import fnmatch
 import logging
-import os.path
+import os
 import pipes
 import random
 import re
@@ -448,8 +448,14 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
         os.chmod(build_directory, 0o755)
         # Make sure all files included in the package are owned by `root'
         # (the only account guaranteed to exist on all systems).
-        logger.debug("Resetting file ownership (to root:root) ..")
-        execute('chown', '-R', 'root:root', build_directory, fakeroot=True, logger=logger)
+        
+        root_user = os.environ.get('DPT_ROOT_USER', 'root')
+        root_group = os.environ.get('DPT_ROOT_GROUP', 'root')
+
+        user_spec = ('%s:%s' % (root_user, root_group))
+
+        logger.debug("Resetting file ownership (to %s) ..", user_spec)
+        execute('chown', '-R', user_spec, build_directory, fakeroot=True, logger=logger)
         # System packages generally install files that are read only and
         # readable (and possibly executable) for everyone (owner, group and
         # world) so we'll go ahead and remove some potentially harmful
@@ -535,8 +541,12 @@ def copy_package_files(from_directory, to_directory):
         with open(test_file_from, 'w') as handle:
             handle.write('test')
         os.link(test_file_from, test_file_to)
-        logger.debug("Speeding up file copy using hard links ..")
-        command.append('-l')
+        
+        allow_hard_links = bool(int(os.environ.get('DPT_HARD_LINKS', '1')))
+        if allow_hard_links is True:
+            logger.debug("Speeding up file copy using hard links ..")
+            command.append('-l')
+
     except (IOError, OSError):
         pass
     finally:
@@ -631,10 +641,12 @@ def update_installed_size(directory):
 
     .. _Installed-Size: http://www.debian.org/doc/debian-policy/ch-controlfields.html#s-f-Installed-Size
     """
+
     # Find the installed size of the package (a rough estimate is fine).
     logger.debug("Finding installed size of package ..")
-    output = execute('du', '-sB', '1024', directory, logger=logger, capture=True)
-    installed_size = output.split()[0]
+    output = execute('du', '-sk', directory, logger=logger, capture=True)
+    installed_size = str(output.split()[0])
+
     # Patch the DEBIAN/control file.
     control_file = os.path.join(directory, 'DEBIAN', 'control')
     patch_control_file(control_file, {'Installed-Size': installed_size})
