@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: June 9, 2014
+# Last Change: August 4, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -35,6 +35,7 @@ from deb_pkg_tools.gpg import GPGKey
 from deb_pkg_tools.package import collect_related_packages, find_package_archives, inspect_package, parse_filename
 from deb_pkg_tools.printer import CustomPrettyPrinter
 from deb_pkg_tools.repo import apt_supports_trusted_option, update_repository
+from deb_pkg_tools.utils import coerce_boolean
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
@@ -252,6 +253,13 @@ class DebPkgToolsTestCase(unittest.TestCase):
         # Test the unhappy paths.
         self.assertRaises(ValueError, parse_filename, 'python2.7_2.7.3-0ubuntu3.4_amd64.not-a-deb')
         self.assertRaises(ValueError, parse_filename, 'python2.7.deb')
+
+    def test_boolean_coercion(self):
+        for value in ['YES', 'Yes', 'yes', 'TRUE', 'True', 'true', '1']:
+            self.assertEqual(coerce_boolean(value), True)
+        for value in ['NO', 'No', 'no', 'FALSE', 'False', 'false', '0']:
+            self.assertEqual(coerce_boolean(value), False)
+        self.assertRaises(ValueError, coerce_boolean, 'not a boolean!')
 
     def test_package_building(self, repository=None, overrides={}, contents={}):
         with Context() as finalizers:

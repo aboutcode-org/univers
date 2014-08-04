@@ -1,7 +1,7 @@
 # Debian packaging tools: Utility functions.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: June 9, 2014
+# Last Change: August 4, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -27,6 +27,23 @@ from humanfriendly import Spinner, Timer
 
 # Modules included in our package.
 from deb_pkg_tools.compat import total_ordering
+
+def coerce_boolean(value):
+    """
+    Coerce a command line argument or environment variable to a boolean.
+
+    :param value: One of the strings ``true``, ``1``, ``false`` or ``0``.
+    :raises: :py:exc:`exceptions.ValueError` when the string is not one of the
+             supported strings.
+    :returns: A boolean value.
+    """
+    normalized_value = value.lower().strip()
+    if normalized_value in ('yes', 'true', '1'):
+        return True
+    elif normalized_value in ('no', 'false', '0'):
+        return False
+    else:
+        raise ValueError("Invalid boolean value %r!" % value)
 
 def sha1(text):
     """

@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: June 27, 2014
+# Last Change: August 4, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -16,6 +16,7 @@ This module provides functions to build and inspect Debian package archives
 import collections
 import fnmatch
 import logging
+import os
 import os.path
 import pipes
 import random
@@ -32,6 +33,7 @@ from humanfriendly import concatenate, format_path, pluralize, Spinner
 from deb_pkg_tools.control import (deb822_from_string,
                                    parse_control_fields,
                                    patch_control_file)
+from deb_pkg_tools.utils import coerce_boolean
 from deb_pkg_tools.version import Version
 
 # Initialize a logger.
@@ -448,8 +450,11 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
         os.chmod(build_directory, 0o755)
         # Make sure all files included in the package are owned by `root'
         # (the only account guaranteed to exist on all systems).
-        logger.debug("Resetting file ownership (to root:root) ..")
-        execute('chown', '-R', 'root:root', build_directory, fakeroot=True, logger=logger)
+        root_user = os.environ.get('DPT_ROOT_USER', 'root')
+        root_group = os.environ.get('DPT_ROOT_GROUP', 'root')
+        user_spec = '%s:%s' % (root_user, root_group)
+        logger.debug("Resetting file ownership (to %s) ..", user_spec)
+        execute('chown', '-R', user_spec, build_directory, fakeroot=True, logger=logger)
         # System packages generally install files that are read only and
         # readable (and possibly executable) for everyone (owner, group and
         # world) so we'll go ahead and remove some potentially harmful
@@ -512,37 +517,38 @@ def copy_package_files(from_directory, to_directory):
     command = ['cp', '-a']
     if not os.path.isdir(to_directory):
         os.makedirs(to_directory)
-    # Check whether we can use hard links to speed up the copy. In the past
-    # this used the following simple and obvious check:
-    #
-    #   os.stat(source_directory).st_dev == os.stat(build_directory).st_dev
-    #
-    # However this expression holds true inside schroot, yet `cp -al' fails
-    # when trying to create the hard links! This is why the following code now
-    # tries to create an actual hard link to verify that `cp -al' can be used.
-    test_file_from = None
-    test_file_to = None
-    try:
-        # Find a unique filename that we can create and destroy without
-        # touching any of the caller's files.
-        while True:
-            test_name = 'deb-pkg-tools-hard-link-test-%d' % random.randint(1, 1000)
-            test_file_from = os.path.join(from_directory, test_name)
-            test_file_to = os.path.join(to_directory, test_name)
-            if not os.path.isfile(test_file_from):
-                break
-        # Create the test file.
-        with open(test_file_from, 'w') as handle:
-            handle.write('test')
-        os.link(test_file_from, test_file_to)
-        logger.debug("Speeding up file copy using hard links ..")
-        command.append('-l')
-    except (IOError, OSError):
-        pass
-    finally:
-        for test_file in [test_file_from, test_file_to]:
-            if test_file and os.path.isfile(test_file):
-                os.unlink(test_file)
+    if coerce_boolean(os.environ.get('DPT_HARD_LINKS', 'true')):
+        # Check whether we can use hard links to speed up the copy. In the past
+        # this used the following simple and obvious check:
+        #
+        #   os.stat(source_directory).st_dev == os.stat(build_directory).st_dev
+        #
+        # However this expression holds true inside schroot, yet `cp -al' fails
+        # when trying to create the hard links! This is why the following code now
+        # tries to create an actual hard link to verify that `cp -al' can be used.
+        test_file_from = None
+        test_file_to = None
+        try:
+            # Find a unique filename that we can create and destroy without
+            # touching any of the caller's files.
+            while True:
+                test_name = 'deb-pkg-tools-hard-link-test-%d' % random.randint(1, 1000)
+                test_file_from = os.path.join(from_directory, test_name)
+                test_file_to = os.path.join(to_directory, test_name)
+                if not os.path.isfile(test_file_from):
+                    break
+            # Create the test file.
+            with open(test_file_from, 'w') as handle:
+                handle.write('test')
+            os.link(test_file_from, test_file_to)
+            logger.debug("Speeding up file copy using hard links ..")
+            command.append('-l')
+        except (IOError, OSError):
+            pass
+        finally:
+            for test_file in [test_file_from, test_file_to]:
+                if test_file and os.path.isfile(test_file):
+                    os.unlink(test_file)
     # I know this looks really funky, but I'm 99% sure this is a valid
     # use of shell escaping and globbing (obviously I tested it ;-).
     command.append('%s/*' % pipes.quote(from_directory))
@@ -631,9 +637,10 @@ def update_installed_size(directory):
 
     .. _Installed-Size: http://www.debian.org/doc/debian-policy/ch-controlfields.html#s-f-Installed-Size
     """
+
     # Find the installed size of the package (a rough estimate is fine).
     logger.debug("Finding installed size of package ..")
-    output = execute('du', '-sB', '1024', directory, logger=logger, capture=True)
+    output = execute('du', '-sk', directory, logger=logger, capture=True)
     installed_size = output.split()[0]
     # Patch the DEBIAN/control file.
     control_file = os.path.join(directory, 'DEBIAN', 'control')
