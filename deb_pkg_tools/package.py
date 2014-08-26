@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: August 4, 2014
+# Last Change: August 26, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -431,7 +431,10 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
         if copy_files:
             build_directory = tempfile.mkdtemp()
             logger.debug("Created build directory: %s", format_path(build_directory))
-            copy_package_files(directory, build_directory)
+            # This no longer uses hard links because of all the file permission
+            # magic going on further down in this function (permissions are
+            # shared between all hard links pointing to an inode).
+            copy_package_files(directory, build_directory, hard_links=False)
         else:
             build_directory = directory
         clean_package_tree(build_directory)
@@ -461,6 +464,16 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
         # permission bits (harmful enough that Lintian complains about them).
         logger.debug("Resetting file modes (go-w) ..")
         execute('chmod', '-R', 'go-w', build_directory, fakeroot=True, logger=logger)
+        # Remove the setgid bit from all directories in the package. Rationale:
+        # In my situation package templates are stored in a directory where a
+        # team of people have push access (I imagine that this is a common
+        # setup). To facilitate shared push access a shared primary UNIX group
+        # is used with the sticky bit on directories. However dpkg-deb *really*
+        # doesn't like this, failing with the error "dpkg-deb: control
+        # directory has bad permissions 2755 (must be >=0755 and <=0775)".
+        if coerce_boolean(os.environ.get('DPT_RESET_SETGID', 'true')):
+            logger.debug("Removing sticky bit from directories (g-s) ..")
+            execute('find -type d -print0 | xargs -0 chmod g-s', directory=build_directory, fakeroot=True, logger=logger)
         # Build the package using `dpkg-deb'.
         logger.info("Building package in %s ..", format_path(build_directory))
         execute('dpkg-deb', '--build', build_directory, package_file, fakeroot=True, logger=logger)
@@ -500,7 +513,7 @@ def determine_package_archive(directory):
         components.append(architecture)
     return '%s.deb' % '_'.join(components)
 
-def copy_package_files(from_directory, to_directory):
+def copy_package_files(from_directory, to_directory, hard_links=True):
     """
     Copy a directory tree suitable for packaging with ``dpkg-deb --build`` to a
     temporary build directory so that individual files can be replaced without
@@ -511,6 +524,7 @@ def copy_package_files(from_directory, to_directory):
     :param from_directory: The pathname of a directory tree suitable for
                            packaging with ``dpkg-deb --build``.
     :param to_directory: The pathname of a temporary build directory.
+    :param hard_links: Use hard links to speed up copying when possible.
     """
     logger.info("Copying files (%s) to temporary directory (%s) ..",
                 format_path(from_directory), format_path(to_directory))
