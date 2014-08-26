@@ -531,7 +531,7 @@ def copy_package_files(from_directory, to_directory, hard_links=True):
     command = ['cp', '-a']
     if not os.path.isdir(to_directory):
         os.makedirs(to_directory)
-    if coerce_boolean(os.environ.get('DPT_HARD_LINKS', 'true')):
+    if hard_links and coerce_boolean(os.environ.get('DPT_HARD_LINKS', 'true')):
         # Check whether we can use hard links to speed up the copy. In the past
         # this used the following simple and obvious check:
         #
@@ -563,8 +563,8 @@ def copy_package_files(from_directory, to_directory, hard_links=True):
             for test_file in [test_file_from, test_file_to]:
                 if test_file and os.path.isfile(test_file):
                     os.unlink(test_file)
-    # I know this looks really funky, but I'm 99% sure this is a valid
-    # use of shell escaping and globbing (obviously I tested it ;-).
+    # I know this looks really funky, but this is a valid use of shell escaping
+    # and globbing (obviously I tested it ;-).
     command.append('%s/*' % pipes.quote(from_directory))
     command.append(pipes.quote(to_directory))
     execute(' '.join(command), logger=logger)
