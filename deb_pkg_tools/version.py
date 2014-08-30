@@ -122,9 +122,6 @@ class Version(str):
     sorting and 'natural order sorting'.
     """
 
-    def __init__(self, *args, **kw):
-        super(Version, self).__init__(*args, **kw)
-
     def __eq__(self, other):
         return compare_versions(self, '=', other) if type(self) is type(other) else NotImplemented
 
