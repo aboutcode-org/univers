@@ -62,6 +62,7 @@ class DebPkgToolsTestCase(unittest.TestCase):
         coloredlogs.set_level(logging.DEBUG)
         self.db_directory = tempfile.mkdtemp()
         self.load_package_cache()
+        os.environ['DPT_FORCE_ENTROPY'] = 'yes'
 
     def load_package_cache(self):
         self.package_cache = PackageCache(os.path.join(self.db_directory, 'package-cache.sqlite3'))
@@ -69,6 +70,7 @@ class DebPkgToolsTestCase(unittest.TestCase):
     def tearDown(self):
         self.package_cache.collect_garbage(force=True)
         shutil.rmtree(self.db_directory)
+        os.environ.pop('DPT_FORCE_ENTROPY')
 
     def test_package_cache_error_handling(self):
         self.assertRaises(KeyError, self.package_cache.__getitem__, '/some/random/non-existing/path')
