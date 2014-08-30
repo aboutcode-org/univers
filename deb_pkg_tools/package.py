@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: August 30, 2014
+# Last Change: August 31, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -212,7 +212,7 @@ def collect_related_packages(filename, cache=None):
     filename = os.path.abspath(filename)
     logger.info("Collecting packages related to %s ..", format_path(filename))
     # Internal state.
-    relationship_sets = []
+    relationship_sets = set()
     packages_to_scan = [filename]
     related_packages = collections.defaultdict(list)
     # Preparations.
@@ -226,7 +226,7 @@ def collect_related_packages(filename, cache=None):
         # Find the relationships of the given package.
         fields = inspect_package_fields(filename, cache)
         if 'Depends' in fields:
-            relationship_sets.append(fields['Depends'])
+            relationship_sets.add(fields['Depends'])
         # Collect all related packages from the given directory.
         for package in available_packages:
             package_matches = None
