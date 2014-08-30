@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: August 4, 2014
+# Last Change: August 30, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -32,7 +32,7 @@ from deb_pkg_tools.control import (deb822_from_string, load_control_file,
 from deb_pkg_tools.deps import (AlternativeRelationship, VersionedRelationship,
                                 parse_depends, Relationship, RelationshipSet)
 from deb_pkg_tools.gpg import GPGKey
-from deb_pkg_tools.package import collect_related_packages, find_package_archives, inspect_package, parse_filename
+from deb_pkg_tools.package import collect_related_packages, copy_package_files, find_latest_version, find_package_archives, group_by_latest_versions, inspect_package, parse_filename
 from deb_pkg_tools.printer import CustomPrettyPrinter
 from deb_pkg_tools.repo import apt_supports_trusted_option, update_repository
 from deb_pkg_tools.utils import coerce_boolean
@@ -61,11 +61,48 @@ class DebPkgToolsTestCase(unittest.TestCase):
         coloredlogs.install()
         coloredlogs.set_level(logging.DEBUG)
         self.db_directory = tempfile.mkdtemp()
+        self.load_package_cache()
+
+    def load_package_cache(self):
         self.package_cache = PackageCache(os.path.join(self.db_directory, 'package-cache.sqlite3'))
 
     def tearDown(self):
         self.package_cache.collect_garbage(force=True)
         shutil.rmtree(self.db_directory)
+
+    def test_package_cache_error_handling(self):
+        self.assertRaises(KeyError, self.package_cache.__getitem__, '/some/random/non-existing/path')
+
+    def test_file_copying(self):
+        with Context() as finalizers:
+            source_directory = finalizers.mkdtemp()
+            target_directory = finalizers.mkdtemp()
+            touch(os.path.join(source_directory, '42'))
+            copy_package_files(source_directory, target_directory, hard_links=True)
+            self.assertEqual(os.stat(os.path.join(source_directory, '42')).st_ino,
+                             os.stat(os.path.join(target_directory, '42')).st_ino)
+
+    def test_package_cache_invalidation(self):
+        with Context() as finalizers:
+            directory = finalizers.mkdtemp()
+            package_file = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-1', Version='1'))
+            for i in range(5):
+                fields, contents = inspect_package(package_file, cache=self.package_cache)
+                if i % 2 == 0:
+                    os.utime(package_file, None)
+                else:
+                    self.load_package_cache()
+
+    def test_find_latest_version(self):
+        good = ['name_1.0_all.deb', 'name_0.5_all.deb']
+        self.assertEqual(os.path.basename(find_latest_version(good).filename), 'name_1.0_all.deb')
+        bad= ['one_1.0_all.deb', 'two_0.5_all.deb']
+        self.assertRaises(ValueError, find_latest_version, bad)
+
+    def test_group_by_latest_versions(self):
+        packages = ['one_1.0_all.deb', 'one_0.5_all.deb', 'two_1.5_all.deb', 'two_0.1_all.deb']
+        self.assertEqual(sorted(os.path.basename(a.filename) for a in group_by_latest_versions(packages).values()),
+                         sorted(['one_1.0_all.deb', 'two_1.5_all.deb']))
 
     def test_control_field_parsing(self):
         deb822_package = Deb822(['Package: python-py2deb',
