@@ -1,7 +1,7 @@
 # Debian packaging tools: Relationship parsing and evaluation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: June 9, 2014
+# Last Change: August 30, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -148,6 +148,33 @@ def parse_relationship(expression):
             raise ValueError(msg % (relationship, tokens))
         return VersionedRelationship(name, *tokens)
 
+def cache_matches(f):
+    """
+    High performance memoizing decorator for overrides of :py:func:`Relationship.matches()`.
+
+    Before writing this function I tried out several caching decorators from
+    PyPI, unfortunately all of them were bloated. I benchmarked using
+    :py:func:`.collect_related_packages()` and where this decorator would get a
+    total runtime of 8 seconds the other caching decorators would get
+    something like 40 seconds...
+    """
+    def decorator(self, package, version=None):
+        # Get or create the cache.
+        try:
+            cache = self._matches_cache
+        except AttributeError:
+            cache = {}
+            setattr(self, '_matches_cache', cache)
+        # Get or create the entry.
+        key = (package, version)
+        try:
+            return cache[key]
+        except KeyError:
+            value = f(self, package, version)
+            cache[key] = value
+            return value
+    return decorator
+
 @str_compatible
 class Relationship(OrderedObject):
 
@@ -181,8 +208,7 @@ class Relationship(OrderedObject):
         :param version: The version number of a package (a string, optional).
         :returns: ``True`` if the relationship matches, ``None`` otherwise.
         """
-        if self.name == name:
-            return True
+        return True if self.name == name else None
 
     def __unicode__(self):
         """
@@ -226,6 +252,7 @@ class VersionedRelationship(Relationship):
         self.operator = operator
         self.version = version
 
+    @cache_matches
     def matches(self, name, version=None):
         """
         Check if the relationship matches a given package and version. Uses the
@@ -296,6 +323,7 @@ class AlternativeRelationship(Relationship):
             names |= relationship.names
         return names
 
+    @cache_matches
     def matches(self, name, version=None):
         """
         Check if the relationship matches a given package and version.
@@ -349,7 +377,6 @@ class RelationshipSet(OrderedObject):
 
         :param relationships: One or more :py:class:`Relationship` objects.
         """
-        self.cache = {}
         self.relationships = tuple(sorted(relationships))
 
     @property
@@ -364,6 +391,7 @@ class RelationshipSet(OrderedObject):
             names |= relationship.names
         return names
 
+    @cache_matches
     def matches(self, name, version=None):
         """
         Check if the set of relationships matches a given package and version.
@@ -378,12 +406,9 @@ class RelationshipSet(OrderedObject):
                      :py:class:`RelationshipSet` objects are
                      immutable. This is not enforced.
         """
-        key = (name, version)
-        if key not in self.cache:
-            results = [r.matches(name, version) for r in self.relationships]
-            matches = [r for r in results if r is not None]
-            self.cache[key] = all(matches) if matches else None
-        return self.cache[key]
+        results = [r.matches(name, version) for r in self.relationships]
+        matches = [r for r in results if r is not None]
+        return all(matches) if matches else None
 
     def __unicode__(self):
         """

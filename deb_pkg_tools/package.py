@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: August 26, 2014
+# Last Change: August 30, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -194,14 +194,24 @@ def collect_related_packages(filename, cache=None):
             relationship_sets.append(fields['Depends'])
         # Collect all related packages from the given directory.
         for package in available_packages:
-            logger.debug("Checking %s ..", package.filename)
-            results = [r.matches(package.name, package.version) for r in relationship_sets]
-            matches = [r for r in results if r is not None]
-            if matches and all(matches):
+            package_matches = None
+            for relationships in relationship_sets:
+                status = relationships.matches(package.name, package.version)
+                if status == True and package_matches != False:
+                    package_matches = True
+                elif status == False:
+                    package_matches = False
+                    break
+            if package_matches == True:
                 logger.debug("Package archive matched all relationships: %s", package.filename)
-                if package not in related_packages[package.name]:
-                    related_packages[package.name].append(package)
-                    packages_to_scan.append(package.filename)
+                related_packages[package.name].append(package)
+                packages_to_scan.append(package.filename)
+                available_packages.remove(package)
+            elif package_matches == False:
+                # If we are sure we can exclude a package from all further
+                # iterations, it's worth it to speed up the process on big
+                # dependency sets.
+                available_packages.remove(package)
             spinner.step(label="Collecting related packages", progress=num_scanned_packages)
         num_scanned_packages += 1
     spinner.clear()

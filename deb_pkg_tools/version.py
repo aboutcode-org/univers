@@ -1,7 +1,7 @@
 # Debian packaging tools: Version comparison.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: June 1, 2014
+# Last Change: August 30, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -64,8 +64,6 @@ def compare_versions_with_python_apt(version1, operator, version2):
                 (operator in ('>', '>=') and result >= 0) or
                 (operator == '=' and result == 0))
 
-dpkg_comparison_cache = {}
-
 def compare_versions_with_dpkg(version1, operator, version2):
     """
     Compare Debian package versions using the external command ``dpkg
@@ -78,10 +76,9 @@ def compare_versions_with_dpkg(version1, operator, version2):
     :param version2: The version on the right side of the comparison (a string).
     :returns: ``True`` if the comparison succeeds, ``False`` if it fails.
     """
-    key = (version1, operator, version2)
-    if key not in dpkg_comparison_cache:
-        dpkg_comparison_cache[key] = execute('dpkg', '--compare-versions', version1, operator, version2, check=False, logger=logger)
-    return dpkg_comparison_cache[key]
+    return execute('dpkg', '--compare-versions', version1, operator, version2, check=False, logger=logger)
+
+dpkg_comparison_cache = {}
 
 def compare_versions(version1, operator, version2):
     """
@@ -96,10 +93,16 @@ def compare_versions(version1, operator, version2):
     """
     if operator == '=' and str(version1) == str(version2):
         return True
-    elif have_python_apt:
-        return compare_versions_with_python_apt(version1, operator, version2)
-    else:
-        return compare_versions_with_dpkg(version1, operator, version2)
+    key = (version1, operator, version2)
+    try:
+        return dpkg_comparison_cache[key]
+    except KeyError:
+        if have_python_apt:
+            value = compare_versions_with_python_apt(version1, operator, version2)
+        else:
+            value = compare_versions_with_dpkg(version1, operator, version2)
+        dpkg_comparison_cache[key] = value
+        return value
 
 class Version(str):
 
@@ -119,6 +122,9 @@ class Version(str):
     sorting and 'natural order sorting'.
     """
 
+    def __init__(self, *args, **kw):
+        super(Version, self).__init__(*args, **kw)
+
     def __eq__(self, other):
         return compare_versions(self, '=', other) if type(self) is type(other) else NotImplemented
 
@@ -136,6 +142,3 @@ class Version(str):
 
     def __ge__(self, other):
         return compare_versions(self, '>=', other) if type(self) is type(other) else NotImplemented
-
-    def __hash__(self):
-        return hash(self.__class__) ^ hash(str(self))
