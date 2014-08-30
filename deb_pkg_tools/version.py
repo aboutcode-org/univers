@@ -122,6 +122,14 @@ class Version(str):
     sorting and 'natural order sorting'.
     """
 
+    def __hash__(self):
+        try:
+            return self._cached_hash
+        except AttributeError:
+            value = hash(str(self))
+            self._cached_hash = value
+            return value
+
     def __eq__(self, other):
         return compare_versions(self, '=', other) if type(self) is type(other) else NotImplemented
 
