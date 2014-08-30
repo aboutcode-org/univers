@@ -1,7 +1,7 @@
 # Debian packaging tools: Utility functions.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: August 4, 2014
+# Last Change: August 30, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -44,6 +44,17 @@ def coerce_boolean(value):
         return False
     else:
         raise ValueError("Invalid boolean value %r!" % value)
+
+def compact(text, **kw):
+    """
+    Compact whitespace in a string and format any keyword arguments into the
+    resulting string.
+
+    :param text: The text to compact (a string).
+    :param kw: Any keyword arguments to apply using :py:func:`str.format()`.
+    :returns: The compacted, formatted string.
+    """
+    return ' '.join(text.split()).format(**kw)
 
 def sha1(text):
     """

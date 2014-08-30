@@ -23,7 +23,7 @@ from debian.deb822 import Deb822
 # Modules included in our package.
 from deb_pkg_tools import version
 from deb_pkg_tools.cache import PackageCache
-from deb_pkg_tools.checks import check_duplicate_files, DuplicateFilesFound
+from deb_pkg_tools.checks import check_duplicate_files, check_version_conflicts, DuplicateFilesFound, VersionConflictFound
 from deb_pkg_tools.cli import main
 from deb_pkg_tools.compat import StringIO, unicode
 from deb_pkg_tools.control import (deb822_from_string, load_control_file,
@@ -366,9 +366,22 @@ class DebPkgToolsTestCase(unittest.TestCase):
                                        contents=duplicate_contents)
             # Test the duplicate files check.
             package_archives = find_package_archives(directory)
-            self.assertRaises(DuplicateFilesFound, check_duplicate_files, package_archives)
+            self.assertRaises(DuplicateFilesFound, check_duplicate_files, package_archives, cache=self.package_cache)
             # Verify that invalid arguments are checked.
             self.assertRaises(ValueError, check_duplicate_files, [])
+
+    def test_version_conflicts_check(self):
+        with Context() as finalizers:
+            # Check that version conflicts raise an exception.
+            directory = finalizers.mkdtemp()
+            package1 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-1', Depends='deb-pkg-tools-package-2 (=1)'))
+            package2 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-2', Version='1'))
+            package3 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-2', Version='2'))
+            # Test the duplicate files check.
+            self.assertRaises(VersionConflictFound, check_version_conflicts, [package1], self.package_cache)
+            # Test for lack of duplicate files.
+            os.unlink(package3)
+            self.assertEqual(check_version_conflicts([package1]), None)
 
     def test_collect_packages(self):
         with Context() as finalizers:

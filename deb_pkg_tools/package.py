@@ -118,10 +118,47 @@ class PackageFile(collections.namedtuple('PackageFile', 'name, version, architec
 
        The absolute pathname of the package archive (a string).
 
+    The following fields are generated on demand:
+
+    .. py:attribute:: directory
+
+       The absolute pathname of the directory containing the package archive (a
+       string).
+
+    .. py:attribute:: other_versions
+
+       A list of :py:class:`PackageFile` objects with other versions of the
+       same package in the same directory.
+
+    .. py:attribute: newer_versions
+
+       A list of :py:class:`PackageFile` objects with newer versions of the
+       same package in the same directory.
+
     :py:class:`PackageFile` objects support sorting according to Debian's
     package version comparison algorithm as implemented in ``dpkg
     --compare-versions``.
     """
+
+    @property
+    def directory(self):
+        return os.path.dirname(self.filename)
+
+    @property
+    def other_versions(self):
+        archives = []
+        for other_archive in find_package_archives(self.directory):
+            if self.name == other_archive.name and self.version != other_archive.version:
+                archives.append(other_archive)
+        return archives
+
+    @property
+    def newer_versions(self):
+        archives = []
+        for other_archive in self.other_versions:
+            if other_archive.version > self.version:
+                archives.append(other_archive)
+        return archives
 
 def find_package_archives(directory):
     """
@@ -130,13 +167,11 @@ def find_package_archives(directory):
     :param directory: The pathname of a directory (a string).
     :returns: A sorted list of :py:class:`PackageFile` objects.
     """
-    archives = []
     for entry in os.listdir(directory):
         if entry.endswith('.deb'):
             pathname = os.path.join(directory, entry)
             if os.path.isfile(pathname):
-                archives.append(parse_filename(pathname))
-    return sorted(archives)
+                yield parse_filename(pathname)
 
 def collect_related_packages(filename, cache=None):
     """
@@ -181,7 +216,7 @@ def collect_related_packages(filename, cache=None):
     packages_to_scan = [filename]
     related_packages = collections.defaultdict(list)
     # Preparations.
-    available_packages = find_package_archives(os.path.dirname(filename))
+    available_packages = sorted(find_package_archives(os.path.dirname(filename)))
     # Loop to collect the related packages.
     num_scanned_packages = 0
     spinner = Spinner(total=len(available_packages) / 2)
