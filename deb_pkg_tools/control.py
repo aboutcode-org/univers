@@ -1,7 +1,7 @@
 # Debian packaging tools: Control file manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: June 9, 2014
+# Last Change: August 31, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -95,18 +95,15 @@ def merge_control_fields(defaults, overrides):
                 if name in source:
                     relationships.update(source[name].relationships)
             merged[name] = RelationshipSet(*sorted(relationships))
-            logger.debug("Merged field %s: %r", name, merged[name])
         elif name not in overrides:
-            logger.debug("Field %s only present in defaults: %r", name, defaults[name])
             merged[name] = defaults[name]
         elif name not in defaults:
-            logger.debug("Field %s only present in overrides: %r", name, overrides[name])
             merged[name] = overrides[name]
         else:
             # Field present in both defaults and overrides;
             # in this case the override takes precedence.
             merged[name] = overrides[name]
-            logger.debug("Overriding field %s: %r -> %r", name, defaults[name], overrides[name])
+    logger.debug("Merged control fields: %s", merged)
     return unparse_control_fields(merged)
 
 def parse_control_fields(input_fields):
@@ -190,11 +187,8 @@ def parse_control_fields(input_fields):
             parsed_value = int(unparsed_value)
         else:
             parsed_value = unparsed_value
-        if parsed_value != unparsed_value:
-            logger.debug("Parsed field %s: %r -> %r", name, unparsed_value, parsed_value)
-        else:
-            logger.debug("Parsed field %s: %r", name, parsed_value)
         output_fields[name] = parsed_value
+    logger.debug("Parsed fields: %s", output_fields)
     return output_fields
 
 def unparse_control_fields(input_fields):
@@ -229,12 +223,9 @@ def unparse_control_fields(input_fields):
             unparsed_value = str(parsed_value)
         else:
             unparsed_value = parsed_value
-        if unparsed_value != parsed_value:
-            logger.debug("Unparsed field %s: %r -> %r", name, parsed_value, unparsed_value)
-        else:
-            logger.debug("Unparsed field %s: %r", name, unparsed_value)
         if unparsed_value:
             output_fields[name] = unparsed_value
+    logger.debug("Unparsed fields: %r", output_fields)
     return output_fields
 
 def normalize_control_field_name(name):
