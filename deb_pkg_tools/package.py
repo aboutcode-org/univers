@@ -216,7 +216,7 @@ def collect_related_packages(filename, cache=None):
     packages_to_scan = [filename]
     related_packages = collections.defaultdict(list)
     # Preparations.
-    available_packages = sorted(find_package_archives(os.path.dirname(filename)))
+    available_packages = list(find_package_archives(os.path.dirname(filename)))
     # Loop to collect the related packages.
     num_scanned_packages = 0
     spinner = Spinner(total=len(available_packages) / 2)
