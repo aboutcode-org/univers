@@ -392,7 +392,7 @@ class DebPkgToolsTestCase(unittest.TestCase):
             # Check that version conflicts raise an exception.
             directory = finalizers.mkdtemp()
             root_package, conflicting_package = self.create_version_conflict(directory)
-            packages_to_scan = list(collect_related_packages(root_package))
+            packages_to_scan = collect_related_packages(root_package)
             # Test the duplicate files check.
             self.assertRaises(VersionConflictFound, check_version_conflicts, packages_to_scan, self.package_cache)
             # Test for lack of duplicate files.

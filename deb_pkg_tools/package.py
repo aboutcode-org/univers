@@ -165,13 +165,15 @@ def find_package_archives(directory):
     Find the Debian package archive(s) in the given directory.
 
     :param directory: The pathname of a directory (a string).
-    :returns: A sorted list of :py:class:`PackageFile` objects.
+    :returns: A list of :py:class:`PackageFile` objects.
     """
+    archives = []
     for entry in os.listdir(directory):
         if entry.endswith('.deb'):
             pathname = os.path.join(directory, entry)
             if os.path.isfile(pathname):
-                yield parse_filename(pathname)
+                archives.append(parse_filename(pathname))
+    return archives
 
 def collect_related_packages(filename, cache=None):
     """
@@ -216,7 +218,7 @@ def collect_related_packages(filename, cache=None):
     packages_to_scan = [filename]
     related_packages = collections.defaultdict(list)
     # Preparations.
-    available_packages = list(find_package_archives(os.path.dirname(filename)))
+    available_packages = find_package_archives(os.path.dirname(filename))
     # Loop to collect the related packages.
     num_scanned_packages = 0
     spinner = Spinner(total=len(available_packages) / 2)
@@ -254,7 +256,7 @@ def collect_related_packages(filename, cache=None):
         num_scanned_packages += 1
     spinner.clear()
     # Pick the latest version of the collected packages.
-    return map(find_latest_version, related_packages.values())
+    return list(map(find_latest_version, related_packages.values()))
 
 def find_latest_version(packages):
     """
