@@ -508,6 +508,12 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
         user_spec = '%s:%s' % (root_user, root_group)
         logger.debug("Resetting file ownership (to %s) ..", user_spec)
         execute('chown', '-R', user_spec, build_directory, fakeroot=True, logger=logger)
+        # Reset the file modes of pre/post installation/removal scripts.
+        for script_name in ('preinst', 'postinst', 'prerm', 'postrm'):
+            script_path = os.path.join(build_directory, 'DEBIAN', script_name)
+            if os.path.isfile(script_path):
+                logger.debug("Resetting file modes (%s to 755) ..", script_path)
+                os.chmod(script_path, 0o755)
         # System packages generally install files that are read only and
         # readable (and possibly executable) for everyone (owner, group and
         # world) so we'll go ahead and remove some potentially harmful
@@ -524,6 +530,13 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
         if coerce_boolean(os.environ.get('DPT_RESET_SETGID', 'true')):
             logger.debug("Removing sticky bit from directories (g-s) ..")
             execute('find -type d -print0 | xargs -0 chmod g-s', directory=build_directory, fakeroot=True, logger=logger)
+        # Make sure files in /etc/sudoers.d have the correct permissions.
+        sudoers_directory = os.path.join(build_directory, 'etc', 'sudoers.d')
+        if os.path.isdir(sudoers_directory):
+            for filename in os.listdir(sudoers_directory):
+                pathname = os.path.join(sudoers_directory, filename)
+                logger.debug("Resetting file modes (%s to 440) ..", pathname)
+                os.chmod(pathname, 0o440)
         # Build the package using `dpkg-deb'.
         logger.info("Building package in %s ..", format_path(build_directory))
         execute('dpkg-deb', '--build', build_directory, package_file, fakeroot=True, logger=logger)
