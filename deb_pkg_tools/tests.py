@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: August 30, 2014
+# Last Change: August 31, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -366,13 +366,42 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 directory = finalizers.mkdtemp()
                 # Test `deb-pkg-tools --inspect PKG'.
                 package_file = self.test_package_building(directory)
-                lines = call('--inspect', package_file).splitlines()
+                lines = call('--verbose', '--inspect', package_file).splitlines()
                 for field, value in TEST_PACKAGE_FIELDS.items():
                     self.assertEqual(match('^ - %s: (.+)$' % field, lines), value)
                 # Test `deb-pkg-tools --with-repo=DIR CMD' (we simply check whether
                 # apt-cache sees the package).
                 if os.getuid() == 0:
                     call('--with-repo=%s' % directory, 'apt-cache show %s' % TEST_PACKAGE_NAME)
+                # Test `deb-pkg-tools --update=DIR' with a non-existing directory.
+                self.assertRaises(SystemExit, call, '--update', '/a/directory/that/will/never/exist')
+
+    def test_check_package(self):
+        with Context() as finalizers:
+            directory = finalizers.mkdtemp()
+            root_package, conflicting_package = self.create_version_conflict(directory)
+            self.assertRaises(SystemExit, call, '--check', root_package)
+            # Test for lack of duplicate files.
+            os.unlink(conflicting_package)
+            call('--check', root_package)
+
+    def test_version_conflicts_check(self):
+        with Context() as finalizers:
+            # Check that version conflicts raise an exception.
+            directory = finalizers.mkdtemp()
+            root_package, conflicting_package = self.create_version_conflict(directory)
+            packages_to_scan = collect_related_packages(root_package)
+            # Test the duplicate files check.
+            self.assertRaises(VersionConflictFound, check_version_conflicts, packages_to_scan, self.package_cache)
+            # Test for lack of duplicate files.
+            os.unlink(conflicting_package)
+            self.assertEqual(check_version_conflicts(packages_to_scan, cache=self.package_cache), None)
+
+    def create_version_conflict(self, directory):
+        root_package = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-1', Depends='deb-pkg-tools-package-2 (=1)'))
+        self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-2', Version='1'))
+        conflicting_package = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-2', Version='2'))
+        return root_package, conflicting_package
 
     def test_duplicates_check(self):
         with Context() as finalizers:
@@ -409,20 +438,17 @@ class DebPkgToolsTestCase(unittest.TestCase):
             # Verify that invalid arguments are checked.
             self.assertRaises(ValueError, check_duplicate_files, [])
 
-    def test_version_conflicts_check(self):
-        with Context() as finalizers:
-            # Check that version conflicts raise an exception.
-            directory = finalizers.mkdtemp()
-            package1 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-1', Depends='deb-pkg-tools-package-2 (=1)'))
-            package2 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-2', Version='1'))
-            package3 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-2', Version='2'))
-            # Test the duplicate files check.
-            self.assertRaises(VersionConflictFound, check_version_conflicts, [package1], self.package_cache)
-            # Test for lack of duplicate files.
-            os.unlink(package3)
-            self.assertEqual(check_version_conflicts([package1]), None)
-
     def test_collect_packages(self):
+        with Context() as finalizers:
+            source_directory = finalizers.mkdtemp()
+            target_directory = finalizers.mkdtemp()
+            package1 = self.test_package_building(source_directory, overrides=dict(Package='deb-pkg-tools-package-1', Depends='deb-pkg-tools-package-2'))
+            package2 = self.test_package_building(source_directory, overrides=dict(Package='deb-pkg-tools-package-2', Depends='deb-pkg-tools-package-3'))
+            package3 = self.test_package_building(source_directory, overrides=dict(Package='deb-pkg-tools-package-3'))
+            call('--yes', '--collect=%s' % target_directory, package1)
+            self.assertEqual(sorted(os.listdir(target_directory)), sorted(map(os.path.basename, [package1, package2, package3])))
+
+    def test_collect_packages_interactive(self):
         with Context() as finalizers:
             directory = finalizers.mkdtemp()
             package1 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-1', Depends='deb-pkg-tools-package-2'))
@@ -430,6 +456,7 @@ class DebPkgToolsTestCase(unittest.TestCase):
             self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-3'))
             package4 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-3', Version='0.2'))
             self.assertEqual(sorted(p.filename for p in collect_related_packages(package1, cache=self.package_cache)), [package2, package4])
+
 
     def test_repository_creation(self, preserve=False):
         if not SKIP_SLOW_TESTS:
@@ -497,7 +524,8 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 self.assertRaises(Exception, GPGKey, public_key_file=public_key_file)
                 missing_secret_key_file = '/tmp/deb-pkg-tools-%i.sec' % random.randint(1, 1000)
                 missing_public_key_file = '/tmp/deb-pkg-tools-%i.pub' % random.randint(1, 1000)
-                self.assertRaises(Exception, GPGKey, key_id='12345', secret_key_file=missing_secret_key_file, public_key_file=missing_public_key_file)
+                self.assertRaises(Exception, GPGKey, key_id='12345', secret_key_file=secret_key_file, public_key_file=missing_public_key_file)
+                self.assertRaises(Exception, GPGKey, key_id='12345', secret_key_file=missing_secret_key_file, public_key_file=public_key_file)
                 os.unlink(secret_key_file)
                 self.assertRaises(Exception, GPGKey, name="test-key", description="Whatever", secret_key_file=secret_key_file, public_key_file=public_key_file)
                 touch(secret_key_file)
