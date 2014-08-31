@@ -228,6 +228,7 @@ def collect_related_packages(filename, cache=None):
         if 'Depends' in fields:
             relationship_sets.add(fields['Depends'])
         # Collect all related packages from the given directory.
+        packages_to_skip = []
         for package in available_packages:
             package_matches = None
             for relationships in relationship_sets:
@@ -241,13 +242,15 @@ def collect_related_packages(filename, cache=None):
                 logger.debug("Package archive matched all relationships: %s", package.filename)
                 related_packages[package.name].append(package)
                 packages_to_scan.append(package.filename)
-                available_packages.remove(package)
+                packages_to_skip.append(package)
             elif package_matches == False:
                 # If we are sure we can exclude a package from all further
                 # iterations, it's worth it to speed up the process on big
                 # dependency sets.
-                available_packages.remove(package)
+                packages_to_skip.append(package)
             spinner.step(label="Collecting related packages", progress=num_scanned_packages)
+        for package in packages_to_skip:
+            available_packages.remove(package)
         num_scanned_packages += 1
     spinner.clear()
     # Pick the latest version of the collected packages.
