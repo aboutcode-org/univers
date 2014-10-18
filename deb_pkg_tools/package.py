@@ -60,6 +60,8 @@ FILES_TO_REMOVE = ('*.pyc',            # Python byte code files (http://lintian.
                    '.hgtags',          # Mercurial ignore files (http://lintian.debian.org/tags/package-contains-vcs-control-file.html)
                    '.s??')             # Vim anonymous swap files
 
+_ALLOW_FAKE_ROOT_OR_SUDO = coerce_boolean(os.environ.get('DPT_ALLOW_FAKEROOT_OR_SUDO', 'true'))
+
 def parse_filename(filename):
     """
     Parse the filename of a Debian binary package archive into three fields:
@@ -501,13 +503,21 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
         #     install the package. As you can imagine, the results are
         #     disastrous...
         os.chmod(build_directory, 0o755)
-        # Make sure all files included in the package are owned by `root'
-        # (the only account guaranteed to exist on all systems).
-        root_user = os.environ.get('DPT_ROOT_USER', 'root')
-        root_group = os.environ.get('DPT_ROOT_GROUP', 'root')
-        user_spec = '%s:%s' % (root_user, root_group)
-        logger.debug("Resetting file ownership (to %s) ..", user_spec)
-        execute('chown', '-R', user_spec, build_directory, fakeroot=True, logger=logger)
+
+        do_chown = coerce_boolean(os.environ.get('DPT_CHOWN_FILES', 'true'))
+        if do_chown is True:
+            # Make sure all files included in the package are owned by `root'
+            # (the only account guaranteed to exist on all systems).
+            root_user = os.environ.get('DPT_ROOT_USER', 'root')
+            root_group = os.environ.get('DPT_ROOT_GROUP', 'root')
+            user_spec = '%s:%s' % (root_user, root_group)
+            
+            logger.debug("Resetting file ownership (to %s) ..", user_spec)
+            execute('chown', '-R', user_spec, build_directory, 
+                    fakeroot=_ALLOW_FAKE_ROOT_OR_SUDO, logger=logger)
+        else:
+            logger.debug("Not resetting file ownership.")
+        
         # Reset the file modes of pre/post installation/removal scripts.
         for script_name in ('preinst', 'postinst', 'prerm', 'postrm'):
             script_path = os.path.join(build_directory, 'DEBIAN', script_name)
@@ -519,7 +529,8 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
         # world) so we'll go ahead and remove some potentially harmful
         # permission bits (harmful enough that Lintian complains about them).
         logger.debug("Resetting file modes (go-w) ..")
-        execute('chmod', '-R', 'go-w', build_directory, fakeroot=True, logger=logger)
+        execute('chmod', '-R', 'go-w', build_directory, 
+                fakeroot=_ALLOW_FAKE_ROOT_OR_SUDO, logger=logger)
         # Remove the setgid bit from all directories in the package. Rationale:
         # In my situation package templates are stored in a directory where a
         # team of people have push access (I imagine that this is a common
@@ -529,7 +540,9 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
         # directory has bad permissions 2755 (must be >=0755 and <=0775)".
         if coerce_boolean(os.environ.get('DPT_RESET_SETGID', 'true')):
             logger.debug("Removing sticky bit from directories (g-s) ..")
-            execute('find -type d -print0 | xargs -0 chmod g-s', directory=build_directory, fakeroot=True, logger=logger)
+            execute('find -type d -print0 | xargs -0 chmod g-s', 
+                    directory=build_directory, 
+                    fakeroot=_ALLOW_FAKE_ROOT_OR_SUDO, logger=logger)
         # Make sure files in /etc/sudoers.d have the correct permissions.
         sudoers_directory = os.path.join(build_directory, 'etc', 'sudoers.d')
         if os.path.isdir(sudoers_directory):
@@ -539,7 +552,8 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
                 os.chmod(pathname, 0o440)
         # Build the package using `dpkg-deb'.
         logger.info("Building package in %s ..", format_path(build_directory))
-        execute('dpkg-deb', '--build', build_directory, package_file, fakeroot=True, logger=logger)
+        execute('dpkg-deb', '--build', build_directory, package_file,
+                fakeroot=_ALLOW_FAKE_ROOT_OR_SUDO, logger=logger)
         # Check the package for possible issues using Lintian?
         if check_package:
             if not os.access('/usr/bin/lintian', os.X_OK):
