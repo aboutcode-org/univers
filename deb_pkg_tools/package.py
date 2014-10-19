@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: August 31, 2014
+# Last Change: October 19, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -59,6 +59,13 @@ FILES_TO_REMOVE = ('*.pyc',            # Python byte code files (http://lintian.
                    '.hgignore',        # Mercurial ignore files (http://lintian.debian.org/tags/package-contains-vcs-control-file.html)
                    '.hgtags',          # Mercurial ignore files (http://lintian.debian.org/tags/package-contains-vcs-control-file.html)
                    '.s??')             # Vim anonymous swap files
+
+# Enable power users to customize how packages are built in order to enable
+# limited use of deb-pkg-tools in non-Debian environments like Mac OS X.
+ALLOW_CHOWN = coerce_boolean(os.environ.get('DPT_CHOWN_FILES', 'true'))
+ALLOW_FAKEROOT_OR_SUDO = coerce_boolean(os.environ.get('DPT_ALLOW_FAKEROOT_OR_SUDO', 'true'))
+ALLOW_HARD_LINKS = coerce_boolean(os.environ.get('DPT_HARD_LINKS', 'true'))
+ALLOW_RESET_SETGID = coerce_boolean(os.environ.get('DPT_RESET_SETGID', 'true'))
 
 def parse_filename(filename):
     """
@@ -501,13 +508,15 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
         #     install the package. As you can imagine, the results are
         #     disastrous...
         os.chmod(build_directory, 0o755)
-        # Make sure all files included in the package are owned by `root'
-        # (the only account guaranteed to exist on all systems).
-        root_user = os.environ.get('DPT_ROOT_USER', 'root')
-        root_group = os.environ.get('DPT_ROOT_GROUP', 'root')
-        user_spec = '%s:%s' % (root_user, root_group)
-        logger.debug("Resetting file ownership (to %s) ..", user_spec)
-        execute('chown', '-R', user_spec, build_directory, fakeroot=True, logger=logger)
+        if ALLOW_CHOWN:
+            # Make sure all files included in the package are owned by `root'
+            # (the only account guaranteed to exist on all systems).
+            root_user = os.environ.get('DPT_ROOT_USER', 'root')
+            root_group = os.environ.get('DPT_ROOT_GROUP', 'root')
+            user_spec = '%s:%s' % (root_user, root_group)
+            logger.debug("Resetting file ownership (to %s) ..", user_spec)
+            execute('chown', '-R', user_spec, build_directory,
+                    fakeroot=ALLOW_FAKEROOT_OR_SUDO, logger=logger)
         # Reset the file modes of pre/post installation/removal scripts.
         for script_name in ('preinst', 'postinst', 'prerm', 'postrm'):
             script_path = os.path.join(build_directory, 'DEBIAN', script_name)
@@ -519,7 +528,8 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
         # world) so we'll go ahead and remove some potentially harmful
         # permission bits (harmful enough that Lintian complains about them).
         logger.debug("Resetting file modes (go-w) ..")
-        execute('chmod', '-R', 'go-w', build_directory, fakeroot=True, logger=logger)
+        execute('chmod', '-R', 'go-w', build_directory,
+                fakeroot=ALLOW_FAKEROOT_OR_SUDO, logger=logger)
         # Remove the setgid bit from all directories in the package. Rationale:
         # In my situation package templates are stored in a directory where a
         # team of people have push access (I imagine that this is a common
@@ -527,9 +537,11 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
         # is used with the sticky bit on directories. However dpkg-deb *really*
         # doesn't like this, failing with the error "dpkg-deb: control
         # directory has bad permissions 2755 (must be >=0755 and <=0775)".
-        if coerce_boolean(os.environ.get('DPT_RESET_SETGID', 'true')):
+        if ALLOW_RESET_SETGID:
             logger.debug("Removing sticky bit from directories (g-s) ..")
-            execute('find -type d -print0 | xargs -0 chmod g-s', directory=build_directory, fakeroot=True, logger=logger)
+            execute('find -type d -print0 | xargs -0 chmod g-s',
+                    directory=build_directory,
+                    fakeroot=ALLOW_FAKEROOT_OR_SUDO, logger=logger)
         # Make sure files in /etc/sudoers.d have the correct permissions.
         sudoers_directory = os.path.join(build_directory, 'etc', 'sudoers.d')
         if os.path.isdir(sudoers_directory):
@@ -539,7 +551,8 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
                 os.chmod(pathname, 0o440)
         # Build the package using `dpkg-deb'.
         logger.info("Building package in %s ..", format_path(build_directory))
-        execute('dpkg-deb', '--build', build_directory, package_file, fakeroot=True, logger=logger)
+        execute('dpkg-deb', '--build', build_directory, package_file,
+                fakeroot=ALLOW_FAKEROOT_OR_SUDO, logger=logger)
         # Check the package for possible issues using Lintian?
         if check_package:
             if not os.access('/usr/bin/lintian', os.X_OK):
@@ -594,7 +607,7 @@ def copy_package_files(from_directory, to_directory, hard_links=True):
     command = ['cp', '-a']
     if not os.path.isdir(to_directory):
         os.makedirs(to_directory)
-    if hard_links and coerce_boolean(os.environ.get('DPT_HARD_LINKS', 'true')):
+    if hard_links and ALLOW_HARD_LINKS:
         # Check whether we can use hard links to speed up the copy. In the past
         # this used the following simple and obvious check:
         #
