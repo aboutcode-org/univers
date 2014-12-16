@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: November 15, 2014
+# Last Change: December 16, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -253,12 +253,6 @@ class DebPkgToolsTestCase(unittest.TestCase):
         self.assertEqual(relationship_set.matches('python2.6'), None) # name didn't match
         self.assertEqual(relationship_set.matches('python', '3.0'), False) # name in alternative matched, version didn't
         self.assertEqual(list(relationship_set.names), ['python'])
-
-    def test_relationship_sorting(self):
-        relationship_set = parse_depends('foo | bar, baz | qux')
-        self.assertEqual(relationship_set, RelationshipSet(
-            AlternativeRelationship(Relationship(name='baz'), Relationship(name='qux')),
-            AlternativeRelationship(Relationship(name='foo'), Relationship(name='bar'))))
 
     def test_custom_pretty_printer(self):
         printer = CustomPrettyPrinter()

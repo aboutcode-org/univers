@@ -1,7 +1,7 @@
 # Debian packaging tools: Relationship parsing and evaluation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: August 30, 2014
+# Last Change: December 16, 2014
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -39,7 +39,7 @@ python (>= 2.6), python (<< 3) | python (>= 3.4)
 
 As you can see the :py:func:`repr()` output of the relationship set shows the
 object tree and the :py:func:`unicode()` output (:py:func:`str()` in Python
-3.x) is the normalized (sorted) dependency line.
+3.x) is the dependency line.
 
 .. warning:: The relationship parsing code does not understand the complete
              syntax defined in the Debian policy manual. More specifically
@@ -309,7 +309,7 @@ class AlternativeRelationship(Relationship):
 
         :param relationships: One or more :py:class:`Relationship` objects.
         """
-        self.relationships = tuple(sorted(relationships))
+        self.relationships = tuple(relationships)
 
     @property
     def names(self):
@@ -377,7 +377,7 @@ class RelationshipSet(OrderedObject):
 
         :param relationships: One or more :py:class:`Relationship` objects.
         """
-        self.relationships = tuple(sorted(relationships))
+        self.relationships = tuple(relationships)
 
     @property
     def names(self):
