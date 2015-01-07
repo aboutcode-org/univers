@@ -3,7 +3,7 @@
 #
 
 class LibmavenPackge(PackageRecipe):
-    name = "python-libmaven"
+    name = "libmaven"
     version = ""
 
     buildRequires = [
