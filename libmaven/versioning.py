@@ -1,11 +1,28 @@
+#
+# Copyright (c) 2015 SAS Institute, Inc
+#
+
 """
 Versioning of artifacts
 """
+
+import itertools
+
 
 EXCLUSIVE_CLOSE = ')'
 EXCLUSIVE_OPEN = '('
 INCLUSIVE_CLOSE = ']'
 INCLUSIVE_OPEN = '['
+
+# Known qualifiers, oldest to newest
+QUALIFIERS = ["alpha", "beta", "milestone", "rc", "snapshot", "", "sp"]
+
+# Well defined aliases
+ALIASES = {
+    "ga": "",
+    "final": "",
+    "cr": "rc",
+}
 
 
 class Restriction(object):
@@ -15,14 +32,14 @@ class Restriction(object):
                  upperBoundInclusive):
         """Create a restriction
 
-        @param lowerBound: the lowest version acceptable
-        @type lowerBound: artifactory.versioning.Version
-        @param lowerBoundInclusive: restriction includes the lower bound
-        @type lowerBoundInclusive: bool
-        @param upperBound: the highest version acceptable
-        @type upperBound: artifactory.versioning.Version
-        @param upperBoundInclusive: restriction includes the upper bound
-        @type upperBoundInclusive: bool
+        :param lowerBound: the lowest version acceptable
+        :type lowerBound: artifactory.versioning.Version
+        :param lowerBoundInclusive: restriction includes the lower bound
+        :type lowerBoundInclusive: bool
+        :param upperBound: the highest version acceptable
+        :type upperBound: artifactory.versioning.Version
+        :param upperBoundInclusive: restriction includes the upper bound
+        :type upperBoundInclusive: bool
         """
         self.lowerBound = lowerBound
         self.lowerBoundInclusive = lowerBoundInclusive
@@ -53,7 +70,7 @@ class Restriction(object):
         return True
 
     def __lt__(self, other):
-        if this is other:
+        if self is other:
             return False
 
         if not isinstance(other, Restriction):
@@ -67,7 +84,7 @@ class Restriction(object):
             )
 
     def __ne__(self, other):
-        return s < o or o < self
+        return self < other or other < self
 
     def __eq__(self, other):
         return not self != other
@@ -98,9 +115,6 @@ class Restriction(object):
         result += 2 if self.upperBoundInclusive else 3
 
         return result
-
-    def __ne__(self, other):
-        return not (self == other)
 
     def __str__(self):
         s = ""
@@ -185,12 +199,12 @@ class VersionRange(object):
     def _intersection(self, l1, l2):
         """Return the intersection of l1 and l2
 
-        @param l1 list of restrictions
-        @type l1 [Restriction, ...]
-        @param l2 list of restrictions
-        @type l2 [Restriction, ...]
-        @return Intersection of l1 and l2
-        @rtype [Restriction, ...]
+        :param l1 list of restrictions
+        :type l1 [Restriction, ...]
+        :param l2 list of restrictions
+        :type l2 [Restriction, ...]
+        :return Intersection of l1 and l2
+        :rtype [Restriction, ...]
         """
         raise NotImplementedError
 
@@ -234,11 +248,11 @@ class VersionRange(object):
     def fromstring(spec):
         """Create a VersionRange from a string specification
 
-        @param spec string representation of a version or version range
-        @type spec str
-        @return a new VersionRange
-        @rtype VersionRange
-        @raises RuntimeError if the range is invalid in some way
+        :param spec string representation of a version or version range
+        :type spec str
+        :return a new VersionRange
+        :rtype VersionRange
+        :raises RuntimeError if the range is invalid in some way
         """
         if not spec:
             return None
@@ -298,15 +312,15 @@ class VersionRange(object):
 
         Prefers this version over the specified version range
 
-        @param versionRange the version range that will restrict this range
-        @type versionRange VersionRange
-        @return intersection of this version range and the specified one
-        @rypte VersionRange
+        :param versionRange the version range that will restrict this range
+        :type versionRange VersionRange
+        :return intersection of this version range and the specified one
+        :rypte VersionRange
         """
         raise NotImplementedError
 
-    def matchVersion(versions):
-        mached = None
+    def matchVersion(self, versions):
+        matched = None
         for version in sorted(versions, reverse=True):
             if version in self:
                 matched = version
@@ -318,38 +332,18 @@ class Version(object):
     """Maven version objecjt
     """
     def __init__(self, version):
-        self.unparsed = version
-        self.major = 0
-        self.minor = 0
-        self.tiny = 0
-        self.qualifier = ''
-        self.build = 0
-
+        self._unparsed = None
+        self._parsed = None
         self.fromstring(version)
 
-    def __lt__(self, other):
-        return self.compareTo(other) < 0
-
-    def __eq__(self, other):
+    def __cmp__(self, other):
         if self is other:
-            return True
+            return 0
 
         if not isinstance(other, Version):
-            return False
+            return 1
 
-        return self.compareTo(other) == 0
-
-    def __ne__(self, other):
-        return not (self == other)
-
-    def __le__(self, other):
-        return self.compareTo(other) <= 0
-
-    def __gt__(self, other):
-        return self.compareTo(other) > 0
-
-    def __ge__(self, other):
-        return self.compareTo(other) >= 0
+        return self._compare(self._parsed, other._parsed)
 
     def __hash__(self):
         result = 1229
@@ -364,116 +358,197 @@ class Version(object):
         return result
 
     def __repr__(self):
-        return "<%s.%s(%r)>" % (self.__module__, "Version", self.unparsed)
+        return "<%s.%s(%r)>" % (self.__module__, "Version", self._unparsed)
 
     def __str__(self):
         return self.unparsed
 
-    def compareTo(self, other):
-        """Compare maven versions
+    def _compare(self, this, other):
+        if isinstance(this, int):
+            return self._intCompare(this, other)
+        elif isinstance(this, str):
+            return self._stringCompare(this, other)
+        elif isinstance(this, list):
+            return self._listCompare(this, other)
+        else:
+            raise RuntimeError("Unkown type for t: %r" % this)
 
-        * numerical comparison of major version
-        * numerical comparison of minor version
-        * if revision does not exist, add ".0" for comparison purposes
-        * numerical comparison of revision
-        * if qualifier does not exist, it is newer than if it does
-        * case-insensitive string comparison of qualifier
-            * this ensures timestamps are correctly ordered, and SNAPSHOT is
-              newer than an equivalent timestamp
-            * this also ensures that beta comes after alpha, as does rc
-        * if no qualifier, and build does not exist, add "-0" for comparison
-          purposes
-        * numerical comparison of build
+    def _intCompare(self, this, other):
+        if isinstance(other, int):
+            return this - other
+        elif isinstance(other, (str, list)):
+            return 1
+        elif other is None:
+            return this
+        else:
+            raise RuntimeError("other is of invalid type: %s" % type(other))
 
-        @param other: other version object to compare with
-        @type other: Version
-        @return: if this version is newer, a number greater than 0, else if this
-            version is older, a number less than 0. 0 if the versions are the
-            same
-        @rtype: int
-        """
-        result = self.major - other.major
-        if result == 0:
-            result = self.minor - other.minor
-        if result == 0:
-            result = self.tiny - other.tiny
-        if result == 0:
-            if self.qualifier:
-                if other.qualifier:
-                    # if either qualifier starts with the other, the
-                    # longer one is older
-                    if (len(self.qualifier) > len(other.qualifier)
-                            and qualifier.startswith(other.qualifier)):
-                        result = -1
-                    elif (len(self.qualifier) < len(other.qualifier)
-                            and other.qualifier.startswith(self.qualifier)):
-                        result = 1
+    def _listCompare(self, l, other):
+        if other is None:
+            if len(l) == 0:
+                return 0
+            return self._compare(l[0], other)
+        if isinstance(other, int):
+            return -1
+        elif isinstance(other, str):
+            return 1
+        elif isinstance(other, list):
+            for left, right in itertools.izip_longest(l, other):
+                if left is None:
+                    if right is None:
+                        result = 0
                     else:
-                        if self.qualifier.upper() < other.qualifier.upper():
-                            result = -1
-                        elif self.qualifier.upper() > other.query.upper():
-                            result = 1
+                        result = -1 * self._compare(right, left)
                 else:
-                    # other has no qualifier but we do, other is newer
-                    result = -1
-            elif other.qualifier:
-                # other has a qualifier but we don't, we are newer
-                result = 1
+                    result = self._compare(left, right)
+                if result != 0:
+                    return result
             else:
-                # compare build
-                result = self.build - other.build
+                return 0
+        else:
+            raise RuntimeError("other is of invalid type: %s" % type(other))
 
-        return result
+    def _newList(self, l):
+        """Create a new sublist, append it to the current list and return the
+        sublist
+
+        :param list l: list to add a sublist to
+        :return: the sublist
+        :rtype: list
+        """
+        l = self._normalize(l)
+        sublist = []
+        l.append(sublist)
+        return sublist
+
+    def _normalize(self, l):
+        for item in l[::-1]:
+            if not item:
+                l.remove(item)
+            elif not isinstance(item, list):
+                break
+        return l
+
+    def _stringCompare(self, s, other):
+        """Compare string item `s` to `other`
+
+        :param str s: string item to compare
+        :param other: other item to compare
+        :type other: int, str, list or None
+        """
+        if other is None:
+            return self._stringCompare(s, "")
+
+        if isinstance(other, (int, list)):
+            return -1
+        elif isinstance(other, str):
+            sValue = self._stringValue(s)
+            otherValue = self._stringValue(other)
+            if sValue < otherValue:
+                return -1
+            elif sValue == otherValue:
+                return 0
+            else:
+                return 1
+        else:
+            raise RuntimeError("other is of invalid type: %s" % type(other))
+
+    def _parseBuffer(self, buf, followedByDigit=False):
+        """Parse the string buf to determine if it is string or an int
+
+        :param str buf: string to parse
+        :param bool followedByDigit: s is followed by a digit, eg. 'a1'
+        :return: integer or string value of buf
+        :rtype: int or str
+        """
+        if buf.isdigit():
+            buf = int(buf)
+        elif followedByDigit and len(buf) == 1:
+            if buf == 'a':
+                buf = 'alpha'
+            elif buf == 'b':
+                buf = 'beta'
+            elif buf == 'm':
+                buf = 'milestone'
+
+        return ALIASES.get(buf, buf)
+
+    def _stringValue(self, s):
+        """Convert a string into a comparable value.
+
+        If the string is a known qualifier, or an alias of a known qualifier,
+        then return its index in the QUALIFIERS list. Otherwise return a string
+        of the length of the QUALIFIERS list - s, eg. 7-foo
+
+        :param str s: string to convert into value
+        :return: value of string `s`
+        :rtype: str
+        """
+        if s in QUALIFIERS:
+            return str(QUALIFIERS.index(s) + 1)
+
+        return "%d-%s" % (len(QUALIFIERS), s)
 
     def fromstring(self, version):
         """Parse a maven version
 
-        <major>.<minor>.<revision>[-<qualifier> | -<build>]
+        The version string is examined one character at a time.
 
-        if the version is not of this format, then the whole thing is considered
-        a qualifier.
+        There's a buffer containing the current text - all characters are
+        appended, except for '.' and '-'. When it's stated 'append buffer to
+        list', the buffer is first converted to an int if that's possible,
+        otherwise left alone as a string. It will only be appended if it's
+        length is not 0.
+
+        * If a '.' is encountered, the current buffer is appended to the current
+          list, either as a int (if it's a number) or a string.
+        * If a '-' is encountered, do the same as when a '.' is encountered,
+          then create a new sublist, append it to the current list and replace
+          the current list with the new sub-list.
+        * If the last character was a digit:
+            * and the current one is too, append it to the buffer.
+            * otherwise append the current buffer to the list, reset the buffer
+              with the current char as content
+        * if the last character was NOT a digit:
+            * if the current character is also NOT a digit, append it to the
+              buffer
+            * if it is a digit, append buffer to list, set buffers content to
+              the digit
+        * finally, append the buffer to the list
         """
-        head, _, tail = version.partition('-')
-        if tail:
-            # we have a qualifier or build number
-            if (len(tail) == 1 or not tail.startswith('0')):
-                # tail may be a build number, try it and find out
-                try:
-                    self.build = int(tail)
-                except ValueError:
-                    # tail wasn't a build number
-                    self.qualifier = tail
+        self._unparsed = version
+        self._parsed = currentList = []
+        buf = version.lower()
+        start = 0
+        isDigit = False
+        for idx, ch in enumerate(buf):
+            if ch == '.':
+                if idx == start:
+                    currentList.append(0)
+                else:
+                    currentList.append(self._parseBuffer(buf[start:idx]))
+                start = idx + 1
+            elif ch == '-':
+                if idx == start:
+                    currentList.append(0)
+                else:
+                    currentList.append(self._parseBuffer(buf[start:idx]))
+                start = idx + 1
+                currentList = self._newList(currentList)
+            elif ch.isdigit():
+                if not isDigit and idx > start:
+                    currentList.append(self._parseBuffer(buf[start:idx], True))
+                    currentList = self._newList(currentList)
+                    start = idx
+                isDigit = True
             else:
-                # tail is a qualifier
-                self.qualifier = tail
-
-        badlyFormatted = False
-        if not ('.' in head or head.startswith('0')):
-            # may have only a major version
-            try:
-                self.major = int(head)
-            except ValueError:
-                badlyFormatted = True
+                if isDigit and idx > start:
+                    currentList.append(self._parseBuffer(buf[start:idx]))
+                    currentList = self._newList(currentList)
+                    start = idx
+                isDigit = False
         else:
-            # parse head
-            if '..' in head or head.startswith('.') or head.endswith('.'):
-                badlyFormatted = True
-            else:
-                parts = head.split('.')
-                try:
-                    self.major = int(parts.pop(0))
-                    if parts:
-                        self.minor = int(parts.pop(0))
-                    if parts:
-                        self.tiny = int(parts.pop(0))
-                    if parts:
-                        badlyFormatted = True
-                except ValueError:
-                    badlyFormatted = True
-
-            if badlyFormatted:
-                self.major = 0
-                self.minor = 0
-                self.tiny = 0
-                self.qualifier = version
-                self.build = 0
+            if len(buf) > start:
+                currentList.append(self._parseBuffer(buf[start:]))
+        currentList = self._normalize(currentList)
+        self._parsed = self._normalize(self._parsed)
