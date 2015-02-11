@@ -300,7 +300,7 @@ class VersionRange(object):
             # add the "everything" restriction
             restrictions.add(Restriction(None, False, None, False))
 
-        return Version(version, restrictions)
+        return VersionRange(version, restrictions)
 
     @staticmethod
     def fromVersion(version):
