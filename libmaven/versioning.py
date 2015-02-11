@@ -361,7 +361,7 @@ class Version(object):
         return "<%s.%s(%r)>" % (self.__module__, "Version", self._unparsed)
 
     def __str__(self):
-        return self.unparsed
+        return self._unparsed
 
     def _compare(self, this, other):
         if isinstance(this, int):
