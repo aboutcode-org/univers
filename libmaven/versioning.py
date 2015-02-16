@@ -9,6 +9,8 @@ Versioning of artifacts
 import itertools
 
 from .errors import RestrictionParseError
+from .errors import VersionRangeParseError
+
 
 EXCLUSIVE_CLOSE = ')'
 EXCLUSIVE_OPEN = '('
@@ -272,7 +274,7 @@ class VersionRange(object):
                 close = exclusiveClose
 
             if close < 0:
-                raise RuntimeError("Unbounded range: %s" % spec)
+                raise VersionRangeParseError("Unbounded range: %s" % spec)
 
             restriction = Restriction.fromstring(_spec[0:close+1])
 
@@ -282,7 +284,7 @@ class VersionRange(object):
             if upperBound is not None:
                 if restriction.lowerBound is None \
                         or restriction.lowerBound < upperBound:
-                    raise RuntimeError("Ranges overlap: %s" % spec)
+                    raise VersionRangeParseError("Ranges overlap: %s" % spec)
             restrictions.append(restriction)
             upperBound = restriction.upperBound
 
@@ -293,8 +295,9 @@ class VersionRange(object):
 
         if _spec:
             if restrictions:
-                raise RuntimeError("Only fully-qualified sets allowed in"
-                                   " multiple set scenario: %s" % spec)
+                raise VersionRangeParseError(
+                    "Only fully-qualified sets allowed in multiple set"
+                    " scenario: %s" % spec)
         else:
             version = Version(_spec)
             # add the "everything" restriction
