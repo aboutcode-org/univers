@@ -8,6 +8,7 @@ Versioning of artifacts
 
 import itertools
 
+from .errors import RestrictionParseError
 
 EXCLUSIVE_CLOSE = ')'
 EXCLUSIVE_OPEN = '('
@@ -139,6 +140,41 @@ class Restriction(object):
             self.upperBoundInclusive,
             )
 
+    @staticmethod
+    def fromstring(spec):
+        """Generate a Restriction from a string
+        """
+        lowerBoundInclusive = spec[0] == INCLUSIVE_OPEN
+        upperBoundInclusive = spec[-1] == INCLUSIVE_CLOSE
+
+        _spec = spec[1:-1].strip()
+        if ',' in _spec:
+            lowerBound, upperBound = _spec.split(',')
+            if lowerBound == upperBound:
+                raise RestrictionParseError(
+                    "Range cannot have identical boundaries: %s" % spec)
+
+            lowerVersion = Version(lowerBound) if lowerBound else None
+            upperVersion = Version(upperBound) if upperBound else None
+
+            if lowerVersion and upperVersion and upperVersion < lowerVersion:
+                raise RestrictionParseError(
+                    "Range defies version ordering: %s" % spec)
+
+            restriction = Restriction(lowerVersion, lowerBoundInclusive,
+                                      upperVersion, upperBoundInclusive)
+        else:
+            # single version restriction
+            if not lowerBoundInclusive or not upperBoundInclusive:
+                raise RestrictionParseError(
+                    "Single version must be surrounded by []: %s"
+                                   % spec)
+            version = Version(_spec)
+            restriction = Restriction(version, lowerBoundInclusive,
+                                      version, upperBoundInclusive)
+
+        return restriction
+
 
 class VersionRange(object):
     """Version range specification
@@ -208,38 +244,6 @@ class VersionRange(object):
         """
         raise NotImplementedError
 
-    @staticmethod
-    def _parseRestriction(spec):
-        lowerBoundInclusive = spec.startswith('[')
-        upperBoundInclusive = spec.endswith(']')
-
-        _spec = spec[1:-1].strip()
-        comma = _spec.find(',')
-        if comma < 0:
-            # single version restriction
-            if not lowerBoundInclusive or not upperBoundInclusive:
-                raise RuntimeError("Single version must be surrounded by []: %s"
-                                   % spec)
-            version = Version(_spec)
-            restriction = Restriction(version, lowerBoundInclusive,
-                                      version, upperBoundInclusive)
-        else:
-            lowerBound = _spec[:comma].strip()
-            upperBound = _spec[comma+1:].strip()
-            if lowerBound == upperBound:
-                raise RuntimeError("Range cannot have identical boundaries: %s"
-                                   % spec)
-            lowerVersion = Version(lowerBound) if lowerBound else None
-            upperVersion = Version(upperBound) if upperBound else None
-
-            if lowerBound and upperBound and upperBound < lowerBound:
-                raise RuntimeError("Range defies version ordering: %s" % spec)
-
-            restriction = Restriction(lowerVersion, lowerBoundInclusive,
-                                      upperVersion, upperBoundInclusive)
-
-        return restriction
-
     def clone(self):
         restrictions = self.restrictions[:] if self.restrictions else []
         return VersionRange(self.version, restrictions)
@@ -274,7 +278,7 @@ class VersionRange(object):
             if close < 0:
                 raise RuntimeError("Unbounded range: %s" % spec)
 
-            restriction = VersionRange._parseRestriction(_spec[0:close+1])
+            restriction = Restriction.fromstring(_spec[0:close+1])
 
             if lowerBound is None:
                 lowerBound = restriction.lowerBound
