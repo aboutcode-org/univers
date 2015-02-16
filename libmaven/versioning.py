@@ -244,10 +244,6 @@ class VersionRange(object):
         """
         raise NotImplementedError
 
-    def clone(self):
-        restrictions = self.restrictions[:] if self.restrictions else []
-        return VersionRange(self.version, restrictions)
-
     @staticmethod
     def fromstring(spec):
         """Create a VersionRange from a string specification
