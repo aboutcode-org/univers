@@ -261,6 +261,7 @@ class VersionRange(object):
         _spec = spec[:]
 
         restrictions = []
+        version = None
         lowerBound = None
         upperBound = None
         while (_spec.startswith(EXCLUSIVE_OPEN)
@@ -269,7 +270,7 @@ class VersionRange(object):
             inclusiveClose = _spec.find(INCLUSIVE_CLOSE)
 
             close = inclusiveClose
-            if inclusiveClose < 0 or exclusiveClose < inclusiveClose:
+            if inclusiveClose < 0 or 0 <= exclusiveClose < inclusiveClose:
                 # close is exclusive
                 close = exclusiveClose
 
