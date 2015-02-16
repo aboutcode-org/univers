@@ -298,10 +298,10 @@ class VersionRange(object):
                 raise VersionRangeParseError(
                     "Only fully-qualified sets allowed in multiple set"
                     " scenario: %s" % spec)
-        else:
-            version = Version(_spec)
-            # add the "everything" restriction
-            restrictions.add(Restriction(None, False, None, False))
+            else:
+                version = Version(_spec)
+                # add the "everything" restriction
+                restrictions.append(Restriction(None, False, None, False))
 
         return VersionRange(version, restrictions)
 
