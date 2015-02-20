@@ -79,12 +79,19 @@ class Restriction(object):
         if not isinstance(other, Restriction):
             return False
 
-        return (
-            self.lowerBound < other.lowerBound
-            or self.lowerBoundInclusive < other.lowerBoundInclusive
-            or self.upperBound < other.upperBound
-            or self.upperBoundInclusive < other.lowerBoundInclusive
-            )
+        if self.lowerBound < other.lowerBound:
+            return True
+
+        if self.lowerBoundInclusive < other.lowerBoundInclusive:
+            return True
+
+        if self.upperBound < other.upperBound:
+            return True
+
+        if self.upperBoundInclusive < other.upperBoundInclusive:
+            return True
+
+        return False
 
     def __ne__(self, other):
         return self < other or other < self
@@ -522,7 +529,7 @@ class Version(object):
         """
         self._unparsed = version
         self._parsed = currentList = []
-        buf = version.lower()
+        buf = str(version).lower()
         start = 0
         isDigit = False
         for idx, ch in enumerate(buf):

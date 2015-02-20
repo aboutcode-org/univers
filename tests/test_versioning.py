@@ -140,6 +140,17 @@ class TestVersion(unittest.TestCase):
             for high in versionNumbers[idx+1:]:
                 self._assertVersionOrder(low, high)
 
+        unicodeVersionNumbers = (
+            # again, but with unicode input
+            u"2.0", u"2-1", u"2.0.a", u"2.0.0.a", u"2.0.2", u"2.0.123", u"2.1.0",
+            u"2.1-a", u"2.1b", u"2.1-x", u"2.1-1", u"2.1.0.1", u"2.2", u"2.123",
+            u"11.a2", u"11.a11", u"11.b2", u"11.b11", u"11.m2", u"11.m11", u"11",
+            u"11.a", u"11b", u"11c", u"11m",
+            )
+        for idx, low in enumerate(versionNumbers[:-1]):
+            for high in versionNumbers[idx+1:]:
+                self._assertVersionOrder(low, high)
+
     def testVersionEquality(self):
         self._assertVersionEqual("1", "1")
         self._assertVersionEqual("1", "1.0")
@@ -186,6 +197,31 @@ class TestVersion(unittest.TestCase):
         self._assertVersionEqual("1m3", "1MileStone3")
         self._assertVersionEqual("1m3", "1MILESTONE3")
 
+        # unicode
+        self._assertVersionEqual(u"1", "1")
+        self._assertVersionEqual(u"1", "1.0")
+        self._assertVersionEqual(u"1", "1.0.0")
+        self._assertVersionEqual(u"1.0", "1.0.0")
+        self._assertVersionEqual(u"1", "1-0")
+        self._assertVersionEqual(u"1", "1.0-0")
+        self._assertVersionEqual(u"1.0", "1.0-0")
+
+        self._assertVersionEqual("1", u"1")
+        self._assertVersionEqual("1", u"1.0")
+        self._assertVersionEqual("1", u"1.0.0")
+        self._assertVersionEqual("1.0", u"1.0.0")
+        self._assertVersionEqual("1", u"1-0")
+        self._assertVersionEqual("1", u"1.0-0")
+        self._assertVersionEqual("1.0", u"1.0-0")
+
+        self._assertVersionEqual(u"1", u"1")
+        self._assertVersionEqual(u"1", u"1.0")
+        self._assertVersionEqual(u"1", u"1.0.0")
+        self._assertVersionEqual(u"1.0", u"1.0.0")
+        self._assertVersionEqual(u"1", u"1-0")
+        self._assertVersionEqual(u"1", u"1.0-0")
+        self._assertVersionEqual(u"1.0", u"1.0-0")
+
     def testVersionCompare(self):
         self._assertVersionOrder("1", "2")
         self._assertVersionOrder("1.5", "2")
@@ -209,6 +245,75 @@ class TestVersion(unittest.TestCase):
         self._assertVersionOrder("2.0.1", "2.0.1-xyz")
         self._assertVersionOrder("2.0.1", "2.0.1-123")
         self._assertVersionOrder("2.0.1-xyz", "2.0.1-123")
+        # unicode input
+        self._assertVersionOrder(u"1", "2")
+        self._assertVersionOrder(u"1.5", "2")
+        self._assertVersionOrder(u"1", "2.5")
+        self._assertVersionOrder(u"1.0", "1.1")
+        self._assertVersionOrder(u"1.1", "1.2")
+        self._assertVersionOrder(u"1.0.0", "1.1")
+        self._assertVersionOrder(u"1.0.1", "1.1")
+        self._assertVersionOrder(u"1.1", "1.2.0")
+        self._assertVersionOrder(u"1.0-alpha-1", "1.0")
+        self._assertVersionOrder(u"1.0-alpha-1", "1.0-alpha-2")
+        self._assertVersionOrder(u"1.0-alpha-1", "1.0-beta-1")
+        self._assertVersionOrder(u"1.0-beta-1", "1.0-SNAPSHOT")
+        self._assertVersionOrder(u"1.0-SNAPSHOT", "1.0")
+        self._assertVersionOrder(u"1.0-alpha-1-SNAPSHOT", "1.0-alpha-1")
+        self._assertVersionOrder(u"1.0", "1.0-1")
+        self._assertVersionOrder(u"1.0-1", "1.0-2")
+        self._assertVersionOrder(u"1.0.0", "1.0-1")
+        self._assertVersionOrder(u"2.0-1", "2.0.1")
+        self._assertVersionOrder(u"2.0.1-klm", "2.0.1-lmn")
+        self._assertVersionOrder(u"2.0.1", "2.0.1-xyz")
+        self._assertVersionOrder(u"2.0.1", "2.0.1-123")
+        self._assertVersionOrder(u"2.0.1-xyz", "2.0.1-123")
+
+        self._assertVersionOrder("1", u"2")
+        self._assertVersionOrder("1.5", u"2")
+        self._assertVersionOrder("1", u"2.5")
+        self._assertVersionOrder("1.0", u"1.1")
+        self._assertVersionOrder("1.1", u"1.2")
+        self._assertVersionOrder("1.0.0", u"1.1")
+        self._assertVersionOrder("1.0.1", u"1.1")
+        self._assertVersionOrder("1.1", u"1.2.0")
+        self._assertVersionOrder("1.0-alpha-1", u"1.0")
+        self._assertVersionOrder("1.0-alpha-1", u"1.0-alpha-2")
+        self._assertVersionOrder("1.0-alpha-1", u"1.0-beta-1")
+        self._assertVersionOrder("1.0-beta-1", u"1.0-SNAPSHOT")
+        self._assertVersionOrder("1.0-SNAPSHOT", u"1.0")
+        self._assertVersionOrder("1.0-alpha-1-SNAPSHOT", u"1.0-alpha-1")
+        self._assertVersionOrder("1.0", u"1.0-1")
+        self._assertVersionOrder("1.0-1", u"1.0-2")
+        self._assertVersionOrder("1.0.0", u"1.0-1")
+        self._assertVersionOrder("2.0-1", u"2.0.1")
+        self._assertVersionOrder("2.0.1-klm", u"2.0.1-lmn")
+        self._assertVersionOrder("2.0.1", u"2.0.1-xyz")
+        self._assertVersionOrder("2.0.1", u"2.0.1-123")
+        self._assertVersionOrder("2.0.1-xyz", u"2.0.1-123")
+
+        self._assertVersionOrder(u"1", u"2")
+        self._assertVersionOrder(u"1.5", u"2")
+        self._assertVersionOrder(u"1", u"2.5")
+        self._assertVersionOrder(u"1.0", u"1.1")
+        self._assertVersionOrder(u"1.1", u"1.2")
+        self._assertVersionOrder(u"1.0.0", u"1.1")
+        self._assertVersionOrder(u"1.0.1", u"1.1")
+        self._assertVersionOrder(u"1.1", u"1.2.0")
+        self._assertVersionOrder(u"1.0-alpha-1", u"1.0")
+        self._assertVersionOrder(u"1.0-alpha-1", u"1.0-alpha-2")
+        self._assertVersionOrder(u"1.0-alpha-1", u"1.0-beta-1")
+        self._assertVersionOrder(u"1.0-beta-1", u"1.0-SNAPSHOT")
+        self._assertVersionOrder(u"1.0-SNAPSHOT", u"1.0")
+        self._assertVersionOrder(u"1.0-alpha-1-SNAPSHOT", u"1.0-alpha-1")
+        self._assertVersionOrder(u"1.0", u"1.0-1")
+        self._assertVersionOrder(u"1.0-1", u"1.0-2")
+        self._assertVersionOrder(u"1.0.0", u"1.0-1")
+        self._assertVersionOrder(u"2.0-1", u"2.0.1")
+        self._assertVersionOrder(u"2.0.1-klm", u"2.0.1-lmn")
+        self._assertVersionOrder(u"2.0.1", u"2.0.1-xyz")
+        self._assertVersionOrder(u"2.0.1", u"2.0.1-123")
+        self._assertVersionOrder(u"2.0.1-xyz", u"2.0.1-123")
 
 
 class TestVersionRange(unittest.TestCase):
