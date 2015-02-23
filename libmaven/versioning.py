@@ -529,7 +529,7 @@ class Version(object):
         """
         self._unparsed = version
         self._parsed = currentList = []
-        buf = str(version).lower()
+        buf = str(version.strip()).lower()
         start = 0
         isDigit = False
         for idx, ch in enumerate(buf):

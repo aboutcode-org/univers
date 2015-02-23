@@ -81,7 +81,7 @@ class TestVersion(unittest.TestCase):
             # test some major.minor.tiny parsing
             ("1", [1]), ("1.0", [1]), ("1.0.0", [1]),
             ("1.0.0.0", [1]), ("11", [11]), ("11.0", [11]),
-            ("1-1", [1, [1]]), ("1-1-1", [1, [1, [1]]]),
+            ("1-1", [1, [1]]), ("1-1-1", [1, [1, [1]]]), (" 1 ", [1]),
             # test qualifeirs
             ("1-ALPHA", [1, ["alpha"]]), ("1-alpha", [1, ["alpha"]]),
             ("1ALPHA", [1, ["alpha"]]), ("1-alpha", [1, ["alpha"]]),
