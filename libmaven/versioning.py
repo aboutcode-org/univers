@@ -31,23 +31,23 @@ ALIASES = {
 class Restriction(object):
     """Describes a restriction in versioning
     """
-    def __init__(self, lowerBound, lowerBoundInclusive, upperBound,
-                 upperBoundInclusive):
+    def __init__(self, lower_bound, lower_bound_inclusive, upper_bound,
+                 upper_bound_inclusive):
         """Create a restriction
 
-        :param lowerBound: the lowest version acceptable
-        :type lowerBound: artifactory.versioning.Version
-        :param lowerBoundInclusive: restriction includes the lower bound
-        :type lowerBoundInclusive: bool
-        :param upperBound: the highest version acceptable
-        :type upperBound: artifactory.versioning.Version
-        :param upperBoundInclusive: restriction includes the upper bound
-        :type upperBoundInclusive: bool
+        :param lower_bound: the lowest version acceptable
+        :type lower_bound: artifactory.versioning.Version
+        :param lower_bound_inclusive: restriction includes the lower bound
+        :type lower_bound_inclusive: bool
+        :param upper_bound: the highest version acceptable
+        :type upper_bound: artifactory.versioning.Version
+        :param upper_bound_inclusive: restriction includes the upper bound
+        :type upper_bound_inclusive: bool
         """
-        self.lowerBound = lowerBound
-        self.lowerBoundInclusive = lowerBoundInclusive
-        self.upperBound = upperBound
-        self.upperBoundInclusive = upperBoundInclusive
+        self.lower_bound = lower_bound
+        self.lower_bound_inclusive = lower_bound_inclusive
+        self.upper_bound = upper_bound
+        self.upper_bound_inclusive = upper_bound_inclusive
 
     def __contains__(self, version):
         """Return true if version is contained within the restriction
@@ -56,18 +56,18 @@ class Restriction(object):
         lower bound is inclusive) and less than the upper bount ( or equal to it
         if the upper bound is inclusive).
         """
-        if self.lowerBound:
-            if self.lowerBound == version and not self.lowerBoundInclusive:
+        if self.lower_bound:
+            if self.lower_bound == version and not self.lower_bound_inclusive:
                 return False
 
-            if self.lowerBound > version:
+            if self.lower_bound > version:
                 return False
 
-        if self.upperBound:
-            if self.upperBound == version and not self.upperBoundInclusive:
+        if self.upper_bound:
+            if self.upper_bound == version and not self.upper_bound_inclusive:
                 return False
 
-            if self.upperBound < version:
+            if self.upper_bound < version:
                 return False
 
         return True
@@ -79,16 +79,16 @@ class Restriction(object):
         if not isinstance(other, Restriction):
             return False
 
-        if self.lowerBound < other.lowerBound:
+        if self.lower_bound < other.lower_bound:
             return True
 
-        if self.lowerBoundInclusive < other.lowerBoundInclusive:
+        if self.lower_bound_inclusive < other.lower_bound_inclusive:
             return True
 
-        if self.upperBound < other.upperBound:
+        if self.upper_bound < other.upper_bound:
             return True
 
-        if self.upperBoundInclusive < other.upperBoundInclusive:
+        if self.upper_bound_inclusive < other.upper_bound_inclusive:
             return True
 
         return False
@@ -110,32 +110,32 @@ class Restriction(object):
 
     def __hash__(self):
         result = 13
-        if self.lowerBound:
-            result += hash(self.lowerBound)
+        if self.lower_bound:
+            result += hash(self.lower_bound)
         else:
             result += 1
 
-        result *= 1 if self.lowerBoundInclusive else 2
+        result *= 1 if self.lower_bound_inclusive else 2
 
-        if self.upperBound:
-            result -= hash(self.upperBound)
+        if self.upper_bound:
+            result -= hash(self.upper_bound)
         else:
             result -= 3
 
-        result += 2 if self.upperBoundInclusive else 3
+        result += 2 if self.upper_bound_inclusive else 3
 
         return result
 
     def __str__(self):
         s = ""
-        s += '[' if self.lowerBoundInclusive else '('
-        if self.lowerBound:
-            s += str(self.lowerBound)
+        s += '[' if self.lower_bound_inclusive else '('
+        if self.lower_bound:
+            s += str(self.lower_bound)
         s += ','
 
-        if self.upperBound:
-            s += str(self.upperBound)
-        s += ']' if self.lowerBoundInclusive else ')'
+        if self.upper_bound:
+            s += str(self.upper_bound)
+        s += ']' if self.lower_bound_inclusive else ')'
 
         return s
 
@@ -143,44 +143,44 @@ class Restriction(object):
         return "<%s.%s(%r, %r, %r, %r)>" % (
             self.__module__,
             "Restriction",
-            self.lowerBound,
-            self.lowerBoundInclusive,
-            self.upperBound,
-            self.upperBoundInclusive,
+            self.lower_bound,
+            self.lower_bound_inclusive,
+            self.upper_bound,
+            self.upper_bound_inclusive,
             )
 
     @staticmethod
     def fromstring(spec):
         """Generate a Restriction from a string
         """
-        lowerBoundInclusive = spec[0] == INCLUSIVE_OPEN
-        upperBoundInclusive = spec[-1] == INCLUSIVE_CLOSE
+        lower_bound_inclusive = spec[0] == INCLUSIVE_OPEN
+        upper_bound_inclusive = spec[-1] == INCLUSIVE_CLOSE
 
         _spec = spec[1:-1].strip()
         if ',' in _spec:
-            lowerBound, upperBound = _spec.split(',')
-            if lowerBound == upperBound:
+            lower_bound, upper_bound = _spec.split(',')
+            if lower_bound == upper_bound:
                 raise RestrictionParseError(
                     "Range cannot have identical boundaries: %s" % spec)
 
-            lowerVersion = Version(lowerBound) if lowerBound else None
-            upperVersion = Version(upperBound) if upperBound else None
+            lower_version = Version(lower_bound) if lower_bound else None
+            upper_version = Version(upper_bound) if upper_bound else None
 
-            if lowerVersion and upperVersion and upperVersion < lowerVersion:
+            if lower_version and upper_version and upper_version < lower_version:
                 raise RestrictionParseError(
                     "Range defies version ordering: %s" % spec)
 
-            restriction = Restriction(lowerVersion, lowerBoundInclusive,
-                                      upperVersion, upperBoundInclusive)
+            restriction = Restriction(lower_version, lower_bound_inclusive,
+                                      upper_version, upper_bound_inclusive)
         else:
             # single version restriction
-            if not lowerBoundInclusive or not upperBoundInclusive:
+            if not lower_bound_inclusive or not upper_bound_inclusive:
                 raise RestrictionParseError(
                     "Single version must be surrounded by []: %s"
                                    % spec)
             version = Version(_spec)
-            restriction = Restriction(version, lowerBoundInclusive,
-                                      version, upperBoundInclusive)
+            restriction = Restriction(version, lower_bound_inclusive,
+                                      version, upper_bound_inclusive)
 
         return restriction
 
@@ -269,32 +269,32 @@ class VersionRange(object):
 
         restrictions = []
         version = None
-        lowerBound = None
-        upperBound = None
+        lower_bound = None
+        upper_bound = None
         while (_spec.startswith(EXCLUSIVE_OPEN)
                or _spec.startswith(INCLUSIVE_OPEN)):
-            exclusiveClose = _spec.find(EXCLUSIVE_CLOSE)
-            inclusiveClose = _spec.find(INCLUSIVE_CLOSE)
+            exclusive_close = _spec.find(EXCLUSIVE_CLOSE)
+            inclusive_close = _spec.find(INCLUSIVE_CLOSE)
 
-            close = inclusiveClose
-            if inclusiveClose < 0 or 0 <= exclusiveClose < inclusiveClose:
+            close = inclusive_close
+            if inclusive_close < 0 or 0 <= exclusive_close < inclusive_close:
                 # close is exclusive
-                close = exclusiveClose
+                close = exclusive_close
 
             if close < 0:
                 raise VersionRangeParseError("Unbounded range: %s" % spec)
 
             restriction = Restriction.fromstring(_spec[0:close+1])
 
-            if lowerBound is None:
-                lowerBound = restriction.lowerBound
+            if lower_bound is None:
+                lower_bound = restriction.lower_bound
 
-            if upperBound is not None:
-                if restriction.lowerBound is None \
-                        or restriction.lowerBound < upperBound:
+            if upper_bound is not None:
+                if restriction.lower_bound is None \
+                        or restriction.lower_bound < upper_bound:
                     raise VersionRangeParseError("Ranges overlap: %s" % spec)
             restrictions.append(restriction)
-            upperBound = restriction.upperBound
+            upper_bound = restriction.upper_bound
 
             _spec = _spec[close+1:]
             if _spec and _spec.startswith(','):
@@ -314,23 +314,23 @@ class VersionRange(object):
         return VersionRange(version, restrictions)
 
     @staticmethod
-    def fromVersion(version):
+    def from_version(version):
         return VersionRange(version, [])
 
-    def restrict(self, versionRange):
+    def restrict(self, version_range):
         """Retruns a new VersionRange that is a restriction of this
         and the specified version range.
 
         Prefers this version over the specified version range
 
-        :param versionRange the version range that will restrict this range
-        :type versionRange VersionRange
+        :param version_range the version range that will restrict this range
+        :type version_range VersionRange
         :return intersection of this version range and the specified one
         :rypte VersionRange
         """
         raise NotImplementedError
 
-    def matchVersion(self, versions):
+    def match_version(self, versions):
         matched = None
         for version in sorted(versions, reverse=True):
             if version in self:
@@ -376,15 +376,15 @@ class Version(object):
 
     def _compare(self, this, other):
         if isinstance(this, int):
-            return self._intCompare(this, other)
+            return self._int_compare(this, other)
         elif isinstance(this, str):
-            return self._stringCompare(this, other)
+            return self._string_compare(this, other)
         elif isinstance(this, list):
-            return self._listCompare(this, other)
+            return self._list_compare(this, other)
         else:
             raise RuntimeError("Unkown type for t: %r" % this)
 
-    def _intCompare(self, this, other):
+    def _int_compare(self, this, other):
         if isinstance(other, int):
             return this - other
         elif isinstance(other, (str, list)):
@@ -394,7 +394,7 @@ class Version(object):
         else:
             raise RuntimeError("other is of invalid type: %s" % type(other))
 
-    def _listCompare(self, l, other):
+    def _list_compare(self, l, other):
         if other is None:
             if len(l) == 0:
                 return 0
@@ -419,7 +419,7 @@ class Version(object):
         else:
             raise RuntimeError("other is of invalid type: %s" % type(other))
 
-    def _newList(self, l):
+    def _new_list(self, l):
         """Create a new sublist, append it to the current list and return the
         sublist
 
@@ -440,7 +440,7 @@ class Version(object):
                 break
         return l
 
-    def _stringCompare(self, s, other):
+    def _string_compare(self, s, other):
         """Compare string item `s` to `other`
 
         :param str s: string item to compare
@@ -448,33 +448,33 @@ class Version(object):
         :type other: int, str, list or None
         """
         if other is None:
-            return self._stringCompare(s, "")
+            return self._string_compare(s, "")
 
         if isinstance(other, (int, list)):
             return -1
         elif isinstance(other, str):
-            sValue = self._stringValue(s)
-            otherValue = self._stringValue(other)
-            if sValue < otherValue:
+            s_value = self._string_value(s)
+            other_value = self._string_value(other)
+            if s_value < other_value:
                 return -1
-            elif sValue == otherValue:
+            elif s_value == other_value:
                 return 0
             else:
                 return 1
         else:
             raise RuntimeError("other is of invalid type: %s" % type(other))
 
-    def _parseBuffer(self, buf, followedByDigit=False):
+    def _parse_buffer(self, buf, followed_by_digit=False):
         """Parse the string buf to determine if it is string or an int
 
         :param str buf: string to parse
-        :param bool followedByDigit: s is followed by a digit, eg. 'a1'
+        :param bool followed_by_digit: s is followed by a digit, eg. 'a1'
         :return: integer or string value of buf
         :rtype: int or str
         """
         if buf.isdigit():
             buf = int(buf)
-        elif followedByDigit and len(buf) == 1:
+        elif followed_by_digit and len(buf) == 1:
             if buf == 'a':
                 buf = 'alpha'
             elif buf == 'b':
@@ -484,7 +484,7 @@ class Version(object):
 
         return ALIASES.get(buf, buf)
 
-    def _stringValue(self, s):
+    def _string_value(self, s):
         """Convert a string into a comparable value.
 
         If the string is a known qualifier, or an alias of a known qualifier,
@@ -528,38 +528,38 @@ class Version(object):
         * finally, append the buffer to the list
         """
         self._unparsed = version
-        self._parsed = currentList = []
+        self._parsed = current_list = []
         buf = str(version.strip()).lower()
         start = 0
-        isDigit = False
+        is_digit = False
         for idx, ch in enumerate(buf):
             if ch == '.':
                 if idx == start:
-                    currentList.append(0)
+                    current_list.append(0)
                 else:
-                    currentList.append(self._parseBuffer(buf[start:idx]))
+                    current_list.append(self._parse_buffer(buf[start:idx]))
                 start = idx + 1
             elif ch == '-':
                 if idx == start:
-                    currentList.append(0)
+                    current_list.append(0)
                 else:
-                    currentList.append(self._parseBuffer(buf[start:idx]))
+                    current_list.append(self._parse_buffer(buf[start:idx]))
                 start = idx + 1
-                currentList = self._newList(currentList)
+                current_list = self._new_list(current_list)
             elif ch.isdigit():
-                if not isDigit and idx > start:
-                    currentList.append(self._parseBuffer(buf[start:idx], True))
-                    currentList = self._newList(currentList)
+                if not is_digit and idx > start:
+                    current_list.append(self._parse_buffer(buf[start:idx], True))
+                    current_list = self._new_list(current_list)
                     start = idx
-                isDigit = True
+                is_digit = True
             else:
-                if isDigit and idx > start:
-                    currentList.append(self._parseBuffer(buf[start:idx]))
-                    currentList = self._newList(currentList)
+                if is_digit and idx > start:
+                    current_list.append(self._parse_buffer(buf[start:idx]))
+                    current_list = self._new_list(current_list)
                     start = idx
-                isDigit = False
+                is_digit = False
         else:
             if len(buf) > start:
-                currentList.append(self._parseBuffer(buf[start:]))
-        currentList = self._normalize(currentList)
+                current_list.append(self._parse_buffer(buf[start:]))
+        current_list = self._normalize(current_list)
         self._parsed = self._normalize(self._parsed)
