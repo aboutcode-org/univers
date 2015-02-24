@@ -6,10 +6,11 @@ Test version handling
 """
 import unittest
 
-from libmaven import errors
+from libmaven import Version
+from libmaven import VersionRange
+from libmaven.errors import RestrictionParseError
+from libmaven.errors import VersionRangeParseError
 from libmaven.versioning import Restriction
-from libmaven.versioning import Version
-from libmaven.versioning import VersionRange
 
 
 class TestRestriction(unittest.TestCase):
@@ -51,7 +52,7 @@ class TestRestriction(unittest.TestCase):
                  "(1.0,1.0)", "[1.1,1.0]",)
         for spec in tests:
             self.assertRaises(
-                errors.RestrictionParseError,
+                RestrictionParseError,
                 Restriction.fromstring,
                 spec,
                 )
@@ -390,4 +391,4 @@ class TestVersionRange(unittest.TestCase):
         for spec in ("[1.0,1.2),1.3", "[1.0,1.2),(1.1,1.3]",
                      "[1.1,1.3),(1.0,1.2]", "(1.1,1.2],[1.0,1.1)",):
             self.assertRaises(
-                errors.VersionRangeParseError, VersionRange.fromstring, spec)
+                VersionRangeParseError, VersionRange.fromstring, spec)
