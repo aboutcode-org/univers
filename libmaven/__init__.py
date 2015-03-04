@@ -15,8 +15,9 @@
 #
 
 
+from .artifact import Artifact
 from .versioning import Version
 from .versioning import VersionRange
 
 
-__all__ = ["Version", "VersionRange"]
+__all__ = ["Artifact", "Version", "VersionRange"]
