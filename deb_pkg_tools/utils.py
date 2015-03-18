@@ -1,7 +1,7 @@
 # Debian packaging tools: Utility functions.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: November 15, 2014
+# Last Change: March 18, 2015
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -16,6 +16,7 @@ modules in the `deb-pkg-tools` package.
 # Standard library modules.
 import errno
 import hashlib
+import logging
 import os
 import pwd
 import random
@@ -23,10 +24,14 @@ import tempfile
 import time
 
 # External dependencies.
+from executor import execute
 from humanfriendly import Spinner, Timer
 
 # Modules included in our package.
 from deb_pkg_tools.compat import total_ordering
+
+# Initialize a logger.
+logger = logging.getLogger(__name__)
 
 def compact(text, **kw):
     """
@@ -100,6 +105,52 @@ def optimize_order(package_archives):
     """
     random.shuffle(package_archives)
     return package_archives
+
+def find_debian_architecture():
+    """
+    Find the Debian architecture of the current environment.
+
+    Uses :py:func:`os.uname()` to determine the current machine architecture
+    (the fifth value returned by :py:func:`os.uname()`) and translates it into
+    one of the `machine architecture labels`_ used in the Debian packaging
+    system:
+
+    ====================  ===================
+    Machine architecture  Debian architecture
+    ====================  ===================
+    ``i686``              ``i386``
+    ``x86_64``            ``amd64``
+    ``armv6l``            ``armhf``
+    ====================  ===================
+
+    When the machine architecture is not listed above, this function falls back
+    to the external command ``dpkg-architecture -qDEB_BUILD_ARCH`` (provided by
+    the ``dpkg-dev`` package). This command is not used by default because:
+
+    1. deb-pkg-tools doesn't have a strict dependency on ``dpkg-dev``.
+    2. The ``dpkg-architecture`` program enables callers to set the current
+       architecture and the exact semantics of this are unclear to me at the
+       time of writing (it can't automagically provide a cross compilation
+       environment, so what exactly does it do?).
+
+    :returns: The Debian architecture (a string like ``i386``, ``amd64``,
+              ``armhf``, etc).
+    :raises: :py:exc:`~executor.ExternalCommandFailed` when the
+             ``dpkg-architecture`` program is not available or reports an
+             error.
+
+    .. _machine architecture labels: https://www.debian.org/doc/debian-policy/ch-controlfields.html#s-f-Architecture
+    .. _more architectures: https://www.debian.org/ports/index.en.html#portlist-released
+    """
+    sysname, nodename, release, version, machine = os.uname()
+    if machine == 'i686':
+        return 'i386'
+    elif machine == 'x86_64':
+        return 'amd64'
+    elif machine == 'armv6l':
+        return 'armhf'
+    else:
+        return execute('dpkg-architecture', '-qDEB_BUILD_ARCH', capture=True, logger=logger).strip()
 
 class atomic_lock(object):
 

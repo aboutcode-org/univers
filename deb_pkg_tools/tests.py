@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: December 16, 2014
+# Last Change: March 18, 2015
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -19,6 +19,7 @@ import unittest
 # External dependencies.
 import coloredlogs
 from debian.deb822 import Deb822
+from executor import execute
 
 # Modules included in our package.
 from deb_pkg_tools import version
@@ -29,12 +30,12 @@ from deb_pkg_tools.compat import StringIO, unicode
 from deb_pkg_tools.control import (deb822_from_string, load_control_file,
                                    merge_control_fields, parse_control_fields,
                                    unparse_control_fields)
-from deb_pkg_tools.deps import (AlternativeRelationship, VersionedRelationship,
-                                parse_depends, Relationship, RelationshipSet)
+from deb_pkg_tools.deps import VersionedRelationship, parse_depends, Relationship, RelationshipSet
 from deb_pkg_tools.gpg import GPGKey
 from deb_pkg_tools.package import collect_related_packages, copy_package_files, find_latest_version, find_package_archives, group_by_latest_versions, inspect_package, parse_filename
 from deb_pkg_tools.printer import CustomPrettyPrinter
 from deb_pkg_tools.repo import apt_supports_trusted_option, update_repository
+from deb_pkg_tools.utils import find_debian_architecture
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
@@ -93,6 +94,10 @@ class DebPkgToolsTestCase(unittest.TestCase):
                     os.utime(package_file, None)
                 else:
                     self.load_package_cache()
+
+    def test_architecture_determination(self):
+        valid_architectures = execute('dpkg-architecture', '-L', capture=True).splitlines()
+        self.assertTrue(find_debian_architecture() in valid_architectures)
 
     def test_find_latest_version(self):
         good = ['name_1.0_all.deb', 'name_0.5_all.deb']
