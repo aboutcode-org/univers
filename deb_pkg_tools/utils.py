@@ -1,7 +1,7 @@
 # Debian packaging tools: Utility functions.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: March 18, 2015
+# Last Change: April 10, 2015
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -24,7 +24,7 @@ import tempfile
 import time
 
 # External dependencies.
-from executor import execute
+from executor import execute, ExternalCommandFailed
 from humanfriendly import Spinner, Timer
 
 # Modules included in our package.
@@ -151,6 +151,21 @@ def find_debian_architecture():
         return 'armhf'
     else:
         return execute('dpkg-architecture', '-qDEB_BUILD_ARCH', capture=True, logger=logger).strip()
+
+def find_installed_version(package_name):
+    """
+    Find the installed version of a Debian system package.
+
+    Uses the ``dpkg-query --show --showformat='${Version}' ...`` command.
+
+    :param package_name: The name of the package (a string).
+    :returns: The installed version of the package (a string) or ``None`` if
+              the version can't be found.
+    """
+    try:
+        return execute('dpkg-query','--show', '--showformat=${Version}', package_name, capture=True, silent=True)
+    except ExternalCommandFailed:
+        return None
 
 class atomic_lock(object):
 
