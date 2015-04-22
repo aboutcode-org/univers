@@ -72,41 +72,24 @@ class Restriction(object):
 
         return True
 
-    def __lt__(self, other):
+    def __cmp__(self, other):
         if self is other:
-            return False
+            return 0
 
         if not isinstance(other, Restriction):
-            return False
+            if isinstance(other, basestring):
+                return cmp(self, Restriction.fromstring(other))
+            return -1
 
-        if self.lower_bound < other.lower_bound:
-            return True
-
-        if self.lower_bound_inclusive < other.lower_bound_inclusive:
-            return True
-
-        if self.upper_bound < other.upper_bound:
-            return True
-
-        if self.upper_bound_inclusive < other.upper_bound_inclusive:
-            return True
-
-        return False
-
-    def __ne__(self, other):
-        return self < other or other < self
-
-    def __eq__(self, other):
-        return not self != other
-
-    def __gt__(self, other):
-        return other < self
-
-    def __ge__(self, other):
-        return not (self < other)
-
-    def __le__(self, other):
-        return not (self > other)
+        result = cmp(self.lower_bound, other.lower_bound)
+        if result == 0:
+            result = cmp(self.lower_bound_inclusive, other.lower_bound_inclusive)
+            if result == 0:
+                result = cmp(self.upper_bound, other.upper_bound)
+                if result == 0:
+                    result = cmp(self.upper_bound_inclusive,
+                                 other.upper_bound_inclusive)
+        return result
 
     def __hash__(self):
         result = 13
@@ -194,35 +177,23 @@ class VersionRange(object):
         self.version = version
         self.restrictions = restrictions
 
-    def __contains__(self, version):
-        return any((version in r) for r in self.restrictions)
-
-    def __lt__(self, other):
+    def __cmp__(self, other):
         if self is other:
-            return False
+            return 0
 
         if not isinstance(other, VersionRange):
-            return False
+            if isinstance(other, basestring):
+                return self.__cmp__(VersionRange.fromstring(other))
+            return -1
 
-        return (
-            self.version < other.version
-            and self.restrictions < other.restrictions
-            )
+        result = cmp(self.version, other.version)
+        if result == 0:
+            result =  cmp(self.restrictions, other.restrictions)
 
-    def __ne__(self, other):
-        return self < other or other < self
+        return result
 
-    def __eq__(self, other):
-        return not self != other
-
-    def __gt__(self, other):
-        return other < self
-
-    def __ge__(self, other):
-        return not (self < other)
-
-    def __le__(self, other):
-        return not (self > other)
+    def __contains__(self, version):
+        return any((version in r) for r in self.restrictions)
 
     def __hash__(self):
         result = 7
@@ -352,7 +323,9 @@ class Version(object):
             return 0
 
         if not isinstance(other, Version):
-            return 1
+            if isinstance(other, basestring):
+                return self._compare(self._parsed, Version(other)._parsed)
+            return -1
 
         return self._compare(self._parsed, other._parsed)
 

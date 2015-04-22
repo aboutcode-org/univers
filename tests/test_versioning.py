@@ -63,18 +63,45 @@ class TestVersion(unittest.TestCase):
     def _assert_version_equal(self, v1, v2):
         V1 = Version(v1)
         V2 = Version(v2)
+        # test Version equal Version
         assert V1 == V2, \
             "%s != %s" % (V1._parsed, V2._parsed)
         assert V2 == V1, \
             "%s != %s" % (V2._parsed, V1._parsed)
 
+        # test str equal Version
+        assert v1 == V2, \
+            "%s != %s" % (v1, V2._parsed)
+        assert v2 == V1, \
+            "%s != %s" % (v2, V1._parsed)
+
+        # test Version equal str
+        assert V1 == v2, \
+            "%s != %s" % (V1._parsed, v2)
+        assert V2 == v1, \
+            "%s != %s" % (V2._parsed, v1)
+
     def _assert_version_order(self, v1, v2):
         V1 = Version(v1)
         V2 = Version(v2)
+
+        # Version <-> Version order
         assert V1 < V2, \
             "%s >= %s" % (V1._parsed, V2._parsed)
         assert V2 > V1, \
             "%s >= %s" % (V2._parsed, V1._parsed)
+
+        # Version <-> str order
+        assert V1 < v2, \
+            "%s >= %s" % (V1._parsed, v2)
+        assert V2 > v1, \
+            "%s >= %s" % (V2._parsed, v1)
+
+        # str <-> Version order
+        assert v1 < V2, \
+            "%s >= %s" % (v1, V2._parsed)
+        assert v2 > V1, \
+            "%s >= %s" % (v2, V1._parsed)
 
     def test_from_string(self):
         test_pairs = (
@@ -353,29 +380,40 @@ class TestVersionRange(unittest.TestCase):
     def test_snapshots(self):
         vr = VersionRange.fromstring("[1.0,)")
         assert Version("1.0-SNAPSHOT") not in vr
+        assert "1.0-SNAPSHOT" not in vr
 
         vr = VersionRange.fromstring("[1.0,1.1-SNAPSHOT]")
         assert Version("1.1-SNAPSHOT") in vr
+        assert "1.1-SNAPSHOT" in vr
 
         vr = VersionRange.fromstring("[1.0,1.2]")
         assert Version("1.1-SNAPSHOT") in vr
         assert Version("1.2-SNAPSHOT") in vr
         assert Version("1.3-SNAPSHOT") not in vr
+        assert "1.1-SNAPSHOT" in vr
+        assert "1.2-SNAPSHOT" in vr
+        assert "1.3-SNAPSHOT" not in vr
 
         vr = VersionRange.fromstring("[1.0,1.2-SNAPSHOT]")
         assert Version("1.1-SNAPSHOT") in vr
         assert Version("1.2-SNAPSHOT") in vr
+        assert "1.1-SNAPSHOT" in vr
+        assert "1.2-SNAPSHOT" in vr
 
         vr = VersionRange.fromstring("[1.0-SNAPSHOT,1.2]")
         assert Version("1.0-SNAPSHOT") in vr
         assert Version("1.1-SNAPSHOT") in vr
+        assert "1.0-SNAPSHOT" in vr
+        assert "1.1-SNAPSHOT" in vr
 
         vr = VersionRange.fromstring("1.0-SNAPSHOT")
         assert Version("1.0-SNAPSHOT") in vr
+        assert "1.0-SNAPSHOT" in vr
 
     def test_long_version(self):
         vr = VersionRange.fromstring("[5.0.9.0,5.0.10.0)")
         assert Version("5.0.9.0") in vr
+        assert "5.0.9.0" in vr
 
     def test_contains(self):
         test_pairs = (("2.0.5", True), ("2.0.4", True), ("[2.0.5]", True),
@@ -386,6 +424,8 @@ class TestVersionRange(unittest.TestCase):
         for spec, expected in test_pairs:
             vr = VersionRange.fromstring(spec)
             assert (v in vr) == expected
+            assert ("2.0.5" in vr) == expected
+
 
     def test_invalid_ranges(self):
         for spec in ("[1.0,1.2),1.3", "[1.0,1.2),(1.1,1.3]",
