@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: March 18, 2015
+# Last Change: April 23, 2015
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -446,10 +446,33 @@ class DebPkgToolsTestCase(unittest.TestCase):
             directory = finalizers.mkdtemp()
             package1 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-1', Depends='deb-pkg-tools-package-2'))
             package2 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-2', Depends='deb-pkg-tools-package-3'))
-            self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-3'))
-            package4 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-3', Version='0.2'))
-            self.assertEqual(sorted(p.filename for p in collect_related_packages(package1, cache=self.package_cache)), [package2, package4])
+            package3_1 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-3', Version='0.1'))
+            package3_2 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-3', Version='0.2'))
+            related_packages = [p.filename for p in collect_related_packages(package1, cache=self.package_cache)]
+            # Make sure deb-pkg-tools-package-2 was collected.
+            assert package2 in related_packages
+            # Make sure deb-pkg-tools-package-3 version 0.1 wasn't collected.
+            assert package3_1 not in related_packages
+            # Make sure deb-pkg-tools-package-3 version 0.2 was collected.
+            assert package3_2 in related_packages
 
+    def test_collect_packages_preference_for_newer_versions(self):
+        with Context() as finalizers:
+            directory = finalizers.mkdtemp()
+            package1 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-1', Depends='deb-pkg-tools-package-2'))
+            package2_1 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-2', Version='1', Depends='deb-pkg-tools-package-3 (= 1)'))
+            package2_2 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-2', Version='2', Depends='deb-pkg-tools-package-3 (= 2)'))
+            package3_1 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-3', Version='1'))
+            package3_2 = self.test_package_building(directory, overrides=dict(Package='deb-pkg-tools-package-3', Version='2'))
+            related_packages = [p.filename for p in collect_related_packages(package1, cache=self.package_cache)]
+            # Make sure deb-pkg-tools-package-2 version 1 wasn't collected.
+            assert package2_1 not in related_packages
+            # Make sure deb-pkg-tools-package-2 version 2 was collected.
+            assert package2_2 in related_packages
+            # Make sure deb-pkg-tools-package-3 version 1 wasn't collected.
+            assert package3_1 not in related_packages
+            # Make sure deb-pkg-tools-package-3 version 2 was collected.
+            assert package3_2 in related_packages
 
     def test_repository_creation(self, preserve=False):
         if not SKIP_SLOW_TESTS:
