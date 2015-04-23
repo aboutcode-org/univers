@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: November 15, 2014
+# Last Change: April 23, 2015
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -27,7 +27,7 @@ import tempfile
 # External dependencies.
 from debian.deb822 import Deb822
 from executor import execute
-from humanfriendly import coerce_boolean, concatenate, format_path, pluralize, Spinner
+from humanfriendly import coerce_boolean, concatenate, format_path, pluralize, Spinner, Timer
 
 # Modules included in our package.
 from deb_pkg_tools.control import (deb822_from_string,
@@ -193,6 +193,27 @@ def collect_related_packages(filename, cache=None):
     :param cache: The :py:class:`.PackageCache` to use (defaults to ``None``).
     :returns: A list of :py:class:`PackageFile` objects.
 
+    Known limitations / sharp edges of this function:
+
+    - Only `Depends` relationships are currently processed. `Pre-Depends` and
+      `Provides` are ignored. I want to add support for `Pre-Depends` but I'm
+      not yet sure if/how to support `Conflicts`, `Provides` and `Replaces`.
+
+    - Unsatisfied relationships don't trigger a warning or error because this
+      function doesn't know in what context a package can be installed (e.g.
+      which additional repositories a given apt client has access to).
+
+    - Please thoroughly test this functionality before you start to rely on it.
+      What this function tries to do is a complex operation to do correctly
+      (given the limited information this function has to work with) and the
+      implementation is far from perfect. Bugs have been found and fixed in
+      this code and more bugs will undoubtedly be discovered. You've been
+      warned :-).
+
+    - This function can be rather slow on large package repositories and
+      dependency sets due to the incremental nature of the related package
+      collection. It's a known issue / limitation.
+
     This function is used to implement the ``deb-pkg-tools --collect`` command:
 
     .. code-block:: sh
@@ -212,10 +233,6 @@ def collect_related_packages(filename, cache=None):
         - ~/python-debian_0.1.21-1_all.deb
        Copy 5 package archives to /tmp? [Y/n] y
        2014-05-18 08:33:44 deb_pkg_tools.cli INFO Done! Copied 5 package archives to /tmp.
-
-    .. note:: The implementation of this function can be somewhat slow when
-              you're dealing with a lot of packages, but this function is meant
-              to be used interactively so I don't think it will be a big issue.
     """
     filename = os.path.abspath(filename)
     logger.info("Collecting packages related to %s ..", format_path(filename))
@@ -224,10 +241,20 @@ def collect_related_packages(filename, cache=None):
     packages_to_scan = [filename]
     related_packages = collections.defaultdict(list)
     # Preparations.
-    available_packages = find_package_archives(os.path.dirname(filename))
+    root_package = parse_filename(filename)
+    # Find all package archives in the directory and group them by name.
+    available_packages = collections.defaultdict(list)
+    for archive in find_package_archives(root_package.directory):
+        available_packages[archive.name].append(archive)
+    # Remove other versions of the package that we've been given.
+    available_packages.pop(root_package.name)
+    # Sort the available versions of the other packages in reverse order (we
+    # want to prefer newer versions over older versions, this will become
+    # relevant further down in this function).
+    for name in available_packages:
+        available_packages[name].sort(key=lambda p: Version(p.version), reverse=True)
     # Loop to collect the related packages.
-    num_scanned_packages = 0
-    spinner = Spinner(total=len(available_packages) / 2)
+    spinner = Spinner(label="Collecting related packages", timer=Timer())
     while packages_to_scan:
         filename = packages_to_scan.pop(0)
         logger.debug("Scanning %s ..", format_path(filename))
@@ -235,31 +262,39 @@ def collect_related_packages(filename, cache=None):
         fields = inspect_package_fields(filename, cache)
         if 'Depends' in fields:
             relationship_sets.add(fields['Depends'])
-        # Collect all related packages from the given directory.
-        packages_to_skip = []
-        for package in available_packages:
-            package_matches = None
-            for relationships in relationship_sets:
-                status = relationships.matches(package.name, package.version)
-                if status == True and package_matches != False:
-                    package_matches = True
-                elif status == False:
-                    package_matches = False
+        # For each group of package archives sharing the same package name ..
+        for name in available_packages:
+            # For each version of the package ..
+            for package in list(available_packages[name]):
+                package_matches = None
+                for relationships in relationship_sets:
+                    status = relationships.matches(package.name, package.version)
+                    if status == True and package_matches != False:
+                        package_matches = True
+                    elif status == False:
+                        package_matches = False
+                        break
+                spinner.step()
+                if package_matches == True:
+                    logger.debug("Package archive matched all relationships: %s", package.filename)
+                    related_packages[package.name].append(package)
+                    available_packages[name].remove(package)
+                    packages_to_scan.append(package.filename)
+                    # Break out of the loop that scans multiple versions of the
+                    # same package, because we found a version of the package
+                    # that matches our criteria.
                     break
-            if package_matches == True:
-                logger.debug("Package archive matched all relationships: %s", package.filename)
-                related_packages[package.name].append(package)
-                packages_to_scan.append(package.filename)
-                packages_to_skip.append(package)
-            elif package_matches == False:
-                # If we are sure we can exclude a package from all further
-                # iterations, it's worth it to speed up the process on big
-                # dependency sets.
-                packages_to_skip.append(package)
-            spinner.step(label="Collecting related packages", progress=num_scanned_packages)
-        for package in packages_to_skip:
-            available_packages.remove(package)
-        num_scanned_packages += 1
+                elif package_matches == False:
+                    # If we're sure we can exclude a package from all further
+                    # iterations, it could be worth it to speed up the process
+                    # on big repositories / dependency sets.
+                    available_packages[name].remove(package)
+                    # Keep looking for a match in another version.
+                elif package_matches == None:
+                    # Break out of the loop that scans multiple versions of the
+                    # same package, because the package name isn't even
+                    # mentioned in any of the collected relationships.
+                    break
     spinner.clear()
     # Pick the latest version of the collected packages.
     return list(map(find_latest_version, related_packages.values()))
