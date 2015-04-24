@@ -69,9 +69,13 @@ ALLOW_RESET_SETGID = coerce_boolean(os.environ.get('DPT_RESET_SETGID', 'true'))
 def parse_filename(filename):
     """
     Parse the filename of a Debian binary package archive into three fields:
-    the name of the package, its version and its architecture. Raises
-    :py:exc:`ValueError` when the given filename cannot be parsed. See also
+    the name of the package, its version and its architecture. See also
     :py:func:`determine_package_archive()`.
+
+    :param filename: The pathname of a ``*.deb`` archive (a string).
+    :returns: A :py:class:`PackageFile` object.
+    :raises: Raises :py:exc:`~exceptions.ValueError` when the given filename
+             cannot be parsed.
 
     Here's an example:
 
@@ -83,8 +87,6 @@ def parse_filename(filename):
                 architecture='amd64',
                 filename='/var/cache/apt/archives/python2.7_2.7.3-0ubuntu3.4_amd64.deb')
 
-    :param filename: The pathname of a ``*.deb`` archive (a string).
-    :returns: A :py:class:`PackageFile` object.
     """
     if isinstance(filename, PackageFile):
         return filename
