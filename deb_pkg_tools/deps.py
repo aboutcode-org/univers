@@ -1,7 +1,7 @@
 # Debian packaging tools: Relationship parsing and evaluation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: December 16, 2014
+# Last Change: May 1, 2015
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -72,8 +72,8 @@ def parse_depends(relationships):
     >>> from deb_pkg_tools.deps import parse_depends
     >>> dependencies = parse_depends('python (>= 2.6), python (<< 3)')
     >>> print(repr(dependencies))
-    RelationshipSet(VersionedRelationship(name='python', operator='<<', version='3'),
-                    VersionedRelationship(name='python', operator='>=', version='2.6'))
+    RelationshipSet(VersionedRelationship(name='python', operator='>=', version='2.6'),
+                    VersionedRelationship(name='python', operator='<<', version='3'))
     >>> dependencies.matches('python', '2.5')
     False
     >>> dependencies.matches('python', '2.6')

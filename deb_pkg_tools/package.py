@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: April 23, 2015
+# Last Change: May 1, 2015
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -364,9 +364,9 @@ def inspect_package_fields(archive, cache=None):
     >>> print(repr(inspect_package_fields('python3.4-minimal_3.4.0-1+precise1_amd64.deb')))
     {'Architecture': u'amd64',
      'Conflicts': RelationshipSet(VersionedRelationship(name=u'binfmt-support', operator=u'<<', version=u'1.1.2')),
-     'Depends': RelationshipSet(VersionedRelationship(name=u'libexpat1', operator=u'>=', version=u'1.95.8'),
+     'Depends': RelationshipSet(VersionedRelationship(name=u'libpython3.4-minimal', operator=u'=', version=u'3.4.0-1+precise1'),
+                                VersionedRelationship(name=u'libexpat1', operator=u'>=', version=u'1.95.8'),
                                 VersionedRelationship(name=u'libgcc1', operator=u'>=', version=u'1:4.1.1'),
-                                VersionedRelationship(name=u'libpython3.4-minimal', operator=u'=', version=u'3.4.0-1+precise1'),
                                 VersionedRelationship(name=u'zlib1g', operator=u'>=', version=u'1:1.2.0')),
      'Description': u'Minimal subset of the Python language (version 3.4)\n This package contains the interpreter and some essential modules.  It can\n be used in the boot process for some basic tasks.\n See /usr/share/doc/python3.4-minimal/README.Debian for a list of the modules\n contained in this package.',
      'Installed-Size': 3586,

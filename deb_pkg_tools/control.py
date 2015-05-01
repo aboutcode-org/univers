@@ -1,7 +1,7 @@
 # Debian packaging tools: Control file manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: August 31, 2014
+# Last Change: May 1, 2015
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -162,11 +162,11 @@ def parse_control_fields(input_fields):
     >>> print(repr(parsed_fields))
     {'Architecture': u'amd64',
      'Conflicts': RelationshipSet(VersionedRelationship(name=u'binfmt-support', operator=u'<<', version=u'1.1.2')),
-     'Depends': RelationshipSet(VersionedRelationship(name=u'libexpat1', operator=u'>=', version=u'1.95.8'),
+     'Depends': RelationshipSet(VersionedRelationship(name=u'libpython3.4-minimal', operator=u'=', version=u'3.4.0-1+precise1'),
+                                VersionedRelationship(name=u'libexpat1', operator=u'>=', version=u'1.95.8'),
                                 VersionedRelationship(name=u'libgcc1', operator=u'>=', version=u'1:4.1.1'),
-                                VersionedRelationship(name=u'libpython3.4-minimal', operator=u'=', version=u'3.4.0-1+precise1'),
                                 VersionedRelationship(name=u'zlib1g', operator=u'>=', version=u'1:1.2.0'),
-                                AlternativeRelationship(Relationship(name=u'bar'), Relationship(name=u'foo'))),
+                                AlternativeRelationship(Relationship(name=u'foo'), Relationship(name=u'bar'))),
      'Installed-Size': 3586,
      'Package': u'python3.4-minimal',
      'Pre-Depends': u'libc6 (>= 2.15)',
