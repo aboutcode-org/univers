@@ -374,7 +374,7 @@ def inspect_package_fields(archive, cache=None):
      'Multi-Arch': u'allowed',
      'Original-Maintainer': u'Matthias Klose <doko@debian.org>',
      'Package': u'python3.4-minimal',
-     'Pre-Depends': u'libc6 (>= 2.15)',
+     'Pre-Depends': RelationshipSet(VersionedRelationship(name=u'libc6', operator=u'>=', version=u'2.15')),
      'Priority': u'optional',
      'Recommends': u'python3.4',
      'Section': u'python',

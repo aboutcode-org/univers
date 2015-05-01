@@ -35,7 +35,7 @@ logger = logging.getLogger(__name__)
 
 # Control file fields that are like `Depends:' (they contain a comma
 # separated list of package names with optional version specifications).
-DEPENDS_LIKE_FIELDS = ('Conflicts', 'Depends', 'Provides', 'Replaces', 'Suggests')
+DEPENDS_LIKE_FIELDS = ('Conflicts', 'Depends', 'Pre-Depends', 'Provides', 'Replaces', 'Suggests')
 
 def load_control_file(control_file):
     """
@@ -169,7 +169,7 @@ def parse_control_fields(input_fields):
                                 AlternativeRelationship(Relationship(name=u'foo'), Relationship(name=u'bar'))),
      'Installed-Size': 3586,
      'Package': u'python3.4-minimal',
-     'Pre-Depends': u'libc6 (>= 2.15)',
+     'Pre-Depends': RelationshipSet(VersionedRelationship(name=u'libc6', operator=u'>=', version=u'2.15')),
      'Recommends': u'python3.4',
      'Suggests': RelationshipSet(Relationship(name=u'binfmt-support')),
      'Version': u'3.4.0-1+precise1'}
