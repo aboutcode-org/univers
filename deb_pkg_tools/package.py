@@ -14,6 +14,7 @@ This module provides functions to build and inspect Debian package archives
 
 # Standard library modules.
 import collections
+import copy
 import fnmatch
 import logging
 import os
@@ -37,6 +38,9 @@ from deb_pkg_tools.version import Version
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
+
+# The names of control file fields that specify dependencies.
+DEPENDENCY_FIELDS = ('Depends', 'Pre-Depends')
 
 # http://lintian.debian.org/tags/package-contains-vcs-control-dir.html
 DIRECTORIES_TO_REMOVE = ('.bzr', # Bazaar
@@ -197,9 +201,9 @@ def collect_related_packages(filename, cache=None):
 
     Known limitations / sharp edges of this function:
 
-    - Only `Depends` relationships are currently processed. `Pre-Depends` and
-      `Provides` are ignored. I want to add support for `Pre-Depends` but I'm
-      not yet sure if/how to support `Conflicts`, `Provides` and `Replaces`.
+    - Only `Depends` and `Pre-Depends` relationships are processed, `Provides`
+      is ignored. I'm not yet sure whether it makes sense to add support for
+      `Conflicts`, `Provides` and `Replaces` (and how to implement it).
 
     - Unsatisfied relationships don't trigger a warning or error because this
       function doesn't know in what context a package can be installed (e.g.
@@ -236,70 +240,134 @@ def collect_related_packages(filename, cache=None):
        Copy 5 package archives to /tmp? [Y/n] y
        2014-05-18 08:33:44 deb_pkg_tools.cli INFO Done! Copied 5 package archives to /tmp.
     """
-    filename = os.path.abspath(filename)
-    logger.info("Collecting packages related to %s ..", format_path(filename))
-    # Internal state.
+    given_archive = parse_filename(filename)
+    logger.info("Collecting packages related to %s ..", format_path(given_archive.filename))
+    # Group the related package archive candidates by name.
+    candidate_archives = collections.defaultdict(list)
+    for archive in find_package_archives(given_archive.directory):
+        if archive.name != given_archive.name:
+            candidate_archives[archive.name].append(archive)
+    # Sort the related package archive candidates by descending versions
+    # because we want to prefer newer versions over older versions.
+    for name in candidate_archives:
+        candidate_archives[name].sort(reverse=True)
+    # Prepare for more than one attempt to find a converging set of related
+    # package archives so we can properly deal with conflicts between
+    # transitive (indirect) dependencies.
+    while True:
+        try:
+            # Assuming there are no possible conflicts one call will be enough.
+            return collect_related_packages_helper(candidate_archives, given_archive, cache)
+        except CollectedPackagesConflict as e:
+            # If we do encounter conflicts we take the brute force approach of
+            # removing the conflicting package archive(s) from the set of
+            # related package archive candidates and retrying from scratch.
+            # This approach works acceptably as long as your repository isn't
+            # full of conflicts between transitive dependencies...
+            logger.warning("Removing %s from candidates (%s) ..",
+                           pluralize(len(e.conflicts), "conflicting archive"),
+                           concatenate(os.path.basename(archive.filename) for archive in e.conflicts))
+            for archive in e.conflicts:
+                candidate_archives[archive.name].remove(archive)
+            logger.info("Retrying related archive collection without %s ..",
+                        pluralize(len(e.conflicts), "conflicting archive"))
+
+def collect_related_packages_helper(candidate_archives, given_archive, cache):
+    """
+    Internal helper that enables :py:func:`collect_related_packages()` to
+    perform conflict resolution (which would otherwise get very complex).
+    """
+    # Enable mutation of the candidate archives data structure inside the scope
+    # of this function without mutating the original data structure.
+    candidate_archives = copy.deepcopy(candidate_archives)
+    # Prepare some internal state.
+    archives_to_scan = [given_archive]
+    collected_archives = []
     relationship_sets = set()
-    packages_to_scan = [filename]
-    related_packages = collections.defaultdict(list)
-    # Preparations.
-    root_package = parse_filename(filename)
-    # Find all package archives in the directory and group them by name.
-    available_packages = collections.defaultdict(list)
-    for archive in find_package_archives(root_package.directory):
-        available_packages[archive.name].append(archive)
-    # Remove other versions of the package that we've been given.
-    available_packages.pop(root_package.name)
-    # Sort the available versions of the other packages in reverse order (we
-    # want to prefer newer versions over older versions, this will become
-    # relevant further down in this function).
-    for name in available_packages:
-        available_packages[name].sort(key=lambda p: Version(p.version), reverse=True)
     # Loop to collect the related packages.
     spinner = Spinner(label="Collecting related packages", timer=Timer())
-    while packages_to_scan:
-        filename = packages_to_scan.pop(0)
-        logger.debug("Scanning %s ..", format_path(filename))
+    while archives_to_scan:
+        selected_archive = archives_to_scan.pop(0)
+        logger.debug("Scanning %s ..", format_path(selected_archive.filename))
         # Find the relationships of the given package.
-        fields = inspect_package_fields(filename, cache)
-        if 'Depends' in fields:
-            relationship_sets.add(fields['Depends'])
+        control_fields = inspect_package_fields(selected_archive.filename, cache)
+        for field_name in DEPENDENCY_FIELDS:
+            if field_name in control_fields:
+                relationship_sets.add(control_fields[field_name])
         # For each group of package archives sharing the same package name ..
-        for name in available_packages:
+        for package_name in sorted(candidate_archives):
             # For each version of the package ..
-            for package in list(available_packages[name]):
-                package_matches = None
-                for relationships in relationship_sets:
-                    status = relationships.matches(package.name, package.version)
-                    if status == True and package_matches != False:
-                        package_matches = True
-                    elif status == False:
-                        package_matches = False
-                        break
+            for package_archive in list(candidate_archives[package_name]):
+                package_matches = match_relationships(package_archive, relationship_sets)
                 spinner.step()
                 if package_matches == True:
-                    logger.debug("Package archive matched all relationships: %s", package.filename)
-                    related_packages[package.name].append(package)
-                    available_packages[name].remove(package)
-                    packages_to_scan.append(package.filename)
-                    # Break out of the loop that scans multiple versions of the
-                    # same package, because we found a version of the package
-                    # that matches our criteria.
+                    logger.debug("Package archive matched all relationships: %s", package_archive.filename)
+                    # Move the selected version of the package archive from the
+                    # candidates to the list of selected package archives.
+                    collected_archives.append(package_archive)
+                    # Prepare to scan and collect dependencies of the selected
+                    # package archive in a future iteration of the outermost
+                    # (while) loop.
+                    archives_to_scan.append(package_archive)
+                    # Ignore all other versions of the package inside this call
+                    # to collect_related_packages_helper().
+                    candidate_archives.pop(package_name)
+                    # Break out of the loop to avoid scanning other versions of
+                    # this package archive; we've made our choice now.
                     break
                 elif package_matches == False:
-                    # If we're sure we can exclude a package from all further
-                    # iterations, it could be worth it to speed up the process
-                    # on big repositories / dependency sets.
-                    available_packages[name].remove(package)
+                    # If we're sure we can exclude this version of the package
+                    # from future iterations it could be worth it to speed up
+                    # the process on big repositories / dependency sets.
+                    candidate_archives[package_name].remove(package_archive)
                     # Keep looking for a match in another version.
                 elif package_matches == None:
                     # Break out of the loop that scans multiple versions of the
-                    # same package, because the package name isn't even
-                    # mentioned in any of the collected relationships.
+                    # same package because none of the relationship sets collected
+                    # so far reference the name of this package (this is intended
+                    # as a harmless optimization).
                     break
     spinner.clear()
-    # Pick the latest version of the collected packages.
-    return list(map(find_latest_version, related_packages.values()))
+    # Check for conflicts in the collected set of related package archives.
+    conflicts = [a for a in collected_archives if not match_relationships(a, relationship_sets)]
+    if conflicts:
+        raise CollectedPackagesConflict(conflicts)
+    else:
+        return collected_archives
+
+def match_relationships(package_archive, relationship_sets):
+    """
+    Internal helper that enables :py:func:`collect_related_packages_helper()`
+    to validate that all relationships are satisfied while the set of related
+    package archives is being collected and again afterwards to make sure that
+    no previously drawn conclusions were invalidated by additionally collected
+    package archives.
+    """
+    archive_matches = None
+    for relationships in relationship_sets:
+        status = relationships.matches(package_archive.name, package_archive.version)
+        if status == True and archive_matches != False:
+            archive_matches = True
+        elif status == False:
+            # This package archive specifically conflicts with (at least) one
+            # of the given relationship sets.
+            archive_matches = False
+            # Short circuit the evaluation of further relationship sets because
+            # we've already found our answer.
+            break
+    return archive_matches
+
+class CollectedPackagesConflict(Exception):
+
+    """Exception raised by :py:func:`collect_related_packages_helper()`."""
+
+    def __init__(self, conflicts):
+        """
+        Construct a :py:exc:`CollectedPackagesConflict` exception.
+
+        :param conflicts: A list of conflicting :py:class:`PackageFile` objects.
+        """
+        self.conflicts = conflicts
 
 def find_latest_version(packages):
     """

@@ -474,7 +474,7 @@ class DebPkgToolsTestCase(unittest.TestCase):
             # Make sure deb-pkg-tools-package-3 version 2 was collected.
             assert package3_2 in related_packages
 
-    def test_collect_packages_with_conflicts(self):
+    def test_collect_packages_with_conflict_resolution(self):
         with Context() as finalizers:
             directory = finalizers.mkdtemp()
             # The following names are a bit confusing, this is to enforce implicit sorting on file system level (exposing an otherwise unnoticed bug).
