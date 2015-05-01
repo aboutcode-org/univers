@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: April 23, 2015
+# Last Change: May 1, 2015
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -473,6 +473,25 @@ class DebPkgToolsTestCase(unittest.TestCase):
             assert package3_1 not in related_packages
             # Make sure deb-pkg-tools-package-3 version 2 was collected.
             assert package3_2 in related_packages
+
+    def test_collect_packages_with_conflicts(self):
+        with Context() as finalizers:
+            directory = finalizers.mkdtemp()
+            # The following names are a bit confusing, this is to enforce implicit sorting on file system level (exposing an otherwise unnoticed bug).
+            package_a = self.test_package_building(directory, overrides=dict(Package='package-a', Depends='package-b, package-c'))
+            package_b = self.test_package_building(directory, overrides=dict(Package='package-b', Depends='package-d'))
+            package_c = self.test_package_building(directory, overrides=dict(Package='package-c', Depends='package-d (= 1)'))
+            package_d1 = self.test_package_building(directory, overrides=dict(Package='package-d', Version='1'))
+            package_d2 = self.test_package_building(directory, overrides=dict(Package='package-d', Version='2'))
+            related_packages = [p.filename for p in collect_related_packages(package_a, cache=self.package_cache)]
+            # Make sure package-b was collected.
+            assert package_b in related_packages
+            # Make sure package-c was collected.
+            assert package_c in related_packages
+            # Make sure package-d1 was collected.
+            assert package_d1 in related_packages
+            # Make sure package-d2 wasn't collected.
+            assert package_d2 not in related_packages
 
     def test_repository_creation(self, preserve=False):
         if not SKIP_SLOW_TESTS:
