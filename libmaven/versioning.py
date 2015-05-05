@@ -195,7 +195,7 @@ class VersionRange(object):
 
         if not isinstance(other, VersionRange):
             if isinstance(other, basestring):
-                return self.__cmp__(VersionRange.fromstring(other))
+                return cmp(self, VersionRange.fromstring(other))
             return -1
 
         result = cmp(self.version, other.version)
