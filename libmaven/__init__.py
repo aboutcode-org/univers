@@ -14,7 +14,6 @@
 # limitations under the License.
 #
 
-
 from .artifact import Artifact
 from .versioning import Version
 from .versioning import VersionRange
