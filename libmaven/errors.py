@@ -16,7 +16,7 @@
 
 
 """
-Exceptions used by libmaven
+Exceptions used by pymaven
 """
 
 

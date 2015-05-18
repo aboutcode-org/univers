@@ -15,8 +15,8 @@
 #
 
 
-class LibmavenPackge(PackageRecipe):
-    name = "libmaven"
+class PymavenPackge(PackageRecipe):
+    name = "pymaven"
     version = ""
 
     buildRequires = [

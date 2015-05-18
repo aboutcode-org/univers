@@ -92,7 +92,7 @@ class Artifact(object):
         return s
 
     def __repr__(self):
-        return "<libmaven.Artifact(%s, %s, %s, %s, %s, %s)" % (
+        return "<pymaven.Artifact(%s, %s, %s, %s, %s, %s)" % (
             self.group_id,
             self.artifact_id,
             self.version,
@@ -112,7 +112,7 @@ class Artifact(object):
 
         :param str coordinate: match the form group:artifact[:packaging[:classifier]]:version
         :return: Artifact matching the coordinate
-        :rtype: libmaven.Artifact
+        :rtype: pymaven.Artifact
         """
         m = MAVEN_COORDINATE_RE.match(coordinate)
         if not m:
