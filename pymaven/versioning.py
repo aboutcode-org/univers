@@ -124,14 +124,13 @@ class Restriction(object):
 
     def __str__(self):
         s = ""
-        s += '[' if self.lower_bound_inclusive else '('
+        s += INCLUSIVE_OPEN if self.lower_bound_inclusive else EXCLUSIVE_OPEN
         if self.lower_bound:
             s += str(self.lower_bound)
-        s += ','
 
-        if self.upper_bound:
-            s += str(self.upper_bound)
-        s += ']' if self.lower_bound_inclusive else ')'
+        if self.upper_bound and not self.upper_bound == self.lower_bound:
+            s += ',' + str(self.upper_bound)
+        s += INCLUSIVE_CLOSE if self.upper_bound_inclusive else EXCLUSIVE_CLOSE
 
         return s
 

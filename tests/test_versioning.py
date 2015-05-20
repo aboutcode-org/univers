@@ -76,6 +76,11 @@ class TestRestriction(unittest.TestCase):
 
         assert 1 < r1
 
+    def test_string_repr(self):
+        assert str(Restriction.fromstring("(1.0,2.0]")) == "(1.0,2.0]"
+        assert str(Restriction.fromstring("[1.0]")) == "[1.0]"
+
+
 class TestVersion(unittest.TestCase):
     """Tests the Version object"""
     def _assert_version_equal(self, v1, v2):
