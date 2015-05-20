@@ -92,7 +92,7 @@ class Restriction(object):
         if not isinstance(other, Restriction):
             if isinstance(other, basestring):
                 return cmp(self, Restriction.fromstring(other))
-            return -1
+            return 1
 
         result = cmp(self.lower_bound, other.lower_bound)
         if result == 0:
@@ -197,7 +197,7 @@ class VersionRange(object):
         if not isinstance(other, VersionRange):
             if isinstance(other, basestring):
                 return cmp(self, VersionRange.fromstring(other))
-            return -1
+            return 1
 
         result = cmp(self.version, other.version)
         if result == 0:
@@ -338,7 +338,7 @@ class Version(object):
         if not isinstance(other, Version):
             if isinstance(other, basestring):
                 return self._compare(self._parsed, Version(other)._parsed)
-            return -1
+            return 1
 
         return self._compare(self._parsed, other._parsed)
 

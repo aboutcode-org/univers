@@ -71,6 +71,10 @@ class TestRestriction(unittest.TestCase):
                 spec,
                 )
 
+    def test_compare(self):
+        r1 = Restriction.fromstring("(1.0,2.0]")
+
+        assert 1 < r1
 
 class TestVersion(unittest.TestCase):
     """Tests the Version object"""
@@ -356,6 +360,9 @@ class TestVersion(unittest.TestCase):
         self._assert_version_order(u"2.0.1", u"2.0.1-123")
         self._assert_version_order(u"2.0.1-xyz", u"2.0.1-123")
 
+    def test_compare(self):
+        assert 1 < Version("1.0")
+
 
 class TestVersionRange(unittest.TestCase):
     def test_no_lower_limit(self):
@@ -446,3 +453,7 @@ class TestVersionRange(unittest.TestCase):
                      "[1.1,1.3),(1.0,1.2]", "(1.1,1.2],[1.0,1.1)",):
             self.assertRaises(
                 VersionRangeParseError, VersionRange.fromstring, spec)
+
+    def test_compare(self):
+        vr1 = VersionRange.fromstring("(1.0,2.0]")
+        assert 1 < vr1
