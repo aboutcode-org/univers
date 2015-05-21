@@ -197,6 +197,8 @@ class VersionRange(object):
         if not isinstance(other, VersionRange):
             if isinstance(other, basestring):
                 return cmp(self, VersionRange.fromstring(other))
+            elif isinstance(other, Version):
+                return cmp(other, self)
             return 1
 
         result = cmp(self.version, other.version)
@@ -338,6 +340,8 @@ class Version(object):
         if not isinstance(other, Version):
             if isinstance(other, basestring):
                 return self._compare(self._parsed, Version(other)._parsed)
+            elif isinstance(other, VersionRange) and other.version:
+                return self._compare(self._parsed, other.version._parsed)
             return 1
 
         return self._compare(self._parsed, other._parsed)

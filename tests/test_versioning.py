@@ -413,6 +413,7 @@ class TestVersion(unittest.TestCase):
 
     def test_compare(self):
         assert 1 < Version("1.0")
+        assert VersionRange.fromstring("1.0") == Version("1.0")
 
     def test_compare_errors(self):
         v = Version("1.0")
@@ -501,6 +502,12 @@ class TestVersionRange(unittest.TestCase):
             vr = VersionRange.fromstring(spec)
             assert (v in vr) == expected
             assert ("2.0.5" in vr) == expected
+
+        assert VersionRange.fromstring("2.0.5") in \
+            VersionRange.fromstring("[2.0,3.0)")
+
+        assert VersionRange.fromstring("[2.0.5]") not in \
+            VersionRange.fromstring("[2.0,3.0)")
 
     def test_invalid_ranges(self):
         for spec in ("(1.0,2.0", "[1.0,1.2),1.3", "[1.0,1.2),(1.1,1.3]",
