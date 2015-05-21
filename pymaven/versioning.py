@@ -96,7 +96,8 @@ class Restriction(object):
 
         result = cmp(self.lower_bound, other.lower_bound)
         if result == 0:
-            result = cmp(self.lower_bound_inclusive, other.lower_bound_inclusive)
+            result = cmp(self.lower_bound_inclusive,
+                         other.lower_bound_inclusive)
             if result == 0:
                 result = cmp(self.upper_bound, other.upper_bound)
                 if result == 0:
@@ -161,7 +162,8 @@ class Restriction(object):
             lower_version = Version(lower_bound) if lower_bound else None
             upper_version = Version(upper_bound) if upper_bound else None
 
-            if lower_version and upper_version and upper_version < lower_version:
+            if lower_version and upper_version \
+                    and upper_version < lower_version:
                 raise RestrictionParseError(
                     "Range defies version ordering: %s" % spec)
 
@@ -171,8 +173,7 @@ class Restriction(object):
             # single version restriction
             if not lower_bound_inclusive or not upper_bound_inclusive:
                 raise RestrictionParseError(
-                    "Single version must be surrounded by []: %s"
-                                   % spec)
+                    "Single version must be surrounded by []: %s" % spec)
             version = Version(_spec)
             restriction = Restriction(version, lower_bound_inclusive,
                                       version, upper_bound_inclusive)
@@ -200,7 +201,7 @@ class VersionRange(object):
 
         result = cmp(self.version, other.version)
         if result == 0:
-            result =  cmp(self.restrictions, other.restrictions)
+            result = cmp(self.restrictions, other.restrictions)
 
         return result
 
@@ -533,7 +534,8 @@ class Version(object):
                 current_list = self._new_list(current_list)
             elif ch.isdigit():
                 if not is_digit and idx > start:
-                    current_list.append(self._parse_buffer(buf[start:idx], True))
+                    current_list.append(
+                        self._parse_buffer(buf[start:idx], True))
                     current_list = self._new_list(current_list)
                     start = idx
                 is_digit = True

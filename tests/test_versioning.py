@@ -92,7 +92,7 @@ class TestRestriction(unittest.TestCase):
         r = Restriction.fromstring("[1.5,)")
         assert str(r.lower_bound) == "1.5"
         assert r.lower_bound_inclusive
-        assert r.upper_bound == None
+        assert r.upper_bound is None
         assert not r.upper_bound_inclusive
 
         assert "0.8" not in r
@@ -183,25 +183,28 @@ class TestVersion(unittest.TestCase):
             ("1-BETA", [1, ["beta"]]), ("1-beta", [1, ["beta"]]),
             ("1-B", [1, ["b"]]), ("1-b", [1, ["b"]]),
             ("1B", [1, ["b"]]), ("1b", [1, ["b"]]),
-            ("1-MILESTONE", [1, ["milestone"]]), ("1-milestone", [1, ["milestone"]]),
-            ("1-M", [1, ["m"]]), ("1-m", [1, ["m"]]),
-            ("1M", [1, ["m"]]), ("1m", [1, ["m"]]),
+            ("1-MILESTONE", [1, ["milestone"]]),
+            ("1-milestone", [1, ["milestone"]]), ("1-M", [1, ["m"]]),
+            ("1-m", [1, ["m"]]), ("1M", [1, ["m"]]), ("1m", [1, ["m"]]),
             ("1-RC", [1, ["rc"]]), ("1-rc", [1, ["rc"]]),
-            ("1-SNAPSHOT", [1, ["snapshot"]]), ("1-snapshot", [1, ["snapshot"]]),
-            ("1-SP", [1, ["sp"]]), ("1-sp", [1, ["sp"]]),
-            ("1-GA", [1]), ("1-ga", [1]),
+            ("1-SNAPSHOT", [1, ["snapshot"]]),
+            ("1-snapshot", [1, ["snapshot"]]), ("1-SP", [1, ["sp"]]),
+            ("1-sp", [1, ["sp"]]), ("1-GA", [1]), ("1-ga", [1]),
             ("1-FINAL", [1]), ("1-final", [1]),
             ("1-CR", [1, ["rc"]]), ("1-cr", [1, ["rc"]]),
             # test some transistion
-            ("1-alpha1", [1, ["alpha", [1]]]), ("1-alpha2", [1, ["alpha", [2]]]),
+            ("1-alpha1", [1, ["alpha", [1]]]),
+            ("1-alpha2", [1, ["alpha", [2]]]),
             ("1.0alpha1", [1, ["alpha", [1]]]),
             ("1-beta1", [1, ["beta", [1]]]), ("1-beta2", [1, ["beta", [2]]]),
             ("1.0beta1", [1, ["beta", [1]]]),
             ("1-BETA1", [1, ["beta", [1]]]), ("1-BETA2", [1, ["beta", [2]]]),
             ("1.0BETA1", [1, ["beta", [1]]]),
-            ("1-milestone1", [1, ["milestone", [1]]]), ("1-milestone2", [1, ["milestone", [2]]]),
+            ("1-milestone1", [1, ["milestone", [1]]]),
+            ("1-milestone2", [1, ["milestone", [2]]]),
             ("1.0milestone1", [1, ["milestone", [1]]]),
-            ("1-MILESTONE1", [1, ["milestone", [1]]]), ("1-milestone2", [1, ["milestone", [2]]]),
+            ("1-MILESTONE1", [1, ["milestone", [1]]]),
+            ("1-milestone2", [1, ["milestone", [2]]]),
             ("1.0MILESTONE1", [1, ["milestone", [1]]]),
             ("1-alpha2snapshot", [1, ["alpha", [2, ["snapshot"]]]]),
             )
@@ -235,10 +238,10 @@ class TestVersion(unittest.TestCase):
 
         unicode_version_numbers = (
             # again, but with unicode input
-            u"2.0", u"2-1", u"2.0.a", u"2.0.0.a", u"2.0.2", u"2.0.123", u"2.1.0",
-            u"2.1-a", u"2.1b", u"2.1-x", u"2.1-1", u"2.1.0.1", u"2.2", u"2.123",
-            u"11.a2", u"11.a11", u"11.b2", u"11.b11", u"11.m2", u"11.m11", u"11",
-            u"11.a", u"11b", u"11c", u"11m",
+            u"2.0", u"2-1", u"2.0.a", u"2.0.0.a", u"2.0.2", u"2.0.123",
+            u"2.1.0", u"2.1-a", u"2.1b", u"2.1-x", u"2.1-1", u"2.1.0.1", u"2.2",
+            u"2.123", u"11.a2", u"11.a11", u"11.b2", u"11.b11", u"11.m2",
+            u"11.m11", u"11", u"11.a", u"11b", u"11c", u"11m",
             )
         for idx, low in enumerate(unicode_version_numbers[:-1]):
             for high in unicode_version_numbers[idx+1:]:
