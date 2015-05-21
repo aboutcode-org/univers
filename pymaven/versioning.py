@@ -421,7 +421,7 @@ class Version(object):
     def _normalize(self, l):
         for item in l[::-1]:
             if not item:
-                l.remove(item)
+                l.pop()
             elif not isinstance(item, list):
                 break
         return l
