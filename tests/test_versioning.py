@@ -29,7 +29,7 @@ from pymaven.versioning import Restriction
 
 class TestRestriction(unittest.TestCase):
     def test_exclusive_lower_bound(self):
-        r = Restriction.fromstring("(1.0,2.0]")
+        r = Restriction("(1.0,2.0]")
         assert str(r.lower_bound) == "1.0"
         assert not r.lower_bound_inclusive
         assert str(r.upper_bound) == "2.0"
@@ -40,7 +40,7 @@ class TestRestriction(unittest.TestCase):
         assert "1.1" in r
 
     def test_no_lower_limit(self):
-        r = Restriction.fromstring("(,1.0]")
+        r = Restriction("(,1.0]")
         assert r.lower_bound is None
         assert not r.lower_bound_inclusive
         assert str(r.upper_bound) == "1.0"
@@ -51,7 +51,7 @@ class TestRestriction(unittest.TestCase):
         assert "2.0" not in r
 
     def test_inclusive_range(self):
-        r = Restriction.fromstring("[1.0]")
+        r = Restriction("[1.0]")
         assert str(r.lower_bound) == "1.0"
         assert r.lower_bound_inclusive
         assert str(r.upper_bound) == "1.0"
@@ -62,7 +62,7 @@ class TestRestriction(unittest.TestCase):
         assert "1.1" not in r
         assert "2.0" not in r
 
-        r = Restriction.fromstring("[1.2,1.3]")
+        r = Restriction("[1.2,1.3]")
         assert str(r.lower_bound) == "1.2"
         assert r.lower_bound_inclusive
         assert str(r.upper_bound) == "1.3"
@@ -77,7 +77,7 @@ class TestRestriction(unittest.TestCase):
         assert "2.0" not in r
 
     def test_exclusive_upper_bound(self):
-        r = Restriction.fromstring("[1.0,2.0)")
+        r = Restriction("[1.0,2.0)")
         assert str(r.lower_bound) == "1.0"
         assert r.lower_bound_inclusive
         assert str(r.upper_bound) == "2.0"
@@ -89,7 +89,7 @@ class TestRestriction(unittest.TestCase):
         assert "2.0" not in r
         assert "3.0" not in r
 
-        r = Restriction.fromstring("[1.5,)")
+        r = Restriction("[1.5,)")
         assert str(r.lower_bound) == "1.5"
         assert r.lower_bound_inclusive
         assert r.upper_bound is None
@@ -106,20 +106,20 @@ class TestRestriction(unittest.TestCase):
         for spec in tests:
             self.assertRaises(
                 RestrictionParseError,
-                Restriction.fromstring,
+                Restriction,
                 spec,
                 )
 
     def test_compare(self):
-        r1 = Restriction.fromstring("(1.0,2.0]")
+        r1 = Restriction("(1.0,2.0]")
 
         assert r1 == r1
         assert r1 == "(1.0,2.0]"
         assert 1 < r1
 
     def test_string_repr(self):
-        assert str(Restriction.fromstring("(1.0,2.0]")) == "(1.0,2.0]"
-        assert str(Restriction.fromstring("[1.0]")) == "[1.0]"
+        assert str(Restriction("(1.0,2.0]")) == "(1.0,2.0]"
+        assert str(Restriction("[1.0]")) == "[1.0]"
 
 
 class TestVersion(unittest.TestCase):
@@ -413,7 +413,7 @@ class TestVersion(unittest.TestCase):
 
     def test_compare(self):
         assert 1 < Version("1.0")
-        assert VersionRange.fromstring("1.0") == Version("1.0")
+        assert VersionRange("1.0") == Version("1.0")
 
     def test_compare_errors(self):
         v = Version("1.0")
@@ -425,70 +425,70 @@ class TestVersion(unittest.TestCase):
 
 class TestVersionRange(unittest.TestCase):
     def test_no_lower_limit(self):
-        vr = VersionRange.fromstring("(,1.0]")
+        vr = VersionRange("(,1.0]")
         assert len(vr.restrictions) == 1
         assert vr.version is None
 
     def test_single_spec(self):
-        vr = VersionRange.fromstring("1.0")
+        vr = VersionRange("1.0")
         assert len(vr.restrictions) == 1
         assert str(vr.version) == "1.0"
 
     def test_inclusive_range(self):
-        vr = VersionRange.fromstring("[1.0]")
+        vr = VersionRange("[1.0]")
         assert len(vr.restrictions) == 1
         assert vr.version is None
 
-        vr = VersionRange.fromstring("[1.2,1.3]")
+        vr = VersionRange("[1.2,1.3]")
         assert len(vr.restrictions) == 1
         assert vr.version is None
 
     def test_exclusive_upper_bound(self):
-        vr = VersionRange.fromstring("[1.0,2.0)")
+        vr = VersionRange("[1.0,2.0)")
         assert len(vr.restrictions) == 1
         assert vr.version is None
 
-        vr = VersionRange.fromstring("[1.5,)")
+        vr = VersionRange("[1.5,)")
         assert len(vr.restrictions) == 1
         assert vr.version is None
 
     def test_multiple_restrictions(self):
-        vr = VersionRange.fromstring("(,1.0],[1.2,)")
+        vr = VersionRange("(,1.0],[1.2,)")
         assert len(vr.restrictions) == 2
         assert vr.version is None
 
     def test_snapshots(self):
-        vr = VersionRange.fromstring("[1.0,)")
+        vr = VersionRange("[1.0,)")
         assert "1.0-SNAPSHOT" not in vr
 
-        vr = VersionRange.fromstring("[1.0,1.1-SNAPSHOT]")
+        vr = VersionRange("[1.0,1.1-SNAPSHOT]")
         assert "1.1-SNAPSHOT" in vr
 
-        vr = VersionRange.fromstring("[1.0,1.2]")
+        vr = VersionRange("[1.0,1.2]")
         assert "1.0-SNAPSHOT" not in vr
         assert "1.1-SNAPSHOT" in vr
         assert "1.2-SNAPSHOT" in vr
         assert "1.3-SNAPSHOT" not in vr
 
-        vr = VersionRange.fromstring("[1.0,1.2-SNAPSHOT]")
+        vr = VersionRange("[1.0,1.2-SNAPSHOT]")
         assert "1.1-SNAPSHOT" in vr
         assert "1.2-SNAPSHOT" in vr
 
-        vr = VersionRange.fromstring("[1.0-SNAPSHOT,1.2]")
+        vr = VersionRange("[1.0-SNAPSHOT,1.2]")
         assert "1.0-SNAPSHOT" in vr
         assert "1.1-SNAPSHOT" in vr
 
-        vr = VersionRange.fromstring("1.0-SNAPSHOT")
+        vr = VersionRange("1.0-SNAPSHOT")
         assert "1.0-SNAPSHOT" in vr
 
-        vr = VersionRange.fromstring("[0.1,1.0)")
+        vr = VersionRange("[0.1,1.0)")
         assert "0.1" in vr
         assert "0.1.0" in vr
         assert "0.1-SNAPSHOT" not in vr
         assert "0.1.0-SNAPSHOT" not in vr
 
     def test_long_version(self):
-        vr = VersionRange.fromstring("[5.0.9.0,5.0.10.0)")
+        vr = VersionRange("[5.0.9.0,5.0.10.0)")
         assert Version("5.0.9.0") in vr
         assert "5.0.9.0" in vr
 
@@ -499,32 +499,32 @@ class TestVersionRange(unittest.TestCase):
                       ("[2.0,2.0.5]", True), ("[2.0,2.0.5)", False),)
         v = Version("2.0.5")
         for spec, expected in test_pairs:
-            vr = VersionRange.fromstring(spec)
+            vr = VersionRange(spec)
             assert (v in vr) == expected
             assert ("2.0.5" in vr) == expected
 
-        assert VersionRange.fromstring("2.0.5") in \
-            VersionRange.fromstring("[2.0,3.0)")
+        assert VersionRange("2.0.5") in \
+            VersionRange("[2.0,3.0)")
 
-        assert VersionRange.fromstring("[2.0.5]") not in \
-            VersionRange.fromstring("[2.0,3.0)")
+        assert VersionRange("[2.0.5]") not in \
+            VersionRange("[2.0,3.0)")
 
     def test_invalid_ranges(self):
         for spec in ("(1.0,2.0", "[1.0,1.2),1.3", "[1.0,1.2),(1.1,1.3]",
                      "[1.1,1.3),(1.0,1.2]", "(1.1,1.2],[1.0,1.1)",):
             self.assertRaises(
-                VersionRangeParseError, VersionRange.fromstring, spec)
+                VersionRangeParseError, VersionRange, spec)
 
     def test_compare(self):
-        vr1 = VersionRange.fromstring("(1.0,2.0]")
+        vr1 = VersionRange("(1.0,2.0]")
 
         assert vr1 == vr1
         assert vr1 == "(1.0,2.0]"
         assert 1 < vr1
 
     def test_str(self):
-        assert str(VersionRange.fromstring("[1.0,2.0]")) == "[1.0,2.0]"
-        assert str(VersionRange.fromstring("1.0")) == "1.0"
+        assert str(VersionRange("[1.0,2.0]")) == "[1.0,2.0]"
+        assert str(VersionRange("1.0")) == "1.0"
 
     def test_fromversion(self):
         v = Version("1.0")
@@ -535,6 +535,6 @@ class TestVersionRange(unittest.TestCase):
     def test_match_versions(self):
         versions = [Version("0.1"), Version("1.0"), Version("1.1"),
                     Version("2.0"), Version("2.1")]
-        vr = VersionRange.fromstring("(1.0,2.0]")
+        vr = VersionRange("(1.0,2.0]")
         assert vr.match_version(versions) == "2.0"
         assert vr.match_version(versions[:3]) == "1.1"

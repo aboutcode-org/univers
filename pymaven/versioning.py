@@ -44,23 +44,57 @@ ALIASES = {
 class Restriction(object):
     """Describes a restriction in versioning
     """
-    def __init__(self, lower_bound, lower_bound_inclusive, upper_bound,
-                 upper_bound_inclusive):
+    def __init__(self, spec=None):
         """Create a restriction
 
-        :param lower_bound: the lowest version acceptable
-        :type lower_bound: artifactory.versioning.Version
-        :param lower_bound_inclusive: restriction includes the lower bound
-        :type lower_bound_inclusive: bool
-        :param upper_bound: the highest version acceptable
-        :type upper_bound: artifactory.versioning.Version
-        :param upper_bound_inclusive: restriction includes the upper bound
-        :type upper_bound_inclusive: bool
+        Restrictions are specified using a semi-mathmatical notation:
+
+        * 1.0: "Soft" requirement on 1.0 (just a recommendation, if it matches
+          all other ranges for the dependency)
+        * [1.0]: "Hard" requirement on 1.0
+        * (,1.0]: x <= 1.0
+        * [1.2,1.3]: 1.2 <= x <= 1.3
+        * [1.0,2.0): 1.0 <= x < 2.0
+        * [1.5,): x >= 1.5
+        * (,1.0],[1.2,): x <= 1.0 or x >= 1.2; multiple sets are comma-separated
+        * (,1.1),(1.1,): this excludes 1.1 (for example if it is known not to
+          work in combination with this library)
+
+        :param str spec: Restriction specification
         """
-        self.lower_bound = lower_bound
-        self.lower_bound_inclusive = lower_bound_inclusive
-        self.upper_bound = upper_bound
-        self.upper_bound_inclusive = upper_bound_inclusive
+        self.lower_bound = None
+        self.upper_bound = None
+        self.lower_bound_inclusive = False
+        self.upper_bound_inclusive = False
+
+        if not spec:
+            return
+
+        self.lower_bound_inclusive = (spec.strip()[0] == INCLUSIVE_OPEN)
+        self.upper_bound_inclusive = (spec.strip()[-1] == INCLUSIVE_CLOSE)
+
+        _spec = spec[1:-1].strip()
+        if ',' in _spec:
+            lower_bound, upper_bound = _spec.split(',')
+            if lower_bound == upper_bound:
+                raise RestrictionParseError(
+                    "Range cannot have identical boundaries: %s" % spec)
+
+            self.lower_bound = Version(lower_bound) if lower_bound else None
+            self.upper_bound = Version(upper_bound) if upper_bound else None
+
+            if self.lower_bound and self.upper_bound \
+                    and self.upper_bound < self.lower_bound:
+                raise RestrictionParseError(
+                    "Range defies version ordering: %s" % spec)
+        else:
+            # single version restriction
+            if not self.lower_bound_inclusive or not self.upper_bound_inclusive:
+                raise RestrictionParseError(
+                    "Single version must be surrounded by []: %s" % spec)
+            version = Version(_spec)
+            self.lower_bound = version
+            self.upper_bound = version
 
     def __contains__(self, version):
         """Return true if version is contained within the restriction
@@ -91,7 +125,7 @@ class Restriction(object):
 
         if not isinstance(other, Restriction):
             if isinstance(other, basestring):
-                return cmp(self, Restriction.fromstring(other))
+                return cmp(self, Restriction(other))
             return 1
 
         result = cmp(self.lower_bound, other.lower_bound)
@@ -146,39 +180,8 @@ class Restriction(object):
             )
 
     @staticmethod
-    def fromstring(spec):
-        """Generate a Restriction from a string
-        """
-        lower_bound_inclusive = spec[0] == INCLUSIVE_OPEN
-        upper_bound_inclusive = spec[-1] == INCLUSIVE_CLOSE
-
-        _spec = spec[1:-1].strip()
-        if ',' in _spec:
-            lower_bound, upper_bound = _spec.split(',')
-            if lower_bound == upper_bound:
-                raise RestrictionParseError(
-                    "Range cannot have identical boundaries: %s" % spec)
-
-            lower_version = Version(lower_bound) if lower_bound else None
-            upper_version = Version(upper_bound) if upper_bound else None
-
-            if lower_version and upper_version \
-                    and upper_version < lower_version:
-                raise RestrictionParseError(
-                    "Range defies version ordering: %s" % spec)
-
-            restriction = Restriction(lower_version, lower_bound_inclusive,
-                                      upper_version, upper_bound_inclusive)
-        else:
-            # single version restriction
-            if not lower_bound_inclusive or not upper_bound_inclusive:
-                raise RestrictionParseError(
-                    "Single version must be surrounded by []: %s" % spec)
-            version = Version(_spec)
-            restriction = Restriction(version, lower_bound_inclusive,
-                                      version, upper_bound_inclusive)
-
-        return restriction
+    def fromstring(self, spec):
+        return Restriction(spec)
 
 
 class VersionRange(object):
@@ -186,9 +189,60 @@ class VersionRange(object):
 
     Valid ranges are comma separated range specifications
     """
-    def __init__(self, version, restrictions):
-        self.version = version
-        self.restrictions = restrictions
+    def __init__(self, spec):
+        """Create a VersionRange from a string specification
+
+        :param spec string representation of a version or version range
+        :type spec str
+        :return a new VersionRange
+        :rtype VersionRange
+        :raises RuntimeError if the range is invalid in some way
+        """
+        self.restrictions = []
+        self.version = None
+
+        _spec = spec[:]
+        lower_bound = None
+        upper_bound = None
+        while (_spec.startswith(EXCLUSIVE_OPEN)
+               or _spec.startswith(INCLUSIVE_OPEN)):
+            exclusive_close = _spec.find(EXCLUSIVE_CLOSE)
+            inclusive_close = _spec.find(INCLUSIVE_CLOSE)
+
+            close = inclusive_close
+            if inclusive_close < 0 or 0 <= exclusive_close < inclusive_close:
+                # close is exclusive
+                close = exclusive_close
+
+            if close < 0:
+                raise VersionRangeParseError("Unbounded range: %s" % spec)
+
+            restriction = Restriction(_spec[0:close+1])
+
+            if lower_bound is None:
+                lower_bound = restriction.lower_bound
+
+            if upper_bound is not None:
+                if restriction.lower_bound is None \
+                        or restriction.lower_bound < upper_bound:
+                    raise VersionRangeParseError("Ranges overlap: %s" % spec)
+            self.restrictions.append(restriction)
+            upper_bound = restriction.upper_bound
+
+            _spec = _spec[close+1:]
+            if _spec and _spec.startswith(','):
+                # pop off leading comma
+                _spec = _spec[1:]
+
+        if _spec:
+            if self.restrictions:
+                raise VersionRangeParseError(
+                    "Only fully-qualified sets allowed in multiple set"
+                    " scenario: %s" % spec)
+            else:
+                self.version = Version(_spec)
+                # add the "everything" restriction
+                self.restrictions.append(Restriction())
 
     def __cmp__(self, other):
         if self is other:
@@ -196,7 +250,7 @@ class VersionRange(object):
 
         if not isinstance(other, VersionRange):
             if isinstance(other, basestring):
-                return cmp(self, VersionRange.fromstring(other))
+                return cmp(self, VersionRange(other))
             elif isinstance(other, Version):
                 return cmp(other, self)
             return 1
@@ -241,67 +295,11 @@ class VersionRange(object):
 
     @staticmethod
     def fromstring(spec):
-        """Create a VersionRange from a string specification
-
-        :param spec string representation of a version or version range
-        :type spec str
-        :return a new VersionRange
-        :rtype VersionRange
-        :raises RuntimeError if the range is invalid in some way
-        """
-        if not spec:
-            return None
-        _spec = spec[:]
-
-        restrictions = []
-        version = None
-        lower_bound = None
-        upper_bound = None
-        while (_spec.startswith(EXCLUSIVE_OPEN)
-               or _spec.startswith(INCLUSIVE_OPEN)):
-            exclusive_close = _spec.find(EXCLUSIVE_CLOSE)
-            inclusive_close = _spec.find(INCLUSIVE_CLOSE)
-
-            close = inclusive_close
-            if inclusive_close < 0 or 0 <= exclusive_close < inclusive_close:
-                # close is exclusive
-                close = exclusive_close
-
-            if close < 0:
-                raise VersionRangeParseError("Unbounded range: %s" % spec)
-
-            restriction = Restriction.fromstring(_spec[0:close+1])
-
-            if lower_bound is None:
-                lower_bound = restriction.lower_bound
-
-            if upper_bound is not None:
-                if restriction.lower_bound is None \
-                        or restriction.lower_bound < upper_bound:
-                    raise VersionRangeParseError("Ranges overlap: %s" % spec)
-            restrictions.append(restriction)
-            upper_bound = restriction.upper_bound
-
-            _spec = _spec[close+1:]
-            if _spec and _spec.startswith(','):
-                # pop off leading comma
-                _spec = _spec[1:]
-
-        if _spec:
-            if restrictions:
-                raise VersionRangeParseError(
-                    "Only fully-qualified sets allowed in multiple set"
-                    " scenario: %s" % spec)
-            else:
-                version = Version(_spec)
-                # add the "everything" restriction
-                restrictions.append(Restriction(None, False, None, False))
-
-        return VersionRange(version, restrictions)
+        return VersionRange(spec)
 
     @staticmethod
     def from_version(version):
-        return VersionRange(version, [])
+        return VersionRange(str(version))
 
     def restrict(self, version_range):
         """Retruns a new VersionRange that is a restriction of this
@@ -329,9 +327,69 @@ class Version(object):
     """Maven version objecjt
     """
     def __init__(self, version):
-        self._unparsed = None
-        self._parsed = None
-        self.fromstring(version)
+        """Create a maven version
+
+        The version string is examined one character at a time.
+
+        There's a buffer containing the current text - all characters are
+        appended, except for '.' and '-'. When it's stated 'append buffer to
+        list', the buffer is first converted to an int if that's possible,
+        otherwise left alone as a string. It will only be appended if it's
+        length is not 0.
+
+        * If a '.' is encountered, the current buffer is appended to the current
+          list, either as a int (if it's a number) or a string.
+        * If a '-' is encountered, do the same as when a '.' is encountered,
+          then create a new sublist, append it to the current list and replace
+          the current list with the new sub-list.
+        * If the last character was a digit:
+            * and the current one is too, append it to the buffer.
+            * otherwise append the current buffer to the list, reset the buffer
+              with the current char as content
+        * if the last character was NOT a digit:
+            * if the current character is also NOT a digit, append it to the
+              buffer
+            * if it is a digit, append buffer to list, set buffers content to
+              the digit
+        * finally, append the buffer to the list
+        """
+        self._unparsed = version
+        self._parsed = current_list = []
+        buf = str(version.strip()).lower()
+        start = 0
+        is_digit = False
+        for idx, ch in enumerate(buf):
+            if ch == '.':
+                if idx == start:
+                    current_list.append(0)
+                else:
+                    current_list.append(self._parse_buffer(buf[start:idx]))
+                start = idx + 1
+            elif ch == '-':
+                if idx == start:
+                    current_list.append(0)
+                else:
+                    current_list.append(self._parse_buffer(buf[start:idx]))
+                start = idx + 1
+                current_list = self._new_list(current_list)
+            elif ch.isdigit():
+                if not is_digit and idx > start:
+                    current_list.append(
+                        self._parse_buffer(buf[start:idx], True))
+                    current_list = self._new_list(current_list)
+                    start = idx
+                is_digit = True
+            else:
+                if is_digit and idx > start:
+                    current_list.append(self._parse_buffer(buf[start:idx]))
+                    current_list = self._new_list(current_list)
+                    start = idx
+                is_digit = False
+        else:
+            if len(buf) > start:
+                current_list.append(self._parse_buffer(buf[start:]))
+        current_list = self._normalize(current_list)
+        self._parsed = self._normalize(self._parsed)
 
     def __cmp__(self, other):
         if self is other:
@@ -490,67 +548,6 @@ class Version(object):
 
         return "%d-%s" % (len(QUALIFIERS), s)
 
-    def fromstring(self, version):
-        """Parse a maven version
-
-        The version string is examined one character at a time.
-
-        There's a buffer containing the current text - all characters are
-        appended, except for '.' and '-'. When it's stated 'append buffer to
-        list', the buffer is first converted to an int if that's possible,
-        otherwise left alone as a string. It will only be appended if it's
-        length is not 0.
-
-        * If a '.' is encountered, the current buffer is appended to the current
-          list, either as a int (if it's a number) or a string.
-        * If a '-' is encountered, do the same as when a '.' is encountered,
-          then create a new sublist, append it to the current list and replace
-          the current list with the new sub-list.
-        * If the last character was a digit:
-            * and the current one is too, append it to the buffer.
-            * otherwise append the current buffer to the list, reset the buffer
-              with the current char as content
-        * if the last character was NOT a digit:
-            * if the current character is also NOT a digit, append it to the
-              buffer
-            * if it is a digit, append buffer to list, set buffers content to
-              the digit
-        * finally, append the buffer to the list
-        """
-        self._unparsed = version
-        self._parsed = current_list = []
-        buf = str(version.strip()).lower()
-        start = 0
-        is_digit = False
-        for idx, ch in enumerate(buf):
-            if ch == '.':
-                if idx == start:
-                    current_list.append(0)
-                else:
-                    current_list.append(self._parse_buffer(buf[start:idx]))
-                start = idx + 1
-            elif ch == '-':
-                if idx == start:
-                    current_list.append(0)
-                else:
-                    current_list.append(self._parse_buffer(buf[start:idx]))
-                start = idx + 1
-                current_list = self._new_list(current_list)
-            elif ch.isdigit():
-                if not is_digit and idx > start:
-                    current_list.append(
-                        self._parse_buffer(buf[start:idx], True))
-                    current_list = self._new_list(current_list)
-                    start = idx
-                is_digit = True
-            else:
-                if is_digit and idx > start:
-                    current_list.append(self._parse_buffer(buf[start:idx]))
-                    current_list = self._new_list(current_list)
-                    start = idx
-                is_digit = False
-        else:
-            if len(buf) > start:
-                current_list.append(self._parse_buffer(buf[start:]))
-        current_list = self._normalize(current_list)
-        self._parsed = self._normalize(self._parsed)
+    @staticmethod
+    def fromstring(spec):
+        return Version(spec)
