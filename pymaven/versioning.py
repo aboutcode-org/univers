@@ -41,6 +41,10 @@ ALIASES = {
 }
 
 
+def list2tuple(l):
+    return tuple(list2tuple(x) if isinstance(x, list) else x for x in l)
+
+
 class Restriction(object):
     """Describes a restriction in versioning
     """
@@ -76,7 +80,7 @@ class Restriction(object):
         _spec = spec[1:-1].strip()
         if ',' in _spec:
             lower_bound, upper_bound = _spec.split(',')
-            if lower_bound == upper_bound:
+            if lower_bound and lower_bound == upper_bound:
                 raise RestrictionParseError(
                     "Range cannot have identical boundaries: %s" % spec)
 
@@ -140,22 +144,8 @@ class Restriction(object):
         return result
 
     def __hash__(self):
-        result = 13
-        if self.lower_bound:
-            result += hash(self.lower_bound)
-        else:
-            result += 1
-
-        result *= 1 if self.lower_bound_inclusive else 2
-
-        if self.upper_bound:
-            result -= hash(self.upper_bound)
-        else:
-            result -= 3
-
-        result += 2 if self.upper_bound_inclusive else 3
-
-        return result
+        return hash((self.lower_bound, self.lower_bound_inclusive,
+                     self.upper_bound, self.upper_bound_inclusive))
 
     def __str__(self):
         s = ""
@@ -198,8 +188,8 @@ class VersionRange(object):
         :rtype VersionRange
         :raises RuntimeError if the range is invalid in some way
         """
-        self.restrictions = []
-        self.version = None
+        restrictions = []
+        version = None
 
         _spec = spec[:]
         lower_bound = None
@@ -226,7 +216,7 @@ class VersionRange(object):
                 if restriction.lower_bound is None \
                         or restriction.lower_bound < upper_bound:
                     raise VersionRangeParseError("Ranges overlap: %s" % spec)
-            self.restrictions.append(restriction)
+            restrictions.append(restriction)
             upper_bound = restriction.upper_bound
 
             _spec = _spec[close+1:]
@@ -235,14 +225,17 @@ class VersionRange(object):
                 _spec = _spec[1:]
 
         if _spec:
-            if self.restrictions:
+            if restrictions:
                 raise VersionRangeParseError(
                     "Only fully-qualified sets allowed in multiple set"
                     " scenario: %s" % spec)
             else:
-                self.version = Version(_spec)
+                version = Version(_spec)
                 # add the "everything" restriction
-                self.restrictions.append(Restriction())
+                restrictions.append(Restriction())
+
+        self.version = version
+        self.restrictions = tuple(restrictions)
 
     def __cmp__(self, other):
         if self is other:
@@ -265,11 +258,7 @@ class VersionRange(object):
         return any((version in r) for r in self.restrictions)
 
     def __hash__(self):
-        result = 7
-        result = 31 * result + (hash(self.version) if self.version else 0)
-        result = 31 * result + (hash(self.restrictions) if self.restrictions
-                                else 0)
-        return result
+        return hash((self.version, self.restrictions))
 
     def __str__(self):
         if self.version:
@@ -354,7 +343,7 @@ class Version(object):
         * finally, append the buffer to the list
         """
         self._unparsed = version
-        self._parsed = current_list = []
+        parsed = current_list = []
         buf = str(version.strip()).lower()
         start = 0
         is_digit = False
@@ -389,7 +378,8 @@ class Version(object):
             if len(buf) > start:
                 current_list.append(self._parse_buffer(buf[start:]))
         current_list = self._normalize(current_list)
-        self._parsed = self._normalize(self._parsed)
+
+        self._parsed = list2tuple(self._normalize(parsed))
 
     def __cmp__(self, other):
         if self is other:
@@ -405,16 +395,7 @@ class Version(object):
         return self._compare(self._parsed, other._parsed)
 
     def __hash__(self):
-        result = 1229
-        result = 1223 * result + self.major
-        result = 1223 * result + self.minor
-        result = 1223 * result + self.tiny
-        result = 1223 * result + self.build
-
-        if self.qualifier:
-            result = 1223 * result + hash(self.qualifier)
-
-        return result
+        return hash(self._unparsed)
 
     def __repr__(self):
         return "<%s.%s(%r)>" % (self.__module__, "Version", self._unparsed)
@@ -425,9 +406,9 @@ class Version(object):
     def _compare(self, this, other):
         if isinstance(this, int):
             return self._int_compare(this, other)
-        elif isinstance(this, str):
+        elif isinstance(this, basestring):
             return self._string_compare(this, other)
-        elif isinstance(this, list):
+        elif isinstance(this, (list, tuple)):
             return self._list_compare(this, other)
         else:
             raise RuntimeError("Unkown type for t: %r" % this)
@@ -435,7 +416,7 @@ class Version(object):
     def _int_compare(self, this, other):
         if isinstance(other, int):
             return this - other
-        elif isinstance(other, (str, list)):
+        elif isinstance(other, (basestring, list, tuple)):
             return 1
         elif other is None:
             return this
@@ -449,9 +430,9 @@ class Version(object):
             return self._compare(l[0], other)
         if isinstance(other, int):
             return -1
-        elif isinstance(other, str):
+        elif isinstance(other, basestring):
             return 1
-        elif isinstance(other, list):
+        elif isinstance(other, (list, tuple)):
             for left, right in itertools.izip_longest(l, other):
                 if left is None:
                     if right is None:
@@ -498,9 +479,9 @@ class Version(object):
         if other is None:
             return self._string_compare(s, "")
 
-        if isinstance(other, (int, list)):
+        if isinstance(other, (int, list, tuple)):
             return -1
-        elif isinstance(other, str):
+        elif isinstance(other, basestring):
             s_value = self._string_value(s)
             other_value = self._string_value(other)
             if s_value < other_value:

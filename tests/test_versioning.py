@@ -28,6 +28,17 @@ from pymaven.versioning import Restriction
 
 
 class TestRestriction(unittest.TestCase):
+    def test_everyting_spec(self):
+        r = Restriction("[,)")
+        assert r.lower_bound is None
+        assert r.lower_bound_inclusive
+        assert r.upper_bound is None
+        assert not r.upper_bound_inclusive
+
+        assert "0.1.0" in r
+        assert "1.0" in r
+        assert "2.0" in r
+
     def test_exclusive_lower_bound(self):
         r = Restriction("(1.0,2.0]")
         assert str(r.lower_bound) == "1.0"
@@ -170,43 +181,45 @@ class TestVersion(unittest.TestCase):
     def test_from_string(self):
         test_pairs = (
             # weird versions
-            (".1", [0, 1]), ("-1", [[1]]),
+            (".1", (0, 1)), ("-1", ((1,),)),
             # test some major.minor.tiny parsing
-            ("1", [1]), ("1.0", [1]), ("1.0.0", [1]),
-            ("1.0.0.0", [1]), ("11", [11]), ("11.0", [11]),
-            ("1-1", [1, [1]]), ("1-1-1", [1, [1, [1]]]), (" 1 ", [1]),
+            ("1", (1,)), ("1.0", (1,)), ("1.0.0", (1,)),
+            ("1.0.0.0", (1,)), ("11", (11,)), ("11.0", (11,)),
+            ("1-1", (1, (1,))), ("1-1-1", (1, (1, (1,)))), (" 1 ", (1,)),
             # test qualifeirs
-            ("1.0-ALPHA", [1, ["alpha"]]), ("1-alpha", [1, ["alpha"]]),
-            ("1.0ALPHA", [1, ["alpha"]]), ("1-alpha", [1, ["alpha"]]),
-            ("1.0-A", [1, ["a"]]), ("1-a", [1, ["a"]]),
-            ("1.0A", [1, ["a"]]), ("1a", [1, ["a"]]),
-            ("1.0-BETA", [1, ["beta"]]), ("1-beta", [1, ["beta"]]),
-            ("1.0-B", [1, ["b"]]), ("1-b", [1, ["b"]]),
-            ("1.0B", [1, ["b"]]), ("1b", [1, ["b"]]),
-            ("1.0-MILESTONE", [1, ["milestone"]]),
-            ("1.0-milestone", [1, ["milestone"]]), ("1-M", [1, ["m"]]),
-            ("1.0-m", [1, ["m"]]), ("1M", [1, ["m"]]), ("1m", [1, ["m"]]),
-            ("1.0-RC", [1, ["rc"]]), ("1-rc", [1, ["rc"]]),
-            ("1.0-SNAPSHOT", [1, ["snapshot"]]),
-            ("1.0-snapshot", [1, ["snapshot"]]), ("1-SP", [1, ["sp"]]),
-            ("1.0-sp", [1, ["sp"]]), ("1-GA", [1]), ("1-ga", [1]),
-            ("1.0-FINAL", [1]), ("1-final", [1]),
-            ("1.0-CR", [1, ["rc"]]), ("1-cr", [1, ["rc"]]),
+            ("1.0-ALPHA", (1, ("alpha",))), ("1-alpha", (1, ("alpha",))),
+            ("1.0ALPHA", (1, ("alpha",))), ("1-alpha", (1, ("alpha",))),
+            ("1.0-A", (1, ("a",))), ("1-a", (1, ("a",))),
+            ("1.0A", (1, ("a",))), ("1a", (1, ("a",))),
+            ("1.0-BETA", (1, ("beta",))), ("1-beta", (1, ("beta",))),
+            ("1.0-B", (1, ("b",))), ("1-b", (1, ("b",))),
+            ("1.0B", (1, ("b",))), ("1b", (1, ("b",))),
+            ("1.0-MILESTONE", (1, ("milestone",))),
+            ("1.0-milestone", (1, ("milestone",))), ("1-M", (1, ("m",))),
+            ("1.0-m", (1, ("m",))), ("1M", (1, ("m",))), ("1m", (1, ("m",))),
+            ("1.0-RC", (1, ("rc",))), ("1-rc", (1, ("rc",))),
+            ("1.0-SNAPSHOT", (1, ("snapshot",))),
+            ("1.0-snapshot", (1, ("snapshot",))), ("1-SP", (1, ("sp",))),
+            ("1.0-sp", (1, ("sp",))), ("1-GA", (1,)), ("1-ga", (1,)),
+            ("1.0-FINAL", (1,)), ("1-final", (1,)),
+            ("1.0-CR", (1, ("rc",))), ("1-cr", (1, ("rc",))),
             # test some transistion
-            ("1.0-alpha1", [1, ["alpha", [1]]]),
-            ("1.0-alpha2", [1, ["alpha", [2]]]),
-            ("1.0.0alpha1", [1, ["alpha", [1]]]),
-            ("1.0-beta1", [1, ["beta", [1]]]), ("1-beta2", [1, ["beta", [2]]]),
-            ("1.0.0beta1", [1, ["beta", [1]]]),
-            ("1.0-BETA1", [1, ["beta", [1]]]), ("1-BETA2", [1, ["beta", [2]]]),
-            ("1.0.0BETA1", [1, ["beta", [1]]]),
-            ("1.0-milestone1", [1, ["milestone", [1]]]),
-            ("1.0-milestone2", [1, ["milestone", [2]]]),
-            ("1.0.0milestone1", [1, ["milestone", [1]]]),
-            ("1.0-MILESTONE1", [1, ["milestone", [1]]]),
-            ("1.0-milestone2", [1, ["milestone", [2]]]),
-            ("1.0.0MILESTONE1", [1, ["milestone", [1]]]),
-            ("1.0-alpha2snapshot", [1, ["alpha", [2, ["snapshot"]]]]),
+            ("1.0-alpha1", (1, ("alpha", (1,)))),
+            ("1.0-alpha2", (1, ("alpha", (2,)))),
+            ("1.0.0alpha1", (1, ("alpha", (1,)))),
+            ("1.0-beta1", (1, ("beta", (1,)))),
+            ("1-beta2", (1, ("beta", (2,)))),
+            ("1.0.0beta1", (1, ("beta", (1,)))),
+            ("1.0-BETA1", (1, ("beta", (1,)))),
+            ("1-BETA2", (1, ("beta", (2,)))),
+            ("1.0.0BETA1", (1, ("beta", (1,)))),
+            ("1.0-milestone1", (1, ("milestone", (1,)))),
+            ("1.0-milestone2", (1, ("milestone", (2,)))),
+            ("1.0.0milestone1", (1, ("milestone", (1,)))),
+            ("1.0-MILESTONE1", (1, ("milestone", (1,)))),
+            ("1.0-milestone2", (1, ("milestone", (2,)))),
+            ("1.0.0MILESTONE1", (1, ("milestone", (1,)))),
+            ("1.0-alpha2snapshot", (1, ("alpha", (2, ("snapshot",))))),
             )
 
         for test, expected in test_pairs:
