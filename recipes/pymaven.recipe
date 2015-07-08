@@ -26,3 +26,5 @@ class PymavenPackge(PackageRecipe):
     def setup(r):
         r.addGitSnapshot()
         r.PythonSetup()
+
+        r.EggRequires(exceptions=".*")
