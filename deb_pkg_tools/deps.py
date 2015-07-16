@@ -1,7 +1,7 @@
 # Debian packaging tools: Relationship parsing and evaluation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: May 1, 2015
+# Last Change: July 16, 2015
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -9,8 +9,8 @@ Relationship parsing and evaluation
 ===================================
 
 This module provides functions to parse and evaluate Debian package
-relationship declarations as defined in `chapter 7`_ of the `Debian policy
-manual`_. The most important function is :py:func:`parse_depends()` which
+relationship declarations as defined in `chapter 7`_ of the Debian policy
+manual. The most important function is :py:func:`parse_depends()` which
 returns a :py:class:`RelationshipSet` object. The
 :py:func:`RelationshipSet.matches()` function can be used to evaluate
 relationship expressions. The relationship parsing is implemented in pure
@@ -46,7 +46,6 @@ object tree and the :py:func:`unicode()` output (:py:func:`str()` in Python
              architecture restrictions are not supported (because I simply
              don't use them).
 
-.. _Debian policy manual: http://www.debian.org/doc/debian-policy/
 .. _chapter 7: http://www.debian.org/doc/debian-policy/ch-relationships.html#s-depsyntax
 """
 

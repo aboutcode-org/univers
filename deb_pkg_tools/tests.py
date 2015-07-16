@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: May 1, 2015
+# Last Change: July 16, 2015
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -24,15 +24,19 @@ from executor import execute
 # Modules included in our package.
 from deb_pkg_tools import version
 from deb_pkg_tools.cache import PackageCache
-from deb_pkg_tools.checks import check_duplicate_files, check_version_conflicts, DuplicateFilesFound, VersionConflictFound
+from deb_pkg_tools.checks import (check_duplicate_files, check_version_conflicts,
+                                  DuplicateFilesFound, VersionConflictFound)
 from deb_pkg_tools.cli import main
 from deb_pkg_tools.compat import StringIO, unicode
-from deb_pkg_tools.control import (deb822_from_string, load_control_file,
-                                   merge_control_fields, parse_control_fields,
-                                   unparse_control_fields)
+from deb_pkg_tools.control import (create_control_file, deb822_from_string,
+                                   load_control_file, merge_control_fields,
+                                   parse_control_fields, unparse_control_fields)
 from deb_pkg_tools.deps import VersionedRelationship, parse_depends, Relationship, RelationshipSet
 from deb_pkg_tools.gpg import GPGKey
-from deb_pkg_tools.package import collect_related_packages, copy_package_files, find_latest_version, find_package_archives, group_by_latest_versions, inspect_package, parse_filename
+from deb_pkg_tools.package import (collect_related_packages, copy_package_files,
+                                   find_latest_version, find_package_archives,
+                                   group_by_latest_versions, inspect_package,
+                                   parse_filename)
 from deb_pkg_tools.printer import CustomPrettyPrinter
 from deb_pkg_tools.repo import apt_supports_trusted_option, update_repository
 from deb_pkg_tools.utils import find_debian_architecture
@@ -145,6 +149,28 @@ class DebPkgToolsTestCase(unittest.TestCase):
                                  'Version: 1.0',
                                  'Depends: python-deb-pkg-tools, python-pip, python-pip-accel',
                                  'Architecture: amd64']))
+
+    def test_control_file_creation(self):
+        with Context() as context:
+            directory = context.mkdtemp()
+            # Use a non-existing subdirectory to verify that it's created.
+            control_file = os.path.join(directory, 'DEBIAN', 'control')
+            # Try to create a control file but omit some mandatory fields.
+            self.assertRaises(ValueError, create_control_file, control_file, dict(Package='created-from-python'))
+            # Now we'll provide all of the required fields to actually create the file.
+            create_control_file(control_file, dict(
+                Package='created-from-python',
+                Description='whatever',
+                Maintainer='Peter Odding',
+                Version='1.0',
+            ))
+            # Load the control file to verify its contents.
+            control_fields = load_control_file(control_file)
+            # These fields were provided by us (the caller of create_control_file()).
+            assert control_fields['Package'] == 'created-from-python'
+            assert control_fields['Description'] == 'whatever'
+            # This field was written as a default value.
+            assert control_fields['Architecture'] == 'all'
 
     def test_control_file_patching_and_loading(self):
         deb822_package = Deb822(['Package: unpatched-example',
