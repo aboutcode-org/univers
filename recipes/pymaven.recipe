@@ -22,6 +22,7 @@ class PymavenPackge(PackageRecipe):
     buildRequires = [
         "python-setuptools",
         "python-requests",
+        "python-lxml",
         ]
 
     def setup(r):
