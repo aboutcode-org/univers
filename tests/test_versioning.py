@@ -129,8 +129,11 @@ class TestRestriction(unittest.TestCase):
         assert 1 < r1
 
     def test_string_repr(self):
-        assert str(Restriction("(1.0,2.0]")) == "(1.0,2.0]"
-        assert str(Restriction("[1.0]")) == "[1.0]"
+        for input in ("[1.0]", "[1.0,)", "[1.0,2.0]", "[1.0,2.0)", "(1.0,2.0)",
+                      "[,2.0]", "[,2.0)", "(,2.0)"):
+            actual = str(Restriction(input))
+            assert input == actual, \
+                "Restriction(%s) == %s, wanted %s" % (input, actual, input)
 
 
 class TestVersion(unittest.TestCase):
@@ -536,8 +539,10 @@ class TestVersionRange(unittest.TestCase):
         assert 1 < vr1
 
     def test_str(self):
-        assert str(VersionRange("[1.0,2.0]")) == "[1.0,2.0]"
-        assert str(VersionRange("1.0")) == "1.0"
+        for input in ("[1.0,2.0]", "1.0"):
+            actual = str(VersionRange(input))
+            assert input == actual, \
+                "VersionRange(%s) == %s, wanted %s" % (input, actual, input)
 
     def test_fromversion(self):
         v = Version("1.0")

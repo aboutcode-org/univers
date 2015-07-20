@@ -148,15 +148,16 @@ class Restriction(object):
                      self.upper_bound, self.upper_bound_inclusive))
 
     def __str__(self):
-        s = ""
-        s += INCLUSIVE_OPEN if self.lower_bound_inclusive else EXCLUSIVE_OPEN
-        if self.lower_bound:
-            s += str(self.lower_bound)
-
-        if self.upper_bound and not self.upper_bound == self.lower_bound:
-            s += ',' + str(self.upper_bound)
-        s += INCLUSIVE_CLOSE if self.upper_bound_inclusive else EXCLUSIVE_CLOSE
-
+        s = "{open}{lower}{comma}{upper}{close}".format(
+            open=(INCLUSIVE_OPEN if self.lower_bound_inclusive
+                  else EXCLUSIVE_OPEN),
+            lower=self.lower_bound if self.lower_bound is not None else "",
+            comma="," if self.lower_bound != self.upper_bound else "",
+            upper=(self.upper_bound if self.upper_bound is not None
+                   and self.upper_bound != self.lower_bound else ""),
+            close=(INCLUSIVE_CLOSE if self.upper_bound_inclusive
+                   else EXCLUSIVE_CLOSE),
+            )
         return s
 
     def __repr__(self):
