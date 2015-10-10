@@ -51,7 +51,7 @@ class Restriction(object):
     def __init__(self, spec=None):
         """Create a restriction
 
-        Restrictions are specified using a semi-mathmatical notation:
+        Restrictions are specified using a semi-mathematical notation:
 
         * 1.0: "Soft" requirement on 1.0 (just a recommendation, if it matches
           all other ranges for the dependency)
@@ -104,7 +104,7 @@ class Restriction(object):
         """Return true if version is contained within the restriction
 
         version must be greater than the lower bound (or equal to it if the
-        lower bound is inclusive) and less than the upper bount ( or equal to it
+        lower bound is inclusive) and less than the upper bound ( or equal to it
         if the upper bound is inclusive).
         """
         if self.lower_bound:
@@ -292,7 +292,7 @@ class VersionRange(object):
         return VersionRange(str(version))
 
     def restrict(self, version_range):
-        """Retruns a new VersionRange that is a restriction of this
+        """Returns a new VersionRange that is a restriction of this
         and the specified version range.
 
         Prefers this version over the specified version range
@@ -412,7 +412,7 @@ class Version(object):
         elif isinstance(this, (list, tuple)):
             return self._list_compare(this, other)
         else:
-            raise RuntimeError("Unkown type for t: %r" % this)
+            raise RuntimeError("Unknown type for t: %r" % this)
 
     def _int_compare(self, this, other):
         if isinstance(other, int):
