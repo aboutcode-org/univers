@@ -19,6 +19,7 @@ from __future__ import unicode_literals
 import io
 import re
 import os
+import requests
 
 try:
         import unittest2 as unittest
@@ -75,11 +76,24 @@ dnl RPMVERCMP(1a, 1b, -1)
 
 
 class VersionCompareTest(unittest.TestCase):
-    TestFile = os.path.join(os.path.dirname(__file__), 'data', 'rpmvercmp.at')
+    TestFile = os.path.join(os.path.dirname(__file__), 'rpmvercmp.at')
+    TestFileUrl = "https://raw.githubusercontent.com/rpm-software-management/rpm/master/tests/rpmvercmp.at"  # noqa
 
     def setUp(self):
         super(VersionCompareTest, self).setUp()
         self.acfobj = io.open(self.TestFile, encoding="utf-8")
+
+    @classmethod
+    def setup_class(cls):
+        if not os.path.exists(cls.TestFile):
+            resp = requests.get(cls.TestFileUrl)
+            with io.open(cls.TestFile, "w", encoding="utf-8") as f:
+                f.write(resp.text)
+
+    @classmethod
+    def teardown_class(cls):
+        if os.path.exists(cls.TestFile):
+            os.unlink(cls.TestFile)
 
     def test_from_rpmtest(self):
         parser = ACParser(self.acfobj, with_buggy_comparisons=True)
