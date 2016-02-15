@@ -97,6 +97,11 @@ class VersionCompareTest(unittest.TestCase):
 
     def test_from_rpmtest(self):
         parser = ACParser(self.acfobj, with_buggy_comparisons=True)
+        test_count = 0
         for first, second, exp in parser:
+            test_count += 1
             ret = rpm_vercmp.vercmp(first, second)
             self.assertEquals(exp, ret)
+        # Make sure we still test something, in case the m4 file drops
+        # content this will fail the test
+        self.assertGreater(test_count, 20)
