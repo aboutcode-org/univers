@@ -1,4 +1,15 @@
-Pure Python implementation of rpmvercmp
+Pure Python implementation of rpmvercmp.
+
+The RPM Package Manager (http://rpm.org) has a version comparision algorithm,
+implemented in its C library, which performs the comparison in a certain way.
+
+In certain circumstances, where the C library is not installable (for example,
+on non-rpm based systems), or does not support the desired version of the
+python interpreter, the pure-python implementation may be useful.
+
+Source Code
+===========
+https://github.com/sassoftware/python-rpm-vercmp
 
 Installation
 ============
@@ -13,6 +24,6 @@ Usage
 
 Testing
 =======
-The testsuite includes rpm's test file in m4 format.
+The testsuite uses rpm's test file in m4 format.
 The file cat be fetched from:
 https://raw.githubusercontent.com/rpm-software-management/rpm/master/tests/rpmvercmp.at
