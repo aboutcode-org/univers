@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: July 16, 2015
+# Last Change: November 17, 2016
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -518,6 +518,19 @@ class DebPkgToolsTestCase(unittest.TestCase):
             assert package_d1 in related_packages
             # Make sure package-d2 wasn't collected.
             assert package_d2 not in related_packages
+
+    def test_collect_packages_with_prompt(self):
+        with Context() as finalizers:
+            # Temporarily change stdin to respond with `y' (for `yes').
+            finalizers.register(setattr, sys, 'stdin', sys.stdin)
+            sys.stdin = StringIO('y')
+            # Run `deb-pkg-tools --collect' ...
+            source_directory = finalizers.mkdtemp()
+            target_directory = finalizers.mkdtemp()
+            package1 = self.test_package_building(source_directory, overrides=dict(Package='deb-pkg-tools-package-1', Depends='deb-pkg-tools-package-2'))
+            package2 = self.test_package_building(source_directory, overrides=dict(Package='deb-pkg-tools-package-2'))
+            call('--collect=%s' % target_directory, package1)
+            self.assertEqual(sorted(os.listdir(target_directory)), sorted(map(os.path.basename, [package1, package2])))
 
     def test_repository_creation(self, preserve=False):
         if not SKIP_SLOW_TESTS:
