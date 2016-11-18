@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: May 1, 2015
+# Last Change: November 18, 2016
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -569,9 +569,16 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
 
     :param directory: The pathname of a directory tree suitable for packaging
                       with ``dpkg-deb --build``.
-    :param repository: The pathname of an existing directory where the
-                       generated ``*.deb`` archive should be stored (defaults
-                       to the system wide temporary directory).
+    :param repository: The pathname of the directory where the generated
+                       ``*.deb`` archive should be stored.
+
+                       By default a temporary directory is created to store the
+                       generated archive, in this case the caller is
+                       responsible for cleaning up the directory.
+
+                       Before deb-pkg-tools 2.0 this defaulted to the system
+                       wide temporary directory which could result in corrupted
+                       archives during concurrent builds.
     :param check_package: If ``True`` (the default) Lintian_ is run to check
                           the resulting package archive for possible issues.
     :param copy_files: If ``True`` (the default) the package's files are copied
@@ -585,7 +592,7 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
     .. _Lintian: http://lintian.debian.org/
     """
     if not repository:
-        repository = tempfile.gettempdir()
+        repository = tempfile.mkdtemp(prefix='deb-pkg-tools-build-')
     package_file = os.path.join(repository, determine_package_archive(directory))
     logger.debug("Preparing to build package: %s", format_path(package_file))
     try:
