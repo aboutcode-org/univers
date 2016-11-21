@@ -1,7 +1,7 @@
 # Debian packaging tools: Utility functions.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: April 10, 2015
+# Last Change: November 21, 2016
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -32,17 +32,6 @@ from deb_pkg_tools.compat import total_ordering
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
-
-def compact(text, **kw):
-    """
-    Compact whitespace in a string and format any keyword arguments into the
-    resulting string.
-
-    :param text: The text to compact (a string).
-    :param kw: Any keyword arguments to apply using :func:`str.format()`.
-    :returns: The compacted, formatted string.
-    """
-    return ' '.join(text.split()).format(**kw)
 
 def sha1(text):
     """
@@ -163,7 +152,7 @@ def find_installed_version(package_name):
               the version can't be found.
     """
     try:
-        return execute('dpkg-query','--show', '--showformat=${Version}', package_name, capture=True, silent=True)
+        return execute('dpkg-query', '--show', '--showformat=${Version}', package_name, capture=True, silent=True)
     except ExternalCommandFailed:
         return None
 

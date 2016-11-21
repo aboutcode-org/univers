@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: November 17, 2016
+# Last Change: November 21, 2016
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 # Standard library modules.
@@ -13,13 +13,13 @@ import re
 import shutil
 import sys
 import tempfile
-import textwrap
 import unittest
 
 # External dependencies.
 import coloredlogs
 from debian.deb822 import Deb822
 from executor import execute
+from humanfriendly.text import compact, dedent
 
 # Modules included in our package.
 from deb_pkg_tools import version
@@ -629,16 +629,6 @@ def match(pattern, lines):
         m = re.match(pattern, line)
         if m:
             return m.group(1)
-
-def dedent(string):
-    return textwrap.dedent(string).strip()
-
-def compact(string):
-    """
-    Compact all whitespace sequences to single spaces and strip all leading and
-    trailing whitespace.
-    """
-    return ' '.join(string.split())
 
 def remove_unicode_prefixes(expression):
     """
