@@ -8,7 +8,7 @@
 Miscellaneous functions
 =======================
 
-The functions in the :py:mod:`deb_pkg_tools.utils` module are not directly
+The functions in the :mod:`deb_pkg_tools.utils` module are not directly
 related to Debian packages/repositories, however they are used by the other
 modules in the `deb-pkg-tools` package.
 """
@@ -39,7 +39,7 @@ def compact(text, **kw):
     resulting string.
 
     :param text: The text to compact (a string).
-    :param kw: Any keyword arguments to apply using :py:func:`str.format()`.
+    :param kw: Any keyword arguments to apply using :func:`str.format()`.
     :returns: The compacted, formatted string.
     """
     return ' '.join(text.split()).format(**kw)
@@ -91,7 +91,7 @@ def optimize_order(package_archives):
 
     Usually when scanning a large group of package archives, it really doesn't
     matter in which order we scan them. However the progress reported using
-    :py:class:`humanfriendly.Spinner` can be more accurate when we shuffle the
+    :class:`humanfriendly.Spinner` can be more accurate when we shuffle the
     order. Why would that happen? When the following conditions are met:
 
     1. The package repository contains multiple versions of the same packages;
@@ -110,8 +110,8 @@ def find_debian_architecture():
     """
     Find the Debian architecture of the current environment.
 
-    Uses :py:func:`os.uname()` to determine the current machine architecture
-    (the fifth value returned by :py:func:`os.uname()`) and translates it into
+    Uses :func:`os.uname()` to determine the current machine architecture
+    (the fifth value returned by :func:`os.uname()`) and translates it into
     one of the `machine architecture labels`_ used in the Debian packaging
     system:
 
@@ -135,7 +135,7 @@ def find_debian_architecture():
 
     :returns: The Debian architecture (a string like ``i386``, ``amd64``,
               ``armhf``, etc).
-    :raises: :py:exc:`~executor.ExternalCommandFailed` when the
+    :raises: :exc:`~executor.ExternalCommandFailed` when the
              ``dpkg-architecture`` program is not available or reports an
              error.
 
@@ -172,10 +172,10 @@ class atomic_lock(object):
     """
     Context manager for atomic locking of files and directories.
 
-    This context manager exploits the fact that :py:func:`os.mkdir()` on UNIX
+    This context manager exploits the fact that :func:`os.mkdir()` on UNIX
     is an atomic operation, which means it will only work on UNIX.
 
-    Intended to be used with Python's :py:keyword:`with` statement:
+    Intended to be used with Python's :keyword:`with` statement:
 
     .. code-block:: python
 
@@ -193,8 +193,8 @@ class atomic_lock(object):
                      to ``True``).
 
         If ``wait=False`` and the file or directory cannot be locked,
-        :py:exc:`ResourceLockedException` will be raised when entering the
-        :py:keyword:`with` block.
+        :exc:`ResourceLockedException` will be raised when entering the
+        :keyword:`with` block.
         """
         self.wait = bool(wait)
         self.pathname = os.path.realpath(pathname)
@@ -226,7 +226,7 @@ class atomic_lock(object):
 class ResourceLockedException(Exception):
 
     """
-    Raised by :py:class:`atomic_lock()` when the lock cannot be created because
+    Raised by :class:`atomic_lock()` when the lock cannot be created because
     another process has claimed the lock.
     """
 
@@ -234,7 +234,7 @@ class ResourceLockedException(Exception):
 class OrderedObject(object):
 
     """
-    By inheriting from this class and implementing :py:func:`OrderedObject._key()`
+    By inheriting from this class and implementing :func:`OrderedObject._key()`
     objects gain support for equality comparison, rich comparison and a hash
     method that allows objects to be added to sets and used as dictionary keys.
     """

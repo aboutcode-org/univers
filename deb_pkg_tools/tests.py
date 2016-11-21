@@ -642,9 +642,9 @@ def compact(string):
 
 def remove_unicode_prefixes(expression):
     """
-    Enable string comparison between :py:func:`repr()` output on Python 2.x
+    Enable string comparison between :func:`repr()` output on Python 2.x
     (where Unicode strings have the ``u`` prefix) and Python 3.x (where Unicode
-    strings are the default and no prefix is emitted by :py:func:`repr()`).
+    strings are the default and no prefix is emitted by :func:`repr()`).
     """
     return re.sub(r'\bu([\'"])', r'\1', expression)
 

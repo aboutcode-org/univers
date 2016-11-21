@@ -8,10 +8,10 @@
 Control file manipulation
 =========================
 
-The functions in the :py:mod:`deb_pkg_tools.control` module can be used to
+The functions in the :mod:`deb_pkg_tools.control` module can be used to
 manipulate Debian control files. It was developed specifically for control
 files of binary packages, however the code is very generic. This module builds
-on top of the :py:class:`debian.deb822.Deb822` class from the python-debian_
+on top of the :class:`debian.deb822.Deb822` class from the python-debian_
 package.
 
 .. _python-debian: https://pypi.python.org/pypi/python-debian
@@ -79,7 +79,7 @@ def load_control_file(control_file):
     Load a control file and return the parsed control fields.
 
     :param control_file: The filename of the control file to load (a string).
-    :returns: A dictionary created by :py:func:`parse_control_fields()`.
+    :returns: A dictionary created by :func:`parse_control_fields()`.
     """
     with open(control_file) as handle:
         return parse_control_fields(Deb822(handle))
@@ -141,13 +141,13 @@ def merge_control_fields(defaults, overrides):
     Merge the fields of two Debian control files.
 
     :param defaults: A dictionary with existing control field name/value pairs
-                     (may be an instance of :py:class:`debian.deb822.Deb822`
+                     (may be an instance of :class:`debian.deb822.Deb822`
                      but doesn't have to be).
     :param overrides: A dictionary with fields that should override default
                       name/value pairs. Values of the fields `Depends`,
                       `Provides`, `Replaces` and `Conflicts` are merged
                       while values of other fields are overwritten.
-    :returns: An instance of :py:class:`debian.deb822.Deb822` that contains the
+    :returns: An instance of :class:`debian.deb822.Deb822` that contains the
               merged control field name/value pairs.
     """
     defaults = parse_control_fields(defaults)
@@ -175,9 +175,9 @@ def merge_control_fields(defaults, overrides):
 
 def parse_control_fields(input_fields):
     r"""
-    The :py:class:`debian.deb822.Deb822` class can be used to parse Debian
-    control files but the result is a simple :py:class:`dict` with string
-    name/value pairs. This function takes an existing :py:class:`debian.deb822.Deb822`
+    The :class:`debian.deb822.Deb822` class can be used to parse Debian
+    control files but the result is a simple :class:`dict` with string
+    name/value pairs. This function takes an existing :class:`debian.deb822.Deb822`
     instance and converts known fields into friendlier formats, for example:
 
     - The value of `Depends`, `Provides`, `Replaces` and `Conflicts` fields is
@@ -186,9 +186,9 @@ def parse_control_fields(input_fields):
     - The value of the `Installed-Size` field is converted to an integer.
 
     :param input_fields: The dictionary to convert (may be an instance of
-                         :py:class:`debian.deb822.Deb822` but doesn't have
+                         :class:`debian.deb822.Deb822` but doesn't have
                          to be).
-    :returns: A :py:class:`dict` object with the converted fields.
+    :returns: A :class:`dict` object with the converted fields.
 
     Let's look at an example. We start with the raw control file contents so
     you can see the complete input:
@@ -207,7 +207,7 @@ def parse_control_fields(input_fields):
     ... ''')
 
     Here are the control file fields as parsed by the
-    :py:class:`debian.deb822` module:
+    :class:`debian.deb822` module:
 
     >>> print(repr(unparsed_fields))
     {'Architecture': u'amd64',
@@ -222,7 +222,7 @@ def parse_control_fields(input_fields):
 
     Notice the value of the `Depends` line is a comma separated string, i.e. it
     hasn't been parsed. Now here are the control file fields parsed by the
-    :py:func:`parse_control_fields()` function:
+    :func:`parse_control_fields()` function:
 
     >>> from deb_pkg_tools.control import parse_control_fields
     >>> parsed_fields = parse_control_fields(unparsed_fields)
@@ -242,7 +242,7 @@ def parse_control_fields(input_fields):
      'Version': u'3.4.0-1+precise1'}
 
     For more information about fields like `Depends` and `Suggests` please
-    refer to the documentation of :py:func:`.parse_depends()`.
+    refer to the documentation of :func:`.parse_depends()`.
     """
     logger.debug("Parsing %i control fields ..", len(input_fields))
     output_fields = {}
@@ -260,16 +260,16 @@ def parse_control_fields(input_fields):
 
 def unparse_control_fields(input_fields):
     """
-    Convert a :py:class:`dict` returned by :py:func:`parse_control_fields()`
-    back into a :py:class:`debian.deb822.Deb822` object.
+    Convert a :class:`dict` returned by :func:`parse_control_fields()`
+    back into a :class:`debian.deb822.Deb822` object.
 
     Note that fields with an empty value are omitted. This makes it possible to
-    delete fields from a control file with :py:func:`patch_control_file()` by
+    delete fields from a control file with :func:`patch_control_file()` by
     setting the value of a field to ``None`` in the overrides...
 
-    :param input_fields: A :py:class:`dict` object previously returned by
-                         :py:func:`parse_control_fields()`.
-    :returns: A :py:class:`debian.deb822.Deb822` object.
+    :param input_fields: A :class:`dict` object previously returned by
+                         :func:`parse_control_fields()`.
+    :returns: A :class:`debian.deb822.Deb822` object.
     """
     logger.debug("Unparsing %i control fields ..", len(input_fields))
     output_fields = Deb822()
@@ -304,7 +304,7 @@ def normalize_control_field_name(name):
     files`_) field names are not case-sensitive, however in my experience
     deviating from the standard capitalization can break things. Hence this
     function (which is used by the other functions in the
-    :py:mod:`deb_pkg_tools.control` module).
+    :mod:`deb_pkg_tools.control` module).
 
     .. note:: This function doesn't adhere 100% to the Debian policy because it
               lacks special casing (no pun intended ;-) for fields like
@@ -319,10 +319,10 @@ def normalize_control_field_name(name):
 
 def deb822_from_string(string):
     """
-    Create a :py:class:`debian.deb822.Deb822` object from a string.
+    Create a :class:`debian.deb822.Deb822` object from a string.
 
     :param string: The string containing the control fields to parse.
-    :returns: A :py:class:`debian.deb822.Deb822` object.
+    :returns: A :class:`debian.deb822.Deb822` object.
     """
     return Deb822(StringIO(textwrap.dedent(string).strip()))
 

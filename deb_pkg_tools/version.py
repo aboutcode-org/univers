@@ -10,8 +10,8 @@ Version comparison
 
 This module supports version comparison and sorting according to `section
 5.6.12 of the Debian Policy Manual`_. It does so by using the python-apt_
-binding (see :py:func:`compare_versions_with_python_apt()`) and/or the external
-command ``dpkg --compare-versions`` (see :py:func:`compare_versions_with_dpkg()`).
+binding (see :func:`compare_versions_with_python_apt()`) and/or the external
+command ``dpkg --compare-versions`` (see :func:`compare_versions_with_dpkg()`).
 
 .. _section 5.6.12 of the Debian Policy Manual: http://www.debian.org/doc/debian-policy/ch-controlfields.html#s-f-Version
 .. _python-apt: http://apt.alioth.debian.org/python-apt-doc/
@@ -43,9 +43,9 @@ except ImportError:
 def compare_versions_with_python_apt(version1, operator, version2):
     """
     Compare Debian package versions using the python-apt_ binding. Compatible
-    with newer versions of python-apt_ (:py:func:`apt_pkg.version_compare()`)
-    and older versions (:py:func:`apt.VersionCompare()`). Raises
-    :py:exc:`NotImplementedError` if python-apt_ is not available (neither of
+    with newer versions of python-apt_ (:func:`apt_pkg.version_compare()`)
+    and older versions (:func:`apt.VersionCompare()`). Raises
+    :exc:`NotImplementedError` if python-apt_ is not available (neither of
     the mentioned functions can be imported).
 
     :param version1: The version on the left side of the comparison (a string).
@@ -83,8 +83,8 @@ dpkg_comparison_cache = {}
 def compare_versions(version1, operator, version2):
     """
     Compare Debian package versions by using the python-apt_ binding (see
-    :py:func:`compare_versions_with_python_apt()`) or the external command
-    ``dpkg --compare-versions`` (see :py:func:`compare_versions_with_dpkg()`).
+    :func:`compare_versions_with_python_apt()`) or the external command
+    ``dpkg --compare-versions`` (see :func:`compare_versions_with_dpkg()`).
 
     :param version1: The version on the left side of the comparison (a string).
     :param operator: The operator to use in the comparison (a string).
@@ -107,7 +107,7 @@ def compare_versions(version1, operator, version2):
 class Version(str):
 
     """
-    The :py:class:`Version` class is a subclass of the built in :py:class:`str`
+    The :class:`Version` class is a subclass of the built in :class:`str`
     type that implements rich comparison according to the version sorting order
     defined in the Debian Policy Manual. Use it to sort Debian package versions
     like this:
