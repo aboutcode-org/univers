@@ -1,7 +1,7 @@
 # Debian packaging tools: Version comparison.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: August 30, 2014
+# Last Change: November 21, 2016
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -45,8 +45,8 @@ def compare_versions_with_python_apt(version1, operator, version2):
     Compare Debian package versions using the python-apt_ binding. Compatible
     with newer versions of python-apt_ (:func:`apt_pkg.version_compare()`)
     and older versions (:func:`apt.VersionCompare()`). Raises
-    :exc:`NotImplementedError` if python-apt_ is not available (neither of
-    the mentioned functions can be imported).
+    :exc:`~exceptions.NotImplementedError` if python-apt_ is not available
+    (neither of the mentioned functions can be imported).
 
     :param version1: The version on the left side of the comparison (a string).
     :param operator: The operator to use in the comparison (a string).

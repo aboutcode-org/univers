@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: November 18, 2016
+# Last Change: November 21, 2016
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -373,8 +373,8 @@ def find_latest_version(packages):
     """
     Find the package archive with the highest version number. Uses
     :class:`.Version` objects for version comparison. Raises
-    :exc:`ValueError` when not all of the given package archives share the
-    same package name.
+    :exc:`~exceptions.ValueError` when not all of the given package archives
+    share the same package name.
 
     :param packages: A list of filenames (strings) and/or
                      :class:`PackageFile` objects.

@@ -1,7 +1,7 @@
 # Debian packaging tools: Relationship parsing and evaluation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: July 16, 2015
+# Last Change: November 21, 2016
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -38,8 +38,7 @@ RelationshipSet(VersionedRelationship(name='python', operator='>=', version='2.6
 python (>= 2.6), python (<< 3) | python (>= 3.4)
 
 As you can see the :func:`repr()` output of the relationship set shows the
-object tree and the :func:`unicode()` output (:func:`str()` in Python
-3.x) is the dependency line.
+object tree and the :class:`str` output is the dependency line.
 
 .. warning:: The relationship parsing code does not understand the complete
              syntax defined in the Debian policy manual. More specifically
@@ -66,7 +65,7 @@ def parse_depends(relationships):
     Parse a list of package relationships of the form ``python (>= 2.6), python
     (<< 3)``, i.e. a comma separated list of relationship expressions. Uses
     :func:`parse_alternatives()` to parse each comma separated expression.
-    Raises :exc:`ValueError` when parsing fails. Here's an example:
+    Raises :exc:`~exceptions.ValueError` when parsing fails. Here's an example:
 
     >>> from deb_pkg_tools.deps import parse_depends
     >>> dependencies = parse_depends('python (>= 2.6), python (<< 3)')
@@ -96,8 +95,8 @@ def parse_alternatives(expression):
     Parse an expression containing one or more alternative relationships of the
     form ``python2.6 | python2.7.``, i.e. a list of relationship expressions
     separated by ``|`` tokens. Uses :func:`parse_relationship()` to parse
-    each ``|`` separated expression. Raises :exc:`ValueError` when parsing
-    fails. An example:
+    each ``|`` separated expression. Raises :exc:`~exceptions.ValueError` when
+    parsing fails. An example:
 
     >>> from deb_pkg_tools.deps import parse_alternatives
     >>> parse_alternatives('python2.6')
@@ -118,7 +117,7 @@ def parse_relationship(expression):
     """
     Parse a relationship expression containing a package name and (optionally)
     a version relation of the form ``python (>= 2.6)``. Raises
-    :exc:`ValueError` when parsing fails. An example:
+    :exc:`~exceptions.ValueError` when parsing fails. An example:
 
     >>> from deb_pkg_tools.deps import parse_relationship
     >>> parse_relationship('python')
