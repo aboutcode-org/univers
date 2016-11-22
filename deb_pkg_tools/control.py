@@ -1,12 +1,11 @@
 # Debian packaging tools: Control file manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: September 24, 2015
+# Last Change: November 21, 2016
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
-Control file manipulation
-=========================
+Functions to manipulate Debian control files.
 
 The functions in the :mod:`deb_pkg_tools.control` module can be used to
 manipulate Debian control files. It was developed specifically for control
@@ -25,9 +24,10 @@ import textwrap
 # External dependencies.
 from debian.deb822 import Deb822
 from humanfriendly import concatenate, format_path, pluralize
+from six import string_types, text_type
+from six.moves import StringIO
 
 # Modules included in our package.
-from deb_pkg_tools.compat import basestring, StringIO, unicode
 from deb_pkg_tools.deps import parse_depends, RelationshipSet
 from deb_pkg_tools.utils import makedirs
 
@@ -74,6 +74,7 @@ are like the ``Depends`` field (in the sense that they contain a comma
 separated list of package names with optional version specifications).
 """
 
+
 def load_control_file(control_file):
     """
     Load a control file and return the parsed control fields.
@@ -83,6 +84,7 @@ def load_control_file(control_file):
     """
     with open(control_file) as handle:
         return parse_control_fields(Deb822(handle))
+
 
 def create_control_file(control_file, control_fields):
     """
@@ -114,6 +116,7 @@ def create_control_file(control_file, control_fields):
     with open(control_file, 'wb') as handle:
         merged_fields.dump(handle)
 
+
 def patch_control_file(control_file, overrides):
     """
     Patch the fields of a Debian control file.
@@ -135,6 +138,7 @@ def patch_control_file(control_file, overrides):
     # Patch the control file.
     with open(control_file, 'wb') as handle:
         patched.dump(handle)
+
 
 def merge_control_fields(defaults, overrides):
     """
@@ -173,22 +177,25 @@ def merge_control_fields(defaults, overrides):
     logger.debug("Merged control fields: %s", merged)
     return unparse_control_fields(merged)
 
+
 def parse_control_fields(input_fields):
     r"""
-    The :class:`debian.deb822.Deb822` class can be used to parse Debian
-    control files but the result is a simple :class:`dict` with string
-    name/value pairs. This function takes an existing :class:`debian.deb822.Deb822`
-    instance and converts known fields into friendlier formats, for example:
-
-    - The value of `Depends`, `Provides`, `Replaces` and `Conflicts` fields is
-      converted to a list of strings.
-
-    - The value of the `Installed-Size` field is converted to an integer.
+    Parse Debian control file fields.
 
     :param input_fields: The dictionary to convert (may be an instance of
                          :class:`debian.deb822.Deb822` but doesn't have
                          to be).
     :returns: A :class:`dict` object with the converted fields.
+
+    The :class:`debian.deb822.Deb822` class can be used to parse Debian control
+    files but the result is a simple :class:`dict` with string name/value
+    pairs. This function takes an existing :class:`debian.deb822.Deb822`
+    instance and converts the following fields into friendlier formats:
+
+    - The values of the fields given by :data:`DEPENDS_LIKE_FIELDS` are parsed
+      into Python data structures using :func:`.parse_depends()`.
+
+    - The value of the `Installed-Size` field is converted to an integer.
 
     Let's look at an example. We start with the raw control file contents so
     you can see the complete input:
@@ -258,18 +265,20 @@ def parse_control_fields(input_fields):
     logger.debug("Parsed fields: %s", output_fields)
     return output_fields
 
+
 def unparse_control_fields(input_fields):
     """
-    Convert a :class:`dict` returned by :func:`parse_control_fields()`
-    back into a :class:`debian.deb822.Deb822` object.
-
-    Note that fields with an empty value are omitted. This makes it possible to
-    delete fields from a control file with :func:`patch_control_file()` by
-    setting the value of a field to ``None`` in the overrides...
+    Unparse (undo the parsing of) Debian control file fields.
 
     :param input_fields: A :class:`dict` object previously returned by
                          :func:`parse_control_fields()`.
     :returns: A :class:`debian.deb822.Deb822` object.
+
+    This function converts dictionaries created by
+    :func:`parse_control_fields()` back into :class:`debian.deb822.Deb822`
+    objects. Fields with an empty value are omitted. This makes it possible to
+    delete fields from a control file with :func:`patch_control_file()` by
+    setting the value of a field to :data:`None` in the overrides...
     """
     logger.debug("Unparsing %i control fields ..", len(input_fields))
     output_fields = Deb822()
@@ -278,8 +287,8 @@ def unparse_control_fields(input_fields):
         if name in DEPENDS_LIKE_FIELDS:
             if isinstance(parsed_value, RelationshipSet):
                 # New interface (a RelationshipSet object).
-                unparsed_value = unicode(parsed_value)
-            elif not isinstance(parsed_value, basestring):
+                unparsed_value = text_type(parsed_value)
+            elif not isinstance(parsed_value, string_types):
                 # Backwards compatibility  with old interface (list of strings).
                 unparsed_value = ', '.join(parsed_value)
             else:
@@ -295,10 +304,16 @@ def unparse_control_fields(input_fields):
     logger.debug("Unparsed fields: %r", output_fields)
     return output_fields
 
+
 def normalize_control_field_name(name):
     """
-    Normalize the case of a field name in a Debian control file to simplify
-    control file manipulation and in particular the merging of control files.
+    Normalize the case of a field name in a Debian control file.
+
+    :param name: The name of a control file field (a string).
+    :returns: The normalized name (a string).
+
+    Normalization of control file field names is useful to simplify control
+    file manipulation and in particular the merging of control files.
 
     According to the Debian Policy Manual (section 5.1, `Syntax of control
     files`_) field names are not case-sensitive, however in my experience
@@ -317,6 +332,7 @@ def normalize_control_field_name(name):
     special_cases = dict(md5sum='MD5sum', sha1='SHA1', sha256='SHA256')
     return '-'.join(special_cases.get(w.lower(), w.capitalize()) for w in name.split('-'))
 
+
 def deb822_from_string(string):
     """
     Create a :class:`debian.deb822.Deb822` object from a string.
@@ -325,5 +341,3 @@ def deb822_from_string(string):
     :returns: A :class:`debian.deb822.Deb822` object.
     """
     return Deb822(StringIO(textwrap.dedent(string).strip()))
-
-# vim: ts=4 sw=4 et

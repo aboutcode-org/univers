@@ -1,22 +1,21 @@
 # Debian packaging tools: Relationship parsing and evaluation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: November 21, 2016
+# Last Change: November 22, 2016
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
-Relationship parsing and evaluation
-===================================
+Parsing and evaluation of Debian package relationship declarations.
 
-This module provides functions to parse and evaluate Debian package
-relationship declarations as defined in `chapter 7`_ of the Debian policy
-manual. The most important function is :func:`parse_depends()` which
-returns a :class:`RelationshipSet` object. The
-:func:`RelationshipSet.matches()` function can be used to evaluate
-relationship expressions. The relationship parsing is implemented in pure
-Python (no external dependencies) but relationship evaluation uses the external
-command ``dpkg --compare-versions`` to ensure compatibility with Debian's
-package version comparison algorithm.
+The :mod:`deb_pkg_tools.deps` module provides functions to parse and evaluate
+Debian package relationship declarations as defined in `chapter 7`_ of the
+Debian policy manual. The most important function is :func:`parse_depends()`
+which returns a :class:`RelationshipSet` object. The
+:func:`RelationshipSet.matches()` function can be used to evaluate relationship
+expressions. The relationship parsing is implemented in pure Python (no
+external dependencies) but relationship evaluation uses the external command
+``dpkg --compare-versions`` to ensure compatibility with Debian's package
+version comparison algorithm.
 
 To give you an impression of how to use this module:
 
@@ -52,20 +51,35 @@ object tree and the :class:`str` output is the dependency line.
 import logging
 import re
 
+# External dependencies.
+from humanfriendly.text import compact, split
+from six import string_types, text_type
+
 # Modules included in our package.
-from deb_pkg_tools.compat import basestring, str_compatible, unicode
+from deb_pkg_tools.compat import str_compatible
 from deb_pkg_tools.utils import OrderedObject
 from deb_pkg_tools.version import compare_versions
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
 
+
 def parse_depends(relationships):
     """
-    Parse a list of package relationships of the form ``python (>= 2.6), python
-    (<< 3)``, i.e. a comma separated list of relationship expressions. Uses
-    :func:`parse_alternatives()` to parse each comma separated expression.
-    Raises :exc:`~exceptions.ValueError` when parsing fails. Here's an example:
+    Parse a Debian package relationship declaration line.
+
+    :param relationships: A string containing one or more comma separated
+                          package relationships or a list of strings with
+                          package relationships.
+    :returns: A :class:`RelationshipSet` object.
+    :raises: :exc:`~exceptions.ValueError` when parsing fails.
+
+    This function parses a list of package relationships of the form ``python
+    (>= 2.6), python (<< 3)``, i.e. a comma separated list of relationship
+    expressions. Uses :func:`parse_alternatives()` to parse each comma
+    separated expression.
+
+    Here's an example:
 
     >>> from deb_pkg_tools.deps import parse_depends
     >>> dependencies = parse_depends('python (>= 2.6), python (<< 3)')
@@ -80,23 +94,26 @@ def parse_depends(relationships):
     True
     >>> dependencies.matches('python', '3.0')
     False
-
-    :param relationships: A string containing one or more comma separated
-                          package relationships or a list of strings with
-                          package relationships.
-    :returns: A :class:`RelationshipSet` object.
     """
-    if isinstance(relationships, basestring):
-        relationships = [r for r in relationships.split(',') if r and not r.isspace()]
+    if isinstance(relationships, string_types):
+        relationships = split(relationships, ',')
     return RelationshipSet(*map(parse_alternatives, relationships))
+
 
 def parse_alternatives(expression):
     """
-    Parse an expression containing one or more alternative relationships of the
-    form ``python2.6 | python2.7.``, i.e. a list of relationship expressions
-    separated by ``|`` tokens. Uses :func:`parse_relationship()` to parse
-    each ``|`` separated expression. Raises :exc:`~exceptions.ValueError` when
-    parsing fails. An example:
+    Parse an expression containing one or more alternative relationships.
+
+    :param expression: A relationship expression (a string).
+    :returns: A :class:`Relationship` object.
+    :raises: :exc:`~exceptions.ValueError` when parsing fails.
+
+    This function parses an expression containing one or more alternative
+    relationships of the form ``python2.6 | python2.7.``, i.e. a list of
+    relationship expressions separated by ``|`` tokens. Uses
+    :func:`parse_relationship()` to parse each ``|`` separated expression.
+
+    An example:
 
     >>> from deb_pkg_tools.deps import parse_alternatives
     >>> parse_alternatives('python2.6')
@@ -105,28 +122,31 @@ def parse_alternatives(expression):
     AlternativeRelationship(Relationship(name='python2.6'),
                             Relationship(name='python2.7'))
 
-    :param expression: A relationship expression (a string).
-    :returns: A :class:`Relationship` object.
     """
     if '|' in expression:
         return AlternativeRelationship(*map(parse_relationship, expression.split('|')))
     else:
         return parse_relationship(expression)
 
+
 def parse_relationship(expression):
     """
-    Parse a relationship expression containing a package name and (optionally)
-    a version relation of the form ``python (>= 2.6)``. Raises
-    :exc:`~exceptions.ValueError` when parsing fails. An example:
+    Parse an expression containing a package name and version.
+
+    :param expression: A relationship expression (a string).
+    :returns: A :class:`Relationship` object.
+    :raises: :exc:`~exceptions.ValueError` when parsing fails.
+
+    This function parses relationship expressions containing a package name
+    and (optionally) a version relation of the form ``python (>= 2.6)``.
+
+    An example:
 
     >>> from deb_pkg_tools.deps import parse_relationship
     >>> parse_relationship('python')
     Relationship(name='python')
     >>> parse_relationship('python (<< 3)')
     VersionedRelationship(name='python', operator='<<', version='3')
-
-    :param expression: A relationship expression (a string).
-    :returns: A :class:`Relationship` object.
     """
     tokens = [t.strip() for t in re.split('[()]', expression) if t and not t.isspace()]
     if len(tokens) == 1:
@@ -134,17 +154,24 @@ def parse_relationship(expression):
         return Relationship(tokens[0])
     elif len(tokens) != 2:
         # Encountered something unexpected!
-        msg = "Corrupt package relationship expression: Splitting name from relationship resulted in more than two tokens! (expression: %r, tokens: %r)"
-        raise ValueError(msg % (expression, tokens))
+        raise ValueError(compact("""
+            Corrupt package relationship expression: Splitting name from
+            relationship resulted in more than two tokens!
+            (expression: {e}, tokens: {t})
+        """, e=expression, t=tokens))
     else:
         # Package name followed by relationship to specific version(s) of package.
         name, relationship = tokens
         tokens = [t.strip() for t in re.split('([<>=]+)', relationship) if t and not t.isspace()]
         if len(tokens) != 2:
             # Encountered something unexpected!
-            msg = "Corrupt package relationship expression: Splitting operator from version resulted in more than two tokens! (expression: %r, tokens: %r)"
-            raise ValueError(msg % (relationship, tokens))
+            raise ValueError(compact("""
+                Corrupt package relationship expression: Splitting operator
+                from version resulted in more than two tokens!
+                (expression: {e}, tokens: {t})
+            """, e=relationship, t=tokens))
         return VersionedRelationship(name, *tokens)
+
 
 def cache_matches(f):
     """
@@ -173,11 +200,13 @@ def cache_matches(f):
             return value
     return decorator
 
+
 @str_compatible
 class Relationship(OrderedObject):
 
     """
     A simple package relationship referring only to the name of a package.
+
     Created by :func:`parse_relationship()`.
     """
 
@@ -204,38 +233,36 @@ class Relationship(OrderedObject):
 
         :param name: The name of a package (a string).
         :param version: The version number of a package (a string, optional).
-        :returns: ``True`` if the relationship matches, ``None`` otherwise.
+        :returns: :data:`True` if the relationship matches, :data:`None` otherwise.
         """
         return True if self.name == name else None
 
-    def __unicode__(self):
-        """
-        Serialize a :class:`Relationship` object to a Debian package
-        relationship expression.
-        """
+    def __str__(self):
+        """Serialize a :class:`Relationship` object to a Debian package relationship expression."""
         return self.name
 
     def __repr__(self):
-        """
-        Serialize a :class:`Relationship` object to a Python expression.
-        """
+        """Serialize a :class:`Relationship` object to a Python expression."""
         return "%s(%s)" % (self.__class__.__name__, ', '.join([
             'name=%r' % self.name
         ]))
 
     def _key(self):
         """
-        Get the comparison key of this :class:`Relationship` object. Used to
-        implement the equality and rich comparison operations.
+        Get the comparison key of this :class:`Relationship` object.
+
+        Used to implement the equality and rich comparison operations.
         """
         return (self.name,)
+
 
 @str_compatible
 class VersionedRelationship(Relationship):
 
     """
-    A conditional package relationship that refers to a package and certain
-    versions of that package. Created by :func:`parse_relationship()`.
+    A conditional package relationship that refers to a package and certain versions of that package.
+
+    Created by :func:`parse_relationship()`.
     """
 
     def __init__(self, name, operator, version):
@@ -253,14 +280,15 @@ class VersionedRelationship(Relationship):
     @cache_matches
     def matches(self, name, version=None):
         """
-        Check if the relationship matches a given package and version. Uses the
-        external command ``dpkg --compare-versions`` to ensure compatibility
-        with Debian's package version comparison algorithm.
+        Check if the relationship matches a given package and version.
 
         :param name: The name of a package (a string).
         :param version: The version number of a package (a string, optional).
-        :returns: ``True`` if the name and version match, ``False`` if only the
-                  name matches, ``None`` otherwise.
+        :returns: :data:`True` if the name and version match, :data:`False` if only the
+                  name matches, :data:`None` otherwise.
+
+        Uses the external command ``dpkg --compare-versions`` to ensure
+        compatibility with Debian's package version comparison algorithm.
         """
         if self.name == name:
             if version:
@@ -268,17 +296,12 @@ class VersionedRelationship(Relationship):
             else:
                 return False
 
-    def __unicode__(self):
-        """
-        Serialize a :class:`VersionedRelationship` object to a Debian package
-        relationship expression.
-        """
+    def __str__(self):
+        """Serialize a :class:`VersionedRelationship` object to a Debian package relationship expression."""
         return u'%s (%s %s)' % (self.name, self.operator, self.version)
 
     def __repr__(self):
-        """
-        Serialize a :class:`VersionedRelationship` object to a Python expression.
-        """
+        """Serialize a :class:`VersionedRelationship` object to a Python expression."""
         return "%s(%s)" % (self.__class__.__name__, ', '.join([
             'name=%r' % self.name,
             'operator=%r' % self.operator,
@@ -287,17 +310,19 @@ class VersionedRelationship(Relationship):
 
     def _key(self):
         """
-        Get the comparison key of this :class:`VersionedRelationship`
-        object. Used to implement the equality and rich comparison
-        operations.
+        Get the comparison key of this :class:`VersionedRelationship` object.
+
+        Used to implement the equality and rich comparison operations.
         """
         return (self.name, self.operator, self.version)
+
 
 @str_compatible
 class AlternativeRelationship(Relationship):
 
     """
     A package relationship that refers to one of several alternative packages.
+
     Created by :func:`parse_alternatives()`.
     """
 
@@ -328,46 +353,41 @@ class AlternativeRelationship(Relationship):
 
         :param name: The name of a package (a string).
         :param version: The version number of a package (a string, optional).
-        :returns: ``True`` if the name and version of an alternative match,
-                  ``False`` if the name of an alternative was matched but the
-                  version didn't match, ``None`` otherwise.
+        :returns: :data:`True` if the name and version of an alternative match,
+                  :data:`False` if the name of an alternative was matched but the
+                  version didn't match, :data:`None` otherwise.
         """
         matches = None
         for alternative in self.relationships:
             alternative_matches = alternative.matches(name, version)
-            if alternative_matches == True:
+            if alternative_matches is True:
                 return True
-            elif alternative_matches == False:
+            elif alternative_matches is False:
                 # Keep looking for a match but return False if we don't find one.
                 matches = False
         return matches
 
-    def __unicode__(self):
-        """
-        Serialize an :class:`AlternativeRelationship` object to a Debian package
-        relationship expression.
-        """
-        return u' | '.join(map(unicode, self.relationships))
+    def __str__(self):
+        """Serialize an :class:`AlternativeRelationship` object to a Debian package relationship expression."""
+        return u' | '.join(map(text_type, self.relationships))
 
     def __repr__(self):
-        """
-        Serialize an :class:`AlternativeRelationship` object to a Python expression.
-        """
+        """Serialize an :class:`AlternativeRelationship` object to a Python expression."""
         return "%s(%s)" % (self.__class__.__name__, ', '.join(repr(r) for r in self.relationships))
 
     def _key(self):
         """
-        Get the comparison key of this :class:`AlternativeRelationship` object. Used to
-        implement the equality and rich comparison operations.
+        Get the comparison key of this :class:`AlternativeRelationship` object.
+
+        Used to implement the equality and rich comparison operations.
         """
         return self.relationships
+
 
 @str_compatible
 class RelationshipSet(OrderedObject):
 
-    """
-    A set of package relationships. Created by :func:`parse_depends()`.
-    """
+    """A set of package relationships. Created by :func:`parse_depends()`."""
 
     def __init__(self, *relationships):
         """
@@ -396,9 +416,9 @@ class RelationshipSet(OrderedObject):
 
         :param name: The name of a package (a string).
         :param version: The version number of a package (a string, optional).
-        :returns: ``True`` if all matched relationships evaluate to true,
-                  ``False`` if a relationship is matched and evaluates to false,
-                  ``None`` otherwise.
+        :returns: :data:`True` if all matched relationships evaluate to true,
+                  :data:`False` if a relationship is matched and evaluates to false,
+                  :data:`None` otherwise.
 
         .. warning:: Results are cached in the assumption that
                      :class:`RelationshipSet` objects are
@@ -408,17 +428,12 @@ class RelationshipSet(OrderedObject):
         matches = [r for r in results if r is not None]
         return all(matches) if matches else None
 
-    def __unicode__(self):
-        """
-        Serialize a :class:`RelationshipSet` object to a Debian package
-        relationship expression.
-        """
-        return u', '.join(map(unicode, self.relationships))
+    def __str__(self):
+        """Serialize a :class:`RelationshipSet` object to a Debian package relationship expression."""
+        return u', '.join(map(text_type, self.relationships))
 
     def __repr__(self, pretty=False, indent=0):
-        """
-        Serialize a :class:`RelationshipSet` object to a Python expression.
-        """
+        """Serialize a :class:`RelationshipSet` object to a Python expression."""
         prefix = '%s(' % self.__class__.__name__
         indent += len(prefix)
         delimiter = ',\n%s' % (' ' * indent) if pretty else ', '
@@ -426,15 +441,12 @@ class RelationshipSet(OrderedObject):
 
     def _key(self):
         """
-        Get the comparison key of this :class:`RelationshipSet` object. Used
-        to implement the equality and rich comparison operations.
+        Get the comparison key of this :class:`RelationshipSet` object.
+
+        Used to implement the equality and rich comparison operations.
         """
         return self.relationships
 
     def __iter__(self):
-        """
-        Iterate over the relationships in a relationship set.
-        """
+        """Iterate over the relationships in a relationship set."""
         return iter(self.relationships)
-
-# vim: ts=4 sw=4 et

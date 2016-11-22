@@ -1,12 +1,11 @@
 # Debian packaging tools: Utility functions.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: November 21, 2016
+# Last Change: November 22, 2016
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
-Miscellaneous functions
-=======================
+Utility functions.
 
 The functions in the :mod:`deb_pkg_tools.utils` module are not directly
 related to Debian packages/repositories, however they are used by the other
@@ -33,6 +32,7 @@ from deb_pkg_tools.compat import total_ordering
 # Initialize a logger.
 logger = logging.getLogger(__name__)
 
+
 def sha1(text):
     """
     Calculate the SHA1 fingerprint of text.
@@ -44,16 +44,16 @@ def sha1(text):
     context.update(text.encode('utf-8'))
     return context.hexdigest()
 
+
 def find_home_directory():
-    """
-    Determine the home directory of the current user.
-    """
+    """Determine the home directory of the current user."""
     try:
         home = os.path.realpath(os.environ['HOME'])
         assert os.path.isdir(home)
         return home
     except Exception:
         return pwd.getpwuid(os.getuid()).pw_dir
+
 
 def makedirs(directory):
     """
@@ -62,7 +62,7 @@ def makedirs(directory):
     It is not an error if the directory already exists.
 
     :param directory: The pathname of a directory (a string).
-    :returns: ``True`` if the directory was created, ``False`` if it already
+    :returns: :data:`True` if the directory was created, :data:`False` if it already
               exists.
     """
     try:
@@ -73,6 +73,7 @@ def makedirs(directory):
             return False
         else:
             raise
+
 
 def optimize_order(package_archives):
     """
@@ -94,6 +95,7 @@ def optimize_order(package_archives):
     """
     random.shuffle(package_archives)
     return package_archives
+
 
 def find_debian_architecture():
     """
@@ -141,6 +143,7 @@ def find_debian_architecture():
     else:
         return execute('dpkg-architecture', '-qDEB_BUILD_ARCH', capture=True, logger=logger).strip()
 
+
 def find_installed_version(package_name):
     """
     Find the installed version of a Debian system package.
@@ -148,13 +151,14 @@ def find_installed_version(package_name):
     Uses the ``dpkg-query --show --showformat='${Version}' ...`` command.
 
     :param package_name: The name of the package (a string).
-    :returns: The installed version of the package (a string) or ``None`` if
+    :returns: The installed version of the package (a string) or :data:`None` if
               the version can't be found.
     """
     try:
         return execute('dpkg-query', '--show', '--showformat=${Version}', package_name, capture=True, silent=True)
     except ExternalCommandFailed:
         return None
+
 
 class atomic_lock(object):
 
@@ -179,7 +183,7 @@ class atomic_lock(object):
 
         :param pathname: The pathname of a file or directory (a string).
         :param wait: Block until the lock can be claimed (a boolean, defaults
-                     to ``True``).
+                     to :data:`True`).
 
         If ``wait=False`` and the file or directory cannot be locked,
         :exc:`ResourceLockedException` will be raised when entering the
@@ -190,9 +194,7 @@ class atomic_lock(object):
         self.lock_directory = os.path.join(tempfile.gettempdir(), '%s.lock' % sha1(self.pathname))
 
     def __enter__(self):
-        """
-        Atomically lock the given pathname.
-        """
+        """Atomically lock the given pathname."""
         spinner = Spinner()
         timer = Timer()
         while True:
@@ -206,51 +208,43 @@ class atomic_lock(object):
                 raise ResourceLockedException(msg % self.pathname)
 
     def __exit__(self, exc_type=None, exc_value=None, traceback=None):
-        """
-        Unlock the previously locked pathname.
-        """
+        """Unlock the previously locked pathname."""
         if os.path.isdir(self.lock_directory):
             os.rmdir(self.lock_directory)
 
+
 class ResourceLockedException(Exception):
 
-    """
-    Raised by :class:`atomic_lock()` when the lock cannot be created because
-    another process has claimed the lock.
-    """
+    """Raised by :class:`atomic_lock()` when the lock can't be claimed."""
+
 
 @total_ordering
 class OrderedObject(object):
 
     """
+    Easy support for equality comparison, rich comparison and a hash method.
+
     By inheriting from this class and implementing :func:`OrderedObject._key()`
     objects gain support for equality comparison, rich comparison and a hash
     method that allows objects to be added to sets and used as dictionary keys.
     """
 
     def __eq__(self, other):
-        """
-        Enables equality comparison between objects.
-        """
+        """Enable equality comparison between objects."""
         return type(self) is type(other) and self._key() == other._key()
 
     def __lt__(self, other):
-        """
-        Enables rich comparison between objects.
-        """
+        """Enable rich comparison between objects."""
         return isinstance(other, OrderedObject) and self._key() < other._key()
 
     def __hash__(self):
-        """
-        Enables adding objects to sets.
-        """
+        """Enable adding objects to sets."""
         return hash(self.__class__) ^ hash(self._key())
 
     def _key(self):
         """
-        Get the comparison key of this object. Used to implement the equality
-        and rich comparison operations.
+        Get the comparison key of this object.
+
+        Used to implement the equality and rich comparison operations.
         """
         raise NotImplementedError
-
-# vim: ts=4 sw=4 et

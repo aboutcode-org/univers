@@ -1,12 +1,11 @@
 # Debian packaging tools: Version comparison.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: November 21, 2016
+# Last Change: November 22, 2016
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
-Version comparison
-==================
+Version sorting according to Debian semantics.
 
 This module supports version comparison and sorting according to `section
 5.6.12 of the Debian Policy Manual`_. It does so by using the python-apt_
@@ -40,18 +39,22 @@ except ImportError:
     except ImportError:
         have_python_apt = False
 
+
 def compare_versions_with_python_apt(version1, operator, version2):
     """
-    Compare Debian package versions using the python-apt_ binding. Compatible
-    with newer versions of python-apt_ (:func:`apt_pkg.version_compare()`)
-    and older versions (:func:`apt.VersionCompare()`). Raises
-    :exc:`~exceptions.NotImplementedError` if python-apt_ is not available
-    (neither of the mentioned functions can be imported).
+    Compare Debian package versions using the python-apt_ binding.
 
     :param version1: The version on the left side of the comparison (a string).
     :param operator: The operator to use in the comparison (a string).
     :param version2: The version on the right side of the comparison (a string).
-    :returns: ``True`` if the comparison succeeds, ``False`` if it fails.
+    :returns: :data:`True` if the comparison succeeds, :data:`False` if it fails.
+    :raises: :exc:`~exceptions.NotImplementedError` if python-apt_ is not
+             available (neither of the functions mentioned below can be
+             imported).
+
+    This function is compatible with newer versions of python-apt_
+    (:func:`apt_pkg.version_compare()`) and older versions
+    (:func:`apt.VersionCompare()`).
     """
     if not have_python_apt:
         raise NotImplementedError("The python-apt binding is not installed!"
@@ -64,32 +67,35 @@ def compare_versions_with_python_apt(version1, operator, version2):
                 (operator in ('>', '>=') and result >= 0) or
                 (operator == '=' and result == 0))
 
+
 def compare_versions_with_dpkg(version1, operator, version2):
     """
-    Compare Debian package versions using the external command ``dpkg
-    --compare-versions ...``. Caches the results of previous comparisons in
-    order to minimize the number of times that the external command has to be
-    run.
+    Compare Debian package versions using the external command ``dpkg --compare-versions ...``.
 
     :param version1: The version on the left side of the comparison (a string).
     :param operator: The operator to use in the comparison (a string).
     :param version2: The version on the right side of the comparison (a string).
-    :returns: ``True`` if the comparison succeeds, ``False`` if it fails.
+    :returns: :data:`True` if the comparison succeeds, :data:`False` if it fails.
     """
     return execute('dpkg', '--compare-versions', version1, operator, version2, check=False, logger=logger)
 
+
 dpkg_comparison_cache = {}
+
 
 def compare_versions(version1, operator, version2):
     """
-    Compare Debian package versions by using the python-apt_ binding (see
-    :func:`compare_versions_with_python_apt()`) or the external command
-    ``dpkg --compare-versions`` (see :func:`compare_versions_with_dpkg()`).
+    Compare Debian package versions using the best available method.
 
     :param version1: The version on the left side of the comparison (a string).
     :param operator: The operator to use in the comparison (a string).
     :param version2: The version on the right side of the comparison (a string).
-    :returns: ``True`` if the comparison succeeds, ``False`` if it fails.
+    :returns: :data:`True` if the comparison succeeds, :data:`False` if it fails.
+
+    This function prefers using the python-apt_ binding (see
+    :func:`compare_versions_with_python_apt()`) but will fall back to the
+    external command ``dpkg --compare-versions`` when required (see
+    :func:`compare_versions_with_dpkg()`).
     """
     if operator == '=' and str(version1) == str(version2):
         return True
@@ -104,11 +110,14 @@ def compare_versions(version1, operator, version2):
         dpkg_comparison_cache[key] = value
         return value
 
+
 class Version(str):
 
     """
-    The :class:`Version` class is a subclass of the built in :class:`str`
-    type that implements rich comparison according to the version sorting order
+    Rich comparison of Debian package versions as first-class Python objects.
+
+    The :class:`Version` class is a subclass of the built in :class:`str` type
+    that implements rich comparison according to the version sorting order
     defined in the Debian Policy Manual. Use it to sort Debian package versions
     like this:
 
@@ -123,6 +132,7 @@ class Version(str):
     """
 
     def __hash__(self):
+        """Enable adding objects to sets and using them as dictionary keys."""
         try:
             return self._cached_hash
         except AttributeError:
@@ -131,19 +141,25 @@ class Version(str):
             return value
 
     def __eq__(self, other):
+        """Enable equality comparison between version objects."""
         return compare_versions(self, '=', other) if type(self) is type(other) else NotImplemented
 
     def __ne__(self, other):
+        """Enable non-equality comparison between version objects."""
         return not compare_versions(self, '=', other) if type(self) is type(other) else NotImplemented
 
     def __lt__(self, other):
+        """Enable less-than comparison between version objects."""
         return compare_versions(self, '<<', other) if type(self) is type(other) else NotImplemented
 
     def __le__(self, other):
+        """Enable less-than-or-equal comparison between version objects."""
         return compare_versions(self, '<=', other) if type(self) is type(other) else NotImplemented
 
     def __gt__(self, other):
+        """Enable greater-than comparison between version objects."""
         return compare_versions(self, '>>', other) if type(self) is type(other) else NotImplemented
 
     def __ge__(self, other):
+        """Enable greater-than-or-equal comparison between version objects."""
         return compare_versions(self, '>=', other) if type(self) is type(other) else NotImplemented
