@@ -85,10 +85,6 @@ class DebPkgToolsTestCase(unittest.TestCase):
         shutil.rmtree(self.db_directory)
         os.environ.pop('DPT_FORCE_ENTROPY')
 
-    def test_package_cache_error_handling(self):
-        """Make sure the package cache responds properly when a package archive doesn't exist."""
-        #self.assertRaises(KeyError, self.package_cache.__getitem__, '/some/random/non-existing/path')
-
     def test_file_copying(self):
         """Test that file copying using hard links actually works."""
         with Context() as finalizers:
