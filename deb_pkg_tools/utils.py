@@ -24,13 +24,16 @@ import time
 
 # External dependencies.
 from executor import execute, ExternalCommandFailed
-from humanfriendly import Spinner, Timer
+from humanfriendly import Spinner, Timer, compact
 
 # Modules included in our package.
 from deb_pkg_tools.compat import total_ordering
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
+
+compact = compact
+"""Alias for backwards compatibility."""
 
 
 def sha1(text):
