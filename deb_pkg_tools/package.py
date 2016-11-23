@@ -467,10 +467,15 @@ def inspect_package_fields(archive, cache=None):
 
     """
     if cache:
-        return cache[archive].control_fields
+        entry = cache.get_entry('control-fields', archive)
+        value = entry.get_value()
+        if value is not None:
+            return value
     listing = execute('dpkg-deb', '-f', archive, logger=logger, capture=True)
-    raw_control_fields = deb822_from_string(listing)
-    return parse_control_fields(raw_control_fields)
+    fields = parse_control_fields(deb822_from_string(listing))
+    if cache:
+        entry.set_value(fields)
+    return fields
 
 
 def inspect_package_contents(archive, cache=None):
@@ -508,7 +513,10 @@ def inspect_package_contents(archive, cache=None):
 
     """
     if cache:
-        return cache[archive].contents
+        entry = cache.get_entry('contents', archive)
+        value = entry.get_value()
+        if value is not None:
+            return value
     contents = {}
     for line in execute('dpkg-deb', '-c', archive, logger=logger, capture=True).splitlines():
         # Example output of dpkg-deb -c archive.deb:
@@ -525,6 +533,8 @@ def inspect_package_contents(archive, cache=None):
             pathname, _, target = pathname.partition(' link to ')
             target = re.sub('^./', '/', target)
         contents[pathname] = ArchiveEntry(permissions, owner, group, size, modified, target)
+    if cache:
+        entry.set_value(contents)
     return contents
 
 
