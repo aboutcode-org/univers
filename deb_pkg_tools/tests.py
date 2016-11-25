@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: November 22, 2016
+# Last Change: November 25, 2016
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """Test suite for the `deb-pkg-tools` package."""
@@ -612,7 +612,7 @@ class DebPkgToolsTestCase(unittest.TestCase):
             # Temporarily change stdin to respond with `y' (for `yes').
             finalizers.register(setattr, sys, 'stdin', sys.stdin)
             sys.stdin = StringIO('y')
-            # Run `deb-pkg-tools --collect' ...
+            # Prepare some packages to collect.
             source_directory = finalizers.mkdtemp()
             target_directory = finalizers.mkdtemp()
             package1 = self.test_package_building(source_directory, overrides=dict(
@@ -622,8 +622,35 @@ class DebPkgToolsTestCase(unittest.TestCase):
             package2 = self.test_package_building(source_directory, overrides=dict(
                 Package='deb-pkg-tools-package-2',
             ))
+            # Run `deb-pkg-tools --collect' ...
             call('--collect=%s' % target_directory, package1)
             assert sorted(os.listdir(target_directory)) == sorted(map(os.path.basename, [package1, package2]))
+
+    def test_collect_packages_concurrent(self):
+        """Test concurrent collection of related packages."""
+        with Context() as finalizers:
+            source_directory = finalizers.mkdtemp()
+            target_directory = finalizers.mkdtemp()
+            # Prepare some packages to collect.
+            package1 = self.test_package_building(source_directory, overrides=dict(
+                Package='package-1',
+                Depends='package-3',
+            ))
+            package2 = self.test_package_building(source_directory, overrides=dict(
+                Package='package-2',
+                Depends='package-4',
+            ))
+            package3 = self.test_package_building(source_directory, overrides=dict(
+                Package='package-3',
+            ))
+            package4 = self.test_package_building(source_directory, overrides=dict(
+                Package='package-4',
+            ))
+            # Run `deb-pkg-tools --collect' ...
+            call('--collect=%s' % target_directory, '--yes', package1, package2)
+            # Make sure the expected packages were promoted.
+            assert sorted(os.listdir(target_directory)) == \
+                sorted(map(os.path.basename, [package1, package2, package3, package4]))
 
     def test_repository_creation(self, preserve=False):
         """Test the creation of trivial repositories."""
