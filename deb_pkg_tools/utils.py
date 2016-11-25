@@ -1,7 +1,7 @@
 # Debian packaging tools: Utility functions.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: November 22, 2016
+# Last Change: November 25, 2016
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -17,7 +17,6 @@ import errno
 import hashlib
 import logging
 import os
-import pwd
 import random
 import tempfile
 import time
@@ -46,16 +45,6 @@ def sha1(text):
     context = hashlib.sha1()
     context.update(text.encode('utf-8'))
     return context.hexdigest()
-
-
-def find_home_directory():
-    """Determine the home directory of the current user."""
-    try:
-        home = os.path.realpath(os.environ['HOME'])
-        assert os.path.isdir(home)
-        return home
-    except Exception:
-        return pwd.getpwuid(os.getuid()).pw_dir
 
 
 def makedirs(directory):
@@ -250,4 +239,4 @@ class OrderedObject(object):
 
         Used to implement the equality and rich comparison operations.
         """
-        raise NotImplementedError
+        raise NotImplementedError()

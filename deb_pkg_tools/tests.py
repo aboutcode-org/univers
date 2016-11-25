@@ -42,7 +42,7 @@ from deb_pkg_tools.package import (collect_related_packages, copy_package_files,
                                    parse_filename)
 from deb_pkg_tools.printer import CustomPrettyPrinter
 from deb_pkg_tools.repo import apt_supports_trusted_option, update_repository
-from deb_pkg_tools.utils import find_debian_architecture
+from deb_pkg_tools.utils import find_debian_architecture, makedirs
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
@@ -84,6 +84,16 @@ class DebPkgToolsTestCase(unittest.TestCase):
         self.package_cache.collect_garbage(force=True)
         shutil.rmtree(self.db_directory)
         os.environ.pop('DPT_FORCE_ENTROPY')
+
+    def test_makedirs(self):
+        """Test that makedirs() can deal with race conditions."""
+        with Context() as finalizers:
+            parent = finalizers.mkdtemp()
+            child = os.path.join(parent, 'nested')
+            # This will create the directory.
+            makedirs(child)
+            # This should not complain that the directory already exists.
+            makedirs(child)
 
     def test_file_copying(self):
         """Test that file copying using hard links actually works."""
@@ -371,8 +381,7 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 for filename, data in contents.items():
                     filename = os.path.join(build_directory, filename)
                     directory = os.path.dirname(filename)
-                    if not os.path.isdir(directory):
-                        os.makedirs(directory)
+                    makedirs(directory)
                     with open(filename, 'w') as handle:
                         handle.write(data)
             else:
@@ -384,7 +393,7 @@ class DebPkgToolsTestCase(unittest.TestCase):
                 touch(os.path.join(build_directory, 'etc', 'file1'))
                 touch(os.path.join(build_directory, 'etc', 'file3'))
                 # Create a directory that should be cleaned up by clean_package_tree().
-                os.makedirs(os.path.join(build_directory, 'tmp', '.git'))
+                makedirs(os.path.join(build_directory, 'tmp', '.git'))
                 # Create a file that should be cleaned up by clean_package_tree().
                 with open(os.path.join(build_directory, 'tmp', '.gitignore'), 'w') as handle:
                     handle.write('\n')

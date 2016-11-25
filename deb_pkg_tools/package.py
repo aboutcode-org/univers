@@ -28,6 +28,7 @@ from humanfriendly import coerce_boolean, concatenate, format_path, pluralize, S
 from deb_pkg_tools.control import (deb822_from_string,
                                    parse_control_fields,
                                    patch_control_file)
+from deb_pkg_tools.utils import makedirs
 from deb_pkg_tools.version import Version
 
 # Initialize a logger.
@@ -756,8 +757,7 @@ def copy_package_files(from_directory, to_directory, hard_links=True):
     logger.info("Copying files (%s) to temporary directory (%s) ..",
                 format_path(from_directory), format_path(to_directory))
     command = ['cp', '-a']
-    if not os.path.isdir(to_directory):
-        os.makedirs(to_directory)
+    makedirs(to_directory)
     if hard_links and ALLOW_HARD_LINKS:
         # Check whether we can use hard links to speed up the copy. In the past
         # this used the following simple and obvious check:
