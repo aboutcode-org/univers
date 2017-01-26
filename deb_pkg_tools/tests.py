@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: November 25, 2016
+# Last Change: January 27, 2017
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """Test suite for the `deb-pkg-tools` package."""
@@ -124,6 +124,23 @@ class DebPkgToolsTestCase(unittest.TestCase):
         """Make sure discovery of the current build architecture works properly."""
         valid_architectures = execute('dpkg-architecture', '-L', capture=True).splitlines()
         assert find_debian_architecture() in valid_architectures
+
+    def test_find_package_archives(self):
+        """Test searching for package archives."""
+        with Context() as finalizers:
+            directory = finalizers.mkdtemp()
+            for filename in 'some-random-file', 'regular-package_1.0_all.deb', 'micro-package_1.5_all.udeb':
+                touch(os.path.join(directory, filename))
+            matches = find_package_archives(directory)
+            assert len(matches) == 2
+            assert any(p.name == 'regular-package' and
+                       p.version == '1.0' and
+                       p.architecture == 'all'
+                       for p in matches)
+            assert any(p.name == 'micro-package' and
+                       p.version == '1.5' and
+                       p.architecture == 'all'
+                       for p in matches)
 
     def test_find_latest_version(self):
         """Test the selection of latest versions."""
