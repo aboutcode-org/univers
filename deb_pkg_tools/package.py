@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: November 25, 2016
+# Last Change: January 27, 2017
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """Functions to build and inspect Debian binary package archives (``*.deb`` files)."""
@@ -33,6 +33,9 @@ from deb_pkg_tools.version import Version
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
+
+# The filename extensions of Debian binary package archives.
+BINARY_PACKAGE_ARCHIVE_EXTENSIONS = ('.deb', '.udeb')
 
 # The names of control file fields that specify dependencies.
 DEPENDENCY_FIELDS = ('Depends', 'Pre-Depends')
@@ -87,7 +90,7 @@ def parse_filename(filename):
     """
     Parse the filename of a Debian binary package archive.
 
-    :param filename: The pathname of a ``*.deb`` archive (a string).
+    :param filename: The pathname of a Debian binary package archive (a string).
     :returns: A :class:`PackageFile` object.
     :raises: :exc:`~exceptions.ValueError` when the given filename cannot be parsed.
 
@@ -111,8 +114,8 @@ def parse_filename(filename):
     pathname = os.path.abspath(filename)
     filename = os.path.basename(pathname)
     basename, extension = os.path.splitext(filename)
-    if extension != '.deb':
-        raise ValueError("Refusing to parse filename that doesn't have `.deb' extension! (%r)" % pathname)
+    if extension not in BINARY_PACKAGE_ARCHIVE_EXTENSIONS:
+        raise ValueError("Refusing to parse filename with unknown extension! (%r)" % pathname)
     components = basename.split('_')
     if len(components) != 3:
         raise ValueError("Filename doesn't have three underscore separated components! (%r)" % pathname)
@@ -188,7 +191,7 @@ def find_package_archives(directory):
     """
     archives = []
     for entry in os.listdir(directory):
-        if entry.endswith(('.deb', '.udeb')):
+        if entry.endswith(BINARY_PACKAGE_ARCHIVE_EXTENSIONS):
             pathname = os.path.join(directory, entry)
             if os.path.isfile(pathname):
                 archives.append(parse_filename(pathname))
