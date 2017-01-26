@@ -188,7 +188,7 @@ def find_package_archives(directory):
     """
     archives = []
     for entry in os.listdir(directory):
-        if entry.endswith('.deb'):
+        if entry.endswith(('.deb', '.udeb')):
             pathname = os.path.join(directory, entry)
             if os.path.isfile(pathname):
                 archives.append(parse_filename(pathname))
