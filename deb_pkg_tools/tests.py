@@ -375,9 +375,9 @@ class DebPkgToolsTestCase(unittest.TestCase):
         relationship_set = parse_depends('python-deb-pkg-tools, python-pip, python-pip-accel')
         formatted_object = printer.pformat(relationship_set)
         assert normalize_repr_output(formatted_object) == normalize_repr_output('''
-            RelationshipSet(Relationship(name='python-deb-pkg-tools'),
-                            Relationship(name='python-pip'),
-                            Relationship(name='python-pip-accel'))
+            RelationshipSet(Relationship(name='python-deb-pkg-tools', architectures=()),
+                            Relationship(name='python-pip', architectures=()),
+                            Relationship(name='python-pip-accel', architectures=()))
         ''')
 
     def test_filename_parsing(self):
