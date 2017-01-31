@@ -30,19 +30,14 @@ True
 >>> dependencies.matches('python', '3.4')
 True
 >>> print(repr(dependencies))
-RelationshipSet(VersionedRelationship(name='python', operator='>=', version='2.6'),
-                AlternativeRelationship(VersionedRelationship(name='python', operator='<<', version='3'),
-                                        VersionedRelationship(name='python', operator='>=', version='3.4')))
+RelationshipSet(VersionedRelationship(name='python', operator='>=', version='2.6', architectures=()),
+                AlternativeRelationship(VersionedRelationship(name='python', operator='<<', version='3', architectures=()),
+                                        VersionedRelationship(name='python', operator='>=', version='3.4', architectures=())))
 >>> print(str(dependencies))
 python (>= 2.6), python (<< 3) | python (>= 3.4)
 
 As you can see the :func:`repr()` output of the relationship set shows the
 object tree and the :class:`str` output is the dependency line.
-
-.. warning:: The relationship parsing code does not understand the complete
-             syntax defined in the Debian policy manual. More specifically
-             architecture restrictions are not supported (because I simply
-             don't use them).
 
 .. _chapter 7: http://www.debian.org/doc/debian-policy/ch-relationships.html#s-depsyntax
 """
@@ -62,6 +57,29 @@ from deb_pkg_tools.version import compare_versions
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
+
+# Define a compiled regular expression pattern that we will use to match
+# package relationship expressions consisting of a package name followed by
+# optional version and architecture restrictions.
+EXPRESSION_PATTERN = re.compile(r'''
+    # Capture all leading characters up to (but not including)
+    # the first parenthesis, bracket or space.
+    (?P<name> [^\(\[ ]+ )
+    # Ignore any whitespace.
+    \s*
+    # Optionally capture version restriction inside parentheses.
+    ( \( (?P<version> [^)]+ ) \) )?
+    # Ignore any whitespace.
+    \s*
+    # Optionally capture architecture restriction inside brackets.
+    ( \[ (?P<architectures> [^\]]+ ) \] )?
+''', re.VERBOSE)
+
+ARCHITECTURE_RESTRICTIONS_MESSAGE = """
+Evaluation of architecture restrictions hasn't been implemented yet. If you
+think this would be useful to you then please submit a feature request at
+https://github.com/xolox/python-deb-pkg-tools/issues/9
+"""
 
 
 def parse_depends(relationships):
@@ -95,6 +113,7 @@ def parse_depends(relationships):
     >>> dependencies.matches('python', '3.0')
     False
     """
+    logger.debug("Parsing relationships: %r", relationships)
     if isinstance(relationships, string_types):
         relationships = split(relationships, ',')
     return RelationshipSet(*map(parse_alternatives, relationships))
@@ -124,57 +143,54 @@ def parse_alternatives(expression):
 
     """
     if '|' in expression:
-        return AlternativeRelationship(*map(parse_relationship, expression.split('|')))
+        logger.debug("Parsing relationship with alternatives: %r", expression)
+        return AlternativeRelationship(*map(parse_relationship, split(expression, '|')))
     else:
         return parse_relationship(expression)
 
 
 def parse_relationship(expression):
     """
-    Parse an expression containing a package name and version.
+    Parse an expression containing a package name and optional version/architecture restrictions.
 
     :param expression: A relationship expression (a string).
     :returns: A :class:`Relationship` object.
     :raises: :exc:`~exceptions.ValueError` when parsing fails.
 
-    This function parses relationship expressions containing a package name
-    and (optionally) a version relation of the form ``python (>= 2.6)``.
-
-    An example:
+    This function parses relationship expressions containing a package name and
+    (optionally) a version relation of the form ``python (>= 2.6)`` and/or an
+    architecture restriction (refer to the Debian policy manual's documentation
+    on the `syntax of relationship fields`_ for details). Here's an example:
 
     >>> from deb_pkg_tools.deps import parse_relationship
     >>> parse_relationship('python')
     Relationship(name='python')
     >>> parse_relationship('python (<< 3)')
     VersionedRelationship(name='python', operator='<<', version='3')
+
+    .. _syntax of relationship fields: https://www.debian.org/doc/debian-policy/ch-relationships.html
     """
-    tokens = [t.strip() for t in re.split('[()]', expression) if t and not t.isspace()]
-    if len(tokens) == 1:
-        # Just a package name (no version information).
-        return Relationship(name=tokens[0])
-    elif len(tokens) != 2:
-        # Encountered something unexpected!
-        raise ValueError(compact("""
-            Corrupt package relationship expression: Splitting name from
-            relationship resulted in more than two tokens!
-            (expression: {e}, tokens: {t})
-        """, e=expression, t=tokens))
+    logger.debug("Parsing relationship: %r", expression)
+    match = EXPRESSION_PATTERN.match(expression)
+    name = match.group('name')
+    version = match.group('version')
+    # Split the architecture restrictions into a tuple of strings.
+    architectures = tuple((match.group('architectures') or '').split())
+    if name and not version:
+        # A package name (and optional architecture restrictions) without version relation.
+        return Relationship(name=name, architectures=architectures)
     else:
-        # Package name followed by relationship to specific version(s) of package.
-        name, relationship = tokens
-        tokens = [t.strip() for t in re.split('([<>=]+)', relationship) if t and not t.isspace()]
+        # A package name (and optional architecture restrictions) followed by a
+        # relationship to specific version(s) of the package.
+        tokens = [t.strip() for t in re.split('([<>=]+)', version) if t and not t.isspace()]
         if len(tokens) != 2:
             # Encountered something unexpected!
             raise ValueError(compact("""
                 Corrupt package relationship expression: Splitting operator
                 from version resulted in more than two tokens!
                 (expression: {e}, tokens: {t})
-            """, e=relationship, t=tokens))
-        return VersionedRelationship(
-            name=name,
-            operator=tokens[0],
-            version=tokens[1],
-        )
+            """, e=expression, t=tokens))
+        return VersionedRelationship(name=name, architectures=architectures, operator=tokens[0], version=tokens[1])
 
 
 def cache_matches(f):
@@ -251,9 +267,17 @@ class Relationship(AbstractRelationship):
     Created by :func:`parse_relationship()`.
     """
 
+    # Explicitly define the sort order of the key properties.
+    key_properties = 'name', 'architectures'
+
     @key_property
     def name(self):
         """The name of a package (a string)."""
+
+    @key_property
+    def architectures(self):
+        """The architecture restriction(s) on the relationship (a tuple of strings)."""
+        return ()
 
     @property
     def names(self):
@@ -261,17 +285,33 @@ class Relationship(AbstractRelationship):
         return set([self.name])
 
     def matches(self, name, version=None):
-        """Check if the relationship matches a given package name."""
-        return True if self.name == name else None
+        """
+        Check if the relationship matches a given package name.
+
+        :param name: The name of a package (a string).
+        :param version: The version number of a package (this parameter is ignored).
+        :returns: :data:`True` if the name matches, :data:`None` otherwise.
+        :raises: :exc:`~exceptions.NotImplementedError` when :attr:`architectures`
+                 is not empty (because evaluation of architecture restrictions
+                 hasn't been implemented).
+        """
+        if self.name == name:
+            if self.architectures:
+                raise NotImplementedError(compact(ARCHITECTURE_RESTRICTIONS_MESSAGE))
+            return True
 
     def __str__(self):
         """Serialize a :class:`Relationship` object to a Debian package relationship expression."""
-        return self.name
+        expression = self.name
+        if self.architectures:
+            expression += u" [%s]" % " ".join(self.architectures)
+        return expression
 
     def __repr__(self):
         """Serialize a :class:`Relationship` object to a Python expression."""
         return "%s(%s)" % (self.__class__.__name__, ', '.join([
-            'name=%r' % self.name
+            'name=%r' % self.name,
+            'architectures=%s' % repr(self.architectures),
         ]))
 
 
@@ -285,7 +325,7 @@ class VersionedRelationship(Relationship):
     """
 
     # Explicitly define the sort order of the key properties.
-    key_properties = 'name', 'operator', 'version'
+    key_properties = 'name', 'operator', 'version', 'architectures'
 
     @key_property
     def operator(self):
@@ -300,18 +340,39 @@ class VersionedRelationship(Relationship):
         """
         Check if the relationship matches a given package name and version.
 
+        :param name: The name of a package (a string).
+        :param version: The version number of a package (a string, optional).
+        :returns: One of the values :data:`True`, :data:`False` or :data:`None`
+                  meaning the following:
+
+                  - :data:`True` if the name matches and the version
+                    doesn't invalidate the match,
+
+                  - :data:`False` if the name matches but the version
+                    invalidates the match,
+
+                  - :data:`None` if the name doesn't match at all.
+        :raises: :exc:`~exceptions.NotImplementedError` when :attr:`architectures`
+                 is not empty (because evaluation of architecture restrictions
+                 hasn't been implemented).
+
         Uses the external command ``dpkg --compare-versions`` to ensure
         compatibility with Debian's package version comparison algorithm.
         """
         if self.name == name:
             if version:
+                if self.architectures:
+                    raise NotImplementedError(compact(ARCHITECTURE_RESTRICTIONS_MESSAGE))
                 return compare_versions(version, self.operator, self.version)
             else:
                 return False
 
     def __str__(self):
         """Serialize a :class:`VersionedRelationship` object to a Debian package relationship expression."""
-        return u'%s (%s %s)' % (self.name, self.operator, self.version)
+        expression = u'%s (%s %s)' % (self.name, self.operator, self.version)
+        if self.architectures:
+            expression += u" [%s]" % " ".join(self.architectures)
+        return expression
 
     def __repr__(self):
         """Serialize a :class:`VersionedRelationship` object to a Python expression."""
@@ -319,6 +380,7 @@ class VersionedRelationship(Relationship):
             'name=%r' % self.name,
             'operator=%r' % self.operator,
             'version=%r' % self.version,
+            'architectures=%s' % repr(self.architectures),
         ]))
 
 
