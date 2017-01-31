@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: January 27, 2017
+# Last Change: January 31, 2017
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """Test suite for the `deb-pkg-tools` package."""
@@ -295,18 +295,26 @@ class DebPkgToolsTestCase(unittest.TestCase):
         self.assertRaises(ValueError, parse_depends, 'foo (bar) (baz)')
         self.assertRaises(ValueError, parse_depends, 'foo (bar baz qux)')
 
+    def test_architecture_restriction_parsing(self):
+        """Test the parsing of architecture restrictions."""
+        relationship_set = parse_depends('qux [i386 amd64]')
+        assert relationship_set.relationships[0].name == 'qux'
+        assert len(relationship_set.relationships[0].architectures) == 2
+        assert 'i386' in relationship_set.relationships[0].architectures
+        assert 'amd64' in relationship_set.relationships[0].architectures
+
     def test_relationship_unparsing(self):
         """Test the unparsing (serialization) of parsed relationship declarations."""
         def strip(text):
             return re.sub(r'\s+', '', text)
-        relationship_set = parse_depends('foo, bar(>=1)|baz')
-        assert text_type(relationship_set) == 'foo, bar (>= 1) | baz'
+        relationship_set = parse_depends('foo, bar(>=1)|baz[i386]')
+        assert text_type(relationship_set) == 'foo, bar (>= 1) | baz [i386]'
         assert strip(repr(relationship_set)) == strip("""
             RelationshipSet(
-                Relationship(name='foo'),
+                Relationship(name='foo', architectures=()),
                 AlternativeRelationship(
-                    VersionedRelationship(name='bar', operator='>=', version='1'),
-                    Relationship(name='baz')
+                    VersionedRelationship(name='bar', operator='>=', version='1', architectures=()),
+                    Relationship(name='baz', architectures=('i386',))
                 )
             )
         """)
