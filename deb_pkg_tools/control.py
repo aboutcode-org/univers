@@ -1,7 +1,7 @@
 # Debian packaging tools: Control file manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: November 21, 2016
+# Last Change: January 31, 2017
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -61,6 +61,7 @@ for the field.
 
 DEPENDS_LIKE_FIELDS = (
     'Breaks',
+    'Build-Depends',
     'Conflicts',
     'Depends',
     'Pre-Depends',
