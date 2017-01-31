@@ -1,7 +1,7 @@
 # Debian packaging tools: Relationship parsing and evaluation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: November 22, 2016
+# Last Change: January 31, 2017
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -53,11 +53,11 @@ import re
 
 # External dependencies.
 from humanfriendly.text import compact, split
+from property_manager import PropertyManager, key_property
 from six import string_types, text_type
 
 # Modules included in our package.
 from deb_pkg_tools.compat import str_compatible
-from deb_pkg_tools.utils import OrderedObject
 from deb_pkg_tools.version import compare_versions
 
 # Initialize a logger.
@@ -151,7 +151,7 @@ def parse_relationship(expression):
     tokens = [t.strip() for t in re.split('[()]', expression) if t and not t.isspace()]
     if len(tokens) == 1:
         # Just a package name (no version information).
-        return Relationship(tokens[0])
+        return Relationship(name=tokens[0])
     elif len(tokens) != 2:
         # Encountered something unexpected!
         raise ValueError(compact("""
@@ -170,7 +170,11 @@ def parse_relationship(expression):
                 from version resulted in more than two tokens!
                 (expression: {e}, tokens: {t})
             """, e=relationship, t=tokens))
-        return VersionedRelationship(name, *tokens)
+        return VersionedRelationship(
+            name=name,
+            operator=tokens[0],
+            version=tokens[1],
+        )
 
 
 def cache_matches(f):
@@ -201,31 +205,20 @@ def cache_matches(f):
     return decorator
 
 
-@str_compatible
-class Relationship(OrderedObject):
+class AbstractRelationship(PropertyManager):
 
-    """
-    A simple package relationship referring only to the name of a package.
-
-    Created by :func:`parse_relationship()`.
-    """
-
-    def __init__(self, name):
-        """
-        Initialize a simple relationship.
-
-        :param name: The name of a package (a string).
-        """
-        self.name = name
+    """Abstract base class for the various types of relationship objects defined in :mod:`deb_pkg_tools.deps`."""
 
     @property
     def names(self):
         """
-        Get the name(s) of the packages in the relationship.
+        The name(s) of the packages in the relationship.
 
         :returns: A set of package names (strings).
+
+        .. note:: This property needs to be implemented by subclasses.
         """
-        return set([self.name])
+        raise NotImplementedError
 
     def matches(self, name, version=None):
         """
@@ -233,8 +226,42 @@ class Relationship(OrderedObject):
 
         :param name: The name of a package (a string).
         :param version: The version number of a package (a string, optional).
-        :returns: :data:`True` if the relationship matches, :data:`None` otherwise.
+        :returns: One of the values :data:`True`, :data:`False` or :data:`None`
+                  meaning the following:
+
+                  - :data:`True` if the name matches and the version
+                    doesn't invalidate the match,
+
+                  - :data:`False` if the name matches but the version
+                    invalidates the match,
+
+                  - :data:`None` if the name doesn't match at all.
+
+        .. note:: This method needs to be implemented by subclasses.
         """
+        raise NotImplementedError
+
+
+@str_compatible
+class Relationship(AbstractRelationship):
+
+    """
+    A simple package relationship referring only to the name of a package.
+
+    Created by :func:`parse_relationship()`.
+    """
+
+    @key_property
+    def name(self):
+        """The name of a package (a string)."""
+
+    @property
+    def names(self):
+        """The name(s) of the packages in the relationship."""
+        return set([self.name])
+
+    def matches(self, name, version=None):
+        """Check if the relationship matches a given package name."""
         return True if self.name == name else None
 
     def __str__(self):
@@ -247,14 +274,6 @@ class Relationship(OrderedObject):
             'name=%r' % self.name
         ]))
 
-    def _key(self):
-        """
-        Get the comparison key of this :class:`Relationship` object.
-
-        Used to implement the equality and rich comparison operations.
-        """
-        return (self.name,)
-
 
 @str_compatible
 class VersionedRelationship(Relationship):
@@ -265,27 +284,21 @@ class VersionedRelationship(Relationship):
     Created by :func:`parse_relationship()`.
     """
 
-    def __init__(self, name, operator, version):
-        """
-        Initialize a conditional relationship.
+    # Explicitly define the sort order of the key properties.
+    key_properties = 'name', 'operator', 'version'
 
-        :param name: The name of a package (a string).
-        :param operator: A version comparison operator (a string).
-        :param version: The version number of a package (a string).
-        """
-        self.name = name
-        self.operator = operator
-        self.version = version
+    @key_property
+    def operator(self):
+        """An operator that compares Debian package version numbers (a string)."""
+
+    @key_property
+    def version(self):
+        """The version number of a package (a string)."""
 
     @cache_matches
     def matches(self, name, version=None):
         """
-        Check if the relationship matches a given package and version.
-
-        :param name: The name of a package (a string).
-        :param version: The version number of a package (a string, optional).
-        :returns: :data:`True` if the name and version match, :data:`False` if only the
-                  name matches, :data:`None` otherwise.
+        Check if the relationship matches a given package name and version.
 
         Uses the external command ``dpkg --compare-versions`` to ensure
         compatibility with Debian's package version comparison algorithm.
@@ -308,14 +321,6 @@ class VersionedRelationship(Relationship):
             'version=%r' % self.version,
         ]))
 
-    def _key(self):
-        """
-        Get the comparison key of this :class:`VersionedRelationship` object.
-
-        Used to implement the equality and rich comparison operations.
-        """
-        return (self.name, self.operator, self.version)
-
 
 @str_compatible
 class AlternativeRelationship(Relationship):
@@ -326,13 +331,20 @@ class AlternativeRelationship(Relationship):
     Created by :func:`parse_alternatives()`.
     """
 
+    # Explicitly define the sort order of the key properties.
+    key_properties = 'name', 'operator', 'version'
+
     def __init__(self, *relationships):
         """
-        Initialize an alternatives relationship.
+        Initialize an :class:`AlternativeRelationship` object.
 
         :param relationships: One or more :class:`Relationship` objects.
         """
         self.relationships = tuple(relationships)
+
+    @key_property
+    def relationships(self):
+        """A tuple of :class:`Relationship` objects."""
 
     @property
     def names(self):
@@ -375,27 +387,23 @@ class AlternativeRelationship(Relationship):
         """Serialize an :class:`AlternativeRelationship` object to a Python expression."""
         return "%s(%s)" % (self.__class__.__name__, ', '.join(repr(r) for r in self.relationships))
 
-    def _key(self):
-        """
-        Get the comparison key of this :class:`AlternativeRelationship` object.
-
-        Used to implement the equality and rich comparison operations.
-        """
-        return self.relationships
-
 
 @str_compatible
-class RelationshipSet(OrderedObject):
+class RelationshipSet(PropertyManager):
 
     """A set of package relationships. Created by :func:`parse_depends()`."""
 
     def __init__(self, *relationships):
         """
-        Initialize a set of relationships.
+        Initialize a :class `RelationshipSet` object.
 
         :param relationships: One or more :class:`Relationship` objects.
         """
         self.relationships = tuple(relationships)
+
+    @key_property
+    def relationships(self):
+        """A tuple of :class:`Relationship` objects."""
 
     @property
     def names(self):
@@ -438,14 +446,6 @@ class RelationshipSet(OrderedObject):
         indent += len(prefix)
         delimiter = ',\n%s' % (' ' * indent) if pretty else ', '
         return prefix + delimiter.join(repr(r) for r in self.relationships) + ')'
-
-    def _key(self):
-        """
-        Get the comparison key of this :class:`RelationshipSet` object.
-
-        Used to implement the equality and rich comparison operations.
-        """
-        return self.relationships
 
     def __iter__(self):
         """Iterate over the relationships in a relationship set."""

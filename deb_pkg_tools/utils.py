@@ -1,7 +1,7 @@
 # Debian packaging tools: Utility functions.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: November 25, 2016
+# Last Change: January 27, 2017
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -24,9 +24,6 @@ import time
 # External dependencies.
 from executor import execute, ExternalCommandFailed
 from humanfriendly import Spinner, Timer, compact
-
-# Modules included in our package.
-from deb_pkg_tools.compat import total_ordering
 
 # Initialize a logger.
 logger = logging.getLogger(__name__)
@@ -208,35 +205,3 @@ class atomic_lock(object):
 class ResourceLockedException(Exception):
 
     """Raised by :class:`atomic_lock()` when the lock can't be claimed."""
-
-
-@total_ordering
-class OrderedObject(object):
-
-    """
-    Easy support for equality comparison, rich comparison and a hash method.
-
-    By inheriting from this class and implementing :func:`OrderedObject._key()`
-    objects gain support for equality comparison, rich comparison and a hash
-    method that allows objects to be added to sets and used as dictionary keys.
-    """
-
-    def __eq__(self, other):
-        """Enable equality comparison between objects."""
-        return type(self) is type(other) and self._key() == other._key()
-
-    def __lt__(self, other):
-        """Enable rich comparison between objects."""
-        return isinstance(other, OrderedObject) and self._key() < other._key()
-
-    def __hash__(self):
-        """Enable adding objects to sets."""
-        return hash(self.__class__) ^ hash(self._key())
-
-    def _key(self):
-        """
-        Get the comparison key of this object.
-
-        Used to implement the equality and rich comparison operations.
-        """
-        raise NotImplementedError()
