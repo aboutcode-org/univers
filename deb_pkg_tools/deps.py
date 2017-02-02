@@ -1,7 +1,7 @@
 # Debian packaging tools: Relationship parsing and evaluation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: January 31, 2017
+# Last Change: February 2, 2017
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -385,16 +385,13 @@ class VersionedRelationship(Relationship):
 
 
 @str_compatible
-class AlternativeRelationship(Relationship):
+class AlternativeRelationship(AbstractRelationship):
 
     """
     A package relationship that refers to one of several alternative packages.
 
     Created by :func:`parse_alternatives()`.
     """
-
-    # Explicitly define the sort order of the key properties.
-    key_properties = 'name', 'operator', 'version'
 
     def __init__(self, *relationships):
         """
