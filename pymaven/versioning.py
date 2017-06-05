@@ -19,11 +19,17 @@
 Versioning of artifacts
 """
 
-import itertools
+import functools
+import sys
+
+from six.moves import zip_longest
+import six
 
 from .errors import RestrictionParseError
 from .errors import VersionRangeParseError
 
+if sys.version_info > (2,):
+    from .utils import cmp
 
 EXCLUSIVE_CLOSE = ')'
 EXCLUSIVE_OPEN = '('
@@ -45,6 +51,7 @@ def list2tuple(l):
     return tuple(list2tuple(x) if isinstance(x, list) else x for x in l)
 
 
+@functools.total_ordering
 class Restriction(object):
     """Describes a restriction in versioning
     """
@@ -127,9 +134,9 @@ class Restriction(object):
         if self is other:
             return 0
 
-        if not isinstance(other, Restriction):
-            if isinstance(other, basestring):
-                return cmp(self, Restriction(other))
+        if not isinstance(other, self.__class__):
+            if isinstance(other, six.string_types):
+                return cmp(self, self.__class__(other))
             return 1
 
         result = cmp(self.lower_bound, other.lower_bound)
@@ -143,9 +150,18 @@ class Restriction(object):
                                  other.upper_bound_inclusive)
         return result
 
+    def __eq__(self, other):
+        return self.__cmp__(other) == 0
+
     def __hash__(self):
         return hash((self.lower_bound, self.lower_bound_inclusive,
                      self.upper_bound, self.upper_bound_inclusive))
+
+    def __lt__(self, other):
+        return self.__cmp__(other) < 0
+
+    def __ne__(self, other):
+        return self.__cmp__(other) != 0
 
     def __str__(self):
         s = "{open}{lower}{comma}{upper}{close}".format(
@@ -170,11 +186,12 @@ class Restriction(object):
             self.upper_bound_inclusive,
             )
 
-    @staticmethod
-    def fromstring(self, spec):
-        return Restriction(spec)
+    @classmethod
+    def fromstring(cls, spec):
+        return cls(spec)
 
 
+@functools.total_ordering
 class VersionRange(object):
     """Version range specification
 
@@ -242,9 +259,9 @@ class VersionRange(object):
         if self is other:
             return 0
 
-        if not isinstance(other, VersionRange):
-            if isinstance(other, basestring):
-                return cmp(self, VersionRange(other))
+        if not isinstance(other, self.__class__):
+            if isinstance(other, six.string_types):
+                return cmp(self, self.__class__(other))
             elif isinstance(other, Version):
                 return cmp(other, self)
             return 1
@@ -258,8 +275,17 @@ class VersionRange(object):
     def __contains__(self, version):
         return any((version in r) for r in self.restrictions)
 
+    def __eq__(self, other):
+        return self.__cmp__(other) == 0
+
     def __hash__(self):
         return hash((self.version, self.restrictions))
+
+    def __lt__(self, other):
+        return self.__cmp__(other) < 0
+
+    def __ne__(self, other):
+        return self.__cmp__(other) != 0
 
     def __str__(self):
         if self.version:
@@ -283,13 +309,13 @@ class VersionRange(object):
         """
         raise NotImplementedError
 
-    @staticmethod
-    def fromstring(spec):
-        return VersionRange(spec)
+    @classmethod
+    def fromstring(cls, spec):
+        return cls(spec)
 
-    @staticmethod
-    def from_version(version):
-        return VersionRange(str(version))
+    @classmethod
+    def from_version(cls, version):
+        return cls(str(version))
 
     def restrict(self, version_range):
         """Returns a new VersionRange that is a restriction of this
@@ -313,6 +339,7 @@ class VersionRange(object):
         return matched
 
 
+@functools.total_ordering
 class Version(object):
     """Maven version objecjt
     """
@@ -386,17 +413,26 @@ class Version(object):
         if self is other:
             return 0
 
-        if not isinstance(other, Version):
-            if isinstance(other, basestring):
-                return self._compare(self._parsed, Version(other)._parsed)
+        if not isinstance(other, self.__class__):
+            if isinstance(other, six.string_types):
+                return self._compare(self._parsed, self.__class__(other)._parsed)
             elif isinstance(other, VersionRange) and other.version:
                 return self._compare(self._parsed, other.version._parsed)
             return 1
 
         return self._compare(self._parsed, other._parsed)
 
+    def __eq__(self, other):
+        return self.__cmp__(other) == 0
+
     def __hash__(self):
         return hash(self._unparsed)
+
+    def __lt__(self, other):
+        return self.__cmp__(other) < 0
+
+    def __ne__(self, other):
+        return self.__cmp__(other) != 0
 
     def __repr__(self):
         return "<%s.%s(%r)>" % (self.__module__, "Version", self._unparsed)
@@ -407,7 +443,7 @@ class Version(object):
     def _compare(self, this, other):
         if isinstance(this, int):
             return self._int_compare(this, other)
-        elif isinstance(this, basestring):
+        elif isinstance(this, six.string_types):
             return self._string_compare(this, other)
         elif isinstance(this, (list, tuple)):
             return self._list_compare(this, other)
@@ -417,7 +453,7 @@ class Version(object):
     def _int_compare(self, this, other):
         if isinstance(other, int):
             return this - other
-        elif isinstance(other, (basestring, list, tuple)):
+        elif isinstance(other, (six.string_types, list, tuple)):
             return 1
         elif other is None:
             return this
@@ -431,10 +467,10 @@ class Version(object):
             return self._compare(l[0], other)
         if isinstance(other, int):
             return -1
-        elif isinstance(other, basestring):
+        elif isinstance(other, six.string_types):
             return 1
         elif isinstance(other, (list, tuple)):
-            for left, right in itertools.izip_longest(l, other):
+            for left, right in zip_longest(l, other):
                 if left is None:
                     if right is None:
                         result = 0
@@ -482,7 +518,7 @@ class Version(object):
 
         if isinstance(other, (int, list, tuple)):
             return -1
-        elif isinstance(other, basestring):
+        elif isinstance(other, six.string_types):
             s_value = self._string_value(s)
             other_value = self._string_value(other)
             if s_value < other_value:
@@ -530,6 +566,6 @@ class Version(object):
 
         return "%d-%s" % (len(QUALIFIERS), s)
 
-    @staticmethod
-    def fromstring(spec):
-        return Version(spec)
+    @classmethod
+    def fromstring(cls, spec):
+        return cls(spec)
