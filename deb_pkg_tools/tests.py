@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: January 31, 2017
+# Last Change: July 9, 2017
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """Test suite for the `deb-pkg-tools` package."""
@@ -15,12 +15,11 @@ import re
 import shutil
 import sys
 import tempfile
-import unittest
 
 # External dependencies.
-import coloredlogs
 from debian.deb822 import Deb822
 from executor import execute
+from humanfriendly.testing import TestCase
 from humanfriendly.text import dedent
 from six import text_type
 from six.moves import StringIO
@@ -63,16 +62,18 @@ TEST_REPO_ORIGIN = 'DebPkgToolsTestCase'
 TEST_REPO_DESCRIPTION = 'Description of test repository'
 
 
-class DebPkgToolsTestCase(unittest.TestCase):
+class DebPkgToolsTestCase(TestCase):
 
     """Container for the `deb-pkg-tools` test suite."""
 
     def setUp(self):
-        """Enable logging to the terminal and prepare a temporary package cache."""
-        coloredlogs.install()
-        coloredlogs.set_level(logging.DEBUG)
+        """Prepare a temporary package cache."""
+        # Set up our superclass.
+        super(DebPkgToolsTestCase, self).setUp()
+        # Prepare the package cache.
         self.db_directory = tempfile.mkdtemp()
         self.load_package_cache()
+        # Try to force entropy generation.
         os.environ['DPT_FORCE_ENTROPY'] = 'yes'
 
     def load_package_cache(self):
@@ -81,8 +82,12 @@ class DebPkgToolsTestCase(unittest.TestCase):
 
     def tearDown(self):
         """Cleanup the temporary package cache."""
+        # Tear down our superclass.
+        super(DebPkgToolsTestCase, self).tearDown()
+        # Cleanup the package cache.
         self.package_cache.collect_garbage(force=True)
         shutil.rmtree(self.db_directory)
+        # Disable entropy generation.
         os.environ.pop('DPT_FORCE_ENTROPY')
 
     def test_makedirs(self):
@@ -232,7 +237,7 @@ class DebPkgToolsTestCase(unittest.TestCase):
             assert str(patched_fields['Depends']) == 'another-dependency, some-dependency'
 
     def test_version_comparison(self):
-        """Test the comparison of version objects."""
+        """Test the comparison of version objects (under both implementations)."""
         self.version_comparison_helper()
         if version.have_python_apt:
             version.have_python_apt = False
@@ -241,7 +246,7 @@ class DebPkgToolsTestCase(unittest.TestCase):
             version.have_python_apt = True
 
     def version_comparison_helper(self):
-        """Helper for testing the comparison of version objects under both implementations."""
+        """Test the comparison of version objects."""
         # V() shortcut for deb_pkg_tools.version.Version().
         V = version.Version
         # Check version sorting implemented on top of `=' and `<<' comparisons.
@@ -455,20 +460,29 @@ class DebPkgToolsTestCase(unittest.TestCase):
 
     def test_command_line_interface(self):
         """Test the command line interface."""
-        if not SKIP_SLOW_TESTS:
-            with Context() as finalizers:
-                directory = finalizers.mkdtemp()
-                # Test `deb-pkg-tools --inspect PKG'.
-                package_file = self.test_package_building(directory)
-                lines = call('--verbose', '--inspect', package_file).splitlines()
-                for field, value in TEST_PACKAGE_FIELDS.items():
-                    assert match('^ - %s: (.+)$' % field, lines) == value
-                # Test `deb-pkg-tools --with-repo=DIR CMD' (we simply check whether
-                # apt-cache sees the package).
-                if os.getuid() == 0:
-                    call('--with-repo=%s' % directory, 'apt-cache show %s' % TEST_PACKAGE_NAME)
-                # Test `deb-pkg-tools --update=DIR' with a non-existing directory.
-                self.assertRaises(SystemExit, call, '--update', '/a/directory/that/will/never/exist')
+        if SKIP_SLOW_TESTS:
+            return self.skipTest("skipping slow tests")
+        with Context() as finalizers:
+            directory = finalizers.mkdtemp()
+            # Test `deb-pkg-tools --inspect PKG'.
+            package_file = self.test_package_building(directory)
+            lines = call('--verbose', '--inspect', package_file).splitlines()
+            for field, value in TEST_PACKAGE_FIELDS.items():
+                assert match('^ - %s: (.+)$' % field, lines) == value
+            # Test `deb-pkg-tools --update=DIR' with a non-existing directory.
+            self.assertRaises(SystemExit, call, '--update', '/a/directory/that/will/never/exist')
+
+    def test_with_repo_cli(self):
+        """Test ``deb-pkg-tools --with-repo``."""
+        if SKIP_SLOW_TESTS:
+            return self.skipTest("skipping slow tests")
+        elif os.getuid() != 0:
+            return self.skipTest("need superuser privileges")
+        with Context() as finalizers:
+            directory = finalizers.mkdtemp()
+            self.test_package_building(directory)
+            # Check whether apt-cache sees the package.
+            call('--with-repo=%s' % directory, 'apt-cache show %s' % TEST_PACKAGE_NAME)
 
     def test_check_package(self):
         """Test the command line interface for static analysis of package archives."""
@@ -688,90 +702,95 @@ class DebPkgToolsTestCase(unittest.TestCase):
 
     def test_repository_creation(self, preserve=False):
         """Test the creation of trivial repositories."""
-        if not SKIP_SLOW_TESTS:
-            with Context() as finalizers:
-                config_dir = tempfile.mkdtemp()
-                repo_dir = tempfile.mkdtemp()
-                if not preserve:
-                    finalizers.register(shutil.rmtree, config_dir)
-                    finalizers.register(shutil.rmtree, repo_dir)
-                from deb_pkg_tools import config
-                config.user_config_directory = config_dir
-                with open(os.path.join(config_dir, config.repo_config_file), 'w') as handle:
-                    handle.write('[test]\n')
-                    handle.write('directory = %s\n' % repo_dir)
-                    handle.write('release-origin = %s\n' % TEST_REPO_ORIGIN)
-                self.test_package_building(repo_dir)
-                update_repository(repo_dir,
-                                  release_fields=dict(description=TEST_REPO_DESCRIPTION),
-                                  cache=self.package_cache)
-                assert os.path.isfile(os.path.join(repo_dir, 'Packages'))
-                assert os.path.isfile(os.path.join(repo_dir, 'Packages.gz'))
-                assert os.path.isfile(os.path.join(repo_dir, 'Release'))
-                with open(os.path.join(repo_dir, 'Release')) as handle:
-                    fields = Deb822(handle)
-                    assert fields['Origin'] == TEST_REPO_ORIGIN
-                    assert fields['Description'] == TEST_REPO_DESCRIPTION
-                if not apt_supports_trusted_option():
-                    assert os.path.isfile(os.path.join(repo_dir, 'Release.gpg'))
-                return repo_dir
+        if SKIP_SLOW_TESTS:
+            return self.skipTest("skipping slow tests")
+        with Context() as finalizers:
+            config_dir = tempfile.mkdtemp()
+            repo_dir = tempfile.mkdtemp()
+            if not preserve:
+                finalizers.register(shutil.rmtree, config_dir)
+                finalizers.register(shutil.rmtree, repo_dir)
+            from deb_pkg_tools import config
+            config.user_config_directory = config_dir
+            with open(os.path.join(config_dir, config.repo_config_file), 'w') as handle:
+                handle.write('[test]\n')
+                handle.write('directory = %s\n' % repo_dir)
+                handle.write('release-origin = %s\n' % TEST_REPO_ORIGIN)
+            self.test_package_building(repo_dir)
+            update_repository(repo_dir,
+                              release_fields=dict(description=TEST_REPO_DESCRIPTION),
+                              cache=self.package_cache)
+            assert os.path.isfile(os.path.join(repo_dir, 'Packages'))
+            assert os.path.isfile(os.path.join(repo_dir, 'Packages.gz'))
+            assert os.path.isfile(os.path.join(repo_dir, 'Release'))
+            with open(os.path.join(repo_dir, 'Release')) as handle:
+                fields = Deb822(handle)
+                assert fields['Origin'] == TEST_REPO_ORIGIN
+                assert fields['Description'] == TEST_REPO_DESCRIPTION
+            if not apt_supports_trusted_option():
+                assert os.path.isfile(os.path.join(repo_dir, 'Release.gpg'))
+            return repo_dir
 
     def test_repository_activation(self):
         """Test the activation of trivial repositories."""
-        if not SKIP_SLOW_TESTS and os.getuid() == 0:
-            repository = self.test_repository_creation(preserve=True)
-            call('--activate-repo=%s' % repository)
-            try:
-                handle = os.popen('apt-cache show %s' % TEST_PACKAGE_NAME)
-                fields = Deb822(handle)
-                assert fields['Package'] == TEST_PACKAGE_NAME
-            finally:
-                call('--deactivate-repo=%s' % repository)
-            # XXX If we skipped the GPG key handling because apt supports the
-            # [trusted=yes] option, re-run the test *including* GPG key
-            # handling (we want this to be tested...).
-            import deb_pkg_tools
-            if deb_pkg_tools.repo.apt_supports_trusted_option():
-                deb_pkg_tools.repo.trusted_option_supported = False
-                self.test_repository_activation()
+        if SKIP_SLOW_TESTS:
+            return self.skipTest("skipping slow tests")
+        elif os.getuid() != 0:
+            return self.skipTest("need superuser privileges")
+        repository = self.test_repository_creation(preserve=True)
+        call('--activate-repo=%s' % repository)
+        try:
+            handle = os.popen('apt-cache show %s' % TEST_PACKAGE_NAME)
+            fields = Deb822(handle)
+            assert fields['Package'] == TEST_PACKAGE_NAME
+        finally:
+            call('--deactivate-repo=%s' % repository)
+        # XXX If we skipped the GPG key handling because apt supports the
+        # [trusted=yes] option, re-run the test *including* GPG key
+        # handling (we want this to be tested...).
+        import deb_pkg_tools
+        if deb_pkg_tools.repo.apt_supports_trusted_option():
+            deb_pkg_tools.repo.trusted_option_supported = False
+            self.test_repository_activation()
 
     def test_gpg_key_generation(self):
         """Test automatic GPG key generation."""
-        if not SKIP_SLOW_TESTS:
-            with Context() as finalizers:
-                working_directory = finalizers.mkdtemp()
-                secret_key_file = os.path.join(working_directory, 'subdirectory', 'test.sec')
-                public_key_file = os.path.join(working_directory, 'subdirectory', 'test.pub')
-                # Generate a named GPG key on the spot.
-                GPGKey(name="named-test-key",
-                       description="GPG key pair generated for unit tests (named key)",
-                       secret_key_file=secret_key_file,
-                       public_key_file=public_key_file)
-                # Generate a default GPG key on the spot.
-                default_key = GPGKey(name="default-test-key",
-                                     description="GPG key pair generated for unit tests (default key)")
-                assert os.path.basename(default_key.secret_key_file) == 'secring.gpg'
-                assert os.path.basename(default_key.public_key_file) == 'pubring.gpg'
-                # Test error handling related to GPG keys.
-                self.assertRaises(Exception, GPGKey, secret_key_file=secret_key_file)
-                self.assertRaises(Exception, GPGKey, public_key_file=public_key_file)
-                missing_secret_key_file = '/tmp/deb-pkg-tools-%i.sec' % random.randint(1, 1000)
-                missing_public_key_file = '/tmp/deb-pkg-tools-%i.pub' % random.randint(1, 1000)
-                self.assertRaises(Exception, GPGKey, key_id='12345', secret_key_file=secret_key_file,
-                                  public_key_file=missing_public_key_file)
-                self.assertRaises(Exception, GPGKey, key_id='12345', secret_key_file=missing_secret_key_file,
-                                  public_key_file=public_key_file)
-                os.unlink(secret_key_file)
-                self.assertRaises(Exception, GPGKey, name="test-key", description="Whatever",
-                                  secret_key_file=secret_key_file, public_key_file=public_key_file)
-                touch(secret_key_file)
-                os.unlink(public_key_file)
-                self.assertRaises(Exception, GPGKey, name="test-key", description="Whatever",
-                                  secret_key_file=secret_key_file, public_key_file=public_key_file)
-                os.unlink(secret_key_file)
-                self.assertRaises(Exception, GPGKey,
-                                  secret_key_file=secret_key_file,
-                                  public_key_file=public_key_file)
+        if SKIP_SLOW_TESTS:
+            return self.skipTest("skipping slow tests")
+        with Context() as finalizers:
+            working_directory = finalizers.mkdtemp()
+            secret_key_file = os.path.join(working_directory, 'subdirectory', 'test.sec')
+            public_key_file = os.path.join(working_directory, 'subdirectory', 'test.pub')
+            # Generate a named GPG key on the spot.
+            GPGKey(name="named-test-key",
+                   description="GPG key pair generated for unit tests (named key)",
+                   secret_key_file=secret_key_file,
+                   public_key_file=public_key_file)
+            # Generate a default GPG key on the spot.
+            default_key = GPGKey(name="default-test-key",
+                                 description="GPG key pair generated for unit tests (default key)")
+            assert os.path.basename(default_key.secret_key_file) == 'secring.gpg'
+            assert os.path.basename(default_key.public_key_file) == 'pubring.gpg'
+            # Test error handling related to GPG keys.
+            self.assertRaises(Exception, GPGKey, secret_key_file=secret_key_file)
+            self.assertRaises(Exception, GPGKey, public_key_file=public_key_file)
+            missing_secret_key_file = '/tmp/deb-pkg-tools-%i.sec' % random.randint(1, 1000)
+            missing_public_key_file = '/tmp/deb-pkg-tools-%i.pub' % random.randint(1, 1000)
+            self.assertRaises(Exception, GPGKey, key_id='12345', secret_key_file=secret_key_file,
+                              public_key_file=missing_public_key_file)
+            self.assertRaises(Exception, GPGKey, key_id='12345', secret_key_file=missing_secret_key_file,
+                              public_key_file=public_key_file)
+            os.unlink(secret_key_file)
+            self.assertRaises(Exception, GPGKey, name="test-key", description="Whatever",
+                              secret_key_file=secret_key_file, public_key_file=public_key_file)
+            touch(secret_key_file)
+            os.unlink(public_key_file)
+            self.assertRaises(Exception, GPGKey, name="test-key", description="Whatever",
+                              secret_key_file=secret_key_file, public_key_file=public_key_file)
+            os.unlink(secret_key_file)
+            self.assertRaises(Exception, GPGKey,
+                              secret_key_file=secret_key_file,
+                              public_key_file=public_key_file)
 
 
 def touch(filename, contents='\n'):
