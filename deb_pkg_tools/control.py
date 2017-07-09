@@ -1,7 +1,7 @@
 # Debian packaging tools: Control file manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: January 31, 2017
+# Last Change: July 9, 2017
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -60,18 +60,28 @@ for the field.
 """
 
 DEPENDS_LIKE_FIELDS = (
+    # Binary control file fields.
     'Breaks',
-    'Build-Depends',
     'Conflicts',
     'Depends',
+    'Enhances',
     'Pre-Depends',
     'Provides',
+    'Recommends',
     'Replaces',
     'Suggests',
+    # Source control file fields.
+    'Build-Conflicts',
+    'Build-Conflicts-Arch',
+    'Build-Conflicts-Indep',
+    'Build-Depends',
+    'Build-Depends-Arch',
+    'Build-Depends-Indep',
+    'Built-Using',
 )
 """
-A tuple of strings with the canonical names of binary control file fields that
-are like the ``Depends`` field (in the sense that they contain a comma
+A tuple of strings with the canonical names of control file fields that are
+similar to the ``Depends`` field (in the sense that they contain a comma
 separated list of package names with optional version specifications).
 """
 
