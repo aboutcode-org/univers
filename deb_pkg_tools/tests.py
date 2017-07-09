@@ -17,6 +17,7 @@ import sys
 import tempfile
 
 # External dependencies.
+from capturer import CaptureOutput
 from debian.deb822 import Deb822
 from executor import execute
 from humanfriendly.testing import PatchedAttribute, TestCase, run_cli
@@ -487,12 +488,14 @@ class DebPkgToolsTestCase(TestCase):
         with Context() as finalizers:
             directory = finalizers.mkdtemp()
             self.test_package_building(directory)
-            # Check whether apt-cache sees the package.
-            returncode, output = run_cli(
-                main, '--with-repo=%s' % directory,
-                'apt-cache show %s' % TEST_PACKAGE_NAME,
-            )
-            assert returncode == 0
+            with CaptureOutput() as capturer:
+                run_cli(
+                    main, '--with-repo=%s' % directory,
+                    'apt-cache show %s' % TEST_PACKAGE_NAME,
+                )
+                # Check whether apt-cache sees the package.
+                expected_line = "Package: %s" % TEST_PACKAGE_NAME
+                assert expected_line in capturer.get_lines()
 
     def test_check_package(self):
         """Test the command line interface for static analysis of package archives."""
