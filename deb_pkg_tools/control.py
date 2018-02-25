@@ -1,7 +1,7 @@
 # Debian packaging tools: Control file manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: July 9, 2017
+# Last Change: February 25, 2018
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -23,7 +23,8 @@ import textwrap
 
 # External dependencies.
 from debian.deb822 import Deb822
-from humanfriendly import concatenate, format_path, pluralize
+from humanfriendly import format_path
+from humanfriendly.text import compact, concatenate, pluralize
 from six import string_types, text_type
 from six.moves import StringIO
 
@@ -105,18 +106,13 @@ def create_control_file(control_file, control_fields):
     :param control_fields: A dictionary with control file fields. This
                            dictionary is merged with the values in
                            :data:`DEFAULT_CONTROL_FIELDS`.
-    :raises: :exc:`~exceptions.ValueError` when a mandatory binary control
-             field is not present in the provided control fields (see also
-             :data:`MANDATORY_BINARY_CONTROL_FIELDS`).
+    :raises: See :func:`check_mandatory_fields()`.
     """
     logger.debug("Creating control file: %s", format_path(control_file))
     # Merge the defaults with the fields defined by the caller.
     merged_fields = merge_control_fields(DEFAULT_CONTROL_FIELDS, control_fields)
     # Sanity check for mandatory fields that are missing.
-    missing_fields = [f for f in MANDATORY_BINARY_CONTROL_FIELDS if f not in merged_fields]
-    if missing_fields:
-        raise ValueError("Missing %s! (%s)" % (pluralize(len(missing_fields), "mandatory binary package control field"),
-                                               concatenate(sorted(missing_fields))))
+    check_mandatory_fields(merged_fields)
     # Make sure the parent directory of the control file exists.
     makedirs(os.path.dirname(control_file))
     # Remove the control file if it already exists in case it's a hard link to
@@ -126,6 +122,24 @@ def create_control_file(control_file, control_fields):
     # Write the control file.
     with open(control_file, 'wb') as handle:
         merged_fields.dump(handle)
+
+
+def check_mandatory_fields(control_fields):
+    """
+    Make sure mandatory binary control fields are defined.
+
+    :param control_fields: A dictionary with control file fields.
+    :raises: :exc:`~exceptions.ValueError` when a mandatory binary control
+             field is not present in the provided control fields (see also
+             :data:`MANDATORY_BINARY_CONTROL_FIELDS`).
+    """
+    missing_fields = [f for f in MANDATORY_BINARY_CONTROL_FIELDS if not control_fields.get(f)]
+    if missing_fields:
+        raise ValueError(compact(
+            "Missing {fields}! ({details})",
+            fields=pluralize(len(missing_fields), "mandatory binary package control field"),
+            details=concatenate(sorted(missing_fields)),
+        ))
 
 
 def patch_control_file(control_file, overrides):
