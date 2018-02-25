@@ -653,10 +653,10 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
         # Process binary executables and *.so files?
         if any(map(options.get, ('find_system_dependencies', 'strip_object_files'))):
             object_files = find_object_files(build_directory)
-        if options.get('find_system_dependencies', False):
+        if options.get('find_system_dependencies', False) and object_files:
             system_dependencies = find_system_dependencies(object_files)
             patch_control_file(control_file, {'Depends': system_dependencies})
-        if options.get('strip_object_files', False):
+        if options.get('strip_object_files', False) and object_files:
             strip_object_files(object_files)
         # Calculate installed size after (potentially) stripping object files.
         update_installed_size(build_directory)
