@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: July 9, 2017
+# Last Change: February 25, 2018
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """Test suite for the `deb-pkg-tools` package."""
@@ -28,18 +28,39 @@ from six.moves import StringIO
 # Modules included in our package.
 from deb_pkg_tools import version
 from deb_pkg_tools.cache import PackageCache
-from deb_pkg_tools.checks import (check_duplicate_files, check_version_conflicts,
-                                  DuplicateFilesFound, VersionConflictFound)
+from deb_pkg_tools.checks import (
+    DuplicateFilesFound,
+    VersionConflictFound,
+    check_duplicate_files,
+    check_version_conflicts,
+)
 from deb_pkg_tools.cli import main
-from deb_pkg_tools.control import (create_control_file, deb822_from_string,
-                                   load_control_file, merge_control_fields,
-                                   parse_control_fields, unparse_control_fields)
-from deb_pkg_tools.deps import VersionedRelationship, parse_depends, Relationship, RelationshipSet
+from deb_pkg_tools.control import (
+    create_control_file,
+    deb822_from_string,
+    load_control_file,
+    merge_control_fields,
+    parse_control_fields,
+    unparse_control_fields,
+)
+from deb_pkg_tools.deps import (
+    Relationship,
+    RelationshipSet,
+    VersionedRelationship,
+    parse_depends,
+)
 from deb_pkg_tools.gpg import GPGKey
-from deb_pkg_tools.package import (collect_related_packages, copy_package_files,
-                                   find_latest_version, find_package_archives,
-                                   group_by_latest_versions, inspect_package,
-                                   parse_filename)
+from deb_pkg_tools.package import (
+    collect_related_packages,
+    copy_package_files,
+    find_latest_version,
+    find_object_files,
+    find_package_archives,
+    find_system_dependencies,
+    group_by_latest_versions,
+    inspect_package,
+    parse_filename,
+)
 from deb_pkg_tools.printer import CustomPrettyPrinter
 from deb_pkg_tools.repo import apt_supports_trusted_option, update_repository
 from deb_pkg_tools.utils import find_debian_architecture, makedirs
@@ -400,6 +421,22 @@ class DebPkgToolsTestCase(TestCase):
         # Test the unhappy paths.
         self.assertRaises(ValueError, parse_filename, 'python2.7_2.7.3-0ubuntu3.4_amd64.not-a-deb')
         self.assertRaises(ValueError, parse_filename, 'python2.7.deb')
+
+    def test_find_object_files(self):
+        """Test the :func:`deb_pkg_tools.package.find_object_files()` function."""
+        with Context() as finalizers:
+            directory = finalizers.mkdtemp()
+            shutil.copy(__file__, directory)
+            shutil.copy(sys.executable, directory)
+            object_files = find_object_files(directory)
+            assert len(object_files) == 1
+            assert object_files[0] == os.path.join(directory, os.path.basename(sys.executable))
+
+    def test_find_system_dependencies(self):
+        """Test the :func:`deb_pkg_tools.package.find_system_dependencies()` function."""
+        dependencies = find_system_dependencies([sys.executable])
+        assert len(dependencies) >= 1
+        assert any(re.match(r'^libc\d+\b', d) for d in dependencies)
 
     def test_package_building(self, repository=None, overrides={}, contents={}):
         """Test building of Debian binary packages."""

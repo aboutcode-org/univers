@@ -1,7 +1,7 @@
 # Debian packaging tools: Package manipulation.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: January 27, 2017
+# Last Change: February 25, 2018
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """Functions to build and inspect Debian binary package archives (``*.deb`` files)."""
@@ -578,7 +578,7 @@ class ArchiveEntry(collections.namedtuple('ArchiveEntry', 'permissions, owner, g
     """
 
 
-def build_package(directory, repository=None, check_package=True, copy_files=True):
+def build_package(directory, repository=None, check_package=True, copy_files=True, **options):
     """
     Create a Debian package using the ``dpkg-deb --build`` command.
 
@@ -600,6 +600,11 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
                        to a temporary directory before being modified. You can
                        set this to :data:`False` if you're already working on a
                        copy and don't want yet another copy to be made.
+    :param strip_object_files: If :data:`True` (not the default) then
+                               :func:`strip_object_files()` will be used.
+    :param find_system_dependencies: If :data:`True` (not the default) then
+                                     :func:`find_system_dependencies()` will be
+                                     used.
     :returns: The pathname of the generated ``*.deb`` archive.
     :raises: :exc:`executor.ExternalCommandFailed` if any of the external
              commands invoked by this function fail.
@@ -642,8 +647,18 @@ def build_package(directory, repository=None, check_package=True, copy_files=Tru
             copy_package_files(directory, build_directory, hard_links=False)
         else:
             build_directory = directory
+        control_file = os.path.join(build_directory, 'DEBIAN', 'control')
         clean_package_tree(build_directory)
         update_conffiles(build_directory)
+        # Process binary executables and *.so files?
+        if any(map(options.get, ('find_system_dependencies', 'strip_object_files'))):
+            object_files = find_object_files(build_directory)
+        if options.get('find_system_dependencies', False):
+            system_dependencies = find_system_dependencies(object_files)
+            patch_control_file(control_file, {'Depends': system_dependencies})
+        if options.get('strip_object_files', False):
+            strip_object_files(object_files)
+        # Calculate installed size after (potentially) stripping object files.
         update_installed_size(build_directory)
         # Sanitize the permission bits of the root directory. Most build
         # directories will have been created with tempfile.mkdtemp() which
@@ -830,6 +845,107 @@ def clean_package_tree(directory, remove_dirs=DIRECTORIES_TO_REMOVE, remove_file
                 pathname = os.path.join(root, name)
                 logger.debug("Cleaning up file: %s", format_path(pathname))
                 os.unlink(pathname)
+
+
+def strip_object_files(object_files):
+    """
+    Use strip_ to make object files smaller.
+
+    :param object_files: An iterable of strings with filenames of object files.
+
+    This function runs ``strip --strip-unneeded`` on each of the given object
+    files to make them as small as possible. To find the object files you can
+    use :func:`find_object_files()`.
+
+    .. _strip: https://manpages.debian.org/strip
+    """
+    for filename in object_files:
+        execute('strip', '--strip-unneeded', filename, logger=logger)
+
+
+def find_system_dependencies(object_files):
+    """
+    Use dpkg-shlibdeps_ to find dependencies on system packages.
+
+    :param object_files: An iterable of strings with filenames of object files.
+    :returns: A list of strings in the format of the entries on the
+              ``Depends:`` line of a binary package control file.
+
+    This function uses the dpkg-shlibdeps_ program to find dependencies
+    on system packages by analyzing the given object files (binary
+    executables and/or ``*.so`` files). To find the object files
+    you can use :func:`find_object_files()`.
+
+    Here's an example to make things a bit more concrete:
+
+    >>> find_system_dependencies(['/usr/bin/ssh'])
+    ['libc6 (>= 2.17)',
+     'libgssapi-krb5-2 (>= 1.12.1+dfsg-2)',
+     'libselinux1 (>= 1.32)',
+     'libssl1.0.0 (>= 1.0.1)',
+     'zlib1g (>= 1:1.1.4)']
+
+    Very advanced magic! :-)
+
+    .. _dpkg-shlibdeps: https://manpages.debian.org/dpkg-shlibdeps
+    """
+    logger.debug("Using `dpkg-shlibdeps' to find dependencies on system packages ..")
+    # Create a fake source package because `dpkg-shlibdeps' requires it.
+    directory = tempfile.mkdtemp()
+    try:
+        # Create the `debian' directory expected in the source package directory.
+        os.mkdir(os.path.join(directory, 'debian'))
+        # Create an empty `debian/control' file because `dpkg-shlibdeps' requires
+        # this (even though it is apparently fine for the file to be empty ;-).
+        with open(os.path.join(directory, 'debian', 'control'), 'w') as handle:
+            handle.write('')
+        # Run `dpkg-shlibdeps' inside the source package directory, but let it
+        # analyze object files in a (build) directory managed by the caller.
+        command = ['dpkg-shlibdeps', '-O']
+        command.extend(map(os.path.abspath, object_files))
+        output = execute(*command, capture=True, directory=directory, logger=logger, silent=True)
+        expected_prefix = 'shlibs:Depends='
+        if not output.startswith(expected_prefix):
+            logger.warning(
+                "The output of dpkg-shlibdeps doesn't match the"
+                " expected format! (expected prefix: %r, output: %r)",
+                expected_prefix, output,
+            )
+            return []
+        output = output[len(expected_prefix):]
+        dependencies = sorted(d.strip() for d in output.split(',') if d and not d.isspace())
+        logger.debug("Dependencies reported by `dpkg-shlibdeps': %s", dependencies)
+        return dependencies
+    finally:
+        shutil.rmtree(directory)
+
+
+def find_object_files(directory):
+    """
+    Find binary executables and ``*.so`` files.
+
+    :param directory: The pathname of the directory to search (a string).
+    :returns: A list of filenames of object files (strings).
+    """
+    binaries = []
+    for root, dirs, files in os.walk(directory):
+        for filename in files:
+            pathname = os.path.join(root, filename)
+            if filename.endswith('.so') or (os.access(pathname, os.X_OK) and is_binary_file(pathname)):
+                binaries.append(pathname)
+    return binaries
+
+
+def is_binary_file(filename):
+    """
+    Check whether a file appears to contain binary data.
+
+    :param filename: The filename of the file to check (a string).
+    :returns: :data:`True` if the file appears to contain binary data,
+              :data:`False` otherwise.
+    """
+    with open(filename, 'rb') as handle:
+        return b'\0' in handle.read(1024 * 4)
 
 
 def update_conffiles(directory):
