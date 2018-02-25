@@ -21,7 +21,7 @@ import tempfile
 
 # External dependencies.
 from debian.deb822 import Deb822
-from executor import execute
+from executor import CommandNotFound, ExternalCommandFailed, execute
 from humanfriendly import coerce_boolean, concatenate, format_path, pluralize, Spinner, Timer
 
 # Modules included in our package.
@@ -857,10 +857,26 @@ def strip_object_files(object_files):
     files to make them as small as possible. To find the object files you can
     use :func:`find_object_files()`.
 
+    If the strip_ program is not installed a `debug` message is logged but no
+    exceptions are raised. When the strip_ program fails a `warning` message is
+    logged but again, no exceptions are raised.
+
+    One reason not to propagate these error conditions as exceptions is that
+    :func:`find_object_files()` will match files with binary contents that
+    have their executable bit set, regardless of whether those files are
+    actually valid object files.
+
     .. _strip: https://manpages.debian.org/strip
     """
     for filename in object_files:
-        execute('strip', '--strip-unneeded', filename, logger=logger)
+        try:
+            execute('strip', '--strip-unneeded', filename, logger=logger, silent=True)
+        except CommandNotFound:
+            # Don't bother trying to strip any more object files.
+            logger.debug("Not stripping object files because 'strip' program isn't installed.")
+            break
+        except ExternalCommandFailed as e:
+            logger.warning("Failed to strip object file: %s", e)
 
 
 def find_system_dependencies(object_files):
