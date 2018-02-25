@@ -434,7 +434,7 @@ class DebPkgToolsTestCase(TestCase):
 
     def test_find_system_dependencies(self):
         """Test the :func:`deb_pkg_tools.package.find_system_dependencies()` function."""
-        dependencies = find_system_dependencies([sys.executable])
+        dependencies = find_system_dependencies(['/usr/bin/python'])
         assert len(dependencies) >= 1
         assert any(re.match(r'^libc\d+\b', d) for d in dependencies)
 
