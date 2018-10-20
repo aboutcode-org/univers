@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: February 25, 2018
+# Last Change: October 20, 2018
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """Test suite for the `deb-pkg-tools` package."""
@@ -814,7 +814,7 @@ class DebPkgToolsTestCase(TestCase):
         # handling (we want this to be tested...).
         from deb_pkg_tools import repo
         if repo.apt_supports_trusted_option():
-            with PatchedAttribute(repo, 'trusted_option_supported', False):
+            with PatchedAttribute(repo, 'apt_supports_trusted_option', lambda: False):
                 self.test_repository_activation()
 
     def test_gpg_key_generation(self):
