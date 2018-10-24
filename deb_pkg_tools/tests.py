@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: October 20, 2018
+# Last Change: October 25, 2018
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """Test suite for the `deb-pkg-tools` package."""
@@ -800,18 +800,21 @@ class DebPkgToolsTestCase(TestCase):
         elif os.getuid() != 0:
             return self.skipTest("need superuser privileges")
         repository = self.test_repository_creation(preserve=True)
-        returncode, output = run_cli(main, '--activate-repo=%s' % repository)
+        returncode, output = run_cli(main, '-vv', '--activate-repo=%s' % repository)
         assert returncode == 0
         try:
             handle = os.popen('apt-cache show %s' % TEST_PACKAGE_NAME)
             fields = Deb822(handle)
             assert fields['Package'] == TEST_PACKAGE_NAME
         finally:
-            returncode, output = run_cli(main, '--deactivate-repo=%s' % repository)
+            returncode, output = run_cli(main, '-vv', '--deactivate-repo=%s' % repository)
             assert returncode == 0
-        # XXX If we skipped the GPG key handling because apt supports the
-        # [trusted=yes] option, re-run the test *including* GPG key
-        # handling (we want this to be tested...).
+
+    def test_repository_activation_fallback(self):
+        """Test the activation of trivial repositories using the fall-back mechanism."""
+        # If we skipped the GPG key handling in test_repository_activation()
+        # because apt supports the [trusted=yes] option, we re-run the test
+        # *including* GPG key handling because we want this to be tested...
         from deb_pkg_tools import repo
         if repo.apt_supports_trusted_option():
             with PatchedAttribute(repo, 'apt_supports_trusted_option', lambda: False):
@@ -822,39 +825,33 @@ class DebPkgToolsTestCase(TestCase):
         if SKIP_SLOW_TESTS:
             return self.skipTest("skipping slow tests")
         with Context() as finalizers:
-            working_directory = finalizers.mkdtemp()
-            secret_key_file = os.path.join(working_directory, 'subdirectory', 'test.sec')
-            public_key_file = os.path.join(working_directory, 'subdirectory', 'test.pub')
+            directory = finalizers.mkdtemp()
+            public_key_file = os.path.join(directory, 'subdirectory', 'test.pub')
+            secret_key_file = os.path.join(directory, 'subdirectory', 'test.sec')
             # Generate a named GPG key on the spot.
-            GPGKey(name="named-test-key",
-                   description="GPG key pair generated for unit tests (named key)",
-                   secret_key_file=secret_key_file,
-                   public_key_file=public_key_file)
-            # Generate a default GPG key on the spot.
-            default_key = GPGKey(name="default-test-key",
-                                 description="GPG key pair generated for unit tests (default key)")
-            assert os.path.basename(default_key.secret_key_file) == 'secring.gpg'
-            assert os.path.basename(default_key.public_key_file) == 'pubring.gpg'
+            key = GPGKey(
+                description="GPG key pair generated for unit tests",
+                directory=directory,
+                name="deb-pkg-tools test suite",
+                public_key_file=public_key_file,
+                secret_key_file=secret_key_file,
+            )
+            assert key.existing_files
             # Test error handling related to GPG keys.
-            self.assertRaises(Exception, GPGKey, secret_key_file=secret_key_file)
-            self.assertRaises(Exception, GPGKey, public_key_file=public_key_file)
-            missing_secret_key_file = '/tmp/deb-pkg-tools-%i.sec' % random.randint(1, 1000)
-            missing_public_key_file = '/tmp/deb-pkg-tools-%i.pub' % random.randint(1, 1000)
-            self.assertRaises(Exception, GPGKey, key_id='12345', secret_key_file=secret_key_file,
-                              public_key_file=missing_public_key_file)
-            self.assertRaises(Exception, GPGKey, key_id='12345', secret_key_file=missing_secret_key_file,
-                              public_key_file=public_key_file)
-            os.unlink(secret_key_file)
-            self.assertRaises(Exception, GPGKey, name="test-key", description="Whatever",
-                              secret_key_file=secret_key_file, public_key_file=public_key_file)
-            touch(secret_key_file)
-            os.unlink(public_key_file)
-            self.assertRaises(Exception, GPGKey, name="test-key", description="Whatever",
-                              secret_key_file=secret_key_file, public_key_file=public_key_file)
-            os.unlink(secret_key_file)
-            self.assertRaises(Exception, GPGKey,
-                              secret_key_file=secret_key_file,
-                              public_key_file=public_key_file)
+            from deb_pkg_tools import gpg
+            with PatchedAttribute(gpg, 'have_updated_gnupg', lambda: False):
+                self.assertRaises(
+                    TypeError, GPGKey,
+                    key_id='12345',
+                    public_key_file='/tmp/deb-pkg-tools-%i.pub' % random.randint(1, 1000),
+                    secret_key_file=secret_key_file,
+                )
+                self.assertRaises(
+                    TypeError, GPGKey,
+                    key_id='12345',
+                    public_key_file=public_key_file,
+                    secret_key_file='/tmp/deb-pkg-tools-%i.sec' % random.randint(1, 1000),
+                )
 
 
 def touch(filename, contents='\n'):
