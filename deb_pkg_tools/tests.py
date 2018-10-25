@@ -836,7 +836,10 @@ class DebPkgToolsTestCase(TestCase):
                 public_key_file=public_key_file,
                 secret_key_file=secret_key_file,
             )
+            # Make sure a key pair was generated.
             assert key.existing_files
+            # Make sure a fingerprint can be extracted from the key.
+            assert re.match('^[0-9A-Fa-f]{10,}$', key.fingerprint)
             # Test error handling related to GPG keys.
             from deb_pkg_tools import gpg
             with PatchedAttribute(gpg, 'have_updated_gnupg', lambda: False):
