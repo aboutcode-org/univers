@@ -841,13 +841,13 @@ class DebPkgToolsTestCase(TestCase):
             from deb_pkg_tools import gpg
             with PatchedAttribute(gpg, 'have_updated_gnupg', lambda: False):
                 self.assertRaises(
-                    TypeError, GPGKey,
+                    EnvironmentError, GPGKey,
                     key_id='12345',
                     public_key_file='/tmp/deb-pkg-tools-%i.pub' % random.randint(1, 1000),
                     secret_key_file=secret_key_file,
                 )
                 self.assertRaises(
-                    TypeError, GPGKey,
+                    EnvironmentError, GPGKey,
                     key_id='12345',
                     public_key_file=public_key_file,
                     secret_key_file='/tmp/deb-pkg-tools-%i.sec' % random.randint(1, 1000),
