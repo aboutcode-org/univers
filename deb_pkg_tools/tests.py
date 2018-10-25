@@ -833,8 +833,8 @@ class DebPkgToolsTestCase(TestCase):
             )
             # Make sure a key pair was generated.
             assert key.existing_files
-            # Make sure a fingerprint can be extracted from the key.
-            assert re.match('^[0-9A-Fa-f]{10,}$', key.fingerprint)
+            # Make sure an identifier can be extracted from the key.
+            assert re.match('^[0-9A-Fa-f]{10,}$', key.identifier)
 
     def test_gpg_key_error_handling(self):
         """Test explicit error handling of GPG key generation."""
