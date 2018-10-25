@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: October 25, 2018
+# Last Change: October 26, 2018
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """Test suite for the `deb-pkg-tools` package."""
@@ -10,7 +10,6 @@
 import functools
 import logging
 import os
-import random
 import re
 import shutil
 import sys
@@ -20,7 +19,7 @@ import tempfile
 from capturer import CaptureOutput
 from debian.deb822 import Deb822
 from executor import execute
-from humanfriendly.testing import PatchedAttribute, TestCase, run_cli
+from humanfriendly.testing import PatchedAttribute, TestCase, run_cli, touch
 from humanfriendly.text import dedent
 from six import text_type
 from six.moves import StringIO
@@ -826,41 +825,33 @@ class DebPkgToolsTestCase(TestCase):
             return self.skipTest("skipping slow tests")
         with Context() as finalizers:
             directory = finalizers.mkdtemp()
-            public_key_file = os.path.join(directory, 'subdirectory', 'test.pub')
-            secret_key_file = os.path.join(directory, 'subdirectory', 'test.sec')
             # Generate a named GPG key on the spot.
             key = GPGKey(
                 description="GPG key pair generated for unit tests",
                 directory=directory,
                 name="deb-pkg-tools test suite",
-                public_key_file=public_key_file,
-                secret_key_file=secret_key_file,
             )
             # Make sure a key pair was generated.
             assert key.existing_files
             # Make sure a fingerprint can be extracted from the key.
             assert re.match('^[0-9A-Fa-f]{10,}$', key.fingerprint)
-            # Test error handling related to GPG keys.
-            from deb_pkg_tools import gpg
-            with PatchedAttribute(gpg, 'have_updated_gnupg', lambda: False):
-                self.assertRaises(
-                    EnvironmentError, GPGKey,
-                    key_id='12345',
-                    public_key_file='/tmp/deb-pkg-tools-%i.pub' % random.randint(1, 1000),
-                    secret_key_file=secret_key_file,
-                )
-                self.assertRaises(
-                    EnvironmentError, GPGKey,
-                    key_id='12345',
-                    public_key_file=public_key_file,
-                    secret_key_file='/tmp/deb-pkg-tools-%i.sec' % random.randint(1, 1000),
-                )
 
-
-def touch(filename, contents='\n'):
-    """Create a file."""
-    with open(filename, 'w') as handle:
-        handle.write(contents)
+    def test_gpg_key_error_handling(self):
+        """Test explicit error handling of GPG key generation."""
+        from deb_pkg_tools import gpg
+        with PatchedAttribute(gpg, 'have_updated_gnupg', lambda: False):
+            with Context() as finalizers:
+                directory = finalizers.mkdtemp()
+                options = dict(
+                    key_id='12345',
+                    public_key_file=os.path.join(directory, 'test.pub'),
+                    secret_key_file=os.path.join(directory, 'test.sec'),
+                )
+                touch(options['public_key_file'])
+                self.assertRaises(EnvironmentError, GPGKey, **options)
+                os.unlink(options['public_key_file'])
+                touch(options['secret_key_file'])
+                self.assertRaises(EnvironmentError, GPGKey, **options)
 
 
 def match(pattern, lines):
