@@ -58,8 +58,8 @@ dnl RPMVERCMP(1a, 1b, -1)
 """)
         parser = ACParser(fobj, with_buggy_comparisons=False)
         exp = [('1', '2', -1)]
-        self.assertEquals(exp,
-                          list(parser))
+        self.assertEqual(exp,
+                         list(parser))
 
     def test_parse_with_buggy(self):
         fobj = io.StringIO("""
@@ -71,8 +71,8 @@ dnl RPMVERCMP(1a, 1b, -1)
         parser = ACParser(fobj, with_buggy_comparisons=True)
         exp = [('1', '2', -1),
                ('1a', '1b', -1)]
-        self.assertEquals(exp,
-                          list(parser))
+        self.assertEqual(exp,
+                         list(parser))
 
 
 class VersionCompareTest(unittest.TestCase):
@@ -101,7 +101,7 @@ class VersionCompareTest(unittest.TestCase):
         for first, second, exp in parser:
             test_count += 1
             ret = rpm_vercmp.vercmp(first, second)
-            self.assertEquals(exp, ret)
+            self.assertEqual(exp, ret)
         # Make sure we still test something, in case the m4 file drops
         # content this will fail the test
         self.assertGreater(test_count, 20)
