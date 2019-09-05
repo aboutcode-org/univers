@@ -1,7 +1,7 @@
 # Debian packaging tools: Version comparison.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: November 25, 2016
+# Last Change: August 7, 2019
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """
@@ -27,17 +27,23 @@ logger = logging.getLogger(__name__)
 
 # Optional external dependency on python-apt.
 try:
-    # The new name of the version comparison function.
-    from apt_pkg import InitSystem, version_compare as apt_version_compare
-    InitSystem()
+    # Newest known calling convention.
+    from apt_pkg import init_system, version_compare as apt_version_compare
+    init_system()
     have_python_apt = True
 except ImportError:
     try:
-        # The old name of the version comparison function.
-        from apt import VersionCompare as apt_version_compare
+        # Older calling convention.
+        from apt_pkg import InitSystem, version_compare as apt_version_compare
+        InitSystem()
         have_python_apt = True
     except ImportError:
-        have_python_apt = False
+        try:
+            # Oldest known calling convention.
+            from apt import VersionCompare as apt_version_compare
+            have_python_apt = True
+        except ImportError:
+            have_python_apt = False
 
 
 def compare_versions_with_python_apt(version1, operator, version2):
