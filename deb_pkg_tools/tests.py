@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: October 26, 2018
+# Last Change: September 6, 2019
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """Test suite for the `deb-pkg-tools` package."""
@@ -19,6 +19,7 @@ import tempfile
 from capturer import CaptureOutput
 from debian.deb822 import Deb822
 from executor import execute
+from humanfriendly import coerce_boolean
 from humanfriendly.testing import PatchedAttribute, TestCase, run_cli, touch
 from humanfriendly.text import dedent
 from six import text_type
@@ -260,13 +261,37 @@ class DebPkgToolsTestCase(TestCase):
             assert patched_fields['Package'] == 'patched-example'
             assert str(patched_fields['Depends']) == 'another-dependency, some-dependency'
 
-    def test_version_comparison(self):
-        """Test the comparison of version objects (under both implementations)."""
+    def test_version_comparison_internal(self):
+        """
+        Test the comparison of version objects (using the python-apt binding).
+
+        The test suite will fail on Travis CI when the python-apt binding isn't
+        available. The idea behind this is to verify that the conditional
+        import chain in ``version.py`` always succeeds (on Travis CI, where I
+        control the runtime environment).
+
+        This was added when after much debugging I finally realized why the new
+        Ubuntu 18.04 build server I'd created was so awfully slow: The
+        conditional import chain had been "silently broken" without me
+        realizing it, except for the fact that using the fall back
+        implementation based on ``dpkg --compare-versions`` to sort through
+        thousands of version numbers was rather noticeably slow...
+        """
+        if not version.have_python_apt:
+            if coerce_boolean(os.environ.get('TRAVIS', 'false')):
+                raise Exception("The python-apt binding isn't available!")
+            else:
+                return self.skipTest("skipping slow tests")
+        # Run the version comparison tests.
         self.version_comparison_helper()
-        if version.have_python_apt:
-            with PatchedAttribute(version, 'have_python_apt', False):
-                self.version_comparison_helper()
-                self.assertRaises(NotImplementedError, version.compare_versions_with_python_apt, '0.1', '<<', '0.2')
+
+    def test_version_comparison_external(self):
+        """Test the comparison of version objects (by running ``dpkg --compare-versions``)."""
+        with PatchedAttribute(version, 'have_python_apt', False):
+            # Sanity check that the monkey patching worked.
+            self.assertRaises(NotImplementedError, version.compare_versions_with_python_apt, '0.1', '<<', '0.2')
+            # Run the version comparison tests.
+            self.version_comparison_helper()
 
     def version_comparison_helper(self):
         """Test the comparison of version objects."""
