@@ -14,10 +14,11 @@ import subprocess
 from distutils.sysconfig import get_python_lib
 
 src = subprocess.check_output(
-    "/usr/bin/python%i" % sys.version_info[0], "-c", "import apt_pkg; print(apt_pkg.__file__)"
-).strip()
+    ["/usr/bin/python%i" % sys.version_info[0], "-c", "import apt_pkg; print(apt_pkg.__file__)"]
+).decode('ascii').strip()
+print("System wide module: %s" % src)
 assert os.path.isfile(src)
 
 dst = os.path.join(get_python_lib(), os.path.basename(src))
-print("Linking %s -> %s .." % (dst, src))
+print("Link in virtual environment: %s" % dst)
 os.symlink(src, dst)
