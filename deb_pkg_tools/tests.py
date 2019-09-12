@@ -1,7 +1,7 @@
 # Debian packaging tools: Automated tests.
 #
 # Author: Peter Odding <peter@peterodding.com>
-# Last Change: September 6, 2019
+# Last Change: September 12, 2019
 # URL: https://github.com/xolox/python-deb-pkg-tools
 
 """Test suite for the `deb-pkg-tools` package."""
@@ -68,8 +68,11 @@ from deb_pkg_tools.utils import find_debian_architecture, makedirs
 # Initialize a logger.
 logger = logging.getLogger(__name__)
 
+# True when running on Travis CI, false otherwise.
+IS_TRAVIS = coerce_boolean(os.environ.get('TRAVIS', 'false'))
+
 # Improvised slow test marker.
-SKIP_SLOW_TESTS = 'SKIP_SLOW_TESTS' in os.environ
+SKIP_SLOW_TESTS = coerce_boolean(os.environ.get('SKIP_SLOW_TESTS', 'false'))
 
 # Configuration defaults.
 TEST_PACKAGE_NAME = 'deb-pkg-tools-demo-package'
@@ -277,13 +280,25 @@ class DebPkgToolsTestCase(TestCase):
         implementation based on ``dpkg --compare-versions`` to sort through
         thousands of version numbers was rather noticeably slow...
         """
+        message = "python-apt binding isn't available"
         if not version.have_python_apt:
-            if coerce_boolean(os.environ.get('TRAVIS', 'false')):
-                raise Exception("The python-apt binding isn't available!")
+            if IS_TRAVIS and self.python_apt_expected:
+                raise Exception(message)
             else:
-                return self.skipTest("skipping slow tests")
+                return self.skipTest(message)
         # Run the version comparison tests.
         self.version_comparison_helper()
+
+    @property
+    def python_apt_expected(self):
+        """
+        :data:`True` if ``python-apt`` is expected to be available, :data:`False` otherwise.
+
+        To make sense of this please refer to ``install-on-travis.sh``.
+        """
+        current_interpreter = "python%i.%i" % sys.version_info[:2]
+        preferred_executable = os.path.join('/usr/bin', current_interpreter)
+        return os.path.exists(preferred_executable)
 
     def test_version_comparison_external(self):
         """Test the comparison of version objects (by running ``dpkg --compare-versions``)."""
