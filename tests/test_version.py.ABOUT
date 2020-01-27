@@ -1,6 +1,0 @@
-about_resource: debtool.py
-name: python-deb-pkg-tools
-version: 6.0
-download_url: https://github.com/xolox/python-deb-pkg-tools/archive/6.0.tar.gz
-license_expression: mit
-homepage_url: https://github.com/xolox/python-deb-pkg-tools

@@ -1,0 +1,11 @@
+graft src
+graft tests
+graft licenses
+include *.rst
+include *.txt
+include *.py
+include *.cfg
+include NOTICE
+include *.LICENSE
+
+
