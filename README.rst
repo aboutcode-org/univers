@@ -11,7 +11,7 @@ Origin
 ------
 
 This library is based on a heavily modified and remixed combo of original code
-with code from several other origins::
+with code from several other origins:
 
 - python-deb-pkg-tools from @xolox for its handling of Debian packages and the
   parsing of dependencies and othe package-to-pacakge relationship fields.
@@ -40,30 +40,28 @@ and several other utilities already provide similar capabilities!
 On the surface this is correct, but there are several differences and reasons
 liste here:
 
- - Existing tools are parsing  control files rather strictly. This library tries
-   to be more flexible. For instance it can recognize and fix some almost
-   correct copyright files that are not fully "machine readable" but close
-   enough to the spec.
+- Existing tools are parsing  control files rather strictly. This library tries
+  to be more flexible. For instance it can recognize and fix some almost
+  correct copyright files that are not fully "machine readable" but close
+  enough to the spec.
 
- - Several of these tools have to deal with a lot of legacy compatibility. We
-   do not have such need. For instance, the Python standard library email module
-   and one line of code is enough to parse a Debian 822 file fields. I doubt
-   that was this capability was there when python-debian was started but it is
-   here now and thisvastly simplifies the code.
+- Several of these tools have to deal with a lot of legacy compatibility. We
+  do not have such need. For instance, the Python standard library email module
+  and one line of code is enough to parse a Debian 822 file fields. I doubt
+  that was this capability was there when python-debian was started but it is
+  here now and thisvastly simplifies the code.
 
- - This library is there to parse and inpect control files but not to emit and
-   create them, so the code and tests can be much simpler. For instance, rather
-   than using somewhat more complex case-insensitive dicionary keys while
-   preserving case, this library uses lower case keys throughout.
+- This library is there to parse and inpect control files but not to emit and
+  create them, so the code and tests can be much simpler. For instance, rather
+  than using somewhat more complex case-insensitive dicionary keys while
+  preserving case, this library uses lower case keys throughout.
 
- - The official python-debian library is GPL-licensed. I went through efforts to
-   work out a relicensing of python-debian with all its authors such that it
-   could be integrated in permissive-licensed Python tools. Even though most
-   current maintainers and contributors were OK with that relicensing to a
-   permissive or an LGPL license, I could not get a reply and agreement from
-   some important legacy authors: therefore the relicensing could not happen.
-
-
+- The official python-debian library is GPL-licensed. I went through efforts to
+  work out a relicensing of python-debian with all its authors such that it
+  could be integrated in permissive-licensed Python tools. Even though most
+  current maintainers and contributors were OK with that relicensing to a
+  permissive or an LGPL license, I could not get a reply and agreement from
+  some important legacy authors: therefore the relicensing could not happen.
 
 
 License
@@ -73,10 +71,10 @@ SPDX-License-Identifier: Apache-2.0 AND BSD-3-Clause AND MIT
 This software is licensed under a mix of origin each using their onw license.
 All these licenses apply as the code as been refactored and remixed significantly.
 
-Copyright nexB Inc. and others.
-Copyright 2017 The Climate Corporation (https://climate.com)
-Copyright 2013 Agustin Henze <tin@sluc.org.ar>
-Copyright (c) 2018 Peter Odding.
-Copyright (c) 2014-2019 Security Innovation, Inc
+- Copyright nexB Inc. and others.
+- Copyright (c) 2018 Peter Odding.
+- Copyright 2017 The Climate Corporation (https://climate.com)
+- Copyright (c) 2014-2019 Security Innovation, Inc
+- Copyright 2013 Agustin Henze <tin@sluc.org.ar>
 
 Note that the tests/ may also contain files using other FOSS licenses.
