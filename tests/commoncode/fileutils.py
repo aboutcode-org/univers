@@ -197,7 +197,7 @@ def prepare_path(pth):
         if not isinstance(pth, bytes):
             pth = fsencode(pth)
         return pth
-    else:    
+    else:
         if not isinstance(pth, compat.unicode):
             return fsdecode(pth)
     return pth

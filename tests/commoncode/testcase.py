@@ -230,7 +230,7 @@ class FileDrivenTesting(object):
 
             # editors temp file leftovers
             tilde = b'~' if on_linux and py2 else '~'
-            tilde_files = [path.join(root, file_loc) 
+            tilde_files = [path.join(root, file_loc)
                            for file_loc in files if file_loc.endswith(tilde)]
             for tf in tilde_files:
                 os.remove(tf)
