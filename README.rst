@@ -34,7 +34,7 @@ with code from several other origins:
 Why?
 ----
 
-Why ceate this seemingly redundant library? The official python-debian tools
+Why create this seemingly redundant library? The official python-debian tools
 and several other utilities already provide similar capabilities!
 
 On the surface this is correct, but there are several differences and reasons
