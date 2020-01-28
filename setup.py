@@ -110,8 +110,6 @@ setup(
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
@@ -120,11 +118,10 @@ setup(
         'Topic :: Utilities',
     ],
     keywords=[
-        'debian', 'deb822', 'copyright', 'package', 'dependency',
-        'license', 'licensing', 'dep5',
+        'debian', 'deb822', 'copyright', 'package', 'dependency', 'license',
+        'licensing', 'dep5', 'control', 'dsc', 'python-debian', 'dpkg', 'libapt',
     ],
     install_requires=[
-        # commoncode
         'chardet >= 3.0.0, <4.0.0',
         'attrs >=18.1, < 20.0',
     ]
