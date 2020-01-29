@@ -1,11 +1,12 @@
 debut: Debian package, copyright and control files parsing tools
 ================================================================
 
-The Python package `debut` is a collection of utilities to various Debian
+The Python package `debut` is a collection of utilities to parse various Debian
 package manifests, machine readable copyright and control files collectively
 known as the Debian 822 format (based on the RFC822 email format).
 
 Why the name `debut`? That's a portmanteau of DEBian and UTilities!
+
 
 Origin
 ------
@@ -48,15 +49,17 @@ listed here:
 - Several of these tools have to deal with a lot of legacy compatibility. We
   do not have such need. For instance, the Python standard library email module
   and one line of code is enough to parse a Debian 822 file fields. I doubt
-  that was this capability was there when python-debian was started but it is
-  here now and this vastly simplifies the code.
+  thatthis feature was available in the standard library when python-debian was
+  started but it is here now and this vastly simplifies the code.
 
-- This library is there to parse and inspect control files and much less so to
+- This library focus is to parse and inspect control files and much less so to
   emit and create them, so the code and tests can be much simpler. For instance,
   rather than using somewhat more complex case-insensitive dictionary keys while
-  preserving case, this library uses lower case keys throughout.
+  preserving case for Deb822-like objects, this library uses lower case keys
+  throughout.
 
-- The official python-debian library is GPL-licensed. I went through efforts to
+- The official python-debian library is GPL-licensed making it it hard to
+  combine with Apache-licensed libraries. I went through efforts to
   work out a relicensing of python-debian with all its authors such that it
   could be integrated in permissive-licensed Python tools. Even though most
   current maintainers and contributors were OK with that relicensing to a
@@ -69,8 +72,9 @@ License
 
 SPDX-License-Identifier: Apache-2.0 AND BSD-3-Clause AND MIT
 
-This software is licensed under a mix of origin each using their own license.
-All these licenses apply as the code as been refactored and remixed significantly.
+This software combines several origins each with their own license.
+All these licenses apply as all original files have been refactored and remixed
+significantly.
 
 - Copyright nexB Inc. and others.
 - Copyright (c) 2018 Peter Odding.
