@@ -1,11 +1,21 @@
 graft src
 graft tests
-graft licenses
-include *.rst
-include *.txt
-include *.py
-include *.cfg
+include .gitignore
+
+include apache-2.0.LICENSE
+include bsd-new.LICENSE
+include mit.LICENSE
 include NOTICE
-include *.LICENSE
 
+include README.rst
+include CHANGELOG.rst
+include configure
+include configure2
+include MANIFEST.in
+include requirements-tests.txt
+include setup.cfg
+include setup.py
 
+prune src/debut.egg-info
+
+global-exclude *.py[co] __pycache__ *.*~
