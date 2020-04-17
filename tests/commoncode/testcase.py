@@ -192,8 +192,11 @@ class FileDrivenTesting(object):
         # ensure that we have a new unique temp directory for each test run
         global test_run_temp_dir
         if not test_run_temp_dir:
-            from scancode_config import scancode_root_dir
-            test_tmp_root_dir = path.join(scancode_root_dir, 'tmp')
+            try:
+                from scancode_config import scancode_root_dir as root_dir
+            except Exception:
+                root_dir = '.'
+            test_tmp_root_dir = path.join(root_dir, 'tmp')
             # now we add a space in the path for testing path with spaces
             test_run_temp_dir = fileutils.get_temp_dir(
                 base_dir=test_tmp_root_dir, prefix='scancode-tk-tests -')
