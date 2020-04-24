@@ -16,7 +16,7 @@ import sys
 from setuptools import find_packages
 from setuptools import setup
 
-version = '0.9.3'
+version = '0.9.4'
 
 #### Small hack to force using a plain version number if the option
 #### --plain-version is passed to setup.py
@@ -123,6 +123,6 @@ setup(
     ],
     install_requires=[
         'chardet >= 3.0.0, <4.0.0',
-        'attrs >=18.1, < 20.0',
+        'attrs >=19.2',
     ]
 )
