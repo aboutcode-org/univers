@@ -34,7 +34,7 @@ function setup {
 
 setup
 
-$CONFIGURE_ROOT_DIR/tmp/bin/pip install -r requirements_dev.txt -e .
+$CONFIGURE_ROOT_DIR/tmp/bin/pip install -r requirements-tests.txt -e .
 
 if [ -f "$CONFIGURE_ROOT_DIR/tmp/bin/activate" ]; then
     source "$CONFIGURE_ROOT_DIR/tmp/bin/activate"
