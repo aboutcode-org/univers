@@ -1,9 +1,14 @@
 Release notes
 -------------
 
-### Version 0.9.5
+### Version 0.9.6
 
 *2020-07-07* -- Support parsing Alpine installed db. This is a debian-like file but the keys are case-sensitive 
+
+
+### Version 0.9.5
+
+*2020-06-09* -- Simplify configure and fix minor bugs
 
 
 ### Version 0.9.4
