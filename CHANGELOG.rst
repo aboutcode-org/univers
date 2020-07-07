@@ -1,6 +1,12 @@
 Release notes
 -------------
 
+
+### Version 0.9.8
+
+*2020-07-07* -- Correct setup.py typo
+
+
 ### Version 0.9.7
 
 *2020-07-07* -- Correct configure script
