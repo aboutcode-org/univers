@@ -4,8 +4,8 @@
 from __future__ import absolute_import
 from __future__ import print_function
 
-import io
 from glob import glob
+import io
 from os.path import basename
 from os.path import dirname
 from os.path import join
@@ -15,73 +15,6 @@ import sys
 
 from setuptools import find_packages
 from setuptools import setup
-
-version = '0.9.8'
-
-#### Small hack to force using a plain version number if the option
-#### --plain-version is passed to setup.py
-
-USE_DEFAULT_VERSION = False
-try:
-    sys.argv.remove('--use-default-version')
-    USE_DEFAULT_VERSION = True
-except ValueError:
-    pass
-####
-
-
-def get_version(default=version, template='{tag}.{distance}.{commit}{dirty}',
-                use_default=USE_DEFAULT_VERSION):
-    """
-    Return a version collected from git if possible or fall back to an
-    hard-coded default version otherwise. If `use_default` is True,
-    always use the default version.
-    """
-    if use_default:
-        return default
-    try:
-        tag, distance, commit, dirty = get_git_version()
-        if not distance and not dirty:
-            # we are from a clean Git tag: use tag
-            return tag
-
-        distance = 'post{}'.format(distance)
-        if dirty:
-            time_stamp = get_time_stamp()
-            dirty = '.dirty.' + get_time_stamp()
-        else:
-            dirty = ''
-
-        return template.format(**locals())
-    except:
-        # no git data: use default version
-        return default
-
-
-def get_time_stamp():
-    """
-    Return a numeric UTC time stamp without microseconds.
-    """
-    from datetime import datetime
-    return (datetime.isoformat(datetime.utcnow()).split('.')[0]
-            .replace('T', '').replace(':', '').replace('-', ''))
-
-
-def get_git_version():
-    """
-    Return version parts from Git or raise an exception.
-    """
-    from subprocess import check_output, STDOUT
-    # this may fail with exceptions
-    cmd = 'git', 'describe', '--tags', '--long', '--dirty',
-    version = check_output(cmd, stderr=STDOUT).strip()
-    dirty = version.endswith('-dirty')
-    tag, distance, commit = version.split('-')[:3]
-    # lower tag and strip V prefix in tags
-    tag = tag.lower().lstrip('v ').strip()
-    # strip leading g from git describe commit
-    commit = commit.lstrip('g').strip()
-    return tag, int(distance), commit, dirty
 
 
 def read(*names, **kwargs):
@@ -93,7 +26,7 @@ def read(*names, **kwargs):
 
 setup(
     name='debut',
-    version=get_version(),
+    version='0.9.9',
     license='Apache-2.0 AND BSD-3-Clause AND MIT',
     description='Utilities to parse Debian package, copyright and control files.',
     long_description=read('README.rst'),
@@ -114,6 +47,7 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
         'Topic :: Software Development',
         'Topic :: Utilities',
     ],

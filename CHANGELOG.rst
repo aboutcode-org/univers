@@ -2,6 +2,12 @@ Release notes
 -------------
 
 
+### Version 0.9.9 
+
+*2020-10-28* -- Improve docstrings
+*2020-08-03* -- Remove Alpine support (moved to scancode-toolkit)
+
+
 ### Version 0.9.8
 
 *2020-07-07* -- Correct setup.py typo
