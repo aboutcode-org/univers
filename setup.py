@@ -56,7 +56,7 @@ setup(
         'licensing', 'dep5', 'control', 'dsc', 'python-debian', 'dpkg', 'libapt',
     ],
     install_requires=[
-        'chardet >= 3.0.0, <4.0.0',
+        'chardet >= 3.0.0',
         'attrs >=19.2',
     ]
 )
