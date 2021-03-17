@@ -23,7 +23,7 @@ import versions
 
 
 class TestPYPIVersion(TestCase):
-    def test_constructior(self):
+    def test_constructor(self):
         pypi_version = versions.PYPIVersion("2.4.5")
         assert pypi_version.value == version.Version("2.4.5")
         assert pypi_version.scheme == "pypi"
