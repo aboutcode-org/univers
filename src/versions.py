@@ -15,13 +15,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import operator
 import re
-from packaging import version
 from functools import total_ordering
-
-
-def remove_spaces(string):
-    return string.replace(" ", "")
+from packaging import version
 
 
 class BaseVersion:
@@ -100,13 +97,17 @@ class SemverVersion:
         # node-semver implementation ...
 
 
-versions_classes_by_scheme = {
+version_class_by_scheme = {
     "generic": GenericVersion,
     "semver": SemverVersion,
     "debian": DebianVersion,
     "pypi": PYPIVersion,
-    # ....
 }
+
+
+def validate_scheme(scheme):
+    if scheme not in version_class_by_scheme:
+        raise ValueError(f"Invalid scheme {scheme}")
 
 
 def parse_version(version):
@@ -118,132 +119,5 @@ def parse_version(version):
     else:
         scheme = "generic"
 
-    cls = versions_classes_by_scheme[scheme]
+    cls = version_class_by_scheme[scheme]
     return cls(version)
-
-
-class VersionRange:
-    # one of <> >= =< or != or =
-    operator = ""
-    value = ""
-
-    def __init__(self, version_range_string):
-        version_range_string = remove_spaces(version_range_string)
-        _, self.operator, self.value = self.partition_operator(version_range_string)
-        self.validate()
-
-    def validate(self):
-
-        # self.operator will always have a valid value
-        if not self.value:
-            raise ValueError("Version range has no bounds")
-
-    @staticmethod
-    def partition_operator(version_range_string):
-
-        if ">=" in version_range_string:
-            return version_range_string.partition(">=")
-
-        if "<=" in version_range_string:
-            return version_range_string.partition("<=")
-
-        if "!=" in version_range_string:
-            return version_range_string.partition("!=")
-
-        if "<" in version_range_string:
-            return version_range_string.partition("<")
-
-        if ">" in version_range_string:
-            return version_range_string.partition(">")
-
-        if "=" in version_range_string:
-            return version_range_string.partition("=")
-
-        return "", "=", version_range_string
-
-    def __contains__(self, version):
-        version_class = versions_classes_by_scheme[version.scheme]
-        version_object = version_class(self.value)
-
-        # TODO: this can be made more concise by using `eval`. Research whether that is safe
-        if self.operator == ">=":
-            return version >= version_object
-
-        if self.operator == "<=":
-            return version <= version_object
-
-        if self.operator == "!=":
-            return version != version_object
-
-        if self.operator == "<":
-            return version < version_object
-
-        if self.operator == ">":
-            return version > version_object
-
-        return version == version_object
-
-    def __str__(self):
-        return f"{self.operator}{self.value}"
-
-
-class VersionSpecifier:
-
-    scheme = ""
-    ranges = []
-
-    @classmethod
-    def from_version_spec_string(cls, version_spec_string):
-        """
-        Return a VersionSpecifier built from a version spec string, prefixed by
-        a scheme such as "semver:1.2.3,>=2.0.0"
-        """
-        scheme, _, version_range_expressions = version_spec_string.partition(":")
-        if not scheme:
-            raise ValueError(f"{version_spec_string} is not prefixed by scheme")
-
-        if not version_range_expressions:
-            raise ValueError(f"{version_spec_string} contains no version range")
-
-        return from_scheme_version_spec_string(scheme, version_range_expressions)
-
-    @classmethod
-    def from_scheme_version_spec_string(cls, scheme, value):
-        """
-        Return a VersionSpecifier built from a scheme-specific version spec string and a scheme string.
-        """
-
-        # TODO: Handle wildcards, carets, tilde here. Convert them into something sane
-        value = remove_spaces(value)
-        version_ranges = value.split(",")
-        ranges = []
-        for version_range in version_ranges:
-            _, operator, value = VersionRange.partition_operator(version_range)
-            version_class = versions_classes_by_scheme[scheme]
-            version_class.validate(value)
-            ranges.append(VersionRange(version_range))
-
-        vs = cls()
-        vs.ranges = ranges
-        vs.scheme = scheme
-        return vs
-
-    def __str__(self):
-        """
-        Return this VersionSpecifier string using a canonical representation and our universal syntax.
-        """
-        # TODO: sort to make canonic
-        ranges = ",".join(self.ranges)
-
-        return f"{self.scheme}:{ranges}"
-
-    def __contains__(self, version):
-        """
-        Return True if this VersionSpecifier contains the ``version``
-        Version object or scheme-prefixed version string. A version is contained
-        in a VersionSpecifier if it satisfies all its Range.
-        """
-        if isinstance(version, str):
-            version = parse_version(version)
-
-        return all([version in version_range for version_range in self.ranges])
