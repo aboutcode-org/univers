@@ -21,7 +21,7 @@ import unittest
 
 class BaseTests(unittest.TestCase):
     def test_codestyle(self):
-        args = "black --check -l 100 ."
+        args = "python -m black --check -l 100 ."
         try:
             subprocess.check_output(args.split())
         except Exception as e:

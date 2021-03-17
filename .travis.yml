@@ -15,7 +15,7 @@ python:
   - "3.8"
 
 # Scripts to run at install stage
-install: pip install -e .
+install: pip install -r requirements.txt
 
 # Scripts to run at script stage
 script: pytest
