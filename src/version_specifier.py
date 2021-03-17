@@ -18,7 +18,6 @@
 from utils import remove_spaces
 from version_range import VersionRange
 from versions import parse_version
-from versions import version_class_by_scheme
 
 
 class VersionSpecifier:
@@ -52,11 +51,8 @@ class VersionSpecifier:
         version_ranges = value.split(",")
         ranges = []
         for version_range in version_ranges:
-
-            _, operator, value = VersionRange.split(version_range)
-            version_class = version_class_by_scheme[scheme]
-            version_class.validate(value)
-            ranges.append(VersionRange(version_range))
+            range = VersionRange(version_range, scheme)
+            ranges.append(range)
 
         vs = cls()
         vs.ranges = ranges

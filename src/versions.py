@@ -18,7 +18,9 @@
 import operator
 import re
 from functools import total_ordering
-from packaging import version
+from packaging import version as pypi_version
+from semver import version as semver_version
+import semver
 
 
 class BaseVersion:
@@ -39,16 +41,16 @@ class PYPIVersion(BaseVersion):
     scheme = "pypi"
 
     def __init__(self, version_string):
-        # TODO the `Version` class's constructor also does the same validation
-        # but it has a fallback option by creating an object of version.LegacyVersion class.
+        # TODO the `pypi_version.Version` class's constructor also does the same validation
+        # but it has a fallback option by creating an object of pypi_version.LegacyVersion class.
         # Avoid the double validation and the fallback.
 
         self.validate(version_string)
-        self.value = version.Version(version_string)
+        self.value = pypi_version.Version(version_string)
 
     @staticmethod
     def validate(version_string):
-        match = version.Version._regex.search(version_string)
+        match = pypi_version.Version._regex.search(version_string)
         if not match:
             raise InvalidVersion(f"Invalid version: '{version_string}'")
 
@@ -87,14 +89,26 @@ class DebianVersion:
         # debian implementation ...
 
 
+@total_ordering
 class SemverVersion:
     scheme = "semver"
 
-    def validate(self):
-        """
-        Validate that the version is valid for its scheme
-        """
-        # node-semver implementation ...
+    def __init__(self, version_string):
+        self.validate(version_string)
+        self.value = semver_version.Version.parse(version_string)
+
+    @staticmethod
+    def validate(version_string):
+        match = semver_version.Version._REGEX.search(version_string)
+        if not match:
+            raise InvalidVersion(f"Invalid version: '{version_string}'")
+
+    def __eq__(self, other):
+        # TBD: Should this verify the type of `other`
+        return self.value.__eq__(other.value)
+
+    def __lt__(self, other):
+        return self.value.__lt__(other.value)
 
 
 version_class_by_scheme = {

@@ -30,10 +30,16 @@ class VersionRange:
     def __init__(self, version_range_string, scheme):
         version_range_string = remove_spaces(version_range_string)
         self.operator, self.version = self.split(version_range_string)
+
         validate_scheme(scheme)
         self.validate()
+
         version_class = version_class_by_scheme[scheme]
-        self.version = version_class(self.version)
+
+        if scheme == "semver":
+            self.version = version_class(self.version)
+        else:
+            self.version = version_class(self.version)
 
     def validate(self):
         # self.operator will always have a valid value
