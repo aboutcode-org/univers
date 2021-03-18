@@ -17,9 +17,9 @@
 
 import operator as operator_module
 
-from utils import remove_spaces
-from versions import version_class_by_scheme
-from versions import validate_scheme
+from universal_versions.utils import remove_spaces
+from universal_versions.versions import version_class_by_scheme
+from universal_versions.versions import validate_scheme
 
 
 class VersionRange:
@@ -64,7 +64,7 @@ class VersionRange:
 
         if version.__class__ != self.version.__class__:
             raise ValueError(
-                f"Can't compare {version.__class__} instance with {self.version.__class__()} instance"
+                f"Can't compare {version.__class__} instance with {self.version.__class__} instance"
             )
 
         operators = {

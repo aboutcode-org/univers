@@ -15,9 +15,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from utils import remove_spaces
-from version_range import VersionRange
-from versions import parse_version
+from universal_versions.utils import remove_spaces
+from universal_versions.version_range import VersionRange
+from universal_versions.versions import parse_version
 
 
 class VersionSpecifier:

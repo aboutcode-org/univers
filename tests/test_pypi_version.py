@@ -19,7 +19,7 @@
 from unittest import TestCase
 from packaging import version
 
-import versions
+from universal_versions import versions
 
 
 class TestPYPIVersion(TestCase):
