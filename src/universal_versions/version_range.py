@@ -79,4 +79,4 @@ class VersionRange:
         return operator(version, self.version)
 
     def __str__(self):
-        return f"{self.operator}{self.value}"
+        return f"{self.operator}{self.version}"

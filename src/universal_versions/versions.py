@@ -33,6 +33,9 @@ class BaseVersion:
         """
         raise NotImplementedError
 
+    def __str__(self):
+        return f"{self.scheme}:{self.value}"
+
 
 @total_ordering
 class PYPIVersion(BaseVersion):

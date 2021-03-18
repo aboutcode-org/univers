@@ -38,7 +38,7 @@ class VersionSpecifier:
         if not version_range_expressions:
             raise ValueError(f"{version_spec_string} contains no version range")
 
-        return cls.from_scheme_version_spec_string(cls, scheme, version_range_expressions)
+        return cls.from_scheme_version_spec_string(scheme, version_range_expressions)
 
     @classmethod
     def from_scheme_version_spec_string(cls, scheme, value):
