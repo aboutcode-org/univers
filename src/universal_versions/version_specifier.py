@@ -15,9 +15,47 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
+from semver import Version
+
 from universal_versions.utils import remove_spaces
 from universal_versions.version_range import VersionRange
 from universal_versions.versions import parse_version
+
+
+def find_pessimistic_upper_bound(version_string):
+    version_obj = Version.parse(version_string)
+    version_tuple = version_obj.to_tuple()
+    index_method = {
+        0: version_obj.bump_build,
+        1: version_obj.bump_minor,
+        2: version_obj.bump_patch,
+        3: version_obj.bump_prerelease,
+    }
+    for index, value in enumerate(version_tuple):
+        if index > 3:
+            raise ValueError(
+                f"No pessismistic upper bound exists for the provided version {version_string}"
+            )
+
+        if not version_tuple[index + 2]:
+            upper_bound_version_object = index_method[index]()
+            return upper_bound_version_object.__str__()
+
+
+def normalized_pessimistic_ranges(pessimistic_version_range_string):
+    remove_spaces(pessimistic_version_range_string)
+    try:
+        _, version = pessimistic_version_range_string.split("~>")
+    except ValueError:
+        raise ValueError(
+            f"The version range string {pessimistic_version_range_string} is not valid"
+        )
+
+    lower_bound = version
+    upper_bound = find_pessimistic_upper_bound(version)
+
+    return VersionRange(f">={lower_bound}", "semver"), VersionRange(f"<{upper_bound}", "semver")
 
 
 class VersionSpecifier:
@@ -51,6 +89,11 @@ class VersionSpecifier:
         version_ranges = value.split(",")
         ranges = []
         for version_range in version_ranges:
+            if scheme == "semver":
+                if "~>" in version_range:
+                    ranges.extend(normalized_pessimistic_ranges(version_range))
+                    continue
+
             range = VersionRange(version_range, scheme)
             ranges.append(range)
 

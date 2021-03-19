@@ -21,6 +21,10 @@ from packaging import version as pypi_version
 from semver import version as semver_version
 
 
+class InvalidVersion(ValueError):
+    pass
+
+
 class BaseVersion:
     # each version value should be comparable e.g. implement functools.total_ordering
 
@@ -61,10 +65,6 @@ class PYPIVersion(BaseVersion):
 
     def __lt__(self, other):
         return self.value.__lt__(other.value)
-
-
-class InvalidVersion(ValueError):
-    pass
 
 
 class GenericVersion:

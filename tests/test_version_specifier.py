@@ -28,3 +28,10 @@ class TestVersionSpecifier(TestCase):
 
         assert len(version_spec.ranges) == 7
         assert all(["pypi" == vrange.version.scheme for vrange in version_spec.ranges])
+
+    def test_resolving_pessimsitic_operator(self):
+        version_range_string = "~>2.0.8"
+        version_spec = VersionSpecifier.from_scheme_version_spec_string(
+            "semver", version_range_string
+        )
+        assert len(version_spec.ranges) == 2
