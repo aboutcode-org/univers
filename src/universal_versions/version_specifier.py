@@ -24,6 +24,14 @@ from universal_versions.versions import parse_version
 
 
 def find_pessimistic_upper_bound(version_string):
+    """
+    Helper which returns the version which is pessimistically greater than provided
+    'version_string'.
+
+    Example:
+    >>find_pessimistic_upper_bound('2.0.8')
+    2.1.0
+    """
     version_obj = Version.parse(version_string)
     version_tuple = version_obj.to_tuple()
     index_method = {
@@ -44,6 +52,13 @@ def find_pessimistic_upper_bound(version_string):
 
 
 def normalized_pessimistic_ranges(pessimistic_version_range_string):
+    """
+    Helper which returns VersionRange objects from a string which contains ranges which use
+    a pessimistic operator. The scheme is 'semver' since only ruby style semver supports
+    this operator.
+
+    Example:- '~>2.0.8' will get resolved into VersionRange objects of '>=2.0.8' and '<2.1.0'
+    """
     remove_spaces(pessimistic_version_range_string)
     try:
         _, version = pessimistic_version_range_string.split("~>")
