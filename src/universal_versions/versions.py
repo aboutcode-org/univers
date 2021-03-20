@@ -18,7 +18,10 @@
 from functools import total_ordering
 from packaging import version as pypi_version
 
+from pymaven import Version as _MavenVersion
 from semver import version as semver_version
+
+from universal_versions.utils import remove_spaces
 
 
 class InvalidVersion(ValueError):
@@ -332,11 +335,49 @@ class SemverVersion(BaseVersion):
         return self.value.__lt__(other.value)
 
 
+@total_ordering
+class MavenVersion(BaseVersion):
+    scheme = "maven"
+
+    def __init__(self, version_string):
+        version_string = remove_spaces(version_string)
+        self.value = _MavenVersion(version_string)
+
+    @staticmethod
+    def validate(version_string):
+        # Defined for compatibility
+        pass
+
+    def __eq__(self, other):
+        return self.value.__eq__(other.value)
+
+    def __lt__(self, other):
+        return self.value.__lt__(other.value)
+
+
+class NugetVersion(MavenVersion):
+    scheme = "nuget"
+    pass
+
+
 version_class_by_scheme = {
     "generic": GenericVersion,
     "semver": SemverVersion,
     "debian": DebianVersion,
     "pypi": PYPIVersion,
+    "maven": MavenVersion,
+    "nuget": NugetVersion,
+}
+
+version_class_by_package_type = {
+    "generic": GenericVersion,
+    "deb": DebianVersion,
+    "pypi": PYPIVersion,
+    "maven": MavenVersion,
+    "nuget": NugetVersion,
+    "composer": SemverVersion,
+    "npm": SemverVersion,
+    "gem": SemverVersion,
 }
 
 

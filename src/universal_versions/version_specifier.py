@@ -59,7 +59,7 @@ def normalized_pessimistic_ranges(pessimistic_version_range_string):
 
     Example:- '~>2.0.8' will get resolved into VersionRange objects of '>=2.0.8' and '<2.1.0'
     """
-    remove_spaces(pessimistic_version_range_string)
+    pessimistic_version_range_string = remove_spaces(pessimistic_version_range_string)
     try:
         _, version = pessimistic_version_range_string.split("~>")
     except ValueError:
