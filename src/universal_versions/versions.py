@@ -18,8 +18,8 @@
 from functools import total_ordering
 from packaging import version as pypi_version
 
+import semantic_version
 from pymaven import Version as _MavenVersion
-from semver import version as semver_version
 
 from universal_versions.utils import remove_spaces
 
@@ -319,13 +319,14 @@ class SemverVersion(BaseVersion):
 
     def __init__(self, version_string):
         self.validate(version_string)
-        self.value = semver_version.Version.parse(version_string)
+        self.value = semantic_version.Version(version_string)
 
     @staticmethod
     def validate(version_string):
-        match = semver_version.Version._REGEX.search(version_string)
-        if not match:
-            raise InvalidVersion(f"Invalid version: '{version_string}'")
+        try:
+            semantic_version.validate(version_string)
+        except ValueError:
+            raise ValueError(f"Invalid version {version_string}")
 
     def __eq__(self, other):
         # TBD: Should this verify the type of `other`

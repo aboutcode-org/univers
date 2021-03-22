@@ -16,39 +16,40 @@
 # limitations under the License.
 
 
-from semver import Version
+# from semver import Version
+from semantic_version import Version
 
 from universal_versions.utils import remove_spaces
 from universal_versions.version_range import VersionRange
 from universal_versions.versions import parse_version
 
 
-def find_pessimistic_upper_bound(version_string):
-    """
-    Helper which returns the version which is pessimistically greater than provided
-    'version_string'.
+# def find_pessimistic_upper_bound(version_string):
+#     """
+#     Helper which returns the version which is pessimistically greater than provided
+#     'version_string'.
 
-    Example:
-    >>find_pessimistic_upper_bound('2.0.8')
-    2.1.0
-    """
-    version_obj = Version.parse(version_string)
-    version_tuple = version_obj.to_tuple()
-    index_method = {
-        0: version_obj.bump_build,
-        1: version_obj.bump_minor,
-        2: version_obj.bump_patch,
-        3: version_obj.bump_prerelease,
-    }
-    for index, value in enumerate(version_tuple):
-        if index > 3:
-            raise ValueError(
-                f"No pessismistic upper bound exists for the provided version {version_string}"
-            )
+#     Example:
+#     >>find_pessimistic_upper_bound('2.0.8')
+#     2.1.0
+#     """
+#     version_obj = Version.parse(version_string)
+#     version_tuple = version_obj.to_tuple()
+#     index_method = {
+#         0: version_obj.bump_build,
+#         1: version_obj.bump_minor,
+#         2: version_obj.bump_patch,
+#         3: version_obj.bump_prerelease,
+#     }
+#     for index, value in enumerate(version_tuple):
+#         if index > 3:
+#             raise ValueError(
+#                 f"No pessismistic upper bound exists for the provided version {version_string}"
+#             )
 
-        if not version_tuple[index + 2]:
-            upper_bound_version_object = index_method[index]()
-            return upper_bound_version_object.__str__()
+#         if not version_tuple[index + 2]:
+#             upper_bound_version_object = index_method[index]()
+#             return upper_bound_version_object.__str__()
 
 
 def normalized_pessimistic_ranges(pessimistic_version_range_string):
@@ -68,7 +69,7 @@ def normalized_pessimistic_ranges(pessimistic_version_range_string):
         )
 
     lower_bound = version
-    upper_bound = find_pessimistic_upper_bound(version)
+    upper_bound = Version(version).next_minor().__str__()
 
     return VersionRange(f">={lower_bound}", "semver"), VersionRange(f"<{upper_bound}", "semver")
 

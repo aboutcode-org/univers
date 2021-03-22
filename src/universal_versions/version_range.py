@@ -36,10 +36,7 @@ class VersionRange:
 
         version_class = version_class_by_scheme[scheme]
 
-        if scheme == "semver":
-            self.version = version_class(self.version)
-        else:
-            self.version = version_class(self.version)
+        self.version = version_class(self.version)
 
     def validate(self):
         # self.operator will always have a valid value

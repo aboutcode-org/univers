@@ -59,7 +59,7 @@ def test_pypi_comparision(version, spec, result):
         ("0.2.9", "<=2.0.0", True),
         ("1.9999.9999", "<2.0.0", True),
         ("0.1.1-alpha", ">=0.1.1-beta", False),
-        ("1.0.0+20130313144700", "=1.0.0+9999999999", True),  # Build data is ignored
+        ("1.0.0+20130313144700", "=1.0.0+9999999999", False),
     ],
 )
 def test_semver_comparision(version, spec, result):
