@@ -1,0 +1,16 @@
+about_resource: version.py
+package_url: pkg:pypi/deb-pkg-tools@8.4
+copyright: |
+    Copyright (C) The Climate Corporation (https://climate.com)
+    Copyright (C) Peter Odding <peter@peterodding.com>
+
+notes: This has been substantially modified and enhanced from the original python-dpkg
+ to extract the version comparison codeoriginall in the Dpkg class.
+
+license_expression: apache-2.0 AND mit
+homepage_url: https://github.com/xolox/python-deb-pkg-tools
+license_text_file: version.py.LICENSE
+notes: |
+  based on https://raw.githubusercontent.com/xolox/python-deb-pkg-tools/a3d6ef1d82c6342b6a57876fc2360875e033f8f0/deb_pkg_tools/version/native.py
+  and on https://raw.githubusercontent.com/xolox/python-deb-pkg-tools/a3d6ef1d82c6342b6a57876fc2360875e033f8f0/deb_pkg_tools/version/__init__.py
+  merged and simplified in a single module. Also mixed in with code from https://github.com/TheClimateCorporation/python-dpkg/blob/45721a447c6b5fd638db50e685d1b8380aac7d66/pydpkg/__init__.py

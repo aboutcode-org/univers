@@ -4,7 +4,7 @@
 # original author: Nathan J. Meh
 
 # Copyright (c) nexB Inc. and others.
-# http://nexb.com and https://github.com/nexB/debut/
+# http://nexb.com and https://github.com/nexB/debian_inspector/
 
 # SPDX-License-Identifier: Apache-2.0
 
@@ -13,10 +13,10 @@ from __future__ import unicode_literals
 
 from unittest import TestCase
 
-from debut import version
-from debut.version import compare_strings
-from debut.version import compare_versions
-from debut.version import Version
+from debian_inspector import version
+from debian_inspector.version import compare_strings
+from debian_inspector.version import compare_versions
+from debian_inspector.version import Version
 
 """
 Parse, compare and sort Debian package versions.

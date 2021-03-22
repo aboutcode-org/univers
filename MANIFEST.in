@@ -16,6 +16,6 @@ include requirements-tests.txt
 include setup.cfg
 include setup.py
 
-prune src/debut.egg-info
+prune src/debian_inspector.egg-info
 
 global-exclude *.py[co] __pycache__ *.*~
