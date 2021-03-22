@@ -8,9 +8,6 @@
 # https://github.com/TheClimateCorporation/python-dpkg
 # SPDX-License-Identifier: Apache-2.0 AND MIT
 
-from __future__ import absolute_import
-from __future__ import unicode_literals
-
 import logging
 import operator as operator_module
 import re

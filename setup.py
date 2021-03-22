@@ -58,5 +58,11 @@ setup(
     install_requires=[
         'chardet >= 3.0.0',
         'attrs >=19.2',
-    ]
+    ],
+    extras_require={
+        'dev': [
+            'pytest',
+            'commoncode',
+        ]
+    }
 )
