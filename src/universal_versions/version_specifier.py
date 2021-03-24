@@ -24,6 +24,29 @@ from universal_versions.version_range import VersionRange
 from universal_versions.versions import parse_version
 
 
+def normalized_caret_ranges(caret_version_range_string):
+    """
+    Helper which returns VersionRange objects from a string which contains ranges which use
+    the caret operator. The scheme is 'semver'.
+
+    Example:-
+    >>> lower_bound, upper_bound = normalized_caret_ranges("^1.0.2")
+    >>> expected_lower_bound = VersionRange(">=1.0.2", "semver")
+    >>> expected_upper_bound = VersionRange("<2.0.0", "semver")
+    >>> assert lower_bound == expected_lower_bound
+    >>> assert upper_bound == expected_upper_bound
+    """
+    caret_version_range_string = remove_spaces(caret_version_range_string)
+    try:
+        _, version = caret_version_range_string.split("^")
+    except ValueError:
+        raise ValueError(f"The version range string {caret_version_range_string} is not valid.")
+    lower_bound = version
+    upper_bound = Version.coerce(version).next_major().__str__()
+
+    return VersionRange(f">={lower_bound}", "semver"), VersionRange(f"<{upper_bound}", "semver")
+
+
 def normalized_tilde_ranges(tilde_version_range_string):
     """
     Helper which returns VersionRange objects from a string which contains ranges which use
@@ -42,7 +65,7 @@ def normalized_tilde_ranges(tilde_version_range_string):
     except ValueError:
         raise ValueError(f"The version range string {tilde_version_range_string} is not valid.")
     lower_bound = version
-    upper_bound = Version(version).next_minor().__str__()
+    upper_bound = Version.coerce(version).next_minor().__str__()
 
     return VersionRange(f">={lower_bound}", "semver"), VersionRange(f"<{upper_bound}", "semver")
 
@@ -106,6 +129,10 @@ class VersionSpecifier:
                     continue
 
                 if "~" in version_range:
+                    ranges.extend(normalized_tilde_ranges(version_range))
+                    continue
+
+                if "^" in version_range:
                     ranges.extend(normalized_tilde_ranges(version_range))
                     continue
 
