@@ -318,15 +318,16 @@ class SemverVersion(BaseVersion):
     scheme = "semver"
 
     def __init__(self, version_string):
-        self.validate(version_string)
+        # self.validate(version_string)
         self.value = semantic_version.Version(version_string)
 
     @staticmethod
     def validate(version_string):
-        try:
-            semantic_version.validate(version_string)
-        except ValueError:
-            raise ValueError(f"Invalid version {version_string}")
+        pass
+        # try:
+        #     semantic_version.validate(version_string)
+        # except ValueError:
+        #     raise ValueError(f"Invalid version {version_string}")
 
     def __eq__(self, other):
         # TBD: Should this verify the type of `other`
