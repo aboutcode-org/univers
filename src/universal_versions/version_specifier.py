@@ -133,7 +133,7 @@ class VersionSpecifier:
                     continue
 
                 if "^" in version_range:
-                    ranges.extend(normalized_tilde_ranges(version_range))
+                    ranges.extend(normalized_caret_ranges(version_range))
                     continue
 
             rng = VersionRange(version_range, scheme)
