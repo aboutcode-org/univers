@@ -319,6 +319,7 @@ class SemverVersion(BaseVersion):
 
     def __init__(self, version_string):
         # self.validate(version_string)
+        version_string = version_string.lstrip("v")
         self.value = semantic_version.Version(version_string)
 
     @staticmethod
