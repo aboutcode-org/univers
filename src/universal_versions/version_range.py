@@ -31,8 +31,11 @@ class VersionRange:
         version_range_string = remove_spaces(version_range_string)
         self.operator, self.version = self.split(version_range_string)
 
-        validate_scheme(scheme)
-        self.validate()
+        try:
+            validate_scheme(scheme)
+            self.validate()
+        except:
+            raise ValueError(f"Version range{version_range_string} has no bounds")
 
         version_class = version_class_by_scheme[scheme]
 
@@ -41,7 +44,7 @@ class VersionRange:
     def validate(self):
         # self.operator will always have a valid value
         if not self.version:
-            raise ValueError("Version range has no bounds")
+            raise ValueError()
 
     @staticmethod
     def split(version_range):
