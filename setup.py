@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 
-from __future__ import absolute_import
-from __future__ import print_function
-
 from glob import glob
 import io
 from os.path import basename
@@ -26,7 +23,7 @@ def read(*names, **kwargs):
 
 setup(
     name='debian_inspector',
-    version='0.9.9',
+    version='0.9.10',
     license='Apache-2.0 AND BSD-3-Clause AND MIT',
     description='Utilities to parse Debian package, copyright and control files.',
     long_description=read('README.rst'),
