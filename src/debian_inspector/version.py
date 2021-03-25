@@ -1,12 +1,10 @@
 #
 # Copyright (c) nexB Inc. and others.
 # http://nexb.com and https://github.com/nexB/debian_inspector/
-# Copyright (c) The Climate Corporation (https://climate.com)
 # Copyright (c) Peter Odding
 # Author: Peter Odding <peter@peterodding.com>
 # URL: https://github.com/xolox/python-deb-pkg-tools
-# https://github.com/TheClimateCorporation/python-dpkg
-# SPDX-License-Identifier: Apache-2.0 AND MIT
+# SPDX-License-Identifier: MIT
 
 import logging
 import operator as operator_module

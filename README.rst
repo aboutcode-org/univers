@@ -16,7 +16,8 @@ code with code from other origins:
 
 * python-deb-pkg-tools from @xolox for its handling of Debian packages and the
   parsing of versions, dependencies and other package-to-package relationship
-  fields. See https://github.com/xolox/python-deb-pkg-tools
+  fields and for its ability to process the syntax of Debian versions and
+  compare them. See https://github.com/xolox/python-deb-pkg-tools
 
 * dlt (Debian license tools) from @agustinhenze for its check of the coverage of
   a license file Files sections and a lot of inspiration. See
