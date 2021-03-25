@@ -87,7 +87,7 @@ def normalized_pessimistic_ranges(pessimistic_version_range_string):
         )
 
     lower_bound = version
-    upper_bound = Version(version).next_minor().__str__()
+    upper_bound = Version.coerce(version).next_minor().__str__()
 
     return VersionRange(f">={lower_bound}", "semver"), VersionRange(f"<{upper_bound}", "semver")
 
