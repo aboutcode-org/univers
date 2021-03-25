@@ -163,3 +163,6 @@ class VersionSpecifier:
             version = parse_version(version)
 
         return all([version in version_range for version_range in self.ranges])
+
+    def __eq__(self, other):
+        return (self.ranges, self.scheme) == (other.ranges, other.scheme)
