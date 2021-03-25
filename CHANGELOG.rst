@@ -1,6 +1,14 @@
 Release notes
 -------------
 
+### Version 0.9.10
+
+*2021-03-25* 
+-- Rename module to debian_inspector
+-- Add compat debut module, marked as deprecated
+-- Drop support for Python 2
+-- Fix version parsing bugs using all new code from @xolox
+
 
 ### Version 0.9.9 
 
