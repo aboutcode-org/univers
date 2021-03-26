@@ -319,16 +319,13 @@ class SemverVersion(BaseVersion):
 
     def __init__(self, version_string):
         # self.validate(version_string)
+        version_string = version_string.lower()
         version_string = version_string.lstrip("v")
         self.value = semantic_version.Version.coerce(version_string)
 
     @staticmethod
     def validate(version_string):
         pass
-        # try:
-        #     semantic_version.validate(version_string)
-        # except ValueError:
-        #     raise ValueError(f"Invalid version {version_string}")
 
     def __eq__(self, other):
         # TBD: Should this verify the type of `other`
@@ -362,6 +359,8 @@ class NugetVersion(MavenVersion):
     scheme = "nuget"
     pass
 
+
+# TODO : Should these be upper case global constants ?
 
 version_class_by_scheme = {
     "generic": GenericVersion,
