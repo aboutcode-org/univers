@@ -354,8 +354,8 @@ class MavenVersion(BaseVersion):
     def __lt__(self, other):
         return self.value.__lt__(other.value)
 
-
-class NugetVersion(MavenVersion):
+# See https://docs.microsoft.com/en-us/nuget/concepts/package-versioning
+class NugetVersion(SemverVersion):
     scheme = "nuget"
     pass
 
