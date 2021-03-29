@@ -22,6 +22,7 @@ import semantic_version
 from pymaven import Version as _MavenVersion
 
 from universal_versions.utils import remove_spaces
+from universal_versions.debian_version.version import Version as _DebianVersion
 
 
 class InvalidVersion(ValueError):
@@ -105,8 +106,23 @@ class SemverVersion(BaseVersion):
         return self.value.__lt__(other.value)
 
 
+@total_ordering
 class DebianVersion(BaseVersion):
-    pass
+    scheme = "debian"
+
+    def __init__(self,  version_string):
+        version_string = remove_spaces(version_string)
+        self.value = _DebianVersion.from_string(version_string)
+
+    @staticmethod
+    def validate(version_string):
+        pass
+
+    def __eq__(self, other):
+        return self.value.__eq__(other.value)
+    
+    def __lt__(self, other):
+        return self.value.__lt__(other.value)
 
 
 @total_ordering
