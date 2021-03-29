@@ -54,14 +54,7 @@ Some examples:
 """
 
 
-@attrs(
-    eq=False,
-    order=False,
-    frozen=True,
-    hash=False,
-    slots=True,
-    str=False
-)
+@attrs(eq=False, order=False, frozen=True, hash=False, slots=True, str=False)
 class Version(object):
     """
     Rich comparison of Debian package versions as first-class Python objects.
@@ -80,18 +73,19 @@ class Version(object):
     demonstrate that this version sorting order is different from regular
     sorting and 'natural order sorting'.
     """
+
     epoch = attrib(default=0)
     upstream = attrib(default=None)
-    revision = attrib(default='0')
+    revision = attrib(default="0")
 
     def __str__(self, *args, **kwargs):
         if self.epoch:
-            version = f'{self.epoch}:{self.upstream}'
+            version = f"{self.epoch}:{self.upstream}"
         else:
-            version = f'{self.upstream}'
+            version = f"{self.upstream}"
 
-        if self.revision not in (None, '0'):
-            version += f'-{self.revision}'
+        if self.revision not in (None, "0"):
+            version += f"-{self.revision}"
 
         return version
 
@@ -109,45 +103,45 @@ class Version(object):
 
     def __lt__(self, other):
         if type(self) is type(other):
-            return eval_constraint(self, '<<', other)
+            return eval_constraint(self, "<<", other)
         return NotImplemented
 
     def __le__(self, other):
         if type(self) is type(other):
-            return eval_constraint(self, '<=', other)
+            return eval_constraint(self, "<=", other)
         return NotImplemented
 
     def __gt__(self, other):
         if type(self) is type(other):
-            return eval_constraint(self, '>>', other)
+            return eval_constraint(self, ">>", other)
         return NotImplemented
 
     def __ge__(self, other):
         if type(self) is type(other):
-            return eval_constraint(self, '>=', other)
+            return eval_constraint(self, ">=", other)
         return NotImplemented
 
     @classmethod
     def from_string(cls, version):
-        if not version and not isinstance(version , str):
+        if not version and not isinstance(version, str):
             raise ValueError('Invalid version string: "{}"'.format(version))
         version = version.strip()
         if not version:
             raise ValueError('Invalid version string: "{}"'.format(version))
-        if not  _is_valid_version(version):
+        if not _is_valid_version(version):
             raise ValueError('Invalid version string: "{}"'.format(version))
 
         if ":" in version:
-            epoch, _, version = version.partition(':')
+            epoch, _, version = version.partition(":")
             epoch = int(epoch)
         else:
             epoch = 0
 
         if "-" in version:
-            upstream, _, revision = version.rpartition('-')
+            upstream, _, revision = version.rpartition("-")
         else:
             upstream = version
-            revision = '0'
+            revision = "0"
         return cls(epoch=epoch, upstream=upstream, revision=revision)
 
     def compare(self, other_version):
@@ -161,22 +155,23 @@ class Version(object):
 
 
 _is_valid_version = re.compile(
-    r'^'
+    r"^"
     # epoch must start with a digit
-    r'(\d+:)?'
+    r"(\d+:)?"
     # upstream must start with a digit
-    r'\d'
-    r'('
-      # upstream  can contain only alphanumerics and the characters . + -
-      # ~ (full stop, plus, hyphen, tilde)
-      # we are adding the extra check that it must end with alphanum
-      r'[A-Za-z0-9\.\+\-\~]*[A-Za-z0-9]'
-    r'|'
-      # If there is no debian_revision then hyphens are not allowed.
-      # we are adding the extra check that it must end with alphanum
-      r'[A-Za-z0-9\.\+\~]*[A-Za-z0-9]-[A-Za-z0-9\+\.\~]*[A-Za-z0-9]'
-    r')?'
-    r'$').match
+    r"\d"
+    r"("
+    # upstream  can contain only alphanumerics and the characters . + -
+    # ~ (full stop, plus, hyphen, tilde)
+    # we are adding the extra check that it must end with alphanum
+    r"[A-Za-z0-9\.\+\-\~]*[A-Za-z0-9]"
+    r"|"
+    # If there is no debian_revision then hyphens are not allowed.
+    # we are adding the extra check that it must end with alphanum
+    r"[A-Za-z0-9\.\+\~]*[A-Za-z0-9]-[A-Za-z0-9\+\.\~]*[A-Za-z0-9]"
+    r")?"
+    r"$"
+).match
 
 
 def eval_constraint(version1, operator, version2):
@@ -192,24 +187,21 @@ def eval_constraint(version1, operator, version2):
     result = compare_versions(version1, version2)
     # See https://www.debian.org/doc/debian-policy/ch-relationships.html#syntax-of-relationship-fields
     operators = {
-        '<=': operator_module.le,
+        "<=": operator_module.le,
         # legacy for compat
-        '<': operator_module.le,
-
-        '>=': operator_module.ge,
+        "<": operator_module.le,
+        ">=": operator_module.ge,
         # legacy for compat
-        '>': operator_module.ge,
-
-        '<<': operator_module.lt,
-        '>>': operator_module.gt,
-
-        '=': operator_module.eq,
+        ">": operator_module.ge,
+        "<<": operator_module.lt,
+        ">>": operator_module.gt,
+        "=": operator_module.eq,
     }
 
     try:
         operator = operators[operator]
     except KeyError:
-        msg = f'Unsupported Debian version constraint comparison operator: {version1} {operator} {version2}'
+        msg = f"Unsupported Debian version constraint comparison operator: {version1} {operator} {version2}"
         raise ValueError(msg)
     return operator(result, 0)
 
@@ -253,14 +245,24 @@ def compare_strings(version1, version2):
         if p1 != p2:
             logger.debug("Comparing non-digit prefixes %r and %r ..", p1, p2)
             for c1, c2 in zip_longest(p1, p2, fillvalue=""):
-                logger.debug("Performing lexical comparison between characters %r and %r ..", c1, c2)
+                logger.debug(
+                    "Performing lexical comparison between characters %r and %r ..", c1, c2
+                )
                 o1 = mapping.get(c1)
                 o2 = mapping.get(c2)
                 if o1 < o2:
-                    logger.debug("Determined that %r sorts before %r (based on lexical comparison).", version1, version2)
+                    logger.debug(
+                        "Determined that %r sorts before %r (based on lexical comparison).",
+                        version1,
+                        version2,
+                    )
                     return -1
                 elif o1 > o2:
-                    logger.debug("Determined that %r sorts after %r (based on lexical comparison).", version1, version2)
+                    logger.debug(
+                        "Determined that %r sorts after %r (based on lexical comparison).",
+                        version1,
+                        version2,
+                    )
                     return 1
         elif p1:
             logger.debug("Skipping matching non-digit prefix %r ..", p1)
@@ -274,10 +276,18 @@ def compare_strings(version1, version2):
         d2 = get_digit_prefix(v2)
         logger.debug("Comparing numeric prefixes %i and %i ..", d1, d2)
         if d1 < d2:
-            logger.debug("Determined that %r sorts before %r (based on numeric comparison).", version1, version2)
+            logger.debug(
+                "Determined that %r sorts before %r (based on numeric comparison).",
+                version1,
+                version2,
+            )
             return -1
         elif d1 > d2:
-            logger.debug("Determined that %r sorts after %r (based on numeric comparison).", version1, version2)
+            logger.debug(
+                "Determined that %r sorts after %r (based on numeric comparison).",
+                version1,
+                version2,
+            )
             return 1
         else:
             logger.debug("Determined that numeric prefixes match.")
@@ -355,64 +365,64 @@ def get_non_digit_prefix(characters):
 # a mapping of characters to integers representing the Debian sort order.
 characters_order = {
     # The tilde sorts before everything.
-    '~': 0,
+    "~": 0,
     # The empty string sort before everything except a tilde.
-    '': 1,
+    "": 1,
     # Letters sort before everything but a tilde or empty string, in their regular lexical sort order.
-    'A': 2,
-    'B': 3,
-    'C': 4,
-    'D': 5,
-    'E': 6,
-    'F': 7,
-    'G': 8,
-    'H': 9,
-    'I': 10,
-    'J': 11,
-    'K': 12,
-    'L': 13,
-    'M': 14,
-    'N': 15,
-    'O': 16,
-    'P': 17,
-    'Q': 18,
-    'R': 19,
-    'S': 20,
-    'T': 21,
-    'U': 22,
-    'V': 23,
-    'W': 24,
-    'X': 25,
-    'Y': 26,
-    'Z': 27,
-    'a': 28,
-    'b': 29,
-    'c': 30,
-    'd': 31,
-    'e': 32,
-    'f': 33,
-    'g': 34,
-    'h': 35,
-    'i': 36,
-    'j': 37,
-    'k': 38,
-    'l': 39,
-    'm': 40,
-    'n': 41,
-    'o': 42,
-    'p': 43,
-    'q': 44,
-    'r': 45,
-    's': 46,
-    't': 47,
-    'u': 48,
-    'v': 49,
-    'w': 50,
-    'x': 51,
-    'y': 52,
-    'z': 53,
+    "A": 2,
+    "B": 3,
+    "C": 4,
+    "D": 5,
+    "E": 6,
+    "F": 7,
+    "G": 8,
+    "H": 9,
+    "I": 10,
+    "J": 11,
+    "K": 12,
+    "L": 13,
+    "M": 14,
+    "N": 15,
+    "O": 16,
+    "P": 17,
+    "Q": 18,
+    "R": 19,
+    "S": 20,
+    "T": 21,
+    "U": 22,
+    "V": 23,
+    "W": 24,
+    "X": 25,
+    "Y": 26,
+    "Z": 27,
+    "a": 28,
+    "b": 29,
+    "c": 30,
+    "d": 31,
+    "e": 32,
+    "f": 33,
+    "g": 34,
+    "h": 35,
+    "i": 36,
+    "j": 37,
+    "k": 38,
+    "l": 39,
+    "m": 40,
+    "n": 41,
+    "o": 42,
+    "p": 43,
+    "q": 44,
+    "r": 45,
+    "s": 46,
+    "t": 47,
+    "u": 48,
+    "v": 49,
+    "w": 50,
+    "x": 51,
+    "y": 52,
+    "z": 53,
     # Punctuation characters follow in their regular lexical sort order.
-    '+': 54,
-    '-': 55,
-    '.': 56,
+    "+": 54,
+    "-": 55,
+    ".": 56,
 }

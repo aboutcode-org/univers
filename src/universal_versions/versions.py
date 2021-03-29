@@ -82,6 +82,7 @@ class GenericVersion:
         #  Version is split into separate all-alphabetic or all-numeric components. All other characters are treated as separators. Empty components are not generated.
         #     10.2alpha3..patch.4. → 10, 2, alpha, 3, patch, 4
 
+
 @total_ordering
 class SemverVersion(BaseVersion):
     scheme = "semver"
@@ -107,6 +108,7 @@ class SemverVersion(BaseVersion):
 class DebianVersion(BaseVersion):
     pass
 
+
 @total_ordering
 class MavenVersion(BaseVersion):
     scheme = "maven"
@@ -125,6 +127,7 @@ class MavenVersion(BaseVersion):
 
     def __lt__(self, other):
         return self.value.__lt__(other.value)
+
 
 # See https://docs.microsoft.com/en-us/nuget/concepts/package-versioning
 class NugetVersion(SemverVersion):
