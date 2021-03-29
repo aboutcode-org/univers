@@ -110,7 +110,7 @@ class SemverVersion(BaseVersion):
 class DebianVersion(BaseVersion):
     scheme = "debian"
 
-    def __init__(self,  version_string):
+    def __init__(self, version_string):
         version_string = remove_spaces(version_string)
         self.value = _DebianVersion.from_string(version_string)
 
@@ -120,7 +120,7 @@ class DebianVersion(BaseVersion):
 
     def __eq__(self, other):
         return self.value.__eq__(other.value)
-    
+
     def __lt__(self, other):
         return self.value.__lt__(other.value)
 
