@@ -1,0 +1,8 @@
+about_resource: test_version_python_deb_pkg_tools.py
+name: python-debian
+license_expression: mit
+download_url: https://raw.githubusercontent.com/xolox/python-deb-pkg-tools/a3d6ef1d82c6342b6a57876fc2360875e033f8f0/deb_pkg_tools/tests.py
+copyright: Copyright (C) Peter Odding <peter@peterodding.com>
+package_url: pkg:pypi/deb-pkg-tools@8.4#deb_pkg_tools/tests.py
+notes: this subset of tests has been modified to tests version comparison and parsing
+homepage_url: https://github.com/xolox/python-deb-pkg-tools
