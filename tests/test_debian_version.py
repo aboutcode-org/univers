@@ -10,10 +10,10 @@
 
 from unittest import TestCase
 
-from debian_inspector import version
-from debian_inspector.version import compare_strings
-from debian_inspector.version import compare_versions
-from debian_inspector.version import Version
+from debian_version import debian_version
+from debian_version.debian_version import compare_strings
+from debian_version.debian_version import compare_versions
+from debian_version.debian_version import Version
 
 """
 Parse, compare and sort Debian package versions.
@@ -24,12 +24,12 @@ comparison code.
 
 
 def get_non_digit_prefix(s):
-    val = version.get_non_digit_prefix(list(s))
+    val = debian_version.get_non_digit_prefix(list(s))
     return ''.join(val)
 
 
 def get_digit_prefix(s):
-    return version.get_digit_prefix(list(s))
+    return debian_version.get_digit_prefix(list(s))
 
 
 class DebianVersionTest(TestCase):
@@ -87,13 +87,13 @@ class DebianVersionTest(TestCase):
     def test_compare_strings_can_sort(self):
         # taken from
         # http://www.debian.org/doc/debian-policy/ch-controlfields.html#s-f-Version
-        result = sorted(['a', '', '~', '~~a', '~~'], key=version.compare_strings_key)
+        result = sorted(['a', '', '~', '~~a', '~~'], key=debian_version.compare_strings_key)
         expected = ['~~', '~~a', '~', '', 'a']
         assert expected == result
 
     def test_compare_strings_more(self):
         # note that these are testing a single revision string, not the full
-        # upstream+debian version.  IOW, "0.0.9-foo" is an upstream or debian
+        # upstream+debian debian_version.  IOW, "0.0.9-foo" is an upstream or debian
         # revision onto itself, not an upstream of 0.0.9 and a debian of foo.
 
         # equals
