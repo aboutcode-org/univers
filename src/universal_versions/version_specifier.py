@@ -139,6 +139,8 @@ class VersionSpecifier:
             rng = VersionRange(version_range, scheme)
             ranges.append(rng)
 
+        ranges.sort(key=lambda rng: (rng.operator, rng.version))
+
         vs = cls()
         vs.ranges = ranges
         vs.scheme = scheme
