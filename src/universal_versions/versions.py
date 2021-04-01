@@ -19,10 +19,11 @@ from functools import total_ordering
 from packaging import version as pypi_version
 
 import semantic_version
-from pymaven import Version as _MavenVersion
 
 from universal_versions.utils import remove_spaces
 from universal_versions.debian_version.version import Version as _DebianVersion
+
+# from universal_versions.maven_version.version import Version as _MavenVersion
 
 
 class InvalidVersion(ValueError):
