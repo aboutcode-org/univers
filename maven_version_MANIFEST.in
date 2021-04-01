@@ -1,0 +1,13 @@
+graft docs
+graft pymaven
+graft tests
+
+include AUTHORS.rst
+include CHANGELOG.rst
+include ContributorAgreement.txt
+include LICENSE
+include README.rst
+
+include tox.ini .travis.yml appveyor.yml
+
+global-exclude *.py[cod] __pycache__ *.so *.dylib
