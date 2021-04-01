@@ -25,16 +25,19 @@ import sys
 from six.moves import zip_longest
 import six
 
-from .errors import RestrictionParseError
-from .errors import VersionRangeParseError
+# TODO: Use common exceptions with other modules
+class VersionRangeParseError(ValueError):
+    pass
 
-if sys.version_info > (2,):
-    from .utils import cmp
 
-EXCLUSIVE_CLOSE = ')'
-EXCLUSIVE_OPEN = '('
-INCLUSIVE_CLOSE = ']'
-INCLUSIVE_OPEN = '['
+class RestrictionParseError(ValueError):
+    pass
+
+
+EXCLUSIVE_CLOSE = ")"
+EXCLUSIVE_OPEN = "("
+INCLUSIVE_CLOSE = "]"
+INCLUSIVE_OPEN = "["
 
 # Known qualifiers, oldest to newest
 QUALIFIERS = ["alpha", "beta", "milestone", "rc", "snapshot", "", "sp"]
@@ -51,10 +54,26 @@ def list2tuple(l):
     return tuple(list2tuple(x) if isinstance(x, list) else x for x in l)
 
 
+def cmp(x, y):
+    """
+    Replacement for built-in funciton cmp that was removed in Python 3
+    Compare the two objects x and y and return an integer according to
+    the outcome. The return value is negative if x < y, zero if x == y
+    and strictly positive if x > y.
+    """
+    if x is None and y is None:
+        return 0
+    elif x is None:
+        return -1
+    elif y is None:
+        return 1
+    return (x > y) - (x < y)
+
+
 @functools.total_ordering
 class Restriction(object):
-    """Describes a restriction in versioning
-    """
+    """Describes a restriction in versioning"""
+
     def __init__(self, spec=None):
         """Create a restriction
 
@@ -81,28 +100,24 @@ class Restriction(object):
         if not spec:
             return
 
-        self.lower_bound_inclusive = (spec.strip()[0] == INCLUSIVE_OPEN)
-        self.upper_bound_inclusive = (spec.strip()[-1] == INCLUSIVE_CLOSE)
+        self.lower_bound_inclusive = spec.strip()[0] == INCLUSIVE_OPEN
+        self.upper_bound_inclusive = spec.strip()[-1] == INCLUSIVE_CLOSE
 
         _spec = spec[1:-1].strip()
-        if ',' in _spec:
-            lower_bound, upper_bound = _spec.split(',')
+        if "," in _spec:
+            lower_bound, upper_bound = _spec.split(",")
             if lower_bound and lower_bound == upper_bound:
-                raise RestrictionParseError(
-                    "Range cannot have identical boundaries: %s" % spec)
+                raise RestrictionParseError("Range cannot have identical boundaries: %s" % spec)
 
             self.lower_bound = Version(lower_bound) if lower_bound else None
             self.upper_bound = Version(upper_bound) if upper_bound else None
 
-            if self.lower_bound and self.upper_bound \
-                    and self.upper_bound < self.lower_bound:
-                raise RestrictionParseError(
-                    "Range defies version ordering: %s" % spec)
+            if self.lower_bound and self.upper_bound and self.upper_bound < self.lower_bound:
+                raise RestrictionParseError("Range defies version ordering: %s" % spec)
         else:
             # single version restriction
             if not self.lower_bound_inclusive or not self.upper_bound_inclusive:
-                raise RestrictionParseError(
-                    "Single version must be surrounded by []: %s" % spec)
+                raise RestrictionParseError("Single version must be surrounded by []: %s" % spec)
             version = Version(_spec)
             self.lower_bound = version
             self.upper_bound = version
@@ -141,21 +156,25 @@ class Restriction(object):
 
         result = cmp(self.lower_bound, other.lower_bound)
         if result == 0:
-            result = cmp(self.lower_bound_inclusive,
-                         other.lower_bound_inclusive)
+            result = cmp(self.lower_bound_inclusive, other.lower_bound_inclusive)
             if result == 0:
                 result = cmp(self.upper_bound, other.upper_bound)
                 if result == 0:
-                    result = cmp(self.upper_bound_inclusive,
-                                 other.upper_bound_inclusive)
+                    result = cmp(self.upper_bound_inclusive, other.upper_bound_inclusive)
         return result
 
     def __eq__(self, other):
         return self.__cmp__(other) == 0
 
     def __hash__(self):
-        return hash((self.lower_bound, self.lower_bound_inclusive,
-                     self.upper_bound, self.upper_bound_inclusive))
+        return hash(
+            (
+                self.lower_bound,
+                self.lower_bound_inclusive,
+                self.upper_bound,
+                self.upper_bound_inclusive,
+            )
+        )
 
     def __lt__(self, other):
         return self.__cmp__(other) < 0
@@ -165,15 +184,16 @@ class Restriction(object):
 
     def __str__(self):
         s = "{open}{lower}{comma}{upper}{close}".format(
-            open=(INCLUSIVE_OPEN if self.lower_bound_inclusive
-                  else EXCLUSIVE_OPEN),
+            open=(INCLUSIVE_OPEN if self.lower_bound_inclusive else EXCLUSIVE_OPEN),
             lower=self.lower_bound if self.lower_bound is not None else "",
             comma="," if self.lower_bound != self.upper_bound else "",
-            upper=(self.upper_bound if self.upper_bound is not None
-                   and self.upper_bound != self.lower_bound else ""),
-            close=(INCLUSIVE_CLOSE if self.upper_bound_inclusive
-                   else EXCLUSIVE_CLOSE),
-            )
+            upper=(
+                self.upper_bound
+                if self.upper_bound is not None and self.upper_bound != self.lower_bound
+                else ""
+            ),
+            close=(INCLUSIVE_CLOSE if self.upper_bound_inclusive else EXCLUSIVE_CLOSE),
+        )
         return s
 
     def __repr__(self):
@@ -184,7 +204,7 @@ class Restriction(object):
             self.lower_bound_inclusive,
             self.upper_bound,
             self.upper_bound_inclusive,
-            )
+        )
 
     @classmethod
     def fromstring(cls, spec):
@@ -197,6 +217,7 @@ class VersionRange(object):
 
     Valid ranges are comma separated range specifications
     """
+
     def __init__(self, spec):
         """Create a VersionRange from a string specification
 
@@ -212,8 +233,7 @@ class VersionRange(object):
         _spec = spec[:]
         lower_bound = None
         upper_bound = None
-        while (_spec.startswith(EXCLUSIVE_OPEN)
-               or _spec.startswith(INCLUSIVE_OPEN)):
+        while _spec.startswith(EXCLUSIVE_OPEN) or _spec.startswith(INCLUSIVE_OPEN):
             exclusive_close = _spec.find(EXCLUSIVE_CLOSE)
             inclusive_close = _spec.find(INCLUSIVE_CLOSE)
 
@@ -225,28 +245,27 @@ class VersionRange(object):
             if close < 0:
                 raise VersionRangeParseError("Unbounded range: %s" % spec)
 
-            restriction = Restriction(_spec[0:close+1])
+            restriction = Restriction(_spec[0 : close + 1])
 
             if lower_bound is None:
                 lower_bound = restriction.lower_bound
 
             if upper_bound is not None:
-                if restriction.lower_bound is None \
-                        or restriction.lower_bound < upper_bound:
+                if restriction.lower_bound is None or restriction.lower_bound < upper_bound:
                     raise VersionRangeParseError("Ranges overlap: %s" % spec)
             restrictions.append(restriction)
             upper_bound = restriction.upper_bound
 
-            _spec = _spec[close+1:]
-            if _spec and _spec.startswith(','):
+            _spec = _spec[close + 1 :]
+            if _spec and _spec.startswith(","):
                 # pop off leading comma
                 _spec = _spec[1:]
 
         if _spec:
             if restrictions:
                 raise VersionRangeParseError(
-                    "Only fully-qualified sets allowed in multiple set"
-                    " scenario: %s" % spec)
+                    "Only fully-qualified sets allowed in multiple set" " scenario: %s" % spec
+                )
             else:
                 version = Version(_spec)
                 # add the "everything" restriction
@@ -291,11 +310,15 @@ class VersionRange(object):
         if self.version:
             return str(self.version)
         else:
-            return ','.join(str(r) for r in self.restrictions)
+            return ",".join(str(r) for r in self.restrictions)
 
     def __repr__(self):
-        return "<%s.%s(%r, %r)>" % (self.__module__, "VersionRange",
-                                    self.version, self.restrictions)
+        return "<%s.%s(%r, %r)>" % (
+            self.__module__,
+            "VersionRange",
+            self.version,
+            self.restrictions,
+        )
 
     def _intersection(self, l1, l2):
         """Return the intersection of l1 and l2
@@ -341,8 +364,8 @@ class VersionRange(object):
 
 @functools.total_ordering
 class Version(object):
-    """Maven version objecjt
-    """
+    """Maven version objecjt"""
+
     def __init__(self, version):
         """Create a maven version
 
@@ -376,13 +399,13 @@ class Version(object):
         start = 0
         is_digit = False
         for idx, ch in enumerate(buf):
-            if ch == '.':
+            if ch == ".":
                 if idx == start:
                     current_list.append(0)
                 else:
                     current_list.append(self._parse_buffer(buf[start:idx]))
                 start = idx + 1
-            elif ch == '-':
+            elif ch == "-":
                 if idx == start:
                     current_list.append(0)
                 else:
@@ -391,8 +414,7 @@ class Version(object):
                 current_list = self._new_list(current_list)
             elif ch.isdigit():
                 if not is_digit and idx > start:
-                    current_list.append(
-                        self._parse_buffer(buf[start:idx], True))
+                    current_list.append(self._parse_buffer(buf[start:idx], True))
                     current_list = self._new_list(current_list)
                     start = idx
                 is_digit = True
@@ -541,12 +563,12 @@ class Version(object):
         if buf.isdigit():
             buf = int(buf)
         elif followed_by_digit and len(buf) == 1:
-            if buf == 'a':
-                buf = 'alpha'
-            elif buf == 'b':
-                buf = 'beta'
-            elif buf == 'm':
-                buf = 'milestone'
+            if buf == "a":
+                buf = "alpha"
+            elif buf == "b":
+                buf = "beta"
+            elif buf == "m":
+                buf = "milestone"
 
         return ALIASES.get(buf, buf)
 
