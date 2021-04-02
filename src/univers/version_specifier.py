@@ -16,7 +16,6 @@
 # limitations under the License.
 
 
-# from semver import Version
 from semantic_version import Version
 
 from univers.utils import remove_spaces
@@ -118,7 +117,6 @@ class VersionSpecifier:
         Return a VersionSpecifier built from a scheme-specific version spec string and a scheme string.
         """
 
-        # TODO: Handle wildcards, carets, tilde here. Convert them into something sane
         value = remove_spaces(value)
         version_ranges = value.split(",")
         ranges = []
@@ -150,9 +148,8 @@ class VersionSpecifier:
         """
         Return the canonical representation.
         """
-        # TODO: sort to make canonic
-        ranges = ",".join(self.ranges)
 
+        ranges = ",".join(self.ranges)
         return f"{self.scheme}:{ranges}"
 
     def __contains__(self, version):

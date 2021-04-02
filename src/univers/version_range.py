@@ -79,7 +79,6 @@ class VersionRange:
         return operator(version, self.version)
 
     def __eq__(self, other):
-        # print((self.version, self.operator), (other.version, other.operator))
         return (self.version, self.operator) == (other.version, other.operator)
 
     def __str__(self):

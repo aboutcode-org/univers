@@ -22,8 +22,7 @@ import semantic_version
 
 from univers.utils import remove_spaces
 from univers.debian_version.version import Version as _DebianVersion
-
-# from univers.maven_version.version import Version as _MavenVersion
+from univers.maven_version.version import Version as _MavenVersion
 
 
 class InvalidVersion(ValueError):

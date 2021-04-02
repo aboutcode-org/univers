@@ -28,7 +28,7 @@ https://www.debian.org/doc/debian-policy/ch-controlfields.html#s-f-Version
 This has been substantially modified and enhanced from the original python-dpkg
 Dpkg class by Nathan J. Meh and team from The Climate Corporation and
 code from python-deb-pkg-tools by Peter Odding to extract only the subset that
-does the version parsing, comparison and version constraints evaluatiob.
+does the version parsing, comparison and version constraints evaluation.
 
 
 So much so that little of this code may still looks like the original.
