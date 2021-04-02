@@ -23,6 +23,7 @@ import semantic_version
 from univers.utils import remove_spaces
 from univers.debian_version.version import Version as _DebianVersion
 from univers.maven_version.version import Version as _MavenVersion
+from univers.rpm_vercmp.vercmp import vercmp
 
 
 class InvalidVersion(ValueError):
@@ -151,6 +152,28 @@ class NugetVersion(SemverVersion):
     pass
 
 
+@total_ordering
+class RPMVersion(BaseVersion):
+    scheme = "rpm"
+
+    def __init__(self, version_string):
+        version_string = remove_spaces(version_string)
+        self.validate(version_string)
+        self.value = version_string
+
+    @staticmethod
+    def validate(version_string):
+        pass
+
+    def __eq__(self, other):
+        result = vercmp(self.value, other.value)
+        return result == 0
+
+    def __lt__(self, other):
+        result = vercmp(self.value, other.value)
+        return result == -1
+
+
 # TODO : Should these be upper case global constants ?
 
 version_class_by_scheme = {
@@ -160,6 +183,7 @@ version_class_by_scheme = {
     "pypi": PYPIVersion,
     "maven": MavenVersion,
     "nuget": NugetVersion,
+    "rpm": RPMVersion,
 }
 
 version_class_by_package_type = {
@@ -171,6 +195,7 @@ version_class_by_package_type = {
     "composer": SemverVersion,
     "npm": SemverVersion,
     "gem": SemverVersion,
+    "rpm": RPMVersion,
 }
 
 
