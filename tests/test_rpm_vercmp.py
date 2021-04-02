@@ -19,19 +19,17 @@ from __future__ import unicode_literals
 import io
 import re
 import os
-import requests
 
 try:
-        import unittest2 as unittest
+    import unittest2 as unittest
 except ImportError:
-        import unittest
+    import unittest
 
-import rpm_vercmp
+from univers.rpm_vercmp import vercmp
 
 
 class ACParser(object):
-    R_STMT = re.compile(
-        r"(.*)RPMVERCMP\(([^, ]*) *, *([^, ]*) *, *([^\)]*)\).*")
+    R_STMT = re.compile(r"(.*)RPMVERCMP\(([^, ]*) *, *([^, ]*) *, *([^\)]*)\).*")
 
     def __init__(self, fobj, with_buggy_comparisons=True):
         self.fobj = fobj
@@ -43,65 +41,57 @@ class ACParser(object):
             if not m:
                 continue
             if not self.with_buggy_comparisons:
-                if m.group(1).startswith('dnl '):
+                if m.group(1).startswith("dnl "):
                     continue
             yield m.group(2), m.group(3), int(m.group(4))
 
 
 class ParserTest(unittest.TestCase):
     def test_parse_without_buggy(self):
-        fobj = io.StringIO("""
+        fobj = io.StringIO(
+            """
 bla
 bla
 RPMVERCMP(1, 2, -1)
 dnl RPMVERCMP(1a, 1b, -1)
-""")
+"""
+        )
         parser = ACParser(fobj, with_buggy_comparisons=False)
-        exp = [('1', '2', -1)]
-        self.assertEqual(exp,
-                         list(parser))
+        exp = [("1", "2", -1)]
+        self.assertEqual(exp, list(parser))
 
     def test_parse_with_buggy(self):
-        fobj = io.StringIO("""
+        fobj = io.StringIO(
+            """
 bla
 bla
 RPMVERCMP(1, 2, -1)
 dnl RPMVERCMP(1a, 1b, -1)
-""")
+"""
+        )
         parser = ACParser(fobj, with_buggy_comparisons=True)
-        exp = [('1', '2', -1),
-               ('1a', '1b', -1)]
-        self.assertEqual(exp,
-                         list(parser))
+        exp = [("1", "2", -1), ("1a", "1b", -1)]
+        self.assertEqual(exp, list(parser))
 
 
 class VersionCompareTest(unittest.TestCase):
-    TestFile = os.path.join(os.path.dirname(__file__), 'rpmvercmp.at')
-    TestFileUrl = "https://raw.githubusercontent.com/rpm-software-management/rpm/master/tests/rpmvercmp.at"  # noqa
+    TestFile = os.path.join(os.path.dirname(__file__), "test_data", "rpmvercmp.at")
 
     def setUp(self):
         super(VersionCompareTest, self).setUp()
         self.acfobj = io.open(self.TestFile, encoding="utf-8")
-
-    @classmethod
-    def setup_class(cls):
-        if not os.path.exists(cls.TestFile):
-            resp = requests.get(cls.TestFileUrl)
-            with io.open(cls.TestFile, "w", encoding="utf-8") as f:
-                f.write(resp.text)
-
-    @classmethod
-    def teardown_class(cls):
-        if os.path.exists(cls.TestFile):
-            os.unlink(cls.TestFile)
 
     def test_from_rpmtest(self):
         parser = ACParser(self.acfobj, with_buggy_comparisons=True)
         test_count = 0
         for first, second, exp in parser:
             test_count += 1
-            ret = rpm_vercmp.vercmp(first, second)
-            self.assertEqual(exp, ret)
+            ret = vercmp.vercmp(first, second)
+            try:
+                self.assertEqual(exp, ret)
+            except:
+                print(first, second, exp, ret)
+                raise
         # Make sure we still test something, in case the m4 file drops
         # content this will fail the test
         self.assertGreater(test_count, 20)

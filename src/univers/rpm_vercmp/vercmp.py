@@ -38,12 +38,12 @@ class Vercmp(object):
                 continue
 
             # handle the tilde separator, it sorts before everything else
-            if first.startswith(b'~'):
-                if not second.startswith(b'~'):
+            if first.startswith(b"~"):
+                if not second.startswith(b"~"):
                     return -1
                 first, second = first[1:], second[1:]
                 continue
-            if second.startswith(b'~'):
+            if second.startswith(b"~"):
                 return 1
 
             # If we ran to the end of either, we are finished with the loop
@@ -75,8 +75,8 @@ class Vercmp(object):
 
             if isnum:
                 # throw away any leading zeros - it's a number, right?
-                m1_head = m1_head.lstrip(b'0')
-                m2_head = m2_head.lstrip(b'0')
+                m1_head = m1_head.lstrip(b"0")
+                m2_head = m2_head.lstrip(b"0")
 
                 # whichever number has more digits wins
                 m1hlen = len(m1_head)
