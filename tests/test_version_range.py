@@ -18,8 +18,8 @@
 
 import pytest
 
-from universal_versions.version_range import VersionRange
-from universal_versions.versions import version_class_by_scheme
+from univers.version_range import VersionRange
+from univers.versions import version_class_by_scheme
 
 
 @pytest.mark.parametrize(

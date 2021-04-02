@@ -18,7 +18,7 @@ requirements = [
 
 
 setup(
-    name="universal-versions",
+    name="univers",
     install_requires=requirements,
     packages=find_packages("src"),
     package_dir={"": "src"},

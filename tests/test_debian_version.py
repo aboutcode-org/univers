@@ -10,10 +10,10 @@
 
 from unittest import TestCase
 
-from universal_versions.debian_version import version
-from universal_versions.debian_version.version import compare_strings
-from universal_versions.debian_version.version import compare_versions
-from universal_versions.debian_version.version import Version
+from univers.debian_version import version
+from univers.debian_version.version import compare_strings
+from univers.debian_version.version import compare_versions
+from univers.debian_version.version import Version
 
 """
 Parse, compare and sort Debian package versions.

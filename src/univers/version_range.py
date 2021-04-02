@@ -17,9 +17,9 @@
 
 import operator as operator_module
 
-from universal_versions.utils import remove_spaces
-from universal_versions.versions import version_class_by_scheme
-from universal_versions.versions import validate_scheme
+from univers.utils import remove_spaces
+from univers.versions import version_class_by_scheme
+from univers.versions import validate_scheme
 
 
 class VersionRange:

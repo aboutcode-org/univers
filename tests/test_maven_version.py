@@ -20,11 +20,11 @@ Test version handling
 """
 import unittest
 
-from universal_versions.maven_version.version import Version
-from universal_versions.maven_version.version import VersionRange
-from universal_versions.maven_version.version import RestrictionParseError
-from universal_versions.maven_version.version import VersionRangeParseError
-from universal_versions.maven_version.version import Restriction
+from univers.maven_version.version import Version
+from univers.maven_version.version import VersionRange
+from univers.maven_version.version import RestrictionParseError
+from univers.maven_version.version import VersionRangeParseError
+from univers.maven_version.version import Restriction
 
 
 class TestRestriction(unittest.TestCase):

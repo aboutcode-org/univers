@@ -20,10 +20,10 @@ from packaging import version as pypi_version
 
 import semantic_version
 
-from universal_versions.utils import remove_spaces
-from universal_versions.debian_version.version import Version as _DebianVersion
+from univers.utils import remove_spaces
+from univers.debian_version.version import Version as _DebianVersion
 
-# from universal_versions.maven_version.version import Version as _MavenVersion
+# from univers.maven_version.version import Version as _MavenVersion
 
 
 class InvalidVersion(ValueError):

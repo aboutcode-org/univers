@@ -19,9 +19,9 @@
 # from semver import Version
 from semantic_version import Version
 
-from universal_versions.utils import remove_spaces
-from universal_versions.version_range import VersionRange
-from universal_versions.versions import parse_version
+from univers.utils import remove_spaces
+from univers.version_range import VersionRange
+from univers.versions import parse_version
 
 
 def normalized_caret_ranges(caret_version_range_string):

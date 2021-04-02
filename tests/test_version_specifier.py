@@ -18,7 +18,7 @@
 
 from unittest import TestCase
 
-from universal_versions.version_specifier import VersionSpecifier
+from univers.version_specifier import VersionSpecifier
 
 
 class TestVersionSpecifier(TestCase):
