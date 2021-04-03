@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 
+# TODO: Add something to track origin and the changes.
 
 """
 Versioning of artifacts
@@ -22,6 +23,7 @@ Versioning of artifacts
 import functools
 import sys
 
+# FIXME Get rid of six
 from six.moves import zip_longest
 import six
 

@@ -1,0 +1,11 @@
+about_resource: maven.py
+package_url: pkg:pypi/pymaven-patch@0.2.9
+copyright: |
+    Copyright (c) SAS Institute Inc.
+
+notes: This has been substantially modified and enhanced from the original 
+ pymaven code to extract the version comparison code.
+
+license_expression: apache-2.0
+homepage_url: https://github.com/nexB/pymaven
+notice_file: maven.py.NOTICE

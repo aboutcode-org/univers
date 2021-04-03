@@ -8,7 +8,7 @@
 
 from unittest import TestCase
 
-from univers.debian_version.version import Version
+from univers.debian import Version
 
 
 class DebPkgToolsTestCase(TestCase):

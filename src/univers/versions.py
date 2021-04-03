@@ -21,9 +21,9 @@ from packaging import version as pypi_version
 import semantic_version
 
 from univers.utils import remove_spaces
-from univers.debian_version.version import Version as _DebianVersion
-from univers.maven_version.version import Version as _MavenVersion
-from univers.rpm_vercmp.vercmp import vercmp
+from univers.debian import Version as _DebianVersion
+from univers.maven import Version as _MavenVersion
+from univers.rpm import vercmp
 
 
 class InvalidVersion(ValueError):

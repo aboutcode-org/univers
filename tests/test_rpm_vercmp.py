@@ -25,7 +25,7 @@ try:
 except ImportError:
     import unittest
 
-from univers.rpm_vercmp import vercmp
+from univers import rpm as vercmp
 
 
 class ACParser(object):
