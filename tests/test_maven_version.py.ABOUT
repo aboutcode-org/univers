@@ -1,0 +1,8 @@
+about_resource: test_maven_version.py
+license_expression: apache-2.0
+download_url: https://raw.githubusercontent.com/nexB/pymaven/f0fe2c908283916daf2573c484433ed55dc4b907/tests/test_versioning.py
+copyright: Copyright (c) SAS Institute Inc.
+package_url: pkg:pypi/pymaven-patch@0.2.9#tests/test_versioning.py
+notes: this subset of tests has been modified to tests version comparison and parsing
+homepage_url: https://github.com/nexB/pymaven
+notice_file: test_maven_version.py.NOTICE

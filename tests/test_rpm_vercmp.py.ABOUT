@@ -1,0 +1,8 @@
+about_resource: test_rpm_vercmp.py
+license_expression: apache-2.0
+download_url: https://raw.githubusercontent.com/nexB/python-rpm-vercmp/15c5c29727c61d5d01e6a7d1a9b956f0d7af41bd/rpm_vercmp/tests/vercmp_test.py
+copyright: Copyright (c) SAS Institute Inc.
+package_url: pkg:pypi/rpm_vercmp@0.1.2#/rpm_vercmp/tests/vercmp_test.py
+notes: this subset of tests has been modified to tests version comparison and parsing
+homepage_url: https://github.com/nexB/python-rpm-vercmp
+notice_file: test_rpm_vercmp.py.NOTICE
