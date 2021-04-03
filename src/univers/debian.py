@@ -35,7 +35,7 @@ Some examples:
 
 #### Compare two arbitrary version strings
 
-    >>> from univers.debian_version.version import compare_versions
+    >>> from univers.debian import compare_versions
     >>> compare_versions('0:1.0-test1', '0:1.0-test2')
     -1
     >>> compare_versions('1.0', '0.6')
@@ -45,7 +45,7 @@ Some examples:
 
 #### Use Version as a key function to sort a list of version strings
 
-    >>> from univers.debian_version.version import Version
+    >>> from univers.debian import Version
     >>> sorted(['0:1.0-test1', '1:0.0-test0', '0:1.0-test2'] , key=Version.from_string)
     ['0:1.0-test1', '0:1.0-test2', '1:0.0-test0']
 
@@ -62,7 +62,7 @@ class Version(object):
     defined in the Debian Policy Manual. Use it to sort Debian package versions
     from oldest to newest in ascending version order like this:
 
-      >>> from univers.debian_version.version import Version
+      >>> from univers.debian import Version
       >>> unsorted = ['0.1', '0.5', '1.0', '2.0', '3.0', '1:0.4', '2:0.3']
       >>> print([str(v) for v in sorted(Version.from_string(s) for s in unsorted)])
       ['0.1', '0.5', '1.0', '2.0', '3.0', '1:0.4', '2:0.3']
