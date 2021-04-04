@@ -15,6 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import attr
 from functools import total_ordering
 from packaging import version as pypi_version
 
@@ -33,8 +34,8 @@ class InvalidVersion(ValueError):
 class BaseVersion:
     # each version value should be comparable e.g. implement functools.total_ordering
 
-    scheme = None
-    value = None
+    scheme = attr.ib()
+    value = attr.ib()
 
     def validate(self):
         """
@@ -47,6 +48,7 @@ class BaseVersion:
 
 
 @total_ordering
+@attr.s(frozen=True, init=False, order=False, eq=False)
 class PYPIVersion(BaseVersion):
     scheme = "pypi"
 
@@ -56,7 +58,7 @@ class PYPIVersion(BaseVersion):
         # Avoid the double validation and the fallback.
 
         self.validate(version_string)
-        self.value = pypi_version.Version(version_string)
+        object.__setattr__(self, "value", pypi_version.Version(version_string))
 
     @staticmethod
     def validate(version_string):
@@ -86,14 +88,12 @@ class GenericVersion:
 
 
 @total_ordering
+@attr.s(frozen=True, init=False, order=False, eq=False)
 class SemverVersion(BaseVersion):
-    scheme = "semver"
-
     def __init__(self, version_string):
-        # self.validate(version_string)
         version_string = version_string.lower()
         version_string = version_string.lstrip("v")
-        self.value = semantic_version.Version.coerce(version_string)
+        object.__setattr__(self, "value", semantic_version.Version.coerce(version_string))
 
     @staticmethod
     def validate(version_string):
@@ -108,12 +108,13 @@ class SemverVersion(BaseVersion):
 
 
 @total_ordering
+@attr.s(frozen=True, init=False, order=False, eq=False)
 class DebianVersion(BaseVersion):
     scheme = "debian"
 
     def __init__(self, version_string):
         version_string = remove_spaces(version_string)
-        self.value = _DebianVersion.from_string(version_string)
+        object.__setattr__(self, "value", _DebianVersion.from_string(version_string))
 
     @staticmethod
     def validate(version_string):
@@ -127,6 +128,7 @@ class DebianVersion(BaseVersion):
 
 
 @total_ordering
+@attr.s(frozen=True, init=False, order=False, eq=False)
 class MavenVersion(BaseVersion):
     scheme = "maven"
 
@@ -147,12 +149,15 @@ class MavenVersion(BaseVersion):
 
 
 # See https://docs.microsoft.com/en-us/nuget/concepts/package-versioning
+@total_ordering
+@attr.s(frozen=True, init=False, order=False, eq=False)
 class NugetVersion(SemverVersion):
     scheme = "nuget"
     pass
 
 
 @total_ordering
+@attr.s(frozen=True, init=False, order=False, eq=False)
 class RPMVersion(BaseVersion):
     scheme = "rpm"
 
