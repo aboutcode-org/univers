@@ -48,7 +48,7 @@ class BaseVersion:
 
 
 @total_ordering
-@attr.s(frozen=True, init=False, order=False, eq=False)
+@attr.s(frozen=True, init=False, order=False, eq=False, hash=True, repr=False)
 class PYPIVersion(BaseVersion):
     scheme = "pypi"
 
@@ -87,8 +87,8 @@ class GenericVersion:
         #     10.2alpha3..patch.4. → 10, 2, alpha, 3, patch, 4
 
 
+@attr.s(frozen=True, init=False, order=False, eq=False, hash=True, repr=False)
 @total_ordering
-@attr.s(frozen=True, init=False, order=False, eq=False)
 class SemverVersion(BaseVersion):
     def __init__(self, version_string):
         version_string = version_string.lower()
@@ -108,7 +108,7 @@ class SemverVersion(BaseVersion):
 
 
 @total_ordering
-@attr.s(frozen=True, init=False, order=False, eq=False)
+@attr.s(frozen=True, init=False, order=False, eq=False, hash=True, repr=False)
 class DebianVersion(BaseVersion):
     scheme = "debian"
 
@@ -128,7 +128,7 @@ class DebianVersion(BaseVersion):
 
 
 @total_ordering
-@attr.s(frozen=True, init=False, order=False, eq=False)
+@attr.s(frozen=True, init=False, order=False, eq=False, hash=True, repr=False)
 class MavenVersion(BaseVersion):
     scheme = "maven"
 
@@ -150,14 +150,14 @@ class MavenVersion(BaseVersion):
 
 # See https://docs.microsoft.com/en-us/nuget/concepts/package-versioning
 @total_ordering
-@attr.s(frozen=True, init=False, order=False, eq=False)
+@attr.s(frozen=True, init=False, order=False, eq=False, hash=True, repr=False)
 class NugetVersion(SemverVersion):
     scheme = "nuget"
     pass
 
 
 @total_ordering
-@attr.s(frozen=True, init=False, order=False, eq=False)
+@attr.s(frozen=True, init=False, order=False, eq=False, hash=True, repr=False)
 class RPMVersion(BaseVersion):
     scheme = "rpm"
 
