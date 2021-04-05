@@ -191,6 +191,7 @@ version_class_by_scheme = {
     "rpm": RPMVersion,
 }
 
+# TODO: This is messed up
 version_class_by_package_type = {
     "generic": GenericVersion,
     "deb": DebianVersion,
@@ -201,6 +202,13 @@ version_class_by_package_type = {
     "npm": SemverVersion,
     "gem": SemverVersion,
     "rpm": RPMVersion,
+    "golang": SemverVersion,
+    "generic": SemverVersion,
+    "apache": SemverVersion,
+    "hex": SemverVersion,
+    "cargo": SemverVersion,
+    "mozilla": SemverVersion,
+    "github": SemverVersion,
 }
 
 
