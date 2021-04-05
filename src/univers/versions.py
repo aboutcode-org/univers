@@ -134,7 +134,7 @@ class MavenVersion(BaseVersion):
 
     def __init__(self, version_string):
         version_string = remove_spaces(version_string)
-        self.value = _MavenVersion(version_string)
+        object.__setattr__(self, "value", _MavenVersion(version_string))
 
     @staticmethod
     def validate(version_string):
@@ -164,7 +164,7 @@ class RPMVersion(BaseVersion):
     def __init__(self, version_string):
         version_string = remove_spaces(version_string)
         self.validate(version_string)
-        self.value = version_string
+        object.__setattr__(self, "value", version_string)
 
     @staticmethod
     def validate(version_string):
