@@ -193,7 +193,6 @@ version_class_by_scheme = {
 
 # TODO: This is messed up
 version_class_by_package_type = {
-    "generic": GenericVersion,
     "deb": DebianVersion,
     "pypi": PYPIVersion,
     "maven": MavenVersion,
