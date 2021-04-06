@@ -21,11 +21,8 @@ Versioning of artifacts
 """
 
 import functools
-import sys
 
-# FIXME Get rid of six
-from six.moves import zip_longest
-import six
+from itertools import zip_longest
 
 # TODO: Use common exceptions with other modules
 class VersionRangeParseError(ValueError):
@@ -152,7 +149,7 @@ class Restriction(object):
             return 0
 
         if not isinstance(other, self.__class__):
-            if isinstance(other, six.string_types):
+            if isinstance(other, str):
                 return cmp(self, self.__class__(other))
             return 1
 
@@ -281,7 +278,7 @@ class VersionRange(object):
             return 0
 
         if not isinstance(other, self.__class__):
-            if isinstance(other, six.string_types):
+            if isinstance(other, str):
                 return cmp(self, self.__class__(other))
             elif isinstance(other, Version):
                 return cmp(other, self)
@@ -438,7 +435,7 @@ class Version(object):
             return 0
 
         if not isinstance(other, self.__class__):
-            if isinstance(other, six.string_types):
+            if isinstance(other, str):
                 return self._compare(self._parsed, self.__class__(other)._parsed)
             elif isinstance(other, VersionRange) and other.version:
                 return self._compare(self._parsed, other.version._parsed)
@@ -467,7 +464,7 @@ class Version(object):
     def _compare(self, this, other):
         if isinstance(this, int):
             return self._int_compare(this, other)
-        elif isinstance(this, six.string_types):
+        elif isinstance(this, str):
             return self._string_compare(this, other)
         elif isinstance(this, (list, tuple)):
             return self._list_compare(this, other)
@@ -477,7 +474,7 @@ class Version(object):
     def _int_compare(self, this, other):
         if isinstance(other, int):
             return this - other
-        elif isinstance(other, (six.string_types, list, tuple)):
+        elif isinstance(other, (str, list, tuple)):
             return 1
         elif other is None:
             return this
@@ -491,7 +488,7 @@ class Version(object):
             return self._compare(l[0], other)
         if isinstance(other, int):
             return -1
-        elif isinstance(other, six.string_types):
+        elif isinstance(other, str):
             return 1
         elif isinstance(other, (list, tuple)):
             for left, right in zip_longest(l, other):
@@ -542,7 +539,7 @@ class Version(object):
 
         if isinstance(other, (int, list, tuple)):
             return -1
-        elif isinstance(other, six.string_types):
+        elif isinstance(other, str):
             s_value = self._string_value(s)
             other_value = self._string_value(other)
             if s_value < other_value:
