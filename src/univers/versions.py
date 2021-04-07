@@ -47,6 +47,9 @@ class BaseVersion:
     def __str__(self):
         return f"{self.scheme}:{self.version_string}"
 
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__} <{self.__str__()}>"
+
 
 @total_ordering
 @attr.s(frozen=True, init=False, order=False, eq=False, hash=True, repr=False)
