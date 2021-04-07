@@ -36,6 +36,7 @@ class BaseVersion:
 
     scheme = attr.ib()
     value = attr.ib()
+    version_string = attr.ib()
 
     def validate(self):
         """
@@ -44,7 +45,7 @@ class BaseVersion:
         raise NotImplementedError
 
     def __str__(self):
-        return f"{self.scheme}:{self.value}"
+        return f"{self.scheme}:{self.version_string}"
 
 
 @total_ordering
@@ -59,6 +60,7 @@ class PYPIVersion(BaseVersion):
 
         self.validate(version_string)
         object.__setattr__(self, "value", pypi_version.Version(version_string))
+        object.__setattr__(self, "version_string", version_string)
 
     @staticmethod
     def validate(version_string):
@@ -90,10 +92,13 @@ class GenericVersion:
 @attr.s(frozen=True, init=False, order=False, eq=False, hash=True, repr=False)
 @total_ordering
 class SemverVersion(BaseVersion):
+    scheme = "semver"
+
     def __init__(self, version_string):
         version_string = version_string.lower()
         version_string = version_string.lstrip("v")
         object.__setattr__(self, "value", semantic_version.Version.coerce(version_string))
+        object.__setattr__(self, "version_string", version_string)
 
     @staticmethod
     def validate(version_string):
@@ -115,6 +120,7 @@ class DebianVersion(BaseVersion):
     def __init__(self, version_string):
         version_string = remove_spaces(version_string)
         object.__setattr__(self, "value", _DebianVersion.from_string(version_string))
+        object.__setattr__(self, "version_string", version_string)
 
     @staticmethod
     def validate(version_string):
@@ -135,6 +141,7 @@ class MavenVersion(BaseVersion):
     def __init__(self, version_string):
         version_string = remove_spaces(version_string)
         object.__setattr__(self, "value", _MavenVersion(version_string))
+        object.__setattr__(self, "version_string", version_string)
 
     @staticmethod
     def validate(version_string):
@@ -165,6 +172,7 @@ class RPMVersion(BaseVersion):
         version_string = remove_spaces(version_string)
         self.validate(version_string)
         object.__setattr__(self, "value", version_string)
+        object.__setattr__(self, "version_string", version_string)
 
     @staticmethod
     def validate(version_string):
