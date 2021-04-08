@@ -35,9 +35,9 @@ depending upon the ecosystem.
 The supported ecosystems and underlying libraries are: 
 
 - npm, golang, php-composer, ruby-gems and others which follow the semver spec. These use `semantic_version <https://github.com/rbarrois/python-semanticversion>`_ library.
-- debian, this is handled by `debian-inspector <https://github.com/nexB/debian-inspector>`_ library.
+- debian, this is handled by `debian-inspector <https://github.com/sbs2001/univers/blob/main/src/univers/debian.py.ABOUT>`_ library.
 - pypi, this is handled by Python's ``packaging.version`` module.
-- maven, this is handled by   `rpm_vercmp <https://github.com/nexb/python-rpm-vercmp>`_ library.
+- maven, this is handled by   `rpm_vercmp <https://github.com/sbs2001/univers/blob/main/src/univers/rpm.py.ABOUT>`_ library.
 
 Installation
 ============
