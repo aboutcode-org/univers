@@ -24,7 +24,8 @@ import semantic_version
 from univers.utils import remove_spaces
 from univers.debian import Version as _DebianVersion
 from univers.maven import Version as _MavenVersion
-from univers.rpm import vercmp
+from univers.rpm import vercmp as rpm_vercmp
+from univers.gentoo import vercmp as gentoo_vercmp
 
 
 class InvalidVersion(ValueError):
@@ -182,11 +183,35 @@ class RPMVersion(BaseVersion):
         pass
 
     def __eq__(self, other):
-        result = vercmp(self.value, other.value)
+        result = rpm_vercmp(self.value, other.value)
         return result == 0
 
     def __lt__(self, other):
-        result = vercmp(self.value, other.value)
+        result = rpm_vercmp(self.value, other.value)
+        return result == -1
+
+
+@total_ordering
+@attr.s(frozen=True, init=False, order=False, eq=False, hash=True, repr=False)
+class GentooVersion(BaseVersion):
+    scheme = "ebuild"
+
+    def __init__(self, version_string):
+        version_string = remove_spaces(version_string)
+        self.validate(version_string)
+        object.__setattr__(self, "value", version_string)
+        object.__setattr__(self, "version_string", version_string)
+
+    @staticmethod
+    def validate(version_string):
+        pass
+
+    def __eq__(self, other):
+        result = gentoo_vercmp(self.value, other.value)
+        return result == 0
+
+    def __lt__(self, other):
+        result = gentoo_vercmp(self.value, other.value)
         return result == -1
 
 
@@ -200,6 +225,7 @@ version_class_by_scheme = {
     "maven": MavenVersion,
     "nuget": NugetVersion,
     "rpm": RPMVersion,
+    "ebuild": GentooVersion,
 }
 
 # TODO: This is messed up
@@ -219,6 +245,7 @@ version_class_by_package_type = {
     "cargo": SemverVersion,
     "mozilla": SemverVersion,
     "github": SemverVersion,
+    "ebuild": GentooVersion,
 }
 
 
