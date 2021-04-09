@@ -4,7 +4,7 @@ copyright: |
     Copyright 1998-2016 Gentoo Foundation
 
 license_expression: GPL-2.0-only
-homepage_url: https://gitweb.gentoo.org/proj/portage.git/
+homepage_url: https://gitweb.gentoo.org/proj/portage.git/plain/lib/portage/versions.py
 
 notes: |
     The version comparision utility is extracted from portage and further stripped down.

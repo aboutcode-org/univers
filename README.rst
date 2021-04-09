@@ -37,6 +37,7 @@ The supported ecosystems and underlying libraries are:
 - debian, this is handled by `debian-inspector <https://github.com/sbs2001/univers/blob/main/src/univers/debian.py.ABOUT>`_ library.
 - pypi, this is handled by Python's ``packaging.version`` module.
 - maven, this is handled by   `rpm_vercmp <https://github.com/sbs2001/univers/blob/main/src/univers/rpm.py.ABOUT>`_ library.
+- ebuild/gentoo, this is handled by `gentoo_vercmp <https://github.com/sbs2001/univers/blob/main/src/univers/gentoo.py.ABOUT>`_ module.
 
 Installation
 ============
