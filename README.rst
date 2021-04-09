@@ -4,7 +4,6 @@ Univers: Ecosystem specific version comparision and conversion
 |Build Status| |License| |Python 3.6+|
 
 .. |Build Status| image:: https://api.travis-ci.com/sbs2001/univers.svg?branch=main&status=passed
-   :target: https://github.com/nexB/vulnerablecode/actions?query=workflow%3ACI
 .. |License| image:: https://img.shields.io/badge/License-Apache%202.0-blue.svg
    :target: https://opensource.org/licenses/Apache-2.0
 .. |Python 3.6+| image:: https://img.shields.io/badge/python-3.6+-blue.svg
