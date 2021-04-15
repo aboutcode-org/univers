@@ -15,6 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import re
 import attr
 from functools import total_ordering
 from packaging import version as pypi_version
@@ -26,6 +27,7 @@ from univers.debian import Version as _DebianVersion
 from univers.maven import Version as _MavenVersion
 from univers.rpm import vercmp as rpm_vercmp
 from univers.gentoo import vercmp as gentoo_vercmp
+from univers.gentoo import parse_version_and_revision as parse_gentoo_version_and_revision
 
 
 class InvalidVersion(ValueError):
@@ -195,6 +197,7 @@ class RPMVersion(BaseVersion):
 @attr.s(frozen=True, init=False, order=False, eq=False, hash=True, repr=False)
 class GentooVersion(BaseVersion):
     scheme = "ebuild"
+    version_re = re.compile("^(?:\d+)(?:\.\d+)*[a-zA-Z]?(?:_(p(?:re)?|beta|alpha|rc)\d*)*$")
 
     def __init__(self, version_string):
         version_string = remove_spaces(version_string)
@@ -204,7 +207,9 @@ class GentooVersion(BaseVersion):
 
     @staticmethod
     def validate(version_string):
-        pass
+        version, _ = parse_gentoo_version_and_revision(version_string)
+        if not GentooVersion.version_re.match(version):
+            raise InvalidVersion(f"Invalid version: '{version_string}'")
 
     def __eq__(self, other):
         result = gentoo_vercmp(self.value, other.value)
