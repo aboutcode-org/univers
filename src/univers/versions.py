@@ -275,6 +275,7 @@ version_class_by_package_type = {
     "mozilla": SemverVersion,
     "github": SemverVersion,
     "ebuild": GentooVersion,
+    "pacman": ArchVersion,
 }
 
 
