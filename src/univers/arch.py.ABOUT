@@ -1,0 +1,12 @@
+about_resource: arch.py
+package_url: pkg:github/msys2/msys2-web@3ed2dde45a8761523b749e42c201a737c7613e6e
+copyright: |
+    Copyright 2016-2020 Christoph Reiter
+
+license_expression: MIT
+homepage_url: https://github.com/msys2/msys2-web/
+
+notes: |
+    The version comparision utility is extracted from msys2 and further stripped down.
+
+notice_file: arch.py.NOTICE

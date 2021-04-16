@@ -28,6 +28,7 @@ from univers.maven import Version as _MavenVersion
 from univers.rpm import vercmp as rpm_vercmp
 from univers.gentoo import vercmp as gentoo_vercmp
 from univers.gentoo import parse_version_and_revision as parse_gentoo_version_and_revision
+from univers.arch import vercmp as arch_vercmp
 
 
 class InvalidVersion(ValueError):
@@ -116,6 +117,29 @@ class SemverVersion(BaseVersion):
 
     def __lt__(self, other):
         return self.value.__lt__(other.value)
+
+
+@attr.s(frozen=True, init=False, order=False, eq=False, hash=True, repr=False)
+@total_ordering
+class ArchVersion(BaseVersion):
+    scheme = "arch"
+
+    def __init__(self, version_string):
+        version_string = version_string.lower()
+        version_string = remove_spaces(version_string)
+        object.__setattr__(self, "version_string", version_string)
+        object.__setattr__(self, "value", version_string)
+
+    @staticmethod
+    def validate(version_string):
+        pass
+
+    def __eq__(self, other):
+        # TBD: Should this verify the type of `other`
+        return arch_vercmp(self.value, other.value) == 0
+
+    def __lt__(self, other):
+        return arch_vercmp(self.value, other.value) == -1
 
 
 @total_ordering
