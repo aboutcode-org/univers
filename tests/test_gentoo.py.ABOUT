@@ -1,0 +1,10 @@
+about_resource: test_gentoo.py
+package_url: pkg:ebuild/sys-apps/portage@3.0.13#tests/versions/test_vercmp.py
+copyright: Copyright 1998-2016 Gentoo Foundation
+
+license_expression: GPL-2.0-only
+homepage_url: https://gitweb.gentoo.org/proj/portage.git/
+
+notes: version comparison tests extracted from portage and further stripped down.
+
+notice_file: gentoo.py.NOTICE
