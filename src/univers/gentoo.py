@@ -35,9 +35,21 @@ def parse_version_and_revision(version_string):
 
 def vercmp(ver1, ver2):
     """
-    Compare two versions ``ver1`` and ``ver2`` and return 0, 1, or -1 according to the
-    cmp semantics
+    Compare two versions ``ver1`` and ``ver2`` and return 0, 1, or -1 according
+    to the Python 2 cmp() semantics:
+
+        Compare the two objects x and y and return an integer according to the
+        outcome. The return value is negative if x < y, zero if x == y and
+        strictly positive if x > y.
     """
+    if not ver1:
+        if not ver2:
+            return 0
+        else:
+            return -1
+    elif not ver2:
+        return 1
+
     ver1, rev1 = parse_version_and_revision(ver1)
     ver2, rev2 = parse_version_and_revision(ver2)
 
