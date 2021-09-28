@@ -61,7 +61,7 @@ class PYPIVersion(BaseVersion):
 
     @staticmethod
     def validate(version_string):
-        match = pypi_version.Version._regex.search(version_string)
+        match = pypi_version.Version._regex.search(version_string)  # NOQA
         if not match:
             raise InvalidVersion(f"Invalid version: '{version_string}'")
 

@@ -11,11 +11,10 @@ from typing import Optional
 from typing import Set
 from typing import Tuple
 
+from univers.utils import cmp
+
 
 def vercmp(v1: str, v2: str) -> int:
-    def cmp(a: int, b: int) -> int:
-        return (a > b) - (a < b)
-
     def split(v: str) -> Tuple[str, str, Optional[str]]:
         if ":" in v:
             e, v = v.split(":", 1)

@@ -5,23 +5,24 @@
 
 import re
 
+from univers.utils import cmp
+
+
 suffix_regexp = re.compile("^(alpha|beta|rc|pre|p)(\\d*)$")
 
 revision_regexp = re.compile(".*(-r\d+)")
 
 suffix_value = {"pre": -2, "p": 1, "alpha": -4, "beta": -3, "rc": -1}
 
-"""gentoo ebuild specific base package class"""
-
-# while the package section looks fugly, there is a reason for it-
-# to prevent version chunks from showing up in the package
-
-
-def cmp(a, b):
-    return bool(a > b) - bool(a < b)
+"""
+gentoo ebuild version comparison
+"""
 
 
 def parse_version_and_revision(version_string):
+    """
+    Return a tuple of (version string, revision int) given a ``version_string``.
+    """
     revision = 0
     version = version_string
     match = revision_regexp.search(version_string)
@@ -33,6 +34,10 @@ def parse_version_and_revision(version_string):
 
 
 def vercmp(ver1, ver2):
+    """
+    Compare two versions ``ver1`` and ``ver2`` and return 0, 1, or -1 according to the
+    cmp semantics
+    """
     ver1, rev1 = parse_version_and_revision(ver1)
     ver2, rev2 = parse_version_and_revision(ver2)
 
