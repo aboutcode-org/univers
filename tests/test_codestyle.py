@@ -14,4 +14,7 @@ class BaseTests(unittest.TestCase):
         try:
             subprocess.check_output(args.split())
         except Exception as e:
-            raise Exception(f"Black style check failed, please format the code using black") from e
+            raise Exception(
+                "Black style check failed; please format the code using: "
+                "python -m black --check -l 100"
+            ) from e
