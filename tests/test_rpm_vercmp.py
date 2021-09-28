@@ -1,4 +1,5 @@
 #
+# Copyright (c) nexB Inc. and others
 # Copyright (c) SAS Institute Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,36 +15,36 @@
 # limitations under the License.
 #
 
-from __future__ import print_function
-from __future__ import unicode_literals
-import io
-import re
-import os
+# This test script has been extensively modified from the original
 
-try:
-    import unittest2 as unittest
-except ImportError:
-    import unittest
+import io
+import os
+import re
+import unittest
 
 from univers import rpm as vercmp
 
+get_vercmp_test = re.compile(
+    r"(.*)" r"RPMVERCMP\(" r"([^, ]*) *, *" r"([^, ]*) *, *" r"([^\)]*)" r"\).*"
+).match
 
-class ACParser(object):
-    R_STMT = re.compile(r"(.*)RPMVERCMP\(([^, ]*) *, *([^, ]*) *, *([^\)]*)\).*")
 
-    def __init__(self, fobj, with_buggy_comparisons=True):
-        self.fobj = fobj
-        self.with_buggy_comparisons = with_buggy_comparisons
-
-    def __iter__(self):
-        for row in self.fobj:
-            m = self.R_STMT.match(row)
-            if not m:
-                continue
-            if not self.with_buggy_comparisons:
-                if m.group(1).startswith("dnl "):
-                    continue
-            yield m.group(2), m.group(3), int(m.group(4))
+def parse_rpmvercmp_tests(fobj, with_buggy_comparisons=True):
+    """
+    Yield triples (version1, version2, comparison result) describing the RPM
+    version comparison tests found in the rpmvercmp.at test file-like  object at
+    ``fobj`` Optionally includ "buggy" upstream tests.
+    """
+    for line in fobj:
+        line = line.strip()
+        if not line:
+            continue
+        if not with_buggy_comparisons and line.startswith("dnl"):
+            continue
+        match = get_vercmp_test(line)
+        if not match:
+            continue
+        yield match.group(2), match.group(3), int(match.group(4))
 
 
 class ParserTest(unittest.TestCase):
@@ -56,9 +57,9 @@ RPMVERCMP(1, 2, -1)
 dnl RPMVERCMP(1a, 1b, -1)
 """
         )
-        parser = ACParser(fobj, with_buggy_comparisons=False)
-        exp = [("1", "2", -1)]
-        self.assertEqual(exp, list(parser))
+        parser = parse_rpmvercmp_tests(fobj, with_buggy_comparisons=False)
+        expected = [("1", "2", -1)]
+        assert list(parser) == expected
 
     def test_parse_with_buggy(self):
         fobj = io.StringIO(
@@ -69,29 +70,23 @@ RPMVERCMP(1, 2, -1)
 dnl RPMVERCMP(1a, 1b, -1)
 """
         )
-        parser = ACParser(fobj, with_buggy_comparisons=True)
-        exp = [("1", "2", -1), ("1a", "1b", -1)]
-        self.assertEqual(exp, list(parser))
+        parser = parse_rpmvercmp_tests(fobj, with_buggy_comparisons=True)
+        expected = [("1", "2", -1), ("1a", "1b", -1)]
+        assert list(parser) == expected
 
 
 class VersionCompareTest(unittest.TestCase):
-    TestFile = os.path.join(os.path.dirname(__file__), "test_data", "rpmvercmp.at")
-
-    def setUp(self):
-        super(VersionCompareTest, self).setUp()
-        self.acfobj = io.open(self.TestFile, encoding="utf-8")
-
     def test_from_rpmtest(self):
-        parser = ACParser(self.acfobj, with_buggy_comparisons=True)
-        test_count = 0
-        for first, second, exp in parser:
-            test_count += 1
-            ret = vercmp.vercmp(first, second)
-            try:
-                self.assertEqual(exp, ret)
-            except:
-                print(first, second, exp, ret)
-                raise
+        test_file = os.path.join(os.path.dirname(__file__), "test_data", "rpmvercmp.at")
+
+        with io.open(test_file, encoding="utf-8") as rpmtests:
+            tests = list(parse_rpmvercmp_tests(rpmtests, with_buggy_comparisons=True))
+
+        for test_count, (ver1, ver2, expected_comparison) in enumerate(tests, 1):
+            result = vercmp.vercmp(ver1, ver2)
+            if result != expected_comparison:
+                assert result == (expected_comparison, ver1, ver2)
+
         # Make sure we still test something, in case the m4 file drops
         # content this will fail the test
-        self.assertGreater(test_count, 20)
+        assert test_count > 20
