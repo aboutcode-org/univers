@@ -1,4 +1,7 @@
-"""gentoo ebuild specific base package class"""
+#
+# Copyright (c) 2006-2019, pkgcore contributors
+# SPDX-License-Identifier: BSD-3-Clause
+# Version comparision utility extracted from pkgcore and further stripped down.
 
 import re
 
@@ -7,6 +10,8 @@ suffix_regexp = re.compile("^(alpha|beta|rc|pre|p)(\\d*)$")
 revision_regexp = re.compile(".*(-r\d+)")
 
 suffix_value = {"pre": -2, "p": 1, "alpha": -4, "beta": -3, "rc": -1}
+
+"""gentoo ebuild specific base package class"""
 
 # while the package section looks fugly, there is a reason for it-
 # to prevent version chunks from showing up in the package
