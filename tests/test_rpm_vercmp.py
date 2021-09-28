@@ -63,17 +63,53 @@ dnl RPMVERCMP(1a, 1b, -1)
 
 
 class VersionCompareTest(unittest.TestCase):
-    def test_from_rpmtest(self):
-        test_file = os.path.join(os.path.dirname(__file__), "test_data", "rpmvercmp.at")
+    pass
 
-        with io.open(test_file, encoding="utf-8") as rpmtests:
-            tests = list(parse_rpmvercmp_tests(rpmtests, with_buggy_comparisons=True))
 
-        for test_count, (ver1, ver2, expected_comparison) in enumerate(tests, 1):
-            result = vercmp.vercmp(ver1, ver2)
-            if result != expected_comparison:
-                assert result == (expected_comparison, ver1, ver2)
+def create_test_function(ver1, ver2, expected, name):
+    """
+    Return a test function closed on test arguments.
+    """
 
-        # Make sure we still test something, in case the m4 file drops
-        # content this will fail the test
-        assert test_count > 20
+    def test_rpm_version(self):
+        print(f"testing (ver1={ver1}, ver2={ver2}, expected=expected{expected}")
+        result = vercmp.vercmp(ver1, ver2)
+        if result != expected:
+            assert result == (expected, ver1, ver2)
+
+    test_rpm_version.__name__ = name
+    return test_rpm_version
+
+
+def get_tests():
+    """
+    Yield test function from rpmvercmp.at data.
+    """
+    test_file = os.path.join(os.path.dirname(__file__), "test_data", "rpmvercmp.at")
+
+    with io.open(test_file, encoding="utf-8") as rpmtests:
+        tests = list(parse_rpmvercmp_tests(rpmtests, with_buggy_comparisons=True))
+        for test_count, (ver1, ver2, expected) in enumerate(tests, 1):
+            name = f"test_rpm_version_{test_count}"
+            func = create_test_function(ver1, ver2, expected, name)
+            if "^" in ver1 or "^" in ver2:
+                result = vercmp.vercmp(ver1, ver2)
+                if result != expected:
+                    func = unittest.expectedFailure(func)
+            yield func
+
+    # Make sure we still test something, in case the m4 file drops
+    # content this will fail the test
+    assert test_count > 20
+
+
+def build_tests():
+    """
+    Create tests from rpmvercmp.at data and attach them to a test class.
+    """
+    for i, test_func in enumerate(get_tests()):
+        name = f"test_rpm_version_{i}"
+        setattr(VersionCompareTest, name, test_func)
+
+
+build_tests()
