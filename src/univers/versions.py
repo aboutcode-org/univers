@@ -4,7 +4,6 @@
 #
 # Visit https://aboutcode.org and https://github.com/nexB/ for support and download.
 
-
 import re
 import attr
 from functools import total_ordering
@@ -26,11 +25,16 @@ class InvalidVersion(ValueError):
 
 
 class BaseVersion:
-    # each version value should be comparable e.g. implement functools.total_ordering
+    """
+    Base  version object to subclass for each version scheme.
 
-    scheme = attr.ib()
-    value = attr.ib()
-    version_string = attr.ib()
+    Each version value should be comparable e.g., implement
+    functools.total_ordering
+    """
+
+    # the version scheme is a class attribute
+    scheme = None
+    value = attr.ib(type=str)
 
     def validate(self):
         """
@@ -39,14 +43,11 @@ class BaseVersion:
         raise NotImplementedError
 
     def __str__(self):
-        return f"{self.scheme}:{self.version_string}"
-
-    def __repr__(self) -> str:
-        return f"{self.__class__.__name__} <{self.__str__()}>"
+        return f"{self.scheme}:{self.value}"
 
 
 @total_ordering
-@attr.s(frozen=True, init=False, order=False, eq=False, hash=True, repr=False)
+@attr.s(frozen=True, init=False, order=False, hash=True)
 class PYPIVersion(BaseVersion):
     scheme = "pypi"
 
@@ -81,9 +82,13 @@ class GenericVersion:
         Validate that the version is valid for its scheme
         """
         # generic implementation ...
-        # use 1. of https://github.com/repology/libversion/blob/master/doc/ALGORITHM.md#core-algorithm
-        #  Version is split into separate all-alphabetic or all-numeric components. All other characters are treated as separators. Empty components are not generated.
-        #     10.2alpha3..patch.4. → 10, 2, alpha, 3, patch, 4
+        # TODO: Should use
+        # https://github.com/repology/libversion/blob/master/doc/ALGORITHM.md#core-algorithm
+        #  Version is split into separate all-alphabetic or all-numeric
+        #  components.
+        # All other characters are treated as separators. Empty components are
+        # not generated.
+        #   10.2alpha3..patch.4. → 10, 2, alpha, 3, patch, 4
 
 
 @attr.s(frozen=True, init=False, order=False, eq=False, hash=True, repr=False)
@@ -236,6 +241,7 @@ class GentooVersion(BaseVersion):
 
 # TODO : Should these be upper case global constants ?
 
+
 version_class_by_scheme = {
     "generic": GenericVersion,
     "semver": SemverVersion,
@@ -247,18 +253,25 @@ version_class_by_scheme = {
     "ebuild": GentooVersion,
 }
 
-# TODO: This is messed up
+
 version_class_by_package_type = {
     "deb": DebianVersion,
     "pypi": PYPIVersion,
     "maven": MavenVersion,
     "nuget": NugetVersion,
+    # TODO: composer may need its own scheme see https://github.com/nexB/univers/issues/5
+    # and https://getcomposer.org/doc/articles/versions.md
     "composer": SemverVersion,
-    "npm": SemverVersion,
+    # TODO: gem may need its own scheme see https://github.com/nexB/univers/issues/5
+    # and https://snyk.io/blog/differences-in-version-handling-gems-and-npm/
+    # https://semver.org/spec/v2.0.0.html#spec-item-11
     "gem": SemverVersion,
+    "npm": SemverVersion,
     "rpm": RPMVersion,
     "golang": SemverVersion,
     "generic": SemverVersion,
+    # apache is not semver at large. And in particular we may have schemes that
+    # are package name-specific
     "apache": SemverVersion,
     "hex": SemverVersion,
     "cargo": SemverVersion,
