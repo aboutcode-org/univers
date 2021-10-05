@@ -70,3 +70,12 @@ Evaluating version ranges
 
     assert (v1 in vs ) == True
     assert (v2 in vs ) == False
+
+
+Development
+============
+
+Starting from a git clone of https://github.com/nexB/univers run these::
+
+    $ configure --dev
+    $ source venv/bin/active
