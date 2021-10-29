@@ -1,4 +1,4 @@
-Univers: mostly universal version and version ranges comparison and conversion
+univers: mostly universal version and version ranges comparison and conversion
 ===============================================================================
 
 |Build Status| |License| |Python 3.6+|
@@ -40,7 +40,7 @@ univers is different and considers the ecosystem-specific version scheme used.
 How does univers work ?
 =========================
 
-Univers wraps, embeds or implements multiple version comparision libraries, each
+univers wraps, embeds or implements multiple version comparision libraries, each
 focused on specific ecosystem version scheme.
 
 It also implements an experimental unified syntax for version ranges specifier
