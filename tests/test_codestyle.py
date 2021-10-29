@@ -10,11 +10,15 @@ import unittest
 
 class BaseTests(unittest.TestCase):
     def test_codestyle(self):
-        args = "python -m black --check -l 100 *.py etc/ src/ tests/ docs"
+        args = "venv/bin/black --check -l 100 setup.py etc src tests docs"
         try:
             subprocess.check_output(args.split())
-        except Exception as e:
+        except subprocess.CalledProcessError as e:
+            print("===========================================================")
+            print(e.output)
+            print("===========================================================")
             raise Exception(
                 "Black style check failed; please format the code using:\n"
-                "  python -m black -l 100 *.py etc/ src/ tests/ docs"
+                "  python -m black -l 100 setup.py etc src tests docs",
+                e.output,
             ) from e
