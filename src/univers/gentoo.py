@@ -10,7 +10,7 @@ from univers.utils import cmp
 
 suffix_regexp = re.compile("^(alpha|beta|rc|pre|p)(\\d*)$")
 
-revision_regexp = re.compile(".*(-r\d+)")
+revision_regexp = re.compile(r".*(-r\d+)")
 
 suffix_value = {"pre": -2, "p": 1, "alpha": -4, "beta": -3, "rc": -1}
 

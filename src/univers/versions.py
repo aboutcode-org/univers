@@ -216,7 +216,7 @@ class RPMVersion(BaseVersion):
 @attr.s(frozen=True, init=False, order=False, eq=False, hash=True, repr=False)
 class GentooVersion(BaseVersion):
     scheme = "ebuild"
-    version_re = re.compile("^(?:\d+)(?:\.\d+)*[a-zA-Z]?(?:_(p(?:re)?|beta|alpha|rc)\d*)*$")
+    version_re = re.compile(r"^(?:\d+)(?:\.\d+)*[a-zA-Z]?(?:_(p(?:re)?|beta|alpha|rc)\d*)*$")
 
     def __init__(self, version_string):
         version_string = remove_spaces(version_string)
