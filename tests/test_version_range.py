@@ -2,7 +2,7 @@
 # Copyright (c) nexB Inc. and others.
 # SPDX-License-Identifier: Apache-2.0
 #
-# Visit https://aboutcode.org and https://github.com/nexB/ for support and download.
+# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
 import pytest
 
@@ -31,6 +31,7 @@ from univers.versions import version_class_by_scheme
         ("1.0.0b1", ">=1.0.0b1", True),
     ],
 )
+
 def test_pypi_comparison(version, spec, result):
     version_class = version_class_by_scheme["pypi"]
     version_object = version_class(version)
@@ -50,6 +51,7 @@ def test_pypi_comparison(version, spec, result):
         ("1.0.0+20130313144700", "=1.0.0+9999999999", False),
     ],
 )
+
 def test_semver_comparison(version, spec, result):
     version_class = version_class_by_scheme["semver"]
     version_object = version_class(version)

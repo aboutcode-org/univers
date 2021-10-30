@@ -1,7 +1,9 @@
 #
 # Copyright (c) 2006-2019, pkgcore contributors
 # SPDX-License-Identifier: BSD-3-Clause
-# Version comparision utility extracted from pkgcore and further stripped down.
+# Version comparison utility extracted from pkgcore and further stripped down.
+#
+# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
 import re
 

@@ -3,6 +3,8 @@
 # Copyright (c) SAS Institute Inc.
 # SPDX-License-Identifier: Apache-2.0
 # this has been significantly modified from the original
+#
+# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
 import io
 import os

@@ -1,10 +1,12 @@
 #
 # Copyright (c) nexB Inc. and others.
-# Exatrcted from http://nexb.com and https://github.com/nexB/debian_inspector/
+# Extracted from http://nexb.com and https://github.com/nexB/debian_inspector/
 # Copyright (c) Peter Odding
 # Author: Peter Odding <peter@peterodding.com>
 # URL: https://github.com/xolox/python-deb-pkg-tools
 # SPDX-License-Identifier: MIT
+#
+# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
 import logging
 import operator as operator_module

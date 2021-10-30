@@ -2,6 +2,8 @@
 # Copyright (c) Peter Odding <peter@peterodding.com>
 # URL: https://github.com/xolox/python-deb-pkg-tools
 # SPDX-License-Identifier: MIT
+#
+# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
 
 from unittest import TestCase

@@ -1,8 +1,10 @@
 #
 # Copyright (c) SAS Institute Inc.
 # SPDX-License-Identifier: Apache-2.0
-# Version comparision utility extracted from python-rpm-vercmp and further
+# Version comparison utility extracted from python-rpm-vercmp and further
 # stripped down and significantly modified from the original at python-rpm-vercmp
+#
+# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
 import re
 

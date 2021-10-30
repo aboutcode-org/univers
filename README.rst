@@ -5,7 +5,7 @@ univers: mostly universal version and version ranges comparison and conversion
 
 .. |Build Status| image:: https://api.travis-ci.com/sbs2001/univers.svg?branch=main&status=passed
 .. |License| image:: https://img.shields.io/badge/License-Apache%202.0-blue.svg
-   :target: https://opensource.org/licenses/Apache-2.0
+   :target: https://scancode-licensedb.aboutcode.org/apache-2.0.html
 .. |Python 3.6+| image:: https://img.shields.io/badge/python-3.6+-blue.svg
    :target: https://www.python.org/downloads/release/python-380/
 
@@ -40,7 +40,7 @@ univers is different and considers the ecosystem-specific version scheme used.
 How does univers work ?
 =========================
 
-univers wraps, embeds or implements multiple version comparision libraries, each
+univers wraps, embeds or implements multiple version comparison libraries, each
 focused on specific ecosystem version scheme.
 
 It also implements an experimental unified syntax for version ranges specifier
