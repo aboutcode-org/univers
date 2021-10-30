@@ -13,9 +13,10 @@ python:
   - "3.6"
   - "3.7"
   - "3.8"
+  - "3.9"
 
 # Scripts to run at install stage
-install: pip install ./ && pip install -r requirements-dev.txt
+install: ./configure --dev
 
 # Scripts to run at script stage
-script: python -m  pytest
+script: venv/bin/pytest

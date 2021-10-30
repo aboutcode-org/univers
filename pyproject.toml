@@ -1,8 +1,11 @@
 [build-system]
-requires = ["setuptools >= 50", "wheel", "setuptools_scm[toml] >= 4"]
+requires = ["setuptools >= 50", "wheel", "setuptools_scm[toml] >= 6"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
+# this is used populated when creating a git archive
+# and when there is .git dir and/or there is no git installed
+fallback_version = "9999.$Format:%h-%cs$"
 
 [tool.pytest.ini_options]
 norecursedirs = [
@@ -30,10 +33,11 @@ norecursedirs = [
    "Scripts",
    "thirdparty",
    "tmp",
+   "venv",
    "tests/data",
    ".eggs"
 ]
-    
+
 python_files = "*.py"
 
 python_classes = "Test"
@@ -41,6 +45,6 @@ python_functions = "test"
 
 addopts = [
     "-rfExXw",
-    "--strict",
+    "--strict-markers",
     "--doctest-modules"
 ]

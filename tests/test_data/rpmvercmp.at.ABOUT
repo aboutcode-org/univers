@@ -1,0 +1,9 @@
+about_resource: rpmvercmp.at
+description: rpm version comparison tests
+license_expression: gpl-2.0
+download_url: https://github.com/rpm-software-management/rpm/blob/04de5e6c854edf4ef4a79b44eac3b20451c88df5/tests/rpmvercmp.at
+copyright:  Copyright (c) Red Hat Software, Inc.
+package_url: pkg:github/rpm-software-management/rpm@04de5e6c854edf4ef4a79b44eac3b20451c88df5#/tests/rpmvercmp.at
+notes: this test file does not have an explicit license but is assumed to be GPL-licensed like the rest of RPM
+homepage_url: https://github.com/rpm-software-management/rpm
+notice_file: rpmvercmp.at.NOTICE

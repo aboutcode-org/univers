@@ -7,12 +7,12 @@
 /build
 /bin
 /lib
-/venv
 /scripts
 /Scripts
 /Lib
 /pip-selfcheck.json
 /tmp
+/venv
 .Python
 /include
 /Include

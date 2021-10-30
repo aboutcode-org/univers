@@ -7,6 +7,7 @@
 # http://nexb.com and https://github.com/nexB/debian_inspector/
 
 # SPDX-License-Identifier: Apache-2.0
+# this has been significantly modified from the original
 
 from unittest import TestCase
 

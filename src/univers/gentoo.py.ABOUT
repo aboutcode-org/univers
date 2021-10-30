@@ -6,7 +6,6 @@ copyright: |
 license_expression: BSD-3-Clause
 homepage_url: https://github.com/pkgcore/pkgcore/blob/master/src/pkgcore/ebuild/cpv.py
 
-notes: |
-    The version comparision utility is extracted from pkgcore and further stripped down.
+notes: The version comparision utility is extracted from pkgcore and further stripped down.
 
 notice_file: gentoo.py.NOTICE
