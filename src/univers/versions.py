@@ -5,19 +5,18 @@
 # Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
 import re
-import attr
 from functools import total_ordering
+
+import attr
+import semantic_version
 from packaging import version as pypi_version
 
-import semantic_version
-
+from univers import arch
+from univers import debian
+from univers import gentoo
+from univers import maven
+from univers import rpm
 from univers.utils import remove_spaces
-from univers.debian import Version as _DebianVersion
-from univers.maven import Version as _MavenVersion
-from univers.rpm import vercmp as rpm_vercmp
-from univers.gentoo import vercmp as gentoo_vercmp
-from univers.gentoo import parse_version_and_revision as parse_gentoo_version_and_revision
-from univers.arch import vercmp as arch_vercmp
 
 
 class InvalidVersion(ValueError):
@@ -131,10 +130,10 @@ class ArchVersion(BaseVersion):
 
     def __eq__(self, other):
         # TBD: Should this verify the type of `other`
-        return arch_vercmp(self.value, other.value) == 0
+        return arch.vercmp(self.value, other.value) == 0
 
     def __lt__(self, other):
-        return arch_vercmp(self.value, other.value) == -1
+        return arch.vercmp(self.value, other.value) == -1
 
 
 @total_ordering
@@ -144,7 +143,7 @@ class DebianVersion(BaseVersion):
 
     def __init__(self, version_string):
         version_string = remove_spaces(version_string)
-        object.__setattr__(self, "value", _DebianVersion.from_string(version_string))
+        object.__setattr__(self, "value", debian.Version.from_string(version_string))
         object.__setattr__(self, "version_string", version_string)
 
     @staticmethod
@@ -165,7 +164,7 @@ class MavenVersion(BaseVersion):
 
     def __init__(self, version_string):
         version_string = remove_spaces(version_string)
-        object.__setattr__(self, "value", _MavenVersion(version_string))
+        object.__setattr__(self, "value", maven.Version(version_string))
         object.__setattr__(self, "version_string", version_string)
 
     @staticmethod
@@ -204,11 +203,11 @@ class RPMVersion(BaseVersion):
         pass
 
     def __eq__(self, other):
-        result = rpm_vercmp(self.value, other.value)
+        result = rpm.vercmp(self.value, other.value)
         return result == 0
 
     def __lt__(self, other):
-        result = rpm_vercmp(self.value, other.value)
+        result = rpm.vercmp(self.value, other.value)
         return result == -1
 
 
@@ -226,16 +225,16 @@ class GentooVersion(BaseVersion):
 
     @staticmethod
     def validate(version_string):
-        version, _ = parse_gentoo_version_and_revision(version_string)
+        version, _ = gentoo.parse_version_and_revision(version_string)
         if not GentooVersion.version_re.match(version):
             raise InvalidVersion(f"Invalid version: '{version_string}'")
 
     def __eq__(self, other):
-        result = gentoo_vercmp(self.value, other.value)
+        result = gentoo.vercmp(self.value, other.value)
         return result == 0
 
     def __lt__(self, other):
-        result = gentoo_vercmp(self.value, other.value)
+        result = gentoo.vercmp(self.value, other.value)
         return result == -1
 
 
