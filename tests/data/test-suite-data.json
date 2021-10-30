@@ -1,0 +1,24 @@
+[
+  {
+    "description": "valid simple semver version",
+    "vers": "vers:semver/=1.3.4",
+    "canonical_vers": "vers:semver/1.3.4",
+    "scheme": "semver",
+    "constraints": [
+       [{"comparator": "=", "version": "1.3.4"}]
+    ],
+    "is_invalid": false
+  },
+  {
+    "description": "valid complex debian version",
+    "vers": "vers:debian/ 5.0A , >  = 2.6 & < 3, > = 3.4.4+reloaded2-13+deb9u1 ",
+    "canonical_vers": "vers:debian/>=2.6&<3,>=3.4.4+reloaded2-13+deb9u1,5.0a",
+    "scheme": "debian",
+    "constraints": [
+       [{"comparator": ">=", "version": "2.6"}, {"comparator": "<", "version": "3"}],
+       [{"comparator": ">=", "version": "3.4.4+reloaded2-13+deb9u1"}],
+       [{"comparator": "=", "version": "5.0a"}]
+    ],
+    "is_invalid": false
+  }
+]
