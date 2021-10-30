@@ -85,7 +85,7 @@ def get_tests():
     """
     Yield test function from rpmvercmp.at data.
     """
-    test_file = os.path.join(os.path.dirname(__file__), "test_data", "rpmvercmp.at")
+    test_file = os.path.join(os.path.dirname(__file__), "data", "rpmvercmp.at")
 
     with io.open(test_file, encoding="utf-8") as rpmtests:
         tests = list(parse_rpmvercmp_tests(rpmtests, with_buggy_comparisons=True))
