@@ -23,8 +23,8 @@ class VersionRange:
         try:
             validate_scheme(scheme)
             self.validate()
-        except:
-            raise ValueError(f"Version range{version_range_string} has no bounds")
+        except Exception as e:
+            raise ValueError(f"Version range has no bounds: {version_range_string!r}") from e
 
         version_class = version_class_by_scheme[scheme]
 
@@ -53,12 +53,13 @@ class VersionRange:
 
         if version.__class__ != self.version.__class__:
             raise ValueError(
-                f"Can't compare {version.__class__} instance with {self.version.__class__} instance"
+                f"Can't compare {version.__class__!r} instance "
+                f"with {self.version.__class__!r} instance."
             )
 
         operators = {
-            "<=": operator_module.le,
             ">=": operator_module.ge,
+            "<=": operator_module.le,
             "!=": operator_module.ne,
             "<": operator_module.lt,
             ">": operator_module.gt,
