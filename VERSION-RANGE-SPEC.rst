@@ -104,7 +104,7 @@ Each package ecosystem may have evolved its own peculiar version comparison
 procedure. 
 
 For instance, semver is a prominent specification in this domain but this is
-just one of the many ways to structure a version string. 
+just one of the many ways to structure a version string.
 
 Debian, RPM, PyPI,  Rubygems, and Composer have their own subtly different
 approach on how to determine which version is greater or lesser.
