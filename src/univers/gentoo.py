@@ -8,7 +8,11 @@
 import re
 
 from univers.utils import cmp
+from univers.utils import remove_spaces
 
+_is_gentoo_version = re.compile(
+    r"^(?:\d+)(?:\.\d+)*[a-zA-Z]?(?:_(p(?:re)?|beta|alpha|rc)\d*)*$"
+).match
 
 suffix_regexp = re.compile("^(alpha|beta|rc|pre|p)(\\d*)$")
 
@@ -19,6 +23,11 @@ suffix_value = {"pre": -2, "p": 1, "alpha": -4, "beta": -3, "rc": -1}
 """
 gentoo ebuild version comparison
 """
+
+
+def is_valid(string):
+    version, _ = parse_version_and_revision(remove_spaces(string))
+    return _is_gentoo_version(version)
 
 
 def parse_version_and_revision(version_string):
