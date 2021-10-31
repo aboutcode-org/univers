@@ -97,13 +97,17 @@ in use:
   such as star and caret.
 
 
-Note that there is a closely related problem: the way two versions are compared
-as equal, lesser or greater is complex and package types may have evolved their
-own peculiar version comparison procedure. Semver is a prominent specification
-in this domain but this is just one of the many versioning schemes. Semver,
-Debian, RPM, PyPI,  Rubygems, and Composer all have their own subtly different
-ways of comparing two versions even though they may seem highly similar at first
-glance.
+Note that there is a closely related problem as the way two versions are compared
+as equal, lesser or greater is often complex.
+
+Each package ecosystem may have evolved its own peculiar version comparison
+procedure. 
+
+For instance, semver is a prominent specification in this domain but this is
+just one of the many ways to structure a version string. 
+
+Debian, RPM, PyPI,  Rubygems, and Composer have their own subtly different
+approach on how to determine which version is greater or lesser.
 
 
 Solution
