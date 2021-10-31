@@ -6,7 +6,7 @@
 
 
 def remove_spaces(string):
-    return string.replace(" ", "")
+    return "".join(string.split())
 
 
 def cmp(x, y):
