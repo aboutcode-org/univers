@@ -49,7 +49,8 @@ error prone task.
 
 In particular the need for common notation for version has emerged based on the
 usage of Package URLs referencing vulnerable package version ranges such as in
-vulnerability databases like VulnerableCode.
+vulnerability databases like `VulnerableCode
+<https://github.com/nexB/vulnerablecode/>`_.
 
 To better understand the problem, here are some of the notations and conventions
 in use:
@@ -133,7 +134,7 @@ For example to define a set of versions that contains either version ``1.2.3``,
 or any versions greater than or equal to ``2.0.0`` but less than ``5.0.0`` using
 the `semver` versioning scheme, the version range specifier will be::
 
-    vers:semver/1.2.3,>=2.0.0&<5.0.0`
+    vers:semver/1.2.3,>=2.0.0&<5.0.0
 
 Each ``<version-constraint>`` in the comma-separated list is either a simple
 constraint such as::
@@ -141,7 +142,7 @@ constraint such as::
     <comparator:version>
 
 Or a composite constraint grouping multiple ``<version-constraint>`` joined by
-an ampersand such as:
+an ampersand such as::
 
     <comparator:version>&<comparator:version>...
 
@@ -208,8 +209,7 @@ The ``<comparator>`` is one of these comparison operators:
 
 - "!=": Version exclusion or inequality comparator. This means a version must
   not be equal to the provided version and this version must be excluded from
-  the range. For example: "!=1.2.3" means that version "1.2.3" is not part of
-  the range.
+  the range. For example: "!=1.2.3" means that version "1.2.3" is excluded.
 
 - "<", "<=": Less than or less-or-equal version comparators points to all
   versions less than or equal to the provided version. For example "<=1.2.3"
@@ -303,13 +303,14 @@ To parse a version range specifier string:
   - Verify that the URI-scheme value is ``vers``.
 - The right hand side is the specifier.
 
-- Split the specifier from left once on colon ":".
+- Split the specifier from left once on a slash "/".
 - The left hand side is the <versioning-scheme> that must be lowercase.
 - The right hand side is the constraints.
 
 - If the constraint contains a star "*", validate that it is equal to "*".
   <version-constraint> is "*". Parsing is done and no further processing is
-  needed for this ``vers``.
+  needed for this ``vers``. A tool may be strict and report an error
+  if there are extra characters beyond "*" or be lenient.
 
 - Split the ranges on comma ",". The result is a list of <version-constraint>
   strings.
@@ -454,8 +455,8 @@ https://nvd.nist.gov/vuln/vulnerability-detail-pages#divRange
 
 The NVD CPE Match String Range is a complex specification that goes well beyond
 version ranges and is used to match comprehensive configurations across multiple
-products and version ranges. The notation is to uses these fields in the CVE API
-or feeds under "configurations"::
+products and version ranges. The notation for version ranges uses these two
+fields (in the CVE API or feeds) under the "configurations" attribute::
 
     "versionStartIncluding": "7.3.0",
     "versionEndExcluding": "7.3.31",
@@ -474,7 +475,7 @@ has a few practical issues:
 
 - The space means "AND" and significant whitespace in a single string makes
   normalization more complicated and may be a source of confusion or errors. The
-  explicit ampersand used an "AND" operator specified here improves clarity.
+  explicit ampersand used as "AND" operator specified here improves clarity.
 
 - There is no negation "!=" operator meaning that some version constraints are
   difficult to express and require combining < and > comparators. For instance
