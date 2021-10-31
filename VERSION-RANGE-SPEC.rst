@@ -85,6 +85,10 @@ in use:
   - Gentoo https://wiki.gentoo.org/wiki/Version_specifier
   - Alpine linux https://gitlab.alpinelinux.org/alpine/apk-tools/-/blob/master/src/version.c
 
+- Arch Linux https://wiki.archlinux.org/title/PKGBUILD#Dependencies use a
+  simplified notation for its PKGBUILD depends array with comparison operators
+  similar to this specification.
+
 - Go modules https://golang.org/ref/mod#versions use semver versions with
   specific version resolution algorithms.
 
