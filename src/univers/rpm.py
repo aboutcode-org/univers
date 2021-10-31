@@ -9,7 +9,7 @@
 import re
 
 
-class Vercmp(object):
+class Vercmp:
     R_NONALNUMTILDE = re.compile(br"^([^a-zA-Z0-9~]*)(.*)$")
     R_NUM = re.compile(br"^([\d]+)(.*)$")
     R_ALPHA = re.compile(br"^([a-zA-Z]+)(.*)$")
