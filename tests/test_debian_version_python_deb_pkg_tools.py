@@ -1,10 +1,8 @@
-# Debian packaging tools: Automated tests.
 #
-# Author: Peter Odding <peter@peterodding.com>
-# Last Change: March 9, 2021
+# Copyright (c) Peter Odding <peter@peterodding.com>
 # URL: https://github.com/xolox/python-deb-pkg-tools
-
 # SPDX-License-Identifier: MIT
+
 
 from unittest import TestCase
 

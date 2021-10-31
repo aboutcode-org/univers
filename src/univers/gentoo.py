@@ -1,22 +1,28 @@
-"""gentoo ebuild specific base package class"""
+#
+# Copyright (c) 2006-2019, pkgcore contributors
+# SPDX-License-Identifier: BSD-3-Clause
+# Version comparision utility extracted from pkgcore and further stripped down.
 
 import re
 
+from univers.utils import cmp
+
+
 suffix_regexp = re.compile("^(alpha|beta|rc|pre|p)(\\d*)$")
 
-revision_regexp = re.compile(".*(-r\d+)")
+revision_regexp = re.compile(r".*(-r\d+)")
 
 suffix_value = {"pre": -2, "p": 1, "alpha": -4, "beta": -3, "rc": -1}
 
-# while the package section looks fugly, there is a reason for it-
-# to prevent version chunks from showing up in the package
-
-
-def cmp(a, b):
-    return bool(a > b) - bool(a < b)
+"""
+gentoo ebuild version comparison
+"""
 
 
 def parse_version_and_revision(version_string):
+    """
+    Return a tuple of (version string, revision int) given a ``version_string``.
+    """
     revision = 0
     version = version_string
     match = revision_regexp.search(version_string)
@@ -28,6 +34,22 @@ def parse_version_and_revision(version_string):
 
 
 def vercmp(ver1, ver2):
+    """
+    Compare two versions ``ver1`` and ``ver2`` and return 0, 1, or -1 according
+    to the Python 2 cmp() semantics:
+
+        Compare the two objects x and y and return an integer according to the
+        outcome. The return value is negative if x < y, zero if x == y and
+        strictly positive if x > y.
+    """
+    if not ver1:
+        if not ver2:
+            return 0
+        else:
+            return -1
+    elif not ver2:
+        return 1
+
     ver1, rev1 = parse_version_and_revision(ver1)
     ver2, rev2 = parse_version_and_revision(ver2)
 

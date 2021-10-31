@@ -1,15 +1,20 @@
+#
 # Copyright 2016-2020 Christoph Reiter
 # SPDX-License-Identifier: MIT
+# Version comparision utility extracted from msys2 and further stripped down.
 
 import re
 from itertools import zip_longest
-from typing import List, Tuple, Optional, Dict, Set
+from typing import Dict
+from typing import List
+from typing import Optional
+from typing import Set
+from typing import Tuple
+
+from univers.utils import cmp
 
 
 def vercmp(v1: str, v2: str) -> int:
-    def cmp(a: int, b: int) -> int:
-        return (a > b) - (a < b)
-
     def split(v: str) -> Tuple[str, str, Optional[str]]:
         if ":" in v:
             e, v = v.split(":", 1)

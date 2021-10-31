@@ -1,19 +1,8 @@
+#
 # Copyright (c) nexB Inc. and others.
 # SPDX-License-Identifier: Apache-2.0
 #
 # Visit https://aboutcode.org and https://github.com/nexB/ for support and download.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
 
 import re
 import attr
@@ -36,11 +25,16 @@ class InvalidVersion(ValueError):
 
 
 class BaseVersion:
-    # each version value should be comparable e.g. implement functools.total_ordering
+    """
+    Base  version object to subclass for each version scheme.
 
-    scheme = attr.ib()
-    value = attr.ib()
-    version_string = attr.ib()
+    Each version value should be comparable e.g., implement
+    functools.total_ordering
+    """
+
+    # the version scheme is a class attribute
+    scheme = None
+    value = attr.ib(type=str)
 
     def validate(self):
         """
@@ -49,14 +43,11 @@ class BaseVersion:
         raise NotImplementedError
 
     def __str__(self):
-        return f"{self.scheme}:{self.version_string}"
-
-    def __repr__(self) -> str:
-        return f"{self.__class__.__name__} <{self.__str__()}>"
+        return f"{self.scheme}:{self.value}"
 
 
 @total_ordering
-@attr.s(frozen=True, init=False, order=False, eq=False, hash=True, repr=False)
+@attr.s(frozen=True, init=False, order=False, hash=True)
 class PYPIVersion(BaseVersion):
     scheme = "pypi"
 
@@ -71,7 +62,7 @@ class PYPIVersion(BaseVersion):
 
     @staticmethod
     def validate(version_string):
-        match = pypi_version.Version._regex.search(version_string)
+        match = pypi_version.Version._regex.search(version_string)  # NOQA
         if not match:
             raise InvalidVersion(f"Invalid version: '{version_string}'")
 
@@ -91,9 +82,13 @@ class GenericVersion:
         Validate that the version is valid for its scheme
         """
         # generic implementation ...
-        # use 1. of https://github.com/repology/libversion/blob/master/doc/ALGORITHM.md#core-algorithm
-        #  Version is split into separate all-alphabetic or all-numeric components. All other characters are treated as separators. Empty components are not generated.
-        #     10.2alpha3..patch.4. → 10, 2, alpha, 3, patch, 4
+        # TODO: Should use
+        # https://github.com/repology/libversion/blob/master/doc/ALGORITHM.md#core-algorithm
+        #  Version is split into separate all-alphabetic or all-numeric
+        #  components.
+        # All other characters are treated as separators. Empty components are
+        # not generated.
+        #   10.2alpha3..patch.4. → 10, 2, alpha, 3, patch, 4
 
 
 @attr.s(frozen=True, init=False, order=False, eq=False, hash=True, repr=False)
@@ -221,7 +216,7 @@ class RPMVersion(BaseVersion):
 @attr.s(frozen=True, init=False, order=False, eq=False, hash=True, repr=False)
 class GentooVersion(BaseVersion):
     scheme = "ebuild"
-    version_re = re.compile("^(?:\d+)(?:\.\d+)*[a-zA-Z]?(?:_(p(?:re)?|beta|alpha|rc)\d*)*$")
+    version_re = re.compile(r"^(?:\d+)(?:\.\d+)*[a-zA-Z]?(?:_(p(?:re)?|beta|alpha|rc)\d*)*$")
 
     def __init__(self, version_string):
         version_string = remove_spaces(version_string)
@@ -246,6 +241,7 @@ class GentooVersion(BaseVersion):
 
 # TODO : Should these be upper case global constants ?
 
+
 version_class_by_scheme = {
     "generic": GenericVersion,
     "semver": SemverVersion,
@@ -257,18 +253,25 @@ version_class_by_scheme = {
     "ebuild": GentooVersion,
 }
 
-# TODO: This is messed up
+
 version_class_by_package_type = {
     "deb": DebianVersion,
     "pypi": PYPIVersion,
     "maven": MavenVersion,
     "nuget": NugetVersion,
+    # TODO: composer may need its own scheme see https://github.com/nexB/univers/issues/5
+    # and https://getcomposer.org/doc/articles/versions.md
     "composer": SemverVersion,
-    "npm": SemverVersion,
+    # TODO: gem may need its own scheme see https://github.com/nexB/univers/issues/5
+    # and https://snyk.io/blog/differences-in-version-handling-gems-and-npm/
+    # https://semver.org/spec/v2.0.0.html#spec-item-11
     "gem": SemverVersion,
+    "npm": SemverVersion,
     "rpm": RPMVersion,
     "golang": SemverVersion,
     "generic": SemverVersion,
+    # apache is not semver at large. And in particular we may have schemes that
+    # are package name-specific
     "apache": SemverVersion,
     "hex": SemverVersion,
     "cargo": SemverVersion,

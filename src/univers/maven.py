@@ -1,28 +1,14 @@
 #
 # Copyright (c) SAS Institute Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-
-# TODO: Add something to track origin and the changes.
-
-"""
-Versioning of artifacts
-"""
+# SPDX-License-Identifier: Apache-2.0
+# Version comparision utility extracted from pymaven and further stripped down
+# and significantly modified from the original at pymaven
 
 import functools
-
 from itertools import zip_longest
+
+from univers.utils import cmp
+
 
 # TODO: Use common exceptions with other modules
 class VersionRangeParseError(ValueError):
@@ -51,22 +37,6 @@ ALIASES = {
 
 def list2tuple(l):
     return tuple(list2tuple(x) if isinstance(x, list) else x for x in l)
-
-
-def cmp(x, y):
-    """
-    Replacement for built-in funciton cmp that was removed in Python 3
-    Compare the two objects x and y and return an integer according to
-    the outcome. The return value is negative if x < y, zero if x == y
-    and strictly positive if x > y.
-    """
-    if x is None and y is None:
-        return 0
-    elif x is None:
-        return -1
-    elif y is None:
-        return 1
-    return (x > y) - (x < y)
 
 
 @functools.total_ordering

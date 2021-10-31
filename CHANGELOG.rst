@@ -1,15 +1,26 @@
 Release notes
 -------------
+
+### Version v30.0.0
+
+- Switching back to semver
+- Improve origin and license documentation
+- Add tests for carets in RPMs
+- Format, stremmline and refactor code
+- Improve testing
+
+
 ### Version v21.4.9
 
-- Added support Gentoo style versions. 
+- Add support Gentoo style versions. 
+
 
 ### Version v21.4.8
 
-- More package types supported.
-- Version classes are hashable and frozen now
+- Add support for more package types.
+- Version classes are now hashable and frozen
+
 
 ### Version v21.4.6
 
 - Initial Release
-
