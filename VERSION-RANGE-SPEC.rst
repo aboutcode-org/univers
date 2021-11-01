@@ -461,7 +461,7 @@ In contrast, this would not be possible with existing notations. For instance,
 the Python notation may not work with npm versions and reciprocally.
 
 There are likely to be a few rare cases where round tripping from and to
-``vers`` may not be possible, and in anycase round tripping to and from ``vers``
+``vers`` may not be possible, and in any case round tripping to and from ``vers``
 may only produce equivalent results and not strictly the same original strings.
 
 Another issue with existing version range notations is that, they are primarily
@@ -566,6 +566,22 @@ similar to this spec's operators with the addition of the "~>" aka. pessimistic
 operator or tilde-wakka which is similar to the "tilde" used in node-semver and
 implies semver versioning. This makes the notation impractical to reuse
 in places that do not use the same semver-like semantics.
+
+
+Why not use more extra comparators such as a tilde, carret and star?
+#####################################################################
+
+Several existing notations such as node-semver, rubygems or composer specs
+provide syntactic shorthand such as:
+
+- a tilde prefix or ~> prefix  as in "~1.3" or "~>1.2.3"
+- a caret ^ prefix as in "^ 1.2"
+- using a star in a segment of a semver version as in "1.2.*"
+- dash-separated ranges as in "1.2 - 1.4"
+
+These range syntaxes can be reduced to a simpler notation here. Furthermore they
+are designed for the structure of a version string (most often semver) as used
+in one ecosystem and therefore are not reusable everywhere.
 
 
 References
