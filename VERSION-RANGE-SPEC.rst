@@ -12,7 +12,7 @@ Software package version ranges and version constraints are essential:
 
 - When resolving the dependencies of a package to express which subset of the
   versions are supported. For instance a dependency or requirement statement
-  such as "I require package foo, version 2.0 and later versions" defines a
+  such as "I require package foo, version 2.0 or later versions" defines a
   range of acceptable foo versions.
 
 - When stating that a known vulnerability or bug affects a range of package
