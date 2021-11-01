@@ -40,9 +40,10 @@ most version range notations are similar.
 
 Each package type or ecosystem may define their own ranges notation and version
 comparison semantics for dependencies. And for security advisories, the lack of
-portable notation for vulnerable package version ranges means that these ranges
-may be either ambiguous or hard to compute and are typically replaced by
-complete enumerations of all versions, such as the NVD CPEs.
+a portable and compact notation for vulnerable package version ranges means that
+these ranges may be either ambiguous or hard to compute and may be best replaced
+by complete enumerations of all impacted versions, such as in the `NVD CPE Match
+feed <https://nvd.nist.gov/vuln/data-feeds#cpeMatch>`_.
 
 Because of this, expressing and resolving a version range is often a complex, or
 error prone task.
@@ -96,6 +97,10 @@ in use:
   similar to this specification based on a modified semver with extra notations
   such as star and caret.
 
+- The NVD https://nvd.nist.gov/vuln/data-feeds#cpeMatch defines CPE ranges as
+  lists of version start and end either including or excluding the start or end
+  version. And also provides a concrete enumeration of the available ranges as
+  a daily feed.
 
 Note that there is a closely related problem as the way two versions are compared
 as equal, lesser or greater is often complex.
@@ -459,18 +464,30 @@ resolution.
 Why not use the NVD CPE Ranges?
 ###############################
 
-https://nvd.nist.gov/vuln/vulnerability-detail-pages#divRange
+- https://nvd.nist.gov/vuln/vulnerability-detail-pages#divRange
+- https://nvd.nist.gov/developers/vulnerabilities#divResponse
+- https://csrc.nist.gov/schema/nvd/feed/1.1/nvd_cve_feed_json_1.1.schema
 
-The NVD CPE Match String Range is a complex specification that goes well beyond
-version ranges and is used to match comprehensive configurations across multiple
-products and version ranges. The notation for version ranges uses these two
-fields (in the CVE API or feeds) under the "configurations" attribute::
+The version ranges notation defined in the JSON schema of the CVE API payload
+uses these four fields: ``versionStartIncluding``, ``versionStartExcluding``,
+``versionEndIncluding`` and ``versionEndExcluding``. For example::
 
     "versionStartIncluding": "7.3.0",
     "versionEndExcluding": "7.3.31",
+    "versionStartExcluding" : "9.0.0",
+    "versionEndIncluding" : "9.0.46",
 
-This notation is limited and is compatible can be expressed in ``vers`` but this
-does not provide a compact notation like ``vers`` does.
+In addition to these ranges, the NVD publishes a list of concrete CPE with
+versions resolved for a range with daily updates at
+https://nvd.nist.gov/vuln/data-feeds#cpeMatch 
+
+Note that the NVD CVE configuration is a complex specification that goes well
+beyond version ranges and is used to match comprehensive configurations across
+multiple products and version ranges. ``vers`` focus is exclusively versions.
+
+The NVD JSON notation is verbose in contrast with ``vers`` that attempts to
+provide a compact notation. It provides the same =, <=, < and > comparators
+specified in ``vers`` and found in other notations.
 
 
 Why not use node-semver ranges?
