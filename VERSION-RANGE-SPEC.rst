@@ -56,15 +56,19 @@ vulnerability databases like `VulnerableCode
 To better understand the problem, here are some of the notations and conventions
 in use:
 
-- Rubygems strongly suggest using semver but does not enforce it
+- ``semver`` https://semver.org/ is a popular specification to structure version
+  strings, but does not provide a way to express version ranges.
+
+- Rubygems strongly suggest using ``semver`` for version but does not enforce it.
+  It use its own notation for version ranges.
   https://guides.rubygems.org/patterns/#semantic-versioning
 
 - node-semver ranges are used in npms https://github.com/npm/node-semver#ranges
-  with semantics specific to semver and node and npm.
+  with their own range semantics that are specific to ``semver`` and npm.
 
-- Dart pub versioning scheme is similar to node-semver and the documentation at
-  https://dart.dev/tools/pub/versioning provides a comprehensive coverage of the
-  topic of versioning. But version resolution is using its own algorithm.
+- Dart pub versioning scheme is similar to ``node-semver`` and the documentation
+  at https://dart.dev/tools/pub/versioning provides a comprehensive coverage of
+  the topic of versioning. Version resolution is using its own algorithm.
 
 - Python uses its own version ranges notation https://www.python.org/dev/peps/pep-0440/
 
@@ -74,21 +78,24 @@ in use:
 - RPM distros use their own range notation
   https://rpm-software-management.github.io/rpm/manual/dependencies.html
 
-- Perl CPAN define its own version range notation similar to this specification:
+- Perl CPAN define its own version range notation similar to this specification
   https://metacpan.org/pod/CPAN::Meta::Spec#Version-Ranges
 
 - Apache Maven and NuGet use math intervals notation
   https://en.wikipedia.org/wiki/Interval_(mathematics)
+
   - Apache Maven http://maven.apache.org/enforcer/enforcer-rules/versionRanges.html
   - NuGet https://docs.microsoft.com/en-us/nuget/concepts/package-versioning#version-ranges
+
+- gradle uses Apache Maven notation with extensions
+  https://docs.gradle.org/current/userguide/single_versions.html
 
 - Gentoo and Alpine Linux use comparison operators similar to this specification:
   - Gentoo https://wiki.gentoo.org/wiki/Version_specifier
   - Alpine linux https://gitlab.alpinelinux.org/alpine/apk-tools/-/blob/master/src/version.c
 
-- Arch Linux https://wiki.archlinux.org/title/PKGBUILD#Dependencies use a
-  simplified notation for its PKGBUILD depends array with comparison operators
-  similar to this specification.
+- Arch Linux https://wiki.archlinux.org/title/PKGBUILD#Dependencies use its
+  own simplified notation for its PKGBUILD depends array.
 
 - Go modules https://golang.org/ref/mod#versions use semver versions with
   specific version resolution algorithms.
@@ -103,16 +110,16 @@ in use:
   a daily feed.
 
 Note that there is a closely related problem as the way two versions are compared
-as equal, lesser or greater is often complex.
+as equal, lesser or greater is often complex:
 
-Each package ecosystem may have evolved its own peculiar version comparison
-procedure. 
+- Each package ecosystem may have evolved its own peculiar version comparison
+  procedure. 
 
-For instance, semver is a prominent specification in this domain but this is
-just one of the many ways to structure a version string.
+- For instance, semver is a prominent specification in this domain but this is
+  just one of the many ways to structure a version string.
 
-Debian, RPM, PyPI,  Rubygems, and Composer have their own subtly different
-approach on how to determine which version is greater or lesser.
+- Debian, RPM, PyPI,  Rubygems, and Composer have their own subtly different
+  approach on how to determine which version is greater or lesser.
 
 
 Solution
@@ -121,11 +128,11 @@ Solution
 A solution to the many version range syntaxes is to design a new notation to
 unify them all with:
 
-- a mostly universal and minimalist notation to express the version range
-  notations from many different package types and ecosystems.
+- a mostly universal and minimalist, compact notation to express version ranges
+  from many different package types and ecosystems.
 
 - the package type-specific definitions to normalize existing range expressions
-  to this common notation .
+  to this common notation.
 
 - the designation of which algorithm or procedure to use when comparing two
   versions such that it is possible to resolve if a version is within or
@@ -145,9 +152,9 @@ URI-scheme with this syntax::
 
 For example to define a set of versions that contains either version ``1.2.3``,
 or any versions greater than or equal to ``2.0.0`` but less than ``5.0.0`` using
-the `semver` versioning scheme, the version range specifier will be::
+the ``node-semver`` versioning scheme, the version range specifier will be::
 
-    vers:semver/1.2.3,>=2.0.0&<5.0.0
+    vers:node-semver/1.2.3,>=2.0.0&<5.0.0
 
 Each ``<version-constraint>`` in the comma-separated list is either a simple
 constraint such as::
@@ -173,7 +180,7 @@ for a future formal registration for this URI-scheme at the IANA registry.
 ``<versioning-scheme>``
 ------------------------
 
-The ``<versioning-scheme>`` (such as ``semver``,
+The ``<versioning-scheme>`` (such as ``node-semver``,
 ``debian``, etc.) determines:
 
 - the specific notation and conventions used for a version string encoded in
@@ -368,7 +375,7 @@ Notes and caveats
 ~~~~~~~~~~~~~~~~~~~
 
 - Comparing versions from two different versioning schemes is unspecified. Even
-  though there may be some similarities between the `semver` version of an npm
+  though there may be some similarities between the ``semver`` version of an npm
   and the `debian` version of its Debian packaging, these similarities are
   specific to each versioning scheme. Tools may report an error in these
   cases.
@@ -394,12 +401,15 @@ scheme and package type.
   The version comparison routine of rmpvercmp is also used by archlinux Pacman.
 
 - ``rubygems``: Rubygems https://guides.rubygems.org/patterns/#semantic-versioning
-  which is almost but not exactly semver.
+  which is almost but not exactly ``node-semver``.
 
-- ``semver``: node-semver as used for npm https://github.com/npm/node-semver#ranges
-  It is also used by Rust: https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html
-  and several other package types. `composer` may need its own scheme as this is
-  not strictly semver.
+- ``node-semver``: node-semver is based on semver and is used for npm
+  https://github.com/npm/node-semver#ranges
+  A similar scheme is used by Rust https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html
+  and several other package types that use ``semver``. But most of these related
+  schemes are not strictly the same as what is implemented in ``node-semver``.
+  For instance PHP ``composer`` may need its own scheme as this is not strictly
+  ``node-semver``.
 
 - ``python``: Python https://www.python.org/dev/peps/pep-0440/
 
@@ -417,12 +427,13 @@ scheme and package type.
 - ``gentoo``: Gentoo https://wiki.gentoo.org/wiki/Version_specifier
 
 - ``alpine``: Alpine linux https://gitlab.alpinelinux.org/alpine/apk-tools/-/blob/master/src/version.c
-  (which might be using Gentoo conventions)
+  which is using Gentoo-like conventions.
 
 - ``generic``: a generic version comparison algorithm (which is TBD, likely a
   split on punctuation and dealing with digit vs. strings comparisons, like is
   done in libversion)
 
+TODO: add Rust, composer and archlinux
 
 
 Implementations
@@ -493,14 +504,16 @@ specified in ``vers`` and found in other notations.
 Why not use node-semver ranges?
 ###############################
 
-https://github.com/npm/node-semver#ranges
+- https://github.com/npm/node-semver#ranges
 
-The node semver is very similar to this spec (this is also an OR of ANDs) but it
-has a few practical issues:
+The node-semver spec is similar to this spec but is an AND of ORs with a few
+issues:
 
-- The space means "AND" and significant whitespace in a single string makes
-  normalization more complicated and may be a source of confusion or errors. The
-  explicit ampersand used as "AND" operator specified here improves clarity.
+- The space means "AND", therefore whitespaces are significant. Having
+  significant whitespaces in string makes normalization more complicated and may
+  be a source of confusion if you remove the spaces from the string. Using an
+  ampersand as an "AND" operator in ``vers`` makes this explicit and avoids any
+  ambiguity.
 
 - There is no negation "!=" operator meaning that some version constraints are
   difficult to express and require combining < and > comparators. For instance
@@ -510,14 +523,18 @@ has a few practical issues:
 - The advanced range syntax has grown to be rather complex using hyphen, stars,
   carets and tilde constructs are all tied to the JavaScript and npm ways of
   handling versions in their specific ecosystem and furthermore are bound to the
-  semver semantics. These are not readily reusable elsewhere. And these multiple
-  comparators and modifiers make the grammar and parsing more complex.
+  semver semantics and the npm implementation. These are not readily reusable
+  elsewhere. And these multiple comparators and modifiers make the grammar and
+  parsing more complex.
+
+Notations that are directly derived from node-semver as used in Rust and PHP
+Composer have the same issues.
 
 
 Why not use Python pep-0440 ranges?
 #####################################
 
-https://www.python.org/dev/peps/pep-0440/#version-specifiers
+- https://www.python.org/dev/peps/pep-0440/#version-specifiers
 
 The Python pep-0440 "Version Identification and Dependency Specification"
 provides a comprehensive specification for Python package versioning and a
@@ -542,7 +559,7 @@ only in the Python ecosystem.
 Why not use Rubygems requirements notation?
 ##############################################################
 
-https://guides.rubygems.org/patterns/#declaring-dependencies
+- https://guides.rubygems.org/patterns/#declaring-dependencies
 
 The rubygems specification suggests but does not enforce using semver. It is
 similar to this spec's operators with the addition of the "~>" aka. pessimistic
