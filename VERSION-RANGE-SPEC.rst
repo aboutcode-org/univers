@@ -109,11 +109,27 @@ in use:
   version. And also provides a concrete enumeration of the available ranges as
   a daily feed.
 
-Note that there is a closely related problem as the way two versions are compared
-as equal, lesser or greater is often complex:
+- The version 5 of the NVD CVE JSON data format at
+  https://github.com/CVEProject/cve-schema/blob/master/schema/v5.0/CVE_JSON_5.0.schema#L303
+  defines version ranges with a starting version, a versionType, and an upper
+  limit for the version range as lessThan or lessThanOrEqual. Or an enumeration
+  of versions. The versionType is defined as ``"The version numbering system
+  used for specifying the range. This defines the exact semantics of the
+  comparison (less-than) operation on versions, which is required to understand
+  the range itself"``.
 
-- Each package ecosystem may have evolved its own peculiar version comparison
-  procedure. 
+- The OSSF OSV schema https://ossf.github.io/osv-schema/ defines vulnerable
+  ranges with version events using "introduced" and "limit" fields and an
+  enumeration of all the versions in these ranges, except for semver-based
+  versions. A range may be ecosystem-specific based on a provided package
+  "ecosystem" value that ressembles closely the Package URL package "type".
+
+
+The way two versions are compared as equal, lesser or greater is a closely
+related topic:
+
+- Each package ecosystem may have evolved its own peculiar version string
+  conventions, semantics and comparison procedure.
 
 - For instance, semver is a prominent specification in this domain but this is
   just one of the many ways to structure a version string.
