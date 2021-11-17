@@ -1,6 +1,6 @@
 The following organizations or individuals have contributed to this repo:
 
-- Shivam Sandbhor
-- nexB Inc.
-- Philippe Ombredanne
+- Shivam Sandbhor @sbs2001
+- Philippe Ombredanne @pombredanne
+- Hritik Vijay @Hritik14
 

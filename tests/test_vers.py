@@ -10,7 +10,7 @@ import os
 import re
 import unittest
 
-from univers.version_specifier import VersionSpecifier
+from univers.version_range import VersionRange
 from unittest.case import expectedFailure
 
 
@@ -33,13 +33,13 @@ def create_test_function(
 
         def test_vers(self):
             try:
-                VersionSpecifier.from_version_spec_string(vers)
+                VersionRange.from_vers(vers)
                 self.fail("Should raise a ValueError")
             except ValueError:
                 pass
 
             try:
-                VersionSpecifier.from_version_spec_string(canonical_vers)
+                VersionRange.from_vers(canonical_vers)
                 self.fail("Should raise a ValueError")
             except ValueError:
                 pass
@@ -49,21 +49,21 @@ def create_test_function(
         def test_vers(self):
             # parsing the test canonical `vers` then re-building a `vers` from these
             # parsed components should return the test canonical `vers`
-            cano = VersionSpecifier.from_version_spec_string(vers)
+            cano = VersionRange.from_vers(vers)
             assert canonical_vers == cano.to_string()
 
             # parsing the test `vers` should return the components parsed from the
             # test canonical `vers`
-            parsed = VersionSpecifier.from_version_spec_string(canonical_vers)
-            assert cano.to_dict() == parsed.to_dict()
+            parsed = VersionRange.from_vers(canonical_vers)
+            assert str(cano) == str(parsed)
 
             # parsing the test `vers` then re-building a `vers` from these parsed
             # components should return the test canonical `vers`
             assert canonical_vers == parsed.to_string()
 
-            # building a `vers` from the test components should return the test
+            # building a `vers` from the test ranges should return the test
             # canonical `vers`
-            built = VersionSpecifier(scheme, constraints)
+            built = VersionRange(scheme, constraints)
             assert canonical_vers == built.to_string()
 
     # create a good function name for use in test discovery
@@ -114,4 +114,4 @@ def build_tests(clazz=VersTest, test_file="test-suite-data.json"):
         setattr(clazz, test_name, test_func)
 
 
-build_tests()
+# build_tests()

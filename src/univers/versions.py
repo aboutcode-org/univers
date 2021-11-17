@@ -4,12 +4,11 @@
 #
 # Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
-import re
 from functools import total_ordering
 
 import attr
 import semantic_version
-from packaging import version as pypi_version
+from packaging import version as packaging_version
 
 from univers import arch
 from univers import debian
@@ -18,68 +17,124 @@ from univers import maven
 from univers import rpm
 from univers.utils import remove_spaces
 
+"""
+Version classes encapsulating the details of each version syntax.
+For instance semver is a version syntax. Python and Debian use another syntax.
+
+Each subclass primary responsability to is be comparable and orderable
+"""
+
+# TODO: Add mozilla versions https://github.com/mozilla-releng/mozilla-version
+# TODO: Add conda versions https://github.com/conda/conda/blob/master/conda/models/version.py
+#       and https://docs.conda.io/projects/conda-build/en/latest/resources/package-spec.html#build-version-spec
+
 
 class InvalidVersion(ValueError):
     pass
 
 
-class BaseVersion:
+@attr.s(frozen=True, order=False, hash=True)
+class Version:
     """
-    Base  version object to subclass for each version scheme.
+    Base version mixin to subclass for each version syntax implementation.
 
-    Each version value should be comparable e.g., implement
-    functools.total_ordering
+    Each version subclass is:
+    - comparable and orderable e.g., implement functools.total_ordering
+    - immutable and hashable
     """
 
-    # the version scheme is a class attribute
-    scheme = None
-    value = attr.ib(type=str)
+    # the original string used to build this Version
+    string = attr.ib(type=str)
 
-    def validate(self):
+    # the normalized string for this Version, stored without spaces and
+    # lowercased. Any leading v is removed too.
+    normalized_string = attr.ib(type=str, default=None, repr=False)
+
+    # a comparable version object constructed from the version string
+    value = attr.ib(default=None, repr=False)
+
+    def __attrs_post_init__(self):
+        normalized_string = self.normalize(self.string)
+        if not self.is_valid(normalized_string):
+            raise InvalidVersion(f"{self.string!r} is not a valid {self.__class__!r}")
+
+        # See https://www.attrs.org/en/stable/init.html?#post-init
+        # we use a post init on frozen objects
+
+        # use the normalized string as default value
+        object.__setattr__(self, "normalized_string", normalized_string)
+        value = self.build_value(normalized_string)
+        object.__setattr__(self, "value", value)
+
+    @classmethod
+    def is_valid(cls, string):
         """
-        Validate that the version is valid for its scheme
+        Return True if the ``string`` is a valid version for its scheme or False
+        if not valid. The empty string, None, False and 0 are considered invalid.
+        Subclasses should implement this.
         """
-        raise NotImplementedError
+        return bool(string)
+
+    @classmethod
+    def normalize(cls, string):
+        """
+        Return a normalized version string from ``string ``. Subclass can override.
+        """
+        # FIXME: Is lowercase and strip v the right thing to do?
+        return remove_spaces(string).lower().rstrip("v")
+
+    @classmethod
+    def build_value(self, string):
+        """
+        Return a wrapped version "value" object for a version ``string``.
+        Subclasses can override. The default is a no-op and returns the string
+        as-is, and is called by default at init time with the computed
+        normalized_string.
+        """
+        return string
+
+    def satisfies(self, constraint):
+        """
+        Return True is this Version satifies the ``constraint``
+        VersionConstraint. Satisfying means that this version is "within" the
+        ``constraint``.
+        """
+        return self in constraint
+
+    def satisfies_all(self, constraints, explain=True):
+        """
+        Return True is this version satifies all the ``constraints`` list of
+        VersionConstraint.
+        If ``explain`` is True, prints de debug explanation.
+        """
+        if explain:
+            print()
+            for constraint in constraints:
+                if self not in constraint:
+                    print(f"{self!r} not in constraint : {constraint!r}")
+                else:
+                    print(f"{self!r}     in constraint : {constraint!r}")
+        return all(self in constraint for constraint in constraints)
 
     def __str__(self):
-        return f"{self.scheme}:{self.value}"
-
-
-@total_ordering
-@attr.s(frozen=True, init=False, order=False, hash=True)
-class PYPIVersion(BaseVersion):
-    scheme = "pypi"
-
-    def __init__(self, version_string):
-        # TODO the `pypi_version.Version` class's constructor also does the same validation
-        # but it has a fallback option by creating an object of pypi_version.LegacyVersion class.
-        # Avoid the double validation and the fallback.
-
-        self.validate(version_string)
-        object.__setattr__(self, "value", pypi_version.Version(version_string))
-        object.__setattr__(self, "version_string", version_string)
-
-    @staticmethod
-    def validate(version_string):
-        match = pypi_version.Version._regex.search(version_string)  # NOQA
-        if not match:
-            raise InvalidVersion(f"Invalid version: '{version_string}'")
+        return str(self.value)
 
     def __eq__(self, other):
-        # TBD: Should this verify the type of `other`
+        if not isinstance(other, self.__class__):
+            return NotImplemented
         return self.value.__eq__(other.value)
 
     def __lt__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
         return self.value.__lt__(other.value)
 
 
-class GenericVersion:
-    scheme = "generic"
-
-    def validate(self):
-        """
-        Validate that the version is valid for its scheme
-        """
+@total_ordering
+@attr.s(frozen=True, order=False, hash=True)
+class GenericVersion(Version):
+    @classmethod
+    def is_valid(cls, string):
         # generic implementation ...
         # TODO: Should use
         # https://github.com/repology/libversion/blob/master/doc/ALGORITHM.md#core-algorithm
@@ -88,211 +143,143 @@ class GenericVersion:
         # All other characters are treated as separators. Empty components are
         # not generated.
         #   10.2alpha3..patch.4. → 10, 2, alpha, 3, patch, 4
+        return super(GenericVersion, cls).is_valid(string)
 
 
-@attr.s(frozen=True, init=False, order=False, eq=False, hash=True, repr=False)
 @total_ordering
-class SemverVersion(BaseVersion):
-    scheme = "semver"
+@attr.s(frozen=True, order=False, eq=False, hash=True)
+class PypiVersion(Version):
+    """
+    PEP 440 as implemented in packaging with fallback to "legacy"
+    """
 
-    def __init__(self, version_string):
-        version_string = version_string.lower()
-        version_string = version_string.lstrip("v")
-        object.__setattr__(self, "value", semantic_version.Version.coerce(version_string))
-        object.__setattr__(self, "version_string", version_string)
+    @classmethod
+    def build_value(cls, string):
+        return packaging_version.Version(string)
 
-    @staticmethod
-    def validate(version_string):
-        pass
+    @classmethod
+    def is_valid(cls, string):
+        try:
+            # Note: we consider only modern pep440 versions as valid. legacy
+            # will fail validation for now.
+            cls.build_value(string)
+            return True
+        except packaging_version.InvalidVersion:
+            return False
 
-    def __eq__(self, other):
-        # TBD: Should this verify the type of `other`
-        return self.value.__eq__(other.value)
-
-    def __lt__(self, other):
-        return self.value.__lt__(other.value)
+        return False
 
 
-@attr.s(frozen=True, init=False, order=False, eq=False, hash=True, repr=False)
 @total_ordering
-class ArchVersion(BaseVersion):
-    scheme = "arch"
+@attr.s(frozen=True, order=False, eq=False, hash=True)
+class SemverVersion(Version):
+    """
+    Strict semver v2.0 with 3 segments.
+    """
 
-    def __init__(self, version_string):
-        version_string = version_string.lower()
-        version_string = remove_spaces(version_string)
-        object.__setattr__(self, "version_string", version_string)
-        object.__setattr__(self, "value", version_string)
+    @classmethod
+    def build_value(cls, string):
+        return semantic_version.Version.coerce(string)
 
-    @staticmethod
-    def validate(version_string):
-        pass
+    @classmethod
+    def is_valid(cls, string):
+        try:
+            cls.build_value(string)
+            return True
+        except ValueError:
+            return False
 
+
+@total_ordering
+@attr.s(frozen=True, order=False, eq=False, hash=True)
+class RubyVersion(Version):
+    """
+    Ruby version encourages but does not enforce semver
+    """
+
+    # FIXME: Ruby is NOT semver support 4 or more segments in versions such as https://rubygems.org/gems/rails/versions/5.0.0.1
+    # See https://github.com/ruby/ruby/blob/415671a28273e5bfbe9aa00a0e386f025720ac23/lib/rubygems/requirement.rb
+
+    @classmethod
+    def build_value(cls, string):
+        return semantic_version.Version.coerce(string)
+
+    @classmethod
+    def is_valid(cls, string):
+        try:
+            semantic_version.Version.parse(string)
+            return True
+        except ValueError:
+            return False
+
+
+@total_ordering
+@attr.s(frozen=True, order=False, eq=False, hash=True)
+class ArchLinuxVersion(Version):
     def __eq__(self, other):
-        # TBD: Should this verify the type of `other`
+        if not isinstance(other, self.__class__):
+            return NotImplemented
         return arch.vercmp(self.value, other.value) == 0
 
     def __lt__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
         return arch.vercmp(self.value, other.value) == -1
 
 
 @total_ordering
-@attr.s(frozen=True, init=False, order=False, eq=False, hash=True, repr=False)
-class DebianVersion(BaseVersion):
-    scheme = "debian"
-
-    def __init__(self, version_string):
-        version_string = remove_spaces(version_string)
-        object.__setattr__(self, "value", debian.Version.from_string(version_string))
-        object.__setattr__(self, "version_string", version_string)
-
-    @staticmethod
-    def validate(version_string):
-        pass
-
-    def __eq__(self, other):
-        return self.value.__eq__(other.value)
-
-    def __lt__(self, other):
-        return self.value.__lt__(other.value)
+@attr.s(frozen=True, order=False, eq=False, hash=True)
+class DebianVersion(Version):
+    @classmethod
+    def build_value(cls, string):
+        return debian.Version.from_string(string)
 
 
 @total_ordering
-@attr.s(frozen=True, init=False, order=False, eq=False, hash=True, repr=False)
-class MavenVersion(BaseVersion):
-    scheme = "maven"
+@attr.s(frozen=True, order=False, eq=False, hash=True)
+class MavenVersion(Version):
+    # See https://maven.apache.org/enforcer/enforcer-rules/versionRanges.html
+    # https://github.com/apache/maven/tree/master/maven-artifact/src/main/java/org/apache/maven/artifact/versioning
 
-    def __init__(self, version_string):
-        version_string = remove_spaces(version_string)
-        object.__setattr__(self, "value", maven.Version(version_string))
-        object.__setattr__(self, "version_string", version_string)
-
-    @staticmethod
-    def validate(version_string):
-        # Defined for compatibility
-        pass
-
-    def __eq__(self, other):
-        return self.value.__eq__(other.value)
-
-    def __lt__(self, other):
-        return self.value.__lt__(other.value)
+    @classmethod
+    def build_value(cls, string):
+        return maven.Version(string)
 
 
-# See https://docs.microsoft.com/en-us/nuget/concepts/package-versioning
 @total_ordering
-@attr.s(frozen=True, init=False, order=False, eq=False, hash=True, repr=False)
+@attr.s(frozen=True, order=False, eq=False, hash=True)
 class NugetVersion(SemverVersion):
-    scheme = "nuget"
+    # See https://docs.microsoft.com/en-us/nuget/concepts/package-versioning
     pass
 
 
 @total_ordering
-@attr.s(frozen=True, init=False, order=False, eq=False, hash=True, repr=False)
-class RPMVersion(BaseVersion):
-    scheme = "rpm"
-
-    def __init__(self, version_string):
-        version_string = remove_spaces(version_string)
-        self.validate(version_string)
-        object.__setattr__(self, "value", version_string)
-        object.__setattr__(self, "version_string", version_string)
-
-    @staticmethod
-    def validate(version_string):
-        pass
-
+@attr.s(frozen=True, order=False, eq=False, hash=True)
+class RpmVersion(Version):
     def __eq__(self, other):
-        result = rpm.vercmp(self.value, other.value)
-        return result == 0
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return rpm.vercmp(self.value, other.value) == 0
 
     def __lt__(self, other):
-        result = rpm.vercmp(self.value, other.value)
-        return result == -1
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return rpm.vercmp(self.value, other.value) == -1
 
 
 @total_ordering
-@attr.s(frozen=True, init=False, order=False, eq=False, hash=True, repr=False)
-class GentooVersion(BaseVersion):
-    scheme = "ebuild"
-    version_re = re.compile(r"^(?:\d+)(?:\.\d+)*[a-zA-Z]?(?:_(p(?:re)?|beta|alpha|rc)\d*)*$")
-
-    def __init__(self, version_string):
-        version_string = remove_spaces(version_string)
-        self.validate(version_string)
-        object.__setattr__(self, "value", version_string)
-        object.__setattr__(self, "version_string", version_string)
-
-    @staticmethod
-    def validate(version_string):
-        version, _ = gentoo.parse_version_and_revision(version_string)
-        if not GentooVersion.version_re.match(version):
-            raise InvalidVersion(f"Invalid version: '{version_string}'")
+@attr.s(frozen=True, order=False, eq=False, hash=True)
+class GentooVersion(Version):
+    @classmethod
+    def is_valid(cls, string):
+        return gentoo.is_valid(string)
 
     def __eq__(self, other):
-        result = gentoo.vercmp(self.value, other.value)
-        return result == 0
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return gentoo.vercmp(self.value, other.value) == 0
 
     def __lt__(self, other):
-        result = gentoo.vercmp(self.value, other.value)
-        return result == -1
-
-
-# TODO : Should these be upper case global constants ?
-
-
-version_class_by_scheme = {
-    "generic": GenericVersion,
-    "semver": SemverVersion,
-    "debian": DebianVersion,
-    "pypi": PYPIVersion,
-    "maven": MavenVersion,
-    "nuget": NugetVersion,
-    "rpm": RPMVersion,
-    "ebuild": GentooVersion,
-}
-
-
-version_class_by_package_type = {
-    "deb": DebianVersion,
-    "pypi": PYPIVersion,
-    "maven": MavenVersion,
-    "nuget": NugetVersion,
-    # TODO: composer may need its own scheme see https://github.com/nexB/univers/issues/5
-    # and https://getcomposer.org/doc/articles/versions.md
-    "composer": SemverVersion,
-    # TODO: gem may need its own scheme see https://github.com/nexB/univers/issues/5
-    # and https://snyk.io/blog/differences-in-version-handling-gems-and-npm/
-    # https://semver.org/spec/v2.0.0.html#spec-item-11
-    "gem": SemverVersion,
-    "npm": SemverVersion,
-    "rpm": RPMVersion,
-    "golang": SemverVersion,
-    "generic": SemverVersion,
-    # apache is not semver at large. And in particular we may have schemes that
-    # are package name-specific
-    "apache": SemverVersion,
-    "hex": SemverVersion,
-    "cargo": SemverVersion,
-    "mozilla": SemverVersion,
-    "github": SemverVersion,
-    "ebuild": GentooVersion,
-}
-
-
-def validate_scheme(scheme):
-    if scheme not in version_class_by_scheme:
-        raise ValueError(f"Invalid scheme {scheme}")
-
-
-def parse_version(version):
-    """
-    Return a Version object from a scheme-prefixed string
-    """
-    if ":" in version:
-        scheme, _, version = version.partition(":")
-    else:
-        scheme = "generic"
-
-    cls = version_class_by_scheme[scheme]
-    return cls(version)
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return gentoo.vercmp(self.value, other.value) == -1

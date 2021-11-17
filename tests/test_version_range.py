@@ -4,53 +4,58 @@
 #
 # Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
-import pytest
+from unittest import TestCase
 
+from univers.version_constraint import VersionConstraint
+from univers.version_range import GemVersionRange
 from univers.version_range import VersionRange
-from univers.versions import version_class_by_scheme
+from univers.versions import PypiVersion
+from univers.versions import RubyVersion
 
 
-@pytest.mark.parametrize(
-    "version, spec, result",
-    [
-        ("2.7", "<=3.4", True),
-        ("2.7.1", "<=3.4", True),
-        ("2.7.1rc1", "<=3.4", True),
-        ("2.7.15", "<=3.4", True),
-        ("2.7.15rc1", "<=3.4", True),
-        ("2.7", ">=3.4", False),
-        ("2.7.1", ">=3.4", False),
-        ("2.7.1rc1", ">=3.4", False),
-        ("2.7.15", ">=3.4", False),
-        ("2.7.15rc1", ">=3.4", False),
-        ("0.0.0", ">=1.0.0", False),
-        ("1.2.3", ">=1.0.0", True),
-        ("1.2.3b1", ">=1.0.0", True),
-        ("1.0.1b1", ">=1.0.0", True),
-        ("1.0.0b1", ">=1.0.0", False),
-        ("1.0.0b1", ">=1.0.0b1", True),
-    ],
-)
-def test_pypi_comparison(version, spec, result):
-    version_class = version_class_by_scheme["pypi"]
-    version_object = version_class(version)
-    assert (version_object in VersionRange(spec, "pypi")) == result
+class TestVersionRange(TestCase):
+    def test_VersionRange_to_string(self):
+        vers = "vers:pypi/0.0.2,0.0.6,>=0.0.0,0.0.1,0.0.4,0.0.5,0.0.3"
+        version_range = VersionRange.from_vers(vers)
+        # note the sorting taking place
+        assert str(version_range) == "vers:pypi/0.0.1,0.0.2,0.0.3,0.0.4,0.0.5,0.0.6,>=0.0.0"
 
+    def test_VersionRange_not_contains(self):
+        vers = "vers:pypi/0.0.2,0.0.6,>=0.0.0,0.0.1,0.0.4,0.0.5,0.0.3"
+        version_range = VersionRange.from_vers(vers)
+        assert not version_range.contains(PypiVersion("2.0.3"))
 
-@pytest.mark.parametrize(
-    "version, spec, result",
-    [
-        ("2.7.1", "<=3.4.3", True),
-        ("1.1.0", ">1.0.0", True),
-        ("2.0.0", "<=2.0.0", True),
-        ("1.9999.9999", "<=2.0.0", True),
-        ("0.2.9", "<=2.0.0", True),
-        ("1.9999.9999", "<2.0.0", True),
-        ("0.1.1-alpha", ">=0.1.1-beta", False),
-        ("1.0.0+20130313144700", "=1.0.0+9999999999", False),
-    ],
-)
-def test_semver_comparison(version, spec, result):
-    version_class = version_class_by_scheme["semver"]
-    version_object = version_class(version)
-    assert (version_object in VersionRange(spec, "semver")) == result
+    def test_VersionRange_contains(self):
+        version_range = VersionRange.from_vers("vers:pypi/>0.0.2")
+        assert PypiVersion("0.0.3") in version_range
+
+    def test_VersionRange_from_vers_pypi(self):
+        vers = "vers:pypi/0.0.2,0.0.6,0.0.0,0.0.1,0.0.4,0.0.5,0.0.3"
+        version_range = VersionRange.from_vers(vers)
+        assert version_range.scheme == "pypi"
+        # note the sorting taking place
+        expected = [
+            [
+                VersionConstraint(comparator="=", version=PypiVersion(string="0.0.0")),
+                VersionConstraint(comparator="=", version=PypiVersion(string="0.0.1")),
+                VersionConstraint(comparator="=", version=PypiVersion(string="0.0.2")),
+                VersionConstraint(comparator="=", version=PypiVersion(string="0.0.3")),
+                VersionConstraint(comparator="=", version=PypiVersion(string="0.0.4")),
+                VersionConstraint(comparator="=", version=PypiVersion(string="0.0.5")),
+                VersionConstraint(comparator="=", version=PypiVersion(string="0.0.6")),
+            ]
+        ]
+        assert version_range.constraints == expected
+        # note the sorting taking place
+        assert str(version_range) == "vers:pypi/0.0.0,0.0.1,0.0.2,0.0.3,0.0.4,0.0.5,0.0.6"
+
+    def test_GemVersionRange_from_native_range_with_pessimistic_operator(self):
+        gem_range = "~>2.0.8"
+        version_range = GemVersionRange.from_native_range(gem_range)
+        assert version_range.to_string() == "vers:gem/<2.1.0,>=2.0.8"
+        assert version_range.constraints == [
+            [
+                VersionConstraint(comparator="<", version=RubyVersion(string="2.1.0")),
+                VersionConstraint(comparator=">=", version=RubyVersion(string="2.0.8")),
+            ],
+        ]
