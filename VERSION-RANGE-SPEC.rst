@@ -60,17 +60,19 @@ in use:
   strings, but does not provide a way to express version ranges.
 
 - Rubygems strongly suggest using ``semver`` for version but does not enforce it.
-  It use its own notation for version ranges.
+  As a result some use semver and several popular package do not use strict
+  semver. Runbygems use their own notation for version ranges.
   https://guides.rubygems.org/patterns/#semantic-versioning
 
-- node-semver ranges are used in npms https://github.com/npm/node-semver#ranges
-  with their own range semantics that are specific to ``semver`` and npm.
+- node-semver ranges are used in npm at https://github.com/npm/node-semver#ranges
+  with range semantics that are specific to ``semver`` and npm.
 
 - Dart pub versioning scheme is similar to ``node-semver`` and the documentation
   at https://dart.dev/tools/pub/versioning provides a comprehensive coverage of
   the topic of versioning. Version resolution is using its own algorithm.
 
-- Python uses its own version ranges notation https://www.python.org/dev/peps/pep-0440/
+- Python uses its own version and version ranges notation
+  https://www.python.org/dev/peps/pep-0440/
 
 - Debian and Ubuntu use their own notation
   https://www.debian.org/doc/debian-policy/ch-relationships.html
@@ -81,7 +83,7 @@ in use:
 - Perl CPAN define its own version range notation similar to this specification
   https://metacpan.org/pod/CPAN::Meta::Spec#Version-Ranges
 
-- Apache Maven and NuGet use math intervals notation
+- Apache Maven and NuGet use similar math intervals notation
   https://en.wikipedia.org/wiki/Interval_(mathematics)
 
   - Apache Maven http://maven.apache.org/enforcer/enforcer-rules/versionRanges.html
@@ -164,28 +166,33 @@ Version range specifier
 A version range specifier (aka. "vers") is a URI string using the ``vers``
 URI-scheme with this syntax::
 
-   vers:<versioning-scheme>/<version-constraint>,<version-constraint&version-constraint>,...
+   vers:<versioning-scheme>/<version-constraint>|<version-constraint,version-constraint>,...
 
 For example to define a set of versions that contains either version ``1.2.3``,
 or any versions greater than or equal to ``2.0.0`` but less than ``5.0.0`` using
 the ``node-semver`` versioning scheme, the version range specifier will be::
 
-    vers:node-semver/1.2.3,>=2.0.0&<5.0.0
+    vers:node-semver/1.2.3|>=2.0.0,<5.0.0
 
-Each ``<version-constraint>`` in the comma-separated list is either a simple
+Each ``<version-constraint>`` in the pipe-separated list is either a simple
 constraint such as::
 
     <comparator:version>
 
 Or a composite constraint grouping multiple ``<version-constraint>`` joined by
-an ampersand such as::
+a comma such as::
 
-    <comparator:version>&<comparator:version>...
+    <comparator:version>,<comparator:version>...
 
-The comma is a logical `OR` and the ampersand is a logical `AND`.
+The pipe is a logical `OR` and the comma is a logical `AND`.
 
-A version range specifier is therefore an "OR of ANDs". This is also called a
-"disjunctive normal form" in boolean logic.
+A version range specifier is therefore an "OR of ANDs" where there are two
+levels of constraints that a version should satisfy to be part of the range:
+
+- At the first level, anyone of the constraints should be satisfied
+- At the second level, all of the constraints must be satisfied
+
+This is also called a "disjunctive normal form" in boolean logic.
 See https://en.wikipedia.org/wiki/Disjunctive_normal_form for details.
 
 ``vers`` is the URI-scheme and is an acronym for "VErsion Range Specifier". It
@@ -196,39 +203,39 @@ for a future formal registration for this URI-scheme at the IANA registry.
 ``<versioning-scheme>``
 ------------------------
 
-The ``<versioning-scheme>`` (such as ``node-semver``,
-``debian``, etc.) determines:
+The ``<versioning-scheme>`` (such as ``npm``, ``deb``, etc.) determines:
 
 - the specific notation and conventions used for a version string encoded in
   this scheme. Versioning schemes often specify a version segments separator and
   the meaning of each version segments, such as [major.minor.patch] in semver.
 
-- how two versions compare as greater or lesser to determine if a version is
-  within or outside a range.
+- how two versions are compared as greater or lesser to determine if a version
+  is within or outside a range.
 
 - how a versioning scheme-specific range notation can be transformed in the
-  ``vers`` notation defined here.
+  ``vers`` simplified notation defined here.
 
-Note: the ``<versioning-scheme>`` does not define which symbols to use to
-compare versions, and how to compose these as this is the substance of this
-specification.
+- by convention the versioning scheme should be the same string as the Package
+  URL package type for a given package ecosystem. It is OK to have other schemes
+  beyond the purl type and even schemes that are specific to a single package.
 
 The ``<versioning-scheme>`` is followed by a slash "/".
-
-Then there are one or more ``<version-constraint>`` separated by a comma ","
-meaning that **any** of these constraints must be satisfied for a version to be
-resolved as within this range specifier.
 
 
 ``<version-constraint>``
 ----------------------------
 
-Each  ``<version-constraint>`` of this comma-separated list can be either a
-single constraint or a list of constraints separated by an ampersand "&" as in
-``1.2.3,>=2.0.0&<5.0.0``.
+After the ``<versioning-scheme>`` and "/" there are one or more
+``<version-constraint>`` separated by a pipe "|". The pipe "|" means that
+**any** of these constraints must be satisfied for a version to be resolved as
+within this version range.
 
-Multiple ``<version-constraint>`` combined with an ampersand means that **all**
-these constraints must be satisfied for a version to be resolved as within this
+Each  ``<version-constraint>`` of this pipe-separated list can be either a
+single constraint or a list of constraints separated in turn by an comma "," as
+in ``1.2.3|>=2.0.0,<5.0.0``.
+
+Multiple ``<version-constraint>`` combined with a comma means that **all** these
+constraints must be satisfied for a version to be resolved as contained in this
 range.
 
 Each simple version constraint has this syntax::
@@ -241,7 +248,9 @@ The ``<comparator>`` is one of these comparison operators:
   present and means that a version must be equal to the provided version.
   For example: "=1.2.3". It must be omitted in the canonical representation.
   Equality is based on the equality of two lower-cased and normalized version
-  strings and is not versioning scheme-specific.
+  strings and is typically not versioning scheme-specific, though some
+  scheme such as pypi PEP440 may apply some version string normalization
+  before testing for equality.
 
 - "!=": Version exclusion or inequality comparator. This means a version must
   not be equal to the provided version and this version must be excluded from
@@ -263,8 +272,12 @@ The ``<comparator>`` is one of these comparison operators:
   dot-separated segments name major, minor and patch.
 
 - The special star "*" ``<version-constraint>`` matches any version. This star
-  constraint must be used **alone** in a version range specifier, exclusive of
-  any other constraint. For example "vers:debian/\*" resolves to any version.
+  constraint must be used **alone** in a version range, exclusive of any other
+  constraint. For example "vers:deb/\*" resolves to any version of a Debian
+  package.
+
+- The way each of these comparators work when doing a version comparison is
+  specific to a versioning scheme.
 
 
 Examples
@@ -287,14 +300,14 @@ Normalized or canonical representation
 
 - The ordering of multiple ``<version-constraint>`` in a range specifier is not
   significant. The canonical ordering is by sorting these by lexicographical
-  order applied with this approach:
+  order applied with this two steps approach:
 
-  - first to each sub-list of ampersand-separated ``<version-constraint>``.
-  - then to the list of comma-separated ``<version-constraint>``.
+  - first to each sub-list of comma-separated ``<version-constraint>``.
+  - then to the top level list of pipe-separated ``<version-constraint>``.
 
 - A version in a ``<version-constraint>`` can only contain printable ASCII
   characters excluding the special characters used as separators and comparators
-  ``><=!,&*``. If it contains special characters (which should be rare in
+  ``><=!,&*|``. If it contains special characters (which should be rare in
   practice) the version string in a constraint must be quoted using the URL
   quoting rules.
 
@@ -304,28 +317,31 @@ Using version range specifiers
 
 ``vers`` primary usage is to test if a version is within or outside a range.
 
-An input version is within a range specifier if it matches or satisfies **any**
-of the ranges in this spec. To match a range, an input version must match
-**all** the version constraints of a range. Otherwise, the input version is
-outside of the range specifier.
+An version is within a version range if satisfies or is "contained" in
+**any one** of the first level of constraints. To satisfy or be "contained" in
+a first level constraint, a version must satisfy or be "contained" in
+**all** the second level of constraints. Otherwise, the input version is outside
+of the version range.
 
 Some important usages derived from this primary usage include:
 
 - **Resolving a version range specifier to a list of concrete versions.**
   In this case, the input is the set of known versions of a package (typically
   obtained from some package repository or registry). Each version is then
-  tested individually to check if it is within or outside the ranges. For
+  tested individually to check if it is within or outside the range. For
   example, this can be used to determine which existing package versions are
   affected by a known vulnerability if they match the vulnerability version
   range specifier.
 
 - **Selecting one of several versions that are within a range.**
-  For example, package management tools need to determine what are the dependent
-  package versions of a package instance based the acceptable version ranges
-  provided with each dependency. This usually requires deploying heuristics and
-  algorithms (possibly complex such as sat solvers) that are versioning-scheme-
-  and tool-specific and outside of the scope for this specification; ``vers``
-  scope is limited to provide an input to the resolution process.
+  In this case, given several versions that are within a range and several
+  packages that each expression inter dependencies together with version ranges,
+  package management tools need to determine and select a set of package versions
+  that satify all the version ranges of all dependencies. This usually requires
+  deploying heuristics and algorithms (possibly complex such as sat solvers)
+  that are ecosystem- and tool-specific and outside of the scope for this
+  specification; yet ``vers`` could be used in tandem with ``purl`` to provide
+  an input to a dependencies resolution process.
 
 
 Parsing version range specifiers
@@ -341,50 +357,50 @@ To parse a version range specifier string:
 
 - Split the specifier from left once on a slash "/".
 - The left hand side is the <versioning-scheme> that must be lowercase.
-- The right hand side is the constraints.
+- The right hand side is a list of one or more constraints.
 
-- If the constraint contains a star "*", validate that it is equal to "*".
-  <version-constraint> is "*". Parsing is done and no further processing is
-  needed for this ``vers``. A tool may be strict and report an error
-  if there are extra characters beyond "*" or be lenient.
+- If the constraints string is equal to "*", the <version-constraint> is "*".
+  Parsing is done and no further processing is needed for this ``vers``. A tool
+  may be strict and report an error if there are extra characters beyond "*" or
+  be lenient.
 
-- Split the ranges on comma ",". The result is a list of <version-constraint>
-  strings.
-- Remove any empty strings from the list of <version-constraint>.
+- Split the constraints on pipe "|". The result is a list of top-level 
+  <version-constraint> lists. Consecutive pipes should be treated as one.
 
-- For each <version-constraint> in this list:
+- For each <version-constraint> list:
 
-  - Split on ampersand "&". The result is a sub-list of <version-constraint>.
-  - Remove any empty strings from this sub-list.
+  - Split on comma ",". Consecutive commas  should be treated as one. The result
+    is a sub-list of <version-constraint>.
 
   - For each <version-constraint> in this sub-list:
 
-    - Split the <version-constraint> comparator and version starting from left
-      based on the start of the <version-constraint>:
+    - Identify the <version-constraint> comparator and version based on the
+      start of the <version-constraint> in this sequence:
 
-       - If it starts with "=", split it once on "=".
-       - If it starts with "!=", split it once on "!=".
-       - If it starts with "<=", split it once on "<=".
-       - If it starts with ">=", split it once on ">=".
-       - If it starts with "<", split it once on "<".
-       - If it starts with ">", split it once on ">".
-       - Otherwise if there is no split, the comparator is "=" (default) and the
-         version is the <version-constraint> string.
+       - If it starts with "=",  then the comparator is "="
+       - If it starts with "!=", then the comparator is "!=".
+       - If it starts with "<=", then the comparator is "<=".
+       - If it starts with ">=", then the comparator is ">=".
+       - If it starts with "<",  then the comparator is "<".
+       - If it starts with ">",  then the comparator is ">".
+       - Else the comparator is "=" (default) and the
+         version is the full <version-constraint> string.
 
-    - After the split, the left hand side is the comparator, and the right hand
-      is the version.
+    - After the operation and removing the comparator from <version-constraint>
+      string, the remaining string is the version.
 
     - Validate that the version is not empty.
 
     - If the version contains a percent "%" character, apply URL quoting rules
       to unquote this string.
 
-    - Yield the comparator and version for this constraint
+    - Append the comparator and version of this constraint to the inner list
+      of constraints.
 
-  - Yield the accumulated list of (comparator and version) that must apply for
-    this constraint
+  - Append the accumulated list of (comparator and version) that must apply to
+    the top level list of constraints.
 
-- Finally return the <versioning-scheme> and the list of <version-constraint>
+- Finally return the <versioning-scheme> and the nested list of <version-constraint>
 
 
 Notes and caveats
@@ -393,15 +409,8 @@ Notes and caveats
 - Comparing versions from two different versioning schemes is unspecified. Even
   though there may be some similarities between the ``semver`` version of an npm
   and the `debian` version of its Debian packaging, these similarities are
-  specific to each versioning scheme. Tools may report an error in these
-  cases.
-
-- Schemes are related to Package URL types (aka. ecosystems) in the sense that
-  each Package URL type has one versioning scheme, but multiple types can reuse
-  the same versioning scheme (such as semver).
-
-- Some package types may use the same versioning scheme such as semver to
-  compare two versions, but may not use the same notation for version ranges.
+  specific to each versioning scheme. Tools should report an error in these
+  cases as it does not make sense to perform these comparisons.
 
 
 Some of the known versioning schemes
@@ -410,24 +419,25 @@ Some of the known versioning schemes
 TODO: add details on how to convert to and from ``vers`` for a given versioning
 scheme and package type.
 
-- ``debian``: Debian and Ubuntu https://www.debian.org/doc/debian-policy/ch-relationships.html
+- ``deb``: Debian and Ubuntu https://www.debian.org/doc/debian-policy/ch-relationships.html
    The comparators are <<, <=, =, >= and >>.
 
 - ``rpm``: RPM distros https://rpm-software-management.github.io/rpm/manual/dependencies.html
   The version comparison routine of rmpvercmp is also used by archlinux Pacman.
 
-- ``rubygems``: Rubygems https://guides.rubygems.org/patterns/#semantic-versioning
+- ``gem``: Rubygems https://guides.rubygems.org/patterns/#semantic-versioning
   which is almost but not exactly ``node-semver``.
 
-- ``node-semver``: node-semver is based on semver and is used for npm
-  https://github.com/npm/node-semver#ranges
-  A similar scheme is used by Rust https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html
-  and several other package types that use ``semver``. But most of these related
-  schemes are not strictly the same as what is implemented in ``node-semver``.
-  For instance PHP ``composer`` may need its own scheme as this is not strictly
-  ``node-semver``.
+- ``npm``: npm uses node-semver which is based on semver with its own range
+  notation https://github.com/npm/node-semver#ranges
+  A similar but different scheme is used by Rust
+  https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html
+  and several other package types may use ``node-semver``-like ranges. But most
+  of these related schemes are not strictly the same as what is implemented in
+  ``node-semver``. For instance PHP ``composer`` may need its own scheme as this
+  is not strictly ``node-semver``.
 
-- ``python``: Python https://www.python.org/dev/peps/pep-0440/
+- ``pypi``: Python https://www.python.org/dev/peps/pep-0440/
 
 - ``perl``: Perl https://perlmaven.com/how-to-compare-version-numbers-in-perl-and-for-cpan-modules
 
@@ -464,32 +474,39 @@ Why not reuse existing version range notations?
 
 Most existing version range notations are tied to a specific version string
 syntax and are therefore not readily applicable to other contexts. For example,
-the use of elements such as tilde and caret ranges in Ruby or Dart notations
-implies that a certain structure exists in the version string (semver or semver-
-like). The inclusion of these additional comparators is a result of the history
-and evolution in a given package ecosystem to address specific needs.
+the use of elements such as tilde and caret ranges in Rubygems, npm or Dart
+notations implies that a certain structure exists in the version string (semver
+or semver- like). The inclusion of these additional comparators is a result of
+the history and evolution in a given package ecosystem to address specific needs.
 
 In practice, the unified and reduced set of comparators and syntax defined for
 ``vers`` has been designed such that all these notations can be converted to a
-``vers`` and back from a ``vers`` to the original notation. 
+``vers`` and back from a ``vers`` to the original notation.
 
 In contrast, this would not be possible with existing notations. For instance,
-the Python notation may not work with npm versions and reciprocally.
+the Python notation may not work with npm semver versions and reciprocally.
 
 There are likely to be a few rare cases where round tripping from and to
 ``vers`` may not be possible, and in any case round tripping to and from ``vers``
-may only produce equivalent results and not strictly the same original strings.
+should produce equivalent results and even if not strictly the same original
+strings.
 
-Another issue with existing version range notations is that, they are primarily
-meant to be used for dependency constraints and may not readily be reused for
-vulnerable ranges. In particular, a vulnerability may exist for multiple
-"branches" of a given package (such as Django 2, 3 and 4) which may not be
-possible to express with a notation designed exclusively for dependent versions
+Another issue with existing version range notations is that they are primarily
+meant to be used for dependency constraints and may not readily be reusable for
+the definitions of vulnerable ranges. In particular, a vulnerability may exist
+for multiple "version branches" of a given package such as with Django 2.x and
+3.x. Several version range notations have difficulties to communicate these
+as typically all the version constraints must be satisfied. In constrast, 
+a vulnerability can affect multiple disjoint version ranges of a package and any
+version satisfying these constraints would be vulnerable: it may not be possible
+to express this with a notation designed exclusively for dependent versions
 resolution.
 
 
 Why not use the NVD CPE Ranges?
 ###############################
+
+See:
 
 - https://nvd.nist.gov/vuln/vulnerability-detail-pages#divRange
 - https://nvd.nist.gov/developers/vulnerabilities#divResponse
@@ -522,26 +539,27 @@ Why not use node-semver ranges?
 
 - https://github.com/npm/node-semver#ranges
 
-The node-semver spec is similar to this spec but is an AND of ORs with a few
-issues:
+The node-semver spec is similar to this spec but is an AND of ORs constraints
+with a few practical issues:
 
 - The space means "AND", therefore whitespaces are significant. Having
-  significant whitespaces in string makes normalization more complicated and may
-  be a source of confusion if you remove the spaces from the string. Using an
-  ampersand as an "AND" operator in ``vers`` makes this explicit and avoids any
-  ambiguity.
+  significant whitespaces in a string makes normalization more complicated and
+  may be a source of confusion if you remove the spaces from the string. Using
+  a comma as an "AND" operator in ``vers`` makes this explicit and avoids the
+  ambiguity of a space.
 
 - There is no negation "!=" operator meaning that some version constraints are
   difficult to express and require combining < and > comparators. For instance
   stating that a vulnerability affects babel 6.2 or later but not babel 7.0 is
-  possible but difficult.
+  possible but complicated.
 
 - The advanced range syntax has grown to be rather complex using hyphen, stars,
-  carets and tilde constructs are all tied to the JavaScript and npm ways of
-  handling versions in their specific ecosystem and furthermore are bound to the
-  semver semantics and the npm implementation. These are not readily reusable
-  elsewhere. And these multiple comparators and modifiers make the grammar and
-  parsing more complex.
+  carets and tilde constructs that are all tied to the JavaScript and npm ways
+  of handling versions in their ecosystem and are bound furthermore to the
+  semver semantics and its npm implementation. These are not readily reusable
+  elsewhere and these extended multiple comparators and modifiers make the
+  notation grammar more complex to parse for a machine and harder to read for
+  human.
 
 Notations that are directly derived from node-semver as used in Rust and PHP
 Composer have the same issues.
@@ -550,15 +568,17 @@ Composer have the same issues.
 Why not use Python pep-0440 ranges?
 #####################################
 
+See:
+
 - https://www.python.org/dev/peps/pep-0440/#version-specifiers
 
 The Python pep-0440 "Version Identification and Dependency Specification"
 provides a comprehensive specification for Python package versioning and a
-notation for "version specifiers" to express dependencies version constraints.
+notation for "version specifiers" to express the version constraints of
+dependencies.
 
-This specification is mostly compatible with and is similar to this ``vers``
-spec, but has a richer notation with some aspects specific to the version used
-only in the Python ecosystem.
+This specification is similar to this ``vers`` spec, but has a richer notation
+with some aspects specific to the versions used only in the Python ecosystem.
 
 - In particular pep-0440 uses tilde, triple equal and wildcard star operators
   that are specific to how two Python versions are compared.
@@ -573,7 +593,7 @@ only in the Python ecosystem.
 
 
 Why not use Rubygems requirements notation?
-##############################################################
+###############################################
 
 - https://guides.rubygems.org/patterns/#declaring-dependencies
 
@@ -584,20 +604,21 @@ implies semver versioning. This makes the notation impractical to reuse
 in places that do not use the same semver-like semantics.
 
 
-Why not use more extra comparators such as a tilde, carret and star?
-#####################################################################
+Why not use fancier comparators such as a tilde, caret and star?
+##################################################################
 
-Several existing notations such as node-semver, rubygems or composer specs
-provide syntactic shorthand such as:
+Several existing notations such as used with npm, gem or python or composer
+provide syntactic shorthands such as:
 
-- a tilde prefix or ~> prefix  as in "~1.3" or "~>1.2.3"
+- a tilde prefix or ~> prefix or =~  as in "~1.3" or "~>1.2.3"
 - a caret ^ prefix as in "^ 1.2"
-- using a star in a segment of a semver version as in "1.2.*"
+- using a star in a segment of a version as in "1.2.*"
 - dash-separated ranges as in "1.2 - 1.4"
 
-These range syntaxes can be reduced to a simpler notation here. Furthermore they
-are designed for the structure of a version string (most often semver) as used
-in one ecosystem and therefore are not reusable everywhere.
+These range syntaxes can typcially be reduced to a set of simpler operators.
+Furthermore they are designed for the structure of a version string (most often
+semver) as used in one ecosystem and therefore are not reusable in another
+ecosystem that would not use the version string conventions.
 
 
 References
