@@ -61,35 +61,38 @@ in use:
 
 - Rubygems strongly suggest using ``semver`` for version but does not enforce it.
   As a result some use semver and several popular package do not use strict
-  semver. Runbygems use their own notation for version ranges.
-  https://guides.rubygems.org/patterns/#semantic-versioning
+  semver. Rubygems use their own notation for version ranges which ressembles
+  the ``node-semver`` notation with some subtle differences.
+  See https://guides.rubygems.org/patterns/#semantic-versioning
 
-- node-semver ranges are used in npm at https://github.com/npm/node-semver#ranges
+- ``node-semver`` ranges are used in npm at https://github.com/npm/node-semver#ranges
   with range semantics that are specific to ``semver`` and npm.
 
 - Dart pub versioning scheme is similar to ``node-semver`` and the documentation
   at https://dart.dev/tools/pub/versioning provides a comprehensive coverage of
-  the topic of versioning. Version resolution is using its own algorithm.
+  the topic of versioning. Version resolution uses its own algorithm.
 
-- Python uses its own version and version ranges notation
+- Python uses its own version and version ranges notation with notable
+  specificities on how how pre- and post-release suffixes are used
   https://www.python.org/dev/peps/pep-0440/
 
-- Debian and Ubuntu use their own notation
+- Debian and Ubuntu use their own notation and are remarkabel for their use of
+  ``epochs`` to disambiguate versions.
   https://www.debian.org/doc/debian-policy/ch-relationships.html
 
-- RPM distros use their own range notation
+- RPM distros use their own range notation and use epochs like Debian.
   https://rpm-software-management.github.io/rpm/manual/dependencies.html
 
-- Perl CPAN define its own version range notation similar to this specification
-  https://metacpan.org/pod/CPAN::Meta::Spec#Version-Ranges
+- Perl CPAN defines its own version range notation similar to this specification
+  and uses two-segment versions. https://metacpan.org/pod/CPAN::Meta::Spec#Version-Ranges
 
-- Apache Maven and NuGet use similar math intervals notation
+- Apache Maven and NuGet use similar math intervals notation using brackets
   https://en.wikipedia.org/wiki/Interval_(mathematics)
 
   - Apache Maven http://maven.apache.org/enforcer/enforcer-rules/versionRanges.html
   - NuGet https://docs.microsoft.com/en-us/nuget/concepts/package-versioning#version-ranges
 
-- gradle uses Apache Maven notation with extensions
+- gradle uses Apache Maven notation with some extensions
   https://docs.gradle.org/current/userguide/single_versions.html
 
 - Gentoo and Alpine Linux use comparison operators similar to this specification:
@@ -133,10 +136,10 @@ related topic:
 - Each package ecosystem may have evolved its own peculiar version string
   conventions, semantics and comparison procedure.
 
-- For instance, semver is a prominent specification in this domain but this is
+- For instance, ``semver`` is a prominent specification in this domain but this is
   just one of the many ways to structure a version string.
 
-- Debian, RPM, PyPI,  Rubygems, and Composer have their own subtly different
+- Debian, RPM, PyPI, Rubygems, and Composer have their own subtly different
   approach on how to determine which version is greater or lesser.
 
 
@@ -172,7 +175,7 @@ For example to define a set of versions that contains either version ``1.2.3``,
 or any versions greater than or equal to ``2.0.0`` but less than ``5.0.0`` using
 the ``node-semver`` versioning scheme, the version range specifier will be::
 
-    vers:node-semver/1.2.3|>=2.0.0,<5.0.0
+    vers:npm/1.2.3|>=2.0.0,<5.0.0
 
 Each ``<version-constraint>`` in the pipe-separated list is either a simple
 constraint such as::
@@ -619,6 +622,16 @@ These range syntaxes can typcially be reduced to a set of simpler operators.
 Furthermore they are designed for the structure of a version string (most often
 semver) as used in one ecosystem and therefore are not reusable in another
 ecosystem that would not use the version string conventions.
+
+
+Why not use mathematical interval notation for ranges?
+#######################################################
+
+Apache Maven and NuGet make use of a mathematical interval with "[" and ")" as a
+syntax for version ranges.
+
+All other notations are using >, <, and = as base symbols for ranges. ``vers``
+reuses this approach because it is more common across package ecosystems.
 
 
 References
