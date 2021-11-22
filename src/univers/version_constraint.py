@@ -210,6 +210,17 @@ class VersionConstraint:
         VersionConstraints are joined with an "OR" e.g., a "vers" pipe "|" and
         the inner sequences of VersionConstraint are each joined with an "AND"
         e.g., a "vers" coma ",".
+        For instance:
+        >>> from univers.versions import PypiVersion
+        >>> constraints = [
+        ...    [VersionConstraint(comparator="=", version=PypiVersion("2"))],
+        ...    [
+        ...        VersionConstraint(comparator="=>", version=PypiVersion("3")),
+        ...        VersionConstraint(comparator="<", version=PypiVersion("4")),
+        ...    ],
+        ...    [VersionConstraint(comparator="=", version=PypiVersion("5"))],
+        ... ]
+        >>> assert VersionConstraint.to_constraints_string(constraints) == "2|=>3,<4|5"
         """
         cls.validate(constraints)
         anyof_constraints = []
