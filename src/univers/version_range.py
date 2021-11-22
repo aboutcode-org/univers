@@ -5,6 +5,10 @@
 # Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
 import attr
+from packaging.specifiers import SpecifierSet
+from semantic_version import NpmSpec
+from semantic_version.base import AllOf
+from semantic_version.base import AnyOf
 
 from univers import versions
 from univers.utils import remove_spaces
@@ -171,11 +175,9 @@ class NpmVersionRange(VersionRange):
         Return a VersionRange built from an npm "node-semver" range ``string``.
         """
         # FIXME: code is entirely duplicated with the GemVersionRange
-        from semantic_version import NpmSpec
-        from semantic_version.base import AnyOf, AllOf
 
         # an NpmSpec handles parsing of both the semver versions and node-semver
-        # ranges
+        # ranges at once
         spec = NpmSpec(string)
 
         clause = spec.clause.simplify()
@@ -194,8 +196,9 @@ class NpmVersionRange(VersionRange):
 
 
 def get_allof_constraints(cls, clause):
-    from semantic_version.base import AllOf
-
+    """
+    Return a list of VersionConstraint given an AllOf ``clause``.
+    """
     assert isinstance(clause, AllOf)
     allof_constraints = []
     for constraint in clause.clauses:
@@ -233,8 +236,6 @@ class GemVersionRange(VersionRange):
         # TODO: Gem version semantics are different from semver:
         # there can be commonly more than 3 segments
         # the operators are also different.
-        from semantic_version import NpmSpec
-        from semantic_version.base import AnyOf, AllOf
 
         # replace Rubygem ~> pessimistic operator by node-semver equivalent
         string = string.replace("~>", "~")
@@ -281,8 +282,6 @@ class PypiVersionRange(VersionRange):
         Return a VersionRange built from a PyPI PEP440 version specifiers ``string``.
         """
         # TODO: there is a complication with environment markers that are not yet supported
-
-        from packaging.specifiers import SpecifierSet
 
         # TODO: handle ~= and === operators
         specifiers = SpecifierSet(string)
