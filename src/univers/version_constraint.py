@@ -209,7 +209,7 @@ class VersionConstraint:
         list of VersionConstraint objects such that the outer sequence
         VersionConstraints are joined with an "OR" e.g., a "vers" pipe "|" and
         the inner sequences of VersionConstraint are each joined with an "AND"
-        e.g., a "vers" coma ",".
+        e.g., a "vers" comma ",".
         For instance:
         >>> from univers.versions import PypiVersion
         >>> constraints = [
