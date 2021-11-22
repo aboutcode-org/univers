@@ -33,13 +33,13 @@ def create_test_function(
 
         def test_vers(self):
             try:
-                VersionRange.from_vers(vers)
+                VersionRange.from_string(vers)
                 self.fail("Should raise a ValueError")
             except ValueError:
                 pass
 
             try:
-                VersionRange.from_vers(canonical_vers)
+                VersionRange.from_string(canonical_vers)
                 self.fail("Should raise a ValueError")
             except ValueError:
                 pass
@@ -49,12 +49,12 @@ def create_test_function(
         def test_vers(self):
             # parsing the test canonical `vers` then re-building a `vers` from these
             # parsed components should return the test canonical `vers`
-            cano = VersionRange.from_vers(vers)
+            cano = VersionRange.from_string(vers)
             assert canonical_vers == cano.to_string()
 
             # parsing the test `vers` should return the components parsed from the
             # test canonical `vers`
-            parsed = VersionRange.from_vers(canonical_vers)
+            parsed = VersionRange.from_string(canonical_vers)
             assert str(cano) == str(parsed)
 
             # parsing the test `vers` then re-building a `vers` from these parsed

@@ -38,14 +38,14 @@ class VersionRange:
         VersionConstraint.sort(self.constraints)
 
     @classmethod
-    def from_native_range(cls, string):
+    def from_native(cls, string):
         """
         Return a VersionRange built from a scheme-specific, native version range
         ``string``. Subclasses must implement.
         """
         return NotImplementedError
 
-    def to_native_range(self):
+    def to_native(self):
         """
         Return a native range string for this VersionRange. Subclasses must
         implement.
@@ -53,7 +53,7 @@ class VersionRange:
         return NotImplementedError
 
     @classmethod
-    def from_vers(cls, vers):
+    def from_string(cls, vers):
         """
         Return a VersionRange built from a ``vers`` version range spec string,
         such as "vers:npm/1.2.3,>=2.0.0"
@@ -166,7 +166,7 @@ class NpmVersionRange(VersionRange):
     }
 
     @classmethod
-    def from_native_range(cls, string):
+    def from_native(cls, string):
         """
         Return a VersionRange built from an npm "node-semver" range ``string``.
         """
@@ -226,7 +226,7 @@ class GemVersionRange(VersionRange):
     }
 
     @classmethod
-    def from_native_range(cls, string):
+    def from_native(cls, string):
         """
         Return a VersionRange built from a Rubygem version range ``string``.
         """
@@ -276,7 +276,7 @@ class PypiVersionRange(VersionRange):
     }
 
     @classmethod
-    def from_native_range(cls, string):
+    def from_native(cls, string):
         """
         Return a VersionRange built from a PyPI PEP440 version specifiers ``string``.
         """

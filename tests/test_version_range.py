@@ -16,22 +16,22 @@ from univers.versions import RubyVersion
 class TestVersionRange(TestCase):
     def test_VersionRange_to_string(self):
         vers = "vers:pypi/0.0.2,0.0.6,>=0.0.0,0.0.1,0.0.4,0.0.5,0.0.3"
-        version_range = VersionRange.from_vers(vers)
+        version_range = VersionRange.from_string(vers)
         # note the sorting taking place
         assert str(version_range) == "vers:pypi/0.0.1,0.0.2,0.0.3,0.0.4,0.0.5,0.0.6,>=0.0.0"
 
     def test_VersionRange_not_contains(self):
         vers = "vers:pypi/0.0.2,0.0.6,>=0.0.0,0.0.1,0.0.4,0.0.5,0.0.3"
-        version_range = VersionRange.from_vers(vers)
+        version_range = VersionRange.from_string(vers)
         assert not version_range.contains(PypiVersion("2.0.3"))
 
     def test_VersionRange_contains(self):
-        version_range = VersionRange.from_vers("vers:pypi/>0.0.2")
+        version_range = VersionRange.from_string("vers:pypi/>0.0.2")
         assert PypiVersion("0.0.3") in version_range
 
-    def test_VersionRange_from_vers_pypi(self):
+    def test_VersionRange_from_string_pypi(self):
         vers = "vers:pypi/0.0.2,0.0.6,0.0.0,0.0.1,0.0.4,0.0.5,0.0.3"
-        version_range = VersionRange.from_vers(vers)
+        version_range = VersionRange.from_string(vers)
         assert version_range.scheme == "pypi"
         # note the sorting taking place
         expected = [
@@ -51,7 +51,7 @@ class TestVersionRange(TestCase):
 
     def test_GemVersionRange_from_native_range_with_pessimistic_operator(self):
         gem_range = "~>2.0.8"
-        version_range = GemVersionRange.from_native_range(gem_range)
+        version_range = GemVersionRange.from_native(gem_range)
         assert version_range.to_string() == "vers:gem/<2.1.0,>=2.0.8"
         assert version_range.constraints == [
             [
