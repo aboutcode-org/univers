@@ -145,9 +145,11 @@ class VersionConstraint:
         >>> v24 = PypiVersion("2.4")
         >>> assert v23 in VersionConstraint(comparator="=", version=v23)
         >>> assert v24 not in VersionConstraint(comparator="=", version=v23)
-        >>> assert None not in VersionConstraint(comparator="=", version=v23)
+        >>> try:
+        ...   None in VersionConstraint(comparator="=", version=v23)
+        ... except ValueError:
+        ...   pass
 
-        >>> assert None not in VersionConstraint(comparator="!=", version=v24)
         >>> assert v22 in VersionConstraint(comparator="!=", version=v23)
         >>> assert v23 in VersionConstraint(comparator="!=", version=v24)
         >>> assert v24 not in VersionConstraint(comparator="!=", version=v24)
@@ -163,10 +165,6 @@ class VersionConstraint:
         >>> assert v24 in VersionConstraint(comparator="<=", version=v24)
         >>> assert v24 not in VersionConstraint(comparator="<", version=v24)
         """
-        if not version:
-            return False
-
-        # TODO: consider if we should accept any type and return False?
         if version.__class__ != self.version.__class__:
             raise ValueError(
                 f"Cannot compare {version.__class__!r} instance "
