@@ -78,10 +78,12 @@ include:
 
 - pypi: handled by Python's packaging library and the standard ``packaging.version`` module.
 
-- Rubygems which use a semver-like but not-quite-semver scheme and a slightly
-  different range notation from node-semver: for instance it uses "~>" as a
-  pessimistic operator and supports exclusion with != and does not support OR
-  between constraints (that it call requirements).
+- Rubygems which use a semver-like but not-quite-semver scheme and there can be
+  commonly more than three version segments.
+  Gems also use a slightly different range notation from node-semver with
+  different operators and slightly different semantics: for instance it uses "~>"
+  as a pessimistic operator and supports exclusion with != and does not support
+  "OR" between constraints (that it call requirements).
 
 - debian: handled by the  `debian-inspector <https://github.com/nexB/univers/blob/main/src/univers/debian.py.ABOUT>`_
   library.
