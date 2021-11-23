@@ -5,8 +5,8 @@
 # Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
 import attr
+import semantic_version
 from packaging.specifiers import SpecifierSet
-from semantic_version import NpmSpec
 from semantic_version.base import AllOf
 from semantic_version.base import AnyOf
 
@@ -178,7 +178,7 @@ class NpmVersionRange(VersionRange):
 
         # an NpmSpec handles parsing of both the semver versions and node-semver
         # ranges at once
-        spec = NpmSpec(string)
+        spec = semantic_version.NpmSpec(string)
 
         clause = spec.clause.simplify()
         assert isinstance(clause, (AnyOf, AllOf))
@@ -239,7 +239,7 @@ class GemVersionRange(VersionRange):
 
         # replace Rubygem ~> pessimistic operator by node-semver equivalent
         string = string.replace("~>", "~")
-        spec = NpmSpec(string)
+        spec = semantic_version.NpmSpec(string)
 
         clause = spec.clause.simplify()
         assert isinstance(clause, (AnyOf, AllOf))
@@ -266,6 +266,7 @@ class PypiVersionRange(VersionRange):
     version_class = versions.PypiVersion
 
     vers_by_native_comparators = {
+        # 01.01.01 is equal 1.1.1 e.g., with version normalization
         "==": "=",
         "!=": "!=",
         "<=": "<=",
@@ -273,6 +274,7 @@ class PypiVersionRange(VersionRange):
         "<": "<",
         ">": ">",
         "~=": None,
+        # 01.01.01 is NOT equal to 1.1.1 using === which is strict string equality
         "===": None,
     }
 
@@ -371,8 +373,157 @@ class ArchLinuxVersionRange(VersionRange):
 
 
 class NginxVersionRange(VersionRange):
+    """
+    Nginx versioning is semver for version and their own syntax for ranges as
+    used in their security advisories.
+
+    The documentation on these ranges is minimal. See these for details:
+    - https://mailman.nginx.org/pipermail/nginx/2021-September/061039.html
+    - https://nginx.org/en/security_advisories.html
+    - https://serverfault.com/questions/715049/what-s-the-difference-between-the-mainline-and-stable-branches-of-nginx
+
+    In particular for versions:
+    - the versions are semver.
+
+    - versions can be in the one "mainline" branch or one of many "stable" branches.
+
+    - for versions in the "mainline" branch, (e.g., development) the minor
+      segment is an odd number.
+
+    - versions in the "stable" branch, (e.g., a release branch) the minor
+      segment is an even number. Installation are typically made from branch and
+      its versions.
+
+      For example: in 0.6.18 the 6 e.g., semver "minor" segment is either odd or even
+      - odd (as with "7") means this is the "mainline" branch
+      - even (as with "4") means this is in a "stable" branch
+
+    And for ranges, we have these notations:
+
+    - dash ranges: 0.6.18-1.20.0 where start and end are included in the range
+
+    - comma ranges: 1.21.0+, 1.20.1+ where any of the condition applies
+
+    - plus suffixes: 1.21.0+ where this or any later version in the branch applies
+      Therefore:
+      - 1.21.0+ would expand to >=1.21.0 because 21 is odd and this is the
+        mainline branch
+
+      - 1.22.0+ would expand to >=1.22.0,<1.23.0 because 22 is even and this is
+        one of the stable branches
+
+    There are two special version range values:
+      - "all" means all versions.
+      - "none" means no version and therefore no version range. It is used only
+        in one advisory for CVE-2009-4487 and triggers an error.
+
+    Some vulnerable ranges are only for Windows builds but the range syntax is
+    the same. This could be resolved with a specific purl qualifier.
+    These are prefixed by the string "nginx/Window".
+    """
+
     scheme = "nginx"
-    version_class = None
+    version_class = versions.SemverVersion
+
+    vers_by_native_comparators = {
+        "==": "=",
+        "<=": "<=",
+        ">=": ">=",
+        "<": "<",
+        ">": ">",
+    }
+
+    @classmethod
+    def from_native(cls, string):
+        """
+        Return a VersionRange built from an nginx range ``string``.
+
+        For example:
+        >>> result = NginxVersionRange.from_native("1.5.10")
+        >>> assert str(result) == "vers:nginx/1.5.10", str(result)
+
+        >>> result = NginxVersionRange.from_native("0.7.52-0.8.39")
+        >>> assert str(result) == "vers:nginx/<=0.8.39,>=0.7.52", str(result)
+
+        >>> result = NginxVersionRange.from_native("1.1.4-1.2.8, 1.3.9-1.4.0")
+        >>> assert str(result) == "vers:nginx/<=1.2.8,>=1.1.4|<=1.4.0,>=1.3.9", str(result)
+
+        >>> result = NginxVersionRange.from_native("0.8.40+, 0.7.66+")
+        >>> assert str(result) == "vers:nginx/<0.9.0,>=0.8.40|>=0.7.66", str(result)
+
+        >>> result = NginxVersionRange.from_native("1.5.0+, 1.4.1+")
+        >>> assert str(result) == "vers:nginx/<1.5.0,>=1.4.1|>=1.5.0", str(result)
+
+        >>> result = NginxVersionRange.from_native("all")
+        >>> assert str(result) == "vers:nginx/*", str(result)
+
+        >>> try:
+        ...     NginxVersionRange.from_native("none")
+        ... except ValueError:
+        ...     pass
+        """
+        cleaned = remove_spaces(string).lower()
+        if cleaned == "all":
+            return cls(constraints=[[VersionConstraint(comparator="*")]])
+
+        anyof_constraints = []
+
+        for allof_clauses in cleaned.split(","):
+
+            if "-" in allof_clauses:
+                # dash range
+                start, _, end = allof_clauses.partition("-")
+                start_version = semantic_version.Version.coerce(start)
+                end_version = semantic_version.Version.coerce(end)
+                vstart = VersionConstraint(comparator=">=", version=start_version)
+                vend = VersionConstraint(comparator="<=", version=end_version)
+                allof_constaints = [vstart, vend]
+                anyof_constraints.append(allof_constaints)
+
+            elif "+" in allof_clauses:
+                # suffixed version
+                vs = allof_clauses.rstrip("+")
+                version = semantic_version.Version.coerce(vs)
+                is_stable = is_even(version.minor)
+
+                if is_stable:
+                    # we have a start and end in stable ranges
+                    start_version = semantic_version.Version.coerce(vs)
+                    end_version = start_version.next_minor()
+                    vstart = VersionConstraint(comparator=">=", version=start_version)
+                    vend = VersionConstraint(comparator="<", version=end_version)
+                    allof_constaints = [vstart, vend]
+                    anyof_constraints.append(allof_constaints)
+                else:
+                    # mainline branch ranges are resolved to a singel constraint
+                    version = semantic_version.Version.coerce(vs)
+                    constraint = VersionConstraint(comparator=">=", version=version)
+                    allof_constaints = [constraint]
+                    anyof_constraints.append(allof_constaints)
+
+            else:
+                # plain single version
+                version = semantic_version.Version.coerce(allof_clauses)
+                constraint = VersionConstraint(comparator="=", version=version)
+                allof_constaints = [constraint]
+                anyof_constraints.append(allof_constaints)
+
+        return cls(constraints=anyof_constraints)
+
+
+def is_even(s):
+    """
+    Return True if the string "s" is an even number and False if this is an odd
+    number. For example:
+
+    >>> is_even(4)
+    True
+    >>> is_even(123)
+    False
+    >>> is_even(0)
+    True
+    """
+    return (int(s) % 2) == 0
 
 
 RANGE_CLASS_BY_SCHEMES = {
