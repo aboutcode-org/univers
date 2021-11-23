@@ -308,6 +308,7 @@ class MavenVersionRange(VersionRange):
     Maven version range as documented at
     https://maven.apache.org/enforcer/enforcer-rules/versionRanges.html
     """
+
     scheme = "maven"
     version_class = versions.MavenVersion
 

@@ -1,11 +1,11 @@
 # Copyright 2017 Center for Information Technology
-# 
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,7 +19,7 @@ from typing import Type, TypeVar
 from typing import Callable, Sequence, MutableSequence
 
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 def default(x, e, y):
@@ -31,14 +31,16 @@ def default(x, e, y):
 
 
 class GemVersion:
-    VERSION_PATTERN = '[0-9]+(?:\.[0-9a-zA-Z]+)*(-[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?'
-    ANCHORED_VERSION_PATTERN = re.compile('^\s*({VERSION_PATTERN})?\s*$'.format(VERSION_PATTERN=VERSION_PATTERN))
+    VERSION_PATTERN = "[0-9]+(?:\.[0-9a-zA-Z]+)*(-[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?"
+    ANCHORED_VERSION_PATTERN = re.compile(
+        "^\s*({VERSION_PATTERN})?\s*$".format(VERSION_PATTERN=VERSION_PATTERN)
+    )
 
     def __init__(self, version):
         # If version is an empty string convert it to 0
-        version = 0 if re.compile('^\s*$').match(str(version)) else version
+        version = 0 if re.compile("^\s*$").match(str(version)) else version
 
-        self.__version = str(version).strip().replace('-', '.pre.')
+        self.__version = str(version).strip().replace("-", ".pre.")
         self.__segments = None
         self.__bump = None
         self.__release = None
@@ -52,7 +54,7 @@ class GemVersion:
                 segments.pop()
             segments[-1] = segments[-1] + 1
             segments = list(map(lambda r: str(r), segments))
-            self.__bump = GemVersion('.'.join(segments))
+            self.__bump = GemVersion(".".join(segments))
 
         return self.__bump
 
@@ -62,7 +64,7 @@ class GemVersion:
             while any(map(lambda s: isinstance(s, str), segments)):
                 segments.pop()
             segments = list(map(lambda r: str(r), segments))
-            self.__release = GemVersion('.'.join(segments))
+            self.__release = GemVersion(".".join(segments))
 
         return self.__release
 
@@ -108,40 +110,42 @@ class GemVersion:
         return self.__cmp__(other) == 0
 
     def __repr__(self):
-        return 'GemVersion({segments})'.format(segments=self.segments())
+        return "GemVersion({segments})".format(segments=self.segments())
 
     def __get_segments(self):
         # type: () -> Sequence[int|str]
         if not self.__segments:
-            rex = re.compile('[0-9]+|[a-z]+', re.IGNORECASE)
-            d_rex = re.compile('^\d+$')
-            self.__segments = tuple(map(lambda s: int(s) if d_rex.match(s) else s, rex.findall(self.__version)))
+            rex = re.compile("[0-9]+|[a-z]+", re.IGNORECASE)
+            d_rex = re.compile("^\d+$")
+            self.__segments = tuple(
+                map(lambda s: int(s) if d_rex.match(s) else s, rex.findall(self.__version))
+            )
         return self.__segments
 
 
 class GemRequirement:
     OPS = {
-        '=': lambda v, r: v == r,
-        '!=': lambda v, r: v != r,
-        '>': lambda v, r: v > r,
-        '<': lambda v, r: v < r,
-        '>=': lambda v, r: v >= r,
-        '<=': lambda v, r: v <= r,
-        '~>': lambda v, r: v >= r and v.release() < r.bump()
+        "=": lambda v, r: v == r,
+        "!=": lambda v, r: v != r,
+        ">": lambda v, r: v > r,
+        "<": lambda v, r: v < r,
+        ">=": lambda v, r: v >= r,
+        "<=": lambda v, r: v <= r,
+        "~>": lambda v, r: v >= r and v.release() < r.bump(),
     }
 
     PATTERN_RAW = "\\s*({quoted})?\\s*({VERSION_PATTERN})\\s*".format(
-        quoted='|'.join(tuple(map(lambda k: re.escape(k), iterkeys(OPS)))),
-        VERSION_PATTERN=GemVersion.VERSION_PATTERN
+        quoted="|".join(tuple(map(lambda k: re.escape(k), iterkeys(OPS)))),
+        VERSION_PATTERN=GemVersion.VERSION_PATTERN,
     )
 
     # A regular expression that matches a requirement
-    PATTERN = re.compile('^{PATTERN_RAW}$'.format(PATTERN_RAW=PATTERN_RAW))
+    PATTERN = re.compile("^{PATTERN_RAW}$".format(PATTERN_RAW=PATTERN_RAW))
 
     ##
     # The default requirement matches any version
 
-    DEFAULT_REQUIREMENT = tuple(['>=', GemVersion(0)])
+    DEFAULT_REQUIREMENT = tuple([">=", GemVersion(0)])
 
     class BadRequirementError(AttributeError):
         pass
@@ -156,16 +160,18 @@ class GemRequirement:
     @classmethod
     def parse(cls, requirement):
         if isinstance(requirement, GemVersion):
-            return tuple(['=', requirement])
+            return tuple(["=", requirement])
 
         match = cls.PATTERN.match(str(requirement))
         if not match:
-            raise cls.BadRequirementError('Illformed requirement [{inspect}]'.format(inspect=repr(requirement)))
+            raise cls.BadRequirementError(
+                "Illformed requirement [{inspect}]".format(inspect=repr(requirement))
+            )
 
-        if match.group(1) == '>=' and match.group(2) == '0':
+        if match.group(1) == ">=" and match.group(2) == "0":
             return cls.DEFAULT_REQUIREMENT
         else:
-            op = match.group(1) if match.group(1) else '='
+            op = match.group(1) if match.group(1) else "="
             return tuple([op, GemVersion(match.group(2))])
 
     def satified_by(self, version):
@@ -180,6 +186,7 @@ class GemRequirement:
             op, rv = req
             callable = cls.__get_operation(op)
             return callable(version, rv)
+
         return __testing
 
     @classmethod
@@ -188,4 +195,4 @@ class GemRequirement:
         try:
             return cls.OPS[op]
         except KeyError:
-            return cls.OPS['=']
+            return cls.OPS["="]
