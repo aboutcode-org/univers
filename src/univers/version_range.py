@@ -304,6 +304,10 @@ class PypiVersionRange(VersionRange):
 
 
 class MavenVersionRange(VersionRange):
+    """
+    Maven version range as documented at
+    https://maven.apache.org/enforcer/enforcer-rules/versionRanges.html
+    """
     scheme = "maven"
     version_class = versions.MavenVersion
 
@@ -321,6 +325,7 @@ class ComposerVersionRange(VersionRange):
 
 
 class RpmVersionRange(VersionRange):
+    # https://twiki.cern.ch/twiki/bin/view/Main/RPMAndDebVersioning
     scheme = "rpm"
     version_class = versions.RpmVersion
 
