@@ -153,6 +153,8 @@ class PypiVersion(Version):
     PEP 440 as implemented in packaging with fallback to "legacy"
     """
 
+    # TODO: ensure we deal with tripple equal
+
     @classmethod
     def build_value(cls, string):
         return packaging_version.Version(string)
