@@ -41,8 +41,9 @@ ecosystem.
 - It support a growing number of package ecosystems versioning in a single
   library.
 
-- It can parse native version ranges notation into the common "vers" notation
-  and can return back native version ranges from a "vers".
+- It can parse version range strings using their native notation (such as an npm
+  range) into the common "vers" notation and internal object model and can
+  return back a native version range string rebuilt from a "vers" range.
 
 - It is designed to work with `Package URLs (purl) <https://github.com/package-url>`_.
 
