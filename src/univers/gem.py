@@ -1,29 +1,17 @@
-# Copyright 2017 Center for Information Technology
+# Copyright (c) Center for Information Technology, http://coi.gov.pl
+# SPDX-License-Identifier: Apache-2.0
+# this has been significantly modified from the original
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
+
+# notes: This has been substantially modified and enhanced from the original 
+# puppeteer code to extract the Ruby version hanlding code.
+
 
 import re
 
-from six import iterkeys, itervalues
-from typing import Type, TypeVar
-from typing import Callable, Sequence, MutableSequence
-
-
-T = TypeVar("T")
-
 
 def default(x, e, y):
-    # type: (Callable[[], T], Type[Exception], T) -> T
     try:
         return x()
     except e:
@@ -37,6 +25,9 @@ class GemVersion:
     )
 
     def __init__(self, version):
+
+        self.original = version
+
         # If version is an empty string convert it to 0
         version = 0 if re.compile("^\s*$").match(str(version)) else version
 
@@ -45,7 +36,14 @@ class GemVersion:
         self.__bump = None
         self.__release = None
 
+    def __str__(self):
+        return self.original
+
     def bump(self):
+        """
+        Return a new GemVersion built from incrementing this GemVersion  last
+        numeric segment.
+        """
         if not self.__bump:
             segments = self.segments()
             while any(map(lambda s: isinstance(s, str), segments)):
@@ -59,6 +57,9 @@ class GemVersion:
         return self.__bump
 
     def release(self):
+        """
+        Return a new GemVersion composed only of release, numeric segments.
+        """
         if not self.__release:
             segments = self.segments()
             while any(map(lambda s: isinstance(s, str), segments)):
@@ -69,11 +70,16 @@ class GemVersion:
         return self.__release
 
     def segments(self):
-        # type: () -> MutableSequence[int|str]
+        """
+        Return a list of version segments.
+        """
         return list(self.__get_segments())
 
     def __cmp__(self, other):
-        # type: (GemVersion) -> int
+        """
+        Compare the ``other`` GemVersion with this GemVersion according to the
+        legacy "cmp()" function semantics. Return 0, 1, or -1.
+        """
         if self.__version == other.__version:
             return 0
         lhsegments = self.__get_segments()
@@ -113,6 +119,10 @@ class GemVersion:
         return "GemVersion({segments})".format(segments=self.segments())
 
     def __get_segments(self):
+        """
+        Return a sequence of ints and strings segments parsed from the original
+        version string.
+        """
         # type: () -> Sequence[int|str]
         if not self.__segments:
             rex = re.compile("[0-9]+|[a-z]+", re.IGNORECASE)
@@ -124,6 +134,9 @@ class GemVersion:
 
 
 class GemRequirement:
+    """
+    A gem requirement using the Gem notation.
+    """
     OPS = {
         "=": lambda v, r: v == r,
         "!=": lambda v, r: v != r,
@@ -135,7 +148,7 @@ class GemRequirement:
     }
 
     PATTERN_RAW = "\\s*({quoted})?\\s*({VERSION_PATTERN})\\s*".format(
-        quoted="|".join(tuple(map(lambda k: re.escape(k), iterkeys(OPS)))),
+        quoted="|".join(tuple(map(lambda k: re.escape(k), iter(OPS)))),
         VERSION_PATTERN=GemVersion.VERSION_PATTERN,
     )
 
@@ -159,6 +172,10 @@ class GemRequirement:
 
     @classmethod
     def parse(cls, requirement):
+        """
+        Return a tuple of (operator string, GemVersion object) parsed from a
+        ``requirements`` string.
+        """
         if isinstance(requirement, GemVersion):
             return tuple(["=", requirement])
 
@@ -175,22 +192,33 @@ class GemRequirement:
             return tuple([op, GemVersion(match.group(2))])
 
     def satified_by(self, version):
+        """
+        Return True if the ``version`` GemVersion or string satisfied this
+        requirement.
+        """
         gemver = version if isinstance(version, GemVersion) else GemVersion(version)
         operation = self.__test_rv(gemver)
         return all(map(operation, self.__requirements))
 
     @classmethod
     def __test_rv(cls, version):
+        """
+        Return a callable function that can check if a ``version`` satisfies the
+        operation of a single (op, version) requirement.
+        """
         # type: (GemVersion) -> Callable[[str, GemVersion], bool]
         def __testing(req):
             op, rv = req
-            callable = cls.__get_operation(op)
-            return callable(version, rv)
+            callble = cls.__get_operation(op)
+            return callble(version, rv)
 
         return __testing
 
     @classmethod
     def __get_operation(cls, op):
+        """
+        Return a callable operator given an ``op`` operator string.
+        """
         # type: (str) -> Callable[[GemVersion, GemVersion], bool]
         try:
             return cls.OPS[op]
