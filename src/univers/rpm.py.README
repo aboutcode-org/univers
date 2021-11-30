@@ -1,6 +1,6 @@
 Pure Python implementation of rpmvercmp.
 
-The RPM Package Manager (http://rpm.org) has a version comparision algorithm,
+The RPM Package Manager (http://rpm.org) has a version comparison algorithm,
 implemented in its C library, which performs the comparison in a certain way.
 
 In certain circumstances, where the C library is not installable (for example,

@@ -1,7 +1,10 @@
 #
-# Copyright 2016-2020 Christoph Reiter
+# Copyright (c) Christoph Reiter
 # SPDX-License-Identifier: MIT
-# Version comparision utility extracted from msys2 and further stripped down.
+# Version utility extracted from msys2 https://github.com/msys2/msys2-web/
+# and further stripped down.
+#
+# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
 import re
 from itertools import zip_longest

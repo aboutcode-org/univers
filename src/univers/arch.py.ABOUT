@@ -7,6 +7,6 @@ license_expression: MIT
 homepage_url: https://github.com/msys2/msys2-web/
 
 notes: |
-    The version comparision utility is extracted from msys2 and further stripped down.
+    The version comparison utility is extracted from msys2 and further stripped down.
 
 notice_file: arch.py.NOTICE

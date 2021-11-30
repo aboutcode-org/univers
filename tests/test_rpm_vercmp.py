@@ -3,6 +3,8 @@
 # Copyright (c) SAS Institute Inc.
 # SPDX-License-Identifier: Apache-2.0
 # this has been significantly modified from the original
+#
+# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
 import io
 import os
@@ -85,7 +87,7 @@ def get_tests():
     """
     Yield test function from rpmvercmp.at data.
     """
-    test_file = os.path.join(os.path.dirname(__file__), "test_data", "rpmvercmp.at")
+    test_file = os.path.join(os.path.dirname(__file__), "data", "rpmvercmp.at")
 
     with io.open(test_file, encoding="utf-8") as rpmtests:
         tests = list(parse_rpmvercmp_tests(rpmtests, with_buggy_comparisons=True))

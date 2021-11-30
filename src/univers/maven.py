@@ -1,8 +1,10 @@
 #
 # Copyright (c) SAS Institute Inc.
 # SPDX-License-Identifier: Apache-2.0
-# Version comparision utility extracted from pymaven and further stripped down
+# Version comparison utility extracted from pymaven and further stripped down
 # and significantly modified from the original at pymaven
+#
+# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
 import functools
 from itertools import zip_longest
