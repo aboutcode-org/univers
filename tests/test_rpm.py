@@ -6,16 +6,16 @@
 
 import unittest
 
-from univers.rpm_metadata import RpmMetadata
-from univers.rpm_metadata import _compare_values
-from univers.rpm_metadata import compare_rpm_versions
+from univers.rpm import RpmVersion
+from univers.rpm import _compare_values
+from univers.rpm import compare_rpm_versions
 
 
 class RpmMetadataTestCase(unittest.TestCase):
     def test_rpm_compare_versions(self):
         # name mismatch
-        a = RpmMetadata("test-name1", 1, "2", "3")
-        b = RpmMetadata("test-name2", 1, "2", "3")
+        a = RpmVersion("test-name1", 1, "2", "3")
+        b = RpmVersion("test-name2", 1, "2", "3")
         with self.assertRaises(ValueError):
             compare_rpm_versions(a, b)
 
@@ -50,8 +50,8 @@ class RpmMetadataTestCase(unittest.TestCase):
         ]
 
         for evr1, evr2, expected in test_evr_data:
-            a = RpmMetadata("test-name", *evr1)
-            b = RpmMetadata("test-name", *evr2)
+            a = RpmVersion("test-name", *evr1)
+            b = RpmVersion("test-name", *evr2)
             self.assertEqual(
                 compare_rpm_versions(a, b),
                 expected,
