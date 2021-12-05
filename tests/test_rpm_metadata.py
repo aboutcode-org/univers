@@ -4,103 +4,14 @@
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
 
-import importlib.resources
-import os
-import re
-import shutil
 import unittest
 
-from antlir.find_built_subvol import find_built_subvol
-from antlir.fs_utils import temp_dir
-from antlir.tests.layer_resource import layer_resource_subvol
-
-from ..rpm_metadata import (
-    RpmMetadata,
-    _compare_values,
-    compare_rpm_versions,
-    _repo_query,
-)
-from .temp_repos import Repo, Rpm, get_test_signing_key, temp_repos_steps
+from univers.rpm_metadata import RpmMetadata
+from univers.rpm_metadata import _compare_values
+from univers.rpm_metadata import compare_rpm_versions
 
 
 class RpmMetadataTestCase(unittest.TestCase):
-    def _load_canonical_tests(self):
-        STMT = re.compile(
-            r"(.*)RPMVERCMP\(([^, ]*) *, *([^, ]*) *, *([^\)]*)\).*"
-        )
-
-        for line in importlib.resources.open_text(
-            "antlir.rpm", "version-compare-tests"
-        ).readlines():
-            m = STMT.match(line)
-            if m:
-                yield m.group(2), m.group(3), int(m.group(4))
-
-    def test_rpm_metadata_from_subvol(self):
-        layer_path = os.path.join(os.path.dirname(__file__), "child-layer")
-        child_subvol = find_built_subvol(layer_path)
-        ba_subvol = layer_resource_subvol(__package__, "test-build-appliance")
-
-        a = RpmMetadata.from_subvol(child_subvol, ba_subvol, "rpm-test-mice")
-        self.assertEqual(a.name, "rpm-test-mice")
-        self.assertEqual(a.epoch, 0)
-        self.assertEqual(a.version, "0.1")
-        self.assertEqual(a.release, "a")
-
-        # not installed
-        with self.assertRaises(RuntimeError):
-            a = RpmMetadata.from_subvol(
-                child_subvol, ba_subvol, "rpm-test-carrot"
-            )
-
-        # subvol with no RPM DB
-        layer_path = os.path.join(os.path.dirname(__file__), "hello-layer")
-        hello_subvol = find_built_subvol(layer_path)
-        with self.assertRaisesRegex(ValueError, " does not exist$"):
-            a = RpmMetadata.from_subvol(
-                hello_subvol, ba_subvol, "rpm-test-mice"
-            )
-
-    def test_rpm_metadata_from_file(self):
-        with temp_repos_steps(
-            gpg_signing_key=get_test_signing_key(),
-            repo_change_steps=[
-                {
-                    "repo": Repo(
-                        [Rpm("sheep", "0.3.5.beta", "l33t.deadbeef.777")]
-                    )
-                }
-            ],
-        ) as repos_root, temp_dir() as td:
-            src_rpm_path = repos_root / (
-                "0/repo/repo-pkgs/"
-                + "rpm-test-sheep-0.3.5.beta-l33t.deadbeef.777.x86_64.rpm"
-            )
-            dst_rpm_path = td / "arbitrary_unused_name.rpm"
-            shutil.copy(src_rpm_path, dst_rpm_path)
-            a = RpmMetadata.from_file(dst_rpm_path)
-            self.assertEqual(a.name, "rpm-test-sheep")
-            self.assertEqual(a.epoch, 0)
-            self.assertEqual(a.version, "0.3.5.beta")
-            self.assertEqual(a.release, "l33t.deadbeef.777")
-
-        # non-existent file
-        with self.assertRaisesRegex(RuntimeError, "^Error querying RPM:"):
-            a = RpmMetadata.from_file(b"idontexist.rpm")
-
-        # missing extension
-        with self.assertRaisesRegex(ValueError, " needs to end with .rpm$"):
-            a = RpmMetadata.from_file(b"idontendwithdotrpm")
-
-    def test_rpm_query_arg_check(self):
-        with self.assertRaisesRegex(ValueError, "^Must pass only "):
-            _repo_query(
-                db_path=b"dbpath",
-                package_name=None,
-                package_path=b"path",
-                check_output_fn="unused",
-            )
-
     def test_rpm_compare_versions(self):
         # name mismatch
         a = RpmMetadata("test-name1", 1, "2", "3")

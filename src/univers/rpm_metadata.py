@@ -4,19 +4,8 @@
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
 
-import os
 import re
-import subprocess
-from typing import List, NamedTuple, Optional
-
-from antlir.common import get_logger
-from antlir.fs_utils import generate_work_dir, MehStr, Path
-from antlir.nspawn_in_subvol.args import PopenArgs, new_nspawn_opts
-from antlir.nspawn_in_subvol.nspawn import run_nspawn
-from antlir.subvol_utils import Subvol
-
-
-log = get_logger()
+from typing import NamedTuple
 
 
 class RpmMetadata(NamedTuple):
@@ -24,77 +13,6 @@ class RpmMetadata(NamedTuple):
     epoch: int
     version: str
     release: str
-
-    @classmethod
-    def from_subvol(
-        cls, subvol: Subvol, ba_subvol: Subvol, package_name: str
-    ) -> "RpmMetadata":
-        db_path_src = subvol.path("var/lib/rpm")
-        if not os.path.exists(db_path_src):
-            # If we didn't check for this, `bindmount_ro` would fail.
-            raise ValueError(f"RPM DB path {db_path_src} does not exist")
-        # Rpm query will write to and update rpm database files if it can.
-        # We must use the BA here because using the host `rpm` can cause the
-        # image RPM to become unreadable to the `rpm` from the BA.
-        db_path_dst = generate_work_dir()
-        return _repo_query(
-            db_path=db_path_dst,
-            package_name=package_name,
-            check_output_fn=lambda cmd: run_nspawn(
-                new_nspawn_opts(
-                    cmd=cmd,
-                    layer=ba_subvol,
-                    # Read-only so that `rpm` does not modify the DB or
-                    # create one when it does not already exist.
-                    bindmount_ro=[(db_path_src, db_path_dst)],
-                ),
-                PopenArgs(stdout=subprocess.PIPE),
-            )[0].stdout,
-        )
-
-    @classmethod
-    def from_file(cls, package_path: Path) -> "RpmMetadata":
-        if not package_path.endswith(b".rpm"):
-            raise ValueError(f"RPM file {package_path} needs to end with .rpm")
-        return _repo_query(
-            package_path=package_path,
-            check_output_fn=subprocess.check_output,
-        )
-
-
-def _repo_query(
-    *,
-    db_path: Optional[Path] = None,
-    package_name: Optional[str] = None,
-    package_path: Optional[Path] = None,
-    check_output_fn,
-) -> "RpmMetadata":
-    query_args: List[MehStr] = [
-        "rpm",
-        "--query",
-        "--queryformat",
-        "'%{NAME}:%{epochnum}:%{VERSION}:%{RELEASE}'",
-    ]
-
-    if db_path and package_name and (package_path is None):
-        query_args += ["--dbpath", db_path, package_name]
-    elif package_path and (db_path is None and package_name is None):
-        query_args += ["--package", package_path]
-    else:
-        raise ValueError(
-            "Must pass only (--dbpath and --package_name) or --package"
-        )
-
-    try:
-        result = check_output_fn(query_args).decode().strip("'\"")
-        log.debug(f"RPM query {query_args} returned {result}")
-    except subprocess.CalledProcessError as e:
-        raise RuntimeError(
-            f"Error querying RPM: {query_args}, {e.stdout}, {e.stderr}"
-        )
-
-    n, e, v, r = result.split(":")
-    return RpmMetadata(name=n, epoch=int(e), version=v, release=r)
 
 
 # This comprises a pure python implementation of rpm version comparison. The
