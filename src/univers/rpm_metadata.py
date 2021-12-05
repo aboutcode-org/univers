@@ -70,10 +70,7 @@ R_ALPHA = re.compile(br"^([a-zA-Z]+)(.*)$")
 
 def _compare_values(left: str, right: str) -> int:
     # Rpm versions can only be ascii, anything else is just
-    # ignored
-    # pyre-fixme[9]: left has type `str`; used as `bytes`.
     left = left.encode("ascii", "ignore")
-    # pyre-fixme[9]: right has type `str`; used as `bytes`.
     right = right.encode("ascii", "ignore")
 
     if left == right:
