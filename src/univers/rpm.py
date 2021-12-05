@@ -20,12 +20,43 @@
 
 import re
 from typing import NamedTuple
+from typing import Union
 
 
 class RpmVersion(NamedTuple):
     epoch: int
     version: str
     release: str
+
+    @classmethod
+    def from_string(cls, s):
+        e, v, r = from_evr(s)
+        return cls(e, v, r)
+
+
+def from_evr(s):
+    """
+    Return an (E, V, R) tuple given a string by splitting
+    [e:]version-release into the three possible subcomponents.
+    Default epoch to 0, version and release to empty string if not specified.
+
+    >>> assert from_evr("1:11.13.2.0-1") == (1, "11.13.2.0", "1")
+    >>> assert from_evr("11.13.2.0-1") == (0, "11.13.2.0", "1")
+    """
+    if ":" in s:
+        e, _, vr = s.partition(":")
+    else:
+        e = "0"
+        vr = s
+
+    e = int(e)
+
+    if "-" in vr:
+        v, _, r = vr.partition("-")
+    else:
+        v = vr
+        r = ""
+    return e, v, r
 
 
 # This comprises a pure python implementation of rpm version comparison. The
@@ -43,14 +74,24 @@ class RpmVersion(NamedTuple):
 #
 # There are extensive test cases in the `test_rpm_metadata.py` test case that
 # cover a wide variety of normal and weird version comparsions.
-def compare_rpm_versions(a: RpmVersion, b: RpmVersion) -> int:
+
+
+def compare_rpm_versions(a: Union[RpmVersion, str], b: Union[RpmVersion, str]) -> int:
     """
     Returns:
         1 if the version of a is newer than b
         0 if the versions match
         -1 if the version of a is older than b
-    """
 
+    >>> assert compare_rpm_versions("1.0", "1.1") == -1
+    >>> assert compare_rpm_versions("1.1", "1.0") == 1
+    >>> assert compare_rpm_versions("11.13.2-1", "11.13.2.0-1") == -1
+    >>> assert compare_rpm_versions("11.13.2.0-1", "11.13.2-1") == 1
+    """
+    if isinstance(a, str):
+        a = RpmVersion.from_string(a)
+    if isinstance(b, str):
+        b = RpmVersion.from_string(b)
     # First compare the epoch, if set.  If the epoch's are not the same, then
     # the higher one wins no matter what the rest of the EVR is.
     if a.epoch != b.epoch:

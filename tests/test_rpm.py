@@ -7,18 +7,11 @@
 import unittest
 
 from univers.rpm import RpmVersion
-from univers.rpm import _compare_values
 from univers.rpm import compare_rpm_versions
 
 
 class RpmMetadataTestCase(unittest.TestCase):
     def test_rpm_compare_versions(self):
-        # name mismatch
-        a = RpmVersion("test-name1", 1, "2", "3")
-        b = RpmVersion("test-name2", 1, "2", "3")
-        with self.assertRaises(ValueError):
-            compare_rpm_versions(a, b)
-
         # Taste data was generated with:
         # rpmdev-vercmp <epoch1> <ver1> <release1> <epoch2> <ver2> <release2>
         # which also uses the same Python rpm lib.
@@ -50,19 +43,10 @@ class RpmMetadataTestCase(unittest.TestCase):
         ]
 
         for evr1, evr2, expected in test_evr_data:
-            a = RpmVersion("test-name", *evr1)
-            b = RpmVersion("test-name", *evr2)
+            a = RpmVersion(*evr1)
+            b = RpmVersion(*evr2)
             self.assertEqual(
                 compare_rpm_versions(a, b),
                 expected,
                 f"failed: {evr1}, {evr2}, {expected}",
-            )
-
-        # Test against some more canonical tests.  These are derived from
-        # actual tests used for rpm itself.
-        for ver1, ver2, expected in self._load_canonical_tests():
-            self.assertEqual(
-                _compare_values(ver1, ver2),
-                expected,
-                f"failed: {ver1}, {ver2}, {expected}",
             )
