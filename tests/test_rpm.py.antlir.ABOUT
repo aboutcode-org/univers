@@ -1,0 +1,12 @@
+about_resource: test_rpm.py
+package_url: pkg:github/facebookincubator/antlir@120b20de91c55244ceacf61f82c5154a28446590#antlir/rpm/tests/test_rpm_metadata.py
+copyright: |
+    Copyright (c) Facebook, Inc. and its affiliates.
+
+license_expression: mit
+homepage_url: https://github.com/facebookincubator/antlir/
+
+notes: |
+  This has been substantially modified and enhanced from the original code
+
+notice_file: test_rpm.py.antlir.NOTICE
