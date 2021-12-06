@@ -1,0 +1,13 @@
+about_resource: test_bundler_version_ranges_spec.py
+package_url: pkg:github.com/rubygems/rubygems@5768c2bc5542ce05466d379981a433ba1ee1e10a
+copyright: |
+    Portions copyright (c) André Arko
+    Portions copyright (c) Engine Yard
+
+license_expression: mit
+homepage_url: https://github.com/rubygems/rubygems
+
+notes: This has been substantially modified and enhanced from the original code
+ to port tests cases to Python
+
+notice_file: test_bundler_edgecases_spec.py.NOTICE
