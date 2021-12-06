@@ -1,0 +1,14 @@
+about_resource: test_rubygems_gem_requirement.py
+package_url: pkg:github.com/rubygems/rubygems@5768c2bc5542ce05466d379981a433ba1ee1e10a
+copyright: |
+    Copyright (c) Chad Fowler, Rich Kilmer, Jim Weirich and others.
+    Portions copyright (c) Engine Yard and Andre Arko
+
+license_expression: mit
+homepage_url: https://github.com/rubygems/rubygems
+
+notes: This has been substantially modified and enhanced from the original code
+ to port tests cases to Python. The original license is a choice of MIT or Ruby
+ license. We selected to use the MIT license here. 
+
+notice_file: test_rubygems_gem_requirement.py.NOTICE
