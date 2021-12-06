@@ -9,6 +9,7 @@
 
 
 import re
+from collections import namedtuple
 
 
 def default(x, e, y):
@@ -133,6 +134,14 @@ class GemVersion:
         return self.__segments
 
 
+GemConstraint = namedtuple("GemConstraint", ["op", "version"])
+GemConstraint.to_string = lambda gc: f"{gc.op} {gc.version}"
+
+
+def sorted_constraints(constraints):
+    return sorted(constraints, key=lambda gc: gc.version)
+
+
 class GemRequirement:
     """
     A gem requirement using the Gem notation.
@@ -156,7 +165,7 @@ class GemRequirement:
     # A regular expression that matches a requirement
     PATTERN = re.compile("^{PATTERN_RAW}$".format(PATTERN_RAW=PATTERN_RAW))
 
-    ##
+    # #
     # The default requirement matches any version
 
     DEFAULT_REQUIREMENT = tuple([">=", GemVersion(0)])
@@ -165,17 +174,45 @@ class GemRequirement:
         pass
 
     def __init__(self, *requirements):
-        # type: (str) -> None
-        if len(requirements) == 0:
-            self.__requirements = tuple([GemRequirement.DEFAULT_REQUIREMENT])
+
+        if not requirements:
+            self.requirements = tuple([GemRequirement.DEFAULT_REQUIREMENT])
+
         else:
-            self.__requirements = tuple(map(lambda req: GemRequirement.parse(req), requirements))
+            self.requirements = tuple(map(GemRequirement.parse, requirements))
+
+    def for_lockfile(self):
+        """
+        Return a string representing this list of requirements suitable for use
+        in a lockfile.
+
+        For example::
+        >>> gr = GemRequirement(">= 1.0.1", "~> 1.0")
+        >>> gf_flf = gr.for_lockfile()
+        >>> assert gf_flf == " (~> 1.0, >= 1.0.1)", gf_flf
+        """
+
+        gcs = [GemConstraint(*r) for r in self.requirements]
+        gcs = [gc.to_string() for gc in sorted_constraints(gcs)]
+        reqss = ", ".join(gcs)
+        return f" ({reqss})"
+
+    @classmethod
+    def create(cls, reqs):
+        """
+        Return a GemRequirement built from a single requirement string or a list
+        of requirement strings.
+        """
+        if isinstance(reqs, list):
+            return GemRequirement(*reqs)
+        else:
+            return GemRequirement(reqs)
 
     @classmethod
     def parse(cls, requirement):
         """
         Return a tuple of (operator string, GemVersion object) parsed from a
-        ``requirements`` string.
+        saingle ``requirement`` string.
         """
         if isinstance(requirement, GemVersion):
             return tuple(["=", requirement])
@@ -199,7 +236,7 @@ class GemRequirement:
         """
         gemver = version if isinstance(version, GemVersion) else GemVersion(version)
         operation = self.__test_rv(gemver)
-        return all(map(operation, self.__requirements))
+        return all(map(operation, self.requirements))
 
     @classmethod
     def __test_rv(cls, version):
@@ -207,6 +244,7 @@ class GemRequirement:
         Return a callable function that can check if a ``version`` satisfies the
         operation of a single (op, version) requirement.
         """
+
         # type: (GemVersion) -> Callable[[str, GemVersion], bool]
         def __testing(req):
             op, rv = req
