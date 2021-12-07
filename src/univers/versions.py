@@ -101,7 +101,7 @@ class Version:
         """
         return self in constraint
 
-    def satisfies_all(self, constraints, explain=True):
+    def satisfies_all(self, constraints, explain=False):
         """
         Return True is this version satifies all the ``constraints`` list of
         VersionConstraint.

@@ -6,21 +6,17 @@
 #
 # Originally from https://github.com/rubygems/rubygems
 
+from univers.gem import GemConstraint
 from univers.gem import GemRequirement
 from univers.gem import GemVersion
+from univers.gem import InvalidRequirementError
 
 
 def test_equals():
     refute_requirement_equal("= 1.2", "= 1.3")
-    refute_requirement_equal("= 1.3", "= 1.2")
-
     refute_requirement_equal("~> 1.3", "~> 1.3.0")
-    refute_requirement_equal("~> 1.3.0", "~> 1.3")
-
     assert_requirement_equal(["> 2", "~> 1.3", "~> 1.3.1"], ["~> 1.3.1", "~> 1.3", "> 2"])
-
     assert_requirement_equal(["> 2", "~> 1.3"], ["> 2.0", "~> 1.3"])
-    assert_requirement_equal(["> 2.0", "~> 1.3"], ["> 2", "~> 1.3"])
 
 
 def test_initialize():
@@ -32,17 +28,15 @@ def test_initialize():
 
 def test_create():
     r = GemRequirement(">= 1", "< 2")
-    assert r.requirements == [[">=", GemVersion(1)], ["<", GemVersion(2)]]
+    assert r.constraints == (
+        GemConstraint(">=", GemVersion(1)),
+        GemConstraint("<", GemVersion(2)),
+    )
     assert GemRequirement("= 1") == GemRequirement("= 1")
     assert GemRequirement(">= 1.2", "<= 1.3") == GemRequirement("<= 1.3", ">= 1.2")
 
 
-def test_empty_requirements_is_none():
-    r = GemRequirement()
-    assert r is None
-
-
-def test_explicit_default_is_none():
+def test_explicit_default_is_not_none():
     r = GemRequirement(">= 0")
     assert r
 
@@ -53,29 +47,29 @@ def test_basic_non_none():
 
 
 def test_for_lockfile():
-    assertGemRequirement("~> 1.0").for_lockfile() == " (~> 1.0)"
+    assert GemRequirement("~> 1.0").for_lockfile() == " (~> 1.0)"
     assert GemRequirement(">= 1.0.1", "~> 1.0").for_lockfile() == " (~> 1.0, >= 1.0.1)"
     duped = GemRequirement("= 1.0", ["=", GemVersion("1.0")])
     assert duped.for_lockfile() == " (= 1.0)"
 
 
 def test_parse():
-    assert GemRequirement.parse("  1") == ["=", GemVersion(1)]
-    assert GemRequirement.parse("= 1") == ["=", GemVersion(1)]
-    assert GemRequirement.parse("> 1") == [">", GemVersion(1)]
-    assert GemRequirement.parse("=\n1" == ["=", GemVersion(1)])
-    assert GemRequirement.parse("1.0") == ["=", GemVersion(1)]
+    assert GemRequirement.parse("  1") == GemConstraint("=", GemVersion(1))
+    assert GemRequirement.parse("= 1") == GemConstraint("=", GemVersion(1))
+    assert GemRequirement.parse("> 1") == GemConstraint(">", GemVersion(1))
+    assert GemRequirement.parse("=\n1") == GemConstraint("=", GemVersion(1))
+    assert GemRequirement.parse("1.0") == GemConstraint("=", GemVersion(1))
 
-    assert GemRequirement.parse(GemVersion("2")) == ["=", GemVersion(2)]
+    assert GemRequirement.parse(GemVersion("2")) == GemConstraint("=", GemVersion(2))
 
 
 def test_parse_deduplication():
-    assert GemRequirement.parse("~> 1")[0] == "~>"
+    assert GemRequirement.parse("~> 1") == GemConstraint("~>", GemVersion("1"))
 
 
 def test_parse_bad():
     bads = [
-        nil,
+        None,
         "",
         "! 1",
         "= junk",
@@ -85,19 +79,19 @@ def test_parse_bad():
         try:
             GemRequirement.parse(bad)
             raise Exception("exception not raised")
-        except GemRequirement.BadRequirementError:
+        except InvalidRequirementError:
             pass
 
 
 def test_prerelease_eh():
-    r = GemRequirement("= 1")
-    assert not r.prerelease
+    r = GemVersion("1")
+    assert not r.prerelease()
 
-    r = GemRequirement("= 1.a")
-    assert r.prerelease
+    r = GemVersion("1.a")
+    assert r.prerelease()
 
-    r = GemRequirement("> 1.a", "< 2")
-    assert r.prerelease
+    r = GemVersion("1.x")
+    assert r.prerelease()
 
 
 def test_satisfied_by_eh_bang_equal():
@@ -180,6 +174,10 @@ def test_satisfied_by_eh_tilde_gt_v0():
     assert_satisfied_by("0.0.1", r)
 
 
+def test_satisfied_by_eh_good_problematic():
+    assert_satisfied_by("0.0.1.0", "> 0.0.0.1")
+
+
 def test_satisfied_by_eh_good():
     assert_satisfied_by("0.2.33", "= 0.2.33")
     assert_satisfied_by("0.2.34", "> 0.2.33")
@@ -191,7 +189,6 @@ def test_satisfied_by_eh_good():
     assert_satisfied_by("1.112", "> 1.111")
     assert_satisfied_by("0.2", "> 0.0.0")
     assert_satisfied_by("0.0.0.0.0.2", "> 0.0.0")
-    assert_satisfied_by("0.0.1.0", "> 0.0.0.1")
     assert_satisfied_by("10.3.2", "> 9.3.2")
     assert_satisfied_by("1.0.0.0", "= 1.0")
     assert_satisfied_by("10.3.2", "!= 9.3.4")
@@ -228,7 +225,7 @@ def test_illformed_requirements():
         try:
             GemRequirement.parse(bad)
             raise Exception("exception not raised")
-        except GemRequirement.BadRequirementError:
+        except InvalidRequirementError:
             pass
 
 
@@ -350,21 +347,21 @@ def assert_requirement_equal(expected, actual):
     assert GemRequirement.create(actual) == GemRequirement.create(expected)
 
 
-def assert_satisfied_by(version, requirement):
-    # Assert that +version+ satisfies +requirement+.
-    assert GemRequirement.create(requirement).satisfied_by(GemVersion(version))
-
-
 def refute_requirement_equal(unexpected, actual):
     # Refute the assumption that two requirements are equal.
     assert GemRequirement.create(actual) != GemRequirement.create(unexpected)
+    assert GemRequirement.create(unexpected) != GemRequirement.create(actual)
+
+
+def assert_satisfied_by(version, requirement):
+    # Assert that +version+ satisfies +requirement+.
+    if not isinstance(requirement, GemRequirement):
+        requirement = GemRequirement.create(requirement)
+    assert requirement.satisfied_by(GemVersion(version))
 
 
 def refute_satisfied_by(version, requirement):
     # Refute the assumption that +version+ satisfies +requirement+.
-    assert not GemRequirement.create(requirement).satisfied_by(GemVersion(version))
-
-
-def refute_requirement_equal(unexpected, actual):
-    # Refute the assumption that two requirements hashes are equal.
-    assert GemRequirement.create(actual) != GemRequirement.create(unexpected)
+    if not isinstance(requirement, GemRequirement):
+        requirement = GemRequirement.create(requirement)
+    assert not requirement.satisfied_by(GemVersion(version))

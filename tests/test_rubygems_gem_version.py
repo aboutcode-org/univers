@@ -6,17 +6,15 @@
 #
 # Originally from https://github.com/rubygems/rubygems
 
+from univers.gem import GemRequirement
 from univers.gem import GemVersion
-
-
-def assert_equal(expected, result):
-    assert result == expected
+from univers.gem import InvalidVersionError
 
 
 def assert_bumped_version_equal(expected, unbumped):
     # Assert that bumping the +unbumped+ version yields the +expected+.
 
-    assert_version_equal(expected, GemVersion(unbumped).bump())
+    assert_version_eql(expected, GemVersion(unbumped).bump())
 
 
 def test_bump():
@@ -39,37 +37,33 @@ def test_bump_one_level():
     assert_bumped_version_equal("6", "5")
 
 
-def test_eql_eh():
+def test_eql_is_same():
     assert_version_eql("1.2", "1.2")
-    refute_version_eql("1.2", "1.2.0")
+    assert_version_strict_equal("1.2", "1.2")
+
     refute_version_eql("1.2", "1.3")
-    refute_version_eql("1.2.b1", "1.2.b.1")
+    refute_version_strict_equal("1.2", "1.3")
 
+    refute_version_strict_equal("1.2", "1.2.0")
+    assert_version_eql("1.2", "1.2.0")
 
-def test_equals2():
-    assert_version_equal("1.2", "1.2")
-    refute_version_equal("1.2", "1.3")
-    assert_version_equal("1.2.b1", "1.2.b.1")
+    assert_version_eql("1.2.b1", "1.2.b.1")
+    refute_version_strict_equal("1.2.b1", "1.2.b.1")
 
-    # REVISIT: consider removing as too impl-bound
-
-
-def test_hash():
-    assert GemVersion("1.2").hash == GemVersion("1.2").hash
-    assert GemVersion("1.2").hash != GemVersion("1.3").hash
-    assert GemVersion("1.2").hash == GemVersion("1.2.0").hash
-    assert GemVersion("1.2.pre.1").hash == GemVersion("1.2.0.pre.1.0").hash
+    refute_version_strict_equal("1.2.pre.1", "1.2.0.pre.1.0")
+    assert_version_eql("1.2.pre.1", "1.2.0.pre.1.0")
 
 
 def test_initialize():
     for good in ["1.0", "1.0 ", " 1.0 ", "1.0\n", "\n1.0\n", "1.0"]:
-        assert_version_equal("1.0", good)
+        assert_version_eql("1.0", good)
 
-    assert_version_equal("1", 1)
+    assert_version_eql("1", 1)
 
 
 def test_initialize_invalid():
     invalid_versions = [
+        "whatever",
         "junk",
         "1.0\n2.0" "1..2",
         "1.2\ 3.4",
@@ -81,14 +75,15 @@ def test_initialize_invalid():
     for invalid in invalid_versions:
         try:
             GemVersion(invalid)
-            raise Exception("exception not raised")
-        except ValueError:
+            raise Exception(f"exception not raised for: {invalid!r}")
+        except InvalidVersionError:
             pass
 
 
 def test_empty_version():
-    for empty in ["", "   ", " "]:
-        assert_equal("0", GemVersion(empty).version)
+    assert GemVersion("").version == "0"
+    assert GemVersion("  ").version == "0"
+    assert GemVersion(" ").version == "0"
 
 
 def test_prerelease():
@@ -114,55 +109,52 @@ def test_release():
     assert_release_equal("1.9.3", "1.9.3")
 
 
-def test_spaceship():
+def test_spaceship_cmp():
     def cmp(a, b):
         return a.__cmp__(b)
 
     # Ruby spaceship  <=>  is the same as Python legacy cmp()
-    assert_equal(0, cmp(GemVersion("1.0"), GemVersion("1.0.0")))
-    assert_equal(1, cmp(GemVersion("1.0"), GemVersion("1.0.a")))
-    assert_equal(1, cmp(GemVersion("1.8.2"), GemVersion("0.0.0")))
-    assert_equal(1, cmp(GemVersion("1.8.2"), GemVersion("1.8.2.a")))
-    assert_equal(1, cmp(GemVersion("1.8.2.b"), GemVersion("1.8.2.a")))
-    assert_equal(-1, cmp(GemVersion("1.8.2.a"), GemVersion("1.8.2")))
-    assert_equal(1, cmp(GemVersion("1.8.2.a10"), GemVersion("1.8.2.a9")))
-    assert_equal(0, cmp(GemVersion(""), GemVersion("0")))
-
-    assert_equal(0, cmp(GemVersion("0.beta.1"), GemVersion("0.0.beta.1")))
-    assert_equal(-1, cmp(GemVersion("0.0.beta"), GemVersion("0.0.beta.1")))
-    assert_equal(-1, cmp(GemVersion("0.0.beta"), GemVersion("0.beta.1")))
-
-    assert_equal(-1, cmp(GemVersion("5.a"), GemVersion("5.0.0.rc2")))
-    assert_equal(1, cmp(GemVersion("5.x"), GemVersion("5.0.0.rc2")))
-
-    assert_nil(cmp(GemVersion("1.0"), "whatever"))
+    assert cmp(GemVersion("1.0"), GemVersion("1.0.0")) == 0
+    assert cmp(GemVersion("1.0"), GemVersion("1.0.a")) == 1
+    assert cmp(GemVersion("1.8.2"), GemVersion("0.0.0")) == 1
+    assert cmp(GemVersion("1.8.2"), GemVersion("1.8.2.a")) == 1
+    assert cmp(GemVersion("1.8.2.b"), GemVersion("1.8.2.a")) == 1
+    assert cmp(GemVersion("1.8.2.a"), GemVersion("1.8.2")) == -1
+    assert cmp(GemVersion("1.8.2.a10"), GemVersion("1.8.2.a9")) == 1
+    assert cmp(GemVersion(""), GemVersion("0")) == 0
+    assert cmp(GemVersion("0.beta.1"), GemVersion("0.0.beta.1")) == 0
+    assert cmp(GemVersion("0.0.beta"), GemVersion("0.0.beta.1")) == -1
+    assert cmp(GemVersion("0.0.beta"), GemVersion("0.beta.1")) == -1
+    assert cmp(GemVersion("5.a"), GemVersion("5.0.0.rc2")) == -1
+    assert cmp(GemVersion("5.x"), GemVersion("5.0.0.rc2")) == 1
 
 
-def test_approximate_recommendation():
-    assert_approximate_equal("~> 1.0", "1")
-    assert_approximate_satisfies_itself("1")
+def assert_version_satisfies_requirement(requirement, version):
+    # Assert that +version+ satisfies the "approximate" ~> +requirement+.
+    req = GemRequirement.create(requirement)
+    ver = GemVersion(version)
+    assert req.satisfied_by(ver)
 
-    assert_approximate_equal("~> 1.0", "1.0")
-    assert_approximate_satisfies_itself("1.0")
 
-    assert_approximate_equal("~> 1.2", "1.2")
-    assert_approximate_satisfies_itself("1.2")
-
-    assert_approximate_equal("~> 1.2", "1.2.0")
-    assert_approximate_satisfies_itself("1.2.0")
-
-    assert_approximate_equal("~> 1.2", "1.2.3")
-    assert_approximate_satisfies_itself("1.2.3")
-
-    assert_approximate_equal("~> 1.2.a", "1.2.3.a.4")
-    assert_approximate_satisfies_itself("1.2.3.a.4")
-
-    assert_approximate_equal("~> 1.9.a", "1.9.0.dev")
-    assert_approximate_satisfies_itself("1.9.0.dev")
+def test_satisfies_requirement():
+    assert_version_satisfies_requirement("~> 1.0", "1")
+    assert_version_satisfies_requirement("~> 1.0", "1.0")
+    assert_version_satisfies_requirement("~> 1.2", "1.2")
+    assert_version_satisfies_requirement("~> 1.2", "1.2.0")
+    assert_version_satisfies_requirement("~> 1.2", "1.2.3")
+    assert_version_satisfies_requirement("~> 1.2.a", "1.2.3.a.4")
+    assert_version_satisfies_requirement("~> 1.9.a", "1.9.0.dev")
 
 
 def test_to_s():
     assert GemVersion("5.2.4").to_string() == "5.2.4"
+
+
+def test_compare():
+    assert GemVersion("0.0.1.0") > GemVersion("0.0.0.1")
+    assert not GemVersion("0.0.1.0") < GemVersion("0.0.0.1")
+    assert GemVersion("0.0.1.0") >= GemVersion("0.0.0.1")
+    assert not GemVersion("0.0.1.0") <= GemVersion("0.0.0.1")
 
 
 def test_semver():
@@ -180,21 +172,25 @@ def test_segments():
     secondseg = ver.segments[2]
     secondseg += 1
 
-    refute_version_equal("9.8.8", "9.8.7")
-    assert_equal([9, 8, 7], GemVersion("9.8.7").segments)
+    refute_version_eql("9.8.8", "9.8.7")
+    assert GemVersion("9.8.7").segments == [9, 8, 7]
+
+
+def test_split_segments():
+    assert GemVersion("3.2.4-2").split_segments() == ([3, 2, 4], ["pre", 2])
 
 
 def test_canonical_segments():
-    assert_equal([1], GemVersion("1.0.0").canonical_segments)
-    assert_equal([1, "a", 1], GemVersion("1.0.0.a.1.0").canonical_segments)
-    assert_equal([1, 2, 3, "pre", 1], GemVersion("1.2.3-1").canonical_segments)
+    assert GemVersion("1.0.0").canonical_segments == [1]
+    assert GemVersion("1.0.0.a.1.0").canonical_segments == [1, "a", 1]
+    assert GemVersion("1.2.3-1").canonical_segments == [1, 2, 3, "pre", 1]
 
 
 def test_frozen_version():
     ver = GemVersion("1.test")
     assert_less_than(ver, GemVersion("1"))
-    assert_version_equal(GemVersion("1"), v.release)
-    assert_version_equal(GemVersion("2"), v.bump)
+    assert_version_eql(GemVersion("1"), ver.release())
+    assert_version_eql(GemVersion("2"), ver.bump())
 
 
 def assert_prerelease(version):
@@ -202,34 +198,45 @@ def assert_prerelease(version):
     assert GemVersion(version).prerelease(), "#{version} is a prerelease"
 
 
-def assert_approximate_equal(expected, version):
-    # Assert that +expected+ is the "approximate" recommendation for +version+.
-    assert GemVersion(version).approximate_recommendation() == expected
-
-
-def assert_approximate_satisfies_itself(version):
-    # Assert that the "approximate" recommendation for +version+ satisfies +version+.
-    gem_version = GemVersion(version)
-    req = GemRequirement(gem_version.approximate_recommendation())
-    assert req.satisfied_by(gem_version)
-
-
 def assert_release_equal(release, version):
     # Assert that +release+ is the correct non-prerelease +version+.
-    assert_version_equal(release, GemVersion(version).release)
-
-
-def assert_version_equal(expected, actual):
-    # Assert that two versions are equal. Handles strings or
-    # Gem::Version instances.
-    assert GemVersion(expected) == GemVersion(actual)
+    assert_version_eql(release, GemVersion(version).release())
 
 
 def assert_version_eql(first, second):
     # Assert that two versions are eql?. Checks both directions.
-    first, second = GemVersion(first), GemVersion(second)
-    assert first == second, "#{first} is eql? #{second}"
-    assert second == first, "#{second} is eql? #{first}"
+    first = GemVersion(first)
+    second = GemVersion(second)
+    assert first is not second
+    assert first == second
+    assert second == first
+
+
+def refute_version_eql(first, second):
+    # Refute the assumption that two versions are eql?. Checks both
+    # directions.
+    first = GemVersion(first)
+    second = GemVersion(second)
+    assert first is not second
+    assert first != second
+    assert second != first
+
+
+def assert_version_strict_equal(first, second):
+    # Assert that two versions are strictly equal
+    first = GemVersion(first)
+    second = GemVersion(second)
+    assert first is not second
+    assert first.equal_strictly(second)
+    assert second.equal_strictly(first)
+
+
+def refute_version_strict_equal(first, second):
+    first = GemVersion(first)
+    second = GemVersion(second)
+    assert first is not second
+    assert not first.equal_strictly(second)
+    assert not second.equal_strictly(first)
 
 
 def assert_less_than(left, right):
@@ -239,17 +246,3 @@ def assert_less_than(left, right):
 def refute_prerelease(version):
     # Refute the assumption that +version+ is a prerelease.
     assert not GemVersion(version).prerelease()
-
-
-def refute_version_eql(first, second):
-    # Refute the assumption that two versions are eql?. Checks both
-    # directions.
-    first = GemVersion(first)
-    second = GemVersion(second)
-    assert first != second
-    assert second != first
-
-
-def refute_version_equal(unexpected, actual):
-    # Refute the assumption that the two versions are equal?.
-    assert GemVersion(unexpected) != GemVersion(actual)
