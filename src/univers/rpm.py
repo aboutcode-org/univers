@@ -52,7 +52,7 @@ def from_evr(s):
 
 def compare_rpm_versions(a: Union[RpmVersion, str], b: Union[RpmVersion, str]) -> int:
     """
-    Compare to RPM versions ``a`` and ``b`` and return:
+    Compare two RPM versions ``a`` and ``b`` and return:
     -  1 if the version of a is newer than b
     -  0 if the versions match
     -  -1 if the version of a is older than b
