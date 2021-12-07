@@ -93,12 +93,7 @@ def get_tests():
         tests = list(parse_rpmvercmp_tests(rpmtests, with_buggy_comparisons=True))
         for test_count, (ver1, ver2, expected) in enumerate(tests, 1):
             name = f"test_rpm_version_{test_count}"
-            func = create_test_function(ver1, ver2, expected, name)
-            if "^" in ver1 or "^" in ver2:
-                result = vercmp.vercmp(ver1, ver2)
-                if result != expected:
-                    func = unittest.expectedFailure(func)
-            yield func
+            yield create_test_function(ver1, ver2, expected, name)
 
     # Make sure we still test something, in case the m4 file drops
     # content this will fail the test
