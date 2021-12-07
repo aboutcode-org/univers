@@ -1,0 +1,16 @@
+about_resource: rpm.py
+package_url: pkg:github/facebookincubator/antlir@120b20de91c55244ceacf61f82c5154a28446590#antlir/rpm/rpm_metadata.py
+copyright: |
+    Copyright (c) Facebook, Inc. and its affiliates.
+    Copyright (c) SAS Institute Inc.
+
+license_expression: mit AND Apache-2.0
+homepage_url: https://github.com/facebookincubator/antlir/
+
+notes: |
+  This has been substantially modified and enhanced from the original code
+  at https://github.com/facebookincubator/antlir/blob/120b20de91c55244ceacf61f82c5154a28446590/antlir/rpm/rpm_metadata.py
+  itself taken from 
+  itself originally derived from the Apache-licensed
+
+notice_file: rpm.py.antlir.NOTICE
