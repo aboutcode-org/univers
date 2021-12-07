@@ -12,6 +12,7 @@ from packaging import version as packaging_version
 
 from univers import arch
 from univers import debian
+from univers import gem
 from univers import gentoo
 from univers import maven
 from univers import rpm
@@ -194,25 +195,20 @@ class SemverVersion(Version):
 
 @total_ordering
 @attr.s(frozen=True, order=False, eq=False, hash=True)
-class RubyVersion(Version):
+class RubygemsVersion(Version):
     """
-    Ruby version encourages but does not enforce semver
+    Rubygems encourages semver version but does not enforce it.
+    Rubygems supports 4 or more segments in versions such
+    as with https://rubygems.org/gems/rails/versions/5.0.0.1
     """
-
-    # FIXME: Ruby is NOT semver support 4 or more segments in versions such as https://rubygems.org/gems/rails/versions/5.0.0.1
-    # See https://github.com/ruby/ruby/blob/415671a28273e5bfbe9aa00a0e386f025720ac23/lib/rubygems/requirement.rb
 
     @classmethod
     def build_value(cls, string):
-        return semantic_version.Version.coerce(string)
+        return gem.GemVersion(string)
 
     @classmethod
     def is_valid(cls, string):
-        try:
-            semantic_version.Version.parse(string)
-            return True
-        except ValueError:
-            return False
+        return gem.GemVersion.is_correct(string)
 
 
 @total_ordering

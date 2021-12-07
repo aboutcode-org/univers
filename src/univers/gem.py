@@ -470,6 +470,19 @@ GemConstraint = namedtuple("GemConstraint", ["op", "version"])
 GemConstraint.to_string = lambda gc: f"{gc.op} {gc.version}"
 
 
+def sort_constraints(constraints):
+    """
+    Return a sorted sequence of unique GemConstraints.
+    """
+    constraints = sorted(constraints, key=lambda gc: (gc.version, gc.op))
+    consts = []
+    for gc in constraints:
+        if gc in consts:
+            continue
+        consts.append(gc)
+    return consts
+
+
 def tilde_comparator(version, requirement, trace=False):
     """
     Return True if ``version`` GemVersion satisfies ``requirement`` GemVersion
@@ -524,22 +537,22 @@ class GemRequirement:
             self.constraints = tuple([GemRequirement.parse(r) for r in requirements])
 
     def __str__(self):
-        gcs = [gc.to_string() for gc in self.as_constraints(sort=True)]
+        gcs = [gc.to_string() for gc in sort_constraints(self.constraints)]
         return ", ".join(gcs)
 
     def __repr__(self):
-        gcs = ", ".join(repr(gc.to_string()) for gc in self.as_constraints(sort=True))
+        gcs = ", ".join(repr(gc.to_string()) for gc in sort_constraints(self.constraints))
         return f"GemRequirement({gcs})"
 
     @classmethod
-    def from_lockfile(cls, requirements):
+    def from_string(cls, requirements):
         """
         Return a GemRequirement build from a lockfile-style ``requirements``
         string.
 
         For example::
         >>> gr1 = GemRequirement(">= 1.0.1", "~> 1.0")
-        >>> gr2 = GemRequirement.from_lockfile(" (>= 1.0.1, ~> 1.0)")
+        >>> gr2 = GemRequirement.from_string(" (>= 1.0.1, ~> 1.0)")
         >>> assert gr1 == gr2, (gr1, gr2)
         """
         reqs = requirements.strip().strip("()")
@@ -556,7 +569,7 @@ class GemRequirement:
         >>> gf_flf = gr.for_lockfile()
         >>> assert gf_flf == " (~> 1.0, >= 1.0.1)", gf_flf
         """
-        gcs = [gc.to_string() for gc in self.as_constraints(sort=True, unique=True)]
+        gcs = [gc.to_string() for gc in sort_constraints(self.constraints)]
         gcs = ", ".join(gcs)
         return f" ({gcs})"
 
@@ -564,16 +577,29 @@ class GemRequirement:
         """
         Return a new GemRequirement with sorted and unique constraints.
         """
-        return GemRequirement(*self.as_constraints(sort=True, unique=True))
+        return GemRequirement(*sort_constraints(self.constraints))
+
+    def simplify(self):
+        """
+        Return a new simplified GemRequirement with:
+        - sorted and unique constraints.
+        - where ~> constraints are replaced by simpler contrainsts.
+        """
+        constraints = []
+        for const in self.constraints:
+            if const.op == "~>":
+                low_high = get_tilde_constraints(const)
+                constraints.extend(low_high)
+            else:
+                constraints.append(const)
+        return GemRequirement(*sort_constraints(constraints))
 
     def __eq__(self, other):
         if not isinstance(other, self.__class__):
             return False
 
         # An == check is always necessary
-        if self.as_constraints(sort=True, unique=True) == other.as_constraints(
-            sort=True, unique=True
-        ):
+        if sort_constraints(self.constraints) == sort_constraints(other.constraints):
             stilde = self.tilde_requirements()
             if not stilde:
                 # An == check is sufficient unless any requirements use ~>
@@ -603,23 +629,6 @@ class GemRequirement:
         True
         """
         return len(self.constraints) == 1 and self.constraints[0].op == "="
-
-    def as_constraints(self, sort=False, unique=False):
-        """
-        Return a sequence of GemConstraints optionally sorted and deduplicated.
-        """
-        constraints = self.constraints[:]
-        if sort:
-            constraints = sorted(constraints, key=lambda gc: (gc.version, gc.op))
-        if unique:
-            consts = []
-            for gc in constraints:
-                if gc in consts:
-                    continue
-                consts.append(gc)
-            constraints = consts
-
-        return constraints
 
     @classmethod
     def create(cls, reqs):
@@ -696,5 +705,31 @@ class GemRequirement:
         """
         Return a sorted sequence of all pessimistic "~>" GemConstraint.
         """
-        constraints = self.as_constraints(sort=True, unique=True)
+        constraints = sort_constraints(self.constraints)
         return [gc for gc in constraints if gc.op == "~>"]
+
+
+def get_tilde_constraints(constraint):
+    """
+    Return a tuple of two GemConstraint representing the lower and upper
+    bound of a version range ``string`` that uses a tilde "~>" pessimistic operator.
+    Raise a ValueError if this is not a tilde range.
+
+    For example:
+    >>> lower_bound, upper_bound = get_tilde_constraints(GemConstraint("~>", GemVersion("1.0.2")))
+    >>> vlow = GemVersion("1.0.2")
+    >>> vup = GemVersion("1.1.0")
+    >>> assert lower_bound == GemConstraint(op=">=", version=vlow)
+    >>> assert upper_bound == GemConstraint(op="<", version=vup)
+    """
+    if not isinstance(constraint, GemConstraint) or not constraint.op == "~>":
+        raise ValueError(f"Invalid tilde GemConstraint: {constraint!r}")
+    version = constraint.version
+    assert isinstance(version, GemVersion)
+    lower_bound = version.release()
+    upper_bound = lower_bound.bump()
+
+    return (
+        GemConstraint(op=">=", version=lower_bound),
+        GemConstraint(op="<", version=upper_bound),
+    )

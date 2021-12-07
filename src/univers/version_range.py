@@ -13,6 +13,7 @@ from semantic_version.base import AnyOf
 from univers import versions
 from univers.utils import remove_spaces
 from univers.version_constraint import VersionConstraint
+from univers import gem
 
 
 @attr.s(frozen=True, order=False, eq=True, hash=True)
@@ -210,17 +211,22 @@ def get_allof_constraints(cls, clause):
 
 
 class GemVersionRange(VersionRange):
-    # gem need its own scheme see https//github.com/nexB/univers/issues/5
-    # See https://github.com/ruby/ruby/blob/415671a28273e5bfbe9aa00a0e386f025720ac23/lib/rubygems/requirement.rb
-    # See https//semver.org/spec/v2.0.0.html#spec-item-11
-    # See https//snyk.io/blog/differences-in-version-handling-gems-and-npm/
-    # See https://github.com/npm/node-semver/issues/112
+    """
+    A version range implementation for Rubygems.
+
+    gem need its own versioning scheme as this is not semver.
+    See https//github.com/nexB/univers/issues/5
+    See https://github.com/ruby/ruby/blob/415671a28273e5bfbe9aa00a0e386f025720ac23/lib/rubygems/requirement.rb
+    See https//semver.org/spec/v2.0.0.html#spec-item-11
+    See https//snyk.io/blog/differences-in-version-handling-gems-and-npm/
+    See https://github.com/npm/node-semver/issues/112
+    """
 
     scheme = "gem"
-    version_class = versions.RubyVersion
+    version_class = versions.RubygemsVersion
 
     vers_by_native_comparators = {
-        "==": "=",
+        "=": "=",
         "!=": "!=",
         "<=": "<=",
         ">=": ">=",
@@ -232,28 +238,22 @@ class GemVersionRange(VersionRange):
     def from_native(cls, string):
         """
         Return a VersionRange built from a Rubygem version range ``string``.
+
+        Gem version semantics are different from semver:
+        there can be commonly more than 3 segments and
+        the operators are also different.
         """
-        # TODO: Gem version semantics are different from semver:
-        # there can be commonly more than 3 segments
-        # the operators are also different.
 
-        # replace Rubygem ~> pessimistic operator by node-semver equivalent
-        string = string.replace("~>", "~")
-        spec = semantic_version.NpmSpec(string)
+        gr = gem.GemRequirement.from_string(string).simplify()
 
-        clause = spec.clause.simplify()
-        assert isinstance(clause, (AnyOf, AllOf))
-        anyof_constraints = []
-        if isinstance(clause, AnyOf):
-            for allof_clause in clause.clauses:
-                anyof_constraints.append(get_allof_constraints(cls, allof_clause))
-        elif isinstance(clause, AllOf):
-            alloc = get_allof_constraints(cls, clause)
-            anyof_constraints.append(alloc)
-        else:
-            raise ValueError(f"Unknown clause type: {spec!r}")
+        constraints = []
+        for gc in gr.constraints:
+            version = cls.version_class(str(gc.version))
+            op = cls.vers_by_native_comparators[gc.op]
+            vc = VersionConstraint(comparator=op, version=version)
+            constraints.append(vc)
 
-        return cls(constraints=anyof_constraints)
+        return cls(constraints=[constraints])
 
 
 class DebianVersionRange(VersionRange):

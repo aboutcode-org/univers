@@ -10,7 +10,7 @@ from univers.version_constraint import VersionConstraint
 from univers.version_range import GemVersionRange
 from univers.version_range import VersionRange
 from univers.versions import PypiVersion
-from univers.versions import RubyVersion
+from univers.versions import RubygemsVersion
 
 
 class TestVersionRange(TestCase):
@@ -52,10 +52,10 @@ class TestVersionRange(TestCase):
     def test_GemVersionRange_from_native_range_with_pessimistic_operator(self):
         gem_range = "~>2.0.8"
         version_range = GemVersionRange.from_native(gem_range)
-        assert version_range.to_string() == "vers:gem/<2.1.0,>=2.0.8"
+        assert version_range.to_string() == "vers:gem/<2.1,>=2.0.8"
         assert version_range.constraints == [
             [
-                VersionConstraint(comparator="<", version=RubyVersion(string="2.1.0")),
-                VersionConstraint(comparator=">=", version=RubyVersion(string="2.0.8")),
+                VersionConstraint(comparator="<", version=RubygemsVersion(string="2.1")),
+                VersionConstraint(comparator=">=", version=RubygemsVersion(string="2.0.8")),
             ],
         ]
