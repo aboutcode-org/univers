@@ -36,7 +36,7 @@ ecosystem.
 
 **univers** is different:
 
-- It tracks each ecosystem versionning scheme and how two versions are compared.
+- It tracks each ecosystem versioning scheme and how two versions are compared.
 
 - It support a growing number of package ecosystems versioning in a single
   library.
