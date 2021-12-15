@@ -40,7 +40,7 @@ class Version:
     Base version mixin to subclass for each version syntax implementation.
 
     Each version subclass is:
-    - comparable and orderable e.g., implement functools.total_ordering
+    - comparable and orderable e.g., such as implementing functools.total_ordering
     - immutable and hashable
     """
 
@@ -51,7 +51,7 @@ class Version:
     # lowercased. Any leading v is removed too.
     normalized_string = attr.ib(type=str, default=None, repr=False)
 
-    # a comparable version object constructed from the version string
+    # a comparable scheme-specific version object constructed from the version string
     value = attr.ib(default=None, repr=False)
 
     def __attrs_post_init__(self):
@@ -59,10 +59,10 @@ class Version:
         if not self.is_valid(normalized_string):
             raise InvalidVersion(f"{self.string!r} is not a valid {self.__class__!r}")
 
-        # See https://www.attrs.org/en/stable/init.html?#post-init
-        # we use a post init on frozen objects
+        # Set the normalized string as default value
 
-        # use the normalized string as default value
+        # Notes: setattr is used because this is an immutable frozen instance.
+        # See https://www.attrs.org/en/stable/init.html?#post-init
         object.__setattr__(self, "normalized_string", normalized_string)
         value = self.build_value(normalized_string)
         object.__setattr__(self, "value", value)
@@ -101,21 +101,6 @@ class Version:
         ``constraint``.
         """
         return self in constraint
-
-    def satisfies_all(self, constraints, explain=False):
-        """
-        Return True is this version satifies all the ``constraints`` list of
-        VersionConstraint.
-        If ``explain`` is True, prints de debug explanation.
-        """
-        if explain:
-            print()
-            for constraint in constraints:
-                if self not in constraint:
-                    print(f"{self!r} not in constraint : {constraint!r}")
-                else:
-                    print(f"{self!r}     in constraint : {constraint!r}")
-        return all(self in constraint for constraint in constraints)
 
     def __str__(self):
         return str(self.value)

@@ -10,16 +10,19 @@ from packaging.specifiers import SpecifierSet
 from semantic_version.base import AllOf
 from semantic_version.base import AnyOf
 
+from univers import gem
 from univers import versions
 from univers.utils import remove_spaces
 from univers.version_constraint import VersionConstraint
-from univers import gem
+from univers.version_constraint import contains_version
 
 
 @attr.s(frozen=True, order=False, eq=True, hash=True)
 class VersionRange:
     """
     Base version range class. Subclasses must provide implememt.
+    A VersionRange represents a list of constraints on the versions "timeline"
+    of a package.
     """
 
     # Versioning scheme. By convention this is the same as the Package URL
@@ -40,7 +43,7 @@ class VersionRange:
     constraints = attr.ib(type=list, default=attr.Factory(list))
 
     def __attrs_post_init__(self, *args, **kwargs):
-        VersionConstraint.sort(self.constraints)
+        self.constraints.sort()
 
     @classmethod
     def from_native(cls, string):
@@ -58,7 +61,7 @@ class VersionRange:
         return NotImplementedError
 
     @classmethod
-    def from_string(cls, vers):
+    def from_string(cls, vers, dedupe=False, validate=False):
         """
         Return a VersionRange built from a ``vers`` version range spec string,
         such as "vers:npm/1.2.3,>=2.0.0"
@@ -66,89 +69,69 @@ class VersionRange:
         vers = remove_spaces(vers)
 
         uri_scheme, _, scheme_range_spec = vers.partition(":")
-        if not uri_scheme == "vers":
+        uri_scheme = uri_scheme.lower()
+
+        if uri_scheme != "vers":
             raise ValueError(f"{vers!r} must start with the 'vers:' URI scheme.")
 
         versioning_scheme, _, constraints = scheme_range_spec.partition("/")
+        versioning_scheme = versioning_scheme.lower()
         range_class = RANGE_CLASS_BY_SCHEMES.get(versioning_scheme)
         if not range_class:
             raise ValueError(
                 f"{vers!r} has an unknown versioning scheme: " f"{versioning_scheme!r}.",
             )
 
+        constraints = constraints.strip()
         if not constraints:
             raise ValueError(f"{vers!r} specifies no version range constraints.")
 
-        # parse_constraints
-        version_constraints = []
-        for or_constraints in constraints.split("|"):
-            and_constraints = []
-            for constraint in or_constraints.split(","):
-                constraint = VersionConstraint.from_string(
-                    string=constraint,
-                    version_class=range_class.version_class,
-                )
-                and_constraints.append(constraint)
-            version_constraints.append(and_constraints)
+        if constraints.startswith("*"):
+            if constraints != "*":
+                raise ValueError(f"{vers!r} contains an invalid '*' constraint.")
+            return range_class([VersionConstraint.from_string("*")])
 
-        return range_class(version_constraints)
+        parsed_constraints = []
+
+        constraints = constraints.strip("|")
+        for const in constraints.split("|"):
+            constraint = VersionConstraint.from_string(
+                string=const,
+                version_class=range_class.version_class,
+            )
+            parsed_constraints.append(constraint)
+
+        parsed_constraints.sort()
+        if dedupe:
+            parsed_constraints = VersionConstraint.dedupe(parsed_constraints)
+        if validate:
+            VersionConstraint.validate(parsed_constraints)
+
+        return range_class(parsed_constraints)
 
     def __str__(self):
-        constraints = VersionConstraint.to_constraints_string(self.constraints)
+        constraints = "|".join(str(c) for c in sorted(self.constraints))
         return f"vers:{self.scheme}/{constraints}"
 
     to_string = __str__
 
     def to_dict(self):
-        VersionConstraint.validate(self.constraints)
-
-        constraints = []
-        for inner_constraints in self.constraints:
-            constraints.append([c.to_dict() for c in inner_constraints])
+        constraints = [c.to_dict() for c in self.constraints]
         return dict(scheme=self.scheme, constraints=constraints)
 
     def __contains__(self, version):
         """
         Return True if this VersionRange contains the ``version`` Version
         object. A version is contained in a VersionRange if it satisfies its
-        constraints this way:
-
-        - at least one of its ``constraints`` nested inner list of
-          VersionConstraint should be satisfied
-
-        - a nested inner list of VersionConstraint is satisfied if all of its
-          VersionConstraints are satisfied, e.g., the ``version`` is contained in
-          all of the version ranges described by the constraint.
-
-        - a VersionConstraint is "satisfied" if the ``version`` Version is "in"
-          this VersionConstraint. Conversely, the ``version`` satisfies a constraint.
+        constraints according to ``vers`` rules.
         """
         if not isinstance(version, self.version_class):
             raise TypeError(
                 f"{version!r} is not of expected type: {self.version_class!r}",
             )
-        for inner_constraints in self.constraints:
-            if version.satisfies_all(inner_constraints):
-                return True
-        return False
+        return contains_version(version, self.constraints)
 
     contains = __contains__
-
-    @classmethod
-    def join(cls, constraints):
-        """
-        Return a string representing the provided ``constraints`` nested
-        sequence of VersionConstraint objects such that the outer sequence
-        VersionConstraints are joined with an "OR" e.g., a "vers" pipe "|" and
-        the inner sequences of VersionConstraint are each joined with an "AND"
-        e.g., a "vers" coma ",".
-        """
-        cls.validate(constraints)
-        or_constraints = []
-        for inner_constraints in constraints:
-            and_constraints = ",".join(str(c) for c in sorted(inner_constraints))
-            or_constraints.append(and_constraints)
-        return "|".join(or_constraints)
 
     def __eq__(self, other):
         return (
@@ -239,9 +222,8 @@ class GemVersionRange(VersionRange):
         """
         Return a VersionRange built from a Rubygem version range ``string``.
 
-        Gem version semantics are different from semver:
-        there can be commonly more than 3 segments and
-        the operators are also different.
+        Gem version semantics are different from semver: there can be commonly
+        more than three segments and the operators are also different.
         """
 
         gr = gem.GemRequirement.from_string(string).simplify()
@@ -253,7 +235,7 @@ class GemVersionRange(VersionRange):
             vc = VersionConstraint(comparator=op, version=version)
             constraints.append(vc)
 
-        return cls(constraints=[constraints])
+        return cls(constraints=constraints)
 
 
 class DebianVersionRange(VersionRange):
@@ -262,6 +244,21 @@ class DebianVersionRange(VersionRange):
 
 
 class PypiVersionRange(VersionRange):
+    """
+    PyPI PEP 440 version range.
+
+    For example:
+    >>> from univers.versions import PypiVersion
+    >>> constraints = [
+    ...    VersionConstraint(version=PypiVersion("2")),
+    ...    VersionConstraint(comparator=">=", version=PypiVersion("3")),
+    ...    VersionConstraint(comparator="<", version=PypiVersion("4")),
+    ...    VersionConstraint(version=PypiVersion("5")),
+    ... ]
+    >>> range = PypiVersionRange(constraints=constraints)
+    >>> assert str(range) == "vers:pypi/2|>=3|<4|5"
+    """
+
     scheme = "pypi"
     version_class = versions.PypiVersion
 
@@ -289,8 +286,7 @@ class PypiVersionRange(VersionRange):
         specifiers = SpecifierSet(string)
 
         # In PyPI all constraints apply
-        allof_constraints = []
-        constraints = [allof_constraints]
+        constraints = []
 
         for spec in specifiers:
             operator = spec.operator
@@ -298,7 +294,7 @@ class PypiVersionRange(VersionRange):
             assert isinstance(version, cls.version_class)
             comparator = cls.vers_by_native_comparators[operator]
             constraint = VersionConstraint(comparator=comparator, version=version)
-            allof_constraints.append(constraint)
+            constraints.append(constraint)
 
         return cls(constraints=constraints)
 
@@ -449,16 +445,16 @@ class NginxVersionRange(VersionRange):
         >>> assert str(result) == "vers:nginx/1.5.10", str(result)
 
         >>> result = NginxVersionRange.from_native("0.7.52-0.8.39")
-        >>> assert str(result) == "vers:nginx/<=0.8.39,>=0.7.52", str(result)
+        >>> assert str(result) == "vers:nginx/>=0.7.52|<=0.8.39", str(result)
 
         >>> result = NginxVersionRange.from_native("1.1.4-1.2.8, 1.3.9-1.4.0")
-        >>> assert str(result) == "vers:nginx/<=1.2.8,>=1.1.4|<=1.4.0,>=1.3.9", str(result)
+        >>> assert str(result) == "vers:nginx/>=1.1.4|<=1.2.8|>=1.3.9|<=1.4.0", str(result)
 
         >>> result = NginxVersionRange.from_native("0.8.40+, 0.7.66+")
-        >>> assert str(result) == "vers:nginx/<0.9.0,>=0.8.40|>=0.7.66", str(result)
+        >>> assert str(result) == "vers:nginx/>=0.7.66|>=0.8.40|<0.9.0", str(result)
 
         >>> result = NginxVersionRange.from_native("1.5.0+, 1.4.1+")
-        >>> assert str(result) == "vers:nginx/<1.5.0,>=1.4.1|>=1.5.0", str(result)
+        >>> assert str(result) == "vers:nginx/>=1.4.1|<1.5.0|>=1.5.0", str(result)
 
         >>> result = NginxVersionRange.from_native("all")
         >>> assert str(result) == "vers:nginx/*", str(result)
@@ -470,25 +466,24 @@ class NginxVersionRange(VersionRange):
         """
         cleaned = remove_spaces(string).lower()
         if cleaned == "all":
-            return cls(constraints=[[VersionConstraint(comparator="*")]])
+            return cls(constraints=[VersionConstraint(comparator="*")])
 
-        anyof_constraints = []
+        constraints = []
 
-        for allof_clauses in cleaned.split(","):
+        for clauses in cleaned.split(","):
 
-            if "-" in allof_clauses:
+            if "-" in clauses:
                 # dash range
-                start, _, end = allof_clauses.partition("-")
+                start, _, end = clauses.partition("-")
                 start_version = semantic_version.Version.coerce(start)
                 end_version = semantic_version.Version.coerce(end)
                 vstart = VersionConstraint(comparator=">=", version=start_version)
                 vend = VersionConstraint(comparator="<=", version=end_version)
-                allof_constaints = [vstart, vend]
-                anyof_constraints.append(allof_constaints)
+                constraints.extend([vstart, vend])
 
-            elif "+" in allof_clauses:
+            elif "+" in clauses:
                 # suffixed version
-                vs = allof_clauses.rstrip("+")
+                vs = clauses.rstrip("+")
                 version = semantic_version.Version.coerce(vs)
                 is_stable = is_even(version.minor)
 
@@ -498,23 +493,20 @@ class NginxVersionRange(VersionRange):
                     end_version = start_version.next_minor()
                     vstart = VersionConstraint(comparator=">=", version=start_version)
                     vend = VersionConstraint(comparator="<", version=end_version)
-                    allof_constaints = [vstart, vend]
-                    anyof_constraints.append(allof_constaints)
+                    constraints.extend([vstart, vend])
                 else:
                     # mainline branch ranges are resolved to a singel constraint
                     version = semantic_version.Version.coerce(vs)
                     constraint = VersionConstraint(comparator=">=", version=version)
-                    allof_constaints = [constraint]
-                    anyof_constraints.append(allof_constaints)
+                    constraints.append(constraint)
 
             else:
                 # plain single version
-                version = semantic_version.Version.coerce(allof_clauses)
+                version = semantic_version.Version.coerce(clauses)
                 constraint = VersionConstraint(comparator="=", version=version)
-                allof_constaints = [constraint]
-                anyof_constraints.append(allof_constaints)
+                constraints.append(constraint)
 
-        return cls(constraints=anyof_constraints)
+        return cls(constraints=constraints)
 
 
 def is_even(s):
