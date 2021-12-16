@@ -96,30 +96,32 @@ class Version(object):
         return hash(self.tuple())
 
     def __eq__(self, other):
-        return type(self) is type(other) and self.tuple() == other.tuple()
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.tuple() == other.tuple()
 
     def __ne__(self, other):
         return not self.__eq__(other)
 
     def __lt__(self, other):
-        if type(self) is type(other):
-            return eval_constraint(self, "<<", other)
-        return NotImplemented
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return eval_constraint(self, "<<", other)
 
     def __le__(self, other):
-        if type(self) is type(other):
-            return eval_constraint(self, "<=", other)
-        return NotImplemented
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return eval_constraint(self, "<=", other)
 
     def __gt__(self, other):
-        if type(self) is type(other):
-            return eval_constraint(self, ">>", other)
-        return NotImplemented
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return eval_constraint(self, ">>", other)
 
     def __ge__(self, other):
-        if type(self) is type(other):
-            return eval_constraint(self, ">=", other)
-        return NotImplemented
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return eval_constraint(self, ">=", other)
 
     @classmethod
     def from_string(cls, version):
@@ -187,15 +189,14 @@ def eval_constraint(version1, operator, version2):
     result = compare_versions(version1, version2)
     # See https://www.debian.org/doc/debian-policy/ch-relationships.html#syntax-of-relationship-fields
     operators = {
+        "<<": operator_module.lt,
         "<=": operator_module.le,
+        "=": operator_module.eq,
+        ">=": operator_module.ge,
+        ">>": operator_module.gt,
         # legacy for compat
         "<": operator_module.le,
-        ">=": operator_module.ge,
-        # legacy for compat
         ">": operator_module.ge,
-        "<<": operator_module.lt,
-        ">>": operator_module.gt,
-        "=": operator_module.eq,
     }
 
     try:
