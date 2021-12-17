@@ -64,7 +64,7 @@ class TestVersionRange(TestCase):
         assert version_range3.constraints == expected
 
     def test_VersionRange_from_string_pypi_complex_dedupe(self):
-        vers = "vers:pypi/0.0.2|>=0.0.6|>0.0.0|>=0.0.1|0.0.4|<0.0.5|<0.0.3"
+        vers = "vers:pypi/>0.0.0|>=0.0.1|0.0.2|<0.0.3|0.0.4|<0.0.5|>=0.0.6"
         version_range = VersionRange.from_string(vers, dedupe=True)
         assert str(version_range) == "vers:pypi/>0.0.0|<0.0.5|>=0.0.6"
         try:
@@ -76,9 +76,71 @@ class TestVersionRange(TestCase):
         assert str(version_range) == "vers:pypi/>0.0.0|<0.0.5|>=0.0.6"
 
     def test_VersionRange_from_string_pypi_complex_dedupe_and_validate(self):
-        vers = "vers:pypi/0.0.2|>=0.0.6|>0.0.0|>=0.0.1|0.0.4|<0.0.5|0.0.3"
+        vers = "vers:pypi/>0.0.0|>=0.0.1|0.0.2|0.0.3|0.0.4|<0.0.5|>=0.0.6|!=0.8"
         version_range = VersionRange.from_string(vers, dedupe=True)
-        assert str(version_range) == "vers:pypi/>0.0.0|<0.0.5|>=0.0.6"
+        assert str(version_range) == "vers:pypi/>0.0.0|<0.0.5|>=0.0.6|!=0.8"
+        version_range = VersionRange.from_string(vers, dedupe=True, validate=True)
+
+    def test_VersionRange_from_string_pypi_complex_dedupe2(self):
+        vers = (
+            "vers:pypi/>0.0.0|>=0.0.1|>=0.0.1|0.0.2|0.0.3|0.0.4|<0.0.5|<=0.0.6|!=0.7|8.0|>12|<15.3"
+        )
+        version_range = VersionRange.from_string(vers, dedupe=True)
+        assert str(version_range) == "vers:pypi/>0.0.0|<=0.0.6|!=0.7|8.0|>12|<15.3"
+
+    def test_VersionRange_from_string_pypi_simple_cases(self):
+        vers = "vers:pypi/>0.0.1"
+        version_range = VersionRange.from_string(vers, dedupe=True, validate=True)
+        assert str(version_range) == vers
+
+        vers = "vers:pypi/>=0.0.1"
+        version_range = VersionRange.from_string(vers, dedupe=True, validate=True)
+        assert str(version_range) == vers
+
+        vers = "vers:pypi/<0.0.1"
+        version_range = VersionRange.from_string(vers, dedupe=True, validate=True)
+        assert str(version_range) == vers
+
+        vers = "vers:pypi/<=0.0.1"
+        version_range = VersionRange.from_string(vers, dedupe=True, validate=True)
+        assert str(version_range) == vers
+
+        vers = "vers:pypi/0.0.1"
+        version_range = VersionRange.from_string(vers, dedupe=True, validate=True)
+        assert str(version_range) == vers
+
+        vers = "vers:pypi/!=0.0.1"
+        version_range = VersionRange.from_string(vers, dedupe=True, validate=True)
+        assert str(version_range) == vers
+
+        vers = "vers:pypi/*"
+        version_range = VersionRange.from_string(vers, dedupe=True, validate=True)
+        assert str(version_range) == vers
+
+    def test_VersionRange_from_string_pypi_two_cases(self):
+        vers = "vers:pypi/>0.0.1|<0.1"
+        version_range = VersionRange.from_string(vers, dedupe=True, validate=True)
+        assert str(version_range) == vers
+
+        vers = "vers:pypi/>=0.0.1|<0.1"
+        version_range = VersionRange.from_string(vers, dedupe=True, validate=True)
+        assert str(version_range) == vers
+
+        vers = "vers:pypi/<0.0.1|>0.1"
+        version_range = VersionRange.from_string(vers, dedupe=True, validate=True)
+        assert str(version_range) == vers
+
+        vers = "vers:pypi/<=0.0.1|>0.1"
+        version_range = VersionRange.from_string(vers, dedupe=True, validate=True)
+        assert str(version_range) == vers
+
+        vers = "vers:pypi/0.0.1|>0.1"
+        version_range = VersionRange.from_string(vers, dedupe=True, validate=True)
+        assert str(version_range) == vers
+
+        vers = "vers:pypi/!=0.0.1|>0.1"
+        version_range = VersionRange.from_string(vers, dedupe=True, validate=True)
+        assert str(version_range) == vers
 
     def test_GemVersionRange_from_native_range_with_pessimistic_operator(self):
         gem_range = "~>2.0.8"
