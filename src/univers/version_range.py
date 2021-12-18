@@ -61,7 +61,7 @@ class VersionRange:
         return NotImplementedError
 
     @classmethod
-    def from_string(cls, vers, dedupe=False, validate=False):
+    def from_string(cls, vers, simplify=False, validate=False):
         """
         Return a VersionRange built from a ``vers`` version range spec string,
         such as "vers:npm/1.2.3,>=2.0.0"
@@ -104,8 +104,8 @@ class VersionRange:
             parsed_constraints.append(constraint)
 
         parsed_constraints.sort()
-        if dedupe:
-            parsed_constraints = VersionConstraint.dedupe(parsed_constraints)
+        if simplify:
+            parsed_constraints = VersionConstraint.simplify(parsed_constraints)
         if validate:
             VersionConstraint.validate(parsed_constraints)
 

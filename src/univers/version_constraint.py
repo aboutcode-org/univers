@@ -238,17 +238,18 @@ class VersionConstraint:
         return validate_comparators(constraints)
 
     @classmethod
-    def dedupe(cls, constraints):
+    def simplify(cls, constraints):
         """
-        Return a new ``constraints`` list with duplicated constraints removed.
-        This includes removing exact duplicates adn redundant constraints.
+        Return a new simplified ``constraints`` list with duplicated constraints
+        removed. This includes removing exact duplicates adn redundant
+        constraints.
         """
-        constraints = deduplicate_exact(constraints)
-        constraints = deduplicate_comparators(constraints)
+        constraints = deduplicate(constraints)
+        constraints = simplify_constraints(constraints)
         return constraints
 
 
-def deduplicate_exact(constraints):
+def deduplicate(constraints):
     """
     Return a new ``constraints`` list with exact duplicated constraints removed.
     """
@@ -299,9 +300,10 @@ def validate_comparators(constraints):
         if cur.comparator == "=" and nxt.comparator not in ("=", ">", ">=")
     ]
     if invalid_equal:
+        c = "|".join(map(str, constraints))
+        i = ", ".join(f"{x}|{y}" for x, y in invalid_equal)
         raise ValueError(
-            f"Invalid {constraints!r}\n: where \n{invalid_equal!r} "
-            "cannot contain an equal = followed by either < or <="
+            f"Invalid {c!r}: where {i!r} " "cannot contain an equal = followed by either < or <="
         )
 
     # discard = that have been validated above
@@ -326,66 +328,76 @@ def validate_comparators(constraints):
     return True
 
 
-def deduplicate_comparators(constraints):
+def simplify_constraints(constraints):
     """
     Return a list of VersionConstraint given a ``constraints`` list by
     discarding redundant constraints according to ``vers`` rules.
     """
-    if len(constraints) == 1 or any(c.comparator == "*" for c in constraints):
-        return list(constraints)
+    # Start from a list of constraints of comparator and version, sorted by version
+    # and where each version occurs only once in any constraint.
 
-    constraints = sorted(constraints)
+    # If the constraints list contains a single constraint (star, equal or anything)
+    # return this list and simplification is finished.
+    if len(constraints) < 2:
+        return constraints
 
-    inequal_constraints = [c for c in constraints if c.comparator == "!="]
+    # Split the constraints list in two sub lists:
+    #   a list of "unequal constraints" where the comparator is "!="
+    #   a remainder list of "constraints" where the comparator is not "!="
+    unequal_constraints = [c for c in constraints if c.comparator == "!="]
     constraints = [c for c in constraints if c.comparator != "!="]
 
+    # If the remainder list of "constraints" is empty, return the "unequal constraints"
+    # list and de-duplication is finished.
     if not constraints:
-        return sorted(inequal_constraints)
+        return unequal_constraints
 
-    # iterate as long as constraints length diminishes with each ieration
-    cycle = 1
-    while True:
-        starting_length = len(constraints)
-        constraints = list(dedup(constraints))
-        ending_length = len(constraints)
-        if ending_length == 1 or ending_length == starting_length:
-            # no filtering happened in this iteration, we are done
-            break
-        cycle += 1
+    # Iterate over the current and next contiguous constraints of this list:
+    i = 0
+    j = 0
 
-    return sorted(inequal_constraints + constraints)
+    while i < len(constraints) - 1:
+        j = i + 1
 
-
-def dedup(constraints):
-    """
-    Yield filtered constraints, discarding redundant ones according to ``vers``.
-    """
-    skip = False
-    for cur, nxt in pairwise(constraints):
+        cur = constraints[i]
+        nxt = constraints[j]
         cur_comp = cur.comparator
         nxt_comp = nxt.comparator
-        if skip:
-            skip = False
-            continue
 
-        if cur_comp in ("=", "<", "<=") and nxt_comp in ("<", "<="):
-            # keep only next (drop current)
-            skip = True
-            yield nxt
-            continue
-
+        # If current comparator is ">" or ">=" and next comparator is "=", ">" or ">=",
         if cur_comp in (">", ">=") and nxt_comp in ("=", ">", ">="):
-            # keep only current (drop next)
-            skip = True
-            yield cur
-            continue
+            # discard next constraint
+            constraints.pop(j)
 
-        # keep cur
-        skip = False
-        yield cur
+        # If current comparator is "=", "<" or "<="  and next comparator is <" or <=",
+        if cur_comp in ("=", "<", "<=") and nxt_comp in ("<", "<="):
+            # discard current constraint
+            constraints.pop(i)
+            # Previous constraint becomes current if if exists.
+            if i:
+                i -= 1
 
-    # yield last next
-    yield nxt
+        # If there is a previous constraint:
+        if i:
+
+            prv = constraints[i - 1]
+            prv_comp = prv.comparator
+
+            # If previous comparator is ">" or ">=" and current comparator is "=", ">" or ">=",
+            if prv_comp in (">", ">=") and cur_comp in ("=", ">", ">="):
+                # discard current constraint
+                constraints.pop(i)
+
+            # If previous comparator is "=", "<" or "<=" and current comparator is <" or <=",
+            if prv_comp in ("=", "<", "<=") and cur_comp in ("<", "<="):
+                # discard previous constraint.
+                constraints.pop(i - 1)
+
+        i += 1
+
+    # Concatenate the "unequal constraints" list and the filtered "constraints" list
+    # Sort by version and return.
+    return sorted(set(unequal_constraints + constraints))
 
 
 def contains_version(version, constraints):
