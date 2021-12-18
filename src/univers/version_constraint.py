@@ -68,7 +68,7 @@ class VersionConstraint:
     comparator = attr.ib(type=str, default="=")
 
     # a Version subclass instance or None
-    version = attr.ib(type=Version, default="")
+    version = attr.ib(type=Version, default=None)
 
     # a function for the comparator
     comp_operator = attr.ib(default=None, repr=False)
@@ -134,7 +134,10 @@ class VersionConstraint:
         if not version and comparator != "*":
             raise ValueError("Empty version")
 
-        version = version_class(version)
+        if comparator == "*":
+            version = None
+        else:
+            version = version_class(version)
         return cls(comparator, version)
 
     @staticmethod

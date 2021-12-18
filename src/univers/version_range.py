@@ -82,6 +82,8 @@ class VersionRange:
                 f"{vers!r} has an unknown versioning scheme: " f"{versioning_scheme!r}.",
             )
 
+        version_class = range_class.version_class
+
         constraints = constraints.strip()
         if not constraints:
             raise ValueError(f"{vers!r} specifies no version range constraints.")
@@ -89,7 +91,7 @@ class VersionRange:
         if constraints.startswith("*"):
             if constraints != "*":
                 raise ValueError(f"{vers!r} contains an invalid '*' constraint.")
-            return range_class([VersionConstraint.from_string("*")])
+            return range_class([VersionConstraint.from_string(string="*", version_class=None)])
 
         parsed_constraints = []
 
@@ -97,7 +99,7 @@ class VersionRange:
         for const in constraints.split("|"):
             constraint = VersionConstraint.from_string(
                 string=const,
-                version_class=range_class.version_class,
+                version_class=version_class,
             )
             parsed_constraints.append(constraint)
 
