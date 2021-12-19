@@ -137,7 +137,7 @@ class Version(object):
         version = version.strip()
         if not version:
             raise ValueError('Invalid version string: "{}"'.format(version))
-        if not _is_valid_version(version):
+        if not cls.is_valid(version):
             raise ValueError('Invalid version string: "{}"'.format(version))
 
         if ":" in version:
@@ -153,6 +153,10 @@ class Version(object):
             revision = "0"
         return cls(epoch=epoch, upstream=upstream, revision=revision)
 
+    @classmethod
+    def is_valid(cls, version):
+        return is_valid_debian_version(version)
+
     def compare(self, other_version):
         return compare_versions(self, other_version)
 
@@ -163,7 +167,7 @@ class Version(object):
         return self.epoch, self.upstream, self.revision
 
 
-_is_valid_version = re.compile(
+is_valid_debian_version = re.compile(
     r"^"
     # epoch must start with a digit
     r"(\d+:)?"
