@@ -15,14 +15,47 @@ from typing import Union
 
 
 class RpmVersion(NamedTuple):
+    """
+    Represent an RPM version. It is ordered.
+    """
+
     epoch: int
     version: str
     release: str
 
+    def __str__(self, *args, **kwargs):
+        return self.to_string()
+
+    def to_string(self):
+        if self.release:
+            vr = f"{self.version}-{self.release}"
+        else:
+            vr = self.version
+
+        if self.epoch:
+            vr = f"{self.epoch}:{vr}"
+        return vr
+
     @classmethod
     def from_string(cls, s):
+        s.strip()
         e, v, r = from_evr(s)
         return cls(e, v, r)
+
+    def __lt__(self, other):
+        return compare_rpm_versions(self, other) < 0
+
+    def __gt__(self, other):
+        return compare_rpm_versions(self, other) > 0
+
+    def __eq__(self, other):
+        return compare_rpm_versions(self, other) == 0
+
+    def __le__(self, other):
+        return compare_rpm_versions(self, other) <= 0
+
+    def __ge__(self, other):
+        return compare_rpm_versions(self, other) >= 0
 
 
 def from_evr(s):
@@ -74,6 +107,9 @@ def compare_rpm_versions(a: Union[RpmVersion, str], b: Union[RpmVersion, str]) -
         a = RpmVersion.from_string(a)
     if isinstance(b, str):
         b = RpmVersion.from_string(b)
+    if not isinstance(a, RpmVersion) and not isinstance(b, RpmVersion):
+        raise TypeError(f"{a!r} and {b!r} must be RpmVersion or strings")
+
     # First compare the epoch, if set.  If the epoch's are not the same, then
     # the higher one wins no matter what the rest of the EVR is.
     if a.epoch != b.epoch:

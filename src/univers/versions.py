@@ -40,8 +40,11 @@ class Version:
     Base version mixin to subclass for each version syntax implementation.
 
     Each version subclass is:
-    - comparable and orderable e.g., such as implementing functools.total_ordering
+
     - immutable and hashable
+    - comparable and orderable e.g., such as implementing all rich comparison
+      operators or implementing functools.total_ordering. The default is to
+      compare the value as-is.
     """
 
     # the original string used to build this Version
@@ -81,8 +84,8 @@ class Version:
         """
         Return a normalized version string from ``string ``. Subclass can override.
         """
-        # FIXME: Is lowercase and strip v the right thing to do?
-        return remove_spaces(string).lower().rstrip("v")
+        # FIXME: Is removing spaces and strip v the right thing to do?
+        return remove_spaces(string).rstrip("v")
 
     @classmethod
     def build_value(self, string):
@@ -115,8 +118,22 @@ class Version:
             return NotImplemented
         return self.value.__lt__(other.value)
 
+    def __gt__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.value.__gt__(other.value)
 
-@total_ordering
+    def __le__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.value.__le__(other.value)
+
+    def __ge__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.value.__ge__(other.value)
+
+
 @attr.s(frozen=True, order=False, hash=True)
 class GenericVersion(Version):
     @classmethod
@@ -132,7 +149,6 @@ class GenericVersion(Version):
         return super(GenericVersion, cls).is_valid(string)
 
 
-@total_ordering
 @attr.s(frozen=True, order=False, eq=False, hash=True)
 class PypiVersion(Version):
     """
@@ -158,7 +174,6 @@ class PypiVersion(Version):
         return False
 
 
-@total_ordering
 @attr.s(frozen=True, order=False, eq=False, hash=True)
 class SemverVersion(Version):
     """
@@ -178,7 +193,6 @@ class SemverVersion(Version):
             return False
 
 
-@total_ordering
 @attr.s(frozen=True, order=False, eq=False, hash=True)
 class RubygemsVersion(Version):
     """
@@ -196,7 +210,6 @@ class RubygemsVersion(Version):
         return gem.GemVersion.is_correct(string)
 
 
-@total_ordering
 @attr.s(frozen=True, order=False, eq=False, hash=True)
 class ArchLinuxVersion(Version):
     def __eq__(self, other):
@@ -207,18 +220,35 @@ class ArchLinuxVersion(Version):
     def __lt__(self, other):
         if not isinstance(other, self.__class__):
             return NotImplemented
-        return arch.vercmp(self.value, other.value) == -1
+        return arch.vercmp(self.value, other.value) < 0
+
+    def __gt__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return arch.vercmp(self.value, other.value) > 0
+
+    def __le__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return arch.vercmp(self.value, other.value) <= 0
+
+    def __ge__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return arch.vercmp(self.value, other.value) >= 0
 
 
-@total_ordering
 @attr.s(frozen=True, order=False, eq=False, hash=True)
 class DebianVersion(Version):
     @classmethod
     def build_value(cls, string):
         return debian.Version.from_string(string)
 
+    @classmethod
+    def is_valid(cls, string):
+        return debian.Version.is_valid(string)
 
-@total_ordering
+
 @attr.s(frozen=True, order=False, eq=False, hash=True)
 class MavenVersion(Version):
     # See https://maven.apache.org/enforcer/enforcer-rules/versionRanges.html
@@ -229,25 +259,25 @@ class MavenVersion(Version):
         return maven.Version(string)
 
 
-@total_ordering
 @attr.s(frozen=True, order=False, eq=False, hash=True)
 class NugetVersion(SemverVersion):
     # See https://docs.microsoft.com/en-us/nuget/concepts/package-versioning
     pass
 
 
-@total_ordering
 @attr.s(frozen=True, order=False, eq=False, hash=True)
 class RpmVersion(Version):
-    def __eq__(self, other):
-        if not isinstance(other, self.__class__):
-            return NotImplemented
-        return rpm.vercmp(self.value, other.value) == 0
+    """
+    Represent an RPM version.
 
-    def __lt__(self, other):
-        if not isinstance(other, self.__class__):
-            return NotImplemented
-        return rpm.vercmp(self.value, other.value) == -1
+    For example::
+
+    # 1:1.1.4|>=2.8.16|<=2.8.16-z
+    """
+
+    @classmethod
+    def build_value(cls, string):
+        return rpm.RpmVersion.from_string(string)
 
 
 @total_ordering

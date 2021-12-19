@@ -25,8 +25,9 @@ except ImportError:
 
 
 """
-Universal version constraint object that stores a comparator such as "=" and
-an ecosystem- or package-specific Version object.
+Universal version constraint object that stores a comparator such as "=" or "<="
+and a Version object using a class that is specific to a package type (aka.
+ecosystem)
 """
 
 
@@ -38,9 +39,7 @@ def operator_star(a, b):
     return True
 
 
-# a minimalist, reduced set of comparators
-MINIMALIST_COMPARATORS = {">=", "<", "*"}
-
+# note: ORDER MATTER here: we tests startswith(key) for each key in sequence
 COMPARATORS = {
     ">=": operator.ge,
     "<=": operator.le,
