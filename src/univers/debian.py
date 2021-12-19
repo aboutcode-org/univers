@@ -69,6 +69,13 @@ class Version(object):
       >>> print([str(v) for v in sorted(Version.from_string(s) for s in unsorted)])
       ['0.1', '0.5', '1.0', '2.0', '3.0', '1:0.4', '2:0.3']
 
+      We also accept trailing punctuations in the version and release:
+
+      >>> v = "2:4.13.1-0ubuntu0.16.04.1.1~"
+      >>> assert str(Version.from_string(v)) == v
+      >>> v = "2:4.13.1~"
+      >>> assert str(Version.from_string(v)) == v
+
     This example uses 'epoch' numbers (the numbers before the colons) to
     demonstrate that this version sorting order is different from regular
     sorting and 'natural order sorting'.
@@ -165,12 +172,10 @@ _is_valid_version = re.compile(
     r"("
     # upstream  can contain only alphanumerics and the characters . + -
     # ~ (full stop, plus, hyphen, tilde)
-    # we are adding the extra check that it must end with alphanum
-    r"[A-Za-z0-9\.\+\-\~]*[A-Za-z0-9]"
+    r"[A-Za-z0-9\.\+\~\-]+"
     r"|"
-    # If there is no debian_revision then hyphens are not allowed.
-    # we are adding the extra check that it must end with alphanum
-    r"[A-Za-z0-9\.\+\~]*[A-Za-z0-9]-[A-Za-z0-9\+\.\~]*[A-Za-z0-9]"
+    # If there is no debian_revision then hyphens are not allowed in version.
+    r"[A-Za-z0-9\.\+\~]+-[A-Za-z0-9\+\.\~]+"
     r")?"
     r"$"
 ).match
@@ -195,8 +200,8 @@ def eval_constraint(version1, operator, version2):
         ">=": operator_module.ge,
         ">>": operator_module.gt,
         # legacy for compat
-        "<": operator_module.le,
-        ">": operator_module.ge,
+        "<": operator_module.lt,
+        ">": operator_module.gt,
     }
 
     try:
