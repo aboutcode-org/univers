@@ -241,8 +241,109 @@ class GemVersionRange(VersionRange):
 
 
 class DebianVersionRange(VersionRange):
+    """
+    Debian version ranges as seen in Debian manual for relationships:
+    https://www.debian.org/doc/debian-policy/ch-relationships.html
+
+    These are for defined one expression at a time. Multiple expressions each
+    com with a package name. Therefore there is no "range string" per se, instead
+    there is always a list of version constraints as an input. For instance::
+
+        libc6 (>> 2.23), libc6 (<< 2.24)'
+
+    Therefore native conversions are different.
+    """
+
     scheme = "deb"
     version_class = versions.DebianVersion
+    vers_by_native_comparators = {
+        "=": "=",
+        "<=": "<=",
+        ">=": ">=",
+        "<<": "<",
+        ">>": ">",
+        # legacy
+        "<": "<",
+        ">": ">",
+    }
+
+    @classmethod
+    def split(cls, string):
+        """
+        Return a tuple of (vers comparator, version) strings given a Debian
+        version relationship ``string`` such as ">>2.3" or "(<< 2.3)". Raise a
+        ValueError for unknown comparators.
+
+        For example::
+        >>> assert DebianVersionRange.split("=2.3") == ("=", "2.3",)
+        >>> assert DebianVersionRange.split("  <   =  2 . 3  ") == ("<=", "2.3",)
+        >>> assert DebianVersionRange.split("(>=2.3)") == (">=", "2.3",)
+        >>> assert DebianVersionRange.split(">=2.3") == (">=", "2.3",)
+        >>> assert DebianVersionRange.split("<=2.3") == ("<=", "2.3",)
+        >>> assert DebianVersionRange.split("<<2.3") == ("<<", "2.3",)
+        >>> assert DebianVersionRange.split(">>2.3") == (">>", "2.3",)
+        >>> assert DebianVersionRange.split(">2.3") == (">", "2.3",)
+        >>> assert DebianVersionRange.split("<2.3") == ("<", "2.3",)
+        >>> try:
+        ...     DebianVersionRange.split("~2.3")
+        ...     raise Exception("ValueError should be raised")
+        ... except ValueError:
+        ...     pass
+        """
+        constraint_string = remove_spaces(string).strip(")(")
+
+        for comparator in cls.vers_by_native_comparators:
+            if constraint_string.startswith(comparator):
+                version = constraint_string.lstrip(comparator)
+                return comparator, version
+
+        raise ValueError(f"Unknown Debian version relationship: {string}")
+
+    @classmethod
+    def from_native(cls, relationships):
+        """
+        Return a VersionRange built from a ``relationships`` list of Debian
+        version relationship strings or a single relationship string.
+        For example::
+
+        >>> dvr = DebianVersionRange.from_native("= 3.5.6")
+        >>> assert str(dvr) == "vers:deb/3.5.6"
+
+        >>> rels = ["(>= 2.8.16)"]
+        >>> dvr = DebianVersionRange.from_native(rels)
+        >>> assert str(dvr) == "vers:deb/>=2.8.16"
+
+        >>> rels = [">= 1:1.1.4", "(>= 2.8.16)", "<= 2.8.16-z"]
+        >>> dvr = DebianVersionRange.from_native(rels)
+        >>> assert str(dvr) == "vers:deb/>=2.8.16|<=2.8.16-z|>=1:1.1.4"
+
+        >>> rels = ["(>= 2:4.13.1)", "(<= 2:4.13.1-0ubuntu0.16.04.1.1~)"]
+        >>> dvr = DebianVersionRange.from_native(rels)
+        >>> assert str(dvr) == "vers:deb/>=2:4.13.1|<=2:4.13.1-0ubuntu0.16.04.1.1~"
+
+        >>> rels = ["= 5.0", "(>> 2.23)", "< 2.24"]
+        >>> dvr = DebianVersionRange.from_native(rels)
+        >>> assert str(dvr) == "vers:deb/>2.23|<2.24|5.0"
+
+        >>> rels = ["(<< 3:1.1.25~)", "(>> 2:1.1.24~)"]
+        >>> dvr = DebianVersionRange.from_native(rels)
+        >>> assert str(dvr) == "vers:deb/>2:1.1.24~|<3:1.1.25~"
+        """
+        constraints = []
+
+        if isinstance(relationships, str):
+            relationships = [relationships]
+
+        for rel in relationships:
+            comparator, version = cls.split(rel)
+            comparator = cls.vers_by_native_comparators[comparator]
+            version = cls.version_class(version)
+            constraint = VersionConstraint(comparator=comparator, version=version)
+            constraints.append(constraint)
+
+        constraints.sort()
+
+        return cls(constraints=constraints)
 
 
 class PypiVersionRange(VersionRange):
