@@ -76,8 +76,16 @@ class VersionRange:
         Return a VersionRange built from a ``vers`` version range spec string,
         such as "vers:npm/1.2.3,>=2.0.0"
         """
+        # Spaces are not significant and removed in a canonical form.
         vers = remove_spaces(vers)
 
+        # A version range specifier contains only printable ASCII letters, digits and
+        # punctuation.
+        is_ascii = len(vers) + 2 == len(ascii(vers))
+        if not is_ascii:
+            raise ValueError(f"Invalid non ASCII characters: {vers!r}")
+
+        # The URI scheme and versioning scheme are always lowercase as in  ``vers:npm``.
         uri_scheme, _, scheme_range_spec = vers.partition(":")
         uri_scheme = uri_scheme.lower()
 
@@ -94,10 +102,12 @@ class VersionRange:
 
         version_class = range_class.version_class
 
-        constraints = constraints.strip()
+        constraints = remove_spaces(constraints)
         if not constraints:
             raise ValueError(f"{vers!r} specifies no version range constraints.")
 
+        # There is only one star: "*" must only occur once and alone in a range,
+        # without any other constraint or version.
         if constraints.startswith("*"):
             if constraints != "*":
                 raise ValueError(f"{vers!r} contains an invalid '*' constraint.")
@@ -113,7 +123,11 @@ class VersionRange:
             )
             parsed_constraints.append(constraint)
 
+        # Constraints are sorted by version**. The canonical ordering is the versions
+        # order. The ordering of ``<version-constraint>`` is not significant otherwise
+        # but this sort order is needed when check if a version is contained in a range.
         parsed_constraints.sort()
+
         if simplify:
             parsed_constraints = VersionConstraint.simplify(parsed_constraints)
         if validate:

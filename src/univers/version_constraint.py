@@ -6,8 +6,8 @@
 
 import operator
 from functools import total_ordering
-import attr
 
+import attr
 from univers.utils import remove_spaces
 from univers.versions import Version
 
@@ -125,8 +125,14 @@ class VersionConstraint:
         a ``version_class`` Version class.
         """
         constraint_string = remove_spaces(string)
-        comparator, version = cls.split(constraint_string)
 
+        # A version range specifier contains only printable ASCII letters, digits and
+        # punctuation.
+        is_ascii = len(constraint_string) + 2 == len(ascii(constraint_string))
+        if not is_ascii:
+            raise ValueError(f"Invalid non ASCII characters: {string!r}")
+
+        comparator, version = cls.split(constraint_string)
         if comparator not in COMPARATORS:
             raise ValueError(f"Unknown comparator: {comparator!r}")
 
@@ -230,10 +236,18 @@ class VersionConstraint:
         if not all(isinstance(c, VersionConstraint) for c in constraints):
             raise ValueError(f"{constraints!r} can contain only VersionConstraint")
 
+        # Versions are unique. Each ``version`` must be unique in a range and can
+        # occur only once in any ``<version-constraint>`` of a range specifier,
+        # irrespective of its comparators. Tools must report an error for duplicated
+        # versions.
         if len(set(c.version for c in constraints)) != len(constraints):
             raise ValueError(f"{constraints!r} cannot contain duplicated Version")
 
+        # Constraints are sorted by version**. The canonical ordering is the versions
+        # order. The ordering of ``<version-constraint>`` is not significant otherwise
+        # but this sort order is needed when check if a version is contained in a range.
         constraints.sort()
+
         return validate_comparators(constraints)
 
     @classmethod
@@ -282,17 +296,28 @@ def validate_comparators(constraints):
     - ">" and ">=" can only be followed by one of "<", "<="
     """
 
+    # Starting from a de-duplicated and sorted list of constraints, these extra rules
+    # apply to the comparators of any two contiguous constraints to be valid:
+
+    # There is only one star: "*" must only occur once and alone in a range,
+    # without any other constraint or version.
     if any(c.comparator == "*" for c in constraints):
         if len(constraints) != 1:
             raise ValueError(f"Invalid {constraints!r}: can contain only one star '*'")
         return True
 
-    # discard != that can occur anywhere
+    # "!=" constraint can be followed by a constraint using any comparator, i.e.,
+    # any of "=", "!=", ">", ">=", "<", "<=" as comparator (or no constraint).
+
+    # Ignoring all constraints with "!=" comparators:
+    # --> discard != that can occur anywhere
     constraints = [c for c in constraints if c.comparator != "!="]
     if not constraints:
         return True
 
-    # check that equals is followed only by "=", ">", ">="
+    # A "=" constraint must be followed only by a constraint with one of "=", ">",
+    # ">=" as comparator (or no constraint).
+    # --> check that equals is followed only by "=", ">", ">="
     invalid_equal = [
         (cur, nxt)
         for cur, nxt in pairwise(constraints)
@@ -305,16 +330,22 @@ def validate_comparators(constraints):
             f"Invalid {c!r}: where {i!r} " "cannot contain an equal = followed by either < or <="
         )
 
-    # discard = that have been validated above
+    # And ignoring all constraints with "=" or "!=" comparators:
+    # --> discard = that have been validated above
     constraints = [c for c in constraints if c.comparator != "="]
     if not constraints:
         return True
 
-    # from now on this must be an alternation of greater/lesser
+    # the sequence of constraint comparators must be an alternation of greater
+    # and lesser comparators:
+    # --> from now on this must be an alternation of greater/lesser
     for cur_constraint, nxt_constraint in pairwise(constraints):
         cur_comp = cur_constraint.comparator
         nxt_comp = nxt_constraint.comparator
 
+        # "<" and "<=" must be followed by one of ">", ">=" (or no constraint).
+        # ">" and ">=" must be followed by one of "<", "<=" (or no constraint).
+        # Tools must report an error for such invalid ranges.
         if (cur_comp in ("<", "<=") and nxt_comp not in (">", ">=")) or (
             cur_comp in (">", ">=") and nxt_comp not in ("<", "<=")
         ):
@@ -373,11 +404,11 @@ def simplify_constraints(constraints):
             # discard current constraint
             constraints.pop(i)
             # Previous constraint becomes current if if exists.
-            if i:
+            if i > 0:
                 i -= 1
 
         # If there is a previous constraint:
-        if i:
+        if i > 0:
 
             prv = constraints[i - 1]
             prv_comp = prv.comparator
