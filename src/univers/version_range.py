@@ -40,7 +40,7 @@ class VersionRange:
 
     # A list of lists of VersionConstraint that are signposts on the versions
     # timeline
-    constraints = attr.ib(type=list, default=attr.Factory(list))
+    constraints = attr.ib(type=tuple, converter=tuple, default=attr.Factory(tuple))
 
     def __attrs_post_init__(self, *args, **kwargs):
         self.constraints.sort()
