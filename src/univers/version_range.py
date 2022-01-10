@@ -10,15 +10,19 @@ from packaging.specifiers import SpecifierSet
 from semantic_version.base import AllOf
 from semantic_version.base import AnyOf
 
+from univers import gem
 from univers import versions
 from univers.utils import remove_spaces
 from univers.version_constraint import VersionConstraint
+from univers.version_constraint import contains_version
 
 
 @attr.s(frozen=True, order=False, eq=True, hash=True)
 class VersionRange:
     """
     Base version range class. Subclasses must provide implememt.
+    A VersionRange represents a list of constraints on the versions "timeline"
+    of a package.
     """
 
     # Versioning scheme. By convention this is the same as the Package URL
@@ -34,120 +38,126 @@ class VersionRange:
     # PypiVersion. Subclasses MUST provide this.
     version_class = None
 
-    # A list of lists of VersionConstraint where the outer list is an "OR" of
-    # the innner lists that are each "ANDs" of atomic constraints
+    # A list of lists of VersionConstraint that are signposts on the versions
+    # timeline
     constraints = attr.ib(type=list, default=attr.Factory(list))
 
     def __attrs_post_init__(self, *args, **kwargs):
-        VersionConstraint.sort(self.constraints)
+        self.constraints.sort()
 
     @classmethod
     def from_native(cls, string):
         """
         Return a VersionRange built from a scheme-specific, native version range
-        ``string``. Subclasses must implement.
-        """
-        return NotImplementedError
-
-    def to_native(self):
-        """
-        Return a native range string for this VersionRange. Subclasses must
-        implement.
+        ``string``. Subclasses can implement.
         """
         return NotImplementedError
 
     @classmethod
-    def from_string(cls, vers):
+    def from_natives(cls, strings):
+        """
+        Return a VersionRange built from a ``strings`` list of scheme-
+        specific native version range strings. Subclasses can implement.
+        """
+        return NotImplementedError
+
+    def to_native(self, *args, **kwargs):
+        """
+        Return a native range string for this VersionRange. Subclasses can
+        implement. Opetional ``args`` and ``kwargs`` allow subclass to require
+        extra arguments (such as a package name that some scheme may require
+        like for deb and rpm.)
+        """
+        return NotImplementedError
+
+    @classmethod
+    def from_string(cls, vers, simplify=False, validate=False):
         """
         Return a VersionRange built from a ``vers`` version range spec string,
         such as "vers:npm/1.2.3,>=2.0.0"
         """
+        # Spaces are not significant and removed in a canonical form.
         vers = remove_spaces(vers)
 
+        # A version range specifier contains only printable ASCII letters, digits and
+        # punctuation.
+        is_ascii = len(vers) + 2 == len(ascii(vers))
+        if not is_ascii:
+            raise ValueError(f"Invalid non ASCII characters: {vers!r}")
+
+        # The URI scheme and versioning scheme are always lowercase as in  ``vers:npm``.
         uri_scheme, _, scheme_range_spec = vers.partition(":")
-        if not uri_scheme == "vers":
+        uri_scheme = uri_scheme.lower()
+
+        if uri_scheme != "vers":
             raise ValueError(f"{vers!r} must start with the 'vers:' URI scheme.")
 
         versioning_scheme, _, constraints = scheme_range_spec.partition("/")
+        versioning_scheme = versioning_scheme.lower()
         range_class = RANGE_CLASS_BY_SCHEMES.get(versioning_scheme)
         if not range_class:
             raise ValueError(
                 f"{vers!r} has an unknown versioning scheme: " f"{versioning_scheme!r}.",
             )
 
+        version_class = range_class.version_class
+
+        constraints = remove_spaces(constraints)
         if not constraints:
             raise ValueError(f"{vers!r} specifies no version range constraints.")
 
-        # parse_constraints
-        version_constraints = []
-        for or_constraints in constraints.split("|"):
-            and_constraints = []
-            for constraint in or_constraints.split(","):
-                constraint = VersionConstraint.from_string(
-                    string=constraint,
-                    version_class=range_class.version_class,
-                )
-                and_constraints.append(constraint)
-            version_constraints.append(and_constraints)
+        # There is only one star: "*" must only occur once and alone in a range,
+        # without any other constraint or version.
+        if constraints.startswith("*"):
+            if constraints != "*":
+                raise ValueError(f"{vers!r} contains an invalid '*' constraint.")
+            return range_class([VersionConstraint.from_string(string="*", version_class=None)])
 
-        return range_class(version_constraints)
+        parsed_constraints = []
+
+        constraints = constraints.strip("|")
+        for const in constraints.split("|"):
+            constraint = VersionConstraint.from_string(
+                string=const,
+                version_class=version_class,
+            )
+            parsed_constraints.append(constraint)
+
+        # Constraints are sorted by version**. The canonical ordering is the versions
+        # order. The ordering of ``<version-constraint>`` is not significant otherwise
+        # but this sort order is needed when check if a version is contained in a range.
+        parsed_constraints.sort()
+
+        if simplify:
+            parsed_constraints = VersionConstraint.simplify(parsed_constraints)
+        if validate:
+            VersionConstraint.validate(parsed_constraints)
+
+        return range_class(parsed_constraints)
 
     def __str__(self):
-        constraints = VersionConstraint.to_constraints_string(self.constraints)
+        constraints = "|".join(str(c) for c in sorted(self.constraints))
         return f"vers:{self.scheme}/{constraints}"
 
     to_string = __str__
 
     def to_dict(self):
-        VersionConstraint.validate(self.constraints)
-
-        constraints = []
-        for inner_constraints in self.constraints:
-            constraints.append([c.to_dict() for c in inner_constraints])
+        constraints = [c.to_dict() for c in self.constraints]
         return dict(scheme=self.scheme, constraints=constraints)
 
     def __contains__(self, version):
         """
         Return True if this VersionRange contains the ``version`` Version
         object. A version is contained in a VersionRange if it satisfies its
-        constraints this way:
-
-        - at least one of its ``constraints`` nested inner list of
-          VersionConstraint should be satisfied
-
-        - a nested inner list of VersionConstraint is satisfied if all of its
-          VersionConstraints are satisfied, e.g., the ``version`` is contained in
-          all of the version ranges described by the constraint.
-
-        - a VersionConstraint is "satisfied" if the ``version`` Version is "in"
-          this VersionConstraint. Conversely, the ``version`` satisfies a constraint.
+        constraints according to ``vers`` rules.
         """
         if not isinstance(version, self.version_class):
             raise TypeError(
                 f"{version!r} is not of expected type: {self.version_class!r}",
             )
-        for inner_constraints in self.constraints:
-            if version.satisfies_all(inner_constraints):
-                return True
-        return False
+        return contains_version(version, self.constraints)
 
     contains = __contains__
-
-    @classmethod
-    def join(cls, constraints):
-        """
-        Return a string representing the provided ``constraints`` nested
-        sequence of VersionConstraint objects such that the outer sequence
-        VersionConstraints are joined with an "OR" e.g., a "vers" pipe "|" and
-        the inner sequences of VersionConstraint are each joined with an "AND"
-        e.g., a "vers" coma ",".
-        """
-        cls.validate(constraints)
-        or_constraints = []
-        for inner_constraints in constraints:
-            and_constraints = ",".join(str(c) for c in sorted(inner_constraints))
-            or_constraints.append(and_constraints)
-        return "|".join(or_constraints)
 
     def __eq__(self, other):
         return (
@@ -155,6 +165,33 @@ class VersionRange:
             and self.version_class == other.version_class
             and self.constraints == other.constraints
         )
+
+
+def from_cve_v4(data, scheme):
+    """
+    Return a VersionRange build from the provided CVE V4 API ``data`` using the
+    provided versioning vers ``scheme``.
+    """
+
+
+def from_cve_v5(data, scheme):
+    """
+    Return a VersionRange build from the provided CVE V5 API ``data`` using the
+    provided versioning vers ``scheme``.
+
+    See https://github.com/CVEProject/cve-schema/tree/master/schema/v5.0
+    ``data`` can be:
+    - a mapping of collectionURL and versions:
+        {"collectionURL": "some URL", "versions": [{"versionValue": "1.0"}]}
+
+    """
+
+
+def from_osv_v1(data, scheme):
+    """
+    Return a VersionRange build from the provided CVE V4 API data using the
+    provided versioning vers ``scheme``.
+    """
 
 
 class NpmVersionRange(VersionRange):
@@ -210,17 +247,22 @@ def get_allof_constraints(cls, clause):
 
 
 class GemVersionRange(VersionRange):
-    # gem need its own scheme see https//github.com/nexB/univers/issues/5
-    # See https://github.com/ruby/ruby/blob/415671a28273e5bfbe9aa00a0e386f025720ac23/lib/rubygems/requirement.rb
-    # See https//semver.org/spec/v2.0.0.html#spec-item-11
-    # See https//snyk.io/blog/differences-in-version-handling-gems-and-npm/
-    # See https://github.com/npm/node-semver/issues/112
+    """
+    A version range implementation for Rubygems.
+
+    gem need its own versioning scheme as this is not semver.
+    See https//github.com/nexB/univers/issues/5
+    See https://github.com/ruby/ruby/blob/415671a28273e5bfbe9aa00a0e386f025720ac23/lib/rubygems/requirement.rb
+    See https//semver.org/spec/v2.0.0.html#spec-item-11
+    See https//snyk.io/blog/differences-in-version-handling-gems-and-npm/
+    See https://github.com/npm/node-semver/issues/112
+    """
 
     scheme = "gem"
-    version_class = versions.RubyVersion
+    version_class = versions.RubygemsVersion
 
     vers_by_native_comparators = {
-        "==": "=",
+        "=": "=",
         "!=": "!=",
         "<=": "<=",
         ">=": ">=",
@@ -232,36 +274,210 @@ class GemVersionRange(VersionRange):
     def from_native(cls, string):
         """
         Return a VersionRange built from a Rubygem version range ``string``.
+
+        Gem version semantics are different from semver: there can be commonly
+        more than three segments and the operators are also different.
         """
-        # TODO: Gem version semantics are different from semver:
-        # there can be commonly more than 3 segments
-        # the operators are also different.
 
-        # replace Rubygem ~> pessimistic operator by node-semver equivalent
-        string = string.replace("~>", "~")
-        spec = semantic_version.NpmSpec(string)
+        gr = gem.GemRequirement.from_string(string).simplify()
 
-        clause = spec.clause.simplify()
-        assert isinstance(clause, (AnyOf, AllOf))
-        anyof_constraints = []
-        if isinstance(clause, AnyOf):
-            for allof_clause in clause.clauses:
-                anyof_constraints.append(get_allof_constraints(cls, allof_clause))
-        elif isinstance(clause, AllOf):
-            alloc = get_allof_constraints(cls, clause)
-            anyof_constraints.append(alloc)
-        else:
-            raise ValueError(f"Unknown clause type: {spec!r}")
+        constraints = []
+        for gc in gr.constraints:
+            version = cls.version_class(str(gc.version))
+            op = cls.vers_by_native_comparators[gc.op]
+            vc = VersionConstraint(comparator=op, version=version)
+            constraints.append(vc)
 
-        return cls(constraints=anyof_constraints)
+        return cls(constraints=constraints)
+
+
+def split_req(string, comparators, default=None, strip=""):
+    """
+    Return a tuple of (vers comparator, version) strings given an common version
+    requirement``string`` such as "> 2.3" or "<= 2.3" using the ``comparators``
+    mapping of {native comparator: vers comparator}. Strip the ``string`` from
+    the provided leading of training characters in ``strip``.
+
+    If there is none of the ``comparators`` found in ``string``:
+
+    - Return the ``default`` vers comparator string if provided.
+    - Otherwise, raise a ValueError for an unknown comparator.
+
+    For example::
+
+    >>> comps = {"=": "=", "<=": "<=", ">=": ">="}
+    >>> assert split_req("= 2.3", comparators=comps) == ("=", "2.3",)
+    >>> assert split_req("  <   =  2 . 3  ", comparators=comps) == ("<=", "2.3",)
+    >>> assert split_req(">= 2.3", comparators=comps) == (">=", "2.3",)
+    >>> assert split_req(">= 2.3", comparators=comps) == (">=", "2.3",)
+    >>> assert split_req("<= 2.3", comparators=comps) == ("<=", "2.3",)
+    >>> assert split_req("(< =  2.3 )", comparators=comps, strip=")(") == ("<=", "2.3",)
+
+    With a default, we return the default comparator::
+
+    >>> assert split_req("2.3,", comparators=comps, default="=", strip=",") == ("=", "2.3",)
+
+    Otherwise, a ValuaeError::
+
+    >>> try:
+    ...     split_req("~2.3", comparators=comps, )
+    ...     raise Exception("ValueError should be raised")
+    ... except ValueError:
+    ...     pass
+    """
+    constraint_string = remove_spaces(string).strip(strip)
+
+    for native_comparator, vers_comparator in comparators.items():
+        if constraint_string.startswith(native_comparator):
+            version = constraint_string.lstrip(native_comparator)
+            return vers_comparator, version
+
+    if default:
+        return default, constraint_string
+
+    raise ValueError(f"Unknown comparator in version requirement: {string!r} ")
 
 
 class DebianVersionRange(VersionRange):
+    """
+    Debian version ranges as seen in Debian manual for relationships:
+    https://www.debian.org/doc/debian-policy/ch-relationships.html
+
+    These are for defined one expression at a time. Multiple expressions each
+    com with a package name. Therefore there is no "range string" per se, instead
+    there is always a list of version constraints as an input. For instance::
+
+        libc6 (>> 2.23), libc6 (<< 2.24)'
+
+    Therefore native conversions are different.
+    """
+
     scheme = "deb"
     version_class = versions.DebianVersion
+    vers_by_native_comparators = {
+        "=": "=",
+        "<=": "<=",
+        ">=": ">=",
+        "<<": "<",
+        ">>": ">",
+        # legacy
+        "<": "<",
+        ">": ">",
+    }
+
+    @classmethod
+    def split(cls, string):
+        """
+        Return a tuple of (vers comparator, version) strings given a Debian
+        version relationship ``string`` such as ">>2.3" or "(<< 2.3)". Raise a
+        ValueError for unknown comparators.
+
+        For example::
+        >>> assert DebianVersionRange.split("=2.3") == ("=", "2.3",)
+        >>> assert DebianVersionRange.split("  <   =  2 . 3  ") == ("<=", "2.3",)
+        >>> assert DebianVersionRange.split("(>=2.3)") == (">=", "2.3",)
+        >>> assert DebianVersionRange.split(">=2.3") == (">=", "2.3",)
+        >>> assert DebianVersionRange.split("<=2.3") == ("<=", "2.3",)
+        >>> assert DebianVersionRange.split("<<2.3") == ("<", "2.3",)
+        >>> assert DebianVersionRange.split(">>2.3") == (">", "2.3",)
+        >>> assert DebianVersionRange.split(">2.3") == (">", "2.3",)
+        >>> assert DebianVersionRange.split("<2.3") == ("<", "2.3",)
+        >>> try:
+        ...     DebianVersionRange.split("~2.3")
+        ...     raise Exception("ValueError should be raised")
+        ... except ValueError:
+        ...     pass
+        """
+        return split_req(
+            string=string,
+            comparators=cls.vers_by_native_comparators,
+            strip=")(",
+        )
+
+    @classmethod
+    def build_constraint_from_string(cls, string):
+        """
+        Return a VersionConstraint built from a single Debian version
+        relationship ``string``.
+
+        >>> vr = DebianVersionRange.build_constraint_from_string("= 5.0")
+        >>> assert str(vr) == "5.0"
+        >>> vr = DebianVersionRange.build_constraint_from_string("(>> 2.23)")
+        >>> assert str(vr) == ">2.23"
+        >>> vr = DebianVersionRange.build_constraint_from_string("<= 2.24")
+        >>> assert str(vr) == "<=2.24"
+        """
+        comparator, version = cls.split(string)
+        version = cls.version_class(version)
+        return VersionConstraint(comparator=comparator, version=version)
+
+    @classmethod
+    def from_native(cls, string):
+        """
+        Return a VersionRange built from a ``string`` single Debian
+        version relationship string.
+
+        For example::
+
+        >>> vr = DebianVersionRange.from_native("(= 3.5.6)")
+        >>> assert str(vr) == "vers:deb/3.5.6"
+        """
+        return cls(constraints=[cls.build_constraint_from_string(string)])
+
+    @classmethod
+    def from_natives(cls, strings):
+        """
+        Return a VersionRange built from a ``strings`` list of Debian
+        version relationships or a single relationship string.
+
+        For example::
+
+        >>> vr = DebianVersionRange.from_natives("= 3.5.6")
+        >>> assert str(vr) == "vers:deb/3.5.6"
+
+        >>> rels = ["(>= 2.8.16)"]
+        >>> vr = DebianVersionRange.from_natives(rels)
+        >>> assert str(vr) == "vers:deb/>=2.8.16"
+
+        >>> rels = [">= 1:1.1.4", "(>= 2.8.16)", "<= 2.8.16-z"]
+        >>> vr = DebianVersionRange.from_natives(rels)
+        >>> assert str(vr) == "vers:deb/>=2.8.16|<=2.8.16-z|>=1:1.1.4"
+
+        >>> rels = ["(>= 2:4.13.1)", "(<= 2:4.13.1-0ubuntu0.16.04.1.1~)"]
+        >>> vr = DebianVersionRange.from_natives(rels)
+        >>> assert str(vr) == "vers:deb/>=2:4.13.1|<=2:4.13.1-0ubuntu0.16.04.1.1~"
+
+        >>> rels = ["= 5.0", "(>> 2.23)", "< 2.24"]
+        >>> vr = DebianVersionRange.from_natives(rels)
+        >>> assert str(vr) == "vers:deb/>2.23|<2.24|5.0"
+
+        >>> rels = ["(<< 3:1.1.25~)", "(>> 2:1.1.24~)"]
+        >>> vr = DebianVersionRange.from_natives(rels)
+        >>> assert str(vr) == "vers:deb/>2:1.1.24~|<3:1.1.25~"
+        """
+
+        if isinstance(strings, str):
+            return cls.from_native(strings)
+        constraints = [cls.build_constraint_from_string(rel) for rel in strings]
+        return cls(constraints=constraints)
 
 
 class PypiVersionRange(VersionRange):
+    """
+    PyPI PEP 440 version range.
+
+    For example:
+    >>> from univers.versions import PypiVersion
+    >>> constraints = [
+    ...    VersionConstraint(version=PypiVersion("2")),
+    ...    VersionConstraint(comparator=">=", version=PypiVersion("3")),
+    ...    VersionConstraint(comparator="<", version=PypiVersion("4")),
+    ...    VersionConstraint(version=PypiVersion("5")),
+    ... ]
+    >>> range = PypiVersionRange(constraints=constraints)
+    >>> assert str(range) == "vers:pypi/2|>=3|<4|5"
+    """
+
     scheme = "pypi"
     version_class = versions.PypiVersion
 
@@ -289,8 +505,7 @@ class PypiVersionRange(VersionRange):
         specifiers = SpecifierSet(string)
 
         # In PyPI all constraints apply
-        allof_constraints = []
-        constraints = [allof_constraints]
+        constraints = []
 
         for spec in specifiers:
             operator = spec.operator
@@ -298,17 +513,26 @@ class PypiVersionRange(VersionRange):
             assert isinstance(version, cls.version_class)
             comparator = cls.vers_by_native_comparators[operator]
             constraint = VersionConstraint(comparator=comparator, version=version)
-            allof_constraints.append(constraint)
+            constraints.append(constraint)
 
         return cls(constraints=constraints)
 
 
 class MavenVersionRange(VersionRange):
+    """
+    Maven version range as documented at
+    https://maven.apache.org/enforcer/enforcer-rules/versionRanges.html
+    """
+
     scheme = "maven"
     version_class = versions.MavenVersion
 
 
 class NugetVersionRange(VersionRange):
+    """
+    NuGet range as in:[3.10.1,4)
+    """
+
     scheme = "nuget"
     version_class = versions.NugetVersion
 
@@ -321,11 +545,94 @@ class ComposerVersionRange(VersionRange):
 
 
 class RpmVersionRange(VersionRange):
+    # http://ftp.rpm.org/api/4.4.2.2/dependencies.html
+    # http://ftp.rpm.org/max-rpm/s1-rpm-depend-manual-dependencies.html
     scheme = "rpm"
     version_class = versions.RpmVersion
 
+    vers_by_native_comparators = {
+        "=": "=",
+        "<=": "<=",
+        ">=": ">=",
+        "<": "<",
+        ">": ">",
+        # seen in RPM code but never seen in the doc or in the wild so far
+        "<>": "!=",
+        # seen in a specfile parser code
+        "!=": "!=",
+        "==": "=",
+    }
+
+    @classmethod
+    def build_constraint_from_string(cls, string):
+        """
+        Return a VersionConstraint built from a single RPM version
+        relationship ``string``.
+
+        >>> vr = RpmVersionRange.build_constraint_from_string("= 5.0")
+        >>> assert str(vr) == "5.0", str(vr)
+        >>> vr = RpmVersionRange.build_constraint_from_string("> 2.23,")
+        >>> assert str(vr) == ">2.23", str(vr)
+        >>> vr = RpmVersionRange.build_constraint_from_string("<= 2.24")
+        >>> assert str(vr) == "<=2.24", str(vr)
+        """
+        comparator, version = split_req(
+            string=string,
+            comparators=cls.vers_by_native_comparators,
+            strip=",",
+        )
+        version = cls.version_class(version)
+        return VersionConstraint(comparator=comparator, version=version)
+
+    @classmethod
+    def from_native(cls, string):
+        """
+        Return a VersionRange built from a ``string`` single RPM
+        version requirement string.
+
+        For example::
+
+        >>> vr = RpmVersionRange.from_native("= 3.5.6")
+        >>> assert str(vr) == "vers:rpm/3.5.6", str(vr)
+        """
+        return cls(constraints=[cls.build_constraint_from_string(string)])
+
+    @classmethod
+    def from_natives(cls, strings):
+        """
+        Return a VersionRange built from a ``strings`` list of RPM
+        version requirements or a single requirement string.
+
+        For example::
+
+        >>> vr = RpmVersionRange.from_natives("= 3.5.6")
+        >>> assert str(vr) == "vers:rpm/3.5.6", str(vr)
+
+        >>> reqs = [">= 2.8.16"]
+        >>> vr = RpmVersionRange.from_natives(reqs)
+        >>> assert str(vr) == "vers:rpm/>=2.8.16", str(vr)
+
+        >>> reqs = [">= 1:1.1.4", ">= 2.8.16", "<= 2.8.16-z"]
+        >>> vr = RpmVersionRange.from_natives(reqs)
+        >>> assert str(vr) == "vers:rpm/>=2.8.16|<=2.8.16-z|>=1:1.1.4", str(vr)
+
+        >>> reqs = ["= 5.0", "> 2.23,", "< 2.24"]
+        >>> vr = RpmVersionRange.from_natives(reqs)
+        >>> assert str(vr) == "vers:rpm/>2.23|<2.24|5.0", str(vr)
+        """
+
+        if isinstance(strings, str):
+            return cls.from_native(strings)
+        constraints = [cls.build_constraint_from_string(rel) for rel in strings]
+        return cls(constraints=constraints)
+
 
 class GolangVersionRange(VersionRange):
+    """
+    Go modules use strict semver with pseudo numbering for Git repos
+    https://go.dev/doc/modules/version-numbers
+    """
+
     scheme = "golang"
     version_class = versions.SemverVersion
 
@@ -333,11 +640,11 @@ class GolangVersionRange(VersionRange):
 class GenericVersionRange(VersionRange):
     scheme = "generic"
     version_class = versions.SemverVersion
-    # apache is not semver at large. And in particular we may have schemes that
-    # are package name-specific
 
 
 class ApacheVersionRange(VersionRange):
+    # apache is not semver at large. And in particular we may have schemes that
+    # are package name-specific
     scheme = "apache"
     version_class = versions.SemverVersion
 
@@ -443,16 +750,16 @@ class NginxVersionRange(VersionRange):
         >>> assert str(result) == "vers:nginx/1.5.10", str(result)
 
         >>> result = NginxVersionRange.from_native("0.7.52-0.8.39")
-        >>> assert str(result) == "vers:nginx/<=0.8.39,>=0.7.52", str(result)
+        >>> assert str(result) == "vers:nginx/>=0.7.52|<=0.8.39", str(result)
 
         >>> result = NginxVersionRange.from_native("1.1.4-1.2.8, 1.3.9-1.4.0")
-        >>> assert str(result) == "vers:nginx/<=1.2.8,>=1.1.4|<=1.4.0,>=1.3.9", str(result)
+        >>> assert str(result) == "vers:nginx/>=1.1.4|<=1.2.8|>=1.3.9|<=1.4.0", str(result)
 
         >>> result = NginxVersionRange.from_native("0.8.40+, 0.7.66+")
-        >>> assert str(result) == "vers:nginx/<0.9.0,>=0.8.40|>=0.7.66", str(result)
+        >>> assert str(result) == "vers:nginx/>=0.7.66|>=0.8.40|<0.9.0", str(result)
 
         >>> result = NginxVersionRange.from_native("1.5.0+, 1.4.1+")
-        >>> assert str(result) == "vers:nginx/<1.5.0,>=1.4.1|>=1.5.0", str(result)
+        >>> assert str(result) == "vers:nginx/>=1.4.1|<1.5.0|>=1.5.0", str(result)
 
         >>> result = NginxVersionRange.from_native("all")
         >>> assert str(result) == "vers:nginx/*", str(result)
@@ -464,25 +771,24 @@ class NginxVersionRange(VersionRange):
         """
         cleaned = remove_spaces(string).lower()
         if cleaned == "all":
-            return cls(constraints=[[VersionConstraint(comparator="*")]])
+            return cls(constraints=[VersionConstraint(comparator="*")])
 
-        anyof_constraints = []
+        constraints = []
 
-        for allof_clauses in cleaned.split(","):
+        for clauses in cleaned.split(","):
 
-            if "-" in allof_clauses:
+            if "-" in clauses:
                 # dash range
-                start, _, end = allof_clauses.partition("-")
+                start, _, end = clauses.partition("-")
                 start_version = semantic_version.Version.coerce(start)
                 end_version = semantic_version.Version.coerce(end)
                 vstart = VersionConstraint(comparator=">=", version=start_version)
                 vend = VersionConstraint(comparator="<=", version=end_version)
-                allof_constaints = [vstart, vend]
-                anyof_constraints.append(allof_constaints)
+                constraints.extend([vstart, vend])
 
-            elif "+" in allof_clauses:
+            elif "+" in clauses:
                 # suffixed version
-                vs = allof_clauses.rstrip("+")
+                vs = clauses.rstrip("+")
                 version = semantic_version.Version.coerce(vs)
                 is_stable = is_even(version.minor)
 
@@ -492,23 +798,20 @@ class NginxVersionRange(VersionRange):
                     end_version = start_version.next_minor()
                     vstart = VersionConstraint(comparator=">=", version=start_version)
                     vend = VersionConstraint(comparator="<", version=end_version)
-                    allof_constaints = [vstart, vend]
-                    anyof_constraints.append(allof_constaints)
+                    constraints.extend([vstart, vend])
                 else:
                     # mainline branch ranges are resolved to a singel constraint
                     version = semantic_version.Version.coerce(vs)
                     constraint = VersionConstraint(comparator=">=", version=version)
-                    allof_constaints = [constraint]
-                    anyof_constraints.append(allof_constaints)
+                    constraints.append(constraint)
 
             else:
                 # plain single version
-                version = semantic_version.Version.coerce(allof_clauses)
+                version = semantic_version.Version.coerce(clauses)
                 constraint = VersionConstraint(comparator="=", version=version)
-                allof_constaints = [constraint]
-                anyof_constraints.append(allof_constaints)
+                constraints.append(constraint)
 
-        return cls(constraints=anyof_constraints)
+        return cls(constraints=constraints)
 
 
 def is_even(s):

@@ -75,7 +75,6 @@ def get_pessimistic_constraints(string):
     bound of version range ``string`` that contains a pessimistic Ruby range.
     Raise a ValueError if this is not a pessimistic Rubygems range.
 
-
     For example:
     >>> lower_bound, upper_bound = get_pessimistic_constraints("~>2.0.8")
     >>> vlow = semantic_version.Version("2.0.8")

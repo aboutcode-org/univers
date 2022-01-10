@@ -21,13 +21,9 @@ def cmp(x, y):
     if x == y:
         return 0
     elif x is None:
-        if y is None:
-            return 0
-        else:
-            return -1
+        return -1
     elif y is None:
         return 1
     else:
-        # TODO: consider casting the values to string or int or floats?
         # note that this is the minimal replacement function
         return (x > y) - (x < y)

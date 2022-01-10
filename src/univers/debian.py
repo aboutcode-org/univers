@@ -69,6 +69,13 @@ class Version(object):
       >>> print([str(v) for v in sorted(Version.from_string(s) for s in unsorted)])
       ['0.1', '0.5', '1.0', '2.0', '3.0', '1:0.4', '2:0.3']
 
+      We also accept trailing punctuations in the version and release:
+
+      >>> v = "2:4.13.1-0ubuntu0.16.04.1.1~"
+      >>> assert str(Version.from_string(v)) == v
+      >>> v = "2:4.13.1~"
+      >>> assert str(Version.from_string(v)) == v
+
     This example uses 'epoch' numbers (the numbers before the colons) to
     demonstrate that this version sorting order is different from regular
     sorting and 'natural order sorting'.
@@ -96,30 +103,32 @@ class Version(object):
         return hash(self.tuple())
 
     def __eq__(self, other):
-        return type(self) is type(other) and self.tuple() == other.tuple()
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.tuple() == other.tuple()
 
     def __ne__(self, other):
         return not self.__eq__(other)
 
     def __lt__(self, other):
-        if type(self) is type(other):
-            return eval_constraint(self, "<<", other)
-        return NotImplemented
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return eval_constraint(self, "<<", other)
 
     def __le__(self, other):
-        if type(self) is type(other):
-            return eval_constraint(self, "<=", other)
-        return NotImplemented
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return eval_constraint(self, "<=", other)
 
     def __gt__(self, other):
-        if type(self) is type(other):
-            return eval_constraint(self, ">>", other)
-        return NotImplemented
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return eval_constraint(self, ">>", other)
 
     def __ge__(self, other):
-        if type(self) is type(other):
-            return eval_constraint(self, ">=", other)
-        return NotImplemented
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return eval_constraint(self, ">=", other)
 
     @classmethod
     def from_string(cls, version):
@@ -128,7 +137,7 @@ class Version(object):
         version = version.strip()
         if not version:
             raise ValueError('Invalid version string: "{}"'.format(version))
-        if not _is_valid_version(version):
+        if not cls.is_valid(version):
             raise ValueError('Invalid version string: "{}"'.format(version))
 
         if ":" in version:
@@ -144,6 +153,10 @@ class Version(object):
             revision = "0"
         return cls(epoch=epoch, upstream=upstream, revision=revision)
 
+    @classmethod
+    def is_valid(cls, version):
+        return is_valid_debian_version(version)
+
     def compare(self, other_version):
         return compare_versions(self, other_version)
 
@@ -154,7 +167,7 @@ class Version(object):
         return self.epoch, self.upstream, self.revision
 
 
-_is_valid_version = re.compile(
+is_valid_debian_version = re.compile(
     r"^"
     # epoch must start with a digit
     r"(\d+:)?"
@@ -163,12 +176,10 @@ _is_valid_version = re.compile(
     r"("
     # upstream  can contain only alphanumerics and the characters . + -
     # ~ (full stop, plus, hyphen, tilde)
-    # we are adding the extra check that it must end with alphanum
-    r"[A-Za-z0-9\.\+\-\~]*[A-Za-z0-9]"
+    r"[A-Za-z0-9\.\+\~\-]+"
     r"|"
-    # If there is no debian_revision then hyphens are not allowed.
-    # we are adding the extra check that it must end with alphanum
-    r"[A-Za-z0-9\.\+\~]*[A-Za-z0-9]-[A-Za-z0-9\+\.\~]*[A-Za-z0-9]"
+    # If there is no debian_revision then hyphens are not allowed in version.
+    r"[A-Za-z0-9\.\+\~]+-[A-Za-z0-9\+\.\~]+"
     r")?"
     r"$"
 ).match
@@ -187,15 +198,14 @@ def eval_constraint(version1, operator, version2):
     result = compare_versions(version1, version2)
     # See https://www.debian.org/doc/debian-policy/ch-relationships.html#syntax-of-relationship-fields
     operators = {
-        "<=": operator_module.le,
-        # legacy for compat
-        "<": operator_module.le,
-        ">=": operator_module.ge,
-        # legacy for compat
-        ">": operator_module.ge,
         "<<": operator_module.lt,
-        ">>": operator_module.gt,
+        "<=": operator_module.le,
         "=": operator_module.eq,
+        ">=": operator_module.ge,
+        ">>": operator_module.gt,
+        # legacy for compat
+        "<": operator_module.lt,
+        ">": operator_module.gt,
     }
 
     try:

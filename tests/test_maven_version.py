@@ -620,9 +620,9 @@ class TestVersionRange(unittest.TestCase):
         assert 1 < vr1
 
     def test_str(self):
-        for input in ("[1.0,2.0]", "1.0"):
-            actual = str(VersionRange(input))
-            assert input == actual, "VersionRange(%s) == %s, wanted %s" % (input, actual, input)
+        for inp in ("[1.0,2.0]", "1.0"):
+            actual = str(VersionRange(inp))
+            assert inp == actual, "VersionRange(%s) == %s, wanted %s" % (inp, actual, inp)
 
     def test_fromversion(self):
         v = Version("1.0")

@@ -1,0 +1,8 @@
+about_resource: test_gem.py
+license_expression: apache-2.0
+download_url: https://raw.githubusercontent.com/coi-gov-pl/puppeter/develop/tests/domain/model/test_gemrequirement.py
+copyright: Copyright (c) Center for Information Technology http://coi.gov.pl
+package_url: pkg:pypi/puppeter@0.8.3#tests/domain/model/test_gemrequirement.py
+notes: this subset of tests has been modified to tests version comparison and parsing
+homepage_url: https://github.com/coi-gov-pl/puppeter
+notice_file: test_gem.py.NOTICE

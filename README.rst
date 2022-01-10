@@ -66,18 +66,20 @@ For each scheme, **univers** provides an implementation for:
 version range syntax. It can parse and convert an existing native version range
 strings to this unified syntax. For example, this means:
 
-- converting ">1.2.3" as used in a Python package into ``vers:pypi/>1.2.3``,
+- converting ">=1.2.3" as used in a Python package into ``vers:pypi/>=1.2.3``,
 
-- or converting "^1.0.2" as used in an npm package dependency declartion into
-  ``vers:npm/>=1.0.2,<2.0.0``
+- or converting "^1.0.2" as used in an npm package dependency declaration into
+  ``vers:npm/>=1.0.2|<2.0.0``
 
 The supported package ecosystems versioning schemes and underlying libraries
 include:
 
 - npm that use the "node-semver" ranges notation and the semver versions syntax
-  This is supported in part by the `semantic_version <https://github.com/rbarrois/python-semanticversion>`_ library.
+  This is supported in part by the `semantic_version
+  <https://github.com/rbarrois/python-semanticversion>`_ library.
 
-- pypi: handled by Python's packaging library and the standard ``packaging.version`` module.
+- pypi: handled by Python's packaging library and the standard 
+  ``packaging.version`` module.
 
 - Rubygems which use a semver-like but not-quite-semver scheme and there can be
   commonly more than three version segments.
@@ -85,21 +87,28 @@ include:
   different operators and slightly different semantics: for instance it uses "~>"
   as a pessimistic operator and supports exclusion with != and does not support
   "OR" between constraints (that it call requirements).
+  Gem are handled by Python port of the Rubygems requirements and version
+  handling code from the `puppeteer tool
+  <https://github.com/nexB/univers/blob/main/src/univers/debian.py.ABOUT>`_
 
-- debian: handled by the  `debian-inspector <https://github.com/nexB/univers/blob/main/src/univers/debian.py.ABOUT>`_
-  library.
+- debian: handled by the  `debian-inspector library
+  <https://github.com/nexB/univers/blob/main/src/univers/debian.py.ABOUT>`_.
 
-- maven: handled by the embedded `pymaven <https://github.com/nexB/univers/blob/main/src/univers/pymaven.py.ABOUT>`_ library.
+- maven: handled by the embedded `pymaven library
+  <https://github.com/nexB/univers/blob/main/src/univers/pymaven.py.ABOUT>`_.
 
-- rpm: handled by the embedded `rpm_vercmp <https://github.com/nexB/univers/blob/main/src/univers/rpm.py.ABOUT>`_ library.
+- rpm: handled by the embedded `rpm_vercmp library
+  <https://github.com/nexB/univers/blob/main/src/univers/rpm.py.ABOUT>`_.
 
 - golang (using semver)
 
 - PHP composer
 
-- ebuild/gentoo: handled by the embedded `gentoo_vercmp <https://github.com/nexB/univers/blob/main/src/univers/gentoo.py.ABOUT>`_ module.
+- ebuild/gentoo: handled by the embedded `gentoo_vercmp module
+  <https://github.com/nexB/univers/blob/main/src/univers/gentoo.py.ABOUT>`_.
 
-- arch linux : handled by the embedded `arch utility borrowed from msys2 <https://github.com/nexB/univers/blob/main/src/univers/arch.py.ABOUT>`_ module.
+- arch linux: handled by the embedded `arch utility module borrowed from msys2
+  <https://github.com/nexB/univers/blob/main/src/univers/arch.py.ABOUT>`_.
 
 The level of support for each ecosystem may not be even for now and new schemes
 and support for more package types are implemented on a continuous basis.
@@ -140,7 +149,7 @@ Normalize a version range from an npm:
 
     from univers.version_range import NpmVersionRange
     range = NpmVersionRange.from_native("^1.0.2")
-    assert str(range) == "vers:npm/>=1.0.2,<2.0.0"
+    assert str(range) == "vers:npm/>=1.0.2|<2.0.0"
 
 
 Test if a version is within or outside a version range:
