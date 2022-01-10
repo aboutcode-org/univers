@@ -40,10 +40,13 @@ class VersionRange:
 
     # A list of lists of VersionConstraint that are signposts on the versions
     # timeline
-    constraints = attr.ib(type=tuple, converter=tuple, default=attr.Factory(tuple))
+    constraints = attr.ib(type=tuple, default=attr.Factory(tuple))
 
     def __attrs_post_init__(self, *args, **kwargs):
-        self.constraints.sort()
+        constraints = tuple(sorted(self.constraints))
+        # Notes: setattr is used because this is an immutable frozen instance.
+        # See https://www.attrs.org/en/stable/init.html?#post-init
+        object.__setattr__(self, "constraints", constraints)
 
     @classmethod
     def from_native(cls, string):
