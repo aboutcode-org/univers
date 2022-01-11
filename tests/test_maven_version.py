@@ -219,7 +219,7 @@ class TestVersion(unittest.TestCase):
             ("1-final", (1,)),
             ("1.0-CR", (1, ("rc",))),
             ("1-cr", (1, ("rc",))),
-            # test some transistion
+            # test some transition
             ("1.0-alpha1", (1, ("alpha", (1,)))),
             ("1.0-alpha2", (1, ("alpha", (2,)))),
             ("1.0.0alpha1", (1, ("alpha", (1,)))),

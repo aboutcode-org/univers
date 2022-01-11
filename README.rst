@@ -10,7 +10,7 @@ univers: mostly universal version and version ranges comparison and conversion
    :target: https://www.python.org/downloads/release/python-380/
 
 
-**univers** was born out of the need for a mostly univeral way to store version
+**univers** was born out of the need for a mostly universal way to store version
 ranges and to compare two software package versions in VulnerableCode.
 
 Package version ranges and version constraints are useful and essential:
@@ -36,7 +36,7 @@ ecosystem.
 
 **univers** is different:
 
-- It tracks each ecosystem versionning scheme and how two versions are compared.
+- It tracks each ecosystem versioning scheme and how two versions are compared.
 
 - It support a growing number of package ecosystems versioning in a single
   library.
@@ -52,7 +52,7 @@ How does **univers** work ?
 ============================
 
 **univers** wraps, embeds and implements multiple version comparison libraries,
-each focused on a specific ecosystem versionning scheme.
+each focused on a specific ecosystem versioning scheme.
 
 For each scheme, **univers** provides an implementation for:
 

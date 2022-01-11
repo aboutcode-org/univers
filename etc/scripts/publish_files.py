@@ -131,7 +131,7 @@ def create_or_update_release_and_upload_directory(
 
 
 TOKEN_HELP = (
-    "The Github personal acess token is used to authenticate API calls. "
+    "The Github personal access token is used to authenticate API calls. "
     "Required unless you set the GITHUB_TOKEN environment variable as an alternative. "
     "See for details: https://github.com/settings/tokens and "
     "https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token"

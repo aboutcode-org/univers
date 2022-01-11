@@ -20,7 +20,7 @@ from univers.version_constraint import contains_version
 @attr.s(frozen=True, order=False, eq=True, hash=True)
 class VersionRange:
     """
-    Base version range class. Subclasses must provide implememt.
+    Base version range class. Subclasses must provide implement.
     A VersionRange represents a list of constraints on the versions "timeline"
     of a package.
     """
@@ -67,7 +67,7 @@ class VersionRange:
     def to_native(self, *args, **kwargs):
         """
         Return a native range string for this VersionRange. Subclasses can
-        implement. Opetional ``args`` and ``kwargs`` allow subclass to require
+        implement. Optional ``args`` and ``kwargs`` allow subclass to require
         extra arguments (such as a package name that some scheme may require
         like for deb and rpm.)
         """
@@ -803,7 +803,7 @@ class NginxVersionRange(VersionRange):
                     vend = VersionConstraint(comparator="<", version=end_version)
                     constraints.extend([vstart, vend])
                 else:
-                    # mainline branch ranges are resolved to a singel constraint
+                    # mainline branch ranges are resolved to a single constraint
                     version = semantic_version.Version.coerce(vs)
                     constraint = VersionConstraint(comparator=">=", version=version)
                     constraints.append(constraint)

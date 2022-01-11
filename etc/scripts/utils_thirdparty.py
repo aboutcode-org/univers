@@ -175,7 +175,7 @@ def fetch_wheels(
     Download all of the wheel of packages listed in the ``requirements_file``
     requirements file into ``dest_dir`` directory.
 
-    Only get wheels for the ``environment`` Enviromnent constraints. If the
+    Only get wheels for the ``environment`` Environment constraints. If the
     provided ``environment`` is None then the current Python interpreter
     environment is used implicitly.
 
@@ -1464,7 +1464,7 @@ class PypiPackage(NameVer):
     ):
         """
         Download a binary wheel of this package matching the ``environment``
-        Enviromnent constraints into ``dest_dir`` directory.
+        Environment constraints into ``dest_dir`` directory.
 
         Return the wheel filename if it was fetched, None otherwise.
 
@@ -2895,7 +2895,7 @@ def check_romp_is_configured():
         raise Exception(
             "ROMP_BUILD_REQUEST_URL, ROMP_DEFINITION_ID, "
             "ROMP_PERSONAL_ACCESS_TOKEN and ROMP_USERNAME "
-            "are required enironment variables."
+            "are required environment variables."
         )
 
 

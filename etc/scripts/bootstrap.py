@@ -87,7 +87,7 @@ def bootstrap(
     build_remotely=False,
 ):
     """
-    Boostrap a thirdparty Python packages directory from pip requirements.
+    Bootstrap a thirdparty Python packages directory from pip requirements.
 
     Fetch or build to THIRDPARTY_DIR all the wheels and source distributions for
     the pip ``--requirement-file`` requirements FILE(s). Build wheels compatible
