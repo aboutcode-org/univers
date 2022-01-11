@@ -41,7 +41,7 @@ class TestVersionRange(TestCase):
         version_range = VersionRange.from_string(vers)
         assert version_range.scheme == "pypi"
         # note the sorting taking place
-        expected = [
+        expected = (
             VersionConstraint(comparator="=", version=PypiVersion(string="0.0.0")),
             VersionConstraint(comparator="=", version=PypiVersion(string="0.0.1")),
             VersionConstraint(comparator="=", version=PypiVersion(string="0.0.2")),
@@ -49,7 +49,7 @@ class TestVersionRange(TestCase):
             VersionConstraint(comparator="=", version=PypiVersion(string="0.0.4")),
             VersionConstraint(comparator="=", version=PypiVersion(string="0.0.5")),
             VersionConstraint(comparator="=", version=PypiVersion(string="0.0.6")),
-        ]
+        )
         assert version_range.constraints == expected
         # note the sorting taking place
         assert str(version_range) == "vers:pypi/0.0.0|0.0.1|0.0.2|0.0.3|0.0.4|0.0.5|0.0.6"
@@ -146,7 +146,7 @@ class TestVersionRange(TestCase):
         gem_range = "~>2.0.8"
         version_range = GemVersionRange.from_native(gem_range)
         assert version_range.to_string() == "vers:gem/>=2.0.8|<2.1"
-        assert version_range.constraints == [
+        assert version_range.constraints == (
             VersionConstraint(comparator=">=", version=RubygemsVersion(string="2.0.8")),
             VersionConstraint(comparator="<", version=RubygemsVersion(string="2.1")),
-        ]
+        )
