@@ -38,7 +38,7 @@ class VersionRange:
     # PypiVersion. Subclasses MUST provide this.
     version_class = None
 
-    # A list of lists of VersionConstraint that are signposts on the versions
+    # A tuple of VersionConstraint that are signposts on the versions
     # timeline
     constraints = attr.ib(type=tuple, default=attr.Factory(tuple))
 
