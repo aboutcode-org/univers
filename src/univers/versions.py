@@ -22,7 +22,7 @@ from univers.utils import remove_spaces
 Version classes encapsulating the details of each version syntax.
 For instance semver is a version syntax. Python and Debian use another syntax.
 
-Each subclass primary responsability to is be comparable and orderable
+Each subclass primary responsibility to is be comparable and orderable
 """
 
 # TODO: Add mozilla versions https://github.com/mozilla-releng/mozilla-version
@@ -99,7 +99,7 @@ class Version:
 
     def satisfies(self, constraint):
         """
-        Return True is this Version satifies the ``constraint``
+        Return True is this Version satisfies the ``constraint``
         VersionConstraint. Satisfying means that this version is "within" the
         ``constraint``.
         """
@@ -155,7 +155,7 @@ class PypiVersion(Version):
     PEP 440 as implemented in packaging with fallback to "legacy"
     """
 
-    # TODO: ensure we deal with tripple equal
+    # TODO: ensure we deal with triple equal
 
     @classmethod
     def build_value(cls, string):

@@ -5,7 +5,7 @@
 # Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
 # notes: This has been substantially modified and enhanced from the original
-# puppeteer code to extract the Ruby version hanlding code.
+# puppeteer code to extract the Ruby version handling code.
 
 from univers.gem import GemRequirement
 from univers.gem import GemVersion

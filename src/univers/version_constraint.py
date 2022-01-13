@@ -254,7 +254,7 @@ class VersionConstraint:
     def simplify(cls, constraints):
         """
         Return a new simplified ``constraints`` list with duplicated constraints
-        removed. This includes removing exact duplicates adn redundant
+        removed. This includes removing exact duplicates and redundant
         constraints.
         """
         constraints = deduplicate(constraints)

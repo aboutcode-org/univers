@@ -118,7 +118,7 @@ See each command line --help option for details.
 * (TODO) **add_package.py** will add or update a Python package including wheels,
   sources and ABOUT files and this for multiple Python version and OSes(for use
   with upload_packages.py afterwards) You will need an Azure personal access
-  token for buidling binaries and an optional DejaCode API key to post and fetch
+  token for building binaries and an optional DejaCode API key to post and fetch
   new package versions there. TODO: explain how we use romp
 
 

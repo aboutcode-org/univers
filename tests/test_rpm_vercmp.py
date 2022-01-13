@@ -22,7 +22,7 @@ def parse_rpmvercmp_tests(fobj, with_buggy_comparisons=True):
     """
     Yield triples (version1, version2, comparison result) describing the RPM
     version comparison tests found in the rpmvercmp.at test file-like  object at
-    ``fobj`` Optionally includ "buggy" upstream tests.
+    ``fobj`` Optionally include "buggy" upstream tests.
     """
     for line in fobj:
         line = line.strip()

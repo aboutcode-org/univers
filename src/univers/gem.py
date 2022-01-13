@@ -9,7 +9,7 @@
 # Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
 # notes: This has been substantially modified and enhanced from the original
-# puppeteer code to extract the Ruby version hanlding code.
+# puppeteer code to extract the Ruby version handling code.
 # This code is in turn originally based and updated from the Rubygems code
 # Originally from https://github.com/rubygems/rubygems and
 # https://github.com/coi-gov-pl/puppeter
