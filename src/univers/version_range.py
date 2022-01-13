@@ -783,8 +783,8 @@ class NginxVersionRange(VersionRange):
             if "-" in clauses:
                 # dash range
                 start, _, end = clauses.partition("-")
-                start_version = semantic_version.Version.coerce(start)
-                end_version = semantic_version.Version.coerce(end)
+                start_version = cls.version_class(start)
+                end_version = cls.version_class(end)
                 vstart = VersionConstraint(comparator=">=", version=start_version)
                 vend = VersionConstraint(comparator="<=", version=end_version)
                 constraints.extend([vstart, vend])
@@ -792,25 +792,25 @@ class NginxVersionRange(VersionRange):
             elif "+" in clauses:
                 # suffixed version
                 vs = clauses.rstrip("+")
-                version = semantic_version.Version.coerce(vs)
-                is_stable = is_even(version.minor)
+                version = cls.version_class(vs)
+                is_stable = is_even(version.value.minor)
 
                 if is_stable:
                     # we have a start and end in stable ranges
-                    start_version = semantic_version.Version.coerce(vs)
-                    end_version = start_version.next_minor()
+                    start_version = cls.version_class(vs)
+                    end_version = cls.version_class(str(start_version.value.next_minor()))
                     vstart = VersionConstraint(comparator=">=", version=start_version)
                     vend = VersionConstraint(comparator="<", version=end_version)
                     constraints.extend([vstart, vend])
                 else:
                     # mainline branch ranges are resolved to a single constraint
-                    version = semantic_version.Version.coerce(vs)
+                    version = cls.version_class(vs)
                     constraint = VersionConstraint(comparator=">=", version=version)
                     constraints.append(constraint)
 
             else:
                 # plain single version
-                version = semantic_version.Version.coerce(clauses)
+                version = cls.version_class(clauses)
                 constraint = VersionConstraint(comparator="=", version=version)
                 constraints.append(constraint)
 
