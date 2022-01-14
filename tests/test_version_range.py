@@ -205,7 +205,7 @@ def test_all_schemes_are_tested_for_round_tripping(self):
 
 
 @pytest.mark.parametrize(
-    "scheme, native_ranges", 
+    "scheme, native_ranges",
     VERSION_RANGE_TESTS_BY_SCHEME.items(),
 )
 def test_from_native_and_from_string_round_trip(self, scheme, native_ranges):
