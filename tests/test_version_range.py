@@ -192,17 +192,26 @@ class TestVersionRange(TestCase):
 
         SemverVersion("1.0.0") in VersionRange.from_string("vers:nginx/*")
 
-@pytest.mark.parametrize("scheme, range_class", RANGE_CLASS_BY_SCHEMES.items())
-class TestVersionRangeImplementations:
-    VERSION_RANGES_BY_SCHEMES = {
-        "nginx": ["0.8.40+", "0.7.52-0.8.39", "0.9.10", "1.5.0+, 1.4.1+"],
-    }
+VERSION_RANGE_TESTS_BY_SCHEME = {
+    "nginx": ["0.8.40+", "0.7.52-0.8.39", "0.9.10", "1.5.0+, 1.4.1+"],
+}
 
-    def test_from_native_and_from_string_equality(self, scheme, range_class):
-        if scheme not in self.VERSION_RANGES_BY_SCHEMES:
-            pytest.skip(f"No {scheme} in VERSION_RANGES_BY_SCHEMES")
 
-        for rng in self.VERSION_RANGES_BY_SCHEMES.get(scheme, []):
-            rng_from_native = range_class.from_native(rng)
-            rng_from_string = range_class.from_string(rng_from_native.to_string())
-            assert rng_from_native == rng_from_string
+@pytest.mark.xfail("Not all schemes are implemented yet")
+def test_all_schemes_are_tested_for_round_tripping(self):
+
+    for scheme in RANGE_CLASS_BY_SCHEMES:
+        VERSION_RANGE_TESTS_BY_SCHEME[scheme]
+
+
+@pytest.mark.parametrize(
+    "scheme, native_ranges", 
+    VERSION_RANGE_TESTS_BY_SCHEME.items(),
+)
+def test_from_native_and_from_string_round_trip(self, scheme, native_ranges):
+
+    range_class = RANGE_CLASS_BY_SCHEMES[scheme]
+    for rng in native_ranges:
+        from_native = range_class.from_native(rng)
+        from_string = range_class.from_string(from_native.to_string())
+        assert from_native == from_string
