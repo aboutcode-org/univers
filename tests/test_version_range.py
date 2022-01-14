@@ -150,3 +150,8 @@ class TestVersionRange(TestCase):
             VersionConstraint(comparator=">=", version=RubygemsVersion(string="2.0.8")),
             VersionConstraint(comparator="<", version=RubygemsVersion(string="2.1")),
         )
+
+    def test_VersionRange_contains_works_for_star_range(self):
+        from univers.versions import SemverVersion
+
+        SemverVersion("1.0.0") in VersionRange.from_string("vers:nginx/*")

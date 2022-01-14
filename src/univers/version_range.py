@@ -114,7 +114,9 @@ class VersionRange:
         if constraints.startswith("*"):
             if constraints != "*":
                 raise ValueError(f"{vers!r} contains an invalid '*' constraint.")
-            return range_class([VersionConstraint.from_string(string="*", version_class=None)])
+            return range_class(
+                [VersionConstraint.from_string(string="*", version_class=version_class)]
+            )
 
         parsed_constraints = []
 
@@ -774,7 +776,9 @@ class NginxVersionRange(VersionRange):
         """
         cleaned = remove_spaces(string).lower()
         if cleaned == "all":
-            return cls(constraints=[VersionConstraint(comparator="*")])
+            return cls(
+                constraints=[VersionConstraint(comparator="*", version_class=cls.version_class)]
+            )
 
         constraints = []
 

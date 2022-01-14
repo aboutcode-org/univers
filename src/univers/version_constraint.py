@@ -66,11 +66,14 @@ class VersionConstraint:
     # one of the COMPARATORS
     comparator = attr.ib(type=str, default="=")
 
-    # a Version subclass instance or None
+    # a Version subclass instance
     version = attr.ib(type=Version, default=None)
 
     # a function for the comparator
     comp_operator = attr.ib(default=None, repr=False)
+
+    # a Version subclass
+    version_class = attr.ib(type=Version, default=None, repr=False)
 
     def __attrs_post_init__(self):
         # Notes: setattr is used because this is an immutable frozen instance.
@@ -80,15 +83,26 @@ class VersionConstraint:
         except KeyError as e:
             raise ValueError(f"Unknown comparator: {self.comparator}") from e
 
+        if self.version and not isinstance(self.version, Version):
+            raise TypeError(
+                f"version must be a 'Version' instance and not: {self.version.__class__!r}"
+            )
+
+        if not self.version_class:
+            if self.version:
+                object.__setattr__(self, "version_class", self.version.__class__)
+            else:
+                raise ValueError("Cannot build a VersionConstraint without a version class")
+
     def __str__(self):
         """
         Return a string representing this constraint.
         For example::
-        >>> assert str(VersionConstraint(comparator=">=", version="2.3")) == ">=2.3"
-        >>> assert str(VersionConstraint(comparator="*")) == "*"
-        >>> assert str(VersionConstraint(comparator="<", version="2.3")) == "<2.3"
-        >>> assert str(VersionConstraint(comparator="=", version="2.3.0")) == "2.3.0"
-        >>> assert str(VersionConstraint(version="2.3.0")) == "2.3.0"
+        >>> assert str(VersionConstraint(comparator=">=", version=Version("2.3"))) == ">=2.3"
+        >>> assert str(VersionConstraint(comparator="*", version_class=Version)) == "*"
+        >>> assert str(VersionConstraint(comparator="<", version=Version("2.3"))) == "<2.3"
+        >>> assert str(VersionConstraint(comparator="=", version=Version("2.3.0"))) == "2.3.0"
+        >>> assert str(VersionConstraint(version=Version("2.3.0"))) == "2.3.0"
         """
         if self.comparator == "*":
             return "*"
@@ -143,7 +157,7 @@ class VersionConstraint:
             version = None
         else:
             version = version_class(version)
-        return cls(comparator, version)
+        return cls(comparator=comparator, version=version, version_class=version_class)
 
     @staticmethod
     def split(string):
@@ -210,11 +224,10 @@ class VersionConstraint:
         >>> assert v24 in VersionConstraint(comparator="<=", version=v24)
         >>> assert v24 not in VersionConstraint(comparator="<", version=v24)
         """
-
-        if not isinstance(version, self.version.__class__):
+        if not isinstance(version, self.version_class):
             raise ValueError(
                 f"Cannot compare {version.__class__!r} instance "
-                f"with {self.version.__class__!r} instance."
+                f"with {self.version_class!r} instance."
             )
         return self.comp_operator(version, self.version)
 
