@@ -192,23 +192,26 @@ class TestVersionRange(TestCase):
 
         SemverVersion("1.0.0") in VersionRange.from_string("vers:nginx/*")
 
+
 VERSION_RANGE_TESTS_BY_SCHEME = {
     "nginx": ["0.8.40+", "0.7.52-0.8.39", "0.9.10", "1.5.0+, 1.4.1+"],
 }
 
 
-@pytest.mark.xfail("Not all schemes are implemented yet")
-def test_all_schemes_are_tested_for_round_tripping(self):
-
+@pytest.mark.xfail(reason="Not all schemes are implemented yet")
+def test_all_schemes_are_tested_for_round_tripping():
+    untested_schemes = []
     for scheme in RANGE_CLASS_BY_SCHEMES:
-        VERSION_RANGE_TESTS_BY_SCHEME[scheme]
+        if scheme not in VERSION_RANGE_TESTS_BY_SCHEME:
+            untested_schemes.append(scheme)
+    assert not untested_schemes
 
 
 @pytest.mark.parametrize(
     "scheme, native_ranges",
     VERSION_RANGE_TESTS_BY_SCHEME.items(),
 )
-def test_from_native_and_from_string_round_trip(self, scheme, native_ranges):
+def test_from_native_and_from_string_round_trip(scheme, native_ranges):
 
     range_class = RANGE_CLASS_BY_SCHEMES[scheme]
     for rng in native_ranges:
