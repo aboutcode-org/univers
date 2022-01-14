@@ -5,11 +5,13 @@
 # Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
 from unittest import TestCase
+import pytest
 
 from univers.version_constraint import VersionConstraint
 from univers.version_range import GemVersionRange
 from univers.version_range import PypiVersionRange
 from univers.version_range import VersionRange
+from univers.version_range import RANGE_CLASS_BY_SCHEMES
 from univers.versions import PypiVersion
 from univers.versions import RubygemsVersion
 
@@ -189,3 +191,30 @@ class TestVersionRange(TestCase):
         from univers.versions import SemverVersion
 
         SemverVersion("1.0.0") in VersionRange.from_string("vers:nginx/*")
+
+
+VERSION_RANGE_TESTS_BY_SCHEME = {
+    "nginx": ["0.8.40+", "0.7.52-0.8.39", "0.9.10", "1.5.0+, 1.4.1+"],
+}
+
+
+@pytest.mark.xfail(reason="Not all schemes are implemented yet")
+def test_all_schemes_are_tested_for_round_tripping():
+    untested_schemes = []
+    for scheme in RANGE_CLASS_BY_SCHEMES:
+        if scheme not in VERSION_RANGE_TESTS_BY_SCHEME:
+            untested_schemes.append(scheme)
+    assert not untested_schemes
+
+
+@pytest.mark.parametrize(
+    "scheme, native_ranges",
+    VERSION_RANGE_TESTS_BY_SCHEME.items(),
+)
+def test_from_native_and_from_string_round_trip(scheme, native_ranges):
+
+    range_class = RANGE_CLASS_BY_SCHEMES[scheme]
+    for rng in native_ranges:
+        from_native = range_class.from_native(rng)
+        from_string = range_class.from_string(from_native.to_string())
+        assert from_native == from_string
