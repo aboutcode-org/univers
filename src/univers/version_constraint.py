@@ -444,19 +444,19 @@ def contains_version(version, constraints):
     if len(constraints) == 1:
         return version in constraints[0]
 
-    # If the "tested version" is equal to the any of the constraint version
-    # where the constraint comparator is for equality (any of "=", "<=", or ">=")
-    # then the "tested version" is in the range. Check is finished.
-    for constraint in constraints:
-        if "=" in constraint.comparator and version == constraint.version:
-            return True
-
     # If the "tested version" is equal to the any of the constraint version where
     # the constraint comparator is "=!" then the "tested version" is NOT in the
     # range. Check is finished.
     for constraint in constraints:
         if "!=" in constraint.comparator and version == constraint.version:
             return False
+
+    # If the "tested version" is equal to the any of the constraint version
+    # where the constraint comparator is for equality (any of "=", "<=", or ">=")
+    # then the "tested version" is in the range. Check is finished.
+    for constraint in constraints:
+        if "=" in constraint.comparator and version == constraint.version:
+            return True
 
     # Split the constraint list in two sub lists:
     #   a first list where the comparator is "=" or "!="
@@ -487,13 +487,9 @@ def contains_version(version, constraints):
         # and the "tested version" is greater than the current version
         # and the "tested version" is less than the next version
         # then the "tested version" is IN the range. Check is finished.
-        if (
-            cur_comp in (">", ">=")
-            and nxt_comp in ("<", "<=")
-            and version > cur_constraint.version
-            and version < nxt_constraint.version
-        ):
-            return True
+        if cur_comp in (">", ">=") and nxt_comp in ("<", "<="):
+            if version > cur_constraint.version and version < nxt_constraint.version:
+                return True
 
         # If current comparator is "<" or <=" and next comparator is ">" or >="
         # then these versions are out the range. Continue to the next iteration.
