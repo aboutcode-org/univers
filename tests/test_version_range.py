@@ -27,14 +27,48 @@ class TestVersionRange(TestCase):
         # note the sorting taking place
         assert str(version_range) == "vers:pypi/>=0.0.0|0.0.1|0.0.2|0.0.3|0.0.4|0.0.5|0.0.6"
 
-    def test_VersionRange_not_contains(self):
+    def test_VersionRange_pypi_does_not_contain_basic(self):
         vers = "vers:pypi/0.0.2|0.0.6|>=0.0.0|0.0.1|0.0.4|0.0.5|0.0.3"
         version_range = VersionRange.from_string(vers)
         assert not version_range.contains(PypiVersion("2.0.3"))
 
-    def test_VersionRange_contains(self):
+    def test_VersionRange_does_not_contain_version_after_range(self):
+        vers = "vers:pypi/>=1.0.0|<=2.0.0"
+        version_range = VersionRange.from_string(vers)
+        assert not version_range.contains(PypiVersion("2.0.3"))
+
+    def test_VersionRange_does_not_contain_version_before_range(self):
+        vers = "vers:pypi/>=1.0.0|<=2.0.0"
+        version_range = VersionRange.from_string(vers)
+        assert not version_range.contains(PypiVersion("0.0.9"))
+
+    def test_VersionRange_does_not_contain_version_in_between(self):
+        vers = "vers:pypi/<=1.0.0|>=2.0.0"
+        version_range = VersionRange.from_string(vers)
+        assert not version_range.contains(PypiVersion("1.5"))
+
+    def test_VersionRange_does_not_contain_version_excluded(self):
+        vers = "vers:pypi/>=3.0.0|!=2.0.3"
+        version_range = VersionRange.from_string(vers)
+        assert not version_range.contains(PypiVersion("2.0.3"))
+
+    def test_VersionRange_contains_version_after(self):
         version_range = VersionRange.from_string("vers:pypi/>0.0.2")
         assert PypiVersion("0.0.3") in version_range
+
+    def test_VersionRange_contains_version_before(self):
+        version_range = VersionRange.from_string("vers:pypi/<0.0.2")
+        assert PypiVersion("0.0.0.1") in version_range
+
+    def test_VersionRange_contains_version_included(self):
+        vers = "vers:pypi/>=3.0.0|2.0.3"
+        version_range = VersionRange.from_string(vers)
+        assert version_range.contains(PypiVersion("2.0.3"))
+
+    def test_VersionRange_contains_version_in_between(self):
+        vers = "vers:pypi/>=1.0.0|<=2.0.0"
+        version_range = VersionRange.from_string(vers)
+        assert version_range.contains(PypiVersion("1.5"))
 
     def test_VersionRange_from_string_pypi(self):
         vers = "vers:pypi/0.0.2|0.0.6|0.0.0|0.0.1|0.0.4|0.0.5|0.0.3"
