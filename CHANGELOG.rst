@@ -3,16 +3,16 @@ Release notes
 
 ### Version v31.0.0
 
-- Implement the new "vers" spec. This is a major incomplatible change.
-- Add support for nginx
-
 
 ### Version v30.0.0
 
+- Implement the new "vers" spec. This is a major incomplatible change.
+
+- Add support for nginx version scheme
 - Switching back to semver
 - Improve origin and license documentation
 - Add tests for carets in RPMs
-- Format, stremmline and refactor code
+- Format, streamline and refactor code
 - Improve testing
 
 
