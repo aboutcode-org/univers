@@ -9,6 +9,7 @@ import pytest
 
 from univers.version_constraint import VersionConstraint
 from univers.version_range import GemVersionRange
+from univers.version_range import InvalidVersionRange
 from univers.version_range import PypiVersionRange
 from univers.version_range import VersionRange
 from univers.version_range import RANGE_CLASS_BY_SCHEMES
@@ -190,7 +191,23 @@ class TestVersionRange(TestCase):
     def test_VersionRange_contains_works_for_star_range(self):
         from univers.versions import SemverVersion
 
-        SemverVersion("1.0.0") in VersionRange.from_string("vers:nginx/*")
+        assert SemverVersion("1.0.0") in VersionRange.from_string("vers:nginx/*")
+
+    def test_PypiVersionRange_raises_ivr_for_unsupported_ranges(self):
+        try:
+            PypiVersionRange.from_native(
+                "~= 0.9, >= 1.0, != 1.3.4.*, < 2.0, ~= 1.3.4.*, ===1.0, ==1.*"
+            )
+            raise Exception("Exception not raised")
+        except InvalidVersionRange as ivre:
+            assert str(ivre).startswith("Unsupported character")
+
+    def test_PypiVersionRange_raises_ivr_for_invalid_ranges(self):
+        try:
+            PypiVersionRange.from_native("~= 1.3, ===1.0, ==1.*")
+            raise Exception("Exception not raised")
+        except InvalidVersionRange as ivre:
+            assert str(ivre).startswith("Unsupported character")
 
 
 VERSION_RANGE_TESTS_BY_SCHEME = {
