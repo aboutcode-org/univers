@@ -6,6 +6,7 @@
 
 import attr
 import semantic_version
+from packaging.specifiers import InvalidSpecifier
 from packaging.specifiers import SpecifierSet
 from semantic_version.base import AllOf
 from semantic_version.base import AnyOf
@@ -15,6 +16,12 @@ from univers import versions
 from univers.utils import remove_spaces
 from univers.version_constraint import VersionConstraint
 from univers.version_constraint import contains_version
+
+
+class InvalidVersionRange(Exception):
+    """
+    Error for scheme-specific version syntax is not supported or not valid
+    """
 
 
 @attr.s(frozen=True, order=False, eq=True, hash=True)
@@ -494,8 +501,13 @@ class PypiVersionRange(VersionRange):
         ">=": ">=",
         "<": "<",
         ">": ">",
+        # per https://www.python.org/dev/peps/pep-0440/#compatible-release
+        # For a given release identifier V.N, the compatible release clause is
+        # approximately equivalent to the pair of comparison clauses:
+        # >= V.N, == V.*
         "~=": None,
-        # 01.01.01 is NOT equal to 1.1.1 using === which is strict string equality
+        # 01.01.01 is NOT equal to 1.1.1 using === which is strict string
+        # equality this is a rare and eventually non-suggested approach
         "===": None,
     }
 
@@ -503,22 +515,52 @@ class PypiVersionRange(VersionRange):
     def from_native(cls, string):
         """
         Return a VersionRange built from a PyPI PEP440 version specifiers ``string``.
+        Raise an a univers.versions.InvalidVersion
         """
-        # TODO: there is a complication with environment markers that are not yet supported
+        # TODO: environment markers are yet supported
+        # TODO: handle  .* version, ~= and === operators
 
-        # TODO: handle ~= and === operators
-        specifiers = SpecifierSet(string)
+        if ";" in string:
+            raise InvalidVersionRange(f"Unsupported PyPI environment marker: {string!r}")
 
-        # In PyPI all constraints apply
+        unsupported_chars = ";<>!=\\/|{}()`?'\"\t\n "
+        if any(c in string for c in unsupported_chars):
+            raise InvalidVersionRange(
+                f"Unsupported character: {unsupported_chars!r} " f"in PyPI version: {string!r}"
+            )
+
+        try:
+            specifiers = SpecifierSet(string)
+        except InvalidSpecifier as e:
+            raise InvalidVersionRange() from e
+
+        # Note that in PyPI all constraints apply
+
         constraints = []
-
+        unsupported_messages = []
         for spec in specifiers:
             operator = spec.operator
             version = spec.version
-            assert isinstance(version, cls.version_class)
-            comparator = cls.vers_by_native_comparators[operator]
-            constraint = VersionConstraint(comparator=comparator, version=version)
-            constraints.append(constraint)
+
+            if operator == "~=" or operator == "===":
+                msg = f"Unsupported PyPI version constraint operator: {spec!r}"
+                unsupported_messages.append(msg)
+
+            if str(version).endswith(".*"):
+                msg = f"Unsupported PyPI version: {spec!r}"
+                unsupported_messages.append(msg)
+
+            try:
+                version = cls.version_class(version)
+                comparator = cls.vers_by_native_comparators[operator]
+                constraint = VersionConstraint(comparator=comparator, version=version)
+                constraints.append(constraint)
+            except:
+                msg = f"Invalid PyPI version: {spec!r}"
+                unsupported_messages.append(msg)
+
+        if unsupported_messages:
+            raise InvalidVersionRange(*unsupported_messages)
 
         return cls(constraints=constraints)
 
