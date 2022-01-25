@@ -13,6 +13,8 @@
 
 from unittest import TestCase
 
+import pytest
+
 import univers.debian as version
 from univers.debian import compare_strings
 from univers.debian import compare_versions
@@ -168,3 +170,7 @@ class DebianVersionTest(TestCase):
         assert compare_versions(u"2:0.0.44-1", u"2:0.0.44-nobin") == -1
         assert compare_versions(u"2:0.0.44-nobin", u"2:0.0.44-1") == 1
         assert compare_versions(u"2:0.0.44-1", u"2:0.0.44-1") == 0
+
+    @pytest.mark.xfail(reason="Not yet supported")
+    def test_can_parse_complex_version_is_not_invalid(self):
+        Version.from_string("1:1.12_1.12.6-1+deb9u1build0.18.04.1")
