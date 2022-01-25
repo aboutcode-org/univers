@@ -85,7 +85,7 @@ class Version:
         Return a normalized version string from ``string ``. Subclass can override.
         """
         # FIXME: Is removing spaces and strip v the right thing to do?
-        return remove_spaces(string).rstrip("v")
+        return remove_spaces(string).rstrip("v ").strip()
 
     @classmethod
     def build_value(self, string):
@@ -152,13 +152,16 @@ class GenericVersion(Version):
 @attr.s(frozen=True, order=False, eq=False, hash=True)
 class PypiVersion(Version):
     """
-    PEP 440 as implemented in packaging with fallback to "legacy"
+    Python PEP 440 version as implemented in packaging with fallback to "legacy"
     """
 
     # TODO: ensure we deal with triple equal
 
     @classmethod
     def build_value(cls, string):
+        """
+        Return a packaging.version.LegacyVersion or packaging.version.Version
+        """
         return packaging_version.Version(string)
 
     @classmethod
