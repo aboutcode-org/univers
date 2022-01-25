@@ -1,6 +1,12 @@
 Release notes
 -------------
 
+### Version v31.0.0
+
+- Implement the new "vers" spec. This is a major incomplatible change.
+- Add support for nginx
+
+
 ### Version v30.0.0
 
 - Switching back to semver
