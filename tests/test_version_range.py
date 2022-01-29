@@ -13,8 +13,10 @@ from univers.version_range import InvalidVersionRange
 from univers.version_range import PypiVersionRange
 from univers.version_range import VersionRange
 from univers.version_range import RANGE_CLASS_BY_SCHEMES
+from univers.version_range import NpmVersionRange
 from univers.versions import PypiVersion
 from univers.versions import RubygemsVersion
+from univers.versions import SemverVersion
 
 
 class TestVersionRange(TestCase):
@@ -209,9 +211,32 @@ class TestVersionRange(TestCase):
         except InvalidVersionRange as ivre:
             assert str(ivre).startswith("Unsupported character")
 
+    def test_NpmVersionRange_from_native_with_compatible_with_version_operator(self):
+        npm_range = "^1.2.9"
+        expected = NpmVersionRange(
+            constraints=(
+                VersionConstraint(comparator=">=", version=SemverVersion(string="1.2.9")),
+                VersionConstraint(comparator="<", version=SemverVersion(string="2.0.0")),
+            )
+        )
+        version_range = NpmVersionRange.from_native(npm_range)
+        assert version_range == expected
+
+    def test_NpmVersionRange_from_native_with_approximately_equal_to_operator(self):
+        npm_range = "~3.8.2"
+        expected = NpmVersionRange(
+            constraints=(
+                VersionConstraint(comparator=">=", version=SemverVersion(string="3.8.2")),
+                VersionConstraint(comparator="<", version=SemverVersion(string="3.9.0")),
+            )
+        )
+        version_range = NpmVersionRange.from_native(npm_range)
+        assert version_range == expected
+
 
 VERSION_RANGE_TESTS_BY_SCHEME = {
     "nginx": ["0.8.40+", "0.7.52-0.8.39", "0.9.10", "1.5.0+, 1.4.1+"],
+    "npm": ["^1.2.9", "~3.8.2", "5.0.0 - 7.2.3", "2.1 || 2.6", "1.1.2 1.2.2", "<=2.1 >=1.1"],
 }
 
 

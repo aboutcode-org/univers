@@ -139,7 +139,7 @@ Compare two native Python versions:
 
 .. code:: python
 
-    from univers.version import PypiVersion
+    from univers.versions import PypiVersion
     assert PypiVersion("1.2.3") < PypiVersion("1.2.4")
 
 
@@ -156,7 +156,7 @@ Test if a version is within or outside a version range:
 
 .. code:: python
 
-    from univers.version import PypiVersion
+    from univers.versions import PypiVersion
     from univers.version_range import VersionRange
 
     range = VersionRange.from_string("vers:pypi/>=1.2.4")
@@ -170,7 +170,7 @@ Development
 
 Run these commands, starting from a git clone of https://github.com/nexB/univers ::
 
-    $ configure --dev
+    $ ./configure --dev
     $ source venv/bin/active
     $ pytest -vvs
 

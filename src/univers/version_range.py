@@ -234,10 +234,10 @@ class NpmVersionRange(VersionRange):
         anyof_constraints = []
         if isinstance(clause, AnyOf):
             for allof_clause in clause.clauses:
-                anyof_constraints.append(get_allof_constraints(cls, allof_clause))
+                anyof_constraints.extend(get_allof_constraints(cls, allof_clause))
         elif isinstance(clause, AllOf):
             alloc = get_allof_constraints(cls, clause)
-            anyof_constraints.append(alloc)
+            anyof_constraints.extend(alloc)
         else:
             raise ValueError(f"Unknown clause type: {spec!r}")
 
