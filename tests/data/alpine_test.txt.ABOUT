@@ -1,0 +1,9 @@
+about_resource: alpine_test.txt
+description: alpine version comparison tests
+license_expression: gpl-2.0
+download_url: download_url: https://git.alpinelinux.org/apk-tools/plain/test/version.data?h=v2.12.9
+copyright:  Copyright (c) Alpine Linux project and apk-tools contributors
+package_url: pkg:alpine/apk-tools@2.12.9#test/version.data
+notes: this test file does not have an explicit license but is assumed to be GPL-licensed like the rest of alpine
+homepage_url: https://git.alpinelinux.org/apk-tools/tree
+notice_file: alpine_test.txt.NOTICE

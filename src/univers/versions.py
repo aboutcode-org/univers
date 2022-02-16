@@ -34,6 +34,28 @@ class InvalidVersion(ValueError):
     pass
 
 
+def is_valid_alpine_version(s):
+    """
+    Return True is the string `s` is a valid Alpine version.
+    We do not support yet version strings that start with
+    non-significant zeros.
+    For example:
+    >>> is_valid_alpine_version("006")
+    False
+    >>> is_valid_alpine_version("1.2.3")
+    True
+    >>> is_valid_alpine_version("02-r1")
+    False
+    """
+    left, _, _ = s.partition(".")
+    # hanlde the suffix case
+    left, _, _ = left.partition("-")
+    if not left.isdigit():
+        return True
+    i = int(left)
+    return str(i) == left
+
+
 @attr.s(frozen=True, order=False, hash=True)
 class Version:
     """
@@ -299,3 +321,25 @@ class GentooVersion(Version):
         if not isinstance(other, self.__class__):
             return NotImplemented
         return gentoo.vercmp(self.value, other.value) == -1
+
+
+@attr.s(frozen=True, order=False, eq=False, hash=True)
+class AlpineLinuxVersion(Version):
+    @classmethod
+    def is_valid(cls, string):
+        return is_valid_alpine_version(string) and gentoo.is_valid(string)
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return gentoo.vercmp(self.value, other.value) == 0
+
+    def __lt__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return gentoo.vercmp(self.value, other.value) < 0
+
+    def __gt__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return gentoo.vercmp(self.value, other.value) > 0
