@@ -721,6 +721,11 @@ class EbuildVersionRange(VersionRange):
     version_class = versions.GentooVersion
 
 
+class AlpineLinuxVersionRange(VersionRange):
+    scheme = "alpine"
+    version_class = versions.AlpineLinuxVersion
+
+
 class ArchLinuxVersionRange(VersionRange):
     scheme = "archlinux"
     version_class = versions.ArchLinuxVersion
