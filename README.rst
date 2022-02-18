@@ -110,6 +110,10 @@ include:
 - arch linux: handled by the embedded `arch utility module borrowed from msys2
   <https://github.com/nexB/univers/blob/main/src/univers/arch.py.ABOUT>`_.
 
+- Alpine linux: handled using the base Gentoo version support and extras
+  specific to Alpine.
+
+
 The level of support for each ecosystem may not be even for now and new schemes
 and support for more package types are implemented on a continuous basis.
 
