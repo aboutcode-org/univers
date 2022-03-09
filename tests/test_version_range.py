@@ -14,9 +14,11 @@ from univers.version_range import PypiVersionRange
 from univers.version_range import VersionRange
 from univers.version_range import RANGE_CLASS_BY_SCHEMES
 from univers.version_range import NpmVersionRange
+from univers.version_range import OpensslVersionRange
 from univers.versions import PypiVersion
 from univers.versions import RubygemsVersion
 from univers.versions import SemverVersion
+from univers.versions import OpensslVersion
 
 
 class TestVersionRange(TestCase):
@@ -233,10 +235,40 @@ class TestVersionRange(TestCase):
         version_range = NpmVersionRange.from_native(npm_range)
         assert version_range == expected
 
+    def test_OpensslVersionRange_from_native_single_legacy(self):
+        openssl_range = "0.9.8j"
+        expected = OpensslVersionRange(
+            constraints=(
+                VersionConstraint(comparator="=", version=OpensslVersion(string="0.9.8j")),
+            )
+        )
+        version_range = OpensslVersionRange.from_native(openssl_range)
+        assert version_range == expected
+
+    def test_OpensslVersionRange_from_native_single_new_semver(self):
+        openssl_range = "3.0.1"
+        expected = OpensslVersionRange(
+            constraints=(VersionConstraint(comparator="=", version=OpensslVersion(string="3.0.1")),)
+        )
+        version_range = OpensslVersionRange.from_native(openssl_range)
+        assert version_range == expected
+
+    def test_OpensslVersionRange_from_native_mixed(self):
+        openssl_range = "3.0.0, 1.0.1b"
+        expected = OpensslVersionRange(
+            constraints=(
+                VersionConstraint(comparator="=", version=OpensslVersion(string="1.0.1b")),
+                VersionConstraint(comparator="=", version=OpensslVersion(string="3.0.0")),
+            )
+        )
+        version_range = OpensslVersionRange.from_native(openssl_range)
+        assert version_range == expected
+
 
 VERSION_RANGE_TESTS_BY_SCHEME = {
     "nginx": ["0.8.40+", "0.7.52-0.8.39", "0.9.10", "1.5.0+, 1.4.1+"],
     "npm": ["^1.2.9", "~3.8.2", "5.0.0 - 7.2.3", "2.1 || 2.6", "1.1.2 1.2.2", "<=2.1 >=1.1"],
+    "openssl": ["1.1.1ak", "1.1.0", "3.0.2", "3.0.1, 0.9.7a", "1.0.2ck, 3.1.2"],
 }
 
 
