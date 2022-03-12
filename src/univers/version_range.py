@@ -874,7 +874,7 @@ class OpensslVersionRange(VersionRange):
     openssl doesn't use <,>,<= or >=
     For more see 'https://www.openssl.org/news/vulnerabilities.xml'
 
-    For exmaple::
+    For example::
     >>> from univers.versions import OpensslVersion
     >>> constraints = (
     ... VersionConstraint(version=OpensslVersion("1.0.1af")),
@@ -887,18 +887,16 @@ class OpensslVersionRange(VersionRange):
 
     scheme = "openssl"
     version_class = versions.OpensslVersion
-    vers_by_native_comparators = {"=": "="}
 
     @classmethod
     def from_native(cls, string):
         cleaned = remove_spaces(string).lower()
-        constraints = set()
-        # plain single version
-        for clause in cleaned.split(","):
-            version = cls.version_class(clause)
-            constraint = VersionConstraint(comparator="=", version=version)
-            constraints.add(constraint)
-        return cls(constraints=list(constraints))
+        constraints = []
+        for version in cleaned.split(","):
+            version_obj = cls.version_class(version)
+            constraint = VersionConstraint(comparator="=", version=version_obj)
+            constraints.append(constraint)
+        return cls(constraints=constraints)
 
 
 def is_even(s):

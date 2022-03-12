@@ -348,11 +348,19 @@ class AlpineLinuxVersion(Version):
 @attr.s(frozen=True, order=False, eq=False, hash=True)
 class LegacyOpensslVersion(Version):
     """
-    Represent an Legacy Openssl Version .
+    Represent an Legacy Openssl Version.
 
     For example::
-
-    # 1.0.1f|0.9.7d|1.0.2ac
+    >>> LegacyOpensslVersion("1.0.1f")
+    LegacyOpensslVersion(string='1.0.1f')
+    >>> LegacyOpensslVersion("1.0.2ac")
+    LegacyOpensslVersion(string='1.0.2ac')
+    >>> LegacyOpensslVersion("1.0.2a")
+    LegacyOpensslVersion(string='1.0.2a')
+    >>> LegacyOpensslVersion("3.0.2")
+    Traceback (most recent call last):
+        ...
+    univers.versions.InvalidVersion: '3.0.2' is not a valid <class 'univers.versions.LegacyOpensslVersion'>
     """
 
     @classmethod
@@ -361,10 +369,10 @@ class LegacyOpensslVersion(Version):
 
     @classmethod
     def parse(cls, string):
-
         """
-        Returns the tuple containig the 4 segments (i.e major, minor, build, patch) of Legacy Version,
-        False if not valid Legacy Openssl Version.
+        Return a four-tuple of (major, minor, build, patch) version segments where
+        major, minor, build are integers and patch is a string possibly empty.
+        Return False if this is not a valid LegacyOpensslVersion.
 
         For example::
         >>> LegacyOpensslVersion.parse("1.0.1f")
@@ -375,7 +383,7 @@ class LegacyOpensslVersion(Version):
         False
         """
 
-        # All legacy base version of openssl that ever exited/exists.
+        # All known legacy base OpenSSL versions
         all_legacy_base = (
             "0.9.1",
             "0.9.2",
@@ -391,7 +399,6 @@ class LegacyOpensslVersion(Version):
             "1.1.0",
             "1.1.1",
         )
-        # check if starts with a valid base
         if not string.startswith(all_legacy_base):
             return False
 
@@ -407,8 +414,8 @@ class LegacyOpensslVersion(Version):
         else:
             patch = build[1:]
             build = int(build[0])
-        if patch and patch[0].isdigit():
-            return False
+            if patch[0].isdigit():
+                return False
         return major, minor, build, patch
 
     @classmethod
@@ -416,16 +423,15 @@ class LegacyOpensslVersion(Version):
         return cls.parse(string)
 
     def __str__(self):
-        return self.normalized_string
+        return f"{self.value[0]}.{self.value[1]}.{self.value[2]}{self.value[3]}"
 
 
 @attr.s(frozen=True, order=False, eq=False, hash=True)
 class OpensslVersion(Version):
-
     """
     Internally tracks two types of openssl versions
-        - Legacy versions: Implemented in LegacyOpensslVersion
-        - New versions: Semver
+        - LegacyOpensslVersion for versions before version 3.0.0 such as 1.0.1g
+        - Semver for versions from 3.0.0 and up
     For example::
     >>> old = OpensslVersion("1.1.0f")
     >>> new = OpensslVersion("3.0.1")
@@ -457,7 +463,7 @@ class OpensslVersion(Version):
     @classmethod
     def is_valid_new(cls, string):
         """
-        Checks the validity of new Openssl Version.
+        Check the validity of new Openssl Version.
 
         For example::
         >>> OpensslVersion.is_valid_new("1.0.1f")
