@@ -343,3 +343,179 @@ class AlpineLinuxVersion(Version):
         if not isinstance(other, self.__class__):
             return NotImplemented
         return gentoo.vercmp(self.value, other.value) > 0
+
+
+@attr.s(frozen=True, order=False, eq=False, hash=True)
+class LegacyOpensslVersion(Version):
+    """
+    Represent an Legacy Openssl Version.
+
+    For example::
+    >>> LegacyOpensslVersion("1.0.1f")
+    LegacyOpensslVersion(string='1.0.1f')
+    >>> LegacyOpensslVersion("1.0.2ac")
+    LegacyOpensslVersion(string='1.0.2ac')
+    >>> LegacyOpensslVersion("1.0.2a")
+    LegacyOpensslVersion(string='1.0.2a')
+    >>> LegacyOpensslVersion("3.0.2")
+    Traceback (most recent call last):
+        ...
+    univers.versions.InvalidVersion: '3.0.2' is not a valid <class 'univers.versions.LegacyOpensslVersion'>
+    """
+
+    @classmethod
+    def is_valid(cls, string):
+        return bool(cls.parse(string))
+
+    @classmethod
+    def parse(cls, string):
+        """
+        Return a four-tuple of (major, minor, build, patch) version segments where
+        major, minor, build are integers and patch is a string possibly empty.
+        Return False if this is not a valid LegacyOpensslVersion.
+
+        For example::
+        >>> LegacyOpensslVersion.parse("1.0.1f")
+        (1, 0, 1, 'f')
+        >>> LegacyOpensslVersion.parse("1.0.2ac")
+        (1, 0, 2, 'ac')
+        >>> LegacyOpensslVersion.parse("2.0.2az")
+        False
+        """
+
+        # All known legacy base OpenSSL versions
+        all_legacy_base = (
+            "0.9.1",
+            "0.9.2",
+            "0.9.3",
+            "0.9.4",
+            "0.9.5",
+            "0.9.6",
+            "0.9.7",
+            "0.9.8",
+            "1.0.0",
+            "1.0.1",
+            "1.0.2",
+            "1.1.0",
+            "1.1.1",
+        )
+        if not string.startswith(all_legacy_base):
+            return False
+
+        segments = string.split(".")
+        if not len(segments) == 3:
+            return False
+        major, minor, build = segments
+        major = int(major)
+        minor = int(minor)
+        if build.isdigit():
+            build = int(build)
+            patch = ""
+        else:
+            patch = build[1:]
+            build = int(build[0])
+            if patch[0].isdigit():
+                return False
+        return major, minor, build, patch
+
+    @classmethod
+    def build_value(cls, string):
+        return cls.parse(string)
+
+    def __str__(self):
+        return f"{self.value[0]}.{self.value[1]}.{self.value[2]}{self.value[3]}"
+
+
+@attr.s(frozen=True, order=False, eq=False, hash=True)
+class OpensslVersion(Version):
+    """
+    Internally tracks two types of openssl versions
+        - LegacyOpensslVersion for versions before version 3.0.0 such as 1.0.1g
+        - Semver for versions from 3.0.0 and up
+    For example::
+    >>> old = OpensslVersion("1.1.0f")
+    >>> new = OpensslVersion("3.0.1")
+    >>> assert old == OpensslVersion(string="1.1.0f")
+    >>> assert new == OpensslVersion(string="3.0.1")
+    >>> assert old.value == LegacyOpensslVersion(string="1.1.0f")
+    >>> assert new.value == SemverVersion(string="3.0.1")
+    >>> OpensslVersion("1.2.4fg")
+    Traceback (most recent call last):
+        ...
+    univers.versions.InvalidVersion: '1.2.4fg' is not a valid <class 'univers.versions.OpensslVersion'>
+    """
+
+    @classmethod
+    def is_valid(cls, string):
+        return cls.is_valid_new(string) or cls.is_valid_legacy(string)
+
+    @classmethod
+    def build_value(cls, string):
+        """
+        Return a wrapped version "value" object depending on
+        whether version is legacy or semver.
+        """
+        if cls.is_valid_legacy(string):
+            return LegacyOpensslVersion(string)
+        if cls.is_valid_new(string):
+            return SemverVersion(string)
+
+    @classmethod
+    def is_valid_new(cls, string):
+        """
+        Check the validity of new Openssl Version.
+
+        For example::
+        >>> OpensslVersion.is_valid_new("1.0.1f")
+        False
+        >>> OpensslVersion.is_valid_new("3.0.0")
+        True
+        >>> OpensslVersion.is_valid_new("3.0.2")
+        True
+        """
+        if SemverVersion.is_valid(string):
+            sem = semantic_version.Version.coerce(string)
+            return sem.major >= 3
+
+    @classmethod
+    def is_valid_legacy(cls, string):
+        return LegacyOpensslVersion.is_valid(string)
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        if not isinstance(other.value, self.value.__class__):
+            return NotImplemented
+        return self.value.__eq__(other.value)
+
+    def __lt__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        if isinstance(other.value, self.value.__class__):
+            return self.value.__lt__(other.value)
+        # By construction legacy version is always behind Semver
+        return isinstance(self.value, LegacyOpensslVersion)
+
+    def __gt__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        if isinstance(other.value, self.value.__class__):
+            return self.value.__gt__(other.value)
+        # By construction semver version is always ahead of legacy
+        return isinstance(self.value, SemverVersion)
+
+    def __le__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        if isinstance(other.value, self.value.__class__):
+            return self.value.__le__(other.value)
+        # version value are of diff type, then legacy one is always behind semver
+        return isinstance(self.value, LegacyOpensslVersion)
+
+    def __ge__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        if isinstance(other.value, self.value.__class__):
+            return self.value.__ge__(other.value)
+        # version value are of diff type, then semver one is always ahead of legacy
+        return isinstance(self.value, SemverVersion)

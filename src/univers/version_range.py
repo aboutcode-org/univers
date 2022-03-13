@@ -868,6 +868,37 @@ class NginxVersionRange(VersionRange):
         return cls(constraints=constraints)
 
 
+class OpensslVersionRange(VersionRange):
+    """
+    Openssl version range.
+    openssl doesn't use <,>,<= or >=
+    For more see 'https://www.openssl.org/news/vulnerabilities.xml'
+
+    For example::
+    >>> from univers.versions import OpensslVersion
+    >>> constraints = (
+    ... VersionConstraint(version=OpensslVersion("1.0.1af")),
+    ... VersionConstraint(comparator="=", version=OpensslVersion("3.0.1")),
+    ... VersionConstraint(comparator="=", version=OpensslVersion("1.1.1nf")),
+    ... )
+    >>> range = OpensslVersionRange(constraints=constraints)
+    >>> assert str(range) == 'vers:openssl/1.0.1af|1.1.1nf|3.0.1'
+    """
+
+    scheme = "openssl"
+    version_class = versions.OpensslVersion
+
+    @classmethod
+    def from_native(cls, string):
+        cleaned = remove_spaces(string).lower()
+        constraints = []
+        for version in cleaned.split(","):
+            version_obj = cls.version_class(version)
+            constraint = VersionConstraint(comparator="=", version=version_obj)
+            constraints.append(constraint)
+        return cls(constraints=constraints)
+
+
 def is_even(s):
     """
     Return True if the string "s" is an even number and False if this is an odd
@@ -902,4 +933,5 @@ RANGE_CLASS_BY_SCHEMES = {
     "ebuild": EbuildVersionRange,
     "archlinux": ArchLinuxVersionRange,
     "nginx": NginxVersionRange,
+    "openssl": OpensslVersionRange,
 }
