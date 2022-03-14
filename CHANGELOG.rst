@@ -1,8 +1,18 @@
-Release notes
--------------
+Changelog
+=========
 
 
-### Version v30.1.0
+Version v30.2.0
+----------------
+
+- New support for OpenSSL version(s). These are peculiar because there are two
+  epochs in the versioning: the versioning scheme is custom before version 3
+  and is based on semver from version 3 onwards. Thank you to Keshav Priyadarshi
+  @keshav-space for this.
+
+
+Version v30.1.0
+-----------------
 
 - New support for Alpine package versions. These are based loosely on Gentoo
   versions with some variations. We do not support all the version styles yet.
@@ -13,7 +23,8 @@ Release notes
 - Adopt latest skeleton, droping support for tests on macOS 10.14
 
 
-### Version v30.0.0
+Version v30.0.0
+-----------------
 
 - Implement the new "vers" spec. This is a major incomplatible change.
 - Add support for nginx version scheme
@@ -24,17 +35,20 @@ Release notes
 - Improve testing
 
 
-### Version v21.4.9
+Version v21.4.9
+-----------------
 
 - Add support Gentoo style versions. 
 
 
-### Version v21.4.8
+Version v21.4.8
+-----------------
 
 - Add support for more package types.
 - Version classes are now hashable and frozen
 
 
-### Version v21.4.6
+Version v21.4.6
+-----------------
 
 - Initial Release
