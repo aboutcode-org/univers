@@ -899,6 +899,63 @@ class OpensslVersionRange(VersionRange):
         return cls(constraints=constraints)
 
 
+vers_by_github_native_comparators = {
+    "==": "=",
+    "<=": "<=",
+    ">=": ">=",
+    "<": "<",
+    ">": ">",
+}
+
+
+def build_constraint_from_github_advisory_string(scheme: str, string: str):
+    """
+    Return a VersionConstraint built from a single github-native version
+    relationship ``string``.
+
+    >>> vr = build_constraint_from_github_advisory_string("gem","<= 2.24")
+    >>> assert str(vr) == "<=2.24", str(vr)
+    >>> vr = build_constraint_from_github_advisory_string("pypi","< 9.0")
+    >>> assert str(vr) == "<9.0", str(vr)
+    """
+    vrc = RANGE_CLASS_BY_SCHEMES[scheme]
+    comparator, version = split_req(
+        string=string,
+        comparators=vers_by_github_native_comparators,
+    )
+    version = vrc.version_class(version)
+    return VersionConstraint(comparator=comparator, version=version)
+
+
+def build_range_from_github_advisory_constraint(scheme: str, string: str):
+    """
+    Github has a special syntax for version ranges.
+    For example:
+    Maven native version range looks like:
+    ``[1.0.0,1.0.1)``
+    Github native version range looks like:
+    ``>= 1.0.0, < 1.0.1``
+
+    Return a VersionRange built from a ``string`` single github-native
+    version relationship string.
+
+    For example::
+
+    >>> vr = build_range_from_github_advisory_constraint("maven", ">= 2.13.0, < 2.16.0")
+    >>> assert str(vr) == "vers:maven/>=2.13.0|<2.16.0"
+    >>> vr = build_range_from_github_advisory_constraint("gem", ">= 2.13.0, < 2.16.0")
+    >>> assert str(vr) == "vers:gem/>=2.13.0|<2.16.0"
+    >>> vr = build_range_from_github_advisory_constraint("pypi","< 9.0")
+    >>> assert str(vr) == "vers:pypi/<9.0"
+    """
+    constraint_strings = string.split(",")
+    constraints = []
+    vrc = RANGE_CLASS_BY_SCHEMES[scheme]
+    for constraint in constraint_strings:
+        constraints.append(build_constraint_from_github_advisory_string(scheme, constraint))
+    return vrc(constraints=constraints)
+
+
 def is_even(s):
     """
     Return True if the string "s" is an even number and False if this is an odd
