@@ -2,6 +2,16 @@ Changelog
 =========
 
 
+Version v30.3.0
+----------------
+- New support for native GitHub version ranges. GitHub native version range is different from
+  other native ranges. For example:
+  Maven native version range looks like:
+  `[1.0.0,1.0.1)`
+  Github native version range looks like:
+  `>= 1.0.0, < 1.0.1`
+
+
 Version v30.2.0
 ----------------
 
