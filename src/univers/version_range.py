@@ -900,7 +900,8 @@ class OpensslVersionRange(VersionRange):
 
 
 vers_by_github_native_comparators = {
-    "==": "=",
+    "=": "=",
+    "!=": "!=",
     "<=": "<=",
     ">=": ">=",
     "<": "<",
@@ -917,6 +918,8 @@ def build_constraint_from_github_advisory_string(scheme: str, string: str):
     >>> assert str(vr) == "<=2.24", str(vr)
     >>> vr = build_constraint_from_github_advisory_string("pypi","< 9.0")
     >>> assert str(vr) == "<9.0", str(vr)
+    >>> vr = build_constraint_from_github_advisory_string("pypi","= 9.0")
+    >>> assert str(vr) == "9.0", str(vr)
     """
     vrc = RANGE_CLASS_BY_SCHEMES[scheme]
     comparator, version = split_req(
@@ -947,6 +950,8 @@ def build_range_from_github_advisory_constraint(scheme: str, string: str):
     >>> assert str(vr) == "vers:gem/>=2.13.0|<2.16.0"
     >>> vr = build_range_from_github_advisory_constraint("pypi","< 9.0")
     >>> assert str(vr) == "vers:pypi/<9.0"
+    >>> vr = build_range_from_github_advisory_constraint("pypi","= 9.0")
+    >>> assert str(vr) == "vers:pypi/9.0"
     """
     constraint_strings = string.split(",")
     constraints = []
