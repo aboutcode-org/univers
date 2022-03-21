@@ -2,8 +2,15 @@ Changelog
 =========
 
 
+Version v30.3.1
+----------------
+
+- Change equal comparator for github native ranges
+
+
 Version v30.3.0
 ----------------
+
 - New support for native GitHub version ranges. GitHub native version range is different from
   other native ranges. For example:
   Maven native version range looks like:
