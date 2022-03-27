@@ -147,6 +147,22 @@ class VersionRange:
 
         return range_class(parsed_constraints)
 
+    @classmethod
+    def from_versions(cls, sequence):
+        """
+        Return a VersionRange built from a list of version strings,
+        such as ["3.0.0", "1.0.1b", "3.0.2", "0.9.7a", "1.1.1ka"]
+        """
+        if not cls.scheme or not cls.version_class:
+            return NotImplementedError
+
+        constraints = []
+        for version in sequence:
+            version_obj = cls.version_class(version)
+            constraint = VersionConstraint(comparator="=", version=version_obj)
+            constraints.append(constraint)
+        return cls(constraints=constraints)
+
     def __str__(self):
         constraints = "|".join(str(c) for c in sorted(self.constraints))
         return f"vers:{self.scheme}/{constraints}"

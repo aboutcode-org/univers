@@ -264,6 +264,20 @@ class TestVersionRange(TestCase):
         version_range = OpensslVersionRange.from_native(openssl_range)
         assert version_range == expected
 
+    def test_OpensslVersionRange_from_versions(self):
+        sequence = ["3.0.0", "1.0.1b", "3.0.2", "0.9.7a ", "1.1.1ka"]
+        expected = OpensslVersionRange(
+            constraints=(
+                VersionConstraint(comparator="=", version=OpensslVersion(string="0.9.7a")),
+                VersionConstraint(comparator="=", version=OpensslVersion(string="1.0.1b")),
+                VersionConstraint(comparator="=", version=OpensslVersion(string="1.1.1ka")),
+                VersionConstraint(comparator="=", version=OpensslVersion(string="3.0.0")),
+                VersionConstraint(comparator="=", version=OpensslVersion(string="3.0.2")),
+            )
+        )
+        version_range = OpensslVersionRange.from_versions(sequence)
+        assert version_range == expected
+
 
 VERSION_RANGE_TESTS_BY_SCHEME = {
     "nginx": ["0.8.40+", "0.7.52-0.8.39", "0.9.10", "1.5.0+, 1.4.1+"],
