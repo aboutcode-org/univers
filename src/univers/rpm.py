@@ -131,9 +131,9 @@ def compare_rpm_versions(a: Union[RpmVersion, str], b: Union[RpmVersion, str]) -
 
 
 class Vercmp:
-    R_NONALNUMTILDE_CARET = re.compile(br"^([^a-zA-Z0-9~\^]*)(.*)$")
-    R_NUM = re.compile(br"^([\d]+)(.*)$")
-    R_ALPHA = re.compile(br"^([a-zA-Z]+)(.*)$")
+    R_NONALNUMTILDE_CARET = re.compile(rb"^([^a-zA-Z0-9~\^]*)(.*)$")
+    R_NUM = re.compile(rb"^([\d]+)(.*)$")
+    R_ALPHA = re.compile(rb"^([a-zA-Z]+)(.*)$")
 
     @classmethod
     def compare(cls, first, second):

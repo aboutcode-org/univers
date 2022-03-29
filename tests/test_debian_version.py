@@ -167,9 +167,9 @@ class DebianVersionTest(TestCase):
         assert compare_versions("2.7.4+reloaded2-13+deb9u1", "2.7.4+reloaded2-13") == 1
 
         # unicode
-        assert compare_versions(u"2:0.0.44-1", u"2:0.0.44-nobin") == -1
-        assert compare_versions(u"2:0.0.44-nobin", u"2:0.0.44-1") == 1
-        assert compare_versions(u"2:0.0.44-1", u"2:0.0.44-1") == 0
+        assert compare_versions("2:0.0.44-1", "2:0.0.44-nobin") == -1
+        assert compare_versions("2:0.0.44-nobin", "2:0.0.44-1") == 1
+        assert compare_versions("2:0.0.44-1", "2:0.0.44-1") == 0
 
     @pytest.mark.xfail(reason="Not yet supported")
     def test_can_parse_complex_version_is_not_invalid(self):
