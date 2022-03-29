@@ -2,6 +2,13 @@ Changelog
 =========
 
 
+Version v30.4.0
+----------------
+
+- Add support for forming VersionRange from a list of versions.Thank you 
+  to Keshav Priyadarshi @keshav-space for this.
+
+
 Version v30.3.1
 ----------------
 
