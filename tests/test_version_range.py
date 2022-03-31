@@ -200,7 +200,7 @@ class TestVersionRange(TestCase):
     def test_PypiVersionRange_raises_ivr_for_unsupported_ranges(self):
         try:
             PypiVersionRange.from_native(
-                "~= 0.9, >= 1.0, != 1.3.4.*, < 2.0, ~= 1.3.4.*, ===1.0, ==1.*"
+                "~= 0.9, >= 1.0, != 1.3.4.*, < 2.0, ~= 1.3.4.*, ===1.0, ==1.* )"
             )
             raise Exception("Exception not raised")
         except InvalidVersionRange as ivre:
@@ -211,7 +211,7 @@ class TestVersionRange(TestCase):
             PypiVersionRange.from_native("~= 1.3, ===1.0, ==1.*")
             raise Exception("Exception not raised")
         except InvalidVersionRange as ivre:
-            assert str(ivre).startswith("Unsupported character")
+            assert "Unsupported PyPI version constraint operator" in str(ivre)
 
     def test_NpmVersionRange_from_native_with_compatible_with_version_operator(self):
         npm_range = "^1.2.9"
