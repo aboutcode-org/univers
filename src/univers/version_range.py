@@ -12,6 +12,7 @@ from semantic_version.base import AllOf
 from semantic_version.base import AnyOf
 
 from univers import gem
+from univers import maven
 from univers import versions
 from univers.utils import remove_spaces
 from univers.version_constraint import VersionConstraint
@@ -589,6 +590,62 @@ class MavenVersionRange(VersionRange):
 
     scheme = "maven"
     version_class = versions.MavenVersion
+
+    @classmethod
+    def from_native(cls, string):
+        """
+        Return a VersionRange built from a Maven version specifier ``string``.
+        """
+
+        string = "".join(string.split(" "))
+
+        restrictions = maven.VersionRange(string).restrictions
+        constraints = []
+
+        for restriction in restrictions:
+            lower_bound = restriction.lower_bound
+            upper_bound = restriction.upper_bound
+            lower_inclusive = restriction.lower_bound_inclusive
+            upper_inclusive = restriction.upper_bound_inclusive
+
+            if lower_bound == upper_bound:
+                constraints.append(
+                    VersionConstraint(comparator="=", version=cls.version_class(str(lower_bound)))
+                )
+                continue
+
+            if lower_bound:
+                if lower_inclusive:
+                    comparator = ">="
+                else:
+                    comparator = ">"
+                constraints.append(
+                    VersionConstraint(
+                        comparator=comparator, version=cls.version_class(str(lower_bound))
+                    )
+                )
+
+            if upper_bound:
+                if upper_inclusive:
+                    comparator = "<="
+                else:
+                    comparator = "<"
+                constraints.append(
+                    VersionConstraint(
+                        comparator=comparator, version=cls.version_class(str(upper_bound))
+                    )
+                )
+
+        return cls(constraints=constraints)
+
+    @classmethod
+    def from_natives(cls, strings):
+        if isinstance(strings, str):
+            return cls.from_native(strings)
+        constraints = []
+        for rel in strings:
+            constraints.extend(cls.from_native(rel).constraints)
+        return cls(constraints=constraints)
 
 
 class NugetVersionRange(VersionRange):
