@@ -540,7 +540,7 @@ class PypiVersionRange(VersionRange):
             raise InvalidVersionRange(f"Unsupported PyPI environment marker: {string!r}")
 
         unsupported_chars = ";\\/|{}()`?'\"\t\n "
-        string = string.replace(" ", "")
+        string = "".join(string.split(" "))
 
         if any(c in string for c in unsupported_chars):
             raise InvalidVersionRange(
