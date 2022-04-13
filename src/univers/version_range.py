@@ -650,7 +650,7 @@ class MavenVersionRange(VersionRange):
         return cls(constraints=constraints)
 
 
-class NugetVersionRange(VersionRange):
+class NugetVersionRange(MavenVersionRange):
     """
     NuGet range as in:[3.10.1,4)
     """

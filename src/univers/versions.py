@@ -5,6 +5,8 @@
 # Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
 from functools import total_ordering
+import functools
+import re
 
 import attr
 import semantic_version
@@ -13,6 +15,7 @@ from packaging import version as packaging_version
 from univers import arch
 from univers import debian
 from univers import gem
+from univers import nuget
 from univers import gentoo
 from univers import maven
 from univers import rpm
@@ -284,10 +287,29 @@ class MavenVersion(Version):
         return maven.Version(string)
 
 
+# We will use total ordering to sort the versions, since these versions also consider prereleases.
 @attr.s(frozen=True, order=False, eq=False, hash=True)
-class NugetVersion(SemverVersion):
+@functools.total_ordering
+class NugetVersion(Version):
     # See https://docs.microsoft.com/en-us/nuget/concepts/package-versioning
-    pass
+
+    @classmethod
+    def build_value(cls, string):
+        return nuget.Version.from_string(string)
+
+    @classmethod
+    def is_valid(cls, string):
+        try:
+            cls.build_value(string)
+            return True
+        except ValueError:
+            return False
+
+    def __lt__(self, other):
+        return nuget.Version.from_string(self.string) < nuget.Version.from_string(other.string)
+
+    def __eq__(self, other):
+        return nuget.Version.from_string(self.string) == nuget.Version.from_string(other.string)
 
 
 @attr.s(frozen=True, order=False, eq=False, hash=True)

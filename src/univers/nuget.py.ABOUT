@@ -1,0 +1,7 @@
+about_resource: nuget.py
+package_url: pkg:github/google/osv@0.0.14#lib/osv/nuget.py
+copyright: Copyright 2022 Google LLC
+download_url: https://raw.githubusercontent.com/google/osv/f5647ad2f746685b08debfba0293e442f2fb9945/lib/osv/nuget.py
+license_expression: apache-2.0
+homepage_url: https://github.com/google/osv/
+notice_file: nuget.py.NOTICE
