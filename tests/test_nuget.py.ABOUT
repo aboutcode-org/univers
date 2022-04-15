@@ -1,0 +1,8 @@
+about_resource: test_nuget.py
+package_url: pkg:github/google/osv@0.0.14#lib/osv/nuget_test.py
+download_url: https://raw.githubusercontent.com/google/osv/f5647ad2f746685b08debfba0293e442f2fb9945/lib/osv/nuget_test.py
+copyright: Copyright 2022 Google LLC
+
+license_expression: apache-2.0
+homepage_url: https://github.com/google/osv/
+notice_file: test_nuget.py.NOTICE
