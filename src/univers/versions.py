@@ -6,7 +6,6 @@
 
 from functools import total_ordering
 import functools
-import re
 
 import attr
 import semantic_version
