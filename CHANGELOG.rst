@@ -2,6 +2,14 @@ Changelog
 =========
 
 
+Version v30.5.0
+----------------
+
+- Add version range support for maven
+- Remove unsupported characters in Pypi from_native implementation
+- Add Nuget Version support in Univers
+
+
 Version v30.4.0
 ----------------
 

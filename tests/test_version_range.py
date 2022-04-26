@@ -197,22 +197,6 @@ class TestVersionRange(TestCase):
 
         assert SemverVersion("1.0.0") in VersionRange.from_string("vers:nginx/*")
 
-    def test_PypiVersionRange_raises_ivr_for_unsupported_ranges(self):
-        try:
-            PypiVersionRange.from_native(
-                "~= 0.9, >= 1.0, != 1.3.4.*, < 2.0, ~= 1.3.4.*, ===1.0, ==1.*"
-            )
-            raise Exception("Exception not raised")
-        except InvalidVersionRange as ivre:
-            assert str(ivre).startswith("Unsupported character")
-
-    def test_PypiVersionRange_raises_ivr_for_invalid_ranges(self):
-        try:
-            PypiVersionRange.from_native("~= 1.3, ===1.0, ==1.*")
-            raise Exception("Exception not raised")
-        except InvalidVersionRange as ivre:
-            assert str(ivre).startswith("Unsupported character")
-
     def test_NpmVersionRange_from_native_with_compatible_with_version_operator(self):
         npm_range = "^1.2.9"
         expected = NpmVersionRange(
@@ -283,6 +267,7 @@ VERSION_RANGE_TESTS_BY_SCHEME = {
     "nginx": ["0.8.40+", "0.7.52-0.8.39", "0.9.10", "1.5.0+, 1.4.1+"],
     "npm": ["^1.2.9", "~3.8.2", "5.0.0 - 7.2.3", "2.1 || 2.6", "1.1.2 1.2.2", "<=2.1 >=1.1"],
     "openssl": ["1.1.1ak", "1.1.0", "3.0.2", "3.0.1, 0.9.7a", "1.0.2ck, 3.1.2"],
+    "pypi": [">= 1.0", "<2.1.0", "!=5"],
 }
 
 
@@ -306,3 +291,28 @@ def test_from_native_and_from_string_round_trip(scheme, native_ranges):
         from_native = range_class.from_native(rng)
         from_string = range_class.from_string(from_native.to_string())
         assert from_native == from_string
+
+
+@pytest.mark.parametrize(
+    "range, will_pass, expected",
+    [
+        (" ~= 0.9", False, "Unsupported PyPI version constraint operator"),
+        ("~= 1.3", False, "Unsupported PyPI version constraint operator"),
+        (" >= 1.0", True, "vers:pypi/>=1.0"),
+        (" != 1.3.4.*", False, "Unsupported PyPI version"),
+        ("< 2.0", True, "vers:pypi/<2.0"),
+        ("~= 1.3.4.*", False, ""),
+        ("==1. *", False, "Unsupported PyPI version"),
+        ("==1.3.4 ) (", False, "Unsupported character"),
+        ("===1.0", False, "Unsupported PyPI version"),
+    ],
+)
+def test_PypiVersionRange_raises_ivr_for_unsupported_and_invalid_ranges(range, will_pass, expected):
+    if not will_pass:
+        try:
+            PypiVersionRange.from_native(range)
+            raise Exception("Exception not raised")
+        except InvalidVersionRange as ivre:
+            assert expected in str(ivre)
+    else:
+        assert expected == str(PypiVersionRange.from_native(range))
