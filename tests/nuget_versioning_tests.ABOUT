@@ -2,8 +2,8 @@ about_resource: nuget_versioning_tests
 package_url: pkg:github/NuGet/NuGet.Client@588d5d5fbf4e5d3fac29b655286a5f2f2a8a446f#test/NuGet.Core.Tests/NuGet.Versioning.Test
 copyright: Copyright (c) .NET Foundation and Contributors.
 
-license_expression: MIT
-homepage_url: https://github/github.com/NuGet/NuGet.Client
+license_expression: apache-2.0
+homepage_url: https://github.com/NuGet/NuGet.Client
 
 notes: |
     The C# version comparison test suite has been extracted from NugetClient
