@@ -1,188 +1,169 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+# Copyright (c) .NET Foundation. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+# URL: https://github.com/NuGet/NuGet.Client
+# Ported to Python from the C# NuGet test suite and significantly modified
 
-using System.Collections.Generic;
-using Xunit;
+import unittest
 
-namespace NuGet.Versioning.Test
-{
-    public class VersionParsingTests
-    {
-        [Theory]
-        [InlineData("2")]
-        [InlineData("2.0")]
-        [InlineData("2.0.0")]
-        [InlineData("2.0.0.0")]
-        public void VersionLength(string version)
-        {
-            // Arrange & Act
-            var semVer = new NuGetVersion(version);
+import pytest
 
-            Assert.Equal("2.0.0", semVer.ToNormalizedString());
-        }
 
-        [Theory]
-        [InlineData("1.0.0-Beta")]
-        [InlineData("1.0.0-Beta.2")]
-        [InlineData("1.0.0+MetaOnly")]
-        [InlineData("1.0.0")]
-        [InlineData("1.0.0-Beta+Meta")]
-        [InlineData("1.0.0-RC.X+MetaAA")]
-        [InlineData("1.0.0-RC.X.35.A.3455+Meta-A-B-C")]
-        public void FullVersionParsing(string version)
-        {
-            // Arrange & Act
-            var versions = Parse(version);
+class VersionParsingTests(unittest.TestCase):
+    @pytest.mark.parametrize(
+        [],
+        [
+            ("2"),
+            ("2.0"),
+            ("2.0.0"),
+            ("2.0.0.0"),
+        ],
+    )
+    def test_VersionLength(self, version):
 
-            // Assert
-            foreach (var v in versions)
-            {
-                Assert.Equal(version, v.ToFullString());
-            }
-        }
+        semVer = NuGetVersion(version)
 
-        [Theory]
-        [InlineData("Beta", "1.0.0-Beta")]
-        [InlineData("Beta", "1.0.0-Beta+Meta")]
-        [InlineData("RC.X", "1.0.0-RC.X+Meta")]
-        [InlineData("RC.X.35.A.3455", "1.0.0-RC.X.35.A.3455+Meta")]
-        public void SpecialVersionParsing(string expected, string version)
-        {
-            // Arrange & Act
-            var versions = Parse(version);
+        assert semVer.to_string() == "2.0.0"
 
-            // Assert
-            foreach (var v in versions)
-            {
-                Assert.Equal(expected, v.Release);
-            }
-        }
+    @pytest.mark.parametrize(
+        [],
+        [
+            ("1.0.0-Beta"),
+            ("1.0.0-Beta.2"),
+            ("1.0.0+MetaOnly"),
+            ("1.0.0"),
+            ("1.0.0-Beta+Meta"),
+            ("1.0.0-RC.X+MetaAA"),
+            ("1.0.0-RC.X.35.A.3455+Meta-A-B-C"),
+        ],
+    )
+    def test_FullVersionParsing(self, version):
+        versions = Parse(version)
+        for v in versions:
+            assert v.to_string() == version
 
-        [Theory]
-        [InlineData(new string[] { }, "1.0.0+Metadata")]
-        [InlineData(new string[] { }, "1.0.0")]
-        [InlineData(new string[] { "Beta" }, "1.0.0-Beta")]
-        [InlineData(new string[] { "Beta" }, "1.0.0-Beta+Meta")]
-        [InlineData(new string[] { "RC", "X" }, "1.0.0-RC.X+Meta")]
-        [InlineData(new string[] { "RC", "X", "35", "A", "3455" }, "1.0.0-RC.X.35.A.3455+Meta")]
-        public void ReleaseLabelParsing(string[] expected, string version)
-        {
-            // Arrange & Act
-            var versions = Parse(version);
+    @pytest.mark.parametrize(
+        [],
+        [
+            ("Beta", "1.0.0-Beta"),
+            ("Beta", "1.0.0-Beta+Meta"),
+            ("RC.X", "1.0.0-RC.X+Meta"),
+            ("RC.X.35.A.3455", "1.0.0-RC.X.35.A.3455+Meta"),
+        ],
+    )
+    def test_SpecialVersionParsing(self, expected, version):
+        versions = Parse(version)
+        for v in versions:
+            assert v.Release == expected
 
-            // Assert
-            foreach (var v in versions)
-            {
-                Assert.Equal(expected, v.ReleaseLabels);
-            }
-        }
+    @pytest.mark.parametrize(
+        [],
+        [
+            ("", "1.0.0+Metadata"),
+            ("", "1.0.0"),
+            ("Beta", "1.0.0-Beta"),
+            ("Beta", "1.0.0-Beta+Meta"),
+            ("RC", "X", "1.0.0-RC.X+Meta"),
+            ("RC", "X", "35", "A", "3455", "1.0.0-RC.X.35.A.3455+Meta"),
+        ],
+    )
+    def test_ReleaseLabelParsing(expected, version):
+        versions = Parse(version)
+        for v in versions:
+            assert v.ReleaseLabels == expected
 
-        [Theory]
-        [InlineData(false, "1.0.0+Metadata")]
-        [InlineData(false, "1.0.0")]
-        [InlineData(true, "1.0.0-Beta")]
-        [InlineData(true, "1.0.0-Beta+Meta")]
-        [InlineData(true, "1.0.0-RC.X+Meta")]
-        [InlineData(true, "1.0.0-RC.X.35.A.3455+Meta")]
-        public void IsPrereleaseParsing(bool expected, string version)
-        {
-            // Arrange & Act
-            var versions = Parse(version);
+    @pytest.mark.parametrize(
+        [],
+        [
+            (false, "1.0.0+Metadata"),
+            (false, "1.0.0"),
+            (true, "1.0.0-Beta"),
+            (true, "1.0.0-Beta+Meta"),
+            (true, "1.0.0-RC.X+Meta"),
+            (true, "1.0.0-RC.X.35.A.3455+Meta"),
+        ],
+    )
+    def test_IsPrereleaseParsing(expected, version):
+        versions = Parse(version)
+        for v in versions:
+            assert v.IsPrerelease == expected
 
-            // Assert
-            foreach (var v in versions)
-            {
-                Assert.Equal(expected, v.IsPrerelease);
-            }
-        }
+    @pytest.mark.parametrize(
+        [],
+        [
+            ("", "1.0.0-Beta"),
+            ("Meta", "1.0.0-Beta+Meta"),
+            ("MetaAA", "1.0.0-RC.X+MetaAA"),
+            ("Meta-A-B-C", "1.0.0-RC.X.35.A.3455+Meta-A-B-C"),
+        ],
+    )
+    def test_MetadataParsing(self, expected, version):
+        versions = Parse(version)
+        for v in versions:
+            assert v.Metadata == expected
 
-        [Theory]
-        [InlineData("", "1.0.0-Beta")]
-        [InlineData("Meta", "1.0.0-Beta+Meta")]
-        [InlineData("MetaAA", "1.0.0-RC.X+MetaAA")]
-        [InlineData("Meta-A-B-C", "1.0.0-RC.X.35.A.3455+Meta-A-B-C")]
-        public void MetadataParsing(string expected, string version)
-        {
-            // Arrange & Act
-            var versions = Parse(version);
+    @pytest.mark.parametrize(
+        [],
+        [
+            (false, "1.0.0-Beta"),
+            (false, "1.0.0-Beta.2"),
+            (true, "1.0.0+MetaOnly"),
+            (false, "1.0.0"),
+            (true, "1.0.0-Beta+Meta"),
+            (true, "1.0.0-RC.X+MetaAA"),
+            (true, "1.0.0-RC.X.35.A.3455+Meta-A-B-C"),
+        ],
+    )
+    def test_HasMetadataParsing(expected, version):
+        versions = Parse(version)
+        for v in versions:
+            assert v.HasMetadata == expected
 
-            // Assert
-            foreach (var v in versions)
-            {
-                Assert.Equal(expected, v.Metadata);
-            }
-        }
+    @pytest.mark.parametrize(
+        [],
+        [
+            (0, 0, 0, "0.0.0"),
+            (1, 0, 0, "1.0.0"),
+            (3, 5, 1, "3.5.1"),
+            (234, 234234, 1111, "234.234234.1111"),
+            (3, 5, 1, "3.5.1+Meta"),
+            (3, 5, 1, "3.5.1-x.y.z+AA"),
+        ],
+    )
+    def test_VersionParsing(major, minor, patch, version):
+        versions = Parse(version)
+        for v in versions:
 
-        [Theory]
-        [InlineData(false, "1.0.0-Beta")]
-        [InlineData(false, "1.0.0-Beta.2")]
-        [InlineData(true, "1.0.0+MetaOnly")]
-        [InlineData(false, "1.0.0")]
-        [InlineData(true, "1.0.0-Beta+Meta")]
-        [InlineData(true, "1.0.0-RC.X+MetaAA")]
-        [InlineData(true, "1.0.0-RC.X.35.A.3455+Meta-A-B-C")]
-        public void HasMetadataParsing(bool expected, string version)
-        {
-            // Arrange & Act
-            var versions = Parse(version);
+            assert v.Major == major
+            assert v.Minor == minor
+            assert v.Patch == patch
 
-            // Assert
-            foreach (var v in versions)
-            {
-                Assert.Equal(expected, v.HasMetadata);
-            }
-        }
 
-        [Theory]
-        [InlineData(0, 0, 0, "0.0.0")]
-        [InlineData(1, 0, 0, "1.0.0")]
-        [InlineData(3, 5, 1, "3.5.1")]
-        [InlineData(234, 234234, 1111, "234.234234.1111")]
-        [InlineData(3, 5, 1, "3.5.1+Meta")]
-        [InlineData(3, 5, 1, "3.5.1-x.y.z+AA")]
-        public void VersionParsing(int major, int minor, int patch, string version)
-        {
-            // Arrange & Act
-            var versions = Parse(version);
+# All possible ways to parse a version from a string
+def Parse(version):
 
-            // Assert
-            foreach (var v in versions)
-            {
-                Assert.Equal(major, v.Major);
-                Assert.Equal(minor, v.Minor);
-                Assert.Equal(patch, v.Patch);
-            }
-        }
+    # Parse
+    versions = []
+    versions.Add(NuGetVersion(version))
+    versions.Add(NuGetVersion(version))
 
-        // All possible ways to parse a version from a string
-        private static List<NuGetVersion> Parse(string version)
-        {
-            // Parse
-            var versions = new List<NuGetVersion>();
-            versions.Add(NuGetVersion.Parse(version));
-            versions.Add(NuGetVersion.Parse(version));
+    # TryParse
+    semVer = None
+    NuGetVersion(version, semVer)
+    versions.Add(semVer)
 
-            // TryParse
-            NuGetVersion semVer = null;
-            NuGetVersion.TryParse(version, out semVer);
-            versions.Add(semVer);
+    nuVer = None
+    NuGetVersion(version, nuVer)
+    versions.Add(nuVer)
 
-            NuGetVersion nuVer = null;
-            NuGetVersion.TryParse(version, out nuVer);
-            versions.Add(nuVer);
+    # TryParseStrict
+    nuVer = None
+    NuGetVersion.TryParseStrict(version, nuVer)
+    versions.Add(nuVer)
 
-            // TryParseStrict
-            nuVer = null;
-            NuGetVersion.TryParseStrict(version, out nuVer);
-            versions.Add(nuVer);
+    # Constructors
+    normal = NuGetVersion(version)
 
-            // Constructors
-            var normal = NuGetVersion.Parse(version);
+    versions.Add(normal)
+    versions.Add(NuGetVersion(NuGetVersion(version)))
 
-            versions.Add(normal);
-            versions.Add(new NuGetVersion(NuGetVersion.Parse(version)));
-
-            return versions;
-        }
-    }
-}
+    return versions

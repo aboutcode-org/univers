@@ -1,286 +1,297 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+# Copyright (c) .NET Foundation. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+# URL: https://github.com/NuGet/NuGet.Client
+# Ported to Python from the C# NuGet test suite and significantly modified
 
-using System.Collections.Generic;
-using Xunit;
+import unittest
 
-namespace NuGet.Versioning.Test
-{
-    public class VersionRangeFloatParsingTests
-    {
-        [Fact]
-        public void VersionRangeFloatParsing_Prerelease()
-        {
-            var range = VersionRange.Parse("1.0.0-*");
+import pytest
 
-            Assert.True(range.MinVersion.IsPrerelease);
-        }
 
-        [Theory]
-        [InlineData("1.0.0-*", "1.0.0-0")]
-        [InlineData("1.0.0-0*", "1.0.0-0")]
-        [InlineData("1.0.0--*", "1.0.0--")]
-        [InlineData("1.0.0-a-*", "1.0.0-a-")]
-        [InlineData("1.0.0-a.*", "1.0.0-a.0")]
-        [InlineData("1.*-*", "1.0.0-0")]
-        [InlineData("1.0.*-0*", "1.0.0-0")]
-        [InlineData("1.0.*--*", "1.0.0--")]
-        [InlineData("1.0.*-a-*", "1.0.0-a-")]
-        [InlineData("1.0.*-a.*", "1.0.0-a.0")]
-        public void VersionRangeFloatParsing_PrereleaseWithNumericOnlyLabelVerifyMinVersion(string rangeString, string expected)
-        {
-            var range = VersionRange.Parse(rangeString);
+class VersionRangeFloatParsingTests(unittest.TestCase):
+    def test_VersionRangeFloatParsing_Prerelease(self):
 
-            Assert.Equal(expected, range.MinVersion.ToNormalizedString());
-        }
+        range = VersionRange("1.0.0-*")
 
-        [Theory]
-        [InlineData("1.0.0-0")]
-        [InlineData("1.0.0-100")]
-        [InlineData("1.0.0-0.0.0.0")]
-        [InlineData("1.0.0-0+0-0")]
-        public void VersionRangeFloatParsing_PrereleaseWithNumericOnlyLabelVerifySatisfies(string version)
-        {
-            var range = VersionRange.Parse("1.0.0-*");
+        assert range.MinVersion.IsPrerelease
 
-            Assert.True(range.Satisfies(NuGetVersion.Parse(version)));
-        }
+    @pytest.mark.parametrize(
+        [],
+        [
+            ("1.0.0-*", "1.0.0-0"),
+            ("1.0.0-0*", "1.0.0-0"),
+            ("1.0.0--*", "1.0.0--"),
+            ("1.0.0-a-*", "1.0.0-a-"),
+            ("1.0.0-a.*", "1.0.0-a.0"),
+            ("1.*-*", "1.0.0-0"),
+            ("1.0.*-0*", "1.0.0-0"),
+            ("1.0.*--*", "1.0.0--"),
+            ("1.0.*-a-*", "1.0.0-a-"),
+            ("1.0.*-a.*", "1.0.0-a.0"),
+        ],
+    )
+    def test_VersionRangeFloatParsing_PrereleaseWithNumericOnlyLabelVerifyMinVersion(
+        self, rangeString, expected
+    ):
 
-        [Theory]
-        [InlineData("1.0.0-a*", "1.0.0-a.0")]
-        [InlineData("1.0.0-a*", "1.0.0-a-0")]
-        [InlineData("1.0.0-a*", "1.0.0-a")]
-        [InlineData("1.0.*-a*", "1.0.0-a")]
-        [InlineData("1.*-a*", "1.0.0-a")]
-        [InlineData("*-a*", "1.0.0-a")]
-        public void VersionRangeFloatParsing_VerifySatisfiesForFloatingRange(string rangeString, string version)
-        {
-            var range = VersionRange.Parse(rangeString);
+        range = VersionRange(rangeString)
 
-            Assert.True(range.Satisfies(NuGetVersion.Parse(version)));
-        }
+        assert range.MinVersion.to_string() == expected
 
-        [Theory]
-        [InlineData("1.0.0-*", "0", "")]
-        [InlineData("1.0.0-a*", "a", "a")]
-        [InlineData("1.0.0-a-*", "a-", "a-")]
-        [InlineData("1.0.0-a.*", "a.0", "a.")]
-        [InlineData("1.0.0-0*", "0", "0")]
-        [InlineData("1.0.*-0*", "0", "0")]
-        [InlineData("1.*-0*", "0", "0")]
-        [InlineData("*-0*", "0", "0")]
-        [InlineData("1.0.*-*", "0", "")]
-        [InlineData("1.*-*", "0", "")]
-        [InlineData("*-*", "0", "")]
-        [InlineData("1.0.*-a*", "a", "a")]
-        [InlineData("1.*-a*", "a", "a")]
-        [InlineData("*-a*", "a", "a")]
-        [InlineData("1.0.*-a-*", "a-", "a-")]
-        [InlineData("1.*-a-*", "a-", "a-")]
-        [InlineData("*-a-*", "a-", "a-")]
-        [InlineData("1.0.*-a.*", "a.0", "a.")]
-        [InlineData("1.*-a.*", "a.0", "a.")]
-        [InlineData("*-a.*", "a.0", "a.")]
-        public void VersionRangeFloatParsing_VerifyReleaseLabels(string rangeString, string versionLabel, string originalLabel)
-        {
-            var range = VersionRange.Parse(rangeString);
+    @pytest.mark.parametrize(
+        [],
+        [
+            ("1.0.0-0"),
+            ("1.0.0-100"),
+            ("1.0.0-0.0.0.0"),
+            ("1.0.0-0+0-0"),
+        ],
+    )
+    def test_VersionRangeFloatParsing_PrereleaseWithNumericOnlyLabelVerifySatisfies(self, version):
 
-            Assert.Equal(versionLabel, range.Float.MinVersion.Release);
-            Assert.Equal(originalLabel, range.Float.OriginalReleasePrefix);
-        }
+        range = VersionRange("1.0.0-*")
 
-        [Theory]
-        [InlineData("1.0.0")]
-        [InlineData("[1.0.0]")]
-        [InlineData("(0.0.0, )")]
-        [InlineData("[1.0.0, )")]
-        [InlineData("[1.0.0, 2.0.0)")]
-        public void VersionRangeFloatParsing_NoFloat(string rangeString)
-        {
-            var range = VersionRange.Parse(rangeString);
+        assert range.Satisfies(NuGetVersion(version))
 
-            var versions = new List<NuGetVersion>()
-                {
-                    NuGetVersion.Parse("1.0.0"),
-                    NuGetVersion.Parse("1.1.0")
-                };
+    @pytest.mark.parametrize(
+        [],
+        [
+            ("1.0.0-a*", "1.0.0-a.0"),
+            ("1.0.0-a*", "1.0.0-a-0"),
+            ("1.0.0-a*", "1.0.0-a"),
+            ("1.0.*-a*", "1.0.0-a"),
+            ("1.*-a*", "1.0.0-a"),
+            ("*-a*", "1.0.0-a"),
+        ],
+    )
+    def test_VersionRangeFloatParsing_VerifySatisfiesForFloatingRange(self, rangeString, version):
 
-            Assert.Equal("1.0.0", range.FindBestMatch(versions).ToNormalizedString());
-        }
+        range = VersionRange(rangeString)
 
-        [Fact]
-        public void VersionRangeFloatParsing_FloatPrerelease()
-        {
-            var range = VersionRange.Parse("1.0.0-*");
+        assert range.Satisfies(NuGetVersion(version))
 
-            var versions = new List<NuGetVersion>()
-                {
-                    NuGetVersion.Parse("1.0.0-alpha"),
-                    NuGetVersion.Parse("1.0.0-beta")
-                };
+    @pytest.mark.parametrize(
+        [],
+        [
+            ("1.0.0-*", "0", ""),
+            ("1.0.0-a*", "a", "a"),
+            ("1.0.0-a-*", "a-", "a-"),
+            ("1.0.0-a.*", "a.0", "a."),
+            ("1.0.0-0*", "0", "0"),
+            ("1.0.*-0*", "0", "0"),
+            ("1.*-0*", "0", "0"),
+            ("*-0*", "0", "0"),
+            ("1.0.*-*", "0", ""),
+            ("1.*-*", "0", ""),
+            ("*-*", "0", ""),
+            ("1.0.*-a*", "a", "a"),
+            ("1.*-a*", "a", "a"),
+            ("*-a*", "a", "a"),
+            ("1.0.*-a-*", "a-", "a-"),
+            ("1.*-a-*", "a-", "a-"),
+            ("*-a-*", "a-", "a-"),
+            ("1.0.*-a.*", "a.0", "a."),
+            ("1.*-a.*", "a.0", "a."),
+            ("*-a.*", "a.0", "a."),
+        ],
+    )
+    def test_VersionRangeFloatParsing_VerifyReleaseLabels(
+        self, rangeString, versionLabel, originalLabel
+    ):
 
-            Assert.Equal("1.0.0-beta", range.FindBestMatch(versions).ToNormalizedString());
-        }
+        range = VersionRange(rangeString)
 
-        [Fact]
-        public void VersionRangeFloatParsing_FloatPrereleaseMatchVersion()
-        {
-            var range = VersionRange.Parse("1.0.0-*");
+        assert range.Float.MinVersion.Release == versionLabel
+        assert range.Float.OriginalReleasePrefix == originalLabel
 
-            var versions = new List<NuGetVersion>()
-                {
-                    NuGetVersion.Parse("1.0.0-beta"),
-                    NuGetVersion.Parse("1.0.1-omega"),
-                };
+    @pytest.mark.parametrize(
+        [],
+        [
+            ("1.0.0"),
+            ("[1.0.0]"),
+            ("(0.0.0, )"),
+            ("[1.0.0, )"),
+            ("[1.0.0, 2.0.0)"),
+        ],
+    )
+    def test_VersionRangeFloatParsing_NoFloat(self, rangeString):
 
-            Assert.Equal("1.0.0-beta", range.FindBestMatch(versions).ToNormalizedString());
-        }
+        range = VersionRange(rangeString)
 
-        [Fact]
-        public void VersionRangeFloatParsing_FloatPrereleasePrefix()
-        {
-            var range = VersionRange.Parse("1.0.0-beta.*");
+        versions = [NuGetVersion("1.0.0"), NuGetVersion("1.1.0")]
 
-            var versions = new List<NuGetVersion>()
-                {
-                    NuGetVersion.Parse("1.0.0-beta.1"),
-                    NuGetVersion.Parse("1.0.0-beta.2"),
-                    NuGetVersion.Parse("1.0.0-omega.3"),
-                };
+        assert range.FindBestMatch(versions).to_string() == "1.0.0"
 
-            Assert.Equal("1.0.0-beta.2", range.FindBestMatch(versions).ToNormalizedString());
-        }
+    def test_VersionRangeFloatParsing_FloatPrerelease(self):
 
-        [Fact]
-        public void VersionRangeFloatParsing_FloatPrereleasePrefixSemVerLabelMix()
-        {
-            var range = VersionRange.Parse("1.0.0-beta.*");
+        range = VersionRange("1.0.0-*")
 
-            var versions = new List<NuGetVersion>()
-                {
-                    NuGetVersion.Parse("1.0.0-beta.1"),
-                    NuGetVersion.Parse("1.0.0-beta.2"),
-                    NuGetVersion.Parse("1.0.0-beta.a"),
-                };
+        versions = [NuGetVersion("1.0.0-alpha"), NuGetVersion("1.0.0-beta")]
+        assert range.FindBestMatch(versions).to_string() == "1.0.0-beta"
 
-            Assert.Equal("1.0.0-beta.a", range.FindBestMatch(versions).ToNormalizedString());
-        }
+    def test_VersionRangeFloatParsing_FloatPrereleaseMatchVersion(self):
 
-        [Theory]
-        [InlineData("[]")]
-        [InlineData("[*]")]
-        [InlineData("[1.0.0, 1.1.*)")]
-        [InlineData("[1.0.0, 2.0.*)")]
-        [InlineData("(, 2.*.*)")]
-        [InlineData("<1.0.*")]
-        [InlineData("<=1.0.*")]
-        [InlineData("1.0.0<")]
-        [InlineData("1.0.0~")]
-        [InlineData("~1.*.*")]
-        [InlineData("~*")]
-        [InlineData("~")]
-        [InlineData("^")]
-        [InlineData("^*")]
-        [InlineData(">=*")]
-        [InlineData("1.*.0")]
-        [InlineData("1.*.0-beta-*")]
-        [InlineData("1.*.0-beta")]
-        [InlineData("1.0.0.0.*")]
-        [InlineData("=1.0.*")]
-        [InlineData("1.0.0+*")]
-        [InlineData("1.0.**")]
-        [InlineData("1.0.*-*bla")]
-        [InlineData("1.0.*-*bla+*")]
-        [InlineData("**")]
-        [InlineData("1.0.0-preview.*+blabla")]
-        [InlineData("1.0.*--")]
-        [InlineData("1.0.*-alpha*+")]
-        [InlineData("1.0.*-")]
-        public void VersionRangeFloatParsing_Invalid(string rangeString)
-        {
-            VersionRange range = null;
-            Assert.False(VersionRange.TryParse(rangeString, out range));
-        }
+        range = VersionRange("1.0.0-*")
 
-        [Theory]
-        [InlineData("*")]
-        [InlineData("1.*")]
-        [InlineData("1.0.*")]
-        [InlineData("1.0.0.*")]
-        [InlineData("1.0.0.0-beta")]
-        [InlineData("1.0.0.0-beta*")]
-        [InlineData("1.0.0")]
-        [InlineData("1.0")]
-        [InlineData("[1.0.*, )")]
-        [InlineData("[1.0.0-beta.*, 2.0.0)")]
-        [InlineData("1.0.0-beta.*")]
-        [InlineData("1.0.0-beta-*")]
-        [InlineData("1.0.*-bla*")]
-        [InlineData("1.0.*-*")]
-        [InlineData("1.0.*-preview.1.*")]
-        [InlineData("1.0.*-preview.1*")]
-        [InlineData("1.0.0--")]
-        [InlineData("1.0.0-bla*")]
-        [InlineData("1.0.*--*")]
-        [InlineData("1.0.0--*")]
-        public void VersionRangeFloatParsing_Valid(string rangeString)
-        {
-            VersionRange range = null;
-            Assert.True(VersionRange.TryParse(rangeString, out range));
-        }
+        versions = [
+            NuGetVersion("1.0.0-beta"),
+            NuGetVersion("1.0.1-omega"),
+        ]
 
-        [Theory]
-        [InlineData("1.0.0", "[1.0.0, )")]
-        [InlineData("1.0.*", "[1.0.0, )")]
-        [InlineData("[1.0.*, )", "[1.0.0, )")]
-        [InlineData("[1.*, )", "[1.0.0, )")]
-        [InlineData("[1.*, 2.0)", "[1.0.0, 2.0.0)")]
-        [InlineData("*", "[0.0.0, )")]
-        public void VersionRangeFloatParsing_LegacyEquivalent(string rangeString, string legacyString)
-        {
-            VersionRange range = null;
-            Assert.True(VersionRange.TryParse(rangeString, out range));
+        assert range.FindBestMatch(versions).to_string() == "1.0.0-beta"
 
-            Assert.Equal(legacyString, range.ToLegacyString());
-        }
+    def test_VersionRangeFloatParsing_FloatPrereleasePrefix(self):
 
-        [Theory]
-        [InlineData("1.0.0-beta*")]
-        [InlineData("1.0.0-beta.*")]
-        [InlineData("1.0.0-beta-*")]
-        public void VersionRangeFloatParsing_CorrectFloatRange(string rangeString)
-        {
-            VersionRange range = null;
-            Assert.True(VersionRange.TryParse(rangeString, out range));
+        range = VersionRange("1.0.0-beta.*")
 
-            Assert.Equal(rangeString, range.Float.ToString());
-        }
+        versions = [
+            NuGetVersion("1.0.0-beta.1"),
+            NuGetVersion("1.0.0-beta.2"),
+            NuGetVersion("1.0.0-omega.3"),
+        ]
+        assert range.FindBestMatch(versions).to_string() == "1.0.0-beta.2"
 
-        [Theory]
-        [InlineData("1.0.0;2.0.0", "*", "2.0.0")]
-        [InlineData("1.0.0;2.0.0", "0.*", "1.0.0")]
-        [InlineData("1.0.0;2.0.0", "[*, )", "2.0.0")]
-        [InlineData("1.0.0;2.0.0;3.0.0", "(1.0.*, )", "2.0.0")]
-        [InlineData("1.0.0;2.0.0;3.0.0", "(1.0.*, 2.0.0)", null)]
-        [InlineData("1.1.0;1.2.0-rc.1;1.2.0-rc.2;2.0.0;3.0.0-beta.1", "*", "2.0.0")]
-        [InlineData("1.1.0;1.2.0-rc.1;1.2.0-rc.2;2.0.0;3.0.0-beta.1", "1.*", "1.1.0")]
-        [InlineData("1.1.0;1.2.0-rc.1;1.2.0-rc.2;2.0.0;3.0.0-beta.1", "1.2.0-*", "1.2.0-rc.2")]
-        [InlineData("1.1.0;1.2.0-rc.1;1.2.0-rc.2;2.0.0;3.0.0-beta.1", "*-*", "3.0.0-beta.1")]
-        [InlineData("1.1.0;1.2.0-rc.1;1.2.0-rc.2;2.0.0;3.0.0-beta.1", "1.*-*", "1.2.0-rc.2")]
-        [InlineData("1.1.0;1.2.0-rc.1;1.2.0-rc.2;2.0.0;3.0.0-beta.1", "*-rc.*", "2.0.0")]
-        [InlineData("1.1.0;1.2.0-rc.1;1.2.0-rc.2;1.2.0-rc1;2.0.0;3.0.0-beta.1", "1.*-rc*", "1.2.0-rc1")]
-        [InlineData("1.1.0;1.2.0-rc.1;1.2.0-rc.2;1.2.0-rc1;1.10.0;2.0.0;3.0.0-beta.1", "1.1*-*", "1.10.0")]
-        public void VersionRangeFloatParsing_FindsBestMatch(string availableVersions, string declaredRange, string expectedVersion)
-        {
-            var range = VersionRange.Parse(declaredRange);
+    def test_VersionRangeFloatParsing_FloatPrereleasePrefixSemVerLabelMix(self):
 
-            var versions = new List<NuGetVersion>();
-            foreach (var version in availableVersions.Split(';'))
-            {
-                versions.Add(NuGetVersion.Parse(version));
-            }
+        range = VersionRange("1.0.0-beta.*")
 
-            Assert.Equal(expectedVersion, range.FindBestMatch(versions)?.ToNormalizedString());
-        }
-    }
-}
+        versions = [
+            NuGetVersion("1.0.0-beta.1"),
+            NuGetVersion("1.0.0-beta.2"),
+            NuGetVersion("1.0.0-beta.a"),
+        ]
+
+        assert range.FindBestMatch(versions).to_string() == "1.0.0-beta.a"
+
+    @pytest.mark.parametrize(
+        [],
+        [
+            ("[]"),
+            ("[*]"),
+            ("[1.0.0, 1.1.*)"),
+            ("[1.0.0, 2.0.*)"),
+            ("(, 2.*.*)"),
+            ("<1.0.*"),
+            ("<=1.0.*"),
+            ("1.0.0<"),
+            ("1.0.0~"),
+            ("~1.*.*"),
+            ("~*"),
+            ("~"),
+            ("^"),
+            ("^*"),
+            (">=*"),
+            ("1.*.0"),
+            ("1.*.0-beta-*"),
+            ("1.*.0-beta"),
+            ("1.0.0.0.*"),
+            ("=1.0.*"),
+            ("1.0.0+*"),
+            ("1.0.**"),
+            ("1.0.*-*bla"),
+            ("1.0.*-*bla+*"),
+            ("**"),
+            ("1.0.0-preview.*+blabla"),
+            ("1.0.*--"),
+            ("1.0.*-alpha*+"),
+            ("1.0.*-"),
+        ],
+    )
+    def test_VersionRangeFloatParsing_Invalid(self, rangeString):
+
+        range = None
+        assert not VersionRange(rangeString, range)
+
+    @pytest.mark.parametrize(
+        [],
+        [
+            ("*"),
+            ("1.*"),
+            ("1.0.*"),
+            ("1.0.0.*"),
+            ("1.0.0.0-beta"),
+            ("1.0.0.0-beta*"),
+            ("1.0.0"),
+            ("1.0"),
+            ("[1.0.*, )"),
+            ("[1.0.0-beta.*, 2.0.0)"),
+            ("1.0.0-beta.*"),
+            ("1.0.0-beta-*"),
+            ("1.0.*-bla*"),
+            ("1.0.*-*"),
+            ("1.0.*-preview.1.*"),
+            ("1.0.*-preview.1*"),
+            ("1.0.0--"),
+            ("1.0.0-bla*"),
+            ("1.0.*--*"),
+            ("1.0.0--*"),
+        ],
+    )
+    def test_VersionRangeFloatParsing_Valid(self, rangeString):
+
+        range = None
+        assert VersionRange(rangeString, range)
+
+    @pytest.mark.parametrize(
+        [],
+        [
+            ("1.0.0", "[1.0.0, )"),
+            ("1.0.*", "[1.0.0, )"),
+            ("[1.0.*, )", "[1.0.0, )"),
+            ("[1.*, )", "[1.0.0, )"),
+            ("[1.*, 2.0)", "[1.0.0, 2.0.0)"),
+            ("*", "[0.0.0, )"),
+        ],
+    )
+    def test_VersionRangeFloatParsing_LegacyEquivalent(self, rangeString, legacyString):
+
+        range = None
+        assert VersionRange(rangeString, range)
+
+        assert range.ToLegacyString() == legacyString
+
+    @pytest.mark.parametrize(
+        [],
+        [
+            ("1.0.0-beta*"),
+            ("1.0.0-beta.*"),
+            ("1.0.0-beta-*"),
+        ],
+    )
+    def test_VersionRangeFloatParsing_CorrectFloatRange(self, rangeString):
+
+        range = None
+        assert VersionRange(rangeString, range)
+
+        assert range.Float.to_string() == rangeString
+
+    @pytest.mark.parametrize(
+        [],
+        [
+            ("1.0.0;2.0.0", "*", "2.0.0"),
+            ("1.0.0;2.0.0", "0.*", "1.0.0"),
+            ("1.0.0;2.0.0", "[*, )", "2.0.0"),
+            ("1.0.0;2.0.0;3.0.0", "(1.0.*, )", "2.0.0"),
+            ("1.0.0;2.0.0;3.0.0", "(1.0.*, 2.0.0)", None),
+            ("1.1.0;1.2.0-rc.1;1.2.0-rc.2;2.0.0;3.0.0-beta.1", "*", "2.0.0"),
+            ("1.1.0;1.2.0-rc.1;1.2.0-rc.2;2.0.0;3.0.0-beta.1", "1.*", "1.1.0"),
+            ("1.1.0;1.2.0-rc.1;1.2.0-rc.2;2.0.0;3.0.0-beta.1", "1.2.0-*", "1.2.0-rc.2"),
+            ("1.1.0;1.2.0-rc.1;1.2.0-rc.2;2.0.0;3.0.0-beta.1", "*-*", "3.0.0-beta.1"),
+            ("1.1.0;1.2.0-rc.1;1.2.0-rc.2;2.0.0;3.0.0-beta.1", "1.*-*", "1.2.0-rc.2"),
+            ("1.1.0;1.2.0-rc.1;1.2.0-rc.2;2.0.0;3.0.0-beta.1", "*-rc.*", "2.0.0"),
+            ("1.1.0;1.2.0-rc.1;1.2.0-rc.2;1.2.0-rc1;2.0.0;3.0.0-beta.1", "1.*-rc*", "1.2.0-rc1"),
+            ("1.1.0;1.2.0-rc.1;1.2.0-rc.2;1.2.0-rc1;1.10.0;2.0.0;3.0.0-beta.1", "1.1*-*", "1.10.0"),
+        ],
+    )
+    def test_VersionRangeFloatParsing_FindsBestMatch(
+        self, availableVersions, declaredRange, expectedVersion
+    ):
+
+        range = VersionRange(declaredRange)
+
+        versions = []
+        for version in availableVersions.Split(";"):
+
+            versions.append(NuGetVersion(version))
+
+        assert range.FindBestMatch(versions).to_string() == expectedVersion

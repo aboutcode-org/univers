@@ -1,101 +1,81 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+# Copyright (c) .NET Foundation. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+# URL: https://github.com/NuGet/NuGet.Client
+# Ported to Python from the C# NuGet test suite and significantly modified
 
-using Xunit;
+import unittest
 
-namespace NuGet.Versioning.Test
-{
-    public class SemanticVersionTests
-    {
-        [Theory]
-        [InlineData("1.0.0")]
-        [InlineData("0.0.1")]
-        [InlineData("1.2.3")]
-        [InlineData("1.2.3-alpha")]
-        [InlineData("1.2.3-X.yZ.3.234.243.32423423.4.23423.4324.234.234.3242")]
-        [InlineData("1.2.3-X.yZ.3.234.243.32423423.4.23423+METADATA")]
-        [InlineData("1.2.3-X.y3+0")]
-        [InlineData("1.2.3-X+0")]
-        [InlineData("1.2.3+0")]
-        [InlineData("1.2.3-0")]
-        public void ParseSemanticVersionStrict(string versionString)
-        {
-            // Act
-            SemanticVersion semVer = null;
-            SemanticVersion.TryParse(versionString, out semVer);
+import pytest
 
-            // Assert
-            Assert.Equal<string>(versionString, semVer.ToFullString());
-            Assert.Equal<string>(semVer.ToNormalizedString(), semVer.ToString());
-        }
 
-        [Theory]
-        [InlineData("1.2.3")]
-        [InlineData("1.2.3+0")]
-        [InlineData("1.2.3+321")]
-        [InlineData("1.2.3+XYZ")]
-        public void SemanticVersionStrictEquality(string versionString)
-        {
-            // Act
-            SemanticVersion main = null;
-            SemanticVersion.TryParse("1.2.3", out main);
+class SemanticVersionTests(unittest.TestCase):
+    @pytest.mark.parametrize(
+        ["versionString"],
+        [
+            ("1.0.0"),
+            ("0.0.1"),
+            ("1.2.3"),
+            ("1.2.3-alpha"),
+            ("1.2.3-X.yZ.3.234.243.32423423.4.23423.4324.234.234.3242"),
+            ("1.2.3-X.yZ.3.234.243.32423423.4.23423+METADATA"),
+            ("1.2.3-X.y3+0"),
+            ("1.2.3-X+0"),
+            ("1.2.3+0"),
+            ("1.2.3-0"),
+        ],
+    )
+    def test_ParseSemanticVersionStrict(self, versionString):
+        semVer = SemanticVersion(versionString)
+        assert versionString == semVer.to_string()
 
-            SemanticVersion semVer = null;
-            SemanticVersion.TryParse(versionString, out semVer);
+    @pytest.mark.parametrize(
+        ["versionString"],
+        [
+            ("1.2.3"),
+            ("1.2.3+0"),
+            ("1.2.3+321"),
+            ("1.2.3+XYZ"),
+        ],
+    )
+    def test_SemanticVersionStrictEquality(self, versionString):
+        main = SemanticVersion("1.2.3")
+        semVer = SemanticVersion(versionString)
+        assert main == semVer
 
-            // Assert
-            Assert.True(main.Equals(semVer));
-            Assert.True(semVer.Equals(main));
+    @pytest.mark.parametrize(
+        ["versionString"],
+        [
+            ("1.2.3-alpha"),
+            ("1.2.3-alpha+0"),
+            ("1.2.3-alpha+10"),
+            ("1.2.3-alpha+beta"),
+        ],
+    )
+    def test_SemanticVersionStrictEqualityPreRelease(self, versionString):
+        main = SemanticVersion("1.2.3-alpha")
+        semVer = SemanticVersion(versionString)
+        assert main == semVer
 
-            Assert.True(main.GetHashCode() == semVer.GetHashCode());
-        }
-
-        [Theory]
-        [InlineData("1.2.3-alpha")]
-        [InlineData("1.2.3-alpha+0")]
-        [InlineData("1.2.3-alpha+10")]
-        [InlineData("1.2.3-alpha+beta")]
-        public void SemanticVersionStrictEqualityPreRelease(string versionString)
-        {
-            // Act
-            SemanticVersion main = null;
-            SemanticVersion.TryParse("1.2.3-alpha", out main);
-
-            SemanticVersion semVer = null;
-            SemanticVersion.TryParse(versionString, out semVer);
-
-            // Assert
-            Assert.True(main.Equals(semVer));
-            Assert.True(semVer.Equals(main));
-
-            Assert.True(main.GetHashCode() == semVer.GetHashCode());
-        }
-
-        [Theory]
-        [InlineData("2.7")]
-        [InlineData("1.3.4.5")]
-        [InlineData("1.3-alpha")]
-        [InlineData("1.3 .4")]
-        [InlineData("2.3.18.2-a")]
-        [InlineData("1.2.3-A..B")]
-        [InlineData("01.2.3")]
-        [InlineData("1.02.3")]
-        [InlineData("1.2.03")]
-        [InlineData(".2.03")]
-        [InlineData("1.2.")]
-        [InlineData("1.2.3-a$b")]
-        [InlineData("a.b.c")]
-        [InlineData("1.2.3-00")]
-        [InlineData("1.2.3-A.00.B")]
-        public void TryParseStrictReturnsFalseIfVersionIsNotStrictSemVer(string version)
-        {
-            // Act 
-            SemanticVersion semanticVersion;
-            var result = SemanticVersion.TryParse(version, out semanticVersion);
-
-            // Assert
-            Assert.False(result);
-            Assert.Null(semanticVersion);
-        }
-    }
-}
+    @pytest.mark.parametrize(
+        ["versionString"],
+        [
+            ("2.7"),
+            ("1.3.4.5"),
+            ("1.3-alpha"),
+            ("1.3 .4"),
+            ("2.3.18.2-a"),
+            ("1.2.3-A..B"),
+            ("01.2.3"),
+            ("1.02.3"),
+            ("1.2.03"),
+            (".2.03"),
+            ("1.2."),
+            ("1.2.3-a$b"),
+            ("a.b.c"),
+            ("1.2.3-00"),
+            ("1.2.3-A.00.B"),
+        ],
+    )
+    def test_TryParseStrictReturnsFalseIfVersionIsNotStrictSemVer(self, version):
+        semanticVersion = SemanticVersion(version)
+        assert not semanticVersion

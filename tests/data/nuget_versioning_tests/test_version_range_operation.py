@@ -1,316 +1,200 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+# Copyright (c) .NET Foundation. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+# URL: https://github.com/NuGet/NuGet.Client
+# Ported to Python from the C# NuGet test suite and significantly modified
 
-using System.Collections.Generic;
-using Xunit;
+import unittest
 
-namespace NuGet.Versioning.Test
-{
-    public class VersionRangeSetTests
-    {
-        [Theory]
-        [InlineData("[1.0.0, )", "[1.0.0, )")]
-        [InlineData("[1.0.0, )", "[1.0.1, )")]
-        [InlineData("[1.0.0-alpha, )", "[1.0.0, )")]
-        [InlineData("[1.0.0]", "[1.0.0]")]
-        [InlineData("[1.0.0, 2.0.0]", "(1.1.0, 1.5.0)")]
-        [InlineData("(, )", "[1.0.0, )")]
-        [InlineData("(0.0.0, )", "[1.0.0, )")]
-        [InlineData("(0.0.0, 0.0.0)", "(0.0.0, 0.0.0)")]
-        [InlineData("(1.0.0-alpha, 2.0.0]", "[2.0.0]")]
-        [InlineData("(1.0.0-alpha, 2.0.0]", "(2.0.0, 2.0.0)")]
-        [InlineData("(2.0.0, 2.0.0)", "(2.0.0, 2.0.0)")]
-        public void VersionRangeSet_SubSetTest(string superSet, string subSet)
-        {
-            var superSetRange = VersionRange.Parse(superSet);
-            var subSetRange = VersionRange.Parse(subSet);
+import pytest
 
-            Assert.True(subSetRange.IsSubSetOrEqualTo(superSetRange));
-        }
 
-        [Theory]
-        [InlineData("[1.0.1, )", "[1.0.0, )")]
-        [InlineData("[1.0.1, )", "[1.0.1-alpha, )")]
-        [InlineData("[1.0.0, 2.0.0)", "[1.0.0, 2.0.0]")]
-        [InlineData("[1.0.0, 2.0.0)", "[1.0.0-alpha, 2.0.0)")]
-        [InlineData("[1.0.0, 2.0.0)", "[ , 2.0.0)")]
-        [InlineData("(1.0.0, 2.0.0)", "[1.0.0, 2.0.0)")]
-        [InlineData("(1.0.0, 2.0.0)", "[1.0.0]")]
-        [InlineData("(1.0.0, 2.0.0)", "[1.0.0-beta]")]
-        [InlineData("(1.0.0-alpha, 2.0.0]", "(3.0.0, 3.0.0)")]
-        [InlineData("(3.0.0, 3.0.0)", "[3.0.0]")]
-        public void VersionRangeSet_SubSetTestNeg(string superSet, string subSet)
-        {
-            var superSetRange = VersionRange.Parse(superSet);
-            var subSetRange = VersionRange.Parse(subSet);
+class VersionRangeSetTests(unittest.TestCase):
+    @pytest.mark.parametrize(
+        [],
+        [
+            ("[1.0.0, )", "[1.0.0, )"),
+            ("[1.0.0, )", "[1.0.1, )"),
+            ("[1.0.0-alpha, )", "[1.0.0, )"),
+            ("[1.0.0]", "[1.0.0]"),
+            ("[1.0.0, 2.0.0]", "(1.1.0, 1.5.0)"),
+            ("(, )", "[1.0.0, )"),
+            ("(0.0.0, )", "[1.0.0, )"),
+            ("(0.0.0, 0.0.0)", "(0.0.0, 0.0.0)"),
+            ("(1.0.0-alpha, 2.0.0]", "[2.0.0]"),
+            ("(1.0.0-alpha, 2.0.0]", "(2.0.0, 2.0.0)"),
+            ("(2.0.0, 2.0.0)", "(2.0.0, 2.0.0)"),
+        ],
+    )
+    def test_VersionRangeSet_SubSetTest(self, superSet, subSet):
 
-            Assert.False(subSetRange.IsSubSetOrEqualTo(superSetRange));
-        }
+        superSetRange = VersionRange(superSet)
+        subSetRange = VersionRange(subSet)
 
-        [Theory]
-        [InlineData("[1.0.0, )", "[1.0.0, )", "[1.0.0, )")]
-        [InlineData("(, 1.0.0)", "[0.0.0, 1.0.0)", "(, 1.0.0)")]
-        [InlineData("[1.0.0, )", "[1.0.0, )", "(1.0.0, )")]
-        [InlineData("[1.0.0-alpha, )", "[1.0.0-alpha, )", "[1.0.0, )")]
-        [InlineData("[1.0.0, 2.0.0]", "[1.0.0]", "[2.0.0]")]
-        [InlineData("[1.0.0, 2.0.0-beta-1]", "[1.0.0]", "[2.0.0-beta-1]")]
-        [InlineData("[1.0.0, 3.0.0]", "[1.0.0, 2.0.0]", "[1.5.0, 3.0.0]")]
-        [InlineData("(1.0.0, 3.0.0)", "(1.0.0, 2.0.0]", "[1.5.0, 3.0.0)")]
-        [InlineData("[1.0.0, 2.0.0]", "(1.0.0, 2.0.0)", "[1.0.0, 2.0.0]")]
-        [InlineData("[1.0.0, 2.0.0]", "[1.0.0, 1.5.0)", "(1.5.0, 2.0.0]")]
-        [InlineData("(, )", "[1.0.0, 1.5.0)", "[, ]")]
-        [InlineData("(, )", "[1.0.0, 1.5.0)", "(, )")]
-        [InlineData("(, )", "[1.0.0-alpha, )", "(, 2.0.0-beta]")]
-        [InlineData("[0.0.0-alpha-1, 9000.0.0.1]", "[0.0.0-alpha-1, 0.0.0-alpha-2]", "[10.0.0.0, 9000.0.0.1]")]
-        public void VersionRangeSet_CombineTwoRanges(string expected, string rangeA, string rangeB)
-        {
-            // Arrange
-            var a = VersionRange.Parse(rangeA);
-            var b = VersionRange.Parse(rangeB);
+        assert subSetRange.IsSubSetOrEqualTo(superSetRange)
 
-            // Act
-            var ranges = new List<VersionRange>() { a, b };
-            var combined = VersionRange.Combine(ranges);
+    @pytest.mark.parametrize(
+        [],
+        [
+            ("[1.0.1, )", "[1.0.0, )"),
+            ("[1.0.1, )", "[1.0.1-alpha, )"),
+            ("[1.0.0, 2.0.0)", "[1.0.0, 2.0.0]"),
+            ("[1.0.0, 2.0.0)", "[1.0.0-alpha, 2.0.0)"),
+            ("[1.0.0, 2.0.0)", "[ , 2.0.0)"),
+            ("(1.0.0, 2.0.0)", "[1.0.0, 2.0.0)"),
+            ("(1.0.0, 2.0.0)", "[1.0.0]"),
+            ("(1.0.0, 2.0.0)", "[1.0.0-beta]"),
+            ("(1.0.0-alpha, 2.0.0]", "(3.0.0, 3.0.0)"),
+            ("(3.0.0, 3.0.0)", "[3.0.0]"),
+        ],
+    )
+    def test_VersionRangeSet_SubSetTestNeg(self, superSet, subSet):
 
-            var rangesRev = new List<VersionRange>() { b, a };
-            var combinedRev = VersionRange.Combine(rangesRev);
+        superSetRange = VersionRange(superSet)
+        subSetRange = VersionRange(subSet)
 
-            // Assert
-            Assert.Equal(expected, combined.ToNormalizedString());
+        assert not subSetRange.IsSubSetOrEqualTo(superSetRange)
 
-            // Verify the order has no effect
-            Assert.Equal(expected, combinedRev.ToNormalizedString());
-        }
+    @pytest.mark.parametrize(
+        [],
+        [
+            ("[1.0.0, )", "[1.0.0, )", "[1.0.0, )"),
+            ("(, 1.0.0)", "[0.0.0, 1.0.0)", "(, 1.0.0)"),
+            ("[1.0.0, )", "[1.0.0, )", "(1.0.0, )"),
+            ("[1.0.0-alpha, )", "[1.0.0-alpha, )", "[1.0.0, )"),
+            ("[1.0.0, 2.0.0]", "[1.0.0]", "[2.0.0]"),
+            ("[1.0.0, 2.0.0-beta-1]", "[1.0.0]", "[2.0.0-beta-1]"),
+            ("[1.0.0, 3.0.0]", "[1.0.0, 2.0.0]", "[1.5.0, 3.0.0]"),
+            ("(1.0.0, 3.0.0)", "(1.0.0, 2.0.0]", "[1.5.0, 3.0.0)"),
+            ("[1.0.0, 2.0.0]", "(1.0.0, 2.0.0)", "[1.0.0, 2.0.0]"),
+            ("[1.0.0, 2.0.0]", "[1.0.0, 1.5.0)", "(1.5.0, 2.0.0]"),
+            ("(, )", "[1.0.0, 1.5.0)", "[, ]"),
+            ("(, )", "[1.0.0, 1.5.0)", "(, )"),
+            ("(, )", "[1.0.0-alpha, )", "(, 2.0.0-beta]"),
+            (
+                "[0.0.0-alpha-1, 9000.0.0.1]",
+                "[0.0.0-alpha-1, 0.0.0-alpha-2]",
+                "[10.0.0.0, 9000.0.0.1]",
+            ),
+        ],
+    )
+    def test_VersionRangeSet_CombineTwoRanges(self, expected, rangeA, rangeB):
 
-        [Fact]
-        public void VersionRangeSet_CombineSingleRangeList()
-        {
-            // Arrange
-            var a = VersionRange.Parse("[1.0.0, )");
-            var ranges = new List<VersionRange>() { a };
+        a = VersionRange(rangeA)
+        b = VersionRange(rangeB)
 
-            // Act
-            var combined = VersionRange.Combine(ranges);
+        ranges = [a, b]
+        combined = VersionRange.Combine(ranges)
 
-            // Assert
-            Assert.Equal(a.ToNormalizedString(), combined.ToNormalizedString());
-        }
+        rangesRev = [b, a]
+        combinedRev = VersionRange.Combine(rangesRev)
 
-        [Fact]
-        public void VersionRangeSet_CombineEmptyRangeList()
-        {
-            // Arrange
-            var ranges = new List<VersionRange>() { };
+        assert combined.to_string() == expected
 
-            // Act
-            var combined = VersionRange.Combine(ranges);
+        # Verify the order has no effect
+        assert combinedRev.to_string() == expected
 
-            // Assert
-            Assert.Equal(VersionRange.None.ToNormalizedString(), combined.ToNormalizedString());
-        }
+    def test_VersionRangeSet_CombineSingleRangeList(self):
 
-        [Fact]
-        public void VersionRangeSet_SpecialCaseRangeCombine_Nones()
-        {
-            // Arrange
-            var ranges = new List<VersionRange>() { VersionRange.None, VersionRange.None, VersionRange.None };
+        a = VersionRange("[1.0.0, )")
+        ranges = [a]
 
-            // Act
-            var combined = VersionRange.Combine(ranges);
+        combined = VersionRange.Combine(ranges)
 
-            // Assert
-            Assert.Equal(VersionRange.None.ToNormalizedString(), combined.ToNormalizedString());
-        }
+        assert combined.to_string() == a.to_string()
 
-        [Fact]
-        public void VersionRangeSet_SpecialCaseRangeCombine_NoneAll()
-        {
-            // Arrange
-            var ranges = new List<VersionRange>() { VersionRange.None, VersionRange.All };
+    def test_VersionRangeSet_SpecialCaseRangeCombine_NonePlusOne(self):
 
-            // Act
-            var combined = VersionRange.Combine(ranges);
+        ranges = [VersionRange, VersionRange("[1.0.0]")]
 
-            // Assert
-            Assert.Equal(VersionRange.All.ToNormalizedString(), combined.ToNormalizedString());
-        }
+        combined = VersionRange.Combine(ranges)
 
-        [Fact]
-        public void VersionRangeSet_SpecialCaseRangeCombine_NonePlusOne()
-        {
-            // Arrange
-            var ranges = new List<VersionRange>() { VersionRange.None, VersionRange.Parse("[1.0.0]") };
+        assert combined.to_string() == "[1.0.0, 1.0.0]"
 
-            // Act
-            var combined = VersionRange.Combine(ranges);
+    def test_VersionRangeSet_RemoveEmptyRanges(self):
 
-            // Assert
-            Assert.Equal("[1.0.0, 1.0.0]", combined.ToNormalizedString());
-        }
+        ranges = [
+            VersionRange,
+            VersionRange("(5.0.0, 5.0.0)"),
+            VersionRange("(3.0.0-alpha, 3.0.0-alpha)"),
+            VersionRange("[1.0.0, 2.0.0]"),
+        ]
 
-        [Fact]
-        public void VersionRangeSet_RemoveEmptyRanges()
-        {
-            // Arrange
-            var ranges = new List<VersionRange>()
-                {
-                    VersionRange.None,
-                    VersionRange.Parse("(5.0.0, 5.0.0)"),
-                    VersionRange.Parse("(3.0.0-alpha, 3.0.0-alpha)"),
-                    VersionRange.Parse("[1.0.0, 2.0.0]")
-                };
+        combined = VersionRange.Combine(ranges)
 
-            // Act
-            var combined = VersionRange.Combine(ranges);
+        assert combined.to_string() == "[1.0.0, 2.0.0]"
 
-            // Assert
-            Assert.Equal("[1.0.0, 2.0.0]", combined.ToNormalizedString());
-        }
+    def test_VersionRangeSet_CombineMultipleRanges(self):
 
-        [Fact]
-        public void VersionRangeSet_SpecialCaseRangeCombine_All()
-        {
-            // Arrange
-            var ranges = new List<VersionRange>()
-                {
-#pragma warning disable CS0618 // Type or member is obsolete
-                VersionRange.AllStable, VersionRange.All,
-                VersionRange.AllFloating, VersionRange.AllStableFloating, VersionRange.None
-#pragma warning restore CS0618 // Type or member is obsolete
+        ranges = [
+            VersionRange("[1.0.0]"),
+            VersionRange("[2.0.0]"),
+            VersionRange("[3.0.0]"),
+            VersionRange("[4.0.0-beta-1]"),
+            VersionRange("[5.0.1-rc4]"),
+        ]
 
-                };
+        combined = VersionRange.Combine(ranges)
 
-            // Act
-            var combined = VersionRange.Combine(ranges);
+        ranges.Reverse()
 
-            // Assert
-            Assert.Equal(VersionRange.All.ToNormalizedString(), combined.ToNormalizedString());
-        }
+        assert combined.to_string() == "[1.0.0, 5.0.1-rc4]"
 
-        [Fact]
-        public void VersionRangeSet_SpecialCaseRangeCombine_AllStablePlusPre()
-        {
-            // Arrange
-            var pre = new VersionRange(new NuGetVersion("1.0.0"), true, new NuGetVersion("2.0.0"), true);
-            var ranges = new List<VersionRange>() { VersionRange.AllStable, pre };
+    def test_VersionRangeSet_CommonSubSet_SingleRangeList(self):
 
-            // Act
-            var combined = VersionRange.Combine(ranges);
+        a = VersionRange("[1.0.0, )")
+        ranges = [a]
 
-            // Assert
-            Assert.Equal(VersionRange.All.ToNormalizedString(), combined.ToNormalizedString());
-        }
+        combined = VersionRange.CommonSubSet(ranges)
 
-        [Fact]
-        public void VersionRangeSet_SpecialCaseRangeCombine_AllStablePlusStable()
-        {
-            // Arrange
-            var stable = new VersionRange(new NuGetVersion("1.0.0"), true, new NuGetVersion("2.0.0"), true);
-            var ranges = new List<VersionRange>() { VersionRange.AllStable, stable };
+        assert combined.to_string() == a.to_string()
 
-            // Act
-            var combined = VersionRange.Combine(ranges);
+    def test_VersionRangeSet_CommonSubSet_EmptyRangeList(self):
 
-            // Assert
-            Assert.Equal(VersionRange.AllStable.ToNormalizedString(), combined.ToNormalizedString());
-        }
+        ranges = []
 
-        [Fact]
-        public void VersionRangeSet_CombineMultipleRanges()
-        {
-            // Arrange 
-            var ranges = new List<VersionRange>()
-                {
-                    VersionRange.Parse("[1.0.0]"),
-                    VersionRange.Parse("[2.0.0]"),
-                    VersionRange.Parse("[3.0.0]"),
-                    VersionRange.Parse("[4.0.0-beta-1]"),
-                    VersionRange.Parse("[5.0.1-rc4]"),
-                };
+        combined = VersionRange.CommonSubSet(ranges)
 
-            // Act
-            var combined = VersionRange.Combine(ranges);
+        assert combined.to_string() == VersionRange.to_string()
 
-            ranges.Reverse();
+    @pytest.mark.parametrize(
+        [],
+        [
+            ("[2.0.0, )", "[1.0.0, )", "[2.0.0, )"),
+            ("[0.0.0, 1.0.0)", "[0.0.0, 2.0.0)", "(, 1.0.0)"),
+            ("[2.0.0, 3.0.0]", "(1.0.0, 3.0.0]", "[2.0.0, 4.0.0)"),
+            ("(0.0.0, 0.0.0)", "[1.0.0, 3.0.0]", "[4.0.0, 5.0.0)"),
+            ("(2.0.0, 3.0.0]", "(2.0.0, 3.0.0]", "[2.0.0, 4.0.0)"),
+            ("(0.0.0, 0.0.0)", "[1.0.0, 3.0.0)", "[3.0.0, 5.0.0)"),
+            ("(0.0.0, 0.0.0)", "[1.0.0, 3.0.0)", "[4.0.0, 5.0.0)"),
+            ("(1.5.0, 2.0.0]", "[1.0.0, 2.0.0]", "(1.5.0, 3.0.0]"),
+            ("[1.0.0, 1.5.0)", "[1.0.0, 1.5.0)", "[, ]"),
+            ("(0.0.0, 0.0.0)", "[1.0.0]", "[2.0.0]"),
+        ],
+    )
+    def test_VersionRangeSet_CommonSubSet(self, expected, rangeA, rangeB):
 
-            // Assert
-            Assert.Equal("[1.0.0, 5.0.1-rc4]", combined.ToNormalizedString());
-        }
+        a = VersionRange(rangeA)
+        b = VersionRange(rangeB)
 
-        [Fact]
-        public void VersionRangeSet_CommonSubSet_SingleRangeList()
-        {
-            // Arrange
-            var a = VersionRange.Parse("[1.0.0, )");
-            var ranges = new List<VersionRange>() { a };
+        ranges = [a, b]
+        combined = VersionRange.CommonSubSet(ranges)
 
-            // Act
-            var combined = VersionRange.CommonSubSet(ranges);
+        rangesRev = [b, a]
+        combinedRev = VersionRange.CommonSubSet(rangesRev)
 
-            // Assert
-            Assert.Equal(a.ToNormalizedString(), combined.ToNormalizedString());
-        }
+        assert combined.to_string() == expected
 
-        [Fact]
-        public void VersionRangeSet_CommonSubSet_EmptyRangeList()
-        {
-            // Arrange
-            var ranges = new List<VersionRange>() { };
+        # Verify the order has no effect
+        assert combinedRev.to_string() == expected
 
-            // Act
-            var combined = VersionRange.CommonSubSet(ranges);
+    def test_VersionRangeSet_CommonSubSetInMultipleRanges(self):
 
-            // Assert
-            Assert.Equal(VersionRange.None.ToNormalizedString(), combined.ToNormalizedString());
-        }
+        ranges = [
+            VersionRange("[1.0.0, 5.0.0)"),
+            VersionRange("[2.0.0, 6.0.0]"),
+            VersionRange("[4.0.0, 5.0.0]"),
+        ]
 
-        [Theory]
-        [InlineData("[2.0.0, )", "[1.0.0, )", "[2.0.0, )")]
-        [InlineData("[0.0.0, 1.0.0)", "[0.0.0, 2.0.0)", "(, 1.0.0)")]
-        [InlineData("[2.0.0, 3.0.0]", "(1.0.0, 3.0.0]", "[2.0.0, 4.0.0)")]
-        [InlineData("(0.0.0, 0.0.0)", "[1.0.0, 3.0.0]", "[4.0.0, 5.0.0)")]
-        [InlineData("(2.0.0, 3.0.0]", "(2.0.0, 3.0.0]", "[2.0.0, 4.0.0)")]
-        [InlineData("(0.0.0, 0.0.0)", "[1.0.0, 3.0.0)", "[3.0.0, 5.0.0)")]
-        [InlineData("(0.0.0, 0.0.0)", "[1.0.0, 3.0.0)", "[4.0.0, 5.0.0)")]
-        [InlineData("(1.5.0, 2.0.0]", "[1.0.0, 2.0.0]", "(1.5.0, 3.0.0]")]
-        [InlineData("[1.0.0, 1.5.0)", "[1.0.0, 1.5.0)", "[, ]")]
-        [InlineData("(0.0.0, 0.0.0)", "[1.0.0]", "[2.0.0]")]
-        public void VersionRangeSet_CommonSubSet(string expected, string rangeA, string rangeB)
-        {
-            // Arrange
-            var a = VersionRange.Parse(rangeA);
-            var b = VersionRange.Parse(rangeB);
+        combined = VersionRange.CommonSubSet(ranges)
 
-            // Act
-            var ranges = new List<VersionRange>() { a, b };
-            var combined = VersionRange.CommonSubSet(ranges);
-
-            var rangesRev = new List<VersionRange>() { b, a };
-            var combinedRev = VersionRange.CommonSubSet(rangesRev);
-
-            // Assert
-            Assert.Equal(expected, combined.ToNormalizedString());
-
-            // Verify the order has no effect
-            Assert.Equal(expected, combinedRev.ToNormalizedString());
-        }
-
-        [Fact]
-        public void VersionRangeSet_CommonSubSetInMultipleRanges()
-        {
-            // Arrange 
-            var ranges = new List<VersionRange>()
-                {
-                    VersionRange.Parse("[1.0.0, 5.0.0)"),
-                    VersionRange.Parse("[2.0.0, 6.0.0]"),
-                    VersionRange.Parse("[4.0.0, 5.0.0]"),
-                };
-
-            // Act
-            var combined = VersionRange.CommonSubSet(ranges);
-
-            // Assert
-            Assert.Equal("[4.0.0, 5.0.0)", combined.ToNormalizedString());
-        }
-    }
-}
+        assert combined.to_string() == "[4.0.0, 5.0.0)"
