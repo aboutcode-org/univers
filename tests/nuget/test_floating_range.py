@@ -3,402 +3,397 @@
 # URL: https://github.com/NuGet/NuGet.Client
 # Ported to Python from the C# NuGet test suite and significantly modified
 
-import unittest
-
 import pytest
 
+from univers.version_range import NugetVersionRange as VersionRange
+from univers.versions import NugetVersion as NuGetVersion
 
-class FloatingRangeTests:
-    def test_FloatRange_OutsideOfRange(self):
 
-        range = VersionRange("[1.0.*, 2.0.0)")
+def test_FloatRange_OutsideOfRange():
+    vrange = VersionRange("[1.0.*, 2.0.0)")
 
-        versions = [
-            NuGetVersion("0.1.0"),
-            NuGetVersion("1.0.0-alpha.2"),
-            NuGetVersion("2.0.0"),
-            NuGetVersion("2.2.0"),
-            NuGetVersion("3.0.0"),
-        ]
+    versions = [
+        NuGetVersion("0.1.0"),
+        NuGetVersion("1.0.0-alpha.2"),
+        NuGetVersion("2.0.0"),
+        NuGetVersion("2.2.0"),
+        NuGetVersion("3.0.0"),
+    ]
 
-        assert not range.FindBestMatch(versions)
+    assert not vrange.FindBestMatch(versions)
 
-    def test_FloatRange_OutsideOfRangeLower(self):
 
-        range = VersionRange("[1.0.*, 2.0.0)")
+def test_FloatRange_OutsideOfRangeLower():
+    vrange = VersionRange("[1.0.*, 2.0.0)")
+    versions = [NuGetVersion("0.1.0"), NuGetVersion("0.2.0"), NuGetVersion("1.0.0-alpha.2")]
+    assert not vrange.FindBestMatch(versions)
 
-        versions = [NuGetVersion("0.1.0"), NuGetVersion("0.2.0"), NuGetVersion("1.0.0-alpha.2")]
 
-        assert not range.FindBestMatch(versions)
+def test_FloatRange_OutsideOfRangeHigher():
+    vrange = VersionRange("[1.0.*, 2.0.0)")
 
-    def test_FloatRange_OutsideOfRangeHigher(self):
+    versions = [
+        NuGetVersion("2.0.0"),
+        NuGetVersion("2.0.0-alpha.2"),
+        NuGetVersion("3.1.0"),
+    ]
 
-        range = VersionRange("[1.0.*, 2.0.0)")
+    assert not vrange.FindBestMatch(versions)
 
-        versions = [
-            NuGetVersion("2.0.0"),
-            NuGetVersion("2.0.0-alpha.2"),
-            NuGetVersion("3.1.0"),
-        ]
 
-        assert not range.FindBestMatch(versions)
+def test_FloatRange_OutsideOfRangeOpen():
+    vrange = VersionRange("[1.0.*, )")
+    versions = [NuGetVersion("0.1.0"), NuGetVersion("0.2.0"), NuGetVersion("1.0.0-alpha.2")]
+    assert not vrange.FindBestMatch(versions)
 
-    def test_FloatRange_OutsideOfRangeOpen(self):
 
-        range = VersionRange("[1.0.*, )")
+def test_FloatRange_RangeOpen():
+    vrange = VersionRange("[1.0.*, )")
 
-        versions = [NuGetVersion("0.1.0"), NuGetVersion("0.2.0"), NuGetVersion("1.0.0-alpha.2")]
+    versions = [
+        NuGetVersion("0.1.0"),
+        NuGetVersion("0.2.0"),
+        NuGetVersion("1.0.0-alpha.2"),
+        NuGetVersion("101.0.0"),
+    ]
 
-        assert not range.FindBestMatch(versions)
+    assert vrange.FindBestMatch(versions).to_string() == "101.0.0"
 
-    def test_FloatRange_RangeOpen(self):
 
-        range = VersionRange("[1.0.*, )")
+def test_FloatRange_ParseBasic():
+    vrange = FloatRange("1.0.0")
+    assert vrange.MinVersion == vrange.MinVersion
+    assert NuGetVersionFloatBehavior == vrange.FloatBehavior
 
-        versions = [
-            NuGetVersion("0.1.0"),
-            NuGetVersion("0.2.0"),
-            NuGetVersion("1.0.0-alpha.2"),
-            NuGetVersion("101.0.0"),
-        ]
 
-        assert range.FindBestMatch(versions).to_string() == "101.0.0"
+def test_FloatRange_ParsePrerelease():
+    vrange = FloatRange("1.0.0-*")
+    assert vrange.Satisfies(NuGetVersion("1.0.0-alpha"))
+    assert vrange.Satisfies(NuGetVersion("1.0.0-beta"))
+    assert vrange.Satisfies(NuGetVersion("1.0.0"))
+    assert not vrange.Satisfies(NuGetVersion("1.0.1-alpha"))
+    assert not vrange.Satisfies(NuGetVersion("1.0.1"))
 
-    def test_FloatRange_ParseBasic(self):
 
-        range = FloatRange("1.0.0")
+def test_FloatingRange_FloatNone():
+    vrange = FloatRange("1.0.0")
+    assert vrange.MinVersion.to_string() == "1.0.0"
+    assert vrange.FloatBehavior == NuGetVersionFloatBehavior
 
-        assert range.MinVersion == range.MinVersion
-        assert NuGetVersionFloatBehavior == range.FloatBehavior
 
-    def test_FloatRange_ParsePrerelease(self):
+def test_FloatingRange_FloatPre():
+    vrange = FloatRange("1.0.0-*")
 
-        range = FloatRange("1.0.0-*")
+    assert vrange.MinVersion.to_string() == "1.0.0-0"
+    assert vrange.FloatBehavior == NuGetVersionFloatBehavior.Prerelease
 
-        assert range.Satisfies(NuGetVersion("1.0.0-alpha"))
-        assert range.Satisfies(NuGetVersion("1.0.0-beta"))
-        assert range.Satisfies(NuGetVersion("1.0.0"))
 
-        assert not range.Satisfies(NuGetVersion("1.0.1-alpha"))
-        assert not range.Satisfies(NuGetVersion("1.0.1"))
+def test_FloatingRange_FloatPrePrefix():
+    vrange = FloatRange("1.0.0-alpha-*")
+    assert vrange.MinVersion.to_string() == "1.0.0-alpha-"
+    assert vrange.FloatBehavior == NuGetVersionFloatBehavior.Prerelease
 
-    def test_FloatingRange_FloatNone(self):
 
-        range = FloatRange("1.0.0")
+def test_FloatingRange_FloatRev():
+    vrange = FloatRange("1.0.0.*")
+    assert vrange.MinVersion.to_string() == "1.0.0"
+    assert vrange.FloatBehavior == NuGetVersionFloatBehavior.Revision
 
-        assert range.MinVersion.to_string() == "1.0.0"
-        assert range.FloatBehavior == NuGetVersionFloatBehavior
 
-    def test_FloatingRange_FloatPre(self):
+def test_FloatingRange_FloatPatch():
+    vrange = FloatRange("1.0.*")
+    assert vrange.MinVersion.to_string() == "1.0.0"
+    assert vrange.FloatBehavior == NuGetVersionFloatBehavior.Patch
 
-        range = FloatRange("1.0.0-*")
 
-        assert range.MinVersion.to_string() == "1.0.0-0"
-        assert range.FloatBehavior == NuGetVersionFloatBehavior.Prerelease
+def test_FloatingRange_FloatMinor():
+    vrange = FloatRange("1.*")
+    assert vrange.MinVersion.to_string() == "1.0.0"
+    assert vrange.FloatBehavior == NuGetVersionFloatBehavior.Minor
 
-    def test_FloatingRange_FloatPrePrefix(self):
 
-        range = FloatRange("1.0.0-alpha-*")
+def test_FloatingRange_FloatMajor():
+    vrange = FloatRange("*")
+    assert vrange.MinVersion.to_string() == "0.0.0"
+    assert vrange.FloatBehavior == NuGetVersionFloatBehavior.Major
 
-        assert range.MinVersion.to_string() == "1.0.0-alpha-"
-        assert range.FloatBehavior == NuGetVersionFloatBehavior.Prerelease
 
-    def test_FloatingRange_FloatRev(self):
+def test_FloatingRange_FloatNoneBest():
+    vrange = VersionRange("1.0.0")
 
-        range = FloatRange("1.0.0.*")
+    versions = [
+        NuGetVersion("1.0.0"),
+        NuGetVersion("1.0.1"),
+        NuGetVersion("2.0.0"),
+    ]
 
-        assert range.MinVersion.to_string() == "1.0.0"
-        assert range.FloatBehavior == NuGetVersionFloatBehavior.Revision
+    assert vrange.FindBestMatch(versions).to_string() == "1.0.0"
 
-    def test_FloatingRange_FloatPatch(self):
 
-        range = FloatRange("1.0.*")
+def test_FloatingRange_FloatMinorBest():
 
-        assert range.MinVersion.to_string() == "1.0.0"
-        assert range.FloatBehavior == NuGetVersionFloatBehavior.Patch
+    vrange = VersionRange("1.*")
 
-    def test_FloatingRange_FloatMinor(self):
+    versions = [
+        NuGetVersion("0.1.0"),
+        NuGetVersion("1.0.0"),
+        NuGetVersion("1.2.0"),
+        NuGetVersion("2.0.0"),
+    ]
 
-        range = FloatRange("1.*")
+    assert vrange.FindBestMatch(versions).to_string() == "1.2.0"
 
-        assert range.MinVersion.to_string() == "1.0.0"
-        assert range.FloatBehavior == NuGetVersionFloatBehavior.Minor
 
-    def test_FloatingRange_FloatMajor(self):
+def test_FloatingRange_FloatMinorPrefixNotFoundBest():
 
-        range = FloatRange("*")
+    vrange = VersionRange("1.*")
 
-        assert range.MinVersion.to_string() == "0.0.0"
-        assert range.FloatBehavior == NuGetVersionFloatBehavior.Major
+    versions = [
+        NuGetVersion("0.1.0"),
+        NuGetVersion("2.0.0"),
+        NuGetVersion("2.5.0"),
+        NuGetVersion("3.3.0"),
+    ]
 
-    def test_FloatingRange_FloatNoneBest(self):
+    # take the nearest when the prefix is not matched
+    assert vrange.FindBestMatch(versions).to_string() == "2.0.0"
 
-        range = VersionRange("1.0.0")
 
-        versions = [
-            NuGetVersion("1.0.0"),
-            NuGetVersion("1.0.1"),
-            NuGetVersion("2.0.0"),
-        ]
+def test_FloatingRange_FloatAllBest():
 
-        assert range.FindBestMatch(versions).to_string() == "1.0.0"
+    vrange = VersionRange("*")
 
-    def test_FloatingRange_FloatMinorBest(self):
+    versions = [
+        NuGetVersion("0.1.0"),
+        NuGetVersion("2.0.0"),
+        NuGetVersion("2.5.0"),
+        NuGetVersion("3.3.0"),
+    ]
 
-        range = VersionRange("1.*")
+    assert vrange.FindBestMatch(versions).to_string() == "3.3.0"
 
-        versions = [
-            NuGetVersion("0.1.0"),
-            NuGetVersion("1.0.0"),
-            NuGetVersion("1.2.0"),
-            NuGetVersion("2.0.0"),
-        ]
 
-        assert range.FindBestMatch(versions).to_string() == "1.2.0"
+def test_FloatingRange_FloatPrereleaseBest():
 
-    def test_FloatingRange_FloatMinorPrefixNotFoundBest(self):
+    vrange = VersionRange("1.0.0-*")
 
-        range = VersionRange("1.*")
+    versions = [
+        NuGetVersion("0.1.0-alpha"),
+        NuGetVersion("1.0.0-alpha01"),
+        NuGetVersion("1.0.0-alpha02"),
+        NuGetVersion("2.0.0-beta"),
+        NuGetVersion("2.0.1"),
+    ]
 
-        versions = [
-            NuGetVersion("0.1.0"),
-            NuGetVersion("2.0.0"),
-            NuGetVersion("2.5.0"),
-            NuGetVersion("3.3.0"),
-        ]
+    assert vrange.FindBestMatch(versions).to_string() == "1.0.0-alpha02"
 
-        # take the nearest when the prefix is not matched
-        assert range.FindBestMatch(versions).to_string() == "2.0.0"
 
-    def test_FloatingRange_FloatAllBest(self):
+def test_FloatingRange_FloatPrereleaseNotFoundBest():
 
-        range = VersionRange("*")
+    vrange = VersionRange("1.0.0-*")
 
-        versions = [
-            NuGetVersion("0.1.0"),
-            NuGetVersion("2.0.0"),
-            NuGetVersion("2.5.0"),
-            NuGetVersion("3.3.0"),
-        ]
+    versions = [
+        NuGetVersion("0.1.0-alpha"),
+        NuGetVersion("1.0.1-alpha01"),
+        NuGetVersion("1.0.1-alpha02"),
+        NuGetVersion("2.0.0-beta"),
+        NuGetVersion("2.0.1"),
+    ]
 
-        assert range.FindBestMatch(versions).to_string() == "3.3.0"
+    assert vrange.FindBestMatch(versions).to_string() == "1.0.1-alpha01"
 
-    def test_FloatingRange_FloatPrereleaseBest(self):
 
-        range = VersionRange("1.0.0-*")
+def test_FloatingRange_FloatPrereleasePartialBest():
 
-        versions = [
-            NuGetVersion("0.1.0-alpha"),
-            NuGetVersion("1.0.0-alpha01"),
-            NuGetVersion("1.0.0-alpha02"),
-            NuGetVersion("2.0.0-beta"),
-            NuGetVersion("2.0.1"),
-        ]
+    vrange = VersionRange("1.0.0-alpha*")
 
-        assert range.FindBestMatch(versions).to_string() == "1.0.0-alpha02"
+    versions = [
+        NuGetVersion("0.1.0-alpha"),
+        NuGetVersion("1.0.0-alpha01"),
+        NuGetVersion("1.0.0-alpha02"),
+        NuGetVersion("2.0.0-beta"),
+        NuGetVersion("2.0.1"),
+    ]
 
-    def test_FloatingRange_FloatPrereleaseNotFoundBest(self):
+    assert vrange.FindBestMatch(versions).to_string() == "1.0.0-alpha02"
 
-        range = VersionRange("1.0.0-*")
 
-        versions = [
-            NuGetVersion("0.1.0-alpha"),
-            NuGetVersion("1.0.1-alpha01"),
-            NuGetVersion("1.0.1-alpha02"),
-            NuGetVersion("2.0.0-beta"),
-            NuGetVersion("2.0.1"),
-        ]
+def test_FloatingRange_to_stringPre():
 
-        assert range.FindBestMatch(versions).to_string() == "1.0.1-alpha01"
+    vrange = VersionRange("1.0.0-*")
 
-    def test_FloatingRange_FloatPrereleasePartialBest(self):
+    assert vrange.to_string() == "[1.0.0-*, )"
 
-        range = VersionRange("1.0.0-alpha*")
 
-        versions = [
-            NuGetVersion("0.1.0-alpha"),
-            NuGetVersion("1.0.0-alpha01"),
-            NuGetVersion("1.0.0-alpha02"),
-            NuGetVersion("2.0.0-beta"),
-            NuGetVersion("2.0.1"),
-        ]
+def test_FloatingRange_to_stringPrePrefix():
 
-        assert range.FindBestMatch(versions).to_string() == "1.0.0-alpha02"
+    vrange = VersionRange("1.0.0-alpha.*")
 
-    def test_FloatingRange_to_stringPre(self):
+    assert vrange.to_string() == "[1.0.0-alpha.*, )"
 
-        range = VersionRange("1.0.0-*")
 
-        assert range.to_string() == "[1.0.0-*, )"
+def test_FloatingRange_to_stringRev():
 
-    def test_FloatingRange_to_stringPrePrefix(self):
+    vrange = VersionRange("1.0.0.*")
 
-        range = VersionRange("1.0.0-alpha.*")
+    assert vrange.to_string() == "[1.0.0.*, )"
 
-        assert range.to_string() == "[1.0.0-alpha.*, )"
 
-    def test_FloatingRange_to_stringRev(self):
+def test_FloatingRange_to_stringPatch():
 
-        range = VersionRange("1.0.0.*")
+    vrange = VersionRange("1.0.*")
 
-        assert range.to_string() == "[1.0.0.*, )"
+    assert vrange.to_string() == "[1.0.*, )"
 
-    def test_FloatingRange_to_stringPatch(self):
 
-        range = VersionRange("1.0.*")
+def test_FloatingRange_to_stringMinor():
 
-        assert range.to_string() == "[1.0.*, )"
+    vrange = VersionRange("1.*")
 
-    def test_FloatingRange_to_stringMinor(self):
+    assert vrange.to_string() == "[1.*, )"
 
-        range = VersionRange("1.*")
 
-        assert range.to_string() == "[1.*, )"
+@pytest.mark.parametrize(
+    "floatVersionString",
+    [
+        ("1.0.0+*"),
+        ("1.0.**"),
+        ("1.*.0"),
+        ("1.0.*-*bla"),
+        ("1.0.*-*bla+*"),
+        ("**"),
+        ("1.0.0-preview.*+blabla"),
+        ("1.0.*--"),
+        ("1.0.*-alpha*+"),
+        ("1.0.*-"),
+        (None),
+        (""),
+    ],
+)
+def test_FloatingRange_TryParse_Invalid(floatVersionString):
+    valid = FloatRange.from_string(floatVersionString)
+    assert not valid
+    assert not vrange
 
-    @pytest.mark.parametrize(
-        ["floatVersionString"],
-        [
-            ("1.0.0+*"),
-            ("1.0.**"),
-            ("1.*.0"),
-            ("1.0.*-*bla"),
-            ("1.0.*-*bla+*"),
-            ("**"),
-            ("1.0.0-preview.*+blabla"),
-            ("1.0.*--"),
-            ("1.0.*-alpha*+"),
-            ("1.0.*-"),
-            (None),
-            (""),
-        ],
-    )
-    def test_FloatingRange_TryParse_Invalid(self, floatVersionString):
 
-        valid = FloatRange.from_string(floatVersionString)
+@pytest.mark.parametrize(
+    "floatVersionString",
+    [
+        ("1.0.0-preview.*"),
+        ("1.0.*-bla*"),
+        ("1.0.*-*"),
+        ("1.0.*-preview.1.*"),
+        ("1.0.*-preview.1*"),
+        ("1.0.0--"),
+        ("1.0.0-bla*"),
+        ("1.0.*--*"),
+        ("1.0.0--*"),
+    ],
+)
+def test_FloatingRange_Parse_Valid(floatVersionString):
 
-        assert not valid
-        assert not range
+    vrange = FloatRange(floatVersionString)
+    assert vrange
 
-    @pytest.mark.parametrize(
-        ["floatVersionString"],
-        [
-            ("1.0.0-preview.*"),
-            ("1.0.*-bla*"),
-            ("1.0.*-*"),
-            ("1.0.*-preview.1.*"),
-            ("1.0.*-preview.1*"),
-            ("1.0.0--"),
-            ("1.0.0-bla*"),
-            ("1.0.*--*"),
-            ("1.0.0--*"),
-        ],
-    )
-    def test_FloatingRange_Parse_Valid(self, floatVersionString):
 
-        range = FloatRange(floatVersionString)
-        assert range
+@pytest.mark.parametrize(
+    "floatVersionString",
+    [
+        ("1.0.0+*"),
+        ("1.0.**"),
+        ("1.*.0"),
+        ("1.0.*-*bla"),
+        ("1.0.*-*bla+*"),
+        ("**"),
+        ("1.0.0-preview.*+blabla"),
+        ("1.0.*--"),
+        ("1.0.*-alpha*+"),
+        ("1.0.*-"),
+        (None),
+        (""),
+    ],
+)
+def test_FloatingRange_Parse_Invalid(floatVersionString):
 
-    @pytest.mark.parametrize(
-        ["floatVersionString"],
-        [
-            ("1.0.0+*"),
-            ("1.0.**"),
-            ("1.*.0"),
-            ("1.0.*-*bla"),
-            ("1.0.*-*bla+*"),
-            ("**"),
-            ("1.0.0-preview.*+blabla"),
-            ("1.0.*--"),
-            ("1.0.*-alpha*+"),
-            ("1.0.*-"),
-            (None),
-            (""),
-        ],
-    )
-    def test_FloatingRange_Parse_Invalid(self, floatVersionString):
+    vrange = FloatRange(floatVersionString)
 
-        range = FloatRange(floatVersionString)
+    assert not vrange
 
-        assert not range
 
-    @pytest.mark.parametrize(
-        ["floatVersionString"],
-        [
-            ("1.0.0-preview.*"),
-            ("1.0.*-bla*"),
-            ("1.0.*-*"),
-            ("1.0.*-preview.1.*"),
-            ("1.0.*-preview.1*"),
-            ("1.0.0--"),
-            ("1.0.0-bla*"),
-            ("1.0.*--*"),
-            ("1.0.0--*"),
-        ],
-    )
-    def test_FloatingRange_TryParse_Valid(self, floatVersionString):
+@pytest.mark.parametrize(
+    "floatVersionString",
+    [
+        ("1.0.0-preview.*"),
+        ("1.0.*-bla*"),
+        ("1.0.*-*"),
+        ("1.0.*-preview.1.*"),
+        ("1.0.*-preview.1*"),
+        ("1.0.0--"),
+        ("1.0.0-bla*"),
+        ("1.0.*--*"),
+        ("1.0.0--*"),
+    ],
+)
+def test_FloatingRange_TryParse_Valid(floatVersionString):
+    valid = FloatRange.from_string(floatVersionString)
+    assert valid
+    assert vrange
 
-        valid = FloatRange.from_string(floatVersionString)
 
-        assert valid
-        assert range
+def test_FloatingRange_FloatPrereleaseRev():
+    vrange = FloatRange("1.0.0.*-*")
+    assert vrange.MinVersion.to_string() == "1.0.0-0"
+    assert vrange.FloatBehavior == NuGetVersionFloatBehavior.PrereleaseRevision
 
-    def test_FloatingRange_FloatPrereleaseRev(self):
 
-        range = FloatRange("1.0.0.*-*")
+def test_FloatingRange_FloatPrereleasePatch():
 
-        assert range.MinVersion.to_string() == "1.0.0-0"
-        assert range.FloatBehavior == NuGetVersionFloatBehavior.PrereleaseRevision
+    vrange = FloatRange("1.0.*-*")
 
-    def test_FloatingRange_FloatPrereleasePatch(self):
+    assert vrange.MinVersion.to_string() == "1.0.0-0"
+    assert vrange.FloatBehavior == NuGetVersionFloatBehavior.PrereleasePatch
 
-        range = FloatRange("1.0.*-*")
 
-        assert range.MinVersion.to_string() == "1.0.0-0"
-        assert range.FloatBehavior == NuGetVersionFloatBehavior.PrereleasePatch
+def test_FloatingRange_FloatPrereleaseMinor():
+    vrange = FloatRange("1.*-*")
+    assert vrange.MinVersion.to_string() == "1.0.0-0"
+    assert vrange.FloatBehavior == NuGetVersionFloatBehavior.PrereleaseMinor
 
-    def test_FloatingRange_FloatPrereleaseMinor(self):
 
-        range = FloatRange("1.*-*")
+def test_FloatingRange_FloatMajorPrerelease():
+    vrange = FloatRange("*-rc.*")
+    assert vrange.MinVersion.to_string() == "0.0.0-rc.0"
+    assert vrange.FloatBehavior == NuGetVersionFloatBehavior.PrereleaseMajor
 
-        assert range.MinVersion.to_string() == "1.0.0-0"
-        assert range.FloatBehavior == NuGetVersionFloatBehavior.PrereleaseMinor
 
-    def test_FloatingRange_FloatMajorPrerelease(self):
+def test_FloatingRange_FloatAbsoluteLatest():
+    vrange = FloatRange("*-*")
+    assert vrange.MinVersion.to_string() == "0.0.0-0"
+    assert vrange.FloatBehavior == NuGetVersionFloatBehavior.AbsoluteLatest
 
-        range = FloatRange("*-rc.*")
 
-        assert range.MinVersion.to_string() == "0.0.0-rc.0"
-        assert range.FloatBehavior == NuGetVersionFloatBehavior.PrereleaseMajor
-
-    def test_FloatingRange_FloatAbsoluteLatest(self):
-
-        range = FloatRange("*-*")
-
-        assert range.MinVersion.to_string() == "0.0.0-0"
-        assert range.FloatBehavior == NuGetVersionFloatBehavior.AbsoluteLatest
-
-    @pytest.mark.parametrize(
-        ["versionRange", "normalizedMinVersion"],
-        [
-            ("*", "0.0.0"),
-            ("*-*", "0.0.0-0"),
-            ("1.*", "1.0.0"),
-            ("1.1.*", "1.1.0"),
-            ("1.1.*-*", "1.1.0-0"),
-            ("1.1.1-*", "1.1.1-0"),
-            ("1.1.1-beta*", "1.1.1-beta"),
-            ("1.1.1-1*", "1.1.1-1"),
-            ("1.1.*-beta*", "1.1.0-beta"),
-            ("1.1.*-1*", "1.1.0-1"),
-            ("1.0.0-beta.1*", "1.0.0-beta.1"),
-            ("1.0.*-beta.1*", "1.0.0-beta.1"),
-            ("1.0.0-b-*", "1.0.0-b-"),
-            ("1.0.*-b-*", "1.0.0-b-"),
-            ("1.1.0-beta.*", "1.1.0-beta.0"),
-            ("1.1.*-beta.*", "1.1.0-beta.0"),
-            ("*-beta.*", "0.0.0-beta.0"),
-        ],
-    )
-    def test_FloatRange_ParsesCorrectMinVersion(self, versionRange, normalizedMinVersion):
-        range = FloatRange(versionRange)
-        assert range.MinVersion.to_string() == normalizedMinVersion
+@pytest.mark.parametrize(
+    "versionRange, normalizedMinVersion",
+    [
+        ("*", "0.0.0"),
+        ("*-*", "0.0.0-0"),
+        ("1.*", "1.0.0"),
+        ("1.1.*", "1.1.0"),
+        ("1.1.*-*", "1.1.0-0"),
+        ("1.1.1-*", "1.1.1-0"),
+        ("1.1.1-beta*", "1.1.1-beta"),
+        ("1.1.1-1*", "1.1.1-1"),
+        ("1.1.*-beta*", "1.1.0-beta"),
+        ("1.1.*-1*", "1.1.0-1"),
+        ("1.0.0-beta.1*", "1.0.0-beta.1"),
+        ("1.0.*-beta.1*", "1.0.0-beta.1"),
+        ("1.0.0-b-*", "1.0.0-b-"),
+        ("1.0.*-b-*", "1.0.0-b-"),
+        ("1.1.0-beta.*", "1.1.0-beta.0"),
+        ("1.1.*-beta.*", "1.1.0-beta.0"),
+        ("*-beta.*", "0.0.0-beta.0"),
+    ],
+)
+def test_FloatRange_ParsesCorrectMinVersion(versionRange, normalizedMinVersion):
+    vrange = FloatRange(versionRange)
+    assert vrange.MinVersion.to_string() == normalizedMinVersion
