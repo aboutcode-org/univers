@@ -9,6 +9,7 @@ import pytest
 
 from univers.version_constraint import VersionConstraint
 from univers.version_range import GemVersionRange
+from univers.version_range import NugetVersionRange
 from univers.version_range import InvalidVersionRange
 from univers.version_range import PypiVersionRange
 from univers.version_range import VersionRange
@@ -16,6 +17,7 @@ from univers.version_range import RANGE_CLASS_BY_SCHEMES
 from univers.version_range import NpmVersionRange
 from univers.version_range import OpensslVersionRange
 from univers.versions import PypiVersion
+from univers.versions import NugetVersion
 from univers.versions import RubygemsVersion
 from univers.versions import SemverVersion
 from univers.versions import OpensslVersion
@@ -261,6 +263,18 @@ class TestVersionRange(TestCase):
         )
         version_range = OpensslVersionRange.from_versions(sequence)
         assert version_range == expected
+
+    def test_nuget_version_range(self):
+        nuget_range = "[1.0.0, 2.0.0)"
+        expected = NugetVersionRange(
+            constraints=(
+                VersionConstraint(comparator=">=", version=NugetVersion(string="1.0.0")),
+                VersionConstraint(comparator="<", version=NugetVersion(string="2.0.0")),
+            )
+        )
+        version_range = NugetVersionRange.from_native(nuget_range)
+        assert version_range == expected
+        assert version_range.to_string() == "vers:nuget/>=1.0.0|<2.0.0"
 
 
 VERSION_RANGE_TESTS_BY_SCHEME = {

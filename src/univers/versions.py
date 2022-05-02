@@ -305,6 +305,9 @@ class NugetVersion(Version):
         except ValueError:
             return False
 
+    def __str__(self):
+        return str(self.string)
+
     def __lt__(self, other):
         return nuget.Version.from_string(self.string) < nuget.Version.from_string(other.string)
 
