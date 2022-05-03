@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+Version v30.5.1
+----------------
+
+- Fix Nuget string representation
+
+
 Version v30.5.0
 ----------------
 
