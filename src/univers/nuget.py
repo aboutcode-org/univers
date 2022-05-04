@@ -1,16 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+# Nuget version utility originally from:
+# https://raw.githubusercontent.com/google/osv/f5647ad2f746685b08debfba0293e442f2fb9945/lib/osv/nuget.py
 # Copyright 2022 Google LLC
+# modified by nexB and others for integration in the Univers library
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
 import functools
 import re
@@ -129,8 +123,13 @@ def normalize(version):
 
 
 def _extract_revision(str_version):
-    """Extract revision (4th component) from version number (if any)."""
+    """
+    Extract revision from ``str_version`` and return a tuple of:
+        (dotted version string without revision, revision integer).
+    The revision is the 4th numeric dotted component of a NuGet version.
+    """
     # e.g. '1.0.0.0-prerelease'
+    # note: each match group contains its leading dot.
     pattern = re.compile(r"^(\d+)(\.\d+)(\.\d+)(\.\d+)(.*)")
     match = pattern.match(str_version)
     if not match:
@@ -142,15 +141,20 @@ def _extract_revision(str_version):
     )
 
 
+class InvalidNuGetVersion(Exception):
+    pass
+
+
 @functools.total_ordering
 class Version:
     """NuGet version."""
 
-    def __init__(self, base_semver, revision):
+    def __init__(self, base_semver, revision=0):
         self._base_semver = base_semver
         if self._base_semver.prerelease:
             self._base_semver = self._base_semver.replace(prerelease=base_semver.prerelease.lower())
-        self._revision = revision
+        self._revision = revision or 0
+        self._original_version = None
 
     def __eq__(self, other):
         return self._base_semver == other._base_semver and self._revision == other._revision
@@ -166,6 +170,82 @@ class Version:
 
     @classmethod
     def from_string(cls, str_version):
+        if not str_version:
+            return
+
+        str_version = str_version.strip()
+        if " " in str_version:
+            raise InvalidNuGetVersion(f"version cannot contain spaces: {str_version}")
+
+        if not any(c.isdigit() for c in str_version):
+            raise InvalidNuGetVersion(f"version does not contain any digit: {str_version}")
+
+        original = str_version
         str_version = coerce(str_version)
         str_version, revision = _extract_revision(str_version)
-        return Version(parse(str_version), revision)
+        vers = Version(base_semver=parse(str_version), revision=revision)
+        vers._original_version = original
+        return vers
+
+    def __repr__(self):
+        return f"Version<{self.to_string()}>"
+
+    def to_string(self, with_empty_revision=False, include_prerelease=True, include_build=True):
+        major = self.major or "0"
+        minor = self.minor or "0"
+        patch = self.patch or "0"
+
+        if with_empty_revision:
+            revision = self.revision and f".{self.revision}" or ".0"
+        else:
+            revision = self.revision and f".{self.revision}" or ""
+
+        if include_prerelease:
+            prerelease = self.prerelease and f"-{self.prerelease}" or ""
+        else:
+            prerelease = ""
+        if include_build:
+            build = self.build and f"+{self.build}" or ""
+        else:
+            build = ""
+
+        return f"{major}.{minor}.{patch}{revision}{prerelease}{build}"
+
+    def __str__(self):
+        return self.to_string(
+            with_empty_revision=False, include_prerelease=True, include_build=True
+        )
+
+    @property
+    def base_version(self):
+        """
+        Return the base version dotted string composed of the four numerical
+        segments including revision and ignoring prerelease and build.
+        """
+        return self.to_string(
+            with_empty_revision=True, include_prerelease=False, include_build=False
+        )
+
+    @property
+    def major(self):
+        return self._base_semver.major
+
+    @property
+    def minor(self):
+        return self._base_semver.minor
+
+    @property
+    def patch(self):
+        return self._base_semver.patch
+
+    @property
+    def revision(self):
+        return self._revision
+
+    @property
+    def prerelease(self):
+        return self._base_semver.prerelease and self._base_semver.prerelease or ""
+
+    @property
+    def build(self):
+        return self._base_semver.build and self._base_semver.build or ""

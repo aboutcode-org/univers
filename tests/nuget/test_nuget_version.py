@@ -6,29 +6,30 @@
 import pytest
 
 from univers import nuget
-from univers.versions import SemverVersion as SemanticVersion
+
 
 @pytest.mark.parametrize(
-    "version_string",
+    ("version_string", "expected"),
     [
-        "1.0.0",
-        "0.0.1",
-        "1.2.3",
-        "1.2.3-alpha",
-        "1.2.3-X.y.3+Meta-2",
-        "1.2.3-X.yZ.3.234.243.3242342+METADATA",
-        "1.2.3-X.y3+0",
-        "1.2.3-X+0",
-        "1.2.3+0",
-        "1.2.3-0",
+        ("1.0.0", "1.0.0"),
+        ("0.0.1", "0.0.1"),
+        ("1.2.3", "1.2.3"),
+        ("1.2.3-alpha", "1.2.3-alpha"),
+        ("1.2.3-X.y.3+Meta-2", "1.2.3-x.y.3+Meta-2"),
+        ("1.2.3-X.yZ.3.234.243.3242342+METADATA", "1.2.3-x.yz.3.234.243.3242342+METADATA"),
+        ("1.2.3-X.y3+0", "1.2.3-x.y3+0"),
+        ("1.2.3-X+0", "1.2.3-x+0"),
+        ("1.2.3+0", "1.2.3+0"),
+        ("1.2.3-0", "1.2.3-0"),
     ],
 )
-def test_NuGetVersionParseStrict(version_string):
-    semver = nuget.Version.from_string(version_string, semver=True)
-    assert version_string == str(semver)
+def test_NuGetVersionParseStrict_and_normalize_case(version_string, expected):
+    semver = nuget.Version.from_string(version_string)
+    assert str(semver) == expected
+
 
 @pytest.mark.parametrize(
-    ("version", "version_value_string", "special_value", "metadata"),
+    ("version", "base_version", "prerelease", "build"),
     [
         ("1.0.0", "1.0.0.0", "", ""),
         ("2.3-alpha", "2.3.0.0", "alpha", ""),
@@ -37,14 +38,12 @@ def test_NuGetVersionParseStrict(version_string):
         ("1.0.0-beta.x.y.5.79.0+AA", "1.0.0.0", "beta.x.y.5.79.0", "AA"),
     ],
 )
-def test_StringConstructorParsesValuesCorrectly(
-    version, version_value_string, special_value, metadata
-):
-    versionValue = nuget.Version(version_value_string)
-    semanticVersion = SemanticVersion(version)
-    assert versionValue == semanticVersion.version
-    assert special_value == semanticVersion.release
-    assert metadata == semanticVersion.metadata
+def test_StringConstructorParsesValuesCorrectly(version, base_version, prerelease, build):
+    vers = nuget.Version.from_string(version)
+    assert vers.base_version == base_version
+    assert vers.prerelease == prerelease.lower()
+    assert vers.build == build
+
 
 @pytest.mark.parametrize(
     "version_string",
@@ -56,6 +55,7 @@ def test_StringConstructorParsesValuesCorrectly(
         ("1.2.3.Beta"),
         ("1.2.3.4This version is full of awesomeness!!"),
         ("So.is.this"),
+        ("NotAVersion"),
         ("1.34.2Alpha"),
         ("1.34.2Release Candidate"),
         ("1.4.7-"),
@@ -69,7 +69,8 @@ def test_StringConstructorParsesValuesCorrectly(
 )
 def test_ParseThrowsIfStringIsNotAValidsemver(version_string):
     with pytest.raises(Exception):
-        nuget.Version.from_string(version_string, semver=True)
+        nuget.Version.from_string(version_string)
+
 
 @pytest.mark.parametrize(
     ("version_string", "expected_string"),
@@ -80,15 +81,12 @@ def test_ParseThrowsIfStringIsNotAValidsemver(version_string):
     ],
 )
 def test_ParseReadsLegacyStyleVersionNumbers(version_string, expected_string):
-    expected = nuget.Version(nuget.Version(expected_string), "")
+    actual = nuget.Version.from_string(version_string)
+    assert actual.base_version == expected_string
 
-    actual = nuget.Version(version_string)
-
-    assert expected.Version == actual.Version
-    assert expected.Release == actual.Release
 
 @pytest.mark.parametrize(
-    ("version_string", "expected_string", "release_string"),
+    ("version", "base_version", "prerelease"),
     [
         ("1.022-Beta", "1.22.0.0", "Beta"),
         ("23.2.3-Alpha", "23.2.3.0", "Alpha"),
@@ -97,17 +95,17 @@ def test_ParseReadsLegacyStyleVersionNumbers(version_string, expected_string):
     ],
 )
 def test_ParseReadssemverAndHybridsemverVersionNumbers(
-    version_string, expected_string, release_string
+    version,
+    base_version,
+    prerelease,
 ):
-    expected = nuget.Version(nuget.Version(expected_string), release_string)
+    vers = nuget.Version.from_string(version)
+    assert vers.base_version == base_version
+    assert vers.prerelease == prerelease.lower()
 
-    actual = nuget.Version(version_string)
-
-    assert expected.Version == actual.Version
-    assert expected.Release == actual.Release
 
 @pytest.mark.parametrize(
-    ("version_string", "expected_string", "release_string"),
+    ("version", "base_version", "prerelease"),
     [
         ("  1.022-Beta", "1.22.0.0", "Beta"),
         ("23.2.3-Alpha  ", "23.2.3.0", "Alpha"),
@@ -115,14 +113,14 @@ def test_ParseReadssemverAndHybridsemverVersionNumbers(
     ],
 )
 def test_ParseIgnoresLeadingAndTrailingWhitespace(
-    version_string, expected_string, release_string
+    version,
+    base_version,
+    prerelease,
 ):
-    expected = nuget.Version(nuget.Version(expected_string), release_string)
+    vers = nuget.Version.from_string(version)
+    assert vers.base_version == base_version
+    assert vers.prerelease == prerelease.lower()
 
-    actual = nuget.Version(version_string)
-
-    assert expected.Version == actual.Version
-    assert expected.Release == actual.Release
 
 @pytest.mark.parametrize(
     (
@@ -142,8 +140,8 @@ def test_ParseIgnoresLeadingAndTrailingWhitespace(
     ],
 )
 def test_semverLessThanAndGreaterThanOperatorsWorks(version_a, version_b):
-    itemA = nuget.Version(version_a)
-    itemB = nuget.Version(version_b)
+    itemA = nuget.Version.from_string(version_a)
+    itemB = nuget.Version.from_string(version_b)
 
     assert itemA < itemB
     assert itemA <= itemB
@@ -151,11 +149,11 @@ def test_semverLessThanAndGreaterThanOperatorsWorks(version_a, version_b):
     assert itemB >= itemA
     assert itemA != itemB
 
-def test_EqualsIsTrueForEmptyRevision(
-    self,
-):
-    assert nuget.Version("1.0.0.0").Equals(SemanticVersion("1.0.0"))
-    assert SemanticVersion("1.0.0").Equals(nuget.Version("1.0.0.0"))
+
+def test_EqualsIsTrueForEmptyRevision():
+    assert nuget.Version.from_string("1.0.0.0") == nuget.Version.from_string("1.0.0")
+    assert nuget.Version.from_string("1.0.0") == nuget.Version.from_string("1.0.0.0")
+
 
 @pytest.mark.parametrize(
     (
@@ -174,32 +172,34 @@ def test_EqualsIsTrueForEmptyRevision(
     ],
 )
 def test_semverEqualsOperatorWorks(version_a, version_b):
-    itemA = nuget.Version(version_a)
-    itemB = nuget.Version(version_b)
+    itemA = nuget.Version.from_string(version_a)
+    itemB = nuget.Version.from_string(version_b)
 
     assert itemA == itemB
     assert itemA <= itemB
     assert itemB == itemA
     assert itemB >= itemA
 
-@pytest.mark.parametrize(
-    "version",
-    [
-        ("1.0"),
-        ("1.0.0"),
-        ("1.0.0.0"),
-        ("1.0-alpha"),
-        ("1.0.0-b"),
-        ("3.0.1.2"),
-        ("2.1.4.3-pre-1"),
-    ],
-)
-def test_to_stringReturnsOriginalValueForNonsemver2(version):
-    semver = nuget.Version(version)
-    assert version == semver.to_string()
 
 @pytest.mark.parametrize(
-    ("version", "expected", "full"),
+    ("version", "expected"),
+    [
+        ("1.0", "1.0.0"),
+        ("1.0.0", "1.0.0"),
+        ("1.0.0.0", "1.0.0"),
+        ("1.0-alpha", "1.0.0-alpha"),
+        ("1.0.0-b", "1.0.0-b"),
+        ("3.0.1.2", "3.0.1.2"),
+        ("2.1.4.3-pre-1", "2.1.4.3-pre-1"),
+    ],
+)
+def test_to_stringReturnsOriginalValueForNonsemver2(version, expected):
+    vers = nuget.Version.from_string(version)
+    assert vers.to_string() == expected
+
+
+@pytest.mark.parametrize(
+    ("version", "base_with_prerelease", "full"),
     [
         ("1.0+A", "1.0.0", "1.0.0+A"),
         ("1.0-1.1", "1.0.0-1.1", "1.0.0-1.1"),
@@ -207,75 +207,90 @@ def test_to_stringReturnsOriginalValueForNonsemver2(version):
         ("1.0.0009.01-1.1+A", "1.0.9.1-1.1", "1.0.9.1-1.1+A"),
     ],
 )
-def test_to_stringReturnsNormalizedForsemver2(version, expected, full):
-    semver = nuget.Version(version)
-    assert expected == semver.to_string()
-    assert full == semver.to_string()
+def test_to_stringReturnsNormalizedForsemver2(version, base_with_prerelease, full):
+    version = nuget.Version.from_string(version)
+    assert (
+        version.to_string(with_empty_revision=False, include_prerelease=True, include_build=False)
+        == base_with_prerelease
+    )
+    assert (
+        version.to_string(with_empty_revision=False, include_prerelease=True, include_build=True)
+        == full
+    )
+
 
 @pytest.mark.parametrize(
-    ("version_string", "special_version", "expected"),
+    ("base_version", "prerelease", "version"),
     [
-        ("1.0", None, "1.0"),
+        ("1.0", "", "1.0"),
         ("1.0.3.120", "", "1.0.3.120"),
         ("1.0.3.120", "alpha", "1.0.3.120-alpha"),
         ("1.0.3.120", "rc-2", "1.0.3.120-rc-2"),
     ],
 )
 def test_to_stringConstructedFromversion_andspecial_versionConstructor(
-    version_string, special_version, expected
+    base_version, prerelease, version
 ):
-    version = nuget.Version(version_string)
-    semver = nuget.Version(version, special_version)
-    assert expected == semver.to_string()
+    version = nuget.Version.from_string(version)
+    assert nuget.Version.from_string(version.base_version) == nuget.Version.from_string(
+        base_version
+    )
+    assert version.prerelease == prerelease
+
 
 @pytest.mark.parametrize(
-    "version",
+    ("version", "expected"),
     [
-        ("01.42.0"),
-        ("01.0"),
-        ("01.42.0-alpha"),
-        ("01.42.0-alpha.1"),
-        ("01.42.0-alpha+metadata"),
-        ("01.42.0+metadata"),
+        ("01.42.0", "1.42.0"),
+        ("01.0", "1.0.0"),
+        ("01.42.0-alpha", "1.42.0-alpha"),
+        ("01.42.0-alpha.1", "1.42.0-alpha.1"),
+        ("01.42.0-alpha+metadata", "1.42.0-alpha+metadata"),
+        ("01.42.0+metadata", "1.42.0+metadata"),
     ],
 )
-def test_NuGetVersionKeepsoriginal_version_string(version):
-    nuver = nuget.Version(version)
-    assert str(nuver) == version
+def test_NuGetVersionKeepsoriginal_version_string(version, expected):
+    nuver = nuget.Version.from_string(version)
+    assert nuver._original_version == version
+    assert str(nuver) == expected
+
 
 @pytest.mark.parametrize(
-    ("version_string", "expected"),
+    ("version", "expected"),
     [
-        ("1.0", "1.0"),
+        ("1.0", "1.0.0"),
         ("1.0.3.120", "1.0.3.120"),
         ("1.0.3.120-alpha", "1.0.3.120-alpha"),
         ("1.0.3.120-rc-2", "1.0.3.120-rc-2"),
     ],
 )
-def test_to_stringFromStringFormat(version_string, expected):
-    semver = nuget.Version.from_string(version_string, semver=True)
-    assert semver.to_string() == expected
+def test_to_stringFromStringFormat(version, expected):
+    version = nuget.Version.from_string(version)
+    assert version.to_string() == expected
 
-def test_TryParseStrictParsesStrictVersion(
-    self,
-):
+
+def test_TryParseStrictParsesStrictVersion():
     version_string = "1.3.2-CTP-2-Refresh-Alpha"
-    version = nuget.Version.from_string(version_string, semver=True)
+    version = nuget.Version.from_string(version_string)
     assert version
-    assert nuget.Version("1.3.2.0") == version.Version
-    assert "CTP-2-Refresh-Alpha" == version.Release
+    no_prerel = nuget.Version.from_string("1.3.2.0")
+    assert version.base_version == no_prerel.to_string(with_empty_revision=True)
+    assert version.prerelease == "CTP-2-Refresh-Alpha".lower()
+
+
+def test_TryParseReturnsFalseWhenUnableToParseString():
+    assert not nuget.Version.from_string("")
+
 
 @pytest.mark.parametrize(
-    "version_string",
+    ("version", "expected"),
     [
-        (""),
-        ("NotAVersion"),
-        ("1"),
-        ("1.0"),
-        ("v1.0.0"),
-        ("1.0.3.120"),
+        ("1", "1.0.0.0"),
+        ("1.0", "1.0.0.0"),
+        ("v1.0.0", "1.0.0.0"),
+        ("1.0.3.120", "1.0.3.120"),
     ],
 )
-def test_TryParseReturnsFalseWhenUnableToParseString(version_string):
-    version = nuget.Version.from_string(version_string, semver=True)
-    assert not version
+def test_Can_Parse_various_String(version, expected):
+    version = nuget.Version.from_string(version)
+    assert version.base_version == expected
