@@ -6,7 +6,6 @@
 
 from functools import total_ordering
 import functools
-import re
 
 import attr
 import semantic_version
@@ -305,6 +304,9 @@ class NugetVersion(Version):
         except ValueError:
             return False
 
+    def __str__(self):
+        return str(self.string)
+
     def __lt__(self, other):
         return nuget.Version.from_string(self.string) < nuget.Version.from_string(other.string)
 
@@ -385,6 +387,19 @@ class LegacyOpensslVersion(Version):
     univers.versions.InvalidVersion: '3.0.2' is not a valid <class 'univers.versions.LegacyOpensslVersion'>
     """
 
+    major = attr.ib(type=int, default=None, repr=False)
+    minor = attr.ib(type=int, default=None, repr=False)
+    build = attr.ib(type=int, default=None, repr=False)
+    patch = attr.ib(type=str, default=None, repr=False)
+
+    def __attrs_post_init__(self):
+        super().__attrs_post_init__()
+        major, minor, build, patch = self.value
+        object.__setattr__(self, "major", major)
+        object.__setattr__(self, "minor", minor)
+        object.__setattr__(self, "build", build)
+        object.__setattr__(self, "patch", patch)
+
     @classmethod
     def is_valid(cls, string):
         return bool(cls.parse(string))
@@ -445,7 +460,29 @@ class LegacyOpensslVersion(Version):
         return cls.parse(string)
 
     def __str__(self):
-        return f"{self.value[0]}.{self.value[1]}.{self.value[2]}{self.value[3]}"
+        return f"{self.major}.{self.minor}.{self.build}{self.patch}"
+
+    def __lt__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        # Check if versions have the same base, and `one and only one` of them is a pre-release.
+        if (self.major, self.minor, self.build) == (other.major, other.minor, other.build) and (
+            self.is_prerelease() != other.is_prerelease()
+        ):
+            return self.is_prerelease()
+        return self.value.__lt__(other.value)
+
+    def __gt__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        if (self.major, self.minor, self.build) == (other.major, other.minor, other.build) and (
+            self.is_prerelease() != other.is_prerelease()
+        ):
+            return other.is_prerelease()
+        return self.value.__gt__(other.value)
+
+    def is_prerelease(self):
+        return self.patch.startswith(("-beta", "-alpha"))
 
 
 @attr.s(frozen=True, order=False, eq=False, hash=True)

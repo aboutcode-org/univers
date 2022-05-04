@@ -2,6 +2,13 @@ Changelog
 =========
 
 
+Version v30.5.1
+----------------
+
+- Fix Nuget string representation
+- Test sorting of all the OpenSSL versions ever released
+
+
 Version v30.5.0
 ----------------
 

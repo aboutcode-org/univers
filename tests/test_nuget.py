@@ -18,7 +18,7 @@
 # https://github.com/NuGet/NuGet.Client/blob/dev/test/NuGet.Core.Tests/NuGet.Versioning.Test/VersionComparerTests.cs
 
 import unittest
-from univers import nuget
+from univers.versions import NugetVersion
 
 
 class NuGetTest(unittest.TestCase):
@@ -29,7 +29,7 @@ class NuGetTest(unittest.TestCase):
 
     def check_order(self, comparison, first, second):
         """Check order."""
-        comparison(nuget.Version.from_string(first), nuget.Version.from_string(second))
+        comparison(NugetVersion.build_value(first), NugetVersion.build_value(second))
 
     def test_equals(self):
         """Test version equals."""

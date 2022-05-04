@@ -1,0 +1,862 @@
+[
+  {
+    "string": "0.9.6",
+    "normalized_string": "0.9.6",
+    "value": "0.9.6"
+  },
+  {
+    "string": "0.9.6-cvs",
+    "normalized_string": "0.9.6-cvs",
+    "value": "0.9.6-cvs"
+  },
+  {
+    "string": "0.9.6a",
+    "normalized_string": "0.9.6a",
+    "value": "0.9.6a"
+  },
+  {
+    "string": "0.9.6b",
+    "normalized_string": "0.9.6b",
+    "value": "0.9.6b"
+  },
+  {
+    "string": "0.9.6c",
+    "normalized_string": "0.9.6c",
+    "value": "0.9.6c"
+  },
+  {
+    "string": "0.9.6d",
+    "normalized_string": "0.9.6d",
+    "value": "0.9.6d"
+  },
+  {
+    "string": "0.9.6e",
+    "normalized_string": "0.9.6e",
+    "value": "0.9.6e"
+  },
+  {
+    "string": "0.9.6f",
+    "normalized_string": "0.9.6f",
+    "value": "0.9.6f"
+  },
+  {
+    "string": "0.9.6g",
+    "normalized_string": "0.9.6g",
+    "value": "0.9.6g"
+  },
+  {
+    "string": "0.9.6h",
+    "normalized_string": "0.9.6h",
+    "value": "0.9.6h"
+  },
+  {
+    "string": "0.9.6i",
+    "normalized_string": "0.9.6i",
+    "value": "0.9.6i"
+  },
+  {
+    "string": "0.9.6j",
+    "normalized_string": "0.9.6j",
+    "value": "0.9.6j"
+  },
+  {
+    "string": "0.9.6k",
+    "normalized_string": "0.9.6k",
+    "value": "0.9.6k"
+  },
+  {
+    "string": "0.9.6l",
+    "normalized_string": "0.9.6l",
+    "value": "0.9.6l"
+  },
+  {
+    "string": "0.9.6m",
+    "normalized_string": "0.9.6m",
+    "value": "0.9.6m"
+  },
+  {
+    "string": "0.9.7-alpha2",
+    "normalized_string": "0.9.7-alpha2",
+    "value": "0.9.7-alpha2"
+  },
+  {
+    "string": "0.9.7-alpha3",
+    "normalized_string": "0.9.7-alpha3",
+    "value": "0.9.7-alpha3"
+  },
+  {
+    "string": "0.9.7-beta1",
+    "normalized_string": "0.9.7-beta1",
+    "value": "0.9.7-beta1"
+  },
+  {
+    "string": "0.9.7-beta3",
+    "normalized_string": "0.9.7-beta3",
+    "value": "0.9.7-beta3"
+  },
+  {
+    "string": "0.9.7-beta5",
+    "normalized_string": "0.9.7-beta5",
+    "value": "0.9.7-beta5"
+  },
+  {
+    "string": "0.9.7",
+    "normalized_string": "0.9.7",
+    "value": "0.9.7"
+  },
+  {
+    "string": "0.9.7a",
+    "normalized_string": "0.9.7a",
+    "value": "0.9.7a"
+  },
+  {
+    "string": "0.9.7b",
+    "normalized_string": "0.9.7b",
+    "value": "0.9.7b"
+  },
+  {
+    "string": "0.9.7c",
+    "normalized_string": "0.9.7c",
+    "value": "0.9.7c"
+  },
+  {
+    "string": "0.9.7d",
+    "normalized_string": "0.9.7d",
+    "value": "0.9.7d"
+  },
+  {
+    "string": "0.9.7e",
+    "normalized_string": "0.9.7e",
+    "value": "0.9.7e"
+  },
+  {
+    "string": "0.9.7f",
+    "normalized_string": "0.9.7f",
+    "value": "0.9.7f"
+  },
+  {
+    "string": "0.9.7g",
+    "normalized_string": "0.9.7g",
+    "value": "0.9.7g"
+  },
+  {
+    "string": "0.9.7h",
+    "normalized_string": "0.9.7h",
+    "value": "0.9.7h"
+  },
+  {
+    "string": "0.9.7i",
+    "normalized_string": "0.9.7i",
+    "value": "0.9.7i"
+  },
+  {
+    "string": "0.9.7j",
+    "normalized_string": "0.9.7j",
+    "value": "0.9.7j"
+  },
+  {
+    "string": "0.9.7k",
+    "normalized_string": "0.9.7k",
+    "value": "0.9.7k"
+  },
+  {
+    "string": "0.9.7l",
+    "normalized_string": "0.9.7l",
+    "value": "0.9.7l"
+  },
+  {
+    "string": "0.9.8",
+    "normalized_string": "0.9.8",
+    "value": "0.9.8"
+  },
+  {
+    "string": "0.9.8v",
+    "normalized_string": "0.9.8",
+    "value": "0.9.8"
+  },
+  {
+    "string": "0.9.8a",
+    "normalized_string": "0.9.8a",
+    "value": "0.9.8a"
+  },
+  {
+    "string": "0.9.8b",
+    "normalized_string": "0.9.8b",
+    "value": "0.9.8b"
+  },
+  {
+    "string": "0.9.8c",
+    "normalized_string": "0.9.8c",
+    "value": "0.9.8c"
+  },
+  {
+    "string": "0.9.8d",
+    "normalized_string": "0.9.8d",
+    "value": "0.9.8d"
+  },
+  {
+    "string": "0.9.8e",
+    "normalized_string": "0.9.8e",
+    "value": "0.9.8e"
+  },
+  {
+    "string": "0.9.8f",
+    "normalized_string": "0.9.8f",
+    "value": "0.9.8f"
+  },
+  {
+    "string": "0.9.8g",
+    "normalized_string": "0.9.8g",
+    "value": "0.9.8g"
+  },
+  {
+    "string": "0.9.8h",
+    "normalized_string": "0.9.8h",
+    "value": "0.9.8h"
+  },
+  {
+    "string": "0.9.8i",
+    "normalized_string": "0.9.8i",
+    "value": "0.9.8i"
+  },
+  {
+    "string": "0.9.8j",
+    "normalized_string": "0.9.8j",
+    "value": "0.9.8j"
+  },
+  {
+    "string": "0.9.8k",
+    "normalized_string": "0.9.8k",
+    "value": "0.9.8k"
+  },
+  {
+    "string": "0.9.8l",
+    "normalized_string": "0.9.8l",
+    "value": "0.9.8l"
+  },
+  {
+    "string": "0.9.8m",
+    "normalized_string": "0.9.8m",
+    "value": "0.9.8m"
+  },
+  {
+    "string": "0.9.8n",
+    "normalized_string": "0.9.8n",
+    "value": "0.9.8n"
+  },
+  {
+    "string": "0.9.8o",
+    "normalized_string": "0.9.8o",
+    "value": "0.9.8o"
+  },
+  {
+    "string": "0.9.8p",
+    "normalized_string": "0.9.8p",
+    "value": "0.9.8p"
+  },
+  {
+    "string": "0.9.8q",
+    "normalized_string": "0.9.8q",
+    "value": "0.9.8q"
+  },
+  {
+    "string": "0.9.8r",
+    "normalized_string": "0.9.8r",
+    "value": "0.9.8r"
+  },
+  {
+    "string": "0.9.8s",
+    "normalized_string": "0.9.8s",
+    "value": "0.9.8s"
+  },
+  {
+    "string": "0.9.8t",
+    "normalized_string": "0.9.8t",
+    "value": "0.9.8t"
+  },
+  {
+    "string": "0.9.8u",
+    "normalized_string": "0.9.8u",
+    "value": "0.9.8u"
+  },
+  {
+    "string": "0.9.8w",
+    "normalized_string": "0.9.8w",
+    "value": "0.9.8w"
+  },
+  {
+    "string": "0.9.8x",
+    "normalized_string": "0.9.8x",
+    "value": "0.9.8x"
+  },
+  {
+    "string": "0.9.8y",
+    "normalized_string": "0.9.8y",
+    "value": "0.9.8y"
+  },
+  {
+    "string": "0.9.8za",
+    "normalized_string": "0.9.8za",
+    "value": "0.9.8za"
+  },
+  {
+    "string": "0.9.8zb",
+    "normalized_string": "0.9.8zb",
+    "value": "0.9.8zb"
+  },
+  {
+    "string": "0.9.8zc",
+    "normalized_string": "0.9.8zc",
+    "value": "0.9.8zc"
+  },
+  {
+    "string": "0.9.8zd",
+    "normalized_string": "0.9.8zd",
+    "value": "0.9.8zd"
+  },
+  {
+    "string": "0.9.8ze",
+    "normalized_string": "0.9.8ze",
+    "value": "0.9.8ze"
+  },
+  {
+    "string": "0.9.8zf",
+    "normalized_string": "0.9.8zf",
+    "value": "0.9.8zf"
+  },
+  {
+    "string": "0.9.8zg",
+    "normalized_string": "0.9.8zg",
+    "value": "0.9.8zg"
+  },
+  {
+    "string": "0.9.8zh",
+    "normalized_string": "0.9.8zh",
+    "value": "0.9.8zh"
+  },
+  {
+    "string": "1.0.0",
+    "normalized_string": "1.0.0",
+    "value": "1.0.0"
+  },
+  {
+    "string": "1.0.0a",
+    "normalized_string": "1.0.0a",
+    "value": "1.0.0a"
+  },
+  {
+    "string": "1.0.0b",
+    "normalized_string": "1.0.0b",
+    "value": "1.0.0b"
+  },
+  {
+    "string": "1.0.0c",
+    "normalized_string": "1.0.0c",
+    "value": "1.0.0c"
+  },
+  {
+    "string": "1.0.0d",
+    "normalized_string": "1.0.0d",
+    "value": "1.0.0d"
+  },
+  {
+    "string": "1.0.0e",
+    "normalized_string": "1.0.0e",
+    "value": "1.0.0e"
+  },
+  {
+    "string": "1.0.0f",
+    "normalized_string": "1.0.0f",
+    "value": "1.0.0f"
+  },
+  {
+    "string": "1.0.0g",
+    "normalized_string": "1.0.0g",
+    "value": "1.0.0g"
+  },
+  {
+    "string": "1.0.0h",
+    "normalized_string": "1.0.0h",
+    "value": "1.0.0h"
+  },
+  {
+    "string": "1.0.0i",
+    "normalized_string": "1.0.0i",
+    "value": "1.0.0i"
+  },
+  {
+    "string": "1.0.0j",
+    "normalized_string": "1.0.0j",
+    "value": "1.0.0j"
+  },
+  {
+    "string": "1.0.0k",
+    "normalized_string": "1.0.0k",
+    "value": "1.0.0k"
+  },
+  {
+    "string": "1.0.0l",
+    "normalized_string": "1.0.0l",
+    "value": "1.0.0l"
+  },
+  {
+    "string": "1.0.0m",
+    "normalized_string": "1.0.0m",
+    "value": "1.0.0m"
+  },
+  {
+    "string": "1.0.0n",
+    "normalized_string": "1.0.0n",
+    "value": "1.0.0n"
+  },
+  {
+    "string": "1.0.0o",
+    "normalized_string": "1.0.0o",
+    "value": "1.0.0o"
+  },
+  {
+    "string": "1.0.0p",
+    "normalized_string": "1.0.0p",
+    "value": "1.0.0p"
+  },
+  {
+    "string": "1.0.0q",
+    "normalized_string": "1.0.0q",
+    "value": "1.0.0q"
+  },
+  {
+    "string": "1.0.0r",
+    "normalized_string": "1.0.0r",
+    "value": "1.0.0r"
+  },
+  {
+    "string": "1.0.0s",
+    "normalized_string": "1.0.0s",
+    "value": "1.0.0s"
+  },
+  {
+    "string": "1.0.0t",
+    "normalized_string": "1.0.0t",
+    "value": "1.0.0t"
+  },
+  {
+    "string": "1.0.1",
+    "normalized_string": "1.0.1",
+    "value": "1.0.1"
+  },
+  {
+    "string": "1.0.1a",
+    "normalized_string": "1.0.1a",
+    "value": "1.0.1a"
+  },
+  {
+    "string": "1.0.1b",
+    "normalized_string": "1.0.1b",
+    "value": "1.0.1b"
+  },
+  {
+    "string": "1.0.1c",
+    "normalized_string": "1.0.1c",
+    "value": "1.0.1c"
+  },
+  {
+    "string": "1.0.1d",
+    "normalized_string": "1.0.1d",
+    "value": "1.0.1d"
+  },
+  {
+    "string": "1.0.1e",
+    "normalized_string": "1.0.1e",
+    "value": "1.0.1e"
+  },
+  {
+    "string": "1.0.1f",
+    "normalized_string": "1.0.1f",
+    "value": "1.0.1f"
+  },
+  {
+    "string": "1.0.1g",
+    "normalized_string": "1.0.1g",
+    "value": "1.0.1g"
+  },
+  {
+    "string": "1.0.1h",
+    "normalized_string": "1.0.1h",
+    "value": "1.0.1h"
+  },
+  {
+    "string": "1.0.1i",
+    "normalized_string": "1.0.1i",
+    "value": "1.0.1i"
+  },
+  {
+    "string": "1.0.1j",
+    "normalized_string": "1.0.1j",
+    "value": "1.0.1j"
+  },
+  {
+    "string": "1.0.1k",
+    "normalized_string": "1.0.1k",
+    "value": "1.0.1k"
+  },
+  {
+    "string": "1.0.1l",
+    "normalized_string": "1.0.1l",
+    "value": "1.0.1l"
+  },
+  {
+    "string": "1.0.1m",
+    "normalized_string": "1.0.1m",
+    "value": "1.0.1m"
+  },
+  {
+    "string": "1.0.1n",
+    "normalized_string": "1.0.1n",
+    "value": "1.0.1n"
+  },
+  {
+    "string": "1.0.1o",
+    "normalized_string": "1.0.1o",
+    "value": "1.0.1o"
+  },
+  {
+    "string": "1.0.1p",
+    "normalized_string": "1.0.1p",
+    "value": "1.0.1p"
+  },
+  {
+    "string": "1.0.1q",
+    "normalized_string": "1.0.1q",
+    "value": "1.0.1q"
+  },
+  {
+    "string": "1.0.1r",
+    "normalized_string": "1.0.1r",
+    "value": "1.0.1r"
+  },
+  {
+    "string": "1.0.1s",
+    "normalized_string": "1.0.1s",
+    "value": "1.0.1s"
+  },
+  {
+    "string": "1.0.1t",
+    "normalized_string": "1.0.1t",
+    "value": "1.0.1t"
+  },
+  {
+    "string": "1.0.1u",
+    "normalized_string": "1.0.1u",
+    "value": "1.0.1u"
+  },
+  {
+    "string": "1.0.2",
+    "normalized_string": "1.0.2",
+    "value": "1.0.2"
+  },
+  {
+    "string": "1.0.2v",
+    "normalized_string": "1.0.2",
+    "value": "1.0.2"
+  },
+  {
+    "string": "1.0.2a",
+    "normalized_string": "1.0.2a",
+    "value": "1.0.2a"
+  },
+  {
+    "string": "1.0.2b",
+    "normalized_string": "1.0.2b",
+    "value": "1.0.2b"
+  },
+  {
+    "string": "1.0.2c",
+    "normalized_string": "1.0.2c",
+    "value": "1.0.2c"
+  },
+  {
+    "string": "1.0.2d",
+    "normalized_string": "1.0.2d",
+    "value": "1.0.2d"
+  },
+  {
+    "string": "1.0.2e",
+    "normalized_string": "1.0.2e",
+    "value": "1.0.2e"
+  },
+  {
+    "string": "1.0.2f",
+    "normalized_string": "1.0.2f",
+    "value": "1.0.2f"
+  },
+  {
+    "string": "1.0.2g",
+    "normalized_string": "1.0.2g",
+    "value": "1.0.2g"
+  },
+  {
+    "string": "1.0.2h",
+    "normalized_string": "1.0.2h",
+    "value": "1.0.2h"
+  },
+  {
+    "string": "1.0.2i",
+    "normalized_string": "1.0.2i",
+    "value": "1.0.2i"
+  },
+  {
+    "string": "1.0.2j",
+    "normalized_string": "1.0.2j",
+    "value": "1.0.2j"
+  },
+  {
+    "string": "1.0.2k",
+    "normalized_string": "1.0.2k",
+    "value": "1.0.2k"
+  },
+  {
+    "string": "1.0.2l",
+    "normalized_string": "1.0.2l",
+    "value": "1.0.2l"
+  },
+  {
+    "string": "1.0.2m",
+    "normalized_string": "1.0.2m",
+    "value": "1.0.2m"
+  },
+  {
+    "string": "1.0.2n",
+    "normalized_string": "1.0.2n",
+    "value": "1.0.2n"
+  },
+  {
+    "string": "1.0.2o",
+    "normalized_string": "1.0.2o",
+    "value": "1.0.2o"
+  },
+  {
+    "string": "1.0.2p",
+    "normalized_string": "1.0.2p",
+    "value": "1.0.2p"
+  },
+  {
+    "string": "1.0.2q",
+    "normalized_string": "1.0.2q",
+    "value": "1.0.2q"
+  },
+  {
+    "string": "1.0.2r",
+    "normalized_string": "1.0.2r",
+    "value": "1.0.2r"
+  },
+  {
+    "string": "1.0.2s",
+    "normalized_string": "1.0.2s",
+    "value": "1.0.2s"
+  },
+  {
+    "string": "1.0.2t",
+    "normalized_string": "1.0.2t",
+    "value": "1.0.2t"
+  },
+  {
+    "string": "1.0.2u",
+    "normalized_string": "1.0.2u",
+    "value": "1.0.2u"
+  },
+  {
+    "string": "1.0.2w",
+    "normalized_string": "1.0.2w",
+    "value": "1.0.2w"
+  },
+  {
+    "string": "1.0.2x",
+    "normalized_string": "1.0.2x",
+    "value": "1.0.2x"
+  },
+  {
+    "string": "1.0.2y",
+    "normalized_string": "1.0.2y",
+    "value": "1.0.2y"
+  },
+  {
+    "string": "1.0.2za",
+    "normalized_string": "1.0.2za",
+    "value": "1.0.2za"
+  },
+  {
+    "string": "1.0.2zb",
+    "normalized_string": "1.0.2zb",
+    "value": "1.0.2zb"
+  },
+  {
+    "string": "1.0.2zc",
+    "normalized_string": "1.0.2zc",
+    "value": "1.0.2zc"
+  },
+  {
+    "string": "1.0.2zc-dev",
+    "normalized_string": "1.0.2zc-de",
+    "value": "1.0.2zc-de"
+  },
+  {
+    "string": "1.0.2zd",
+    "normalized_string": "1.0.2zd",
+    "value": "1.0.2zd"
+  },
+  {
+    "string": "1.1.0",
+    "normalized_string": "1.1.0",
+    "value": "1.1.0"
+  },
+  {
+    "string": "1.1.0a",
+    "normalized_string": "1.1.0a",
+    "value": "1.1.0a"
+  },
+  {
+    "string": "1.1.0b",
+    "normalized_string": "1.1.0b",
+    "value": "1.1.0b"
+  },
+  {
+    "string": "1.1.0c",
+    "normalized_string": "1.1.0c",
+    "value": "1.1.0c"
+  },
+  {
+    "string": "1.1.0d",
+    "normalized_string": "1.1.0d",
+    "value": "1.1.0d"
+  },
+  {
+    "string": "1.1.0e",
+    "normalized_string": "1.1.0e",
+    "value": "1.1.0e"
+  },
+  {
+    "string": "1.1.0f",
+    "normalized_string": "1.1.0f",
+    "value": "1.1.0f"
+  },
+  {
+    "string": "1.1.0g",
+    "normalized_string": "1.1.0g",
+    "value": "1.1.0g"
+  },
+  {
+    "string": "1.1.0h",
+    "normalized_string": "1.1.0h",
+    "value": "1.1.0h"
+  },
+  {
+    "string": "1.1.0i",
+    "normalized_string": "1.1.0i",
+    "value": "1.1.0i"
+  },
+  {
+    "string": "1.1.0j",
+    "normalized_string": "1.1.0j",
+    "value": "1.1.0j"
+  },
+  {
+    "string": "1.1.0k",
+    "normalized_string": "1.1.0k",
+    "value": "1.1.0k"
+  },
+  {
+    "string": "1.1.0l",
+    "normalized_string": "1.1.0l",
+    "value": "1.1.0l"
+  },
+  {
+    "string": "1.1.1",
+    "normalized_string": "1.1.1",
+    "value": "1.1.1"
+  },
+  {
+    "string": "1.1.1a",
+    "normalized_string": "1.1.1a",
+    "value": "1.1.1a"
+  },
+  {
+    "string": "1.1.1b",
+    "normalized_string": "1.1.1b",
+    "value": "1.1.1b"
+  },
+  {
+    "string": "1.1.1c",
+    "normalized_string": "1.1.1c",
+    "value": "1.1.1c"
+  },
+  {
+    "string": "1.1.1d",
+    "normalized_string": "1.1.1d",
+    "value": "1.1.1d"
+  },
+  {
+    "string": "1.1.1e",
+    "normalized_string": "1.1.1e",
+    "value": "1.1.1e"
+  },
+  {
+    "string": "1.1.1f",
+    "normalized_string": "1.1.1f",
+    "value": "1.1.1f"
+  },
+  {
+    "string": "1.1.1g",
+    "normalized_string": "1.1.1g",
+    "value": "1.1.1g"
+  },
+  {
+    "string": "1.1.1h",
+    "normalized_string": "1.1.1h",
+    "value": "1.1.1h"
+  },
+  {
+    "string": "1.1.1i",
+    "normalized_string": "1.1.1i",
+    "value": "1.1.1i"
+  },
+  {
+    "string": "1.1.1j",
+    "normalized_string": "1.1.1j",
+    "value": "1.1.1j"
+  },
+  {
+    "string": "1.1.1k",
+    "normalized_string": "1.1.1k",
+    "value": "1.1.1k"
+  },
+  {
+    "string": "1.1.1l",
+    "normalized_string": "1.1.1l",
+    "value": "1.1.1l"
+  },
+  {
+    "string": "1.1.1m",
+    "normalized_string": "1.1.1m",
+    "value": "1.1.1m"
+  },
+  {
+    "string": "1.1.1n",
+    "normalized_string": "1.1.1n",
+    "value": "1.1.1n"
+  },
+  {
+    "string": "3.0.0",
+    "normalized_string": "3.0.0",
+    "value": "3.0.0"
+  },
+  {
+    "string": "3.0.1",
+    "normalized_string": "3.0.1",
+    "value": "3.0.1"
+  },
+  {
+    "string": "3.0.2",
+    "normalized_string": "3.0.2",
+    "value": "3.0.2"
+  }
+]
