@@ -9,6 +9,28 @@ from univers.version_range import NugetVersionRange as VersionRange
 from univers.versions import NugetVersion as NuGetVersion
 
 
+"""
+NuGet Float ranges are not yet supported in Univers.
+
+See https://docs.microsoft.com/en-us/nuget/concepts/package-versioning#version-ranges
+
+    "When using the PackageReference format, NuGet also supports using a floating 
+    notation, *, for Major, Minor, Patch, and pre-release suffix parts of the
+    number. Floating versions are not supported with the packages.config format.
+    When a floating version is specified, the rule is to resolve to the highest
+    existent version that matches the version description. Examples of floating
+    versions and the resolutions are below."
+
+For example:
+
+<!-- Accepts any 6.x.y version.
+     Will resolve to the highest acceptable stable version.-->
+<PackageReference Include="ExamplePackage" Version="6.*" />
+"""
+
+pytestmark = pytest.mark.skipif(True, reason="NuGet Float ranges are not yet supported in Univers.")
+
+
 def test_FloatRange_OutsideOfRange():
     vrange = VersionRange("[1.0.*, 2.0.0)")
 
@@ -58,12 +80,6 @@ def test_FloatRange_RangeOpen():
     ]
 
     assert vrange.FindBestMatch(versions).to_string() == "101.0.0"
-
-
-def test_FloatRange_ParseBasic():
-    vrange = FloatRange("1.0.0")
-    assert vrange.MinVersion == vrange.MinVersion
-    assert NuGetVersionFloatBehavior == vrange.FloatBehavior
 
 
 def test_FloatRange_ParsePrerelease():
@@ -273,7 +289,6 @@ def test_FloatingRange_to_stringMinor():
 def test_FloatingRange_TryParse_Invalid(floatVersionString):
     valid = FloatRange.from_string(floatVersionString)
     assert not valid
-    assert not vrange
 
 
 @pytest.mark.parametrize(
