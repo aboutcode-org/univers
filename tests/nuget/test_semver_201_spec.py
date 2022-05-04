@@ -6,96 +6,104 @@
 import pytest
 
 from univers.utils import cmp
-from univers.versions import SemverVersion as SemanticVersion
+from univers import nuget
 
 
 # A normal version number MUST take the form X.Y.Z
 @pytest.mark.parametrize(
     ["version", "expected"],
     [
-        ("1", False),
-        ("1.2", False),
-        ("1.2.3", True),
-        ("10.2.3", True),
-        ("13234.223.32222", True),
-        ("1.2.3.4", False),
-        ("1.2. 3", False),
-        ("1. 2.3", False),
-        ("X.2.3", False),
-        ("1.2.Z", False),
-        ("X.Y.Z", False),
+        ("1", "1.0.0"),
+        ("1.2", "1.2.0"),
+        ("1.2.3", "1.2.3"),
+        ("10.2.3", "10.2.3"),
+        ("13234.223.32222", "13234.223.32222"),
+        ("1.2.3.4", "1.2.3.4"),
     ],
 )
 def test_SemVerVersionMustBe3Parts(version, expected):
-    semVer = None
-    valid = SemanticVersion(version, semVer)
-    assert valid == expected
+    version = nuget.Version.from_string(version)
+    assert str(version) == expected
+
+
+@pytest.mark.parametrize(
+    "version",
+    [
+        "1.2. 3",
+        "1. 2.3",
+        "X.2.3",
+        "1.2.Z",
+        "X.Y.Z",
+    ],
+)
+def test_SemVerVersionMustBeValid(version):
+    with pytest.raises(Exception):
+        nuget.Version.from_string(version)
 
 
 # X, Y, and Z are non-negative integers
 @pytest.mark.parametrize(
-    ["versionString"],
+    "version",
     [
-        ("-1.2.3",),
-        ("1.-2.3",),
-        ("1.2.-3",),
+        "-1.2.3",
+        "1.-2.3",
+        "1.2.-3",
     ],
 )
-def test_SemVerVersionNegativeNumbers(versionString):
-    semVer = None
-    valid = SemanticVersion(versionString, semVer)
-    assert not valid
+def test_SemVerVersionNegativeNumbers(version):
+    with pytest.raises(Exception):
+        nuget.Version.from_string(version)
 
 
-# X, Y, and Z MUST NOT contain leading zeroes
+# X, Y, and Z leading zeroes are normalized
 @pytest.mark.parametrize(
-    "versionString",
+    ("version", "expected"),
     [
-        ("01.2.3",),
-        ("1.02.3",),
-        ("1.2.03",),
-        ("00.2.3",),
-        ("1.2.0030",),
+        ("01.2.3", "1.2.3"),
+        ("1.02.3", "1.2.3"),
+        ("1.2.03", "1.2.3"),
+        ("00.2.3", "0.2.3"),
+        ("1.2.0030", "1.2.30"),
     ],
 )
-def test_SemVerVersionLeadingZeros(versionString):
-    semVer = None
-    valid = SemanticVersion(versionString, semVer)
-    assert not valid
+def test_SemVerVersionAcceptsLeadingZeros(version, expected):
+    version = nuget.Version.from_string(version)
+    assert str(version) == expected
 
 
 # Major version zero (0.y.z) is for initial development
 @pytest.mark.parametrize(
-    "versionString",
+    "version",
     [
-        ("0.1.2",),
-        ("1.0.0",),
-        ("0.0.0",),
+        "0.1.2",
+        "1.0.0",
+        "0.0.0",
     ],
 )
-def test_SemVerVersionValidZeros(versionString):
-    semVer = None
-    valid = SemanticVersion(versionString, semVer)
-    assert valid
+def test_SemVerVersionValidZeros(version):
+    valid = nuget.Version.from_string(version)
+    assert str(valid) == version
 
 
 # valid release labels
 @pytest.mark.parametrize(
-    "versionString",
+    ("version", "prerelease"),
     [
-        ("0.1.2-Alpha",),
-        ("0.1.2-Alpha.2.34.5.453.345.345.345.345.A.B.bbbbbbb.Csdfdfdf",),
-        ("0.1.2-Alpha-2-5Bdd",),
-        ("0.1.2--",),
-        ("0.1.2--B-C-",),
-        ("0.1.2--B2.-.C.-A0-",),
-        ("0.1.2+NoReleaseLabel",),
+        ("0.1.2-Alpha", "Alpha"),
+        (
+            "0.1.2-Alpha.2.34.5.453.345.345.345.345.A.B.bbbbbbb.Csdfdfdf",
+            "Alpha.2.34.5.453.345.345.345.345.A.B.bbbbbbb.Csdfdfdf",
+        ),
+        ("0.1.2-Alpha-2-5Bdd", "Alpha-2-5Bdd"),
+        ("0.1.2--", "-"),
+        ("0.1.2--B-C-", "-B-C-"),
+        ("0.1.2--B2.-.C.-A0-", "-B2.-.C.-A0-"),
+        ("0.1.2+NoReleaseLabel", ""),
     ],
 )
-def test_SemVerVersionValidReleaseLabels(versionString):
-    semVer = None
-    valid = SemanticVersion(versionString, semVer)
-    assert valid
+def test_SemVerVersionValidReleaseLabels(version, prerelease):
+    version = nuget.Version.from_string(version)
+    assert version.prerelease == prerelease.lower()
 
 
 # Release label identifiers MUST NOT be empty
@@ -109,9 +117,8 @@ def test_SemVerVersionValidReleaseLabels(versionString):
     ],
 )
 def test_SemVerVersionInvalidReleaseId(versionString):
-    semVer = None
-    valid = SemanticVersion(versionString, semVer)
-    assert not valid
+    with pytest.raises(Exception):
+        nuget.Version.from_string(versionString)
 
 
 # Identifiers MUST comprise only ASCII alphanumerics and hyphen [0-9A-Za-z-]
@@ -125,9 +132,8 @@ def test_SemVerVersionInvalidReleaseId(versionString):
     ],
 )
 def test_SemVerVersionInvalidReleaseLabelChars(versionString):
-    semVer = None
-    valid = SemanticVersion(versionString, semVer)
-    assert not valid
+    with pytest.raises(Exception):
+        nuget.Version.from_string(versionString)
 
 
 # Numeric identifiers MUST NOT include leading zeroes
@@ -141,9 +147,8 @@ def test_SemVerVersionInvalidReleaseLabelChars(versionString):
     ],
 )
 def test_SemVerVersionReleaseLabelZeros(versionString):
-    semVer = None
-    valid = SemanticVersion(versionString, semVer)
-    assert not valid
+    with pytest.raises(Exception):
+        nuget.Version.from_string(versionString)
 
 
 # Numeric identifiers MUST NOT include leading zeroes
@@ -157,8 +162,7 @@ def test_SemVerVersionReleaseLabelZeros(versionString):
     ],
 )
 def test_SemVerVersionReleaseLabelValidZeros(versionString):
-    semVer = None
-    valid = SemanticVersion(versionString, semVer)
+    valid = nuget.Version.from_string(versionString)
     assert valid
 
 
@@ -177,8 +181,7 @@ def test_SemVerVersionReleaseLabelValidZeros(versionString):
     ],
 )
 def test_SemVerVersionMetadataValidChars(versionString):
-    semVer = None
-    valid = SemanticVersion(versionString, semVer)
+    valid = nuget.Version.from_string(versionString)
     assert valid
 
 
@@ -192,9 +195,8 @@ def test_SemVerVersionMetadataValidChars(versionString):
     ],
 )
 def test_SemVerVersionMetadataInvalidChars(versionString):
-    semVer = None
-    valid = SemanticVersion(versionString, semVer)
-    assert not valid
+    with pytest.raises(Exception):
+        nuget.Version.from_string(versionString)
 
 
 # Identifiers MUST NOT be empty
@@ -207,9 +209,8 @@ def test_SemVerVersionMetadataInvalidChars(versionString):
     ],
 )
 def test_SemVerVersionMetadataNonEmptyParts(versionString):
-    semVer = None
-    valid = SemanticVersion(versionString, semVer)
-    assert not valid
+    with pytest.raises(Exception):
+        nuget.Version.from_string(versionString)
 
 
 # Leading zeros are fine for metadata
@@ -223,8 +224,7 @@ def test_SemVerVersionMetadataNonEmptyParts(versionString):
     ],
 )
 def test_SemVerVersionMetadataLeadingZeros(versionString):
-    semVer = None
-    valid = SemanticVersion(versionString, semVer)
+    valid = nuget.Version.from_string(versionString)
     assert valid
 
 
@@ -236,8 +236,8 @@ def test_SemVerVersionMetadataLeadingZeros(versionString):
     ],
 )
 def test_SemVerVersionMetadataOrder(versionString):
-    semver = SemanticVersion(versionString)
-    assert not semver.IsPrerelease
+    semver = nuget.Version.from_string(versionString)
+    assert not semver.prerelease
 
 
 # Precedence is determined by the first difference when comparing each
@@ -252,8 +252,8 @@ def test_SemVerVersionMetadataOrder(versionString):
     ],
 )
 def test_SemVerSortVersion(lower, higher):
-    lowerSemVer = SemanticVersion(lower)
-    higherSemVer = SemanticVersion(higher)
+    lowerSemVer = nuget.Version.from_string(lower)
+    higherSemVer = nuget.Version.from_string(higher)
     assert cmp(lowerSemVer, higherSemVer) < 0
 
 
@@ -265,8 +265,8 @@ def test_SemVerSortVersion(lower, higher):
     ],
 )
 def test_SemVerSortRelease(lower, higher):
-    lowerSemVer = SemanticVersion(lower)
-    higherSemVer = SemanticVersion(higher)
+    lowerSemVer = nuget.Version.from_string(lower)
+    higherSemVer = nuget.Version.from_string(higher)
     assert cmp(lowerSemVer, higherSemVer) < 0
 
 
@@ -279,8 +279,8 @@ def test_SemVerSortRelease(lower, higher):
     ],
 )
 def test_SemVerSortReleaseNumeric(lower, higher):
-    lowerSemVer = SemanticVersion(lower)
-    higherSemVer = SemanticVersion(higher)
+    lowerSemVer = nuget.Version.from_string(lower)
+    higherSemVer = nuget.Version.from_string(higher)
     assert cmp(lowerSemVer, higherSemVer) < 0
 
 
@@ -293,8 +293,8 @@ def test_SemVerSortReleaseNumeric(lower, higher):
     ],
 )
 def test_SemVerSortReleaseAlpha(lower, higher):
-    lowerSemVer = SemanticVersion(lower)
-    higherSemVer = SemanticVersion(higher)
+    lowerSemVer = nuget.Version.from_string(lower)
+    higherSemVer = nuget.Version.from_string(higher)
     assert cmp(lowerSemVer, higherSemVer) < 0
 
 
@@ -307,8 +307,8 @@ def test_SemVerSortReleaseAlpha(lower, higher):
     ],
 )
 def test_SemVerSortNumericAlpha(lower, higher):
-    lowerSemVer = SemanticVersion(lower)
-    higherSemVer = SemanticVersion(higher)
+    lowerSemVer = nuget.Version.from_string(lower)
+    higherSemVer = nuget.Version.from_string(higher)
     assert cmp(lowerSemVer, higherSemVer) < 0
 
 
@@ -321,8 +321,8 @@ def test_SemVerSortNumericAlpha(lower, higher):
     ],
 )
 def test_SemVerSortReleaseLabelCount(lower, higher):
-    lowerSemVer = SemanticVersion(lower)
-    higherSemVer = SemanticVersion(higher)
+    lowerSemVer = nuget.Version.from_string(lower)
+    higherSemVer = nuget.Version.from_string(higher)
     assert cmp(lowerSemVer, higherSemVer) < 0
 
 
@@ -335,6 +335,6 @@ def test_SemVerSortReleaseLabelCount(lower, higher):
     ],
 )
 def test_SemVerSortIgnoreReleaseCasing(a, b):
-    semVerA = SemanticVersion(a)
-    semVerB = SemanticVersion(b)
+    semVerA = nuget.Version.from_string(a)
+    semVerB = nuget.Version.from_string(b)
     assert semVerA == semVerB

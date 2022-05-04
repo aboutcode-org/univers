@@ -152,14 +152,21 @@ class Version:
     def __init__(self, base_semver, revision=0):
         self._base_semver = base_semver
         if self._base_semver.prerelease:
+            # TODO: why lowercasing this and not the build and why here and now?
             self._base_semver = self._base_semver.replace(prerelease=base_semver.prerelease.lower())
         self._revision = revision or 0
         self._original_version = None
 
     def __eq__(self, other):
-        return self._base_semver == other._base_semver and self._revision == other._revision
+        return (
+            isinstance(other, Version)
+            and self._base_semver == other._base_semver
+            and self._revision == other._revision
+        )
 
     def __lt__(self, other):
+        if not isinstance(other, Version):
+            return NotImplemented
         if self._base_semver.replace(prerelease="") == other._base_semver.replace(prerelease=""):
             # If the first three components are the same, compare the revision.
             if self._revision != other._revision:

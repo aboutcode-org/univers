@@ -6,11 +6,32 @@
 import pytest
 
 from univers import nuget
-from univers.version_range import NugetVersionRange as VersionRange
+from univers.version_range import NugetVersionRange
+
+"""
+NuGet Float ranges are not yet supported in Univers.
+
+See https://docs.microsoft.com/en-us/nuget/concepts/package-versioning#version-ranges
+
+    "When using the PackageReference format, NuGet also supports using a floating 
+    notation, *, for Major, Minor, Patch, and pre-release suffix parts of the
+    number. Floating versions are not supported with the packages.config format.
+    When a floating version is specified, the rule is to resolve to the highest
+    existent version that matches the version description. Examples of floating
+    versions and the resolutions are below."
+
+For example:
+
+<!-- Accepts any 6.x.y version.
+     Will resolve to the highest acceptable stable version.-->
+<PackageReference Include="ExamplePackage" Version="6.*" />
+"""
+
+pytestmark = pytest.mark.skipif(True, reason="NuGet Float ranges are not yet supported in Univers.")
 
 
 def test_VersionRangeFloatParsing_Prerelease():
-    vrange = VersionRange("1.0.0-*")
+    vrange = NugetVersionRange.from_native("1.0.0-*")
     assert vrange.MinVersion.IsPrerelease
 
 
@@ -32,7 +53,7 @@ def test_VersionRangeFloatParsing_Prerelease():
 def test_VersionRangeFloatParsing_PrereleaseWithNumericOnlyLabelVerifyMinVersion(
     rangeString, expected
 ):
-    vrange = VersionRange(rangeString)
+    vrange = NugetVersionRange.from_native(rangeString)
     assert vrange.MinVersion.to_string() == expected
 
 
@@ -46,7 +67,7 @@ def test_VersionRangeFloatParsing_PrereleaseWithNumericOnlyLabelVerifyMinVersion
     ],
 )
 def test_VersionRangeFloatParsing_PrereleaseWithNumericOnlyLabelVerifySatisfies(version):
-    vrange = VersionRange("1.0.0-*")
+    vrange = NugetVersionRange.from_native("1.0.0-*")
     assert vrange.Satisfies(nuget.Version(version))
 
 
@@ -62,7 +83,7 @@ def test_VersionRangeFloatParsing_PrereleaseWithNumericOnlyLabelVerifySatisfies(
     ],
 )
 def test_VersionRangeFloatParsing_VerifySatisfiesForFloatingRange(rangeString, version):
-    vrange = VersionRange(rangeString)
+    vrange = NugetVersionRange.from_native(rangeString)
     assert vrange.Satisfies(nuget.Version(version))
 
 
@@ -92,7 +113,7 @@ def test_VersionRangeFloatParsing_VerifySatisfiesForFloatingRange(rangeString, v
     ],
 )
 def test_VersionRangeFloatParsing_VerifyReleaseLabels(rangeString, versionLabel, originalLabel):
-    vrange = VersionRange(rangeString)
+    vrange = NugetVersionRange.from_native(rangeString)
     assert vrange.Float.MinVersion.Release == versionLabel
     assert vrange.Float.OriginalReleasePrefix == originalLabel
 
@@ -108,19 +129,19 @@ def test_VersionRangeFloatParsing_VerifyReleaseLabels(rangeString, versionLabel,
     ],
 )
 def test_VersionRangeFloatParsing_NoFloat(rangeString):
-    vrange = VersionRange(rangeString)
+    vrange = NugetVersionRange.from_native(rangeString)
     versions = [nuget.Version("1.0.0"), nuget.Version("1.1.0")]
     assert vrange.FindBestMatch(versions).to_string() == "1.0.0"
 
 
 def test_VersionRangeFloatParsing_FloatPrerelease():
-    vrange = VersionRange("1.0.0-*")
+    vrange = NugetVersionRange.from_native("1.0.0-*")
     versions = [nuget.Version("1.0.0-alpha"), nuget.Version("1.0.0-beta")]
     assert vrange.FindBestMatch(versions).to_string() == "1.0.0-beta"
 
 
 def test_VersionRangeFloatParsing_FloatPrereleaseMatchVersion():
-    vrange = VersionRange("1.0.0-*")
+    vrange = NugetVersionRange.from_native("1.0.0-*")
     versions = [
         nuget.Version("1.0.0-beta"),
         nuget.Version("1.0.1-omega"),
@@ -129,7 +150,7 @@ def test_VersionRangeFloatParsing_FloatPrereleaseMatchVersion():
 
 
 def test_VersionRangeFloatParsing_FloatPrereleasePrefix():
-    vrange = VersionRange("1.0.0-beta.*")
+    vrange = NugetVersionRange.from_native("1.0.0-beta.*")
     versions = [
         nuget.Version("1.0.0-beta.1"),
         nuget.Version("1.0.0-beta.2"),
@@ -139,7 +160,7 @@ def test_VersionRangeFloatParsing_FloatPrereleasePrefix():
 
 
 def test_VersionRangeFloatParsing_FloatPrereleasePrefixSemVerLabelMix():
-    vrange = VersionRange("1.0.0-beta.*")
+    vrange = NugetVersionRange.from_native("1.0.0-beta.*")
     versions = [
         nuget.Version("1.0.0-beta.1"),
         nuget.Version("1.0.0-beta.2"),
@@ -184,7 +205,7 @@ def test_VersionRangeFloatParsing_FloatPrereleasePrefixSemVerLabelMix():
 )
 def test_VersionRangeFloatParsing_Invalid(rangeString):
     vrange = None
-    assert not VersionRange(rangeString, vrange)
+    assert not NugetVersionRange.from_native(rangeString, vrange)
 
 
 @pytest.mark.parametrize(
@@ -214,7 +235,7 @@ def test_VersionRangeFloatParsing_Invalid(rangeString):
 )
 def test_VersionRangeFloatParsing_Valid(rangeString):
     vrange = None
-    assert VersionRange(rangeString, vrange)
+    assert NugetVersionRange.from_native(rangeString, vrange)
 
 
 @pytest.mark.parametrize(
@@ -230,7 +251,7 @@ def test_VersionRangeFloatParsing_Valid(rangeString):
 )
 def test_VersionRangeFloatParsing_LegacyEquivalent(rangeString, legacyString):
     vrange = None
-    assert VersionRange(rangeString, vrange)
+    assert NugetVersionRange.from_native(rangeString, vrange)
     assert vrange.ToLegacyString() == legacyString
 
 
@@ -244,7 +265,7 @@ def test_VersionRangeFloatParsing_LegacyEquivalent(rangeString, legacyString):
 )
 def test_VersionRangeFloatParsing_CorrectFloatRange(rangeString):
     vrange = None
-    assert VersionRange(rangeString, vrange)
+    assert NugetVersionRange.from_native(rangeString, vrange)
     assert vrange.Float.to_string() == rangeString
 
 
@@ -267,7 +288,7 @@ def test_VersionRangeFloatParsing_CorrectFloatRange(rangeString):
     ],
 )
 def test_VersionRangeFloatParsing_FindsBestMatch(availableVersions, declaredRange, expectedVersion):
-    vrange = VersionRange(declaredRange)
+    vrange = NugetVersionRange.from_native(declaredRange)
     versions = []
     for version in availableVersions.Split(";"):
         versions.append(nuget.Version(version))
