@@ -160,7 +160,6 @@ class Version:
 
 @attr.s(frozen=True, order=False, hash=True)
 class GenericVersion(Version):
-
     @classmethod
     def is_valid(cls, string):
         # generic implementation ...
