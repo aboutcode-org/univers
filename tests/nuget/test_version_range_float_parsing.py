@@ -91,9 +91,7 @@ def test_VersionRangeFloatParsing_VerifySatisfiesForFloatingRange(rangeString, v
         ("*-a.*", "a.0", "a."),
     ],
 )
-def test_VersionRangeFloatParsing_VerifyReleaseLabels(
-    rangeString, versionLabel, originalLabel
-):
+def test_VersionRangeFloatParsing_VerifyReleaseLabels(rangeString, versionLabel, originalLabel):
     vrange = VersionRange(rangeString)
     assert vrange.Float.MinVersion.Release == versionLabel
     assert vrange.Float.OriginalReleasePrefix == originalLabel
@@ -268,9 +266,7 @@ def test_VersionRangeFloatParsing_CorrectFloatRange(rangeString):
         ("1.1.0;1.2.0-rc.1;1.2.0-rc.2;1.2.0-rc1;1.10.0;2.0.0;3.0.0-beta.1", "1.1*-*", "1.10.0"),
     ],
 )
-def test_VersionRangeFloatParsing_FindsBestMatch(
-    availableVersions, declaredRange, expectedVersion
-):
+def test_VersionRangeFloatParsing_FindsBestMatch(availableVersions, declaredRange, expectedVersion):
     vrange = VersionRange(declaredRange)
     versions = []
     for version in availableVersions.Split(";"):

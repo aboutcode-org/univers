@@ -31,6 +31,7 @@ def test_SemVerVersionMustBe3Parts(version, expected):
     valid = SemanticVersion(version, semVer)
     assert valid == expected
 
+
 # X, Y, and Z are non-negative integers
 @pytest.mark.parametrize(
     ["versionString"],
@@ -44,6 +45,7 @@ def test_SemVerVersionNegativeNumbers(versionString):
     semVer = None
     valid = SemanticVersion(versionString, semVer)
     assert not valid
+
 
 # X, Y, and Z MUST NOT contain leading zeroes
 @pytest.mark.parametrize(
@@ -61,6 +63,7 @@ def test_SemVerVersionLeadingZeros(versionString):
     valid = SemanticVersion(versionString, semVer)
     assert not valid
 
+
 # Major version zero (0.y.z) is for initial development
 @pytest.mark.parametrize(
     "versionString",
@@ -74,6 +77,7 @@ def test_SemVerVersionValidZeros(versionString):
     semVer = None
     valid = SemanticVersion(versionString, semVer)
     assert valid
+
 
 # valid release labels
 @pytest.mark.parametrize(
@@ -93,6 +97,7 @@ def test_SemVerVersionValidReleaseLabels(versionString):
     valid = SemanticVersion(versionString, semVer)
     assert valid
 
+
 # Release label identifiers MUST NOT be empty
 @pytest.mark.parametrize(
     "versionString",
@@ -107,6 +112,7 @@ def test_SemVerVersionInvalidReleaseId(versionString):
     semVer = None
     valid = SemanticVersion(versionString, semVer)
     assert not valid
+
 
 # Identifiers MUST comprise only ASCII alphanumerics and hyphen [0-9A-Za-z-]
 @pytest.mark.parametrize(
@@ -123,6 +129,7 @@ def test_SemVerVersionInvalidReleaseLabelChars(versionString):
     valid = SemanticVersion(versionString, semVer)
     assert not valid
 
+
 # Numeric identifiers MUST NOT include leading zeroes
 @pytest.mark.parametrize(
     "versionString",
@@ -138,6 +145,7 @@ def test_SemVerVersionReleaseLabelZeros(versionString):
     valid = SemanticVersion(versionString, semVer)
     assert not valid
 
+
 # Numeric identifiers MUST NOT include leading zeroes
 @pytest.mark.parametrize(
     "versionString",
@@ -152,6 +160,7 @@ def test_SemVerVersionReleaseLabelValidZeros(versionString):
     semVer = None
     valid = SemanticVersion(versionString, semVer)
     assert valid
+
 
 # Identifiers MUST comprise only ASCII alphanumerics and hyphen [0-9A-Za-z-]
 @pytest.mark.parametrize(
@@ -172,6 +181,7 @@ def test_SemVerVersionMetadataValidChars(versionString):
     valid = SemanticVersion(versionString, semVer)
     assert valid
 
+
 # Identifiers MUST comprise only ASCII alphanumerics and hyphen [0-9A-Za-z-]
 @pytest.mark.parametrize(
     "versionString",
@@ -186,6 +196,7 @@ def test_SemVerVersionMetadataInvalidChars(versionString):
     valid = SemanticVersion(versionString, semVer)
     assert not valid
 
+
 # Identifiers MUST NOT be empty
 @pytest.mark.parametrize(
     "versionString",
@@ -199,6 +210,7 @@ def test_SemVerVersionMetadataNonEmptyParts(versionString):
     semVer = None
     valid = SemanticVersion(versionString, semVer)
     assert not valid
+
 
 # Leading zeros are fine for metadata
 @pytest.mark.parametrize(
@@ -215,6 +227,7 @@ def test_SemVerVersionMetadataLeadingZeros(versionString):
     valid = SemanticVersion(versionString, semVer)
     assert valid
 
+
 @pytest.mark.parametrize(
     "versionString",
     [
@@ -225,6 +238,7 @@ def test_SemVerVersionMetadataLeadingZeros(versionString):
 def test_SemVerVersionMetadataOrder(versionString):
     semver = SemanticVersion(versionString)
     assert not semver.IsPrerelease
+
 
 # Precedence is determined by the first difference when comparing each
 # of these identifiers from left to right as follows: Major, minor, and
@@ -242,6 +256,7 @@ def test_SemVerSortVersion(lower, higher):
     higherSemVer = SemanticVersion(higher)
     assert cmp(lowerSemVer, higherSemVer) < 0
 
+
 # a pre-release version has lower precedence than a normal version
 @pytest.mark.parametrize(
     ["lower", "higher"],
@@ -253,6 +268,7 @@ def test_SemVerSortRelease(lower, higher):
     lowerSemVer = SemanticVersion(lower)
     higherSemVer = SemanticVersion(higher)
     assert cmp(lowerSemVer, higherSemVer) < 0
+
 
 # identifiers consisting of only digits are compared numerically
 @pytest.mark.parametrize(
@@ -267,6 +283,7 @@ def test_SemVerSortReleaseNumeric(lower, higher):
     higherSemVer = SemanticVersion(higher)
     assert cmp(lowerSemVer, higherSemVer) < 0
 
+
 # identifiers with letters or hyphens are compared lexically in ASCII sort order
 @pytest.mark.parametrize(
     ["lower", "higher"],
@@ -279,6 +296,7 @@ def test_SemVerSortReleaseAlpha(lower, higher):
     lowerSemVer = SemanticVersion(lower)
     higherSemVer = SemanticVersion(higher)
     assert cmp(lowerSemVer, higherSemVer) < 0
+
 
 # Numeric identifiers always have lower precedence than non-numeric identifiers
 @pytest.mark.parametrize(
@@ -293,6 +311,7 @@ def test_SemVerSortNumericAlpha(lower, higher):
     higherSemVer = SemanticVersion(higher)
     assert cmp(lowerSemVer, higherSemVer) < 0
 
+
 # A larger set of pre-release fields has a higher precedence than a smaller set
 @pytest.mark.parametrize(
     ["lower", "higher"],
@@ -305,6 +324,7 @@ def test_SemVerSortReleaseLabelCount(lower, higher):
     lowerSemVer = SemanticVersion(lower)
     higherSemVer = SemanticVersion(higher)
     assert cmp(lowerSemVer, higherSemVer) < 0
+
 
 # ignore release label casing
 @pytest.mark.parametrize(

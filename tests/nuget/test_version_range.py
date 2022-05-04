@@ -50,9 +50,7 @@ def test_VersionRange_PrettyPrintTests(versionString, expected):
         ("(, )", True),
     ],
 )
-def test_VersionRange_NormalizationRoundTripsTest(
-    versionString, isOriginalStringNormalized
-):
+def test_VersionRange_NormalizationRoundTripsTest(versionString, isOriginalStringNormalized):
 
     originalParsedRange = NugetVersionRange(versionString)
 
@@ -242,9 +240,7 @@ def test_VersionRange_Exact():
         ("[,2021)", "[,2021.0.0.0)"),
     ],
 )
-def test_VersionRange_MissingVersionComponents_DefaultToZero(
-    shortVersionSpec, longVersionSpec
-):
+def test_VersionRange_MissingVersionComponents_DefaultToZero(shortVersionSpec, longVersionSpec):
     versionRange1 = NugetVersionRange(shortVersionSpec)
     versionRange2 = NugetVersionRange(longVersionSpec)
     assert versionRange1 == versionRange2
@@ -589,9 +585,7 @@ def test_StringFormatNullProvider2(vrange):
         ("[2.7]", "2.7", True, "2.7", True),
     ],
 )
-def test_ParseVersionParsesTokensVersionsCorrectly(
-    versionString, minver, incMin, maxver, incMax
-):
+def test_ParseVersionParsesTokensVersionsCorrectly(versionString, minver, incMin, maxver, incMax):
 
     versionRange = NugetVersionRange(
         None if minver == None else nuget.Version(minver),
