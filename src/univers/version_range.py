@@ -51,7 +51,7 @@ class VersionRange:
     constraints = attr.ib(type=tuple, default=attr.Factory(tuple))
 
     def __attrs_post_init__(self, *args, **kwargs):
-        constraints = tuple(sorted(self.constraints))
+        constraints = tuple(sorted(set(self.constraints)))
         # Notes: setattr is used because this is an immutable frozen instance.
         # See https://www.attrs.org/en/stable/init.html?#post-init
         object.__setattr__(self, "constraints", constraints)

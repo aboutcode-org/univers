@@ -18,6 +18,7 @@ from univers.version_range import VersionRange
 from univers.version_range import RANGE_CLASS_BY_SCHEMES
 from univers.version_range import NpmVersionRange
 from univers.version_range import OpensslVersionRange
+from univers.version_range import NginxVersionRange
 from univers.versions import PypiVersion
 from univers.versions import NugetVersion
 from univers.versions import RubygemsVersion
@@ -277,6 +278,24 @@ class TestVersionRange(TestCase):
         version_range = NugetVersionRange.from_native(nuget_range)
         assert version_range == expected
         assert version_range.to_string() == "vers:nuget/>=1.0.0|<2.0.0"
+
+    def test_version_range_constraint_duplication(self):
+        version_range = VersionRange(
+            constraints=(
+                VersionConstraint(comparator=">=", version=SemverVersion(string="1.4.0")),
+                VersionConstraint(comparator=">=", version=SemverVersion(string="1.4.0")),
+                VersionConstraint(comparator="=", version=SemverVersion(string="2.5.0")),
+                VersionConstraint(comparator="=", version=SemverVersion(string="2.5.0")),
+            )
+        )
+
+        expected = VersionRange(
+            constraints=(
+                VersionConstraint(comparator=">=", version=SemverVersion(string="1.4.0")),
+                VersionConstraint(comparator="=", version=SemverVersion(string="2.5.0")),
+            )
+        )
+        assert version_range == expected
 
 
 VERSION_RANGE_TESTS_BY_SCHEME = {
