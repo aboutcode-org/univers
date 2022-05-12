@@ -1,0 +1,734 @@
+[
+  {
+    "test_index": 1,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.0a1,<1.0.5||>=1.1b1,<1.1.1",
+    "expected_vers": "vers:pypi/>=1.0a1|<1.0.5|>=1.1b1|<1.1.1"
+  },
+  {
+    "test_index": 2,
+    "scheme": "pypi",
+    "gitlab_native": ">=5.0.0,<5.0.12||>=6.0.0,<6.0.5||>=6.1.0,<6.2.2",
+    "expected_vers": "vers:pypi/>=5.0.0|<5.0.12|>=6.0.0|<6.0.5|>=6.1.0|<6.2.2"
+  },
+  {
+    "test_index": 3,
+    "scheme": "pypi",
+    "gitlab_native": ">=5.0.0,<5.0.12||>=6.0.0,<6.0.5||>=6.1.0,<6.2.2",
+    "expected_vers": "vers:pypi/>=5.0.0|<5.0.12|>=6.0.0|<6.0.5|>=6.1.0|<6.2.2"
+  },
+  {
+    "test_index": 4,
+    "scheme": "pypi",
+    "gitlab_native": ">=4.0,<4.3||>=5.0,<5.2",
+    "expected_vers": "vers:pypi/>=4.0|<4.3|>=5.0|<5.2"
+  },
+  {
+    "test_index": 5,
+    "scheme": "pypi",
+    "gitlab_native": ">=4.0,<4.3||>=5.0,<5.2",
+    "expected_vers": "vers:pypi/>=4.0|<4.3|>=5.0|<5.2"
+  },
+  {
+    "test_index": 6,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.10.0,<=1.10.15||>=2.0.0,<2.2.0",
+    "expected_vers": "vers:pypi/>=1.10.0|<=1.10.15|>=2.0.0|<2.2.0"
+  },
+  {
+    "test_index": 7,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.0.0,<1.10.15||>=2.0.0,<2.0.2",
+    "expected_vers": "vers:pypi/>=1.0.0|<1.10.15|>=2.0.0|<2.0.2"
+  },
+  {
+    "test_index": 8,
+    "scheme": "pypi",
+    "gitlab_native": ">0.11.0,<0.11.7 || >0.12.0,<0.12.6",
+    "expected_vers": "vers:pypi/>0.11.0|<0.11.7|>0.12.0|<0.12.6"
+  },
+  {
+    "test_index": 9,
+    "scheme": "pypi",
+    "gitlab_native": ">=2.12.0,<2.12.19||>=2.13.0,<2.13.8",
+    "expected_vers": "vers:pypi/>=2.12.0|<2.12.19|>=2.13.0|<2.13.8"
+  },
+  {
+    "test_index": 10,
+    "scheme": "pypi",
+    "gitlab_native": "<2.12.21||>=2.13.0,<2.13.11",
+    "expected_vers": "vers:pypi/<2.12.21|>=2.13.0|<2.13.11"
+  },
+  {
+    "test_index": 11,
+    "scheme": "pypi",
+    "gitlab_native": ">=2.8.0,<2.8.12||>=2.9.0,<2.9.12||>=2.10.0,<2.10.11||>=2.11.0",
+    "expected_vers": "vers:pypi/>=2.8.0|<2.8.12|>=2.9.0|<2.9.12|>=2.10.0|<2.10.11|>=2.11.0"
+  },
+  {
+    "test_index": 12,
+    "scheme": "pypi",
+    "gitlab_native": "<21.2.3||>=22.0.0,<22.2.3||>=23.0.0,<23.0.3",
+    "expected_vers": "vers:pypi/<21.2.3|>=22.0.0|<22.2.3|>=23.0.0|<23.0.3"
+  },
+  {
+    "test_index": 13,
+    "scheme": "pypi",
+    "gitlab_native": ">=2.4.0,<2.4.5||>=3.0.0,<3.1.1",
+    "expected_vers": "vers:pypi/>=2.4.0|<2.4.5|>=3.0.0|<3.1.1"
+  },
+  {
+    "test_index": 14,
+    "scheme": "pypi",
+    "gitlab_native": "<1.9.0||>=2.0.0,<2.2.0",
+    "expected_vers": "vers:pypi/<1.9.0|>=2.0.0|<2.2.0"
+  },
+  {
+    "test_index": 15,
+    "scheme": "pypi",
+    "gitlab_native": "<1.8.0||>=2.0.0,<2.1.0",
+    "expected_vers": "vers:pypi/<1.8.0|>=2.0.0|<2.1.0"
+  },
+  {
+    "test_index": 16,
+    "scheme": "pypi",
+    "gitlab_native": ">=0.6.0,<=0.6.1||>=0.7.0,<=0.7.2",
+    "expected_vers": "vers:pypi/>=0.6.0|<=0.6.1|>=0.7.0|<=0.7.2"
+  },
+  {
+    "test_index": 17,
+    "scheme": "pypi",
+    "gitlab_native": "<=3.4.6.27||>=4.0.0.21,<=4.1.0.25",
+    "expected_vers": "vers:pypi/<=3.4.6.27|>=4.0.0.21|<=4.1.0.25"
+  },
+  {
+    "test_index": 18,
+    "scheme": "pypi",
+    "gitlab_native": "<=3.4.6.27||>=4.0.0.21,<=4.1.0.25",
+    "expected_vers": "vers:pypi/<=3.4.6.27|>=4.0.0.21|<=4.1.0.25"
+  },
+  {
+    "test_index": 19,
+    "scheme": "pypi",
+    "gitlab_native": "<1.2.21||>=2.0.0,<2.2.10||>=2.3.0,<2.3.2||>=3.0.0,<3.0.17",
+    "expected_vers": "vers:pypi/<1.2.21|>=2.0.0|<2.2.10|>=2.3.0|<2.3.2|>=3.0.0|<3.0.17"
+  },
+  {
+    "test_index": 20,
+    "scheme": "pypi",
+    "gitlab_native": "==2.3.0||==3.0.0",
+    "expected_vers": "vers:pypi/2.3.0|3.0.0"
+  },
+  {
+    "test_index": 21,
+    "scheme": "pypi",
+    "gitlab_native": "<15.0.1||>=16.0.0.0rc1,<16.0.0",
+    "expected_vers": "vers:pypi/<15.0.1|>=16.0.0.0rc1|<16.0.0"
+  },
+  {
+    "test_index": 22,
+    "scheme": "pypi",
+    "gitlab_native": "<1.3.1||>=2.0.0,<=3.0.0",
+    "expected_vers": "vers:pypi/<1.3.1|>=2.0.0|<=3.0.0"
+  },
+  {
+    "test_index": 23,
+    "scheme": "pypi",
+    "gitlab_native": "<=1.7.0||>=2.0.0,<2.4.0",
+    "expected_vers": "vers:pypi/<=1.7.0|>=2.0.0|<2.4.0"
+  },
+  {
+    "test_index": 24,
+    "scheme": "pypi",
+    "gitlab_native": "<1.8.6||>=1.9.0alpha,<1.10.5||>=2.0.0alpha,<2.0.2",
+    "expected_vers": "vers:pypi/<1.8.6|>=1.9.0a0|<1.10.5|>=2.0.0a0|<2.0.2"
+  },
+  {
+    "test_index": 25,
+    "scheme": "pypi",
+    "gitlab_native": "<0.7.6||==0.8.0",
+    "expected_vers": "vers:pypi/<0.7.6|0.8.0"
+  },
+  {
+    "test_index": 26,
+    "scheme": "pypi",
+    "gitlab_native": "<=1.2.17||==1.3.0",
+    "expected_vers": "vers:pypi/<=1.2.17|1.3.0"
+  },
+  {
+    "test_index": 27,
+    "scheme": "pypi",
+    "gitlab_native": "<1.3.2||==2.0.0||==2.0.0b1",
+    "expected_vers": "vers:pypi/<1.3.2|2.0.0b1|2.0.0"
+  },
+  {
+    "test_index": 28,
+    "scheme": "pypi",
+    "gitlab_native": ">=3.0.0,<=3.0.17||>=3.2.0,<=3.2.17||>=3.4.0,<=3.4.17 ||>=3.6.0",
+    "expected_vers": "vers:pypi/>=3.0.0|<=3.0.17|>=3.2.0|<=3.2.17|>=3.4.0|<=3.4.17|>=3.6.0"
+  },
+  {
+    "test_index": 29,
+    "scheme": "pypi",
+    "gitlab_native": ">=4.2,<4.2.21||>=4.4,<4.4.19||>=4.6,<4.6.14||>=4.8,<4.8.10",
+    "expected_vers": "vers:pypi/>=4.2|<4.2.21|>=4.4|<4.4.19|>=4.6|<4.6.14|>=4.8|<4.8.10"
+  },
+  {
+    "test_index": 30,
+    "scheme": "pypi",
+    "gitlab_native": "==4.4.1||==4.10",
+    "expected_vers": "vers:pypi/4.4.1|4.10"
+  },
+  {
+    "test_index": 31,
+    "scheme": "pypi",
+    "gitlab_native": "==5.3.0||==6.1.0||==7.2.0",
+    "expected_vers": "vers:pypi/5.3.0|6.1.0|7.2.0"
+  },
+  {
+    "test_index": 32,
+    "scheme": "pypi",
+    "gitlab_native": "<2019.2.4||>=3000,<3000.2",
+    "expected_vers": "vers:pypi/<2019.2.4|>=3000|<3000.2"
+  },
+  {
+    "test_index": 33,
+    "scheme": "pypi",
+    "gitlab_native": "<=2015.8.12||>=2016.3.0,<=2016.3.4||>=2016.11.0,<=2016.11.2",
+    "expected_vers": "vers:pypi/<=2015.8.12|>=2016.3.0|<=2016.3.4|>=2016.11.0|<=2016.11.2"
+  },
+  {
+    "test_index": 34,
+    "scheme": "pypi",
+    "gitlab_native": "<=2016.3.7||>=2016.11,<=2016.11.7||>=2017.7.0,<=2017.7.1",
+    "expected_vers": "vers:pypi/<=2016.3.7|>=2016.11|<=2016.11.7|>=2017.7.0|<=2017.7.1"
+  },
+  {
+    "test_index": 35,
+    "scheme": "pypi",
+    "gitlab_native": "<2015.8.13||>=2016.3.0,<2016.3.8||>=2016.11.0,<2016.11.10|| >=2017.5.0,<2017.7.8",
+    "expected_vers": "vers:pypi/<2015.8.13|>=2016.3.0|<2016.3.8|>=2016.11.0|<2016.11.10|>=2017.5.0|<2017.7.8"
+  },
+  {
+    "test_index": 36,
+    "scheme": "pypi",
+    "gitlab_native": "<2015.8.13||>=2016.3.0,<2016.11.5||>=2016.11.7,<2016.11.10|| >=2017.5.0,<2017.7.8",
+    "expected_vers": "vers:pypi/<2015.8.13|>=2016.3.0|<2016.11.5|>=2016.11.7|<2016.11.10|>=2017.5.0|<2017.7.8"
+  },
+  {
+    "test_index": 37,
+    "scheme": "pypi",
+    "gitlab_native": "<2015.8.13||>=2016.3.0,<2016.3.8||>=2016.11.0,<2016.11.10|| >=2017.5.0,<2017.7.8",
+    "expected_vers": "vers:pypi/<2015.8.13|>=2016.3.0|<2016.3.8|>=2016.11.0|<2016.11.10|>=2017.5.0|<2017.7.8"
+  },
+  {
+    "test_index": 38,
+    "scheme": "pypi",
+    "gitlab_native": ">=3002,<3002.8||>=3003,<3003.4||>=3004,<3004.1",
+    "expected_vers": "vers:pypi/>=3002|<3002.8|>=3003|<3003.4|>=3004|<3004.1"
+  },
+  {
+    "test_index": 39,
+    "scheme": "pypi",
+    "gitlab_native": "<=2016.11.6||==2017.7.0",
+    "expected_vers": "vers:pypi/<=2016.11.6|2017.7.0"
+  },
+  {
+    "test_index": 40,
+    "scheme": "pypi",
+    "gitlab_native": ">=3002,<3002.8||>=3003,<3003.4||>=3004,<3004.1",
+    "expected_vers": "vers:pypi/>=3002|<3002.8|>=3003|<3003.4|>=3004|<3004.1"
+  },
+  {
+    "test_index": 41,
+    "scheme": "pypi",
+    "gitlab_native": "<=2016.3.7||>=2016.11,<=2016.11.7||>=2017.7.0,<=2017.7.1",
+    "expected_vers": "vers:pypi/<=2016.3.7|>=2016.11|<=2016.11.7|>=2017.7.0|<=2017.7.1"
+  },
+  {
+    "test_index": 42,
+    "scheme": "pypi",
+    "gitlab_native": "<2015.8.13||>=2016.3.0,<2016.11.5||>=2016.11.7,<2016.11.10||>=2017.5.0,<2017.7.8",
+    "expected_vers": "vers:pypi/<2015.8.13|>=2016.3.0|<2016.11.5|>=2016.11.7|<2016.11.10|>=2017.5.0|<2017.7.8"
+  },
+  {
+    "test_index": 43,
+    "scheme": "pypi",
+    "gitlab_native": ">=3002,<3002.8||>=3003,<3003.4||>=3004,<3004.1",
+    "expected_vers": "vers:pypi/>=3002|<3002.8|>=3003|<3003.4|>=3004|<3004.1"
+  },
+  {
+    "test_index": 44,
+    "scheme": "pypi",
+    "gitlab_native": "<=2015.8.12||>=2016.3.0,<=2016.3.4||>=2016.11.0,<=2016.11.2",
+    "expected_vers": "vers:pypi/<=2015.8.12|>=2016.3.0|<=2016.3.4|>=2016.11.0|<=2016.11.2"
+  },
+  {
+    "test_index": 45,
+    "scheme": "pypi",
+    "gitlab_native": "<2015.8.13||>=2016.3.0,<2016.11.5||>=2016.11.7,<2016.11.10||>=2017.5.0,<2017.7.8||",
+    "expected_vers": "vers:pypi/<2015.8.13|>=2016.3.0|<2016.11.5|>=2016.11.7|<2016.11.10|>=2017.5.0|<2017.7.8"
+  },
+  {
+    "test_index": 46,
+    "scheme": "pypi",
+    "gitlab_native": "<2015.8.13||>=2016.3.0,<2016.11.5||>=2016.11.7,<2016.11.10|| >=2017.5.0,<2017.7.8",
+    "expected_vers": "vers:pypi/<2015.8.13|>=2016.3.0|<2016.11.5|>=2016.11.7|<2016.11.10|>=2017.5.0|<2017.7.8"
+  },
+  {
+    "test_index": 47,
+    "scheme": "pypi",
+    "gitlab_native": "<2019.2.4||>=3000,<3000.2",
+    "expected_vers": "vers:pypi/<2019.2.4|>=3000|<3000.2"
+  },
+  {
+    "test_index": 48,
+    "scheme": "pypi",
+    "gitlab_native": "<2017.7.8||>=2018.3.0,<2018.3.3",
+    "expected_vers": "vers:pypi/<2017.7.8|>=2018.3.0|<2018.3.3"
+  },
+  {
+    "test_index": 49,
+    "scheme": "pypi",
+    "gitlab_native": "<2015.8.13||>=2016.3.0,<2016.3.8||>=2016.11.0,<2016.11.10|| >=2017.5.0,<2017.7.8",
+    "expected_vers": "vers:pypi/<2015.8.13|>=2016.3.0|<2016.3.8|>=2016.11.0|<2016.11.10|>=2017.5.0|<2017.7.8"
+  },
+  {
+    "test_index": 50,
+    "scheme": "pypi",
+    "gitlab_native": "<2015.8.13||>=2016.3.0,<2016.11.5||>=2016.11.7,<2016.11.10|| >=2017.5.0,<2017.7.8",
+    "expected_vers": "vers:pypi/<2015.8.13|>=2016.3.0|<2016.11.5|>=2016.11.7|<2016.11.10|>=2017.5.0|<2017.7.8"
+  },
+  {
+    "test_index": 51,
+    "scheme": "pypi",
+    "gitlab_native": "<2015.8.13||>=2016.3.0,<2016.11.5||>=2016.11.7,<2016.11.10|| >=2017.5.0,<2017.7.8",
+    "expected_vers": "vers:pypi/<2015.8.13|>=2016.3.0|<2016.11.5|>=2016.11.7|<2016.11.10|>=2017.5.0|<2017.7.8"
+  },
+  {
+    "test_index": 52,
+    "scheme": "pypi",
+    "gitlab_native": "<2017.7.8||>=2018.3.0,<2018.3.3",
+    "expected_vers": "vers:pypi/<2017.7.8|>=2018.3.0|<2018.3.3"
+  },
+  {
+    "test_index": 53,
+    "scheme": "pypi",
+    "gitlab_native": "<2015.8.13||>=2016.3.0,<2016.11.5||>=2016.11.7,<2016.11.10|| >=2017.5.0,<2017.7.8",
+    "expected_vers": "vers:pypi/<2015.8.13|>=2016.3.0|<2016.11.5|>=2016.11.7|<2016.11.10|>=2017.5.0|<2017.7.8"
+  },
+  {
+    "test_index": 54,
+    "scheme": "pypi",
+    "gitlab_native": "<2015.8.13||>=2016.3.0,<2016.11.5||>=2016.11.7,<2016.11.10 ||>=2017.5.0,<2017.7.8",
+    "expected_vers": "vers:pypi/<2015.8.13|>=2016.3.0|<2016.11.5|>=2016.11.7|<2016.11.10|>=2017.5.0|<2017.7.8"
+  },
+  {
+    "test_index": 55,
+    "scheme": "pypi",
+    "gitlab_native": "<2015.8.13||>=2016.3.0,<2016.11.5||>=2016.11.7,<2016.11.10|| >=2017.5.0,<2017.7.8",
+    "expected_vers": "vers:pypi/<2015.8.13|>=2016.3.0|<2016.11.5|>=2016.11.7|<2016.11.10|>=2017.5.0|<2017.7.8"
+  },
+  {
+    "test_index": 56,
+    "scheme": "pypi",
+    "gitlab_native": ">=3002,<3002.8||>=3003,<3003.4||>=3004,<3004.1",
+    "expected_vers": "vers:pypi/>=3002|<3002.8|>=3003|<3003.4|>=3004|<3004.1"
+  },
+  {
+    "test_index": 57,
+    "scheme": "pypi",
+    "gitlab_native": "<2015.8.13||>=2016.3.0,<2016.11.5||>=2016.11.7,<2016.11.10|| >=2017.5.0,<2017.7.8",
+    "expected_vers": "vers:pypi/<2015.8.13|>=2016.3.0|<2016.11.5|>=2016.11.7|<2016.11.10|>=2017.5.0|<2017.7.8"
+  },
+  {
+    "test_index": 58,
+    "scheme": "pypi",
+    "gitlab_native": "<5.7.11||>=6.0.0,<6.4.1",
+    "expected_vers": "vers:pypi/<5.7.11|>=6.0.0|<6.4.1"
+  },
+  {
+    "test_index": 59,
+    "scheme": "pypi",
+    "gitlab_native": ">=5.7.0,<5.7.11||==6.4.0",
+    "expected_vers": "vers:pypi/>=5.7.0|<5.7.11|6.4.0"
+  },
+  {
+    "test_index": 60,
+    "scheme": "pypi",
+    "gitlab_native": "<1.1.2||==2.0.0rc1",
+    "expected_vers": "vers:pypi/<1.1.2|2.0.0rc1"
+  },
+  {
+    "test_index": 61,
+    "scheme": "pypi",
+    "gitlab_native": "<16.4.1||>=17.0.0,<17.1.3||==18.0.0",
+    "expected_vers": "vers:pypi/<16.4.1|>=17.0.0|<17.1.3|18.0.0"
+  },
+  {
+    "test_index": 62,
+    "scheme": "pypi",
+    "gitlab_native": ">=11.0.0,<11.0.7||>=12.0.0,<12.0.6||>=13.0.0,<13.0.3",
+    "expected_vers": "vers:pypi/>=11.0.0|<11.0.7|>=12.0.0|<12.0.6|>=13.0.0|<13.0.3"
+  },
+  {
+    "test_index": 63,
+    "scheme": "pypi",
+    "gitlab_native": ">=7.0.0,<7.2.1||>=8.0.0,<8.3.1||>=9.0.0,<9.3.2",
+    "expected_vers": "vers:pypi/>=7.0.0|<7.2.1|>=8.0.0|<8.3.1|>=9.0.0|<9.3.2"
+  },
+  {
+    "test_index": 64,
+    "scheme": "pypi",
+    "gitlab_native": ">=11.0.0,<=11.0.5||>=12.0.0,<=12.0.3||==13.0.0.0",
+    "expected_vers": "vers:pypi/>=11.0.0|<=11.0.5|>=12.0.0|<=12.0.3|13.0.0.0"
+  },
+  {
+    "test_index": 65,
+    "scheme": "pypi",
+    "gitlab_native": "<15.3.3||>=16.0.0,<16.3.1||>=17.0.0,<17.1.1",
+    "expected_vers": "vers:pypi/<15.3.3|>=16.0.0|<16.3.1|>=17.0.0|<17.1.1"
+  },
+  {
+    "test_index": 66,
+    "scheme": "pypi",
+    "gitlab_native": "<16.4.1||>=17.0.0,<17.2.1||>=18.0.0,<18.1.1",
+    "expected_vers": "vers:pypi/<16.4.1|>=17.0.0|<17.2.1|>=18.0.0|<18.1.1"
+  },
+  {
+    "test_index": 67,
+    "scheme": "pypi",
+    "gitlab_native": ">=7.0.0,<=11.0.4||>=12.0.0,<=12.0.2||==13.0.0",
+    "expected_vers": "vers:pypi/>=7.0.0|<=11.0.4|>=12.0.0|<=12.0.2|13.0.0"
+  },
+  {
+    "test_index": 68,
+    "scheme": "pypi",
+    "gitlab_native": "<16.4.1||>=17.0.0,<17.2.1||>=18.0.0,<18.1.1",
+    "expected_vers": "vers:pypi/<16.4.1|>=17.0.0|<17.2.1|>=18.0.0|<18.1.1"
+  },
+  {
+    "test_index": 69,
+    "scheme": "pypi",
+    "gitlab_native": "<10.0.8||>=11.0.0,<11.0.7||>=12.0.0,<12.0.6||>=13.0.0,<13.0.3",
+    "expected_vers": "vers:pypi/<10.0.8|>=11.0.0|<11.0.7|>=12.0.0|<12.0.6|>=13.0.0|<13.0.3"
+  },
+  {
+    "test_index": 70,
+    "scheme": "pypi",
+    "gitlab_native": "<6.2.3||==7.0.0",
+    "expected_vers": "vers:pypi/<6.2.3|7.0.0"
+  },
+  {
+    "test_index": 71,
+    "scheme": "pypi",
+    "gitlab_native": "<6.2.3||==7.0.0",
+    "expected_vers": "vers:pypi/<6.2.3|7.0.0"
+  },
+  {
+    "test_index": 72,
+    "scheme": "pypi",
+    "gitlab_native": "<6.2.3||==7.0.0",
+    "expected_vers": "vers:pypi/<6.2.3|7.0.0"
+  },
+  {
+    "test_index": 73,
+    "scheme": "pypi",
+    "gitlab_native": ">=2.3.0,<2.3.2||>=2.5.0,<2.5.2",
+    "expected_vers": "vers:pypi/>=2.3.0|<2.3.2|>=2.5.0|<2.5.2"
+  },
+  {
+    "test_index": 74,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.0,<=1.1.7||>=1.2,<=8.2.0",
+    "expected_vers": "vers:pypi/>=1.0|<=1.1.7|>=1.2|<=8.2.0"
+  },
+  {
+    "test_index": 75,
+    "scheme": "pypi",
+    "gitlab_native": "<4.6.1||>=5.0.0,<5.2.1",
+    "expected_vers": "vers:pypi/<4.6.1|>=5.0.0|<5.2.1"
+  },
+  {
+    "test_index": 76,
+    "scheme": "pypi",
+    "gitlab_native": ">=4.0,<4.6.3||>=5.0,<5.3",
+    "expected_vers": "vers:pypi/>=4.0|<4.6.3|>=5.0|<5.3"
+  },
+  {
+    "test_index": 77,
+    "scheme": "pypi",
+    "gitlab_native": "<4.6||>=5.0,<5.2",
+    "expected_vers": "vers:pypi/<4.6|>=5.0|<5.2"
+  },
+  {
+    "test_index": 78,
+    "scheme": "pypi",
+    "gitlab_native": "<0.13.7||>=0.14.0,<0.14.6",
+    "expected_vers": "vers:pypi/<0.13.7|>=0.14.0|<0.14.6"
+  },
+  {
+    "test_index": 79,
+    "scheme": "pypi",
+    "gitlab_native": "<7.5.7||>=8.0.0,<8.1.0",
+    "expected_vers": "vers:pypi/<7.5.7|>=8.0.0|<8.1.0"
+  },
+  {
+    "test_index": 80,
+    "scheme": "pypi",
+    "gitlab_native": "<=5.10.0||>=6.0.0,<7.16.3||>=7.17.0,<7.31.1||>=8.0.0,<8.0.1",
+    "expected_vers": "vers:pypi/<=5.10.0|>=6.0.0|<7.16.3|>=7.17.0|<7.31.1|>=8.0.0|<8.0.1"
+  },
+  {
+    "test_index": 81,
+    "scheme": "pypi",
+    "gitlab_native": ">=3.4.0,<3.4.7||>=3.5.0,<3.5.4||>=3.6.0,<3.6.1||>=3.7.0",
+    "expected_vers": "vers:pypi/>=3.4.0|<3.4.7|>=3.5.0|<3.5.4|>=3.6.0|<3.6.1|>=3.7.0"
+  },
+  {
+    "test_index": 82,
+    "scheme": "pypi",
+    "gitlab_native": "<=3.4.6.27||>=4.0.0.21,<=4.1.0.25",
+    "expected_vers": "vers:pypi/<=3.4.6.27|>=4.0.0.21|<=4.1.0.25"
+  },
+  {
+    "test_index": 83,
+    "scheme": "pypi",
+    "gitlab_native": "<=3.4.6.27||>=4.0.0.21,<=4.1.0.25",
+    "expected_vers": "vers:pypi/<=3.4.6.27|>=4.0.0.21|<=4.1.0.25"
+  },
+  {
+    "test_index": 84,
+    "scheme": "pypi",
+    "gitlab_native": "<1.9.0||>=2.0.0,<2.2.0",
+    "expected_vers": "vers:pypi/<1.9.0|>=2.0.0|<2.2.0"
+  },
+  {
+    "test_index": 85,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.0.0,<1.1.1||>=2.0.0,<2.1.1||>=3.0.0,<=3.1.1",
+    "expected_vers": "vers:pypi/>=1.0.0|<1.1.1|>=2.0.0|<2.1.1|>=3.0.0|<=3.1.1"
+  },
+  {
+    "test_index": 86,
+    "scheme": "pypi",
+    "gitlab_native": "<1.8.2||>=2.0.0,<2.3.1",
+    "expected_vers": "vers:pypi/<1.8.2|>=2.0.0|<2.3.1"
+  },
+  {
+    "test_index": 87,
+    "scheme": "pypi",
+    "gitlab_native": "==3.1||>=4.0.0,<=4.0.2",
+    "expected_vers": "vers:pypi/3.1|>=4.0.0|<=4.0.2"
+  },
+  {
+    "test_index": 88,
+    "scheme": "pypi",
+    "gitlab_native": ">=2.1,<2.1.15||>=2.2,<2.2.8",
+    "expected_vers": "vers:pypi/>=2.1|<2.1.15|>=2.2|<2.2.8"
+  },
+  {
+    "test_index": 89,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.4,<1.4.11||>=1.5,<1.5.6||>=1.6,<1.6.3",
+    "expected_vers": "vers:pypi/>=1.4|<1.4.11|>=1.5|<1.5.6|>=1.6|<1.6.3"
+  },
+  {
+    "test_index": 90,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.8.0a,<1.8.10||>=1.9.0a,<1.9.3",
+    "expected_vers": "vers:pypi/>=1.8.0a0|<1.8.10|>=1.9.0a0|<1.9.3"
+  },
+  {
+    "test_index": 91,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.2.0,<1.2.7||>=1.3.0,<1.3.1",
+    "expected_vers": "vers:pypi/>=1.2.0|<1.2.7|>=1.3.0|<1.3.1"
+  },
+  {
+    "test_index": 92,
+    "scheme": "pypi",
+    "gitlab_native": ">=2.2,<2.2.26||>=3.2,<3.2.11||>=4.0,<4.0.1",
+    "expected_vers": "vers:pypi/>=2.2|<2.2.26|>=3.2|<3.2.11|>=4.0|<4.0.1"
+  },
+  {
+    "test_index": 93,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.11.8,<=1.11.9||>=2.0,<=2.0.1",
+    "expected_vers": "vers:pypi/>=1.11.8|<=1.11.9|>=2.0|<=2.0.1"
+  },
+  {
+    "test_index": 94,
+    "scheme": "pypi",
+    "gitlab_native": ">=2.2,<2.2.16||>=3.0,<3.0.10||>=3.1,<3.1.1",
+    "expected_vers": "vers:pypi/>=2.2|<2.2.16|>=3.0|<3.0.10|>=3.1|<3.1.1"
+  },
+  {
+    "test_index": 95,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.3.0,<1.3.1||>=1.2.0,<1.2.7",
+    "expected_vers": "vers:pypi/>=1.2.0|<1.2.7|>=1.3.0|<1.3.1"
+  },
+  {
+    "test_index": 96,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.1.0,<1.1.4||>=1.2.0,<1.2.5",
+    "expected_vers": "vers:pypi/>=1.1.0|<1.1.4|>=1.2.0|<1.2.5"
+  },
+  {
+    "test_index": 97,
+    "scheme": "pypi",
+    "gitlab_native": ">=2.2,<2.2.27||>=3.2,<3.2.12||>=4.0,<4.0.2",
+    "expected_vers": "vers:pypi/>=2.2|<2.2.27|>=3.2|<3.2.12|>=4.0|<4.0.2"
+  },
+  {
+    "test_index": 98,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.11,<1.11.15||>=2.0,<2.0.8",
+    "expected_vers": "vers:pypi/>=1.11|<1.11.15|>=2.0|<2.0.8"
+  },
+  {
+    "test_index": 99,
+    "scheme": "pypi",
+    "gitlab_native": ">=2.2,<2.2.26||>=3.2,<3.2.11||>=4.0,<4.0.1",
+    "expected_vers": "vers:pypi/>=2.2|<2.2.26|>=3.2|<3.2.11|>=4.0|<4.0.1"
+  },
+  {
+    "test_index": 100,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.11.0,<1.11.19||>=2.0.0,<2.0.11||>=2.1.0,<2.1.6",
+    "expected_vers": "vers:pypi/>=1.11.0|<1.11.19|>=2.0.0|<2.0.11|>=2.1.0|<2.1.6"
+  },
+  {
+    "test_index": 101,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.11alpha,<1.11||>=1.10.0alpha,<1.10.7||>=1.9.0alpha,<1.9.13||<1.8.18",
+    "expected_vers": "vers:pypi/<1.8.18|>=1.9.0a0|<1.9.13|>=1.10.0a0|<1.10.7|>=1.11a0|<1.11"
+  },
+  {
+    "test_index": 102,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.4,<1.4.13||>=1.5,<1.5.8||>=1.6,<1.6.5||>=1.7.b1,<1.7b3",
+    "expected_vers": "vers:pypi/>=1.4|<1.4.13|>=1.5|<1.5.8|>=1.6|<1.6.5|>=1.7b1|<1.7b3"
+  },
+  {
+    "test_index": 103,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.4,<1.4.11||>=1.5,<1.5.6||>=1.6,<1.6.3",
+    "expected_vers": "vers:pypi/>=1.4|<1.4.11|>=1.5|<1.5.6|>=1.6|<1.6.3"
+  },
+  {
+    "test_index": 104,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.11,<1.11.21||>=2.1,<2.1.9||>=2.2,<2.2.2",
+    "expected_vers": "vers:pypi/>=1.11|<1.11.21|>=2.1|<2.1.9|>=2.2|<2.2.2"
+  },
+  {
+    "test_index": 105,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.8.0a,<1.8.10||>=1.9.0a,<1.9.3",
+    "expected_vers": "vers:pypi/>=1.8.0a0|<1.8.10|>=1.9.0a0|<1.9.3"
+  },
+  {
+    "test_index": 106,
+    "scheme": "pypi",
+    "gitlab_native": "<1.11.27||>=2.2,<2.2.9||==3.0",
+    "expected_vers": "vers:pypi/<1.11.27|>=2.2|<2.2.9|3.0"
+  },
+  {
+    "test_index": 107,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.8.0a,<1.8.3||>=1.7.0a,<1.7.9||>=1.4.0a,<1.4.21",
+    "expected_vers": "vers:pypi/>=1.4.0a0|<1.4.21|>=1.7.0a0|<1.7.9|>=1.8.0a0|<1.8.3"
+  },
+  {
+    "test_index": 108,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.10.0alpha,<1.10.3||>=1.9.0alpha,<1.9.11||<1.8.16",
+    "expected_vers": "vers:pypi/<1.8.16|>=1.9.0a0|<1.9.11|>=1.10.0a0|<1.10.3"
+  },
+  {
+    "test_index": 109,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.8.0a,<1.8.4||>=1.7.0a,<1.7.10||>=1.4.0a,<1.4.22",
+    "expected_vers": "vers:pypi/>=1.4.0a0|<1.4.22|>=1.7.0a0|<1.7.10|>=1.8.0a0|<1.8.4"
+  },
+  {
+    "test_index": 110,
+    "scheme": "pypi",
+    "gitlab_native": ">=2.2,<2.2.13||>=3.0,<3.0.7",
+    "expected_vers": "vers:pypi/>=2.2|<2.2.13|>=3.0|<3.0.7"
+  },
+  {
+    "test_index": 111,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.11,<1.11.23||>=2.1,<2.1.11||>=2.2,<2.2.4",
+    "expected_vers": "vers:pypi/>=1.11|<1.11.23|>=2.1|<2.1.11|>=2.2|<2.2.4"
+  },
+  {
+    "test_index": 112,
+    "scheme": "pypi",
+    "gitlab_native": ">=2.2,<2.2.25||>=3.1,<3.1.14||>=3.2,<3.2.10",
+    "expected_vers": "vers:pypi/>=2.2|<2.2.25|>=3.1|<3.1.14|>=3.2|<3.2.10"
+  },
+  {
+    "test_index": 113,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.11,<1.11.22||>=2.1,<2.1.10||>=2.2,<2.2.3",
+    "expected_vers": "vers:pypi/>=1.11|<1.11.22|>=2.1|<2.1.10|>=2.2|<2.2.3"
+  },
+  {
+    "test_index": 114,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.8,<1.8.19||>=1.11,<1.11.11||>=2.0,<2.0.3",
+    "expected_vers": "vers:pypi/>=1.8|<1.8.19|>=1.11|<1.11.11|>=2.0|<2.0.3"
+  },
+  {
+    "test_index": 115,
+    "scheme": "pypi",
+    "gitlab_native": ">=2.2,<2.2.19||>=3.0,<3.0.13||>=3.1,<3.1.7",
+    "expected_vers": "vers:pypi/>=2.2|<2.2.19|>=3.0|<3.0.13|>=3.1|<3.1.7"
+  },
+  {
+    "test_index": 116,
+    "scheme": "pypi",
+    "gitlab_native": "<2.2.24||>=3.0.0,<3.1.12||>=3.2.0,<3.2.4",
+    "expected_vers": "vers:pypi/<2.2.24|>=3.0.0|<3.1.12|>=3.2.0|<3.2.4"
+  },
+  {
+    "test_index": 117,
+    "scheme": "pypi",
+    "gitlab_native": "<1.2.7||>=1.3.0,<1.3.1",
+    "expected_vers": "vers:pypi/<1.2.7|>=1.3.0|<1.3.1"
+  },
+  {
+    "test_index": 118,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.1.0,<1.1.4||>=1.2.0,<1.2.5",
+    "expected_vers": "vers:pypi/>=1.1.0|<1.1.4|>=1.2.0|<1.2.5"
+  },
+  {
+    "test_index": 119,
+    "scheme": "pypi",
+    "gitlab_native": ">=2.2,<2.2.26||>=3.2,<3.2.11||>=4.0,<4.0.1",
+    "expected_vers": "vers:pypi/>=2.2|<2.2.26|>=3.2|<3.2.11|>=4.0|<4.0.1"
+  },
+  {
+    "test_index": 120,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.10.0,<=1.10.7||>=1.11.0,<=1.11.4",
+    "expected_vers": "vers:pypi/>=1.10.0|<=1.10.7|>=1.11.0|<=1.11.4"
+  },
+  {
+    "test_index": 121,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.1.0,<1.1.4||>=1.2.0,<1.2.5",
+    "expected_vers": "vers:pypi/>=1.1.0|<1.1.4|>=1.2.0|<1.2.5"
+  },
+  {
+    "test_index": 122,
+    "scheme": "pypi",
+    "gitlab_native": ">=1.9.0alpha,<1.9.10||<1.8.15",
+    "expected_vers": "vers:pypi/<1.8.15|>=1.9.0a0|<1.9.10"
+  }
+]

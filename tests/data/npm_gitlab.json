@@ -1,0 +1,3200 @@
+[
+  {
+    "test_index": 1,
+    "scheme": "npm",
+    "gitlab_native": "<4.2.0",
+    "expected_vers": "vers:npm/<4.2.0"
+  },
+  {
+    "test_index": 2,
+    "scheme": "npm",
+    "gitlab_native": "<=3.3",
+    "expected_vers": "vers:npm/<=3.3.0"
+  },
+  {
+    "test_index": 3,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 4,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 5,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 6,
+    "scheme": "npm",
+    "gitlab_native": "<0.5.3",
+    "expected_vers": "vers:npm/<0.5.3"
+  },
+  {
+    "test_index": 7,
+    "scheme": "npm",
+    "gitlab_native": "<=0.3.0",
+    "expected_vers": "vers:npm/<=0.3.0"
+  },
+  {
+    "test_index": 8,
+    "scheme": "npm",
+    "gitlab_native": "<0.3.1",
+    "expected_vers": "vers:npm/<0.3.1"
+  },
+  {
+    "test_index": 9,
+    "scheme": "npm",
+    "gitlab_native": "<0.3.4",
+    "expected_vers": "vers:npm/<0.3.4"
+  },
+  {
+    "test_index": 10,
+    "scheme": "npm",
+    "gitlab_native": "<3.1.0",
+    "expected_vers": "vers:npm/<3.1.0"
+  },
+  {
+    "test_index": 11,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 12,
+    "scheme": "npm",
+    "gitlab_native": "<=0.0.1",
+    "expected_vers": "vers:npm/<=0.0.1"
+  },
+  {
+    "test_index": 13,
+    "scheme": "npm",
+    "gitlab_native": "<0.4.9",
+    "expected_vers": "vers:npm/<0.4.9"
+  },
+  {
+    "test_index": 14,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 15,
+    "scheme": "npm",
+    "gitlab_native": "<=0.5.0",
+    "expected_vers": "vers:npm/<=0.5.0"
+  },
+  {
+    "test_index": 16,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 17,
+    "scheme": "npm",
+    "gitlab_native": "=1.0.0",
+    "expected_vers": "vers:npm/1.0.0"
+  },
+  {
+    "test_index": 18,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 19,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 20,
+    "scheme": "npm",
+    "gitlab_native": "<3.1.6",
+    "expected_vers": "vers:npm/<3.1.6"
+  },
+  {
+    "test_index": 21,
+    "scheme": "npm",
+    "gitlab_native": "<=0.0.9",
+    "expected_vers": "vers:npm/<=0.0.9"
+  },
+  {
+    "test_index": 22,
+    "scheme": "npm",
+    "gitlab_native": "<=0.0.9",
+    "expected_vers": "vers:npm/<=0.0.9"
+  },
+  {
+    "test_index": 23,
+    "scheme": "npm",
+    "gitlab_native": "<=0.0.9",
+    "expected_vers": "vers:npm/<=0.0.9"
+  },
+  {
+    "test_index": 24,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 25,
+    "scheme": "npm",
+    "gitlab_native": "<1.1.0",
+    "expected_vers": "vers:npm/<1.1.0"
+  },
+  {
+    "test_index": 26,
+    "scheme": "npm",
+    "gitlab_native": "=1.0.0",
+    "expected_vers": "vers:npm/1.0.0"
+  },
+  {
+    "test_index": 27,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 28,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 29,
+    "scheme": "npm",
+    "gitlab_native": "=1.0.0",
+    "expected_vers": "vers:npm/1.0.0"
+  },
+  {
+    "test_index": 30,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 31,
+    "scheme": "npm",
+    "gitlab_native": "<3.8.1",
+    "expected_vers": "vers:npm/<3.8.1"
+  },
+  {
+    "test_index": 32,
+    "scheme": "npm",
+    "gitlab_native": "<3.8.1",
+    "expected_vers": "vers:npm/<3.8.1"
+  },
+  {
+    "test_index": 33,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 34,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 35,
+    "scheme": "npm",
+    "gitlab_native": "<=2.48.0",
+    "expected_vers": "vers:npm/<=2.48.0"
+  },
+  {
+    "test_index": 36,
+    "scheme": "npm",
+    "gitlab_native": "<7.4.4",
+    "expected_vers": "vers:npm/<7.4.4"
+  },
+  {
+    "test_index": 37,
+    "scheme": "npm",
+    "gitlab_native": "<1.10.0",
+    "expected_vers": "vers:npm/<1.10.0"
+  },
+  {
+    "test_index": 38,
+    "scheme": "npm",
+    "gitlab_native": "<=2.5.0",
+    "expected_vers": "vers:npm/<=2.5.0"
+  },
+  {
+    "test_index": 39,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 40,
+    "scheme": "npm",
+    "gitlab_native": "<0.0.25",
+    "expected_vers": "vers:npm/<0.0.25"
+  },
+  {
+    "test_index": 41,
+    "scheme": "npm",
+    "gitlab_native": "<=0.0.25",
+    "expected_vers": "vers:npm/<=0.0.25"
+  },
+  {
+    "test_index": 42,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 43,
+    "scheme": "npm",
+    "gitlab_native": "<=1.0.0",
+    "expected_vers": "vers:npm/<=1.0.0"
+  },
+  {
+    "test_index": 44,
+    "scheme": "npm",
+    "gitlab_native": "<8.31.2",
+    "expected_vers": "vers:npm/<8.31.2"
+  },
+  {
+    "test_index": 45,
+    "scheme": "npm",
+    "gitlab_native": "=8.0.0",
+    "expected_vers": "vers:npm/8.0.0"
+  },
+  {
+    "test_index": 46,
+    "scheme": "npm",
+    "gitlab_native": "<39.1.0",
+    "expected_vers": "vers:npm/<39.1.0"
+  },
+  {
+    "test_index": 47,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 48,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 49,
+    "scheme": "npm",
+    "gitlab_native": "=0.1.2",
+    "expected_vers": "vers:npm/0.1.2"
+  },
+  {
+    "test_index": 50,
+    "scheme": "npm",
+    "gitlab_native": "<13.0.8",
+    "expected_vers": "vers:npm/<13.0.8"
+  },
+  {
+    "test_index": 51,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 52,
+    "scheme": "npm",
+    "gitlab_native": "<2.1.4||>=3.0.0 <6.0.6",
+    "expected_vers": "vers:npm/<2.1.4|>=3.0.0|<6.0.6"
+  },
+  {
+    "test_index": 53,
+    "scheme": "npm",
+    "gitlab_native": "<2.1.4||>=3.0.0 <6.0.6",
+    "expected_vers": "vers:npm/<2.1.4|>=3.0.0|<6.0.6"
+  },
+  {
+    "test_index": 54,
+    "scheme": "npm",
+    "gitlab_native": "<7.3.1",
+    "expected_vers": "vers:npm/<7.3.1"
+  },
+  {
+    "test_index": 55,
+    "scheme": "npm",
+    "gitlab_native": "<1.1.0",
+    "expected_vers": "vers:npm/<1.1.0"
+  },
+  {
+    "test_index": 56,
+    "scheme": "npm",
+    "gitlab_native": "=2.0.43",
+    "expected_vers": "vers:npm/2.0.43"
+  },
+  {
+    "test_index": 57,
+    "scheme": "npm",
+    "gitlab_native": "<0.1.7",
+    "expected_vers": "vers:npm/<0.1.7"
+  },
+  {
+    "test_index": 58,
+    "scheme": "npm",
+    "gitlab_native": "<0.5.1",
+    "expected_vers": "vers:npm/<0.5.1"
+  },
+  {
+    "test_index": 59,
+    "scheme": "npm",
+    "gitlab_native": "<1.0.0",
+    "expected_vers": "vers:npm/<1.0.0"
+  },
+  {
+    "test_index": 60,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 61,
+    "scheme": "npm",
+    "gitlab_native": "=0.4.0",
+    "expected_vers": "vers:npm/0.4.0"
+  },
+  {
+    "test_index": 62,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 63,
+    "scheme": "npm",
+    "gitlab_native": "=1.1.7",
+    "expected_vers": "vers:npm/1.1.7"
+  },
+  {
+    "test_index": 64,
+    "scheme": "npm",
+    "gitlab_native": "<0.2.6",
+    "expected_vers": "vers:npm/<0.2.6"
+  },
+  {
+    "test_index": 65,
+    "scheme": "npm",
+    "gitlab_native": "<3.4.6 || >=4.0.0 <4.0.5",
+    "expected_vers": "vers:npm/<3.4.6|>=4.0.0|<4.0.5"
+  },
+  {
+    "test_index": 66,
+    "scheme": "npm",
+    "gitlab_native": "<3.4.6||>=4.0.0 <4.0.5",
+    "expected_vers": "vers:npm/<3.4.6|>=4.0.0|<4.0.5"
+  },
+  {
+    "test_index": 67,
+    "scheme": "npm",
+    "gitlab_native": "<3.5.1||>=4.0.0 <=4.1.3||>=5.0.0 <=5.6.1||>=6.0.0 <=6.1.2",
+    "expected_vers": "vers:npm/<3.5.1|>=4.0.0|<=4.1.3|>=5.0.0|<=5.6.1|>=6.0.0|<=6.1.2"
+  },
+  {
+    "test_index": 68,
+    "scheme": "npm",
+    "gitlab_native": "<0.5.2",
+    "expected_vers": "vers:npm/<0.5.2"
+  },
+  {
+    "test_index": 69,
+    "scheme": "npm",
+    "gitlab_native": "<0.4.4",
+    "expected_vers": "vers:npm/<0.4.4"
+  },
+  {
+    "test_index": 70,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 71,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 72,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 73,
+    "scheme": "npm",
+    "gitlab_native": "<=0.2.3",
+    "expected_vers": "vers:npm/<=0.2.3"
+  },
+  {
+    "test_index": 74,
+    "scheme": "npm",
+    "gitlab_native": "=1.0.3",
+    "expected_vers": "vers:npm/1.0.3"
+  },
+  {
+    "test_index": 75,
+    "scheme": "npm",
+    "gitlab_native": "<4.2.0",
+    "expected_vers": "vers:npm/<4.2.0"
+  },
+  {
+    "test_index": 76,
+    "scheme": "npm",
+    "gitlab_native": "<3.0.5",
+    "expected_vers": "vers:npm/<3.0.5"
+  },
+  {
+    "test_index": 77,
+    "scheme": "npm",
+    "gitlab_native": "< 2.11.2 || >= 3.0.0 < 3.6.4 ||  >= 4.0.0 < 4.5.7 || >= 5.0.0 < 5.2.1 || >= 6.0.0 < 6.0.5 || >= 6.1.0 < 6.1.6 || >= 6.2.0 < 6.2.5 || >= 6.3.0 < 6.3.3 || >= 6.4.0 < 6.4.2 || >= 7.0.0 < 7.0.2 || >= 7.1.0 < 7.1.2",
+    "expected_vers": "vers:npm/<2.11.2|>=3.0.0|<3.6.4|>=4.0.0|<4.5.7|>=5.0.0|<5.2.1|>=6.0.0|<6.0.5|>=6.1.0|<6.1.6|>=6.2.0|<6.2.5|>=6.3.0|<6.3.3|>=6.4.0|<6.4.2|>=7.0.0|<7.0.2|>=7.1.0|<7.1.2"
+  },
+  {
+    "test_index": 78,
+    "scheme": "npm",
+    "gitlab_native": "<=0.0.1",
+    "expected_vers": "vers:npm/<=0.0.1"
+  },
+  {
+    "test_index": 79,
+    "scheme": "npm",
+    "gitlab_native": "<=0.0.3",
+    "expected_vers": "vers:npm/<=0.0.3"
+  },
+  {
+    "test_index": 80,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 81,
+    "scheme": "npm",
+    "gitlab_native": "<11.0.4",
+    "expected_vers": "vers:npm/<11.0.4"
+  },
+  {
+    "test_index": 82,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 83,
+    "scheme": "npm",
+    "gitlab_native": "=1.0.0",
+    "expected_vers": "vers:npm/1.0.0"
+  },
+  {
+    "test_index": 84,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 85,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 86,
+    "scheme": "npm",
+    "gitlab_native": "=1.0.6",
+    "expected_vers": "vers:npm/1.0.6"
+  },
+  {
+    "test_index": 87,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 88,
+    "scheme": "npm",
+    "gitlab_native": "<=0.2.4",
+    "expected_vers": "vers:npm/<=0.2.4"
+  },
+  {
+    "test_index": 89,
+    "scheme": "npm",
+    "gitlab_native": "<2.0.3",
+    "expected_vers": "vers:npm/<2.0.3"
+  },
+  {
+    "test_index": 90,
+    "scheme": "npm",
+    "gitlab_native": "<0.2.2",
+    "expected_vers": "vers:npm/<0.2.2"
+  },
+  {
+    "test_index": 91,
+    "scheme": "npm",
+    "gitlab_native": "=8.0.8",
+    "expected_vers": "vers:npm/8.0.8"
+  },
+  {
+    "test_index": 92,
+    "scheme": "npm",
+    "gitlab_native": "<0.1.1",
+    "expected_vers": "vers:npm/<0.1.1"
+  },
+  {
+    "test_index": 93,
+    "scheme": "npm",
+    "gitlab_native": "<=1.0",
+    "expected_vers": "vers:npm/<=1.0.0"
+  },
+  {
+    "test_index": 94,
+    "scheme": "npm",
+    "gitlab_native": "<1.14",
+    "expected_vers": "vers:npm/<1.14.0"
+  },
+  {
+    "test_index": 95,
+    "scheme": "npm",
+    "gitlab_native": "<1.11.10||>=1.12.0 <1.12.8||>=1.13.0 <1.13.7||>=1.14.0 <1.14.6||>=1.15.0 <1.15.3||>=1.16.0 <1.16.2",
+    "expected_vers": "vers:npm/<1.11.10|>=1.12.0|<1.12.8|>=1.13.0|<1.13.7|>=1.14.0|<1.14.6|>=1.15.0|<1.15.3|>=1.16.0|<1.16.2"
+  },
+  {
+    "test_index": 96,
+    "scheme": "npm",
+    "gitlab_native": "<1.2.0",
+    "expected_vers": "vers:npm/<1.2.0"
+  },
+  {
+    "test_index": 97,
+    "scheme": "npm",
+    "gitlab_native": "<1.17.0",
+    "expected_vers": "vers:npm/<1.17.0"
+  },
+  {
+    "test_index": 98,
+    "scheme": "npm",
+    "gitlab_native": "=1.13.0",
+    "expected_vers": "vers:npm/1.13.0"
+  },
+  {
+    "test_index": 99,
+    "scheme": "npm",
+    "gitlab_native": "=1.13.0||>=1.12.0 <1.12.4||>=1.11.0 <1.11.6||>=1.10.0 <1.10.10",
+    "expected_vers": "vers:npm/>=1.10.0|<1.10.10|>=1.11.0|<1.11.6|>=1.12.0|<1.12.4|1.13.0"
+  },
+  {
+    "test_index": 100,
+    "scheme": "npm",
+    "gitlab_native": "<=1.13.0",
+    "expected_vers": "vers:npm/<=1.13.0"
+  },
+  {
+    "test_index": 101,
+    "scheme": "npm",
+    "gitlab_native": "<3.0.3",
+    "expected_vers": "vers:npm/<3.0.3"
+  },
+  {
+    "test_index": 102,
+    "scheme": "npm",
+    "gitlab_native": "<3.0.1",
+    "expected_vers": "vers:npm/<3.0.1"
+  },
+  {
+    "test_index": 103,
+    "scheme": "npm",
+    "gitlab_native": "<3.0.1",
+    "expected_vers": "vers:npm/<3.0.1"
+  },
+  {
+    "test_index": 104,
+    "scheme": "npm",
+    "gitlab_native": "<=0.1.1",
+    "expected_vers": "vers:npm/<=0.1.1"
+  },
+  {
+    "test_index": 105,
+    "scheme": "npm",
+    "gitlab_native": "<5.2.1",
+    "expected_vers": "vers:npm/<5.2.1"
+  },
+  {
+    "test_index": 106,
+    "scheme": "npm",
+    "gitlab_native": "=0.7.29||=0.8.0||=1.0.0",
+    "expected_vers": "vers:npm/0.7.29|0.8.0|1.0.0"
+  },
+  {
+    "test_index": 107,
+    "scheme": "npm",
+    "gitlab_native": "<0.7.22",
+    "expected_vers": "vers:npm/<0.7.22"
+  },
+  {
+    "test_index": 108,
+    "scheme": "npm",
+    "gitlab_native": "<0.7.23",
+    "expected_vers": "vers:npm/<0.7.23"
+  },
+  {
+    "test_index": 109,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 110,
+    "scheme": "npm",
+    "gitlab_native": "=0.1.1",
+    "expected_vers": "vers:npm/0.1.1"
+  },
+  {
+    "test_index": 111,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 112,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 113,
+    "scheme": "npm",
+    "gitlab_native": "=0.1.1",
+    "expected_vers": "vers:npm/0.1.1"
+  },
+  {
+    "test_index": 114,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 115,
+    "scheme": "npm",
+    "gitlab_native": "=0.1.8",
+    "expected_vers": "vers:npm/0.1.8"
+  },
+  {
+    "test_index": 116,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 117,
+    "scheme": "npm",
+    "gitlab_native": "<=0.1.1",
+    "expected_vers": "vers:npm/<=0.1.1"
+  },
+  {
+    "test_index": 118,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 119,
+    "scheme": "npm",
+    "gitlab_native": "=1.0.2",
+    "expected_vers": "vers:npm/1.0.2"
+  },
+  {
+    "test_index": 120,
+    "scheme": "npm",
+    "gitlab_native": "<=2.0.0",
+    "expected_vers": "vers:npm/<=2.0.0"
+  },
+  {
+    "test_index": 121,
+    "scheme": "npm",
+    "gitlab_native": "<=5.80.0",
+    "expected_vers": "vers:npm/<=5.80.0"
+  },
+  {
+    "test_index": 122,
+    "scheme": "npm",
+    "gitlab_native": "=1.0.0",
+    "expected_vers": "vers:npm/1.0.0"
+  },
+  {
+    "test_index": 123,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 124,
+    "scheme": "npm",
+    "gitlab_native": "=2.3.21",
+    "expected_vers": "vers:npm/2.3.21"
+  },
+  {
+    "test_index": 125,
+    "scheme": "npm",
+    "gitlab_native": "<5.0.2",
+    "expected_vers": "vers:npm/<5.0.2"
+  },
+  {
+    "test_index": 126,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 127,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 128,
+    "scheme": "npm",
+    "gitlab_native": "<20190301.0.0",
+    "expected_vers": "vers:npm/<20190301.0.0"
+  },
+  {
+    "test_index": 129,
+    "scheme": "npm",
+    "gitlab_native": "<20200315",
+    "expected_vers": "vers:npm/<20200315.0.0"
+  },
+  {
+    "test_index": 130,
+    "scheme": "npm",
+    "gitlab_native": "<=3.2.0",
+    "expected_vers": "vers:npm/<=3.2.0"
+  },
+  {
+    "test_index": 131,
+    "scheme": "npm",
+    "gitlab_native": "<=1.0.0",
+    "expected_vers": "vers:npm/<=1.0.0"
+  },
+  {
+    "test_index": 132,
+    "scheme": "npm",
+    "gitlab_native": "<4.0.1",
+    "expected_vers": "vers:npm/<4.0.1"
+  },
+  {
+    "test_index": 133,
+    "scheme": "npm",
+    "gitlab_native": "<=1.0.8",
+    "expected_vers": "vers:npm/<=1.0.8"
+  },
+  {
+    "test_index": 134,
+    "scheme": "npm",
+    "gitlab_native": "<2.1.0",
+    "expected_vers": "vers:npm/<2.1.0"
+  },
+  {
+    "test_index": 135,
+    "scheme": "npm",
+    "gitlab_native": "<3.0.0",
+    "expected_vers": "vers:npm/<3.0.0"
+  },
+  {
+    "test_index": 136,
+    "scheme": "npm",
+    "gitlab_native": "<2.0.0",
+    "expected_vers": "vers:npm/<2.0.0"
+  },
+  {
+    "test_index": 137,
+    "scheme": "npm",
+    "gitlab_native": "<3.3.0",
+    "expected_vers": "vers:npm/<3.3.0"
+  },
+  {
+    "test_index": 138,
+    "scheme": "npm",
+    "gitlab_native": "<3.4.2",
+    "expected_vers": "vers:npm/<3.4.2"
+  },
+  {
+    "test_index": 139,
+    "scheme": "npm",
+    "gitlab_native": "<3.3.0",
+    "expected_vers": "vers:npm/<3.3.0"
+  },
+  {
+    "test_index": 140,
+    "scheme": "npm",
+    "gitlab_native": "<2.0.1",
+    "expected_vers": "vers:npm/<2.0.1"
+  },
+  {
+    "test_index": 141,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 142,
+    "scheme": "npm",
+    "gitlab_native": "=1.0.0",
+    "expected_vers": "vers:npm/1.0.0"
+  },
+  {
+    "test_index": 143,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 144,
+    "scheme": "npm",
+    "gitlab_native": "<3.4.0||>=4.0.0 <4.1.2",
+    "expected_vers": "vers:npm/<3.4.0|>=4.0.0|<4.1.2"
+  },
+  {
+    "test_index": 145,
+    "scheme": "npm",
+    "gitlab_native": "<3.4.0",
+    "expected_vers": "vers:npm/<3.4.0"
+  },
+  {
+    "test_index": 146,
+    "scheme": "npm",
+    "gitlab_native": "<3.4.0||>=4.0.0 <4.1.2",
+    "expected_vers": "vers:npm/<3.4.0|>=4.0.0|<4.1.2"
+  },
+  {
+    "test_index": 147,
+    "scheme": "npm",
+    "gitlab_native": "<3.4.0",
+    "expected_vers": "vers:npm/<3.4.0"
+  },
+  {
+    "test_index": 148,
+    "scheme": "npm",
+    "gitlab_native": "<4.10.7",
+    "expected_vers": "vers:npm/<4.10.7"
+  },
+  {
+    "test_index": 149,
+    "scheme": "npm",
+    "gitlab_native": "<3.6.0",
+    "expected_vers": "vers:npm/<3.6.0"
+  },
+  {
+    "test_index": 150,
+    "scheme": "npm",
+    "gitlab_native": "<4.1.0",
+    "expected_vers": "vers:npm/<4.1.0"
+  },
+  {
+    "test_index": 151,
+    "scheme": "npm",
+    "gitlab_native": "<4.10.3",
+    "expected_vers": "vers:npm/<4.10.3"
+  },
+  {
+    "test_index": 152,
+    "scheme": "npm",
+    "gitlab_native": "<4.5.0",
+    "expected_vers": "vers:npm/<4.5.0"
+  },
+  {
+    "test_index": 153,
+    "scheme": "npm",
+    "gitlab_native": "<4.10.4",
+    "expected_vers": "vers:npm/<4.10.4"
+  },
+  {
+    "test_index": 154,
+    "scheme": "npm",
+    "gitlab_native": "<3.4.1",
+    "expected_vers": "vers:npm/<3.4.1"
+  },
+  {
+    "test_index": 155,
+    "scheme": "npm",
+    "gitlab_native": "<=4.3.0",
+    "expected_vers": "vers:npm/<=4.3.0"
+  },
+  {
+    "test_index": 156,
+    "scheme": "npm",
+    "gitlab_native": "<4.5.1",
+    "expected_vers": "vers:npm/<4.5.1"
+  },
+  {
+    "test_index": 157,
+    "scheme": "npm",
+    "gitlab_native": "<=0.3.13",
+    "expected_vers": "vers:npm/<=0.3.13"
+  },
+  {
+    "test_index": 158,
+    "scheme": "npm",
+    "gitlab_native": "<=0.3.13",
+    "expected_vers": "vers:npm/<=0.3.13"
+  },
+  {
+    "test_index": 159,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 160,
+    "scheme": "npm",
+    "gitlab_native": "<=0.9.1",
+    "expected_vers": "vers:npm/<=0.9.1"
+  },
+  {
+    "test_index": 161,
+    "scheme": "npm",
+    "gitlab_native": "<=3.0.0",
+    "expected_vers": "vers:npm/<=3.0.0"
+  },
+  {
+    "test_index": 162,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 163,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 164,
+    "scheme": "npm",
+    "gitlab_native": "<1.7.9",
+    "expected_vers": "vers:npm/<1.7.9"
+  },
+  {
+    "test_index": 165,
+    "scheme": "npm",
+    "gitlab_native": "<1.6.3",
+    "expected_vers": "vers:npm/<1.6.3"
+  },
+  {
+    "test_index": 166,
+    "scheme": "npm",
+    "gitlab_native": "<1.8.0",
+    "expected_vers": "vers:npm/<1.8.0"
+  },
+  {
+    "test_index": 167,
+    "scheme": "npm",
+    "gitlab_native": "<1.6.9",
+    "expected_vers": "vers:npm/<1.6.9"
+  },
+  {
+    "test_index": 168,
+    "scheme": "npm",
+    "gitlab_native": "<1.6.0",
+    "expected_vers": "vers:npm/<1.6.0"
+  },
+  {
+    "test_index": 169,
+    "scheme": "npm",
+    "gitlab_native": "<1.6.3",
+    "expected_vers": "vers:npm/<1.6.3"
+  },
+  {
+    "test_index": 170,
+    "scheme": "npm",
+    "gitlab_native": "<1.6.5",
+    "expected_vers": "vers:npm/<1.6.5"
+  },
+  {
+    "test_index": 171,
+    "scheme": "npm",
+    "gitlab_native": "<1.2.30",
+    "expected_vers": "vers:npm/<1.2.30"
+  },
+  {
+    "test_index": 172,
+    "scheme": "npm",
+    "gitlab_native": "<1.8.0",
+    "expected_vers": "vers:npm/<1.8.0"
+  },
+  {
+    "test_index": 173,
+    "scheme": "npm",
+    "gitlab_native": "<1.5.9",
+    "expected_vers": "vers:npm/<1.5.9"
+  },
+  {
+    "test_index": 174,
+    "scheme": "npm",
+    "gitlab_native": "<=1.4.14",
+    "expected_vers": "vers:npm/<=1.4.14"
+  },
+  {
+    "test_index": 175,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 176,
+    "scheme": "npm",
+    "gitlab_native": "<=0.2.1",
+    "expected_vers": "vers:npm/<=0.2.1"
+  },
+  {
+    "test_index": 177,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 178,
+    "scheme": "npm",
+    "gitlab_native": "<2.0.1||>=3.0.0 <4.0.1",
+    "expected_vers": "vers:npm/<2.0.1|>=3.0.0|<4.0.1"
+  },
+  {
+    "test_index": 179,
+    "scheme": "npm",
+    "gitlab_native": "<2.0.1||>=3.0.0 <3.0.1",
+    "expected_vers": "vers:npm/<2.0.1|>=3.0.0|<3.0.1"
+  },
+  {
+    "test_index": 180,
+    "scheme": "npm",
+    "gitlab_native": "<3.2.1",
+    "expected_vers": "vers:npm/<3.2.1"
+  },
+  {
+    "test_index": 181,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 182,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 183,
+    "scheme": "npm",
+    "gitlab_native": "<=1.1.0",
+    "expected_vers": "vers:npm/<=1.1.0"
+  },
+  {
+    "test_index": 184,
+    "scheme": "npm",
+    "gitlab_native": "<=0.2.0",
+    "expected_vers": "vers:npm/<=0.2.0"
+  },
+  {
+    "test_index": 185,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 186,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 187,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 188,
+    "scheme": "npm",
+    "gitlab_native": "<0.0.19",
+    "expected_vers": "vers:npm/<0.0.19"
+  },
+  {
+    "test_index": 189,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 190,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 191,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 192,
+    "scheme": "npm",
+    "gitlab_native": "=4.0.11",
+    "expected_vers": "vers:npm/4.0.11"
+  },
+  {
+    "test_index": 193,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 194,
+    "scheme": "npm",
+    "gitlab_native": "<= 0.0.1",
+    "expected_vers": "vers:npm/<=0.0.1"
+  },
+  {
+    "test_index": 195,
+    "scheme": "npm",
+    "gitlab_native": "<6.0.0",
+    "expected_vers": "vers:npm/<6.0.0"
+  },
+  {
+    "test_index": 196,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 197,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 198,
+    "scheme": "npm",
+    "gitlab_native": "<=0.0.2",
+    "expected_vers": "vers:npm/<=0.0.2"
+  },
+  {
+    "test_index": 199,
+    "scheme": "npm",
+    "gitlab_native": "<0.0.3",
+    "expected_vers": "vers:npm/<0.0.3"
+  },
+  {
+    "test_index": 200,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 201,
+    "scheme": "npm",
+    "gitlab_native": "<2015.4.18-a",
+    "expected_vers": "vers:npm/<2015.4.18-a"
+  },
+  {
+    "test_index": 202,
+    "scheme": "npm",
+    "gitlab_native": "<4.80.0",
+    "expected_vers": "vers:npm/<4.80.0"
+  },
+  {
+    "test_index": 203,
+    "scheme": "npm",
+    "gitlab_native": "<4.80.0",
+    "expected_vers": "vers:npm/<4.80.0"
+  },
+  {
+    "test_index": 204,
+    "scheme": "npm",
+    "gitlab_native": "<4.79.0",
+    "expected_vers": "vers:npm/<4.79.0"
+  },
+  {
+    "test_index": 205,
+    "scheme": "npm",
+    "gitlab_native": "<4.72.2",
+    "expected_vers": "vers:npm/<4.72.2"
+  },
+  {
+    "test_index": 206,
+    "scheme": "npm",
+    "gitlab_native": "<4.73.1",
+    "expected_vers": "vers:npm/<4.73.1"
+  },
+  {
+    "test_index": 207,
+    "scheme": "npm",
+    "gitlab_native": "<3.1.3",
+    "expected_vers": "vers:npm/<3.1.3"
+  },
+  {
+    "test_index": 208,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 209,
+    "scheme": "npm",
+    "gitlab_native": "<9.1.0",
+    "expected_vers": "vers:npm/<9.1.0"
+  },
+  {
+    "test_index": 210,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 211,
+    "scheme": "npm",
+    "gitlab_native": "<0.4.0",
+    "expected_vers": "vers:npm/<0.4.0"
+  },
+  {
+    "test_index": 212,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 213,
+    "scheme": "npm",
+    "gitlab_native": "<0.9.7",
+    "expected_vers": "vers:npm/<0.9.7"
+  },
+  {
+    "test_index": 214,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 215,
+    "scheme": "npm",
+    "gitlab_native": "<2.1.1",
+    "expected_vers": "vers:npm/<2.1.1"
+  },
+  {
+    "test_index": 216,
+    "scheme": "npm",
+    "gitlab_native": "<=0.5.0",
+    "expected_vers": "vers:npm/<=0.5.0"
+  },
+  {
+    "test_index": 217,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 218,
+    "scheme": "npm",
+    "gitlab_native": "<=0.0.11",
+    "expected_vers": "vers:npm/<=0.0.11"
+  },
+  {
+    "test_index": 219,
+    "scheme": "npm",
+    "gitlab_native": "=1.0.0",
+    "expected_vers": "vers:npm/1.0.0"
+  },
+  {
+    "test_index": 220,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 221,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 222,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 223,
+    "scheme": "npm",
+    "gitlab_native": "<=0.0.1",
+    "expected_vers": "vers:npm/<=0.0.1"
+  },
+  {
+    "test_index": 224,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 225,
+    "scheme": "npm",
+    "gitlab_native": "<=0.29.0",
+    "expected_vers": "vers:npm/<=0.29.0"
+  },
+  {
+    "test_index": 226,
+    "scheme": "npm",
+    "gitlab_native": "<=0.29.0",
+    "expected_vers": "vers:npm/<=0.29.0"
+  },
+  {
+    "test_index": 227,
+    "scheme": "npm",
+    "gitlab_native": "=1.1.6",
+    "expected_vers": "vers:npm/1.1.6"
+  },
+  {
+    "test_index": 228,
+    "scheme": "npm",
+    "gitlab_native": "<=0.0.2",
+    "expected_vers": "vers:npm/<=0.0.2"
+  },
+  {
+    "test_index": 229,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 230,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 231,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 232,
+    "scheme": "npm",
+    "gitlab_native": "<=0.0.4",
+    "expected_vers": "vers:npm/<=0.0.4"
+  },
+  {
+    "test_index": 233,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 234,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 235,
+    "scheme": "npm",
+    "gitlab_native": "=0.1.1",
+    "expected_vers": "vers:npm/0.1.1"
+  },
+  {
+    "test_index": 236,
+    "scheme": "npm",
+    "gitlab_native": "<3.0.0",
+    "expected_vers": "vers:npm/<3.0.0"
+  },
+  {
+    "test_index": 237,
+    "scheme": "npm",
+    "gitlab_native": "<3.0.0",
+    "expected_vers": "vers:npm/<3.0.0"
+  },
+  {
+    "test_index": 238,
+    "scheme": "npm",
+    "gitlab_native": "<5.65.7",
+    "expected_vers": "vers:npm/<5.65.7"
+  },
+  {
+    "test_index": 239,
+    "scheme": "npm",
+    "gitlab_native": "<0.35.0",
+    "expected_vers": "vers:npm/<0.35.0"
+  },
+  {
+    "test_index": 240,
+    "scheme": "npm",
+    "gitlab_native": "=0.42.0",
+    "expected_vers": "vers:npm/0.42.0"
+  },
+  {
+    "test_index": 241,
+    "scheme": "npm",
+    "gitlab_native": "<1.3.4||>2.0.0 <2.0.4",
+    "expected_vers": "vers:npm/<1.3.4|>2.0.0|<2.0.4"
+  },
+  {
+    "test_index": 242,
+    "scheme": "npm",
+    "gitlab_native": "<0.6.1",
+    "expected_vers": "vers:npm/<0.6.1"
+  },
+  {
+    "test_index": 243,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 244,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 245,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 246,
+    "scheme": "npm",
+    "gitlab_native": "<=3.9.1||=3.10.0",
+    "expected_vers": "vers:npm/<=3.9.1|3.10.0"
+  },
+  {
+    "test_index": 247,
+    "scheme": "npm",
+    "gitlab_native": "<6.1.0",
+    "expected_vers": "vers:npm/<6.1.0"
+  },
+  {
+    "test_index": 248,
+    "scheme": "npm",
+    "gitlab_native": "<6.1.0",
+    "expected_vers": "vers:npm/<6.1.0"
+  },
+  {
+    "test_index": 249,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 250,
+    "scheme": "npm",
+    "gitlab_native": "<=1.0.0",
+    "expected_vers": "vers:npm/<=1.0.0"
+  },
+  {
+    "test_index": 251,
+    "scheme": "npm",
+    "gitlab_native": "<=1.1.3",
+    "expected_vers": "vers:npm/<=1.1.3"
+  },
+  {
+    "test_index": 252,
+    "scheme": "npm",
+    "gitlab_native": "<=1.1.3",
+    "expected_vers": "vers:npm/<=1.1.3"
+  },
+  {
+    "test_index": 253,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 254,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 255,
+    "scheme": "npm",
+    "gitlab_native": "<1.0.2",
+    "expected_vers": "vers:npm/<1.0.2"
+  },
+  {
+    "test_index": 256,
+    "scheme": "npm",
+    "gitlab_native": "<1.2.4",
+    "expected_vers": "vers:npm/<1.2.4"
+  },
+  {
+    "test_index": 257,
+    "scheme": "npm",
+    "gitlab_native": "<1.2.4",
+    "expected_vers": "vers:npm/<1.2.4"
+  },
+  {
+    "test_index": 258,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 259,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 260,
+    "scheme": "npm",
+    "gitlab_native": "=0.1.0",
+    "expected_vers": "vers:npm/0.1.0"
+  },
+  {
+    "test_index": 261,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 262,
+    "scheme": "npm",
+    "gitlab_native": "<=2.8.17-beta.6",
+    "expected_vers": "vers:npm/<=2.8.17-beta.6"
+  },
+  {
+    "test_index": 263,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 264,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 265,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 266,
+    "scheme": "npm",
+    "gitlab_native": "<=5.84.0",
+    "expected_vers": "vers:npm/<=5.84.0"
+  },
+  {
+    "test_index": 267,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 268,
+    "scheme": "npm",
+    "gitlab_native": "<6.2.6",
+    "expected_vers": "vers:npm/<6.2.6"
+  },
+  {
+    "test_index": 269,
+    "scheme": "npm",
+    "gitlab_native": "<3.0.0",
+    "expected_vers": "vers:npm/<3.0.0"
+  },
+  {
+    "test_index": 270,
+    "scheme": "npm",
+    "gitlab_native": "<3.0.0",
+    "expected_vers": "vers:npm/<3.0.0"
+  },
+  {
+    "test_index": 271,
+    "scheme": "npm",
+    "gitlab_native": "<6.1.0",
+    "expected_vers": "vers:npm/<6.1.0"
+  },
+  {
+    "test_index": 272,
+    "scheme": "npm",
+    "gitlab_native": "<7.2.2||>=8.0.0 <8.1.1",
+    "expected_vers": "vers:npm/<7.2.2|>=8.0.0|<8.1.1"
+  },
+  {
+    "test_index": 273,
+    "scheme": "npm",
+    "gitlab_native": "<9.0.0",
+    "expected_vers": "vers:npm/<9.0.0"
+  },
+  {
+    "test_index": 274,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 275,
+    "scheme": "npm",
+    "gitlab_native": "<1.0.0",
+    "expected_vers": "vers:npm/<1.0.0"
+  },
+  {
+    "test_index": 276,
+    "scheme": "npm",
+    "gitlab_native": "<=0.9.1",
+    "expected_vers": "vers:npm/<=0.9.1"
+  },
+  {
+    "test_index": 277,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 278,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 279,
+    "scheme": "npm",
+    "gitlab_native": "=0.2.0",
+    "expected_vers": "vers:npm/0.2.0"
+  },
+  {
+    "test_index": 280,
+    "scheme": "npm",
+    "gitlab_native": "<1.2.6",
+    "expected_vers": "vers:npm/<1.2.6"
+  },
+  {
+    "test_index": 281,
+    "scheme": "npm",
+    "gitlab_native": "<1.2.2",
+    "expected_vers": "vers:npm/<1.2.2"
+  },
+  {
+    "test_index": 282,
+    "scheme": "npm",
+    "gitlab_native": "<1.0.3",
+    "expected_vers": "vers:npm/<1.0.3"
+  },
+  {
+    "test_index": 283,
+    "scheme": "npm",
+    "gitlab_native": "<0.4.0",
+    "expected_vers": "vers:npm/<0.4.0"
+  },
+  {
+    "test_index": 284,
+    "scheme": "npm",
+    "gitlab_native": "<0.45.3",
+    "expected_vers": "vers:npm/<0.45.3"
+  },
+  {
+    "test_index": 285,
+    "scheme": "npm",
+    "gitlab_native": "<0.8.0",
+    "expected_vers": "vers:npm/<0.8.0"
+  },
+  {
+    "test_index": 286,
+    "scheme": "npm",
+    "gitlab_native": "<=0.12.0",
+    "expected_vers": "vers:npm/<=0.12.0"
+  },
+  {
+    "test_index": 287,
+    "scheme": "npm",
+    "gitlab_native": "<0.8.2",
+    "expected_vers": "vers:npm/<0.8.2"
+  },
+  {
+    "test_index": 288,
+    "scheme": "npm",
+    "gitlab_native": "<2.4.2",
+    "expected_vers": "vers:npm/<2.4.2"
+  },
+  {
+    "test_index": 289,
+    "scheme": "npm",
+    "gitlab_native": "<2.4.2",
+    "expected_vers": "vers:npm/<2.4.2"
+  },
+  {
+    "test_index": 290,
+    "scheme": "npm",
+    "gitlab_native": "<4.1.3",
+    "expected_vers": "vers:npm/<4.1.3"
+  },
+  {
+    "test_index": 291,
+    "scheme": "npm",
+    "gitlab_native": "<4.1.3",
+    "expected_vers": "vers:npm/<4.1.3"
+  },
+  {
+    "test_index": 292,
+    "scheme": "npm",
+    "gitlab_native": "<=0.1.9",
+    "expected_vers": "vers:npm/<=0.1.9"
+  },
+  {
+    "test_index": 293,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 294,
+    "scheme": "npm",
+    "gitlab_native": "<=5.4.0",
+    "expected_vers": "vers:npm/<=5.4.0"
+  },
+  {
+    "test_index": 295,
+    "scheme": "npm",
+    "gitlab_native": "<2.0.1",
+    "expected_vers": "vers:npm/<2.0.1"
+  },
+  {
+    "test_index": 296,
+    "scheme": "npm",
+    "gitlab_native": "<1.1.82",
+    "expected_vers": "vers:npm/<1.1.82"
+  },
+  {
+    "test_index": 297,
+    "scheme": "npm",
+    "gitlab_native": "<1.1.82",
+    "expected_vers": "vers:npm/<1.1.82"
+  },
+  {
+    "test_index": 298,
+    "scheme": "npm",
+    "gitlab_native": "<=1.2.1",
+    "expected_vers": "vers:npm/<=1.2.1"
+  },
+  {
+    "test_index": 299,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 300,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 301,
+    "scheme": "npm",
+    "gitlab_native": "=0.2.0",
+    "expected_vers": "vers:npm/0.2.0"
+  },
+  {
+    "test_index": 302,
+    "scheme": "npm",
+    "gitlab_native": "<0.2.3",
+    "expected_vers": "vers:npm/<0.2.3"
+  },
+  {
+    "test_index": 303,
+    "scheme": "npm",
+    "gitlab_native": "<=0.2.3",
+    "expected_vers": "vers:npm/<=0.2.3"
+  },
+  {
+    "test_index": 304,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 305,
+    "scheme": "npm",
+    "gitlab_native": "<2.0.3",
+    "expected_vers": "vers:npm/<2.0.3"
+  },
+  {
+    "test_index": 306,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 307,
+    "scheme": "npm",
+    "gitlab_native": ">=1.0.0 <=1.0.1||=1.1.0",
+    "expected_vers": "vers:npm/>=1.0.0|<=1.0.1|1.1.0"
+  },
+  {
+    "test_index": 308,
+    "scheme": "npm",
+    "gitlab_native": "<16.8.2||>=17.0.0 <17.9.2||>=18.0.0 <18.4.1||>=19.0.0 <19.1.1",
+    "expected_vers": "vers:npm/<16.8.2|>=17.0.0|<17.9.2|>=18.0.0|<18.4.1|>=19.0.0|<19.1.1"
+  },
+  {
+    "test_index": 309,
+    "scheme": "npm",
+    "gitlab_native": "<2.1.1",
+    "expected_vers": "vers:npm/<2.1.1"
+  },
+  {
+    "test_index": 310,
+    "scheme": "npm",
+    "gitlab_native": "=5.1.1",
+    "expected_vers": "vers:npm/5.1.1"
+  },
+  {
+    "test_index": 311,
+    "scheme": "npm",
+    "gitlab_native": "<5.1.2",
+    "expected_vers": "vers:npm/<5.1.2"
+  },
+  {
+    "test_index": 312,
+    "scheme": "npm",
+    "gitlab_native": "<5.1.1",
+    "expected_vers": "vers:npm/<5.1.1"
+  },
+  {
+    "test_index": 313,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 314,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 315,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 316,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 317,
+    "scheme": "npm",
+    "gitlab_native": "=3.0.0",
+    "expected_vers": "vers:npm/3.0.0"
+  },
+  {
+    "test_index": 318,
+    "scheme": "npm",
+    "gitlab_native": "<0.3.16",
+    "expected_vers": "vers:npm/<0.3.16"
+  },
+  {
+    "test_index": 319,
+    "scheme": "npm",
+    "gitlab_native": "<0.3.16",
+    "expected_vers": "vers:npm/<0.3.16"
+  },
+  {
+    "test_index": 320,
+    "scheme": "npm",
+    "gitlab_native": "<=4.0.0",
+    "expected_vers": "vers:npm/<=4.0.0"
+  },
+  {
+    "test_index": 321,
+    "scheme": "npm",
+    "gitlab_native": "<1.0.2",
+    "expected_vers": "vers:npm/<1.0.2"
+  },
+  {
+    "test_index": 322,
+    "scheme": "npm",
+    "gitlab_native": "<4.0.0",
+    "expected_vers": "vers:npm/<4.0.0"
+  },
+  {
+    "test_index": 323,
+    "scheme": "npm",
+    "gitlab_native": "<=0.3.22||=4.0.0",
+    "expected_vers": "vers:npm/<=0.3.22|4.0.0"
+  },
+  {
+    "test_index": 324,
+    "scheme": "npm",
+    "gitlab_native": "<4.0.0",
+    "expected_vers": "vers:npm/<4.0.0"
+  },
+  {
+    "test_index": 325,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 326,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 327,
+    "scheme": "npm",
+    "gitlab_native": "<=3.3.1",
+    "expected_vers": "vers:npm/<=3.3.1"
+  },
+  {
+    "test_index": 328,
+    "scheme": "npm",
+    "gitlab_native": "<2.14.2",
+    "expected_vers": "vers:npm/<2.14.2"
+  },
+  {
+    "test_index": 329,
+    "scheme": "npm",
+    "gitlab_native": "<=0.0.5",
+    "expected_vers": "vers:npm/<=0.0.5"
+  },
+  {
+    "test_index": 330,
+    "scheme": "npm",
+    "gitlab_native": "<0.2.1",
+    "expected_vers": "vers:npm/<0.2.1"
+  },
+  {
+    "test_index": 331,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 332,
+    "scheme": "npm",
+    "gitlab_native": "<=0.8.6",
+    "expected_vers": "vers:npm/<=0.8.6"
+  },
+  {
+    "test_index": 333,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 334,
+    "scheme": "npm",
+    "gitlab_native": "<3.15.7",
+    "expected_vers": "vers:npm/<3.15.7"
+  },
+  {
+    "test_index": 335,
+    "scheme": "npm",
+    "gitlab_native": "<3.15.7",
+    "expected_vers": "vers:npm/<3.15.7"
+  },
+  {
+    "test_index": 336,
+    "scheme": "npm",
+    "gitlab_native": "<=5.2.1",
+    "expected_vers": "vers:npm/<=5.2.1"
+  },
+  {
+    "test_index": 337,
+    "scheme": "npm",
+    "gitlab_native": "<5.2.2",
+    "expected_vers": "vers:npm/<5.2.2"
+  },
+  {
+    "test_index": 338,
+    "scheme": "npm",
+    "gitlab_native": "<0.26.0",
+    "expected_vers": "vers:npm/<0.26.0"
+  },
+  {
+    "test_index": 339,
+    "scheme": "npm",
+    "gitlab_native": "<2.2.7",
+    "expected_vers": "vers:npm/<2.2.7"
+  },
+  {
+    "test_index": 340,
+    "scheme": "npm",
+    "gitlab_native": "<2.2.0",
+    "expected_vers": "vers:npm/<2.2.0"
+  },
+  {
+    "test_index": 341,
+    "scheme": "npm",
+    "gitlab_native": "<6.11.4",
+    "expected_vers": "vers:npm/<6.11.4"
+  },
+  {
+    "test_index": 342,
+    "scheme": "npm",
+    "gitlab_native": "<0.0.18",
+    "expected_vers": "vers:npm/<0.0.18"
+  },
+  {
+    "test_index": 343,
+    "scheme": "npm",
+    "gitlab_native": "<0.0.18",
+    "expected_vers": "vers:npm/<0.0.18"
+  },
+  {
+    "test_index": 344,
+    "scheme": "npm",
+    "gitlab_native": "=1.0.3",
+    "expected_vers": "vers:npm/1.0.3"
+  },
+  {
+    "test_index": 345,
+    "scheme": "npm",
+    "gitlab_native": "<1.0.3",
+    "expected_vers": "vers:npm/<1.0.3"
+  },
+  {
+    "test_index": 346,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 347,
+    "scheme": "npm",
+    "gitlab_native": "<=1.4.0",
+    "expected_vers": "vers:npm/<=1.4.0"
+  },
+  {
+    "test_index": 348,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 349,
+    "scheme": "npm",
+    "gitlab_native": "<=0.0.1",
+    "expected_vers": "vers:npm/<=0.0.1"
+  },
+  {
+    "test_index": 350,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 351,
+    "scheme": "npm",
+    "gitlab_native": "=1.1.0",
+    "expected_vers": "vers:npm/1.1.0"
+  },
+  {
+    "test_index": 352,
+    "scheme": "npm",
+    "gitlab_native": "<=1.0.2||<2.3.10",
+    "expected_vers": "vers:npm/<=1.0.2|<2.3.10"
+  },
+  {
+    "test_index": 353,
+    "scheme": "npm",
+    "gitlab_native": "<2.3.10",
+    "expected_vers": "vers:npm/<2.3.10"
+  },
+  {
+    "test_index": 354,
+    "scheme": "npm",
+    "gitlab_native": "=2.8.1",
+    "expected_vers": "vers:npm/2.8.1"
+  },
+  {
+    "test_index": 355,
+    "scheme": "npm",
+    "gitlab_native": "<=3.0.0",
+    "expected_vers": "vers:npm/<=3.0.0"
+  },
+  {
+    "test_index": 356,
+    "scheme": "npm",
+    "gitlab_native": "<2.1.2",
+    "expected_vers": "vers:npm/<2.1.2"
+  },
+  {
+    "test_index": 357,
+    "scheme": "npm",
+    "gitlab_native": "<2.1.1",
+    "expected_vers": "vers:npm/<2.1.1"
+  },
+  {
+    "test_index": 358,
+    "scheme": "npm",
+    "gitlab_native": "=1.1.8",
+    "expected_vers": "vers:npm/1.1.8"
+  },
+  {
+    "test_index": 359,
+    "scheme": "npm",
+    "gitlab_native": "=0.1.0",
+    "expected_vers": "vers:npm/0.1.0"
+  },
+  {
+    "test_index": 360,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 361,
+    "scheme": "npm",
+    "gitlab_native": "<=1.0.3",
+    "expected_vers": "vers:npm/<=1.0.3"
+  },
+  {
+    "test_index": 362,
+    "scheme": "npm",
+    "gitlab_native": "<1.0.4",
+    "expected_vers": "vers:npm/<1.0.4"
+  },
+  {
+    "test_index": 363,
+    "scheme": "npm",
+    "gitlab_native": "<1.14.6",
+    "expected_vers": "vers:npm/<1.14.6"
+  },
+  {
+    "test_index": 364,
+    "scheme": "npm",
+    "gitlab_native": "<=1.0.0",
+    "expected_vers": "vers:npm/<=1.0.0"
+  },
+  {
+    "test_index": 365,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 366,
+    "scheme": "npm",
+    "gitlab_native": "<1.1.7||>=2.0.0 <2.0.2",
+    "expected_vers": "vers:npm/<1.1.7|>=2.0.0|<2.0.2"
+  },
+  {
+    "test_index": 367,
+    "scheme": "npm",
+    "gitlab_native": "<=1.4.3",
+    "expected_vers": "vers:npm/<=1.4.3"
+  },
+  {
+    "test_index": 368,
+    "scheme": "npm",
+    "gitlab_native": "<1.5.1",
+    "expected_vers": "vers:npm/<1.5.1"
+  },
+  {
+    "test_index": 369,
+    "scheme": "npm",
+    "gitlab_native": "<1.0.5",
+    "expected_vers": "vers:npm/<1.0.5"
+  },
+  {
+    "test_index": 370,
+    "scheme": "npm",
+    "gitlab_native": "=1.7.5",
+    "expected_vers": "vers:npm/1.7.5"
+  },
+  {
+    "test_index": 371,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 372,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 373,
+    "scheme": "npm",
+    "gitlab_native": "<=0.9.0",
+    "expected_vers": "vers:npm/<=0.9.0"
+  },
+  {
+    "test_index": 374,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 375,
+    "scheme": "npm",
+    "gitlab_native": "<1.1.3",
+    "expected_vers": "vers:npm/<1.1.3"
+  },
+  {
+    "test_index": 376,
+    "scheme": "npm",
+    "gitlab_native": "=1.3.3",
+    "expected_vers": "vers:npm/1.3.3"
+  },
+  {
+    "test_index": 377,
+    "scheme": "npm",
+    "gitlab_native": "=1.4.14",
+    "expected_vers": "vers:npm/1.4.14"
+  },
+  {
+    "test_index": 378,
+    "scheme": "npm",
+    "gitlab_native": "<1.4.15",
+    "expected_vers": "vers:npm/<1.4.15"
+  },
+  {
+    "test_index": 379,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 380,
+    "scheme": "npm",
+    "gitlab_native": "<3.0.0",
+    "expected_vers": "vers:npm/<3.0.0"
+  },
+  {
+    "test_index": 381,
+    "scheme": "npm",
+    "gitlab_native": "<3.2.5",
+    "expected_vers": "vers:npm/<3.2.5"
+  },
+  {
+    "test_index": 382,
+    "scheme": "npm",
+    "gitlab_native": "<=3.0.0-beta.17.7",
+    "expected_vers": "vers:npm/<=3.0.0-beta.17.7"
+  },
+  {
+    "test_index": 383,
+    "scheme": "npm",
+    "gitlab_native": "<3.2.5",
+    "expected_vers": "vers:npm/<3.2.5"
+  },
+  {
+    "test_index": 384,
+    "scheme": "npm",
+    "gitlab_native": "<=1.6.4||=3.0.0",
+    "expected_vers": "vers:npm/<=1.6.4|3.0.0"
+  },
+  {
+    "test_index": 385,
+    "scheme": "npm",
+    "gitlab_native": "<4.1.0",
+    "expected_vers": "vers:npm/<4.1.0"
+  },
+  {
+    "test_index": 386,
+    "scheme": "npm",
+    "gitlab_native": "<3.0.2",
+    "expected_vers": "vers:npm/<3.0.2"
+  },
+  {
+    "test_index": 387,
+    "scheme": "npm",
+    "gitlab_native": "<=3.6.0",
+    "expected_vers": "vers:npm/<=3.6.0"
+  },
+  {
+    "test_index": 388,
+    "scheme": "npm",
+    "gitlab_native": "<3.2.5",
+    "expected_vers": "vers:npm/<3.2.5"
+  },
+  {
+    "test_index": 389,
+    "scheme": "npm",
+    "gitlab_native": "<3.0.0-beta.17.8",
+    "expected_vers": "vers:npm/<3.0.0-beta.17.8"
+  },
+  {
+    "test_index": 390,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 391,
+    "scheme": "npm",
+    "gitlab_native": "<4.7.0",
+    "expected_vers": "vers:npm/<4.7.0"
+  },
+  {
+    "test_index": 392,
+    "scheme": "npm",
+    "gitlab_native": "<=1.0.54",
+    "expected_vers": "vers:npm/<=1.0.54"
+  },
+  {
+    "test_index": 393,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 394,
+    "scheme": "npm",
+    "gitlab_native": "<=0.1.1",
+    "expected_vers": "vers:npm/<=0.1.1"
+  },
+  {
+    "test_index": 395,
+    "scheme": "npm",
+    "gitlab_native": "<1.4.1",
+    "expected_vers": "vers:npm/<1.4.1"
+  },
+  {
+    "test_index": 396,
+    "scheme": "npm",
+    "gitlab_native": "<1.4.2",
+    "expected_vers": "vers:npm/<1.4.2"
+  },
+  {
+    "test_index": 397,
+    "scheme": "npm",
+    "gitlab_native": "<1.4.2",
+    "expected_vers": "vers:npm/<1.4.2"
+  },
+  {
+    "test_index": 398,
+    "scheme": "npm",
+    "gitlab_native": "<4.4.6",
+    "expected_vers": "vers:npm/<4.4.6"
+  },
+  {
+    "test_index": 399,
+    "scheme": "npm",
+    "gitlab_native": "<=2.4.2",
+    "expected_vers": "vers:npm/<=2.4.2"
+  },
+  {
+    "test_index": 400,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 401,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 402,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 403,
+    "scheme": "npm",
+    "gitlab_native": "<=0.1.1",
+    "expected_vers": "vers:npm/<=0.1.1"
+  },
+  {
+    "test_index": 404,
+    "scheme": "npm",
+    "gitlab_native": "<5.0.0",
+    "expected_vers": "vers:npm/<5.0.0"
+  },
+  {
+    "test_index": 405,
+    "scheme": "npm",
+    "gitlab_native": "<=2.2.0",
+    "expected_vers": "vers:npm/<=2.2.0"
+  },
+  {
+    "test_index": 406,
+    "scheme": "npm",
+    "gitlab_native": "<0.125.0",
+    "expected_vers": "vers:npm/<0.125.0"
+  },
+  {
+    "test_index": 407,
+    "scheme": "npm",
+    "gitlab_native": "<=3.1.1",
+    "expected_vers": "vers:npm/<=3.1.1"
+  },
+  {
+    "test_index": 408,
+    "scheme": "npm",
+    "gitlab_native": "=0.2.1",
+    "expected_vers": "vers:npm/0.2.1"
+  },
+  {
+    "test_index": 409,
+    "scheme": "npm",
+    "gitlab_native": "<8.13.8",
+    "expected_vers": "vers:npm/<8.13.8"
+  },
+  {
+    "test_index": 410,
+    "scheme": "npm",
+    "gitlab_native": "<8.2.3",
+    "expected_vers": "vers:npm/<8.2.3"
+  },
+  {
+    "test_index": 411,
+    "scheme": "npm",
+    "gitlab_native": "<8.2.3",
+    "expected_vers": "vers:npm/<8.2.3"
+  },
+  {
+    "test_index": 412,
+    "scheme": "npm",
+    "gitlab_native": "<8.11.0",
+    "expected_vers": "vers:npm/<8.11.0"
+  },
+  {
+    "test_index": 413,
+    "scheme": "npm",
+    "gitlab_native": "<2.0.0",
+    "expected_vers": "vers:npm/<2.0.0"
+  },
+  {
+    "test_index": 414,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 415,
+    "scheme": "npm",
+    "gitlab_native": "<1.2.3",
+    "expected_vers": "vers:npm/<1.2.3"
+  },
+  {
+    "test_index": 416,
+    "scheme": "npm",
+    "gitlab_native": "<5.0.0",
+    "expected_vers": "vers:npm/<5.0.0"
+  },
+  {
+    "test_index": 417,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 418,
+    "scheme": "npm",
+    "gitlab_native": ">=3.0.0 <3.10.0||=3.10.2",
+    "expected_vers": "vers:npm/>=3.0.0|<3.10.0|3.10.2"
+  },
+  {
+    "test_index": 419,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 420,
+    "scheme": "npm",
+    "gitlab_native": "<6.15.1",
+    "expected_vers": "vers:npm/<6.15.1"
+  },
+  {
+    "test_index": 421,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 422,
+    "scheme": "npm",
+    "gitlab_native": "<1.0.12",
+    "expected_vers": "vers:npm/<1.0.12"
+  },
+  {
+    "test_index": 423,
+    "scheme": "npm",
+    "gitlab_native": "<3.24.0",
+    "expected_vers": "vers:npm/<3.24.0"
+  },
+  {
+    "test_index": 424,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 425,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 426,
+    "scheme": "npm",
+    "gitlab_native": "<1.1.4",
+    "expected_vers": "vers:npm/<1.1.4"
+  },
+  {
+    "test_index": 427,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 428,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 429,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 430,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 431,
+    "scheme": "npm",
+    "gitlab_native": "<3.1.1",
+    "expected_vers": "vers:npm/<3.1.1"
+  },
+  {
+    "test_index": 432,
+    "scheme": "npm",
+    "gitlab_native": "<1.5.2",
+    "expected_vers": "vers:npm/<1.5.2"
+  },
+  {
+    "test_index": 433,
+    "scheme": "npm",
+    "gitlab_native": "=8.4.3",
+    "expected_vers": "vers:npm/8.4.3"
+  },
+  {
+    "test_index": 434,
+    "scheme": "npm",
+    "gitlab_native": "<2.19.6||>=3.0.0 <3.1.2||>=4.0.0 <4.3.4",
+    "expected_vers": "vers:npm/<2.19.6|>=3.0.0|<3.1.2|>=4.0.0|<4.3.4"
+  },
+  {
+    "test_index": 435,
+    "scheme": "npm",
+    "gitlab_native": "<4.4.0",
+    "expected_vers": "vers:npm/<4.4.0"
+  },
+  {
+    "test_index": 436,
+    "scheme": "npm",
+    "gitlab_native": "<2.0.1",
+    "expected_vers": "vers:npm/<2.0.1"
+  },
+  {
+    "test_index": 437,
+    "scheme": "npm",
+    "gitlab_native": "<2.0.0",
+    "expected_vers": "vers:npm/<2.0.0"
+  },
+  {
+    "test_index": 438,
+    "scheme": "npm",
+    "gitlab_native": "<=2.3.0",
+    "expected_vers": "vers:npm/<=2.3.0"
+  },
+  {
+    "test_index": 439,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 440,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 441,
+    "scheme": "npm",
+    "gitlab_native": "<=0.0.3",
+    "expected_vers": "vers:npm/<=0.0.3"
+  },
+  {
+    "test_index": 442,
+    "scheme": "npm",
+    "gitlab_native": "=0.0.3",
+    "expected_vers": "vers:npm/0.0.3"
+  },
+  {
+    "test_index": 443,
+    "scheme": "npm",
+    "gitlab_native": "<2.10.0",
+    "expected_vers": "vers:npm/<2.10.0"
+  },
+  {
+    "test_index": 444,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 445,
+    "scheme": "npm",
+    "gitlab_native": "<0.4.0",
+    "expected_vers": "vers:npm/<0.4.0"
+  },
+  {
+    "test_index": 446,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 447,
+    "scheme": "npm",
+    "gitlab_native": "<=1.0.1",
+    "expected_vers": "vers:npm/<=1.0.1"
+  },
+  {
+    "test_index": 448,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 449,
+    "scheme": "npm",
+    "gitlab_native": "<=0.1.8",
+    "expected_vers": "vers:npm/<=0.1.8"
+  },
+  {
+    "test_index": 450,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 451,
+    "scheme": "npm",
+    "gitlab_native": "<=1.3.1",
+    "expected_vers": "vers:npm/<=1.3.1"
+  },
+  {
+    "test_index": 452,
+    "scheme": "npm",
+    "gitlab_native": "<2.2.4",
+    "expected_vers": "vers:npm/<2.2.4"
+  },
+  {
+    "test_index": 453,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 454,
+    "scheme": "npm",
+    "gitlab_native": "<1.7.0",
+    "expected_vers": "vers:npm/<1.7.0"
+  },
+  {
+    "test_index": 455,
+    "scheme": "npm",
+    "gitlab_native": "<0.4.2",
+    "expected_vers": "vers:npm/<0.4.2"
+  },
+  {
+    "test_index": 456,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 457,
+    "scheme": "npm",
+    "gitlab_native": "<=0.7.0",
+    "expected_vers": "vers:npm/<=0.7.0"
+  },
+  {
+    "test_index": 458,
+    "scheme": "npm",
+    "gitlab_native": "<1.0.0",
+    "expected_vers": "vers:npm/<1.0.0"
+  },
+  {
+    "test_index": 459,
+    "scheme": "npm",
+    "gitlab_native": "<1.0.0",
+    "expected_vers": "vers:npm/<1.0.0"
+  },
+  {
+    "test_index": 460,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 461,
+    "scheme": "npm",
+    "gitlab_native": "<2.0.3",
+    "expected_vers": "vers:npm/<2.0.3"
+  },
+  {
+    "test_index": 462,
+    "scheme": "npm",
+    "gitlab_native": "<3.2.5",
+    "expected_vers": "vers:npm/<3.2.5"
+  },
+  {
+    "test_index": 463,
+    "scheme": "npm",
+    "gitlab_native": "=5.0.1",
+    "expected_vers": "vers:npm/5.0.1"
+  },
+  {
+    "test_index": 464,
+    "scheme": "npm",
+    "gitlab_native": "=5.0.2",
+    "expected_vers": "vers:npm/5.0.2"
+  },
+  {
+    "test_index": 465,
+    "scheme": "npm",
+    "gitlab_native": "<=1.0.0",
+    "expected_vers": "vers:npm/<=1.0.0"
+  },
+  {
+    "test_index": 466,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 467,
+    "scheme": "npm",
+    "gitlab_native": "<2.0.1",
+    "expected_vers": "vers:npm/<2.0.1"
+  },
+  {
+    "test_index": 468,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 469,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 470,
+    "scheme": "npm",
+    "gitlab_native": "<1.0.1",
+    "expected_vers": "vers:npm/<1.0.1"
+  },
+  {
+    "test_index": 471,
+    "scheme": "npm",
+    "gitlab_native": "<1.0.1",
+    "expected_vers": "vers:npm/<1.0.1"
+  },
+  {
+    "test_index": 472,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 473,
+    "scheme": "npm",
+    "gitlab_native": "<=0.9.73",
+    "expected_vers": "vers:npm/<=0.9.73"
+  },
+  {
+    "test_index": 474,
+    "scheme": "npm",
+    "gitlab_native": "=1.0.0",
+    "expected_vers": "vers:npm/1.0.0"
+  },
+  {
+    "test_index": 475,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 476,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 477,
+    "scheme": "npm",
+    "gitlab_native": "<=2.0.0",
+    "expected_vers": "vers:npm/<=2.0.0"
+  },
+  {
+    "test_index": 478,
+    "scheme": "npm",
+    "gitlab_native": "<1.5.1",
+    "expected_vers": "vers:npm/<1.5.1"
+  },
+  {
+    "test_index": 479,
+    "scheme": "npm",
+    "gitlab_native": "<1.6.0",
+    "expected_vers": "vers:npm/<1.6.0"
+  },
+  {
+    "test_index": 480,
+    "scheme": "npm",
+    "gitlab_native": "<1.5.3",
+    "expected_vers": "vers:npm/<1.5.3"
+  },
+  {
+    "test_index": 481,
+    "scheme": "npm",
+    "gitlab_native": "<1.5.3",
+    "expected_vers": "vers:npm/<1.5.3"
+  },
+  {
+    "test_index": 482,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 483,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 484,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 485,
+    "scheme": "npm",
+    "gitlab_native": "<1.4.1",
+    "expected_vers": "vers:npm/<1.4.1"
+  },
+  {
+    "test_index": 486,
+    "scheme": "npm",
+    "gitlab_native": "<1.5.8",
+    "expected_vers": "vers:npm/<1.5.8"
+  },
+  {
+    "test_index": 487,
+    "scheme": "npm",
+    "gitlab_native": "<1.2.0",
+    "expected_vers": "vers:npm/<1.2.0"
+  },
+  {
+    "test_index": 488,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 489,
+    "scheme": "npm",
+    "gitlab_native": "<1.2.1",
+    "expected_vers": "vers:npm/<1.2.1"
+  },
+  {
+    "test_index": 490,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 491,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 492,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 493,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 494,
+    "scheme": "npm",
+    "gitlab_native": "<=2.1.1",
+    "expected_vers": "vers:npm/<=2.1.1"
+  },
+  {
+    "test_index": 495,
+    "scheme": "npm",
+    "gitlab_native": "<0.26.0",
+    "expected_vers": "vers:npm/<0.26.0"
+  },
+  {
+    "test_index": 496,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 497,
+    "scheme": "npm",
+    "gitlab_native": "<4.0.3||>=4.1.0 <4.1.3||>=4.2.0 <4.2.1||>=4.3.0 <4.3.1",
+    "expected_vers": "vers:npm/<4.0.3|>=4.1.0|<4.1.3|>=4.2.0|<4.2.1|>=4.3.0|<4.3.1"
+  },
+  {
+    "test_index": 498,
+    "scheme": "npm",
+    "gitlab_native": "<=1.0.1",
+    "expected_vers": "vers:npm/<=1.0.1"
+  },
+  {
+    "test_index": 499,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 500,
+    "scheme": "npm",
+    "gitlab_native": "<=2.0.11",
+    "expected_vers": "vers:npm/<=2.0.11"
+  },
+  {
+    "test_index": 501,
+    "scheme": "npm",
+    "gitlab_native": "<2.0.15",
+    "expected_vers": "vers:npm/<2.0.15"
+  },
+  {
+    "test_index": 502,
+    "scheme": "npm",
+    "gitlab_native": "<2.0.12",
+    "expected_vers": "vers:npm/<2.0.12"
+  },
+  {
+    "test_index": 503,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 504,
+    "scheme": "npm",
+    "gitlab_native": "<=1.0.0",
+    "expected_vers": "vers:npm/<=1.0.0"
+  },
+  {
+    "test_index": 505,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 506,
+    "scheme": "npm",
+    "gitlab_native": "=1.2.6",
+    "expected_vers": "vers:npm/1.2.6"
+  },
+  {
+    "test_index": 507,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 508,
+    "scheme": "npm",
+    "gitlab_native": "<=0.1.11",
+    "expected_vers": "vers:npm/<=0.1.11"
+  },
+  {
+    "test_index": 509,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 510,
+    "scheme": "npm",
+    "gitlab_native": "<1.0.8",
+    "expected_vers": "vers:npm/<1.0.8"
+  },
+  {
+    "test_index": 511,
+    "scheme": "npm",
+    "gitlab_native": "<1.2.6",
+    "expected_vers": "vers:npm/<1.2.6"
+  },
+  {
+    "test_index": 512,
+    "scheme": "npm",
+    "gitlab_native": "<4.0.5||>=5.0.0 <8.1.1",
+    "expected_vers": "vers:npm/<4.0.5|>=5.0.0|<8.1.1"
+  },
+  {
+    "test_index": 513,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 514,
+    "scheme": "npm",
+    "gitlab_native": "=0.1.1",
+    "expected_vers": "vers:npm/0.1.1"
+  },
+  {
+    "test_index": 515,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 516,
+    "scheme": "npm",
+    "gitlab_native": "<=3.2.0",
+    "expected_vers": "vers:npm/<=3.2.0"
+  },
+  {
+    "test_index": 517,
+    "scheme": "npm",
+    "gitlab_native": "<=3.2.0",
+    "expected_vers": "vers:npm/<=3.2.0"
+  },
+  {
+    "test_index": 518,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0-alpha",
+    "expected_vers": "vers:npm/>=0.0.0-alpha"
+  },
+  {
+    "test_index": 519,
+    "scheme": "npm",
+    "gitlab_native": "<1.4.0",
+    "expected_vers": "vers:npm/<1.4.0"
+  },
+  {
+    "test_index": 520,
+    "scheme": "npm",
+    "gitlab_native": "<=0.2.4",
+    "expected_vers": "vers:npm/<=0.2.4"
+  },
+  {
+    "test_index": 521,
+    "scheme": "npm",
+    "gitlab_native": "<0.2.4",
+    "expected_vers": "vers:npm/<0.2.4"
+  },
+  {
+    "test_index": 522,
+    "scheme": "npm",
+    "gitlab_native": "<0.2.4",
+    "expected_vers": "vers:npm/<0.2.4"
+  },
+  {
+    "test_index": 523,
+    "scheme": "npm",
+    "gitlab_native": "<1.4.1",
+    "expected_vers": "vers:npm/<1.4.1"
+  },
+  {
+    "test_index": 524,
+    "scheme": "npm",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 525,
+    "scheme": "npm",
+    "gitlab_native": "<1.0.12",
+    "expected_vers": "vers:npm/<1.0.12"
+  },
+  {
+    "test_index": 526,
+    "scheme": "npm",
+    "gitlab_native": "<3.1.0",
+    "expected_vers": "vers:npm/<3.1.0"
+  },
+  {
+    "test_index": 527,
+    "scheme": "npm",
+    "gitlab_native": "<3.0.0",
+    "expected_vers": "vers:npm/<3.0.0"
+  },
+  {
+    "test_index": 528,
+    "scheme": "npm",
+    "gitlab_native": ">=0.0.0",
+    "expected_vers": "vers:npm/>=0.0.0"
+  },
+  {
+    "test_index": 529,
+    "scheme": "npm",
+    "gitlab_native": "<=0.0.10-2014-03-24-17-36-27",
+    "expected_vers": "vers:npm/<=0.0.10-2014-03-24-17-36-27"
+  },
+  {
+    "test_index": 530,
+    "scheme": "npm",
+    "gitlab_native": "<2.0.2",
+    "expected_vers": "vers:npm/<2.0.2"
+  },
+  {
+    "test_index": 531,
+    "scheme": "npm",
+    "gitlab_native": "=2.3.2",
+    "expected_vers": "vers:npm/2.3.2"
+  },
+  {
+    "test_index": 532,
+    "scheme": "npm",
+    "gitlab_native": "<1.16.2",
+    "expected_vers": "vers:npm/<1.16.2"
+  },
+  {
+    "test_index": 533,
+    "scheme": "npm",
+    "gitlab_native": "<3.1.13",
+    "expected_vers": "vers:npm/<3.1.13"
+  }
+]
