@@ -4,11 +4,13 @@
 #
 # Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
+import json
 from unittest import TestCase
 import pytest
 
 from univers.version_constraint import VersionConstraint
 from univers.version_range import GemVersionRange
+from univers.version_range import GitLabVersionRange
 from univers.version_range import NugetVersionRange
 from univers.version_range import InvalidVersionRange
 from univers.version_range import PypiVersionRange
@@ -330,3 +332,30 @@ def test_PypiVersionRange_raises_ivr_for_unsupported_and_invalid_ranges(range, w
             assert expected in str(ivre)
     else:
         assert expected == str(PypiVersionRange.from_native(range))
+
+
+@pytest.mark.parametrize("test_case", json.load(open("./tests/data/pypi_gitlab.json")))
+def test_pypi_gitlab_version_range_parse(test_case):
+    result = GitLabVersionRange.from_gitlab_native(
+        scheme=test_case["scheme"],
+        string=test_case["gitlab_native"],
+    )
+    assert str(result) == test_case["expected_vers"]
+
+
+@pytest.mark.parametrize("test_case", json.load(open("./tests/data/npm_gitlab.json")))
+def test_npm_gitlab_version_range_parse(test_case):
+    result = GitLabVersionRange.from_gitlab_native(
+        scheme=test_case["scheme"],
+        string=test_case["gitlab_native"],
+    )
+    assert str(result) == test_case["expected_vers"]
+
+
+@pytest.mark.parametrize("test_case", json.load(open("./tests/data/gem_gitlab.json")))
+def test_gem_gitlab_version_range_parse(test_case):
+    result = GitLabVersionRange.from_gitlab_native(
+        scheme=test_case["scheme"],
+        string=test_case["gitlab_native"],
+    )
+    assert str(result) == test_case["expected_vers"]

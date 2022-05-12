@@ -233,6 +233,7 @@ class NpmVersionRange(VersionRange):
         ">=": ">=",
         "<": "<",
         ">": ">",
+        "=": "=",  # This is not a native node-semver comparator, but is used in the gitlab version range for npm packages.
     }
 
     @classmethod
@@ -970,6 +971,51 @@ class OpensslVersionRange(VersionRange):
             constraint = VersionConstraint(comparator="=", version=version_obj)
             constraints.append(constraint)
         return cls(constraints=constraints)
+
+
+class GitLabVersionRange(VersionRange):
+    @classmethod
+    def from_gitlab_native(cls, scheme, string):
+        vrc = RANGE_CLASS_BY_SCHEMES[scheme]
+        constraint_items = []
+        constraints = []
+        split = " "
+        if scheme == "pypi":
+            split = ","
+        pipe_separated_constraints = string.split("||")
+        for pipe_separated_constraint in pipe_separated_constraints:
+            space_seperated_constraints = pipe_separated_constraint.split(split)
+            constraint_items.extend(space_seperated_constraints)
+        comparator = ""
+        # A constraint item can be a comparator or a version or a version with comparator
+        # If it's empty continue
+        # If it's in `vers_by_native_comparators`, append it with the comparator and continue
+        # If it's a version, make version constraint from the version and use the comparator from the previous item and make comparator empty
+        # If it's a version with comparator, use split_req to get version and comparator to form constraint and make comparator empty
+        for constraint_item in constraint_items:
+            if not constraint_item:
+                continue
+            if "".join([comparator, constraint_item]) in vrc.vers_by_native_comparators:
+                comparator = "".join([comparator, constraint_item])
+                comparator = vrc.vers_by_native_comparators[comparator]
+                continue
+            if comparator:
+                constraints.append(
+                    VersionConstraint(
+                        comparator=comparator, version=vrc.version_class(constraint_item)
+                    )
+                )
+            else:
+                comparator, version_constraint = split_req(
+                    constraint_item, vrc.vers_by_native_comparators
+                )
+                constraints.append(
+                    VersionConstraint(
+                        comparator=comparator, version=vrc.version_class(version_constraint)
+                    )
+                )
+            comparator = ""
+        return vrc(constraints=constraints)
 
 
 vers_by_github_native_comparators = {
