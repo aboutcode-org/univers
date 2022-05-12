@@ -2,6 +2,13 @@ Changelog
 =========
 
 
+Version v30.6.0
+----------------
+
+- Add support for gitlab in pypi, npm, gem version ranges
+- Subclass semver for nginx
+
+
 Version v30.5.1
 ----------------
 
