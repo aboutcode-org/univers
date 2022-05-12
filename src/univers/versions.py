@@ -219,6 +219,64 @@ class SemverVersion(Version):
         except ValueError:
             return False
 
+    @property
+    def major(self):
+        return self.value and self.value.major
+
+    @property
+    def minor(self):
+        return self.value and self.value.minor
+
+    @property
+    def patch(self):
+        return self.value and self.value.patch
+
+    @property
+    def prerelease(self):
+        return self.value and self.value.prerelease
+
+    @property
+    def build(self):
+        return self.value and self.value.build
+
+    def next_major(self):
+        return self.value and self.value.next_major()
+
+    def next_minor(self):
+        return self.value and self.value.next_minor()
+
+    def next_patch(self):
+        return self.value and self.value.next_patch()
+
+
+def is_even(s):
+    """
+    Return True if the string "s" is an even number and False if this is an odd
+    number. For example:
+
+    >>> is_even(4)
+    True
+    >>> is_even(123)
+    False
+    >>> is_even(0)
+    True
+    """
+    return (int(s) % 2) == 0
+
+
+@attr.s(frozen=True, order=False, eq=False, hash=True)
+class NginxVersion(SemverVersion):
+    """
+    Semver with 3 segments and extra attribute for stable vs. unstable branches
+    """
+
+    @property
+    def is_stable(self):
+        """
+        True if this is a "stable "version
+        """
+        return is_even(self.minor)
+
 
 @attr.s(frozen=True, order=False, eq=False, hash=True)
 class RubygemsVersion(Version):

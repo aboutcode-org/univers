@@ -857,7 +857,7 @@ class NginxVersionRange(VersionRange):
     """
 
     scheme = "nginx"
-    version_class = versions.SemverVersion
+    version_class = versions.NginxVersion
 
     vers_by_native_comparators = {
         "==": "=",
@@ -919,12 +919,10 @@ class NginxVersionRange(VersionRange):
                 # suffixed version
                 vs = clauses.rstrip("+")
                 version = cls.version_class(vs)
-                is_stable = is_even(version.value.minor)
-
-                if is_stable:
+                if version.is_stable:
                     # we have a start and end in stable ranges
                     start_version = cls.version_class(vs)
-                    end_version = cls.version_class(str(start_version.value.next_minor()))
+                    end_version = cls.version_class(str(start_version.next_minor()))
                     vstart = VersionConstraint(comparator=">=", version=start_version)
                     vend = VersionConstraint(comparator="<", version=end_version)
                     constraints.extend([vstart, vend])
@@ -1034,21 +1032,6 @@ def build_range_from_github_advisory_constraint(scheme: str, string: str):
     for constraint in constraint_strings:
         constraints.append(build_constraint_from_github_advisory_string(scheme, constraint))
     return vrc(constraints=constraints)
-
-
-def is_even(s):
-    """
-    Return True if the string "s" is an even number and False if this is an odd
-    number. For example:
-
-    >>> is_even(4)
-    True
-    >>> is_even(123)
-    False
-    >>> is_even(0)
-    True
-    """
-    return (int(s) % 2) == 0
 
 
 RANGE_CLASS_BY_SCHEMES = {

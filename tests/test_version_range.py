@@ -195,9 +195,9 @@ class TestVersionRange(TestCase):
         )
 
     def test_VersionRange_contains_works_for_star_range(self):
-        from univers.versions import SemverVersion
+        from univers.versions import NginxVersion
 
-        assert SemverVersion("1.0.0") in VersionRange.from_string("vers:nginx/*")
+        assert NginxVersion("1.0.0") in VersionRange.from_string("vers:nginx/*")
 
     def test_NpmVersionRange_from_native_with_compatible_with_version_operator(self):
         npm_range = "^1.2.9"
