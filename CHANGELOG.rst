@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+Version v30.7.0
+----------------
+
+- Add composer and golang versions and also support gitlab native ranges for them
+
+
 Version v30.6.0
 ----------------
 
