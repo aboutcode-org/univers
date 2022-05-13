@@ -664,7 +664,16 @@ class ComposerVersionRange(VersionRange):
     # TODO composer may need its own scheme see https//github.com/nexB/univers/issues/5
     # and https//getcomposer.org/doc/articles/versions.md
     scheme = "composer"
-    version_class = versions.SemverVersion
+    version_class = versions.ComposerVersion
+
+    vers_by_native_comparators = {
+        "==": "=",
+        "<=": "<=",
+        ">=": ">=",
+        "<": "<",
+        ">": ">",
+        "=": "=",  # This is not a native composer-semver comparator, but is used in the gitlab version range for composer packages.
+    }
 
 
 class RpmVersionRange(VersionRange):
@@ -757,7 +766,16 @@ class GolangVersionRange(VersionRange):
     """
 
     scheme = "golang"
-    version_class = versions.SemverVersion
+    version_class = versions.GolangVersion
+
+    vers_by_native_comparators = {
+        "==": "=",
+        "<=": "<=",
+        ">=": ">=",
+        "<": "<",
+        ">": ">",
+        "=": "=",  # This is not a native golang-semver comparator, but is used in the gitlab version range for go packages.
+    }
 
 
 class GenericVersionRange(VersionRange):
@@ -973,49 +991,47 @@ class OpensslVersionRange(VersionRange):
         return cls(constraints=constraints)
 
 
-class GitLabVersionRange(VersionRange):
-    @classmethod
-    def from_gitlab_native(cls, scheme, string):
-        vrc = RANGE_CLASS_BY_SCHEMES[scheme]
-        constraint_items = []
-        constraints = []
-        split = " "
-        if scheme == "pypi":
-            split = ","
-        pipe_separated_constraints = string.split("||")
-        for pipe_separated_constraint in pipe_separated_constraints:
-            space_seperated_constraints = pipe_separated_constraint.split(split)
-            constraint_items.extend(space_seperated_constraints)
+def from_gitlab_native(gitlab_scheme, string):
+    purl_scheme = PURL_TYPE_BY_GITLAB_SCHEME[gitlab_scheme]
+    vrc = RANGE_CLASS_BY_SCHEMES[purl_scheme]
+    constraint_items = []
+    constraints = []
+    split = " "
+    split_by_comma_schemes = ["pypi", "composer"]
+    if purl_scheme in split_by_comma_schemes:
+        split = ","
+    pipe_separated_constraints = string.split("||")
+    for pipe_separated_constraint in pipe_separated_constraints:
+        space_seperated_constraints = pipe_separated_constraint.split(split)
+        constraint_items.extend(space_seperated_constraints)
+    comparator = ""
+    # A constraint item can be a comparator or a version or a version with comparator
+    # If it's empty continue
+    # If it's in `vers_by_native_comparators`, append it with the comparator and continue
+    # If it's a version, make version constraint from the version and use the comparator from the previous item and make comparator empty
+    # If it's a version with comparator, use split_req to get version and comparator to form constraint and make comparator empty
+    for constraint_item in constraint_items:
+        if not constraint_item:
+            continue
+        if "".join([comparator, constraint_item]) in vrc.vers_by_native_comparators:
+            comparator = "".join([comparator, constraint_item])
+            comparator = vrc.vers_by_native_comparators[comparator]
+            continue
+        if comparator:
+            constraints.append(
+                VersionConstraint(comparator=comparator, version=vrc.version_class(constraint_item))
+            )
+        else:
+            comparator, version_constraint = split_req(
+                constraint_item, vrc.vers_by_native_comparators, default="="
+            )
+            constraints.append(
+                VersionConstraint(
+                    comparator=comparator, version=vrc.version_class(version_constraint)
+                )
+            )
         comparator = ""
-        # A constraint item can be a comparator or a version or a version with comparator
-        # If it's empty continue
-        # If it's in `vers_by_native_comparators`, append it with the comparator and continue
-        # If it's a version, make version constraint from the version and use the comparator from the previous item and make comparator empty
-        # If it's a version with comparator, use split_req to get version and comparator to form constraint and make comparator empty
-        for constraint_item in constraint_items:
-            if not constraint_item:
-                continue
-            if "".join([comparator, constraint_item]) in vrc.vers_by_native_comparators:
-                comparator = "".join([comparator, constraint_item])
-                comparator = vrc.vers_by_native_comparators[comparator]
-                continue
-            if comparator:
-                constraints.append(
-                    VersionConstraint(
-                        comparator=comparator, version=vrc.version_class(constraint_item)
-                    )
-                )
-            else:
-                comparator, version_constraint = split_req(
-                    constraint_item, vrc.vers_by_native_comparators
-                )
-                constraints.append(
-                    VersionConstraint(
-                        comparator=comparator, version=vrc.version_class(version_constraint)
-                    )
-                )
-            comparator = ""
-        return vrc(constraints=constraints)
+    return vrc(constraints=constraints)
 
 
 vers_by_github_native_comparators = {
@@ -1100,4 +1116,14 @@ RANGE_CLASS_BY_SCHEMES = {
     "archlinux": ArchLinuxVersionRange,
     "nginx": NginxVersionRange,
     "openssl": OpensslVersionRange,
+}
+
+PURL_TYPE_BY_GITLAB_SCHEME = {
+    "gem": "gem",
+    "go": "golang",
+    "maven": "maven",
+    "npm": "npm",
+    "nuget": "nuget",
+    "pypi": "pypi",
+    "packagist": "composer",
 }

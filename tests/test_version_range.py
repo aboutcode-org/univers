@@ -10,7 +10,7 @@ import pytest
 
 from univers.version_constraint import VersionConstraint
 from univers.version_range import GemVersionRange
-from univers.version_range import GitLabVersionRange
+from univers.version_range import from_gitlab_native
 from univers.version_range import NugetVersionRange
 from univers.version_range import InvalidVersionRange
 from univers.version_range import PypiVersionRange
@@ -336,8 +336,8 @@ def test_PypiVersionRange_raises_ivr_for_unsupported_and_invalid_ranges(range, w
 
 @pytest.mark.parametrize("test_case", json.load(open("./tests/data/pypi_gitlab.json")))
 def test_pypi_gitlab_version_range_parse(test_case):
-    result = GitLabVersionRange.from_gitlab_native(
-        scheme=test_case["scheme"],
+    result = from_gitlab_native(
+        gitlab_scheme=test_case["scheme"],
         string=test_case["gitlab_native"],
     )
     assert str(result) == test_case["expected_vers"]
@@ -345,8 +345,8 @@ def test_pypi_gitlab_version_range_parse(test_case):
 
 @pytest.mark.parametrize("test_case", json.load(open("./tests/data/npm_gitlab.json")))
 def test_npm_gitlab_version_range_parse(test_case):
-    result = GitLabVersionRange.from_gitlab_native(
-        scheme=test_case["scheme"],
+    result = from_gitlab_native(
+        gitlab_scheme=test_case["scheme"],
         string=test_case["gitlab_native"],
     )
     assert str(result) == test_case["expected_vers"]
@@ -354,8 +354,26 @@ def test_npm_gitlab_version_range_parse(test_case):
 
 @pytest.mark.parametrize("test_case", json.load(open("./tests/data/gem_gitlab.json")))
 def test_gem_gitlab_version_range_parse(test_case):
-    result = GitLabVersionRange.from_gitlab_native(
-        scheme=test_case["scheme"],
+    result = from_gitlab_native(
+        gitlab_scheme=test_case["scheme"],
+        string=test_case["gitlab_native"],
+    )
+    assert str(result) == test_case["expected_vers"]
+
+
+@pytest.mark.parametrize("test_case", json.load(open("./tests/data/go_gitlab.json")))
+def test_golang_gitlab_version_range_parse(test_case):
+    result = from_gitlab_native(
+        gitlab_scheme=test_case["scheme"],
+        string=test_case["gitlab_native"],
+    )
+    assert str(result) == test_case["expected_vers"]
+
+
+@pytest.mark.parametrize("test_case", json.load(open("./tests/data/composer_gitlab.json")))
+def test_composer_gitlab_version_range_parse(test_case):
+    result = from_gitlab_native(
+        gitlab_scheme=test_case["scheme"],
         string=test_case["gitlab_native"],
     )
     assert str(result) == test_case["expected_vers"]
