@@ -428,6 +428,20 @@ class AlpineLinuxVersion(Version):
 
 
 @attr.s(frozen=True, order=False, eq=False, hash=True)
+class ComposerVersion(SemverVersion):
+    @classmethod
+    def build_value(cls, string):
+        return semantic_version.Version.coerce(string.lstrip("vV"))
+
+
+@attr.s(frozen=True, order=False, eq=False, hash=True)
+class GolangVersion(SemverVersion):
+    @classmethod
+    def build_value(cls, string):
+        return semantic_version.Version.coerce(string.lstrip("vV"))
+
+
+@attr.s(frozen=True, order=False, eq=False, hash=True)
 class LegacyOpensslVersion(Version):
     """
     Represent an Legacy Openssl Version.
