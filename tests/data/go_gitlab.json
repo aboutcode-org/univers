@@ -1,0 +1,4586 @@
+[
+  {
+    "test_index": 1,
+    "scheme": "go",
+    "gitlab_native": "<v1.3.7",
+    "expected_vers": "vers:golang/<1.3.7"
+  },
+  {
+    "test_index": 2,
+    "scheme": "go",
+    "gitlab_native": "<1.1.0",
+    "expected_vers": "vers:golang/<1.1.0"
+  },
+  {
+    "test_index": 3,
+    "scheme": "go",
+    "gitlab_native": "<1.0.4",
+    "expected_vers": "vers:golang/<1.0.4"
+  },
+  {
+    "test_index": 4,
+    "scheme": "go",
+    "gitlab_native": "<2.2.8",
+    "expected_vers": "vers:golang/<2.2.8"
+  },
+  {
+    "test_index": 5,
+    "scheme": "go",
+    "gitlab_native": "<=v2.2.2",
+    "expected_vers": "vers:golang/<=2.2.2"
+  },
+  {
+    "test_index": 6,
+    "scheme": "go",
+    "gitlab_native": "<1.9.8||>=1.10.0 <1.10.4||=1.11.0",
+    "expected_vers": "vers:golang/<1.9.8|>=1.10.0|<1.10.4|1.11.0"
+  },
+  {
+    "test_index": 7,
+    "scheme": "go",
+    "gitlab_native": "<1.9.8||>=1.10.0 <1.10.4||=1.11.0",
+    "expected_vers": "vers:golang/<1.9.8|>=1.10.0|<1.10.4|1.11.0"
+  },
+  {
+    "test_index": 8,
+    "scheme": "go",
+    "gitlab_native": "<0.0.1",
+    "expected_vers": "vers:golang/<0.0.1"
+  },
+  {
+    "test_index": 9,
+    "scheme": "go",
+    "gitlab_native": "<3.4.0",
+    "expected_vers": "vers:golang/<3.4.0"
+  },
+  {
+    "test_index": 10,
+    "scheme": "go",
+    "gitlab_native": ">=3.2.0 <3.2.26||>=3.3.0 <3.3.11",
+    "expected_vers": "vers:golang/>=3.2.0|<3.2.26|>=3.3.0|<3.3.11"
+  },
+  {
+    "test_index": 11,
+    "scheme": "go",
+    "gitlab_native": "<3.4.0",
+    "expected_vers": "vers:golang/<3.4.0"
+  },
+  {
+    "test_index": 12,
+    "scheme": "go",
+    "gitlab_native": "<1.11.0",
+    "expected_vers": "vers:golang/<1.11.0"
+  },
+  {
+    "test_index": 13,
+    "scheme": "go",
+    "gitlab_native": ">=0.0.15 <0.0.17",
+    "expected_vers": "vers:golang/>=0.0.15|<0.0.17"
+  },
+  {
+    "test_index": 14,
+    "scheme": "go",
+    "gitlab_native": ">=0.0.15 <0.0.17",
+    "expected_vers": "vers:golang/>=0.0.15|<0.0.17"
+  },
+  {
+    "test_index": 15,
+    "scheme": "go",
+    "gitlab_native": "<0.21.1",
+    "expected_vers": "vers:golang/<0.21.1"
+  },
+  {
+    "test_index": 16,
+    "scheme": "go",
+    "gitlab_native": "<0.21.1",
+    "expected_vers": "vers:golang/<0.21.1"
+  },
+  {
+    "test_index": 17,
+    "scheme": "go",
+    "gitlab_native": "<0.193.0",
+    "expected_vers": "vers:golang/<0.193.0"
+  },
+  {
+    "test_index": 18,
+    "scheme": "go",
+    "gitlab_native": ">=0.3.1 <0.5.8",
+    "expected_vers": "vers:golang/>=0.3.1|<0.5.8"
+  },
+  {
+    "test_index": 19,
+    "scheme": "go",
+    "gitlab_native": ">=0.3.1 <0.5.8",
+    "expected_vers": "vers:golang/>=0.3.1|<0.5.8"
+  },
+  {
+    "test_index": 20,
+    "scheme": "go",
+    "gitlab_native": "<0.12.5",
+    "expected_vers": "vers:golang/<0.12.5"
+  },
+  {
+    "test_index": 21,
+    "scheme": "go",
+    "gitlab_native": "<0.12.5",
+    "expected_vers": "vers:golang/<0.12.5"
+  },
+  {
+    "test_index": 22,
+    "scheme": "go",
+    "gitlab_native": "<0.12.6",
+    "expected_vers": "vers:golang/<0.12.6"
+  },
+  {
+    "test_index": 23,
+    "scheme": "go",
+    "gitlab_native": "<0.12.5",
+    "expected_vers": "vers:golang/<0.12.5"
+  },
+  {
+    "test_index": 24,
+    "scheme": "go",
+    "gitlab_native": "<0.12.0",
+    "expected_vers": "vers:golang/<0.12.0"
+  },
+  {
+    "test_index": 25,
+    "scheme": "go",
+    "gitlab_native": ">=0.3.1 <0.5.8",
+    "expected_vers": "vers:golang/>=0.3.1|<0.5.8"
+  },
+  {
+    "test_index": 26,
+    "scheme": "go",
+    "gitlab_native": "<0.12.0",
+    "expected_vers": "vers:golang/<0.12.0"
+  },
+  {
+    "test_index": 27,
+    "scheme": "go",
+    "gitlab_native": "<0.11.91",
+    "expected_vers": "vers:golang/<0.11.91"
+  },
+  {
+    "test_index": 28,
+    "scheme": "go",
+    "gitlab_native": "<0.12.5",
+    "expected_vers": "vers:golang/<0.12.5"
+  },
+  {
+    "test_index": 29,
+    "scheme": "go",
+    "gitlab_native": "<v0.3.3",
+    "expected_vers": "vers:golang/<0.3.3"
+  },
+  {
+    "test_index": 30,
+    "scheme": "go",
+    "gitlab_native": "<0.3.3",
+    "expected_vers": "vers:golang/<0.3.3"
+  },
+  {
+    "test_index": 31,
+    "scheme": "go",
+    "gitlab_native": "<=v0.0.0-20201203163018-be400aefbc4c",
+    "expected_vers": "vers:golang/<=0.0.0-20201203163018-be400aefbc4c"
+  },
+  {
+    "test_index": 32,
+    "scheme": "go",
+    "gitlab_native": "=0.0.0-20200220183623-bac4c82f6975",
+    "expected_vers": "vers:golang/0.0.0-20200220183623-bac4c82f6975"
+  },
+  {
+    "test_index": 33,
+    "scheme": "go",
+    "gitlab_native": "<=0.0.0-20220214200702-86341886e292",
+    "expected_vers": "vers:golang/<=0.0.0-20220214200702-86341886e292"
+  },
+  {
+    "test_index": 34,
+    "scheme": "go",
+    "gitlab_native": ">=1.16.0 <1.18.19||>=1.19.0 <1.19.11||>=1.20.0 <1.20.7||=1.21.0",
+    "expected_vers": "vers:golang/>=1.16.0|<1.18.19|>=1.19.0|<1.19.11|>=1.20.0|<1.20.7|1.21.0"
+  },
+  {
+    "test_index": 35,
+    "scheme": "go",
+    "gitlab_native": ">=1.20.0 <=1.20.5||>=1.19.0 <=1.19.9||<=1.18.17",
+    "expected_vers": "vers:golang/<=1.18.17|>=1.19.0|<=1.19.9|>=1.20.0|<=1.20.5"
+  },
+  {
+    "test_index": 36,
+    "scheme": "go",
+    "gitlab_native": "<=1.22.0",
+    "expected_vers": "vers:golang/<=1.22.0"
+  },
+  {
+    "test_index": 37,
+    "scheme": "go",
+    "gitlab_native": ">=1.21.0 <1.21.1||>=1.20.0 <1.20.7||>=1.19.0 <1.19.11||<1.18.19",
+    "expected_vers": "vers:golang/<1.18.19|>=1.19.0|<1.19.11|>=1.20.0|<1.20.7|>=1.21.0|<1.21.1"
+  },
+  {
+    "test_index": 38,
+    "scheme": "go",
+    "gitlab_native": "<v1.2.0",
+    "expected_vers": "vers:golang/<1.2.0"
+  },
+  {
+    "test_index": 39,
+    "scheme": "go",
+    "gitlab_native": "<=1.22.2",
+    "expected_vers": "vers:golang/<=1.22.2"
+  },
+  {
+    "test_index": 40,
+    "scheme": "go",
+    "gitlab_native": "<1.19.15||>=1.20.0 <1.20.11||>=1.21.0 <1.21.5||>=1.22.0 <1.22.2",
+    "expected_vers": "vers:golang/<1.19.15|>=1.20.0|<1.20.11|>=1.21.0|<1.21.5|>=1.22.0|<1.22.2"
+  },
+  {
+    "test_index": 41,
+    "scheme": "go",
+    "gitlab_native": "<=1.22.2",
+    "expected_vers": "vers:golang/<=1.22.2"
+  },
+  {
+    "test_index": 42,
+    "scheme": "go",
+    "gitlab_native": "<1.15.10||>=1.16.0 <1.16.7||>=1.17.0 <1.17.3",
+    "expected_vers": "vers:golang/<1.15.10|>=1.16.0|<1.16.7|>=1.17.0|<1.17.3"
+  },
+  {
+    "test_index": 43,
+    "scheme": "go",
+    "gitlab_native": ">=1.9.0 <1.9.10||>=1.10.0 <1.10.6||>=1.11.0 <1.11.2",
+    "expected_vers": "vers:golang/>=1.9.0|<1.9.10|>=1.10.0|<1.10.6|>=1.11.0|<1.11.2"
+  },
+  {
+    "test_index": 44,
+    "scheme": "go",
+    "gitlab_native": ">=1.11.0 <1.11.9||>=1.12.0 <1.12.7||>=1.13.0 <1.13.5||=1.14.0",
+    "expected_vers": "vers:golang/>=1.11.0|<1.11.9|>=1.12.0|<1.12.7|>=1.13.0|<1.13.5|1.14.0"
+  },
+  {
+    "test_index": 45,
+    "scheme": "go",
+    "gitlab_native": ">=1.0.0 <1.13.12||>=1.14.0 <1.14.8||>=1.15.0 <1.15.5||>=1.16.0 <1.16.2",
+    "expected_vers": "vers:golang/>=1.0.0|<1.13.12|>=1.14.0|<1.14.8|>=1.15.0|<1.15.5|>=1.16.0|<1.16.2"
+  },
+  {
+    "test_index": 46,
+    "scheme": "go",
+    "gitlab_native": ">=1.15.0 <=1.15.9||>=1.16.0 <=1.16.6||>=1.17.0 <=1.17.2",
+    "expected_vers": "vers:golang/>=1.15.0|<=1.15.9|>=1.16.0|<=1.16.6|>=1.17.0|<=1.17.2"
+  },
+  {
+    "test_index": 47,
+    "scheme": "go",
+    "gitlab_native": "<1.19.3",
+    "expected_vers": "vers:golang/<1.19.3"
+  },
+  {
+    "test_index": 48,
+    "scheme": "go",
+    "gitlab_native": ">=1.17.0 <1.17.16||>=1.18.0 <1.18.14||>=1.19.0 <1.19.6",
+    "expected_vers": "vers:golang/>=1.17.0|<1.17.16|>=1.18.0|<1.18.14|>=1.19.0|<1.19.6"
+  },
+  {
+    "test_index": 49,
+    "scheme": "go",
+    "gitlab_native": ">=1.16.0 <1.18.19||>=1.19.0 <1.19.10||>=1.20.0 <1.20.7||>=1.21.0 <1.21.1",
+    "expected_vers": "vers:golang/>=1.16.0|<1.18.19|>=1.19.0|<1.19.10|>=1.20.0|<1.20.7|>=1.21.0|<1.21.1"
+  },
+  {
+    "test_index": 50,
+    "scheme": "go",
+    "gitlab_native": "<1.18.18||>=1.19.0 <1.19.10||>=1.20.0 <1.20.6",
+    "expected_vers": "vers:golang/<1.18.18|>=1.19.0|<1.19.10|>=1.20.0|<1.20.6"
+  },
+  {
+    "test_index": 51,
+    "scheme": "go",
+    "gitlab_native": ">=1.6.0 <1.16.13||>=1.17.0 <1.17.9||>=1.18.0 <1.18.6",
+    "expected_vers": "vers:golang/>=1.6.0|<1.16.13|>=1.17.0|<1.17.9|>=1.18.0|<1.18.6"
+  },
+  {
+    "test_index": 52,
+    "scheme": "go",
+    "gitlab_native": "<1.16.13||>=1.17.0 <1.17.9||>=1.18.0 <1.18.6",
+    "expected_vers": "vers:golang/<1.16.13|>=1.17.0|<1.17.9|>=1.18.0|<1.18.6"
+  },
+  {
+    "test_index": 53,
+    "scheme": "go",
+    "gitlab_native": "<=1.15.9||>=1.16.0 <=1.16.6||>=1.17.0 <=1.17.2",
+    "expected_vers": "vers:golang/<=1.15.9|>=1.16.0|<=1.16.6|>=1.17.0|<=1.17.2"
+  },
+  {
+    "test_index": 54,
+    "scheme": "go",
+    "gitlab_native": ">=1.1.0 <=1.16.10||>=1.17.0 <=1.17.6||>=1.18.0 <=1.18.3",
+    "expected_vers": "vers:golang/>=1.1.0|<=1.16.10|>=1.17.0|<=1.17.6|>=1.18.0|<=1.18.3"
+  },
+  {
+    "test_index": 55,
+    "scheme": "go",
+    "gitlab_native": ">=1.17.0 <1.17.13||>=1.18.0 <1.18.10||>=1.19.0 <1.19.3",
+    "expected_vers": "vers:golang/>=1.17.0|<1.17.13|>=1.18.0|<1.18.10|>=1.19.0|<1.19.3"
+  },
+  {
+    "test_index": 56,
+    "scheme": "go",
+    "gitlab_native": "<1.15.11||>=1.16.0 <1.16.9||>=1.17.0 <1.17.5||>=1.18.0 <1.18.1",
+    "expected_vers": "vers:golang/<1.15.11|>=1.16.0|<1.16.9|>=1.17.0|<1.17.5|>=1.18.0|<1.18.1"
+  },
+  {
+    "test_index": 57,
+    "scheme": "go",
+    "gitlab_native": ">=1.17.0 <1.17.13||>=1.18.0 <1.18.10||>=1.19.0 <1.19.3",
+    "expected_vers": "vers:golang/>=1.17.0|<1.17.13|>=1.18.0|<1.18.10|>=1.19.0|<1.19.3"
+  },
+  {
+    "test_index": 58,
+    "scheme": "go",
+    "gitlab_native": "=1.13.6||=1.14.2",
+    "expected_vers": "vers:golang/1.13.6|1.14.2"
+  },
+  {
+    "test_index": 59,
+    "scheme": "go",
+    "gitlab_native": "<v0.16.4",
+    "expected_vers": "vers:golang/<0.16.4"
+  },
+  {
+    "test_index": 60,
+    "scheme": "go",
+    "gitlab_native": ">=1.8.0 <=1.14.1",
+    "expected_vers": "vers:golang/>=1.8.0|<=1.14.1"
+  },
+  {
+    "test_index": 61,
+    "scheme": "go",
+    "gitlab_native": ">=1.18.0 <1.18.4||>=1.17.0 <1.17.7||<1.16.11",
+    "expected_vers": "vers:golang/<1.16.11|>=1.17.0|<1.17.7|>=1.18.0|<1.18.4"
+  },
+  {
+    "test_index": 62,
+    "scheme": "go",
+    "gitlab_native": "<3.7.1",
+    "expected_vers": "vers:golang/<3.7.1"
+  },
+  {
+    "test_index": 63,
+    "scheme": "go",
+    "gitlab_native": "<v2021-08-11",
+    "expected_vers": "vers:golang/<2021.0.0-08-11"
+  },
+  {
+    "test_index": 64,
+    "scheme": "go",
+    "gitlab_native": ">=v1.3.0 <v1.3.2",
+    "expected_vers": "vers:golang/>=1.3.0|<1.3.2"
+  },
+  {
+    "test_index": 65,
+    "scheme": "go",
+    "gitlab_native": "<v1.6.1",
+    "expected_vers": "vers:golang/<1.6.1"
+  },
+  {
+    "test_index": 66,
+    "scheme": "go",
+    "gitlab_native": "<v1.3.3",
+    "expected_vers": "vers:golang/<1.3.3"
+  },
+  {
+    "test_index": 67,
+    "scheme": "go",
+    "gitlab_native": ">=v1.6.0 <v1.6.1",
+    "expected_vers": "vers:golang/>=1.6.0|<1.6.1"
+  },
+  {
+    "test_index": 68,
+    "scheme": "go",
+    "gitlab_native": "<v1.3.2",
+    "expected_vers": "vers:golang/<1.3.2"
+  },
+  {
+    "test_index": 69,
+    "scheme": "go",
+    "gitlab_native": "<v1.3.2",
+    "expected_vers": "vers:golang/<1.3.2"
+  },
+  {
+    "test_index": 70,
+    "scheme": "go",
+    "gitlab_native": "<v1.0.1",
+    "expected_vers": "vers:golang/<1.0.1"
+  },
+  {
+    "test_index": 71,
+    "scheme": "go",
+    "gitlab_native": "<v1.3.3",
+    "expected_vers": "vers:golang/<1.3.3"
+  },
+  {
+    "test_index": 72,
+    "scheme": "go",
+    "gitlab_native": "<v1.3.1",
+    "expected_vers": "vers:golang/<1.3.1"
+  },
+  {
+    "test_index": 73,
+    "scheme": "go",
+    "gitlab_native": "<v20.10.9",
+    "expected_vers": "vers:golang/<20.10.9"
+  },
+  {
+    "test_index": 74,
+    "scheme": "go",
+    "gitlab_native": "<v19.03.11",
+    "expected_vers": "vers:golang/<19.3.11"
+  },
+  {
+    "test_index": 75,
+    "scheme": "go",
+    "gitlab_native": "<19.03.9",
+    "expected_vers": "vers:golang/<19.3.9"
+  },
+  {
+    "test_index": 76,
+    "scheme": "go",
+    "gitlab_native": "<v2.8.0",
+    "expected_vers": "vers:golang/<2.8.0"
+  },
+  {
+    "test_index": 77,
+    "scheme": "go",
+    "gitlab_native": "<1.1.1",
+    "expected_vers": "vers:golang/<1.1.1"
+  },
+  {
+    "test_index": 78,
+    "scheme": "go",
+    "gitlab_native": "<v1.11.0",
+    "expected_vers": "vers:golang/<1.11.0"
+  },
+  {
+    "test_index": 79,
+    "scheme": "go",
+    "gitlab_native": "<v1.1.0",
+    "expected_vers": "vers:golang/<1.1.0"
+  },
+  {
+    "test_index": 80,
+    "scheme": "go",
+    "gitlab_native": "<v6.5.4",
+    "expected_vers": "vers:golang/<6.5.4"
+  },
+  {
+    "test_index": 81,
+    "scheme": "go",
+    "gitlab_native": "<0.11.1||>=0.12.0 <0.12.2",
+    "expected_vers": "vers:golang/<0.11.1|>=0.12.0|<0.12.2"
+  },
+  {
+    "test_index": 82,
+    "scheme": "go",
+    "gitlab_native": "<v1.3.1",
+    "expected_vers": "vers:golang/<1.3.1"
+  },
+  {
+    "test_index": 83,
+    "scheme": "go",
+    "gitlab_native": "<=0.6.0",
+    "expected_vers": "vers:golang/<=0.6.0"
+  },
+  {
+    "test_index": 84,
+    "scheme": "go",
+    "gitlab_native": "<0.5.0",
+    "expected_vers": "vers:golang/<0.5.0"
+  },
+  {
+    "test_index": 85,
+    "scheme": "go",
+    "gitlab_native": "<0.6.0",
+    "expected_vers": "vers:golang/<0.6.0"
+  },
+  {
+    "test_index": 86,
+    "scheme": "go",
+    "gitlab_native": "<=0.4.1",
+    "expected_vers": "vers:golang/<=0.4.1"
+  },
+  {
+    "test_index": 87,
+    "scheme": "go",
+    "gitlab_native": "<1.1.0",
+    "expected_vers": "vers:golang/<1.1.0"
+  },
+  {
+    "test_index": 88,
+    "scheme": "go",
+    "gitlab_native": ">=1.7.8 <=1.7.14||>=1.8.3 <=1.8.7||>=1.9.0 <=1.9.4",
+    "expected_vers": "vers:golang/>=1.7.8|<=1.7.14|>=1.8.3|<=1.8.7|>=1.9.0|<=1.9.4"
+  },
+  {
+    "test_index": 89,
+    "scheme": "go",
+    "gitlab_native": "<2.1.4",
+    "expected_vers": "vers:golang/<2.1.4"
+  },
+  {
+    "test_index": 90,
+    "scheme": "go",
+    "gitlab_native": "<v1.7.26",
+    "expected_vers": "vers:golang/<1.7.26"
+  },
+  {
+    "test_index": 91,
+    "scheme": "go",
+    "gitlab_native": ">v2.2.0 <v2.2.8",
+    "expected_vers": "vers:golang/>2.2.0|<2.2.8"
+  },
+  {
+    "test_index": 92,
+    "scheme": "go",
+    "gitlab_native": "<=v2.5.0",
+    "expected_vers": "vers:golang/<=2.5.0"
+  },
+  {
+    "test_index": 93,
+    "scheme": "go",
+    "gitlab_native": "<1.4.0",
+    "expected_vers": "vers:golang/<1.4.0"
+  },
+  {
+    "test_index": 94,
+    "scheme": "go",
+    "gitlab_native": "<1.4.0",
+    "expected_vers": "vers:golang/<1.4.0"
+  },
+  {
+    "test_index": 95,
+    "scheme": "go",
+    "gitlab_native": ">=v0.30.2 <v0.34.1",
+    "expected_vers": "vers:golang/>=0.30.2|<0.34.1"
+  },
+  {
+    "test_index": 96,
+    "scheme": "go",
+    "gitlab_native": "<v0.34.1",
+    "expected_vers": "vers:golang/<0.34.1"
+  },
+  {
+    "test_index": 97,
+    "scheme": "go",
+    "gitlab_native": "<0.34.0",
+    "expected_vers": "vers:golang/<0.34.0"
+  },
+  {
+    "test_index": 98,
+    "scheme": "go",
+    "gitlab_native": "<v0.31.0",
+    "expected_vers": "vers:golang/<0.31.0"
+  },
+  {
+    "test_index": 99,
+    "scheme": "go",
+    "gitlab_native": "<0.34.0",
+    "expected_vers": "vers:golang/<0.34.0"
+  },
+  {
+    "test_index": 100,
+    "scheme": "go",
+    "gitlab_native": ">=0.38.0-beta.2 <=0.38.11-beta.1",
+    "expected_vers": "vers:golang/>=0.38.0-beta.2|<=0.38.11-beta.1"
+  },
+  {
+    "test_index": 101,
+    "scheme": "go",
+    "gitlab_native": ">=0.38.0-beta.2 <=0.38.11-beta.1",
+    "expected_vers": "vers:golang/>=0.38.0-beta.2|<=0.38.11-beta.1"
+  },
+  {
+    "test_index": 102,
+    "scheme": "go",
+    "gitlab_native": "<v1.4.1",
+    "expected_vers": "vers:golang/<1.4.1"
+  },
+  {
+    "test_index": 103,
+    "scheme": "go",
+    "gitlab_native": "=v1.8.17",
+    "expected_vers": "vers:golang/1.8.17"
+  },
+  {
+    "test_index": 104,
+    "scheme": "go",
+    "gitlab_native": "<v1.9.18",
+    "expected_vers": "vers:golang/<1.9.18"
+  },
+  {
+    "test_index": 105,
+    "scheme": "go",
+    "gitlab_native": ">=v1.10.0 <v1.10.8",
+    "expected_vers": "vers:golang/>=1.10.0|<1.10.8"
+  },
+  {
+    "test_index": 106,
+    "scheme": "go",
+    "gitlab_native": "<v1.10.9",
+    "expected_vers": "vers:golang/<1.10.9"
+  },
+  {
+    "test_index": 107,
+    "scheme": "go",
+    "gitlab_native": "<=v1.10.16",
+    "expected_vers": "vers:golang/<=1.10.16"
+  },
+  {
+    "test_index": 108,
+    "scheme": "go",
+    "gitlab_native": "<=v1.10.12",
+    "expected_vers": "vers:golang/<=1.10.12"
+  },
+  {
+    "test_index": 109,
+    "scheme": "go",
+    "gitlab_native": "<v1.9.25",
+    "expected_vers": "vers:golang/<1.9.25"
+  },
+  {
+    "test_index": 110,
+    "scheme": "go",
+    "gitlab_native": "<1.9.24",
+    "expected_vers": "vers:golang/<1.9.24"
+  },
+  {
+    "test_index": 111,
+    "scheme": "go",
+    "gitlab_native": "<v1.9.24",
+    "expected_vers": "vers:golang/<1.9.24"
+  },
+  {
+    "test_index": 112,
+    "scheme": "go",
+    "gitlab_native": "=v1.10.9",
+    "expected_vers": "vers:golang/1.10.9"
+  },
+  {
+    "test_index": 113,
+    "scheme": "go",
+    "gitlab_native": "<v1.9.17",
+    "expected_vers": "vers:golang/<1.9.17"
+  },
+  {
+    "test_index": 114,
+    "scheme": "go",
+    "gitlab_native": ">=v1.9.4 <v1.9.20",
+    "expected_vers": "vers:golang/>=1.9.4|<1.9.20"
+  },
+  {
+    "test_index": 115,
+    "scheme": "go",
+    "gitlab_native": "<=v1.10.9",
+    "expected_vers": "vers:golang/<=1.10.9"
+  },
+  {
+    "test_index": 116,
+    "scheme": "go",
+    "gitlab_native": "<v1.9.18",
+    "expected_vers": "vers:golang/<1.9.18"
+  },
+  {
+    "test_index": 117,
+    "scheme": "go",
+    "gitlab_native": ">=v1.10.0 <v1.10.8",
+    "expected_vers": "vers:golang/>=1.10.0|<1.10.8"
+  },
+  {
+    "test_index": 118,
+    "scheme": "go",
+    "gitlab_native": "<1.8.14",
+    "expected_vers": "vers:golang/<1.8.14"
+  },
+  {
+    "test_index": 119,
+    "scheme": "go",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:golang/>=0.0.0"
+  },
+  {
+    "test_index": 120,
+    "scheme": "go",
+    "gitlab_native": "<=v1.10.12",
+    "expected_vers": "vers:golang/<=1.10.12"
+  },
+  {
+    "test_index": 121,
+    "scheme": "go",
+    "gitlab_native": "<v1.9.25",
+    "expected_vers": "vers:golang/<1.9.25"
+  },
+  {
+    "test_index": 122,
+    "scheme": "go",
+    "gitlab_native": "<v1.9.24",
+    "expected_vers": "vers:golang/<1.9.24"
+  },
+  {
+    "test_index": 123,
+    "scheme": "go",
+    "gitlab_native": "=v1.10.9",
+    "expected_vers": "vers:golang/1.10.9"
+  },
+  {
+    "test_index": 124,
+    "scheme": "go",
+    "gitlab_native": "<v1.9.17",
+    "expected_vers": "vers:golang/<1.9.17"
+  },
+  {
+    "test_index": 125,
+    "scheme": "go",
+    "gitlab_native": ">=v1.9.4 <v1.9.20",
+    "expected_vers": "vers:golang/>=1.9.4|<1.9.20"
+  },
+  {
+    "test_index": 126,
+    "scheme": "go",
+    "gitlab_native": "=v1.10.9",
+    "expected_vers": "vers:golang/1.10.9"
+  },
+  {
+    "test_index": 127,
+    "scheme": "go",
+    "gitlab_native": "<1.8.14",
+    "expected_vers": "vers:golang/<1.8.14"
+  },
+  {
+    "test_index": 128,
+    "scheme": "go",
+    "gitlab_native": "<v1.9.18",
+    "expected_vers": "vers:golang/<1.9.18"
+  },
+  {
+    "test_index": 129,
+    "scheme": "go",
+    "gitlab_native": ">=v1.10.0 <v1.10.8",
+    "expected_vers": "vers:golang/>=1.10.0|<1.10.8"
+  },
+  {
+    "test_index": 130,
+    "scheme": "go",
+    "gitlab_native": ">=0",
+    "expected_vers": "vers:golang/>=0.0.0"
+  },
+  {
+    "test_index": 131,
+    "scheme": "go",
+    "gitlab_native": "<=v1.10.12",
+    "expected_vers": "vers:golang/<=1.10.12"
+  },
+  {
+    "test_index": 132,
+    "scheme": "go",
+    "gitlab_native": "<v1.9.25",
+    "expected_vers": "vers:golang/<1.9.25"
+  },
+  {
+    "test_index": 133,
+    "scheme": "go",
+    "gitlab_native": "<v1.9.24",
+    "expected_vers": "vers:golang/<1.9.24"
+  },
+  {
+    "test_index": 134,
+    "scheme": "go",
+    "gitlab_native": "=v1.10.9",
+    "expected_vers": "vers:golang/1.10.9"
+  },
+  {
+    "test_index": 135,
+    "scheme": "go",
+    "gitlab_native": "<v1.9.17",
+    "expected_vers": "vers:golang/<1.9.17"
+  },
+  {
+    "test_index": 136,
+    "scheme": "go",
+    "gitlab_native": ">=v1.9.4 <v1.9.20",
+    "expected_vers": "vers:golang/>=1.9.4|<1.9.20"
+  },
+  {
+    "test_index": 137,
+    "scheme": "go",
+    "gitlab_native": "<1.9.24",
+    "expected_vers": "vers:golang/<1.9.24"
+  },
+  {
+    "test_index": 138,
+    "scheme": "go",
+    "gitlab_native": ">=1.9.4 <1.9.20",
+    "expected_vers": "vers:golang/>=1.9.4|<1.9.20"
+  },
+  {
+    "test_index": 139,
+    "scheme": "go",
+    "gitlab_native": "<1.19.7",
+    "expected_vers": "vers:golang/<1.19.7"
+  },
+  {
+    "test_index": 140,
+    "scheme": "go",
+    "gitlab_native": "<1.9.25",
+    "expected_vers": "vers:golang/<1.9.25"
+  },
+  {
+    "test_index": 141,
+    "scheme": "go",
+    "gitlab_native": "<1.9.18",
+    "expected_vers": "vers:golang/<1.9.18"
+  },
+  {
+    "test_index": 142,
+    "scheme": "go",
+    "gitlab_native": "<3.14.4||>=3.15.0 <3.15.1",
+    "expected_vers": "vers:golang/<3.14.4|>=3.15.0|<3.15.1"
+  },
+  {
+    "test_index": 143,
+    "scheme": "go",
+    "gitlab_native": "<0.13.4",
+    "expected_vers": "vers:golang/<0.13.4"
+  },
+  {
+    "test_index": 144,
+    "scheme": "go",
+    "gitlab_native": ">=0.11.0 <0.14.8||=0.15.0",
+    "expected_vers": "vers:golang/>=0.11.0|<0.14.8|0.15.0"
+  },
+  {
+    "test_index": 145,
+    "scheme": "go",
+    "gitlab_native": ">=0.14.0 <0.15.6",
+    "expected_vers": "vers:golang/>=0.14.0|<0.15.6"
+  },
+  {
+    "test_index": 146,
+    "scheme": "go",
+    "gitlab_native": ">=0.10.0 <0.13.4",
+    "expected_vers": "vers:golang/>=0.10.0|<0.13.4"
+  },
+  {
+    "test_index": 147,
+    "scheme": "go",
+    "gitlab_native": "<0.15.1",
+    "expected_vers": "vers:golang/<0.15.1"
+  },
+  {
+    "test_index": 148,
+    "scheme": "go",
+    "gitlab_native": "<v0.16.4",
+    "expected_vers": "vers:golang/<0.16.4"
+  },
+  {
+    "test_index": 149,
+    "scheme": "go",
+    "gitlab_native": "<0.14.8||=0.15.0",
+    "expected_vers": "vers:golang/<0.14.8|0.15.0"
+  },
+  {
+    "test_index": 150,
+    "scheme": "go",
+    "gitlab_native": ">=0.10.0 <0.13.4",
+    "expected_vers": "vers:golang/>=0.10.0|<0.13.4"
+  },
+  {
+    "test_index": 151,
+    "scheme": "go",
+    "gitlab_native": "<0.13.4",
+    "expected_vers": "vers:golang/<0.13.4"
+  },
+  {
+    "test_index": 152,
+    "scheme": "go",
+    "gitlab_native": "<v1.0.6",
+    "expected_vers": "vers:golang/<1.0.6"
+  },
+  {
+    "test_index": 153,
+    "scheme": "go",
+    "gitlab_native": "<=v12.1.8 || =v12.2.0",
+    "expected_vers": "vers:golang/<=12.1.8|12.2.0"
+  },
+  {
+    "test_index": 154,
+    "scheme": "go",
+    "gitlab_native": "<=12.2.0-alpha5",
+    "expected_vers": "vers:golang/<=12.2.0-alpha5"
+  },
+  {
+    "test_index": 155,
+    "scheme": "go",
+    "gitlab_native": "<v1.3.1",
+    "expected_vers": "vers:golang/<1.3.1"
+  },
+  {
+    "test_index": 156,
+    "scheme": "go",
+    "gitlab_native": "<v2019.03.04.00",
+    "expected_vers": "vers:golang/<2019.3.4+00"
+  },
+  {
+    "test_index": 157,
+    "scheme": "go",
+    "gitlab_native": "<v2021.02.22.00",
+    "expected_vers": "vers:golang/<2021.2.22+00"
+  },
+  {
+    "test_index": 158,
+    "scheme": "go",
+    "gitlab_native": "<v2020.03.16.00",
+    "expected_vers": "vers:golang/<2020.3.16+00"
+  },
+  {
+    "test_index": 159,
+    "scheme": "go",
+    "gitlab_native": "<v0.0.0-20201120070457-d52dcb253c63",
+    "expected_vers": "vers:golang/<0.0.0-20201120070457-d52dcb253c63"
+  },
+  {
+    "test_index": 160,
+    "scheme": "go",
+    "gitlab_native": "<v0.0.0-20201120070457-d52dcb253c63",
+    "expected_vers": "vers:golang/<0.0.0-20201120070457-d52dcb253c63"
+  },
+  {
+    "test_index": 161,
+    "scheme": "go",
+    "gitlab_native": "<v0.0.0-20201119192817-4b595ed4fac7",
+    "expected_vers": "vers:golang/<0.0.0-20201119192817-4b595ed4fac7"
+  },
+  {
+    "test_index": 162,
+    "scheme": "go",
+    "gitlab_native": "<v0.0.0-20201120070457-d52dcb253c63",
+    "expected_vers": "vers:golang/<0.0.0-20201120070457-d52dcb253c63"
+  },
+  {
+    "test_index": 163,
+    "scheme": "go",
+    "gitlab_native": "<1.12.2",
+    "expected_vers": "vers:golang/<1.12.2"
+  },
+  {
+    "test_index": 164,
+    "scheme": "go",
+    "gitlab_native": "<v2.0.2",
+    "expected_vers": "vers:golang/<2.0.2"
+  },
+  {
+    "test_index": 165,
+    "scheme": "go",
+    "gitlab_native": "<v2.0.2",
+    "expected_vers": "vers:golang/<2.0.2"
+  },
+  {
+    "test_index": 166,
+    "scheme": "go",
+    "gitlab_native": "<v2.0.2",
+    "expected_vers": "vers:golang/<2.0.2"
+  },
+  {
+    "test_index": 167,
+    "scheme": "go",
+    "gitlab_native": ">=v2.0.0 <v2.0.2",
+    "expected_vers": "vers:golang/>=2.0.0|<2.0.2"
+  },
+  {
+    "test_index": 168,
+    "scheme": "go",
+    "gitlab_native": ">=v2.0.0 <v2.0.2",
+    "expected_vers": "vers:golang/>=2.0.0|<2.0.2"
+  },
+  {
+    "test_index": 169,
+    "scheme": "go",
+    "gitlab_native": "<2.0.2",
+    "expected_vers": "vers:golang/<2.0.2"
+  },
+  {
+    "test_index": 170,
+    "scheme": "go",
+    "gitlab_native": ">=v2.0.0 <v2.0.2",
+    "expected_vers": "vers:golang/>=2.0.0|<2.0.2"
+  },
+  {
+    "test_index": 171,
+    "scheme": "go",
+    "gitlab_native": "<1.7.0",
+    "expected_vers": "vers:golang/<1.7.0"
+  },
+  {
+    "test_index": 172,
+    "scheme": "go",
+    "gitlab_native": "<1.28.1",
+    "expected_vers": "vers:golang/<1.28.1"
+  },
+  {
+    "test_index": 173,
+    "scheme": "go",
+    "gitlab_native": ">=1.23.8 <1.28.1",
+    "expected_vers": "vers:golang/>=1.23.8|<1.28.1"
+  },
+  {
+    "test_index": 174,
+    "scheme": "go",
+    "gitlab_native": "<=1.16.7||>=1.17.0 <=1.17.1||>=1.18.0 <=1.19.8||>=1.20.0 <=1.21.2",
+    "expected_vers": "vers:golang/<=1.16.7|>=1.17.0|<=1.17.1|>=1.18.0|<=1.19.8|>=1.20.0|<=1.21.2"
+  },
+  {
+    "test_index": 175,
+    "scheme": "go",
+    "gitlab_native": "<v1.25.0",
+    "expected_vers": "vers:golang/<1.25.0"
+  },
+  {
+    "test_index": 176,
+    "scheme": "go",
+    "gitlab_native": "<1.14.4",
+    "expected_vers": "vers:golang/<1.14.4"
+  },
+  {
+    "test_index": 177,
+    "scheme": "go",
+    "gitlab_native": ">=v1.8.0 <v3.0.0",
+    "expected_vers": "vers:golang/>=1.8.0|<3.0.0"
+  },
+  {
+    "test_index": 178,
+    "scheme": "go",
+    "gitlab_native": "<v1.7.0",
+    "expected_vers": "vers:golang/<1.7.0"
+  },
+  {
+    "test_index": 179,
+    "scheme": "go",
+    "gitlab_native": "<v4.0.3",
+    "expected_vers": "vers:golang/<4.0.3"
+  },
+  {
+    "test_index": 180,
+    "scheme": "go",
+    "gitlab_native": ">=v3.3.0 <v3.4.3",
+    "expected_vers": "vers:golang/>=3.3.0|<3.4.3"
+  },
+  {
+    "test_index": 181,
+    "scheme": "go",
+    "gitlab_native": "<v2.0.5",
+    "expected_vers": "vers:golang/<2.0.5"
+  },
+  {
+    "test_index": 182,
+    "scheme": "go",
+    "gitlab_native": "<3.0.0",
+    "expected_vers": "vers:golang/<3.0.0"
+  },
+  {
+    "test_index": 183,
+    "scheme": "go",
+    "gitlab_native": "<3.4.3",
+    "expected_vers": "vers:golang/<3.4.3"
+  },
+  {
+    "test_index": 184,
+    "scheme": "go",
+    "gitlab_native": "<v4.0.3",
+    "expected_vers": "vers:golang/<4.0.3"
+  },
+  {
+    "test_index": 185,
+    "scheme": "go",
+    "gitlab_native": "<v3.0.0",
+    "expected_vers": "vers:golang/<3.0.0"
+  },
+  {
+    "test_index": 186,
+    "scheme": "go",
+    "gitlab_native": ">=v1.9.0 <=v1.13.1",
+    "expected_vers": "vers:golang/>=1.9.0|<=1.13.1"
+  },
+  {
+    "test_index": 187,
+    "scheme": "go",
+    "gitlab_native": "<v1.4.3",
+    "expected_vers": "vers:golang/<1.4.3"
+  },
+  {
+    "test_index": 188,
+    "scheme": "go",
+    "gitlab_native": "<v1.8.0",
+    "expected_vers": "vers:golang/<1.8.0"
+  },
+  {
+    "test_index": 189,
+    "scheme": "go",
+    "gitlab_native": "<=v1.6.2",
+    "expected_vers": "vers:golang/<=1.6.2"
+  },
+  {
+    "test_index": 190,
+    "scheme": "go",
+    "gitlab_native": ">=v1.12.0 <=v1.12.6 || >=v1.13.0 <v1.13.4",
+    "expected_vers": "vers:golang/>=1.12.0|<=1.12.6|>=1.13.0|<1.13.4"
+  },
+  {
+    "test_index": 191,
+    "scheme": "go",
+    "gitlab_native": "<=v1.7.0",
+    "expected_vers": "vers:golang/<=1.7.0"
+  },
+  {
+    "test_index": 192,
+    "scheme": "go",
+    "gitlab_native": "<v1.5.4",
+    "expected_vers": "vers:golang/<1.5.4"
+  },
+  {
+    "test_index": 193,
+    "scheme": "go",
+    "gitlab_native": ">=v1.1.0 <=v1.12.5",
+    "expected_vers": "vers:golang/>=1.1.0|<=1.12.5"
+  },
+  {
+    "test_index": 194,
+    "scheme": "go",
+    "gitlab_native": ">=v0.9.99 <v1.12.6",
+    "expected_vers": "vers:golang/>=0.9.99|<1.12.6"
+  },
+  {
+    "test_index": 195,
+    "scheme": "go",
+    "gitlab_native": "<v1.8.0",
+    "expected_vers": "vers:golang/<1.8.0"
+  },
+  {
+    "test_index": 196,
+    "scheme": "go",
+    "gitlab_native": "<1.16.4",
+    "expected_vers": "vers:golang/<1.16.4"
+  },
+  {
+    "test_index": 197,
+    "scheme": "go",
+    "gitlab_native": "<v1.7.0",
+    "expected_vers": "vers:golang/<1.7.0"
+  },
+  {
+    "test_index": 198,
+    "scheme": "go",
+    "gitlab_native": "<v1.5.0",
+    "expected_vers": "vers:golang/<1.5.0"
+  },
+  {
+    "test_index": 199,
+    "scheme": "go",
+    "gitlab_native": "<v1.7.6 || =v1.8.0",
+    "expected_vers": "vers:golang/<1.7.6|1.8.0"
+  },
+  {
+    "test_index": 200,
+    "scheme": "go",
+    "gitlab_native": "<=v1.1.1",
+    "expected_vers": "vers:golang/<=1.1.1"
+  },
+  {
+    "test_index": 201,
+    "scheme": "go",
+    "gitlab_native": "<v1.13.6",
+    "expected_vers": "vers:golang/<1.13.6"
+  },
+  {
+    "test_index": 202,
+    "scheme": "go",
+    "gitlab_native": "<v1.5.1",
+    "expected_vers": "vers:golang/<1.5.1"
+  },
+  {
+    "test_index": 203,
+    "scheme": "go",
+    "gitlab_native": ">=v1.7.2 <=v1.7.3",
+    "expected_vers": "vers:golang/>=1.7.2|<=1.7.3"
+  },
+  {
+    "test_index": 204,
+    "scheme": "go",
+    "gitlab_native": "<v1.5.2",
+    "expected_vers": "vers:golang/<1.5.2"
+  },
+  {
+    "test_index": 205,
+    "scheme": "go",
+    "gitlab_native": "<=v1.11.5",
+    "expected_vers": "vers:golang/<=1.11.5"
+  },
+  {
+    "test_index": 206,
+    "scheme": "go",
+    "gitlab_native": "<=v1.15.7",
+    "expected_vers": "vers:golang/<=1.15.7"
+  },
+  {
+    "test_index": 207,
+    "scheme": "go",
+    "gitlab_native": "<v1.11.2",
+    "expected_vers": "vers:golang/<1.11.2"
+  },
+  {
+    "test_index": 208,
+    "scheme": "go",
+    "gitlab_native": "<v1.5.0",
+    "expected_vers": "vers:golang/<1.5.0"
+  },
+  {
+    "test_index": 209,
+    "scheme": "go",
+    "gitlab_native": "<v1.5.1",
+    "expected_vers": "vers:golang/<1.5.1"
+  },
+  {
+    "test_index": 210,
+    "scheme": "go",
+    "gitlab_native": "<1.16.5",
+    "expected_vers": "vers:golang/<1.16.5"
+  },
+  {
+    "test_index": 211,
+    "scheme": "go",
+    "gitlab_native": "<v1.7.6",
+    "expected_vers": "vers:golang/<1.7.6"
+  },
+  {
+    "test_index": 212,
+    "scheme": "go",
+    "gitlab_native": "<v1.7.6",
+    "expected_vers": "vers:golang/<1.7.6"
+  },
+  {
+    "test_index": 213,
+    "scheme": "go",
+    "gitlab_native": "<v1.5.1",
+    "expected_vers": "vers:golang/<1.5.1"
+  },
+  {
+    "test_index": 214,
+    "scheme": "go",
+    "gitlab_native": "<v2.1.0",
+    "expected_vers": "vers:golang/<2.1.0"
+  },
+  {
+    "test_index": 215,
+    "scheme": "go",
+    "gitlab_native": "<v2.1.0",
+    "expected_vers": "vers:golang/<2.1.0"
+  },
+  {
+    "test_index": 216,
+    "scheme": "go",
+    "gitlab_native": "<v2.1.0",
+    "expected_vers": "vers:golang/<2.1.0"
+  },
+  {
+    "test_index": 217,
+    "scheme": "go",
+    "gitlab_native": "<v0.2.0",
+    "expected_vers": "vers:golang/<0.2.0"
+  },
+  {
+    "test_index": 218,
+    "scheme": "go",
+    "gitlab_native": "<v1.6.6",
+    "expected_vers": "vers:golang/<1.6.6"
+  },
+  {
+    "test_index": 219,
+    "scheme": "go",
+    "gitlab_native": "<v1.7.0",
+    "expected_vers": "vers:golang/<1.7.0"
+  },
+  {
+    "test_index": 220,
+    "scheme": "go",
+    "gitlab_native": "<v1.17.1",
+    "expected_vers": "vers:golang/<1.17.1"
+  },
+  {
+    "test_index": 221,
+    "scheme": "go",
+    "gitlab_native": "<=v3.2.0",
+    "expected_vers": "vers:golang/<=3.2.0"
+  },
+  {
+    "test_index": 222,
+    "scheme": "go",
+    "gitlab_native": "<0.1.1",
+    "expected_vers": "vers:golang/<0.1.1"
+  },
+  {
+    "test_index": 223,
+    "scheme": "go",
+    "gitlab_native": ">=v0.34.0 <v0.34.2 || >=v0.35.0 <v0.35.2",
+    "expected_vers": "vers:golang/>=0.34.0|<0.34.2|>=0.35.0|<0.35.2"
+  },
+  {
+    "test_index": 224,
+    "scheme": "go",
+    "gitlab_native": ">=v0.19.0 <v0.30.0",
+    "expected_vers": "vers:golang/>=0.19.0|<0.30.0"
+  },
+  {
+    "test_index": 225,
+    "scheme": "go",
+    "gitlab_native": "<v0.33.1||>v0.33.1 <v0.34.1",
+    "expected_vers": "vers:golang/<0.33.1|>0.33.1|<0.34.1"
+  },
+  {
+    "test_index": 226,
+    "scheme": "go",
+    "gitlab_native": ">=v0.26.0 <v0.30.0",
+    "expected_vers": "vers:golang/>=0.26.0|<0.30.0"
+  },
+  {
+    "test_index": 227,
+    "scheme": "go",
+    "gitlab_native": "<v0.30.0",
+    "expected_vers": "vers:golang/<0.30.0"
+  },
+  {
+    "test_index": 228,
+    "scheme": "go",
+    "gitlab_native": "<=1.7.30",
+    "expected_vers": "vers:golang/<=1.7.30"
+  },
+  {
+    "test_index": 229,
+    "scheme": "go",
+    "gitlab_native": "<1.7.26",
+    "expected_vers": "vers:golang/<1.7.26"
+  },
+  {
+    "test_index": 230,
+    "scheme": "go",
+    "gitlab_native": "<2.4.13",
+    "expected_vers": "vers:golang/<2.4.13"
+  },
+  {
+    "test_index": 231,
+    "scheme": "go",
+    "gitlab_native": "<2.3.0",
+    "expected_vers": "vers:golang/<2.3.0"
+  },
+  {
+    "test_index": 232,
+    "scheme": "go",
+    "gitlab_native": "<2.2.2",
+    "expected_vers": "vers:golang/<2.2.2"
+  },
+  {
+    "test_index": 233,
+    "scheme": "go",
+    "gitlab_native": "<v2.6.1",
+    "expected_vers": "vers:golang/<2.6.1"
+  },
+  {
+    "test_index": 234,
+    "scheme": "go",
+    "gitlab_native": "<v0.15.0",
+    "expected_vers": "vers:golang/<0.15.0"
+  },
+  {
+    "test_index": 235,
+    "scheme": "go",
+    "gitlab_native": ">=2.0.0 <2.16.8",
+    "expected_vers": "vers:golang/>=2.0.0|<2.16.8"
+  },
+  {
+    "test_index": 236,
+    "scheme": "go",
+    "gitlab_native": ">3.0.0 <3.5.2",
+    "expected_vers": "vers:golang/>3.0.0|<3.5.2"
+  },
+  {
+    "test_index": 237,
+    "scheme": "go",
+    "gitlab_native": ">=3.0.0 <3.1.0",
+    "expected_vers": "vers:golang/>=3.0.0|<3.1.0"
+  },
+  {
+    "test_index": 238,
+    "scheme": "go",
+    "gitlab_native": "<0.7.2",
+    "expected_vers": "vers:golang/<0.7.2"
+  },
+  {
+    "test_index": 239,
+    "scheme": "go",
+    "gitlab_native": "<0.7.2",
+    "expected_vers": "vers:golang/<0.7.2"
+  },
+  {
+    "test_index": 240,
+    "scheme": "go",
+    "gitlab_native": "<v0.6.5",
+    "expected_vers": "vers:golang/<0.6.5"
+  },
+  {
+    "test_index": 241,
+    "scheme": "go",
+    "gitlab_native": "<1.8.1",
+    "expected_vers": "vers:golang/<1.8.1"
+  },
+  {
+    "test_index": 242,
+    "scheme": "go",
+    "gitlab_native": "<v0.6.1",
+    "expected_vers": "vers:golang/<0.6.1"
+  },
+  {
+    "test_index": 243,
+    "scheme": "go",
+    "gitlab_native": ">=v0.7.0 <v0.7.5",
+    "expected_vers": "vers:golang/>=0.7.0|<0.7.5"
+  },
+  {
+    "test_index": 244,
+    "scheme": "go",
+    "gitlab_native": ">=v0.7.0 <v0.7.5",
+    "expected_vers": "vers:golang/>=0.7.0|<0.7.5"
+  },
+  {
+    "test_index": 245,
+    "scheme": "go",
+    "gitlab_native": "<2.0.5||>=2.1.0 <2.1.2",
+    "expected_vers": "vers:golang/<2.0.5|>=2.1.0|<2.1.2"
+  },
+  {
+    "test_index": 246,
+    "scheme": "go",
+    "gitlab_native": ">=1.8.0 <=1.8.3||=1.9.0",
+    "expected_vers": "vers:golang/>=1.8.0|<=1.8.3|1.9.0"
+  },
+  {
+    "test_index": 247,
+    "scheme": "go",
+    "gitlab_native": ">=1.7.0 <=1.7.5||>=1.8.0 <=1.8.2||>1.8.3 <1.9.0",
+    "expected_vers": "vers:golang/>=1.7.0|<=1.7.5|>=1.8.0|<=1.8.2|>1.8.3|<1.9.0"
+  },
+  {
+    "test_index": 248,
+    "scheme": "go",
+    "gitlab_native": ">=v1.7.0 <v1.8.6 || >=v1.9.0 <v1.9.3",
+    "expected_vers": "vers:golang/>=1.7.0|<1.8.6|>=1.9.0|<1.9.3"
+  },
+  {
+    "test_index": 249,
+    "scheme": "go",
+    "gitlab_native": ">=1.7.0 <1.10.3||>=2.0.0 <2.0.1",
+    "expected_vers": "vers:golang/>=1.7.0|<1.10.3|>=2.0.0|<2.0.1"
+  },
+  {
+    "test_index": 250,
+    "scheme": "go",
+    "gitlab_native": ">=v1.7.0 <v1.8.6 || >=v1.9.0 <v1.9.3",
+    "expected_vers": "vers:golang/>=1.7.0|<1.8.6|>=1.9.0|<1.9.3"
+  },
+  {
+    "test_index": 251,
+    "scheme": "go",
+    "gitlab_native": ">=1.7.0 <=1.7.6||>=1.8.0 <=1.8.5||>=1.9.0 <=1.9.1",
+    "expected_vers": "vers:golang/>=1.7.0|<=1.7.6|>=1.8.0|<=1.8.5|>=1.9.0|<=1.9.1"
+  },
+  {
+    "test_index": 252,
+    "scheme": "go",
+    "gitlab_native": ">=v1.7.0 <v1.8.6 || >=v1.9.0 <v1.9.3",
+    "expected_vers": "vers:golang/>=1.7.0|<1.8.6|>=1.9.0|<1.9.3"
+  },
+  {
+    "test_index": 253,
+    "scheme": "go",
+    "gitlab_native": ">=1.8.0 <2.0.1",
+    "expected_vers": "vers:golang/>=1.8.0|<2.0.1"
+  },
+  {
+    "test_index": 254,
+    "scheme": "go",
+    "gitlab_native": "<2.0.3",
+    "expected_vers": "vers:golang/<2.0.3"
+  },
+  {
+    "test_index": 255,
+    "scheme": "go",
+    "gitlab_native": ">=v1.7.0 <v1.8.6 || >=v1.9.0 <v1.9.3",
+    "expected_vers": "vers:golang/>=1.7.0|<1.8.6|>=1.9.0|<1.9.3"
+  },
+  {
+    "test_index": 256,
+    "scheme": "go",
+    "gitlab_native": ">=v1.7.0 <v1.7.6||>=v1.8.0 <v1.8.3",
+    "expected_vers": "vers:golang/>=1.7.0|<1.7.6|>=1.8.0|<1.8.3"
+  },
+  {
+    "test_index": 257,
+    "scheme": "go",
+    "gitlab_native": ">=1.9.0 <2.0.3||>2.0.3 <2.1.0",
+    "expected_vers": "vers:golang/>=1.9.0|<2.0.3|>2.0.3|<2.1.0"
+  },
+  {
+    "test_index": 258,
+    "scheme": "go",
+    "gitlab_native": "<=v1.6.5",
+    "expected_vers": "vers:golang/<=1.6.5"
+  },
+  {
+    "test_index": 259,
+    "scheme": "go",
+    "gitlab_native": "<v1.6.5",
+    "expected_vers": "vers:golang/<1.6.5"
+  },
+  {
+    "test_index": 260,
+    "scheme": "go",
+    "gitlab_native": "<v1.9.3",
+    "expected_vers": "vers:golang/<1.9.3"
+  },
+  {
+    "test_index": 261,
+    "scheme": "go",
+    "gitlab_native": "<v1.6.4",
+    "expected_vers": "vers:golang/<1.6.4"
+  },
+  {
+    "test_index": 262,
+    "scheme": "go",
+    "gitlab_native": "<1.15.0",
+    "expected_vers": "vers:golang/<1.15.0"
+  },
+  {
+    "test_index": 263,
+    "scheme": "go",
+    "gitlab_native": "<v1.58.2",
+    "expected_vers": "vers:golang/<1.58.2"
+  },
+  {
+    "test_index": 264,
+    "scheme": "go",
+    "gitlab_native": "<v0.2.7",
+    "expected_vers": "vers:golang/<0.2.7"
+  },
+  {
+    "test_index": 265,
+    "scheme": "go",
+    "gitlab_native": "<v1.5.2",
+    "expected_vers": "vers:golang/<1.5.2"
+  },
+  {
+    "test_index": 266,
+    "scheme": "go",
+    "gitlab_native": "<v3.0.1",
+    "expected_vers": "vers:golang/<3.0.1"
+  },
+  {
+    "test_index": 267,
+    "scheme": "go",
+    "gitlab_native": "<5.39",
+    "expected_vers": "vers:golang/<5.39.0"
+  },
+  {
+    "test_index": 268,
+    "scheme": "go",
+    "gitlab_native": ">=1.8.0 <=1.8.4",
+    "expected_vers": "vers:golang/>=1.8.0|<=1.8.4"
+  },
+  {
+    "test_index": 269,
+    "scheme": "go",
+    "gitlab_native": ">=0.11.0 <1.3.2",
+    "expected_vers": "vers:golang/>=0.11.0|<1.3.2"
+  },
+  {
+    "test_index": 270,
+    "scheme": "go",
+    "gitlab_native": ">=1.7.0 <1.7.2||>=1.6.0 <1.6.5||>=0.10.0 <1.5.9",
+    "expected_vers": "vers:golang/>=0.10.0|<1.5.9|>=1.6.0|<1.6.5|>=1.7.0|<1.7.2"
+  },
+  {
+    "test_index": 271,
+    "scheme": "go",
+    "gitlab_native": ">=1.5.0 <1.5.1||>=0.8.1 <1.2.5||>=1.3.0 <1.3.8||>=1.4.0 <1.4.4",
+    "expected_vers": "vers:golang/>=0.8.1|<1.2.5|>=1.3.0|<1.3.8|>=1.4.0|<1.4.4|>=1.5.0|<1.5.1"
+  },
+  {
+    "test_index": 272,
+    "scheme": "go",
+    "gitlab_native": ">0.11.0 <1.7.6||>=1.8.0 <1.8.5",
+    "expected_vers": "vers:golang/>0.11.0|<1.7.6|>=1.8.0|<1.8.5"
+  },
+  {
+    "test_index": 273,
+    "scheme": "go",
+    "gitlab_native": "<1.7.5||>=1.8.0 <1.8.4",
+    "expected_vers": "vers:golang/<1.7.5|>=1.8.0|<1.8.4"
+  },
+  {
+    "test_index": 274,
+    "scheme": "go",
+    "gitlab_native": ">=1.4.0 <1.8.0",
+    "expected_vers": "vers:golang/>=1.4.0|<1.8.0"
+  },
+  {
+    "test_index": 275,
+    "scheme": "go",
+    "gitlab_native": "<1.6.6||>=1.7.0 <1.7.4",
+    "expected_vers": "vers:golang/<1.6.6|>=1.7.0|<1.7.4"
+  },
+  {
+    "test_index": 276,
+    "scheme": "go",
+    "gitlab_native": ">=1.3.0 <1.3.6||>=1.4.0 <1.4.2",
+    "expected_vers": "vers:golang/>=1.3.0|<1.3.6|>=1.4.0|<1.4.2"
+  },
+  {
+    "test_index": 277,
+    "scheme": "go",
+    "gitlab_native": "<v0.2.0",
+    "expected_vers": "vers:golang/<0.2.0"
+  },
+  {
+    "test_index": 278,
+    "scheme": "go",
+    "gitlab_native": "<v0.2.0",
+    "expected_vers": "vers:golang/<0.2.0"
+  },
+  {
+    "test_index": 279,
+    "scheme": "go",
+    "gitlab_native": "<v0.0.6",
+    "expected_vers": "vers:golang/<0.0.6"
+  },
+  {
+    "test_index": 280,
+    "scheme": "go",
+    "gitlab_native": "<0.6.2",
+    "expected_vers": "vers:golang/<0.6.2"
+  },
+  {
+    "test_index": 281,
+    "scheme": "go",
+    "gitlab_native": "<1.10.1",
+    "expected_vers": "vers:golang/<1.10.1"
+  },
+  {
+    "test_index": 282,
+    "scheme": "go",
+    "gitlab_native": ">=v1.4.1 <=v1.6.2",
+    "expected_vers": "vers:golang/>=1.4.1|<=1.6.2"
+  },
+  {
+    "test_index": 283,
+    "scheme": "go",
+    "gitlab_native": ">=1.7.0 <1.8.17||>=1.9.0 <1.9.11||>=1.10.0 <1.10.4",
+    "expected_vers": "vers:golang/>=1.7.0|<1.8.17|>=1.9.0|<1.9.11|>=1.10.0|<1.10.4"
+  },
+  {
+    "test_index": 284,
+    "scheme": "go",
+    "gitlab_native": "=v1.4.3",
+    "expected_vers": "vers:golang/1.4.3"
+  },
+  {
+    "test_index": 285,
+    "scheme": "go",
+    "gitlab_native": ">=1.8.0 <1.9.15||>=1.10.0 <1.10.8||>=1.11.0 <1.11.3",
+    "expected_vers": "vers:golang/>=1.8.0|<1.9.15|>=1.10.0|<1.10.8|>=1.11.0|<1.11.3"
+  },
+  {
+    "test_index": 286,
+    "scheme": "go",
+    "gitlab_native": ">=v1.4.0 <=v1.5.0",
+    "expected_vers": "vers:golang/>=1.4.0|<=1.5.0"
+  },
+  {
+    "test_index": 287,
+    "scheme": "go",
+    "gitlab_native": "=1.10.1||>=1.9.0 <1.9.9||<1.8.15",
+    "expected_vers": "vers:golang/<1.8.15|>=1.9.0|<1.9.9|1.10.1"
+  },
+  {
+    "test_index": 288,
+    "scheme": "go",
+    "gitlab_native": "<1.10.1",
+    "expected_vers": "vers:golang/<1.10.1"
+  },
+  {
+    "test_index": 289,
+    "scheme": "go",
+    "gitlab_native": ">=v1.4.0 <v1.4.3",
+    "expected_vers": "vers:golang/>=1.4.0|<1.4.3"
+  },
+  {
+    "test_index": 290,
+    "scheme": "go",
+    "gitlab_native": ">=1.8.0 <1.8.10||>=1.9.0 <1.9.5",
+    "expected_vers": "vers:golang/>=1.8.0|<1.8.10|>=1.9.0|<1.9.5"
+  },
+  {
+    "test_index": 291,
+    "scheme": "go",
+    "gitlab_native": "<v1.6.3",
+    "expected_vers": "vers:golang/<1.6.3"
+  },
+  {
+    "test_index": 292,
+    "scheme": "go",
+    "gitlab_native": "=1.10.1||>=1.9.0 <1.9.9||<1.8.15",
+    "expected_vers": "vers:golang/<1.8.15|>=1.9.0|<1.9.9|1.10.1"
+  },
+  {
+    "test_index": 293,
+    "scheme": "go",
+    "gitlab_native": ">=v1.4.0 <v1.6.6 || >=v1.7.0 <v1.7.4",
+    "expected_vers": "vers:golang/>=1.4.0|<1.6.6|>=1.7.0|<1.7.4"
+  },
+  {
+    "test_index": 294,
+    "scheme": "go",
+    "gitlab_native": ">=1.7.0 <1.7.4||>=1.6.0 <1.6.6",
+    "expected_vers": "vers:golang/>=1.6.0|<1.6.6|>=1.7.0|<1.7.4"
+  },
+  {
+    "test_index": 295,
+    "scheme": "go",
+    "gitlab_native": "<1.6.3",
+    "expected_vers": "vers:golang/<1.6.3"
+  },
+  {
+    "test_index": 296,
+    "scheme": "go",
+    "gitlab_native": ">=v1.4.0 <=v1.6.6 || >=v1.7.0 <v1.7.4",
+    "expected_vers": "vers:golang/>=1.4.0|<=1.6.6|>=1.7.0|<1.7.4"
+  },
+  {
+    "test_index": 297,
+    "scheme": "go",
+    "gitlab_native": ">=v1.6.0 <v1.6.6 || >=v1.7.0 <v1.7.4",
+    "expected_vers": "vers:golang/>=1.6.0|<1.6.6|>=1.7.0|<1.7.4"
+  },
+  {
+    "test_index": 298,
+    "scheme": "go",
+    "gitlab_native": ">=1.2.0 <1.6.6||>=1.7.0 <1.7.4",
+    "expected_vers": "vers:golang/>=1.2.0|<1.6.6|>=1.7.0|<1.7.4"
+  },
+  {
+    "test_index": 299,
+    "scheme": "go",
+    "gitlab_native": "<v1.8.15 || >=v1.9.0 <v1.9.9 || >=v1.10.0 <v1.10.2",
+    "expected_vers": "vers:golang/<1.8.15|>=1.9.0|<1.9.9|>=1.10.0|<1.10.2"
+  },
+  {
+    "test_index": 300,
+    "scheme": "go",
+    "gitlab_native": ">=v1.9.0 <v1.9.8 || >=v1.10.0 <v1.10.1",
+    "expected_vers": "vers:golang/>=1.9.0|<1.9.8|>=1.10.0|<1.10.1"
+  },
+  {
+    "test_index": 301,
+    "scheme": "go",
+    "gitlab_native": ">=v1.4.1 <v1.6.2",
+    "expected_vers": "vers:golang/>=1.4.1|<1.6.2"
+  },
+  {
+    "test_index": 302,
+    "scheme": "go",
+    "gitlab_native": ">=v1.7.0 <=v1.8.4",
+    "expected_vers": "vers:golang/>=1.7.0|<=1.8.4"
+  },
+  {
+    "test_index": 303,
+    "scheme": "go",
+    "gitlab_native": ">=1.7.0 <1.8.17||>=1.9.0 <1.9.11||>=1.10.0 <1.10.4",
+    "expected_vers": "vers:golang/>=1.7.0|<1.8.17|>=1.9.0|<1.9.11|>=1.10.0|<1.10.4"
+  },
+  {
+    "test_index": 304,
+    "scheme": "go",
+    "gitlab_native": "<v1.8.15 || >=v1.9.0 <v1.9.9 || >=v1.10.0 <v1.10.2",
+    "expected_vers": "vers:golang/<1.8.15|>=1.9.0|<1.9.9|>=1.10.0|<1.10.2"
+  },
+  {
+    "test_index": 305,
+    "scheme": "go",
+    "gitlab_native": "<v1.7.14 || >=v1.8.0 <v1.8.10 || >=v1.9.0 <v1.9.5",
+    "expected_vers": "vers:golang/<1.7.14|>=1.8.0|<1.8.10|>=1.9.0|<1.9.5"
+  },
+  {
+    "test_index": 306,
+    "scheme": "go",
+    "gitlab_native": ">=v1.3.0 <v1.8.14 || >=v1.9.0 <v1.9.8 || >=v1.10.0 <v1.10.1",
+    "expected_vers": "vers:golang/>=1.3.0|<1.8.14|>=1.9.0|<1.9.8|>=1.10.0|<1.10.1"
+  },
+  {
+    "test_index": 307,
+    "scheme": "go",
+    "gitlab_native": ">=v1.8.0 <v1.8.10 || >=v1.9.0 <v1.9.5",
+    "expected_vers": "vers:golang/>=1.8.0|<1.8.10|>=1.9.0|<1.9.5"
+  },
+  {
+    "test_index": 308,
+    "scheme": "go",
+    "gitlab_native": ">=v1.2.0 <v1.6.10 || >=v1.7.0 <v1.7.10 || >=v1.8.0 <v1.8.6",
+    "expected_vers": "vers:golang/>=1.2.0|<1.6.10|>=1.7.0|<1.7.10|>=1.8.0|<1.8.6"
+  },
+  {
+    "test_index": 309,
+    "scheme": "go",
+    "gitlab_native": "<v1.8.15 || >=v1.9.0 <v1.9.9 || >=v1.10.0 <v1.10.2",
+    "expected_vers": "vers:golang/<1.8.15|>=1.9.0|<1.9.9|>=1.10.0|<1.10.2"
+  },
+  {
+    "test_index": 310,
+    "scheme": "go",
+    "gitlab_native": ">=v1.2.0 <v1.6.6 || >=v1.7.0 <v1.7.4",
+    "expected_vers": "vers:golang/>=1.2.0|<1.6.6|>=1.7.0|<1.7.4"
+  },
+  {
+    "test_index": 311,
+    "scheme": "go",
+    "gitlab_native": "<v0.5.0",
+    "expected_vers": "vers:golang/<0.5.0"
+  },
+  {
+    "test_index": 312,
+    "scheme": "go",
+    "gitlab_native": ">=1.0.0 <1.0.17||>=1.1.0 <1.1.12||>=1.2.0 <1.2.6",
+    "expected_vers": "vers:golang/>=1.0.0|<1.0.17|>=1.1.0|<1.1.12|>=1.2.0|<1.2.6"
+  },
+  {
+    "test_index": 313,
+    "scheme": "go",
+    "gitlab_native": ">=0.9.2 <1.0.18||>=1.1.0 <1.1.12||>=1.2.0 <1.2.6",
+    "expected_vers": "vers:golang/>=0.9.2|<1.0.18|>=1.1.0|<1.1.12|>=1.2.0|<1.2.6"
+  },
+  {
+    "test_index": 314,
+    "scheme": "go",
+    "gitlab_native": ">=0.9.0 <1.0.18||>=1.1.0 <1.1.12||>=1.2.0 <1.2.6",
+    "expected_vers": "vers:golang/>=0.9.0|<1.0.18|>=1.1.0|<1.1.12|>=1.2.0|<1.2.6"
+  },
+  {
+    "test_index": 315,
+    "scheme": "go",
+    "gitlab_native": "<0.10.3",
+    "expected_vers": "vers:golang/<0.10.3"
+  },
+  {
+    "test_index": 316,
+    "scheme": "go",
+    "gitlab_native": ">=0.3.0 <1.0.18||>=1.1.0 <1.1.12||>=1.2.0 <1.2.6",
+    "expected_vers": "vers:golang/>=0.3.0|<1.0.18|>=1.1.0|<1.1.12|>=1.2.0|<1.2.6"
+  },
+  {
+    "test_index": 317,
+    "scheme": "go",
+    "gitlab_native": "<1.0.10||>=1.1.0 <1.1.4",
+    "expected_vers": "vers:golang/<1.0.10|>=1.1.0|<1.1.4"
+  },
+  {
+    "test_index": 318,
+    "scheme": "go",
+    "gitlab_native": ">=1.0.0 <1.0.3||<0.12.10",
+    "expected_vers": "vers:golang/<0.12.10|>=1.0.0|<1.0.3"
+  },
+  {
+    "test_index": 319,
+    "scheme": "go",
+    "gitlab_native": ">=1.0.0 <1.0.5||<0.12.12",
+    "expected_vers": "vers:golang/<0.12.12|>=1.0.0|<1.0.5"
+  },
+  {
+    "test_index": 320,
+    "scheme": "go",
+    "gitlab_native": "<1.0.14||>=1.1.0 <1.1.8||>=1.2.0 <1.2.1",
+    "expected_vers": "vers:golang/<1.0.14|>=1.1.0|<1.1.8|>=1.2.0|<1.2.1"
+  },
+  {
+    "test_index": 321,
+    "scheme": "go",
+    "gitlab_native": "<0.9.5",
+    "expected_vers": "vers:golang/<0.9.5"
+  },
+  {
+    "test_index": 322,
+    "scheme": "go",
+    "gitlab_native": ">=0.9.0 <0.10.6||>=0.11.0 <0.11.5||>=0.12.0 <0.12.6",
+    "expected_vers": "vers:golang/>=0.9.0|<0.10.6|>=0.11.0|<0.11.5|>=0.12.0|<0.12.6"
+  },
+  {
+    "test_index": 323,
+    "scheme": "go",
+    "gitlab_native": ">=0.9.0 <0.10.8||>=0.11.0-beta1 <0.11.7||>=0.12.0-beta1 <0.12.8",
+    "expected_vers": "vers:golang/>=0.9.0|<0.10.8|>=0.11.0-beta1|<0.11.7|>=0.12.0-beta1|<0.12.8"
+  },
+  {
+    "test_index": 324,
+    "scheme": "go",
+    "gitlab_native": "<0.10.3",
+    "expected_vers": "vers:golang/<0.10.3"
+  },
+  {
+    "test_index": 325,
+    "scheme": "go",
+    "gitlab_native": "<0.12.17",
+    "expected_vers": "vers:golang/<0.12.17"
+  },
+  {
+    "test_index": 326,
+    "scheme": "go",
+    "gitlab_native": "<v1.16.3",
+    "expected_vers": "vers:golang/<1.16.3"
+  },
+  {
+    "test_index": 327,
+    "scheme": "go",
+    "gitlab_native": ">=2.0.0 <2.1.6",
+    "expected_vers": "vers:golang/>=2.0.0|<2.1.6"
+  },
+  {
+    "test_index": 328,
+    "scheme": "go",
+    "gitlab_native": ">=v2.0.0 <=v2.1.5",
+    "expected_vers": "vers:golang/>=2.0.0|<=2.1.5"
+  },
+  {
+    "test_index": 329,
+    "scheme": "go",
+    "gitlab_native": "=v2.1.4",
+    "expected_vers": "vers:golang/2.1.4"
+  },
+  {
+    "test_index": 330,
+    "scheme": "go",
+    "gitlab_native": ">=v2.0.0 <=v2.0.13 || >=v2.1.0 <=v2.1.8 || >=v2.2.0 <=v2.2.1",
+    "expected_vers": "vers:golang/>=2.0.0|<=2.0.13|>=2.1.0|<=2.1.8|>=2.2.0|<=2.2.1"
+  },
+  {
+    "test_index": 331,
+    "scheme": "go",
+    "gitlab_native": "<2.4.18||>=2.5.0 <2.5.12||>=2.6.0 <2.6.3",
+    "expected_vers": "vers:golang/<2.4.18|>=2.5.0|<2.5.12|>=2.6.0|<2.6.3"
+  },
+  {
+    "test_index": 332,
+    "scheme": "go",
+    "gitlab_native": "<v2.5.10",
+    "expected_vers": "vers:golang/<2.5.10"
+  },
+  {
+    "test_index": 333,
+    "scheme": "go",
+    "gitlab_native": ">=v2.0.0 <=v2.2.4",
+    "expected_vers": "vers:golang/>=2.0.0|<=2.2.4"
+  },
+  {
+    "test_index": 334,
+    "scheme": "go",
+    "gitlab_native": "<v2.3.11 || >=v2.4.0 <v2.4.14 || >=v2.5.0 <v2.5.6",
+    "expected_vers": "vers:golang/<2.3.11|>=2.4.0|<2.4.14|>=2.5.0|<2.5.6"
+  },
+  {
+    "test_index": 335,
+    "scheme": "go",
+    "gitlab_native": "<2.4.18||>=2.5.0 <2.5.12||>=2.6.0 <2.6.3",
+    "expected_vers": "vers:golang/<2.4.18|>=2.5.0|<2.5.12|>=2.6.0|<2.6.3"
+  },
+  {
+    "test_index": 336,
+    "scheme": "go",
+    "gitlab_native": ">=v2.0.0 <=v2.1.5",
+    "expected_vers": "vers:golang/>=2.0.0|<=2.1.5"
+  },
+  {
+    "test_index": 337,
+    "scheme": "go",
+    "gitlab_native": ">=v1.0.0 <=v1.6.28 || >=v2.0.0 <=v2.2.3",
+    "expected_vers": "vers:golang/>=1.0.0|<=1.6.28|>=2.0.0|<=2.2.3"
+  },
+  {
+    "test_index": 338,
+    "scheme": "go",
+    "gitlab_native": "<v2.4.16 || >=v2.5.0 <v2.5.9",
+    "expected_vers": "vers:golang/<2.4.16|>=2.5.0|<2.5.9"
+  },
+  {
+    "test_index": 339,
+    "scheme": "go",
+    "gitlab_native": "<v2.4.16 || >=v2.5.0 <v2.5.9",
+    "expected_vers": "vers:golang/<2.4.16|>=2.5.0|<2.5.9"
+  },
+  {
+    "test_index": 340,
+    "scheme": "go",
+    "gitlab_native": "=v2.1.4",
+    "expected_vers": "vers:golang/2.1.4"
+  },
+  {
+    "test_index": 341,
+    "scheme": "go",
+    "gitlab_native": "<v2.5.10",
+    "expected_vers": "vers:golang/<2.5.10"
+  },
+  {
+    "test_index": 342,
+    "scheme": "go",
+    "gitlab_native": ">=v2.0.0 <=v2.2.3",
+    "expected_vers": "vers:golang/>=2.0.0|<=2.2.3"
+  },
+  {
+    "test_index": 343,
+    "scheme": "go",
+    "gitlab_native": ">=v2.0.0 <=v2.2.4",
+    "expected_vers": "vers:golang/>=2.0.0|<=2.2.4"
+  },
+  {
+    "test_index": 344,
+    "scheme": "go",
+    "gitlab_native": "<v2.3.11 || >=v2.4.0 <v2.4.14 || >=v2.5.0 <v2.5.6",
+    "expected_vers": "vers:golang/<2.3.11|>=2.4.0|<2.4.14|>=2.5.0|<2.5.6"
+  },
+  {
+    "test_index": 345,
+    "scheme": "go",
+    "gitlab_native": ">=v2.0.0 <=v2.0.13 || >=v2.1.0 <=v2.1.8 || >=v2.2.0 <=v2.2.1",
+    "expected_vers": "vers:golang/>=2.0.0|<=2.0.13|>=2.1.0|<=2.1.8|>=2.2.0|<=2.2.1"
+  },
+  {
+    "test_index": 346,
+    "scheme": "go",
+    "gitlab_native": "<v1.2.1",
+    "expected_vers": "vers:golang/<1.2.1"
+  },
+  {
+    "test_index": 347,
+    "scheme": "go",
+    "gitlab_native": "<v1.3.2",
+    "expected_vers": "vers:golang/<1.3.2"
+  },
+  {
+    "test_index": 348,
+    "scheme": "go",
+    "gitlab_native": "<v1.3.2",
+    "expected_vers": "vers:golang/<1.3.2"
+  },
+  {
+    "test_index": 349,
+    "scheme": "go",
+    "gitlab_native": "<v4.9.1",
+    "expected_vers": "vers:golang/<4.9.1"
+  },
+  {
+    "test_index": 350,
+    "scheme": "go",
+    "gitlab_native": "<v3.5.1",
+    "expected_vers": "vers:golang/<3.5.1"
+  },
+  {
+    "test_index": 351,
+    "scheme": "go",
+    "gitlab_native": "<1.0.10",
+    "expected_vers": "vers:golang/<1.0.10"
+  },
+  {
+    "test_index": 352,
+    "scheme": "go",
+    "gitlab_native": "<1.1.25",
+    "expected_vers": "vers:golang/<1.1.25"
+  },
+  {
+    "test_index": 353,
+    "scheme": "go",
+    "gitlab_native": "<1.0.4",
+    "expected_vers": "vers:golang/<1.0.4"
+  },
+  {
+    "test_index": 354,
+    "scheme": "go",
+    "gitlab_native": ">=0.33.0 <0.33.6",
+    "expected_vers": "vers:golang/>=0.33.0|<0.33.6"
+  },
+  {
+    "test_index": 355,
+    "scheme": "go",
+    "gitlab_native": ">=0.34.0 <0.34.9",
+    "expected_vers": "vers:golang/>=0.34.0|<0.34.9"
+  },
+  {
+    "test_index": 356,
+    "scheme": "go",
+    "gitlab_native": ">=0.33.0 <0.33.3||<0.31.12||>=0.32.0 <0.32.10",
+    "expected_vers": "vers:golang/<0.31.12|>=0.32.0|<0.32.10|>=0.33.0|<0.33.3"
+  },
+  {
+    "test_index": 357,
+    "scheme": "go",
+    "gitlab_native": "<v1.7.0",
+    "expected_vers": "vers:golang/<1.7.0"
+  },
+  {
+    "test_index": 358,
+    "scheme": "go",
+    "gitlab_native": "<v0.4.1",
+    "expected_vers": "vers:golang/<0.4.1"
+  },
+  {
+    "test_index": 359,
+    "scheme": "go",
+    "gitlab_native": "<v0.4.1",
+    "expected_vers": "vers:golang/<0.4.1"
+  },
+  {
+    "test_index": 360,
+    "scheme": "go",
+    "gitlab_native": "<v0.4.1",
+    "expected_vers": "vers:golang/<0.4.1"
+  },
+  {
+    "test_index": 361,
+    "scheme": "go",
+    "gitlab_native": "<v0.4.1",
+    "expected_vers": "vers:golang/<0.4.1"
+  },
+  {
+    "test_index": 362,
+    "scheme": "go",
+    "gitlab_native": ">=v0.43.0 <v0.44.2",
+    "expected_vers": "vers:golang/>=0.43.0|<0.44.2"
+  },
+  {
+    "test_index": 363,
+    "scheme": "go",
+    "gitlab_native": "<1.8.6",
+    "expected_vers": "vers:golang/<1.8.6"
+  },
+  {
+    "test_index": 364,
+    "scheme": "go",
+    "gitlab_native": "<=v1.3.0",
+    "expected_vers": "vers:golang/<=1.3.0"
+  },
+  {
+    "test_index": 365,
+    "scheme": "go",
+    "gitlab_native": "<v1.12.1",
+    "expected_vers": "vers:golang/<1.12.1"
+  },
+  {
+    "test_index": 366,
+    "scheme": "go",
+    "gitlab_native": "<v1.1.3",
+    "expected_vers": "vers:golang/<1.1.3"
+  },
+  {
+    "test_index": 367,
+    "scheme": "go",
+    "gitlab_native": "<v0.7.3 || >=v0.8.0 <=v0.9.0",
+    "expected_vers": "vers:golang/<0.7.3|>=0.8.0|<=0.9.0"
+  },
+  {
+    "test_index": 368,
+    "scheme": "go",
+    "gitlab_native": "<=v0.4.2",
+    "expected_vers": "vers:golang/<=0.4.2"
+  },
+  {
+    "test_index": 369,
+    "scheme": "go",
+    "gitlab_native": "<v2.0.1",
+    "expected_vers": "vers:golang/<2.0.1"
+  },
+  {
+    "test_index": 370,
+    "scheme": "go",
+    "gitlab_native": "=v3.9.0",
+    "expected_vers": "vers:golang/3.9.0"
+  },
+  {
+    "test_index": 371,
+    "scheme": "go",
+    "gitlab_native": "=v1.0.0",
+    "expected_vers": "vers:golang/1.0.0"
+  },
+  {
+    "test_index": 372,
+    "scheme": "go",
+    "gitlab_native": "<0.14.0",
+    "expected_vers": "vers:golang/<0.14.0"
+  },
+  {
+    "test_index": 373,
+    "scheme": "go",
+    "gitlab_native": "<v0.8.6",
+    "expected_vers": "vers:golang/<0.8.6"
+  },
+  {
+    "test_index": 374,
+    "scheme": "go",
+    "gitlab_native": "<v0.8.1",
+    "expected_vers": "vers:golang/<0.8.1"
+  },
+  {
+    "test_index": 375,
+    "scheme": "go",
+    "gitlab_native": "<v0.8.1",
+    "expected_vers": "vers:golang/<0.8.1"
+  },
+  {
+    "test_index": 376,
+    "scheme": "go",
+    "gitlab_native": "<v0.6.0",
+    "expected_vers": "vers:golang/<0.6.0"
+  },
+  {
+    "test_index": 377,
+    "scheme": "go",
+    "gitlab_native": "<v0.5.0",
+    "expected_vers": "vers:golang/<0.5.0"
+  },
+  {
+    "test_index": 378,
+    "scheme": "go",
+    "gitlab_native": "<v1.4.8 || >=v1.5.0 <v1.5.4",
+    "expected_vers": "vers:golang/<1.4.8|>=1.5.0|<1.5.4"
+  },
+  {
+    "test_index": 379,
+    "scheme": "go",
+    "gitlab_native": ">=v1.5.0 <v1.5.9",
+    "expected_vers": "vers:golang/>=1.5.0|<1.5.9"
+  },
+  {
+    "test_index": 380,
+    "scheme": "go",
+    "gitlab_native": "<v1.3.10 || >=v1.4.0 <v1.4.4",
+    "expected_vers": "vers:golang/<1.3.10|>=1.4.0|<1.4.4"
+  },
+  {
+    "test_index": 381,
+    "scheme": "go",
+    "gitlab_native": "<v1.4.11 || >=v1.5.0 <v1.5.7",
+    "expected_vers": "vers:golang/<1.4.11|>=1.5.0|<1.5.7"
+  },
+  {
+    "test_index": 382,
+    "scheme": "go",
+    "gitlab_native": "<1.4.13||>=1.5.0 <1.5.10||>=1.6.0 <1.6.1",
+    "expected_vers": "vers:golang/<1.4.13|>=1.5.0|<1.5.10|>=1.6.0|<1.6.1"
+  },
+  {
+    "test_index": 383,
+    "scheme": "go",
+    "gitlab_native": "<1.4.12||>=1.5.0 <1.5.8",
+    "expected_vers": "vers:golang/<1.4.12|>=1.5.0|<1.5.8"
+  },
+  {
+    "test_index": 384,
+    "scheme": "go",
+    "gitlab_native": ">=v1.2.0 <v1.2.14 || =v1.3.0",
+    "expected_vers": "vers:golang/>=1.2.0|<1.2.14|1.3.0"
+  },
+  {
+    "test_index": 385,
+    "scheme": "go",
+    "gitlab_native": "<v1.3.9 || >=v1.4.0 <v1.4.3",
+    "expected_vers": "vers:golang/<1.3.9|>=1.4.0|<1.4.3"
+  },
+  {
+    "test_index": 386,
+    "scheme": "go",
+    "gitlab_native": "<1.2.0||>=1.3.0 <1.3.9||>=1.4.0 <1.4.3",
+    "expected_vers": "vers:golang/<1.2.0|>=1.3.0|<1.3.9|>=1.4.0|<1.4.3"
+  },
+  {
+    "test_index": 387,
+    "scheme": "go",
+    "gitlab_native": "<v1.1.4",
+    "expected_vers": "vers:golang/<1.1.4"
+  },
+  {
+    "test_index": 388,
+    "scheme": "go",
+    "gitlab_native": ">=4.0.0-alpha1 <=4.29.2",
+    "expected_vers": "vers:golang/>=4.0.0-alpha1|<=4.29.2"
+  },
+  {
+    "test_index": 389,
+    "scheme": "go",
+    "gitlab_native": "<v2.13.2",
+    "expected_vers": "vers:golang/<2.13.2"
+  },
+  {
+    "test_index": 390,
+    "scheme": "go",
+    "gitlab_native": "<v2.12.1",
+    "expected_vers": "vers:golang/<2.12.1"
+  },
+  {
+    "test_index": 391,
+    "scheme": "go",
+    "gitlab_native": ">=3.2.0 <3.6.3",
+    "expected_vers": "vers:golang/>=3.2.0|<3.6.3"
+  },
+  {
+    "test_index": 392,
+    "scheme": "go",
+    "gitlab_native": ">=3.1.1 <3.6.4",
+    "expected_vers": "vers:golang/>=3.1.1|<3.6.4"
+  },
+  {
+    "test_index": 393,
+    "scheme": "go",
+    "gitlab_native": ">=3.5.0 <3.6.0",
+    "expected_vers": "vers:golang/>=3.5.0|<3.6.0"
+  },
+  {
+    "test_index": 394,
+    "scheme": "go",
+    "gitlab_native": "<3.6.3",
+    "expected_vers": "vers:golang/<3.6.3"
+  },
+  {
+    "test_index": 395,
+    "scheme": "go",
+    "gitlab_native": ">=3.1.0 <3.2.0",
+    "expected_vers": "vers:golang/>=3.1.0|<3.2.0"
+  },
+  {
+    "test_index": 396,
+    "scheme": "go",
+    "gitlab_native": ">=3.7.2 <3.7.4",
+    "expected_vers": "vers:golang/>=3.7.2|<3.7.4"
+  },
+  {
+    "test_index": 397,
+    "scheme": "go",
+    "gitlab_native": ">=3.0.0 <3.6.0",
+    "expected_vers": "vers:golang/>=3.0.0|<3.6.0"
+  },
+  {
+    "test_index": 398,
+    "scheme": "go",
+    "gitlab_native": ">=v3.2.0 <=v3.6.2",
+    "expected_vers": "vers:golang/>=3.2.0|<=3.6.2"
+  },
+  {
+    "test_index": 399,
+    "scheme": "go",
+    "gitlab_native": "<v3.7.3",
+    "expected_vers": "vers:golang/<3.7.3"
+  },
+  {
+    "test_index": 400,
+    "scheme": "go",
+    "gitlab_native": ">=v3.1.1 <=v3.6.3",
+    "expected_vers": "vers:golang/>=3.1.1|<=3.6.3"
+  },
+  {
+    "test_index": 401,
+    "scheme": "go",
+    "gitlab_native": "<=v3.6.2",
+    "expected_vers": "vers:golang/<=3.6.2"
+  },
+  {
+    "test_index": 402,
+    "scheme": "go",
+    "gitlab_native": ">=v3.5.0 <v3.7.0",
+    "expected_vers": "vers:golang/>=3.5.0|<3.7.0"
+  },
+  {
+    "test_index": 403,
+    "scheme": "go",
+    "gitlab_native": ">=3.1.0 <3.2.0",
+    "expected_vers": "vers:golang/>=3.1.0|<3.2.0"
+  },
+  {
+    "test_index": 404,
+    "scheme": "go",
+    "gitlab_native": ">=v3.7.2 <=v3.7.3",
+    "expected_vers": "vers:golang/>=3.7.2|<=3.7.3"
+  },
+  {
+    "test_index": 405,
+    "scheme": "go",
+    "gitlab_native": ">=v1.2.0 <v1.2.6 || >=v1.3.0 <v1.3.4 || >=v1.4.0 <v1.4.4 || >=v1.5.0 <v1.5.4 || >=v1.6.0 <v1.6.3",
+    "expected_vers": "vers:golang/>=1.2.0|<1.2.6|>=1.3.0|<1.3.4|>=1.4.0|<1.4.4|>=1.5.0|<1.5.4|>=1.6.0|<1.6.3"
+  },
+  {
+    "test_index": 406,
+    "scheme": "go",
+    "gitlab_native": "<v1.2.3",
+    "expected_vers": "vers:golang/<1.2.3"
+  },
+  {
+    "test_index": 407,
+    "scheme": "go",
+    "gitlab_native": "=v5.0.0",
+    "expected_vers": "vers:golang/5.0.0"
+  },
+  {
+    "test_index": 408,
+    "scheme": "go",
+    "gitlab_native": "<v5.0.1",
+    "expected_vers": "vers:golang/<5.0.1"
+  },
+  {
+    "test_index": 409,
+    "scheme": "go",
+    "gitlab_native": "<v10.1.0",
+    "expected_vers": "vers:golang/<10.1.0"
+  },
+  {
+    "test_index": 410,
+    "scheme": "go",
+    "gitlab_native": "<=v3.3.1",
+    "expected_vers": "vers:golang/<=3.3.1"
+  },
+  {
+    "test_index": 411,
+    "scheme": "go",
+    "gitlab_native": ">=v3.3.0 <v3.3.23||>=v3.4.0 <v3.4.10",
+    "expected_vers": "vers:golang/>=3.3.0|<3.3.23|>=3.4.0|<3.4.10"
+  },
+  {
+    "test_index": 412,
+    "scheme": "go",
+    "gitlab_native": ">=v3.3.0 <v3.3.23 || >=v3.4.0 <v3.4.10",
+    "expected_vers": "vers:golang/>=3.3.0|<3.3.23|>=3.4.0|<3.4.10"
+  },
+  {
+    "test_index": 413,
+    "scheme": "go",
+    "gitlab_native": ">=v3.3.0 <v3.3.23 || >=v3.4.0 <v3.4.10",
+    "expected_vers": "vers:golang/>=3.3.0|<3.3.23|>=3.4.0|<3.4.10"
+  },
+  {
+    "test_index": 414,
+    "scheme": "go",
+    "gitlab_native": "<=v3.3.1",
+    "expected_vers": "vers:golang/<=3.3.1"
+  },
+  {
+    "test_index": 415,
+    "scheme": "go",
+    "gitlab_native": "<v1.1.1",
+    "expected_vers": "vers:golang/<1.1.1"
+  },
+  {
+    "test_index": 416,
+    "scheme": "go",
+    "gitlab_native": "<1.5.0",
+    "expected_vers": "vers:golang/<1.5.0"
+  },
+  {
+    "test_index": 417,
+    "scheme": "go",
+    "gitlab_native": "=v0.5.1",
+    "expected_vers": "vers:golang/0.5.1"
+  },
+  {
+    "test_index": 418,
+    "scheme": "go",
+    "gitlab_native": "<v1.34.0",
+    "expected_vers": "vers:golang/<1.34.0"
+  },
+  {
+    "test_index": 419,
+    "scheme": "go",
+    "gitlab_native": ">=0.33.1 <0.37.0",
+    "expected_vers": "vers:golang/>=0.33.1|<0.37.0"
+  },
+  {
+    "test_index": 420,
+    "scheme": "go",
+    "gitlab_native": "<1.2.0",
+    "expected_vers": "vers:golang/<1.2.0"
+  },
+  {
+    "test_index": 421,
+    "scheme": "go",
+    "gitlab_native": "<1.0.3||>=1.1.0 <1.1.3",
+    "expected_vers": "vers:golang/<1.0.3|>=1.1.0|<1.1.3"
+  },
+  {
+    "test_index": 422,
+    "scheme": "go",
+    "gitlab_native": ">=0.8.1 <0.8.5||>=0.9.0 <0.9.4||>=0.10.0 <0.10.2||>=0.11.0 <0.11.3||>=0.12.0 <0.12.1",
+    "expected_vers": "vers:golang/>=0.8.1|<0.8.5|>=0.9.0|<0.9.4|>=0.10.0|<0.10.2|>=0.11.0|<0.11.3|>=0.12.0|<0.12.1"
+  },
+  {
+    "test_index": 423,
+    "scheme": "go",
+    "gitlab_native": "<=v1.0.3",
+    "expected_vers": "vers:golang/<=1.0.3"
+  },
+  {
+    "test_index": 424,
+    "scheme": "go",
+    "gitlab_native": "<=v1.0.4",
+    "expected_vers": "vers:golang/<=1.0.4"
+  },
+  {
+    "test_index": 425,
+    "scheme": "go",
+    "gitlab_native": "<v1.2.3019.52a",
+    "expected_vers": "vers:golang/<1.2.3019+52a"
+  },
+  {
+    "test_index": 426,
+    "scheme": "go",
+    "gitlab_native": "=v1.2.2550.20",
+    "expected_vers": "vers:golang/1.2.2550+20"
+  },
+  {
+    "test_index": 427,
+    "scheme": "go",
+    "gitlab_native": ">=v1.0.1116.6 <=v1.2.2550.20",
+    "expected_vers": "vers:golang/>=1.0.1116+6|<=1.2.2550+20"
+  },
+  {
+    "test_index": 428,
+    "scheme": "go",
+    "gitlab_native": "<3.5.1",
+    "expected_vers": "vers:golang/<3.5.1"
+  },
+  {
+    "test_index": 429,
+    "scheme": "go",
+    "gitlab_native": "<3.5.1",
+    "expected_vers": "vers:golang/<3.5.1"
+  },
+  {
+    "test_index": 430,
+    "scheme": "go",
+    "gitlab_native": ">=3.7.2 <3.7.4",
+    "expected_vers": "vers:golang/>=3.7.2|<3.7.4"
+  },
+  {
+    "test_index": 431,
+    "scheme": "go",
+    "gitlab_native": "<v2.8.0",
+    "expected_vers": "vers:golang/<2.8.0"
+  },
+  {
+    "test_index": 432,
+    "scheme": "go",
+    "gitlab_native": "<2.6.3",
+    "expected_vers": "vers:golang/<2.6.3"
+  },
+  {
+    "test_index": 433,
+    "scheme": "go",
+    "gitlab_native": "<v1.4.4",
+    "expected_vers": "vers:golang/<1.4.4"
+  },
+  {
+    "test_index": 434,
+    "scheme": "go",
+    "gitlab_native": "=1.2.0",
+    "expected_vers": "vers:golang/1.2.0"
+  },
+  {
+    "test_index": 435,
+    "scheme": "go",
+    "gitlab_native": "<v1.12.6",
+    "expected_vers": "vers:golang/<1.12.6"
+  },
+  {
+    "test_index": 436,
+    "scheme": "go",
+    "gitlab_native": "<v0.7.1",
+    "expected_vers": "vers:golang/<0.7.1"
+  },
+  {
+    "test_index": 437,
+    "scheme": "go",
+    "gitlab_native": "<v0.4.3",
+    "expected_vers": "vers:golang/<0.4.3"
+  },
+  {
+    "test_index": 438,
+    "scheme": "go",
+    "gitlab_native": "<v1.0.0",
+    "expected_vers": "vers:golang/<1.0.0"
+  },
+  {
+    "test_index": 439,
+    "scheme": "go",
+    "gitlab_native": "=v1.0.0",
+    "expected_vers": "vers:golang/1.0.0"
+  },
+  {
+    "test_index": 440,
+    "scheme": "go",
+    "gitlab_native": ">=2.1.0 <2.1.3||>=3.0.0 <3.0.2",
+    "expected_vers": "vers:golang/>=2.1.0|<2.1.3|>=3.0.0|<3.0.2"
+  },
+  {
+    "test_index": 441,
+    "scheme": "go",
+    "gitlab_native": ">=v3.0.0 <v3.0.2",
+    "expected_vers": "vers:golang/>=3.0.0|<3.0.2"
+  },
+  {
+    "test_index": 442,
+    "scheme": "go",
+    "gitlab_native": ">=v2.0.0 <v2.1.3",
+    "expected_vers": "vers:golang/>=2.0.0|<2.1.3"
+  },
+  {
+    "test_index": 443,
+    "scheme": "go",
+    "gitlab_native": "=v1.10.0",
+    "expected_vers": "vers:golang/1.10.0"
+  },
+  {
+    "test_index": 444,
+    "scheme": "go",
+    "gitlab_native": "=v1.10.0",
+    "expected_vers": "vers:golang/1.10.0"
+  },
+  {
+    "test_index": 445,
+    "scheme": "go",
+    "gitlab_native": "<1.12.2",
+    "expected_vers": "vers:golang/<1.12.2"
+  },
+  {
+    "test_index": 446,
+    "scheme": "go",
+    "gitlab_native": "=v2.0.1",
+    "expected_vers": "vers:golang/2.0.1"
+  },
+  {
+    "test_index": 447,
+    "scheme": "go",
+    "gitlab_native": "<=v2.0.1",
+    "expected_vers": "vers:golang/<=2.0.1"
+  },
+  {
+    "test_index": 448,
+    "scheme": "go",
+    "gitlab_native": "<v1.0.0",
+    "expected_vers": "vers:golang/<1.0.0"
+  },
+  {
+    "test_index": 449,
+    "scheme": "go",
+    "gitlab_native": "<v2.1.1",
+    "expected_vers": "vers:golang/<2.1.1"
+  },
+  {
+    "test_index": 450,
+    "scheme": "go",
+    "gitlab_native": "<=v1.1.4",
+    "expected_vers": "vers:golang/<=1.1.4"
+  },
+  {
+    "test_index": 451,
+    "scheme": "go",
+    "gitlab_native": "<=v0.17.0",
+    "expected_vers": "vers:golang/<=0.17.0"
+  },
+  {
+    "test_index": 452,
+    "scheme": "go",
+    "gitlab_native": "<v2.7.1",
+    "expected_vers": "vers:golang/<2.7.1"
+  },
+  {
+    "test_index": 453,
+    "scheme": "go",
+    "gitlab_native": ">=2.23.0 <2.26.1||=2.27.0",
+    "expected_vers": "vers:golang/>=2.23.0|<2.26.1|2.27.0"
+  },
+  {
+    "test_index": 454,
+    "scheme": "go",
+    "gitlab_native": ">=v2.23.0 <v2.26.1 || =v2.27.0",
+    "expected_vers": "vers:golang/>=2.23.0|<2.26.1|2.27.0"
+  },
+  {
+    "test_index": 455,
+    "scheme": "go",
+    "gitlab_native": "<v1.11.1",
+    "expected_vers": "vers:golang/<1.11.1"
+  },
+  {
+    "test_index": 456,
+    "scheme": "go",
+    "gitlab_native": "<v0.0.3",
+    "expected_vers": "vers:golang/<0.0.3"
+  },
+  {
+    "test_index": 457,
+    "scheme": "go",
+    "gitlab_native": "<v1.7.13",
+    "expected_vers": "vers:golang/<1.7.13"
+  },
+  {
+    "test_index": 458,
+    "scheme": "go",
+    "gitlab_native": "<v0.4.8",
+    "expected_vers": "vers:golang/<0.4.8"
+  },
+  {
+    "test_index": 459,
+    "scheme": "go",
+    "gitlab_native": ">=v0.4.6 <v0.4.8 || >=v0.5.3 <v0.5.5",
+    "expected_vers": "vers:golang/>=0.4.6|<0.4.8|>=0.5.3|<0.5.5"
+  },
+  {
+    "test_index": 460,
+    "scheme": "go",
+    "gitlab_native": "<=0.9.5",
+    "expected_vers": "vers:golang/<=0.9.5"
+  },
+  {
+    "test_index": 461,
+    "scheme": "go",
+    "gitlab_native": "<1.7.6",
+    "expected_vers": "vers:golang/<1.7.6"
+  },
+  {
+    "test_index": 462,
+    "scheme": "go",
+    "gitlab_native": "<2.2",
+    "expected_vers": "vers:golang/<2.2.0"
+  },
+  {
+    "test_index": 463,
+    "scheme": "go",
+    "gitlab_native": "<2.2",
+    "expected_vers": "vers:golang/<2.2.0"
+  },
+  {
+    "test_index": 464,
+    "scheme": "go",
+    "gitlab_native": ">=v1.7.0 <=v1.7.1",
+    "expected_vers": "vers:golang/>=1.7.0|<=1.7.1"
+  },
+  {
+    "test_index": 465,
+    "scheme": "go",
+    "gitlab_native": ">=1.7.0 <1.7.2",
+    "expected_vers": "vers:golang/>=1.7.0|<1.7.2"
+  },
+  {
+    "test_index": 466,
+    "scheme": "go",
+    "gitlab_native": ">=v1.17.0 <=v1.17.13 || >=v1.18.0 <=v1.18.10 || >=v1.19.0 <=v1.19.3",
+    "expected_vers": "vers:golang/>=1.17.0|<=1.17.13|>=1.18.0|<=1.18.10|>=1.19.0|<=1.19.3"
+  },
+  {
+    "test_index": 467,
+    "scheme": "go",
+    "gitlab_native": "<1.2.0",
+    "expected_vers": "vers:golang/<1.2.0"
+  },
+  {
+    "test_index": 468,
+    "scheme": "go",
+    "gitlab_native": ">=v1.10.1 <v1.14.0",
+    "expected_vers": "vers:golang/>=1.10.1|<1.14.0"
+  },
+  {
+    "test_index": 469,
+    "scheme": "go",
+    "gitlab_native": ">=v1.5.0 <=v1.5.4",
+    "expected_vers": "vers:golang/>=1.5.0|<=1.5.4"
+  },
+  {
+    "test_index": 470,
+    "scheme": "go",
+    "gitlab_native": ">=v1.6.0 <=v1.16.13 || >=v1.17.0 <v1.17.9 || >=v1.18.0 <v1.18.6",
+    "expected_vers": "vers:golang/>=1.6.0|<=1.16.13|>=1.17.0|<1.17.9|>=1.18.0|<1.18.6"
+  },
+  {
+    "test_index": 471,
+    "scheme": "go",
+    "gitlab_native": "<=v1.15.9 || >=v1.16.0 <=v1.16.6 || >=v1.17.0 <=v1.17.2",
+    "expected_vers": "vers:golang/<=1.15.9|>=1.16.0|<=1.16.6|>=1.17.0|<=1.17.2"
+  },
+  {
+    "test_index": 472,
+    "scheme": "go",
+    "gitlab_native": "<1.10.11||>=1.11.0 <1.11.5||>=1.12.0 <1.12.3",
+    "expected_vers": "vers:golang/<1.10.11|>=1.11.0|<1.11.5|>=1.12.0|<1.12.3"
+  },
+  {
+    "test_index": 473,
+    "scheme": "go",
+    "gitlab_native": ">=v1.6.0 <=v1.6.5",
+    "expected_vers": "vers:golang/>=1.6.0|<=1.6.5"
+  },
+  {
+    "test_index": 474,
+    "scheme": "go",
+    "gitlab_native": ">=v1.17.0 <v1.17.13 || >=v1.18.0 <v1.18.10 || >=v1.19.0 <v1.19.3",
+    "expected_vers": "vers:golang/>=1.17.0|<1.17.13|>=1.18.0|<1.18.10|>=1.19.0|<1.19.3"
+  },
+  {
+    "test_index": 475,
+    "scheme": "go",
+    "gitlab_native": "<v1.1.1",
+    "expected_vers": "vers:golang/<1.1.1"
+  },
+  {
+    "test_index": 476,
+    "scheme": "go",
+    "gitlab_native": ">=v1.3.0 <=v1.3.10 || >=v1.4.0 <=v1.4.12 || >=v1.5.0 <=v1.5.8 || >=v1.6.0 <=v1.6.13 || >=v1.7.0 <v1.7.14 || >=v1.8.0 <v1.8.9 || >=v1.9.0 <v1.9.4",
+    "expected_vers": "vers:golang/>=1.3.0|<=1.3.10|>=1.4.0|<=1.4.12|>=1.5.0|<=1.5.8|>=1.6.0|<=1.6.13|>=1.7.0|<1.7.14|>=1.8.0|<1.8.9|>=1.9.0|<1.9.4"
+  },
+  {
+    "test_index": 477,
+    "scheme": "go",
+    "gitlab_native": ">=v1.3.0 <=v1.3.10 || >=v1.4.0 <=v1.4.12 || >=v1.5.0 <=v1.5.8 || >=v1.6.0 <=v1.6.13 || >=v1.7.0 <v1.7.14 || >=v1.8.0 <v1.8.9 || >=v1.9.0 <v1.9.4",
+    "expected_vers": "vers:golang/>=1.3.0|<=1.3.10|>=1.4.0|<=1.4.12|>=1.5.0|<=1.5.8|>=1.6.0|<=1.6.13|>=1.7.0|<1.7.14|>=1.8.0|<1.8.9|>=1.9.0|<1.9.4"
+  },
+  {
+    "test_index": 478,
+    "scheme": "go",
+    "gitlab_native": "<v1.15.11 || >=v1.16.0 <v1.16.9 || >=v1.17.0 <v1.17.5 || =v1.18.0",
+    "expected_vers": "vers:golang/<1.15.11|>=1.16.0|<1.16.9|>=1.17.0|<1.17.5|1.18.0"
+  },
+  {
+    "test_index": 479,
+    "scheme": "go",
+    "gitlab_native": "<1.11.9||>=1.12.0 <1.12.7||>=1.13.0 <1.13.5",
+    "expected_vers": "vers:golang/<1.11.9|>=1.12.0|<1.12.7|>=1.13.0|<1.13.5"
+  },
+  {
+    "test_index": 480,
+    "scheme": "go",
+    "gitlab_native": ">=1.0.0 <=1.12.11||>=1.13.0 <1.13.9||>=1.14.0 <1.14.5||>=1.15.0 <1.15.2",
+    "expected_vers": "vers:golang/>=1.0.0|<=1.12.11|>=1.13.0|<1.13.9|>=1.14.0|<1.14.5|>=1.15.0|<1.15.2"
+  },
+  {
+    "test_index": 481,
+    "scheme": "go",
+    "gitlab_native": ">=1.0.0 <=1.12.11||>=1.13.0 <1.13.9||>=1.14.0 <1.14.5||>=1.15.0 <1.15.2",
+    "expected_vers": "vers:golang/>=1.0.0|<=1.12.11|>=1.13.0|<1.13.9|>=1.14.0|<1.14.5|>=1.15.0|<1.15.2"
+  },
+  {
+    "test_index": 482,
+    "scheme": "go",
+    "gitlab_native": "=1.1-1.12||>=1.13.0 <1.13.11||>=1.14.0 <1.14.7||>=1.15.0 <1.15.4",
+    "expected_vers": "vers:golang/1.1.0-1.12|>=1.13.0|<1.13.11|>=1.14.0|<1.14.7|>=1.15.0|<1.15.4"
+  },
+  {
+    "test_index": 483,
+    "scheme": "go",
+    "gitlab_native": ">=1.18.0 <1.18.1||>=1.17.0 <1.17.4||>=1.16.0 <1.16.9||<1.15.12",
+    "expected_vers": "vers:golang/<1.15.12|>=1.16.0|<1.16.9|>=1.17.0|<1.17.4|>=1.18.0|<1.18.1"
+  },
+  {
+    "test_index": 484,
+    "scheme": "go",
+    "gitlab_native": "<=1.2.0-alpha.5",
+    "expected_vers": "vers:golang/<=1.2.0-alpha.5"
+  },
+  {
+    "test_index": 485,
+    "scheme": "go",
+    "gitlab_native": ">=1.15.0 <1.15.10||>=1.16.0 <1.16.6||>=1.17.0 <1.17.2",
+    "expected_vers": "vers:golang/>=1.15.0|<1.15.10|>=1.16.0|<1.16.6|>=1.17.0|<1.17.2"
+  },
+  {
+    "test_index": 486,
+    "scheme": "go",
+    "gitlab_native": ">=v1.7.6 <=v1.16.13 || >=v1.17.0 <v1.17.9 || >=v1.18.0 <v1.18.6",
+    "expected_vers": "vers:golang/>=1.7.6|<=1.16.13|>=1.17.0|<1.17.9|>=1.18.0|<1.18.6"
+  },
+  {
+    "test_index": 487,
+    "scheme": "go",
+    "gitlab_native": ">=v1.16.0 <v1.18.19 || >=v1.19.0 <v1.19.10 || >=v1.20.0 <v1.20.7 || =v1.21.0",
+    "expected_vers": "vers:golang/>=1.16.0|<1.18.19|>=1.19.0|<1.19.10|>=1.20.0|<1.20.7|1.21.0"
+  },
+  {
+    "test_index": 488,
+    "scheme": "go",
+    "gitlab_native": ">=v1.11.0 <v1.11.9 || >=v1.12.0 <v1.12.7 || >=v1.13.0 <v1.13.5 || =v1.14.0",
+    "expected_vers": "vers:golang/>=1.11.0|<1.11.9|>=1.12.0|<1.12.7|>=1.13.0|<1.13.5|1.14.0"
+  },
+  {
+    "test_index": 489,
+    "scheme": "go",
+    "gitlab_native": ">=v1.8.0 <=v1.14.1",
+    "expected_vers": "vers:golang/>=1.8.0|<=1.14.1"
+  },
+  {
+    "test_index": 490,
+    "scheme": "go",
+    "gitlab_native": "<v1.15.4",
+    "expected_vers": "vers:golang/<1.15.4"
+  },
+  {
+    "test_index": 491,
+    "scheme": "go",
+    "gitlab_native": ">=v1.8.0 <v1.12.9",
+    "expected_vers": "vers:golang/>=1.8.0|<1.12.9"
+  },
+  {
+    "test_index": 492,
+    "scheme": "go",
+    "gitlab_native": "<v1.10.1",
+    "expected_vers": "vers:golang/<1.10.1"
+  },
+  {
+    "test_index": 493,
+    "scheme": "go",
+    "gitlab_native": "<v0.28.0",
+    "expected_vers": "vers:golang/<0.28.0"
+  },
+  {
+    "test_index": 494,
+    "scheme": "go",
+    "gitlab_native": "<v0.49.1 || =v1.0.0",
+    "expected_vers": "vers:golang/<0.49.1|1.0.0"
+  },
+  {
+    "test_index": 495,
+    "scheme": "go",
+    "gitlab_native": ">=v1.15.0 <=v1.15.9 || >=v1.16.0 <=v1.16.6 || >=v1.17.0 <=v1.17.2",
+    "expected_vers": "vers:golang/>=1.15.0|<=1.15.9|>=1.16.0|<=1.16.6|>=1.17.0|<=1.17.2"
+  },
+  {
+    "test_index": 496,
+    "scheme": "go",
+    "gitlab_native": "<v1.18.18||>=v1.19.0 <v1.19.10||>=v1.20.0 <v1.20.6",
+    "expected_vers": "vers:golang/<1.18.18|>=1.19.0|<1.19.10|>=1.20.0|<1.20.6"
+  },
+  {
+    "test_index": 497,
+    "scheme": "go",
+    "gitlab_native": "<v1.16.13 || >=v1.17.0 <v1.17.9 || >=v1.18.0 <v1.18.6",
+    "expected_vers": "vers:golang/<1.16.13|>=1.17.0|<1.17.9|>=1.18.0|<1.18.6"
+  },
+  {
+    "test_index": 498,
+    "scheme": "go",
+    "gitlab_native": "<v1.19.15 || >=v1.20.0 <v1.20.11 || >=v1.21.0 <v1.21.5 || >=v1.22.0 <v1.22.2",
+    "expected_vers": "vers:golang/<1.19.15|>=1.20.0|<1.20.11|>=1.21.0|<1.21.5|>=1.22.0|<1.22.2"
+  },
+  {
+    "test_index": 499,
+    "scheme": "go",
+    "gitlab_native": ">=v1.1.0 <=v1.16.10 || >=v1.17.0 <=v1.17.6 || >=v1.18.0 <=v1.18.3",
+    "expected_vers": "vers:golang/>=1.1.0|<=1.16.10|>=1.17.0|<=1.17.6|>=1.18.0|<=1.18.3"
+  },
+  {
+    "test_index": 500,
+    "scheme": "go",
+    "gitlab_native": ">=0.4.0 <1.15.1",
+    "expected_vers": "vers:golang/>=0.4.0|<1.15.1"
+  },
+  {
+    "test_index": 501,
+    "scheme": "go",
+    "gitlab_native": "<1.31.0",
+    "expected_vers": "vers:golang/<1.31.0"
+  },
+  {
+    "test_index": 502,
+    "scheme": "go",
+    "gitlab_native": "<1.33.0",
+    "expected_vers": "vers:golang/<1.33.0"
+  },
+  {
+    "test_index": 503,
+    "scheme": "go",
+    "gitlab_native": "<1.15.1",
+    "expected_vers": "vers:golang/<1.15.1"
+  },
+  {
+    "test_index": 504,
+    "scheme": "go",
+    "gitlab_native": "<=1.16.0-snapshot.0",
+    "expected_vers": "vers:golang/<=1.16.0-snapshot.0"
+  },
+  {
+    "test_index": 505,
+    "scheme": "go",
+    "gitlab_native": "<=v0.11.0",
+    "expected_vers": "vers:golang/<=0.11.0"
+  },
+  {
+    "test_index": 506,
+    "scheme": "go",
+    "gitlab_native": "=2.1.2",
+    "expected_vers": "vers:golang/2.1.2"
+  },
+  {
+    "test_index": 507,
+    "scheme": "go",
+    "gitlab_native": "<=v2.7.0",
+    "expected_vers": "vers:golang/<=2.7.0"
+  },
+  {
+    "test_index": 508,
+    "scheme": "go",
+    "gitlab_native": "<v2.5",
+    "expected_vers": "vers:golang/<2.5.0"
+  },
+  {
+    "test_index": 509,
+    "scheme": "go",
+    "gitlab_native": ">=v2.7.0 <v2.8.3",
+    "expected_vers": "vers:golang/>=2.7.0|<2.8.3"
+  },
+  {
+    "test_index": 510,
+    "scheme": "go",
+    "gitlab_native": "<v0.26.0",
+    "expected_vers": "vers:golang/<0.26.0"
+  },
+  {
+    "test_index": 511,
+    "scheme": "go",
+    "gitlab_native": "<=v0.29",
+    "expected_vers": "vers:golang/<=0.29.0"
+  },
+  {
+    "test_index": 512,
+    "scheme": "go",
+    "gitlab_native": "<=1.5.0",
+    "expected_vers": "vers:golang/<=1.5.0"
+  },
+  {
+    "test_index": 513,
+    "scheme": "go",
+    "gitlab_native": "<3.0.0",
+    "expected_vers": "vers:golang/<3.0.0"
+  },
+  {
+    "test_index": 514,
+    "scheme": "go",
+    "gitlab_native": ">=3.0.0 <3.0.9||>=3.1.0 <3.1.6",
+    "expected_vers": "vers:golang/>=3.0.0|<3.0.9|>=3.1.0|<3.1.6"
+  },
+  {
+    "test_index": 515,
+    "scheme": "go",
+    "gitlab_native": ">=3.1.0 <3.1.6",
+    "expected_vers": "vers:golang/>=3.1.0|<3.1.6"
+  },
+  {
+    "test_index": 516,
+    "scheme": "go",
+    "gitlab_native": ">=3.0.0 <3.0.9||>=3.1.0 <3.1.6",
+    "expected_vers": "vers:golang/>=3.0.0|<3.0.9|>=3.1.0|<3.1.6"
+  },
+  {
+    "test_index": 517,
+    "scheme": "go",
+    "gitlab_native": "<1.7.14||>=1.8.0 <1.8.7",
+    "expected_vers": "vers:golang/<1.7.14|>=1.8.0|<1.8.7"
+  },
+  {
+    "test_index": 518,
+    "scheme": "go",
+    "gitlab_native": ">=v1.3.0 <v2.1.11 || >=v2.2.0 <v2.2.6 || >=v2.3.0-rc1 <v2.3.0",
+    "expected_vers": "vers:golang/>=1.3.0|<2.1.11|>=2.2.0|<2.2.6|>=2.3.0-rc1|<2.3.0"
+  },
+  {
+    "test_index": 519,
+    "scheme": "go",
+    "gitlab_native": ">=v0.5.0 <v2.1.14 || >=v2.2.0 <v2.2.8 || >=v2.3.0 <v2.3.2",
+    "expected_vers": "vers:golang/>=0.5.0|<2.1.14|>=2.2.0|<2.2.8|>=2.3.0|<2.3.2"
+  },
+  {
+    "test_index": 520,
+    "scheme": "go",
+    "gitlab_native": ">=v1.5.0 <v2.1.11 || >=v2.2.0 <v2.2.6 || >=v2.3.0-rc1 <v2.3.0",
+    "expected_vers": "vers:golang/>=1.5.0|<2.1.11|>=2.2.0|<2.2.6|>=2.3.0-rc1|<2.3.0"
+  },
+  {
+    "test_index": 521,
+    "scheme": "go",
+    "gitlab_native": "<2.1.9",
+    "expected_vers": "vers:golang/<2.1.9"
+  },
+  {
+    "test_index": 522,
+    "scheme": "go",
+    "gitlab_native": "<1.5.1",
+    "expected_vers": "vers:golang/<1.5.1"
+  },
+  {
+    "test_index": 523,
+    "scheme": "go",
+    "gitlab_native": "=1.5.0",
+    "expected_vers": "vers:golang/1.5.0"
+  },
+  {
+    "test_index": 524,
+    "scheme": "go",
+    "gitlab_native": "<1.7.13||>=1.8.0 <1.8.6",
+    "expected_vers": "vers:golang/<1.7.13|>=1.8.0|<1.8.6"
+  },
+  {
+    "test_index": 525,
+    "scheme": "go",
+    "gitlab_native": "<2.1.9||>=2.2.0 <2.2.4",
+    "expected_vers": "vers:golang/<2.1.9|>=2.2.0|<2.2.4"
+  },
+  {
+    "test_index": 526,
+    "scheme": "go",
+    "gitlab_native": "<v4.4.0",
+    "expected_vers": "vers:golang/<4.4.0"
+  },
+  {
+    "test_index": 527,
+    "scheme": "go",
+    "gitlab_native": "<v1.13.1",
+    "expected_vers": "vers:golang/<1.13.1"
+  },
+  {
+    "test_index": 528,
+    "scheme": "go",
+    "gitlab_native": "<v0.3.0",
+    "expected_vers": "vers:golang/<0.3.0"
+  },
+  {
+    "test_index": 529,
+    "scheme": "go",
+    "gitlab_native": "<1.53.3",
+    "expected_vers": "vers:golang/<1.53.3"
+  },
+  {
+    "test_index": 530,
+    "scheme": "go",
+    "gitlab_native": "<=v1.9 || >=v1.10.0 <v1.10.5 || >=v1.11.0 <v1.11.1",
+    "expected_vers": "vers:golang/<=1.9.0|>=1.10.0|<1.10.5|>=1.11.0|<1.11.1"
+  },
+  {
+    "test_index": 531,
+    "scheme": "go",
+    "gitlab_native": "<=v1.9 || >=v1.10.0 <v1.10.5 || >=v1.11.0 <v1.11.1",
+    "expected_vers": "vers:golang/<=1.9.0|>=1.10.0|<1.10.5|>=1.11.0|<1.11.1"
+  },
+  {
+    "test_index": 532,
+    "scheme": "go",
+    "gitlab_native": "<=v1.9 || >=v1.10.0 <=v1.10.5 || =v1.11.0",
+    "expected_vers": "vers:golang/<=1.9.0|>=1.10.0|<=1.10.5|1.11.0"
+  },
+  {
+    "test_index": 533,
+    "scheme": "go",
+    "gitlab_native": "<v0.1.0",
+    "expected_vers": "vers:golang/<0.1.0"
+  },
+  {
+    "test_index": 534,
+    "scheme": "go",
+    "gitlab_native": "<v0.9.0",
+    "expected_vers": "vers:golang/<0.9.0"
+  },
+  {
+    "test_index": 535,
+    "scheme": "go",
+    "gitlab_native": ">=v0.4.0 <v0.9.0",
+    "expected_vers": "vers:golang/>=0.4.0|<0.9.0"
+  },
+  {
+    "test_index": 536,
+    "scheme": "go",
+    "gitlab_native": "<=v1.9.0",
+    "expected_vers": "vers:golang/<=1.9.0"
+  },
+  {
+    "test_index": 537,
+    "scheme": "go",
+    "gitlab_native": "<v1.8.1",
+    "expected_vers": "vers:golang/<1.8.1"
+  },
+  {
+    "test_index": 538,
+    "scheme": "go",
+    "gitlab_native": "<1.1.1",
+    "expected_vers": "vers:golang/<1.1.1"
+  },
+  {
+    "test_index": 539,
+    "scheme": "go",
+    "gitlab_native": "<1.0.6",
+    "expected_vers": "vers:golang/<1.0.6"
+  },
+  {
+    "test_index": 540,
+    "scheme": "go",
+    "gitlab_native": "<v4.0",
+    "expected_vers": "vers:golang/<4.0.0"
+  },
+  {
+    "test_index": 541,
+    "scheme": "go",
+    "gitlab_native": "=v3.11 || >=v4.0",
+    "expected_vers": "vers:golang/3.11.0|>=4.0.0"
+  },
+  {
+    "test_index": 542,
+    "scheme": "go",
+    "gitlab_native": "<v1.2.4",
+    "expected_vers": "vers:golang/<1.2.4"
+  },
+  {
+    "test_index": 543,
+    "scheme": "go",
+    "gitlab_native": "<v1.2.4",
+    "expected_vers": "vers:golang/<1.2.4"
+  },
+  {
+    "test_index": 544,
+    "scheme": "go",
+    "gitlab_native": "<=v2.0",
+    "expected_vers": "vers:golang/<=2.0.0"
+  },
+  {
+    "test_index": 545,
+    "scheme": "go",
+    "gitlab_native": ">=v3.0.0",
+    "expected_vers": "vers:golang/>=3.0.0"
+  },
+  {
+    "test_index": 546,
+    "scheme": "go",
+    "gitlab_native": ">=3.0.0 <3.3.2",
+    "expected_vers": "vers:golang/>=3.0.0|<3.3.2"
+  },
+  {
+    "test_index": 547,
+    "scheme": "go",
+    "gitlab_native": "<=v0.9.0",
+    "expected_vers": "vers:golang/<=0.9.0"
+  },
+  {
+    "test_index": 548,
+    "scheme": "go",
+    "gitlab_native": "<=0.3.0",
+    "expected_vers": "vers:golang/<=0.3.0"
+  },
+  {
+    "test_index": 549,
+    "scheme": "go",
+    "gitlab_native": "<v1.3.21",
+    "expected_vers": "vers:golang/<1.3.21"
+  },
+  {
+    "test_index": 550,
+    "scheme": "go",
+    "gitlab_native": "<1.3.3",
+    "expected_vers": "vers:golang/<1.3.3"
+  },
+  {
+    "test_index": 551,
+    "scheme": "go",
+    "gitlab_native": "<0.5.0",
+    "expected_vers": "vers:golang/<0.5.0"
+  },
+  {
+    "test_index": 552,
+    "scheme": "go",
+    "gitlab_native": "<v1.1",
+    "expected_vers": "vers:golang/<1.1.0"
+  },
+  {
+    "test_index": 553,
+    "scheme": "go",
+    "gitlab_native": "<=1.0.0-rc2",
+    "expected_vers": "vers:golang/<=1.0.0-rc2"
+  },
+  {
+    "test_index": 554,
+    "scheme": "go",
+    "gitlab_native": "<=v1.0.0-rc8",
+    "expected_vers": "vers:golang/<=1.0.0-rc8"
+  },
+  {
+    "test_index": 555,
+    "scheme": "go",
+    "gitlab_native": "<=1.0.0-rc90",
+    "expected_vers": "vers:golang/<=1.0.0-rc90"
+  },
+  {
+    "test_index": 556,
+    "scheme": "go",
+    "gitlab_native": "<1.0.3",
+    "expected_vers": "vers:golang/<1.0.3"
+  },
+  {
+    "test_index": 557,
+    "scheme": "go",
+    "gitlab_native": "<0.1.0",
+    "expected_vers": "vers:golang/<0.1.0"
+  },
+  {
+    "test_index": 558,
+    "scheme": "go",
+    "gitlab_native": "<=1.0.0-rc94",
+    "expected_vers": "vers:golang/<=1.0.0-rc94"
+  },
+  {
+    "test_index": 559,
+    "scheme": "go",
+    "gitlab_native": "<1.0.0",
+    "expected_vers": "vers:golang/<1.0.0"
+  },
+  {
+    "test_index": 560,
+    "scheme": "go",
+    "gitlab_native": "<=v1.0.0-rc8",
+    "expected_vers": "vers:golang/<=1.0.0-rc8"
+  },
+  {
+    "test_index": 561,
+    "scheme": "go",
+    "gitlab_native": "<v1.0.3",
+    "expected_vers": "vers:golang/<1.0.3"
+  },
+  {
+    "test_index": 562,
+    "scheme": "go",
+    "gitlab_native": "<=v0.1.1 || =v1.0.0",
+    "expected_vers": "vers:golang/<=0.1.1|1.0.0"
+  },
+  {
+    "test_index": 563,
+    "scheme": "go",
+    "gitlab_native": "<v0.4.7",
+    "expected_vers": "vers:golang/<0.4.7"
+  },
+  {
+    "test_index": 564,
+    "scheme": "go",
+    "gitlab_native": "<1.0.2",
+    "expected_vers": "vers:golang/<1.0.2"
+  },
+  {
+    "test_index": 565,
+    "scheme": "go",
+    "gitlab_native": "<1.0.1",
+    "expected_vers": "vers:golang/<1.0.1"
+  },
+  {
+    "test_index": 566,
+    "scheme": "go",
+    "gitlab_native": "<v4.44.0",
+    "expected_vers": "vers:golang/<4.44.0"
+  },
+  {
+    "test_index": 567,
+    "scheme": "go",
+    "gitlab_native": "<v4.44.0",
+    "expected_vers": "vers:golang/<4.44.0"
+  },
+  {
+    "test_index": 568,
+    "scheme": "go",
+    "gitlab_native": "=6.4.0||=6.3.0",
+    "expected_vers": "vers:golang/6.3.0|6.4.0"
+  },
+  {
+    "test_index": 569,
+    "scheme": "go",
+    "gitlab_native": "<v6.3.1 || >=v6.4.0 <v6.4.1",
+    "expected_vers": "vers:golang/<6.3.1|>=6.4.0|<6.4.1"
+  },
+  {
+    "test_index": 570,
+    "scheme": "go",
+    "gitlab_native": "<v5.0.1",
+    "expected_vers": "vers:golang/<5.0.1"
+  },
+  {
+    "test_index": 571,
+    "scheme": "go",
+    "gitlab_native": "<v4.2.2",
+    "expected_vers": "vers:golang/<4.2.2"
+  },
+  {
+    "test_index": 572,
+    "scheme": "go",
+    "gitlab_native": "<v5.0.1",
+    "expected_vers": "vers:golang/<5.0.1"
+  },
+  {
+    "test_index": 573,
+    "scheme": "go",
+    "gitlab_native": ">=v4.0.0 <v4.2.2",
+    "expected_vers": "vers:golang/>=4.0.0|<4.2.2"
+  },
+  {
+    "test_index": 574,
+    "scheme": "go",
+    "gitlab_native": ">=1.23.0 <1.23.1||>=1.22.0 <1.22.2||>=1.21.0 <1.21.5||>=1.20.0 <1.20.6||>=1.18.0 <1.19.5",
+    "expected_vers": "vers:golang/>=1.18.0|<1.19.5|>=1.20.0|<1.20.6|>=1.21.0|<1.21.5|>=1.22.0|<1.22.2|>=1.23.0|<1.23.1"
+  },
+  {
+    "test_index": 575,
+    "scheme": "go",
+    "gitlab_native": ">=1.19.0 <1.19.6||>=1.20.0 <1.20.7||>=1.21.0 <1.21.6||>=1.22.0 <1.22.3||>=1.23.0 <1.23.2",
+    "expected_vers": "vers:golang/>=1.19.0|<1.19.6|>=1.20.0|<1.20.7|>=1.21.0|<1.21.6|>=1.22.0|<1.22.3|>=1.23.0|<1.23.2"
+  },
+  {
+    "test_index": 576,
+    "scheme": "go",
+    "gitlab_native": "<=v1.18",
+    "expected_vers": "vers:golang/<=1.18.0"
+  },
+  {
+    "test_index": 577,
+    "scheme": "go",
+    "gitlab_native": ">=v0.14.0 <v0.20.1 || >=v0.21.0 <v0.21.2",
+    "expected_vers": "vers:golang/>=0.14.0|<0.20.1|>=0.21.0|<0.21.2"
+  },
+  {
+    "test_index": 578,
+    "scheme": "go",
+    "gitlab_native": "<7.5.11||>=8.0.0 <8.1.6",
+    "expected_vers": "vers:golang/<7.5.11|>=8.0.0|<8.1.6"
+  },
+  {
+    "test_index": 579,
+    "scheme": "go",
+    "gitlab_native": "<4.6.4||>=5.0.0 <5.2.3",
+    "expected_vers": "vers:golang/<4.6.4|>=5.0.0|<5.2.3"
+  },
+  {
+    "test_index": 580,
+    "scheme": "go",
+    "gitlab_native": ">=3.0.1 <6.7.4||>=7.0.0 <7.0.2",
+    "expected_vers": "vers:golang/>=3.0.1|<6.7.4|>=7.0.0|<7.0.2"
+  },
+  {
+    "test_index": 581,
+    "scheme": "go",
+    "gitlab_native": ">=6.7.3 <7.4.2",
+    "expected_vers": "vers:golang/>=6.7.3|<7.4.2"
+  },
+  {
+    "test_index": 582,
+    "scheme": "go",
+    "gitlab_native": "<=v2.2.1",
+    "expected_vers": "vers:golang/<=2.2.1"
+  },
+  {
+    "test_index": 583,
+    "scheme": "go",
+    "gitlab_native": "<v2.27.0",
+    "expected_vers": "vers:golang/<2.27.0"
+  },
+  {
+    "test_index": 584,
+    "scheme": "go",
+    "gitlab_native": "<v2.27.0",
+    "expected_vers": "vers:golang/<2.27.0"
+  },
+  {
+    "test_index": 585,
+    "scheme": "go",
+    "gitlab_native": ">=2.1.0 <2.27.0",
+    "expected_vers": "vers:golang/>=2.1.0|<2.27.0"
+  },
+  {
+    "test_index": 586,
+    "scheme": "go",
+    "gitlab_native": "=v0.1.1",
+    "expected_vers": "vers:golang/0.1.1"
+  },
+  {
+    "test_index": 587,
+    "scheme": "go",
+    "gitlab_native": ">=v2.0.10 <v2.1.1",
+    "expected_vers": "vers:golang/>=2.0.10|<2.1.1"
+  },
+  {
+    "test_index": 588,
+    "scheme": "go",
+    "gitlab_native": "<v0.47.5",
+    "expected_vers": "vers:golang/<0.47.5"
+  },
+  {
+    "test_index": 589,
+    "scheme": "go",
+    "gitlab_native": "=v0.4.23",
+    "expected_vers": "vers:golang/0.4.23"
+  },
+  {
+    "test_index": 590,
+    "scheme": "go",
+    "gitlab_native": ">=v0.11.0 <v0.12.1",
+    "expected_vers": "vers:golang/>=0.11.0|<0.12.1"
+  },
+  {
+    "test_index": 591,
+    "scheme": "go",
+    "gitlab_native": "<v0.8.0",
+    "expected_vers": "vers:golang/<0.8.0"
+  },
+  {
+    "test_index": 592,
+    "scheme": "go",
+    "gitlab_native": "<=v0.7.0",
+    "expected_vers": "vers:golang/<=0.7.0"
+  },
+  {
+    "test_index": 593,
+    "scheme": "go",
+    "gitlab_native": "<v0.0.10",
+    "expected_vers": "vers:golang/<0.0.10"
+  },
+  {
+    "test_index": 594,
+    "scheme": "go",
+    "gitlab_native": "<=v0.3.0",
+    "expected_vers": "vers:golang/<=0.3.0"
+  },
+  {
+    "test_index": 595,
+    "scheme": "go",
+    "gitlab_native": "<1.0.1",
+    "expected_vers": "vers:golang/<1.0.1"
+  },
+  {
+    "test_index": 596,
+    "scheme": "go",
+    "gitlab_native": "<1.0.0",
+    "expected_vers": "vers:golang/<1.0.0"
+  },
+  {
+    "test_index": 597,
+    "scheme": "go",
+    "gitlab_native": "<0.5.8",
+    "expected_vers": "vers:golang/<0.5.8"
+  },
+  {
+    "test_index": 598,
+    "scheme": "go",
+    "gitlab_native": "<v0.5.8",
+    "expected_vers": "vers:golang/<0.5.8"
+  },
+  {
+    "test_index": 599,
+    "scheme": "go",
+    "gitlab_native": "=1.4.0||>=2.0.0 <=2.1.0",
+    "expected_vers": "vers:golang/1.4.0|>=2.0.0|<=2.1.0"
+  },
+  {
+    "test_index": 600,
+    "scheme": "go",
+    "gitlab_native": "=1.4.0||>=2.0.0 <=2.0.1||=2.3.0",
+    "expected_vers": "vers:golang/1.4.0|>=2.0.0|<=2.0.1|2.3.0"
+  },
+  {
+    "test_index": 601,
+    "scheme": "go",
+    "gitlab_native": "<0.53.1",
+    "expected_vers": "vers:golang/<0.53.1"
+  },
+  {
+    "test_index": 602,
+    "scheme": "go",
+    "gitlab_native": "<v1.3.0",
+    "expected_vers": "vers:golang/<1.3.0"
+  },
+  {
+    "test_index": 603,
+    "scheme": "go",
+    "gitlab_native": ">=v0.0.15 <=v0.0.16",
+    "expected_vers": "vers:golang/>=0.0.15|<=0.0.16"
+  },
+  {
+    "test_index": 604,
+    "scheme": "go",
+    "gitlab_native": "<=7.0.0",
+    "expected_vers": "vers:golang/<=7.0.0"
+  },
+  {
+    "test_index": 605,
+    "scheme": "go",
+    "gitlab_native": "<=7.0.0",
+    "expected_vers": "vers:golang/<=7.0.0"
+  },
+  {
+    "test_index": 606,
+    "scheme": "go",
+    "gitlab_native": "<v2.18.0",
+    "expected_vers": "vers:golang/<2.18.0"
+  },
+  {
+    "test_index": 607,
+    "scheme": "go",
+    "gitlab_native": "<v2.18.0",
+    "expected_vers": "vers:golang/<2.18.0"
+  },
+  {
+    "test_index": 608,
+    "scheme": "go",
+    "gitlab_native": "<v0.8.5 || >=v0.9.0 <v0.9.4",
+    "expected_vers": "vers:golang/<0.8.5|>=0.9.0|<0.9.4"
+  },
+  {
+    "test_index": 609,
+    "scheme": "go",
+    "gitlab_native": "<v0.8.5 || >=v0.9.0 <v0.9.4",
+    "expected_vers": "vers:golang/<0.8.5|>=0.9.0|<0.9.4"
+  },
+  {
+    "test_index": 610,
+    "scheme": "go",
+    "gitlab_native": "<v1.2",
+    "expected_vers": "vers:golang/<1.2.0"
+  },
+  {
+    "test_index": 611,
+    "scheme": "go",
+    "gitlab_native": "<v3.15.0",
+    "expected_vers": "vers:golang/<3.15.0"
+  },
+  {
+    "test_index": 612,
+    "scheme": "go",
+    "gitlab_native": "<=0.7.0",
+    "expected_vers": "vers:golang/<=0.7.0"
+  },
+  {
+    "test_index": 613,
+    "scheme": "go",
+    "gitlab_native": "<v0.13.0",
+    "expected_vers": "vers:golang/<0.13.0"
+  },
+  {
+    "test_index": 614,
+    "scheme": "go",
+    "gitlab_native": "<v0.2.1",
+    "expected_vers": "vers:golang/<0.2.1"
+  },
+  {
+    "test_index": 615,
+    "scheme": "go",
+    "gitlab_native": "<0.5.2",
+    "expected_vers": "vers:golang/<0.5.2"
+  },
+  {
+    "test_index": 616,
+    "scheme": "go",
+    "gitlab_native": "<v0.5.4",
+    "expected_vers": "vers:golang/<0.5.4"
+  },
+  {
+    "test_index": 617,
+    "scheme": "go",
+    "gitlab_native": ">=0.5.0 <0.5.2",
+    "expected_vers": "vers:golang/>=0.5.0|<0.5.2"
+  },
+  {
+    "test_index": 618,
+    "scheme": "go",
+    "gitlab_native": "<0.5.1",
+    "expected_vers": "vers:golang/<0.5.1"
+  },
+  {
+    "test_index": 619,
+    "scheme": "go",
+    "gitlab_native": "<v1.13.2",
+    "expected_vers": "vers:golang/<1.13.2"
+  },
+  {
+    "test_index": 620,
+    "scheme": "go",
+    "gitlab_native": "<1.0.2",
+    "expected_vers": "vers:golang/<1.0.2"
+  },
+  {
+    "test_index": 621,
+    "scheme": "go",
+    "gitlab_native": "<v0.12.3",
+    "expected_vers": "vers:golang/<0.12.3"
+  },
+  {
+    "test_index": 622,
+    "scheme": "go",
+    "gitlab_native": "<v0.0.0-20210316203340-e197800f9055",
+    "expected_vers": "vers:golang/<0.0.0-20210316203340-e197800f9055"
+  },
+  {
+    "test_index": 623,
+    "scheme": "go",
+    "gitlab_native": "<v0.0.0-20210207001905-0d057c777ad6",
+    "expected_vers": "vers:golang/<0.0.0-20210207001905-0d057c777ad6"
+  },
+  {
+    "test_index": 624,
+    "scheme": "go",
+    "gitlab_native": "<v2018.05.16",
+    "expected_vers": "vers:golang/<2018.5.16"
+  },
+  {
+    "test_index": 625,
+    "scheme": "go",
+    "gitlab_native": "=v2021-10-10t16-53-30z",
+    "expected_vers": "vers:golang/2021.0.0-10-10t16-53-30z"
+  },
+  {
+    "test_index": 626,
+    "scheme": "go",
+    "gitlab_native": "<v0.0.0-20211227072318-bb97eafa8254",
+    "expected_vers": "vers:golang/<0.0.0-20211227072318-bb97eafa8254"
+  },
+  {
+    "test_index": 627,
+    "scheme": "go",
+    "gitlab_native": "<v2021-03-04t00-53-13z",
+    "expected_vers": "vers:golang/<2021.0.0-03-04t00-53-13z"
+  },
+  {
+    "test_index": 628,
+    "scheme": "go",
+    "gitlab_native": "<0.1.0",
+    "expected_vers": "vers:golang/<0.1.0"
+  },
+  {
+    "test_index": 629,
+    "scheme": "go",
+    "gitlab_native": ">=1.4.0 <1.5.2",
+    "expected_vers": "vers:golang/>=1.4.0|<1.5.2"
+  },
+  {
+    "test_index": 630,
+    "scheme": "go",
+    "gitlab_native": "<v1.3.0",
+    "expected_vers": "vers:golang/<1.3.0"
+  },
+  {
+    "test_index": 631,
+    "scheme": "go",
+    "gitlab_native": "<v1.3.0",
+    "expected_vers": "vers:golang/<1.3.0"
+  },
+  {
+    "test_index": 632,
+    "scheme": "go",
+    "gitlab_native": "<v1.3.0",
+    "expected_vers": "vers:golang/<1.3.0"
+  },
+  {
+    "test_index": 633,
+    "scheme": "go",
+    "gitlab_native": "<v1.3.0",
+    "expected_vers": "vers:golang/<1.3.0"
+  },
+  {
+    "test_index": 634,
+    "scheme": "go",
+    "gitlab_native": "<v1.3.0",
+    "expected_vers": "vers:golang/<1.3.0"
+  },
+  {
+    "test_index": 635,
+    "scheme": "go",
+    "gitlab_native": "<v1.3.0",
+    "expected_vers": "vers:golang/<1.3.0"
+  },
+  {
+    "test_index": 636,
+    "scheme": "go",
+    "gitlab_native": "<v1.3.0",
+    "expected_vers": "vers:golang/<1.3.0"
+  },
+  {
+    "test_index": 637,
+    "scheme": "go",
+    "gitlab_native": "<=v1.4.2",
+    "expected_vers": "vers:golang/<=1.4.2"
+  },
+  {
+    "test_index": 638,
+    "scheme": "go",
+    "gitlab_native": "<1.4",
+    "expected_vers": "vers:golang/<1.4.0"
+  },
+  {
+    "test_index": 639,
+    "scheme": "go",
+    "gitlab_native": "<1.4",
+    "expected_vers": "vers:golang/<1.4.0"
+  },
+  {
+    "test_index": 640,
+    "scheme": "go",
+    "gitlab_native": "<1.4",
+    "expected_vers": "vers:golang/<1.4.0"
+  },
+  {
+    "test_index": 641,
+    "scheme": "go",
+    "gitlab_native": "<1.4.2",
+    "expected_vers": "vers:golang/<1.4.2"
+  },
+  {
+    "test_index": 642,
+    "scheme": "go",
+    "gitlab_native": "<2020.8.1",
+    "expected_vers": "vers:golang/<2020.8.1"
+  },
+  {
+    "test_index": 643,
+    "scheme": "go",
+    "gitlab_native": "<1.2.1",
+    "expected_vers": "vers:golang/<1.2.1"
+  },
+  {
+    "test_index": 644,
+    "scheme": "go",
+    "gitlab_native": "<1.34.0",
+    "expected_vers": "vers:golang/<1.34.0"
+  },
+  {
+    "test_index": 645,
+    "scheme": "go",
+    "gitlab_native": "<1.34.0",
+    "expected_vers": "vers:golang/<1.34.0"
+  },
+  {
+    "test_index": 646,
+    "scheme": "go",
+    "gitlab_native": "<1.34.0",
+    "expected_vers": "vers:golang/<1.34.0"
+  },
+  {
+    "test_index": 647,
+    "scheme": "go",
+    "gitlab_native": "<v3.0.1",
+    "expected_vers": "vers:golang/<3.0.1"
+  },
+  {
+    "test_index": 648,
+    "scheme": "go",
+    "gitlab_native": "<2.1.9",
+    "expected_vers": "vers:golang/<2.1.9"
+  },
+  {
+    "test_index": 649,
+    "scheme": "go",
+    "gitlab_native": "<2.1.9",
+    "expected_vers": "vers:golang/<2.1.9"
+  },
+  {
+    "test_index": 650,
+    "scheme": "go",
+    "gitlab_native": "<2.1.9",
+    "expected_vers": "vers:golang/<2.1.9"
+  },
+  {
+    "test_index": 651,
+    "scheme": "go",
+    "gitlab_native": "<2.2.0",
+    "expected_vers": "vers:golang/<2.2.0"
+  },
+  {
+    "test_index": 652,
+    "scheme": "go",
+    "gitlab_native": ">=2.0 <2.7.2",
+    "expected_vers": "vers:golang/>=2.0.0|<2.7.2"
+  },
+  {
+    "test_index": 653,
+    "scheme": "go",
+    "gitlab_native": ">=v2.2.0 <v2.7.4",
+    "expected_vers": "vers:golang/>=2.2.0|<2.7.4"
+  },
+  {
+    "test_index": 654,
+    "scheme": "go",
+    "gitlab_native": "<2.2.0",
+    "expected_vers": "vers:golang/<2.2.0"
+  },
+  {
+    "test_index": 655,
+    "scheme": "go",
+    "gitlab_native": "<2.1.9",
+    "expected_vers": "vers:golang/<2.1.9"
+  },
+  {
+    "test_index": 656,
+    "scheme": "go",
+    "gitlab_native": "<2.0.2",
+    "expected_vers": "vers:golang/<2.0.2"
+  },
+  {
+    "test_index": 657,
+    "scheme": "go",
+    "gitlab_native": "<v2.2.0",
+    "expected_vers": "vers:golang/<2.2.0"
+  },
+  {
+    "test_index": 658,
+    "scheme": "go",
+    "gitlab_native": "<v2.2.0",
+    "expected_vers": "vers:golang/<2.2.0"
+  },
+  {
+    "test_index": 659,
+    "scheme": "go",
+    "gitlab_native": "<v2.2.0",
+    "expected_vers": "vers:golang/<2.2.0"
+  },
+  {
+    "test_index": 660,
+    "scheme": "go",
+    "gitlab_native": ">=v0.15.0 <v0.24.1",
+    "expected_vers": "vers:golang/>=0.15.0|<0.24.1"
+  },
+  {
+    "test_index": 661,
+    "scheme": "go",
+    "gitlab_native": ">=v0.15.0 <v0.24.3",
+    "expected_vers": "vers:golang/>=0.15.0|<0.24.3"
+  },
+  {
+    "test_index": 662,
+    "scheme": "go",
+    "gitlab_native": "<v2.0.1",
+    "expected_vers": "vers:golang/<2.0.1"
+  },
+  {
+    "test_index": 663,
+    "scheme": "go",
+    "gitlab_native": "<v1.1.0",
+    "expected_vers": "vers:golang/<1.1.0"
+  },
+  {
+    "test_index": 664,
+    "scheme": "go",
+    "gitlab_native": ">=v2.0.0 <v2.0.1",
+    "expected_vers": "vers:golang/>=2.0.0|<2.0.1"
+  },
+  {
+    "test_index": 665,
+    "scheme": "go",
+    "gitlab_native": "<v1.1.0",
+    "expected_vers": "vers:golang/<1.1.0"
+  },
+  {
+    "test_index": 666,
+    "scheme": "go",
+    "gitlab_native": "<v2.0.1",
+    "expected_vers": "vers:golang/<2.0.1"
+  },
+  {
+    "test_index": 667,
+    "scheme": "go",
+    "gitlab_native": "<1.0.1",
+    "expected_vers": "vers:golang/<1.0.1"
+  },
+  {
+    "test_index": 668,
+    "scheme": "go",
+    "gitlab_native": "<1.0.1",
+    "expected_vers": "vers:golang/<1.0.1"
+  },
+  {
+    "test_index": 669,
+    "scheme": "go",
+    "gitlab_native": "<v1.3.3",
+    "expected_vers": "vers:golang/<1.3.3"
+  },
+  {
+    "test_index": 670,
+    "scheme": "go",
+    "gitlab_native": ">=1.6.0 <1.6.1",
+    "expected_vers": "vers:golang/>=1.6.0|<1.6.1"
+  },
+  {
+    "test_index": 671,
+    "scheme": "go",
+    "gitlab_native": "<v1.6.1",
+    "expected_vers": "vers:golang/<1.6.1"
+  },
+  {
+    "test_index": 672,
+    "scheme": "go",
+    "gitlab_native": "<1.0.1",
+    "expected_vers": "vers:golang/<1.0.1"
+  },
+  {
+    "test_index": 673,
+    "scheme": "go",
+    "gitlab_native": "<1.0.5",
+    "expected_vers": "vers:golang/<1.0.5"
+  },
+  {
+    "test_index": 674,
+    "scheme": "go",
+    "gitlab_native": "<1.0.16",
+    "expected_vers": "vers:golang/<1.0.16"
+  },
+  {
+    "test_index": 675,
+    "scheme": "go",
+    "gitlab_native": "<v1.0.0",
+    "expected_vers": "vers:golang/<1.0.0"
+  },
+  {
+    "test_index": 676,
+    "scheme": "go",
+    "gitlab_native": ">=0.9.3 <=0.12.0",
+    "expected_vers": "vers:golang/>=0.9.3|<=0.12.0"
+  },
+  {
+    "test_index": 677,
+    "scheme": "go",
+    "gitlab_native": "<=0.12.0",
+    "expected_vers": "vers:golang/<=0.12.0"
+  },
+  {
+    "test_index": 678,
+    "scheme": "go",
+    "gitlab_native": ">=0.9.3 <0.13.0",
+    "expected_vers": "vers:golang/>=0.9.3|<0.13.0"
+  },
+  {
+    "test_index": 679,
+    "scheme": "go",
+    "gitlab_native": ">=v0.9.3 <=v0.13.0",
+    "expected_vers": "vers:golang/>=0.9.3|<=0.13.0"
+  },
+  {
+    "test_index": 680,
+    "scheme": "go",
+    "gitlab_native": "<=v1.8.1 || =v2.0.0",
+    "expected_vers": "vers:golang/<=1.8.1|2.0.0"
+  },
+  {
+    "test_index": 681,
+    "scheme": "go",
+    "gitlab_native": "<v5.0.0",
+    "expected_vers": "vers:golang/<5.0.0"
+  },
+  {
+    "test_index": 682,
+    "scheme": "go",
+    "gitlab_native": ">=6.0.0 <6.1.0||<5.1.6",
+    "expected_vers": "vers:golang/<5.1.6|>=6.0.0|<6.1.0"
+  },
+  {
+    "test_index": 683,
+    "scheme": "go",
+    "gitlab_native": ">=3.0.0 <=3.0.1",
+    "expected_vers": "vers:golang/>=3.0.0|<=3.0.1"
+  },
+  {
+    "test_index": 684,
+    "scheme": "go",
+    "gitlab_native": "<5.1.3",
+    "expected_vers": "vers:golang/<5.1.3"
+  },
+  {
+    "test_index": 685,
+    "scheme": "go",
+    "gitlab_native": ">=v3.0.0 <=v3.1.0 || >=v4.0.0 <=v4.1.0",
+    "expected_vers": "vers:golang/>=3.0.0|<=3.1.0|>=4.0.0|<=4.1.0"
+  },
+  {
+    "test_index": 686,
+    "scheme": "go",
+    "gitlab_native": "<5.1.6||>=6.0.0 <6.1.0",
+    "expected_vers": "vers:golang/<5.1.6|>=6.0.0|<6.1.0"
+  },
+  {
+    "test_index": 687,
+    "scheme": "go",
+    "gitlab_native": ">=3.0.0 <=3.0.1",
+    "expected_vers": "vers:golang/>=3.0.0|<=3.0.1"
+  },
+  {
+    "test_index": 688,
+    "scheme": "go",
+    "gitlab_native": ">=5.1.0 <5.1.4||>=6.0.0 <6.0.1",
+    "expected_vers": "vers:golang/>=5.1.0|<5.1.4|>=6.0.0|<6.0.1"
+  },
+  {
+    "test_index": 689,
+    "scheme": "go",
+    "gitlab_native": ">=v4.1.0 <v5.1.3",
+    "expected_vers": "vers:golang/>=4.1.0|<5.1.3"
+  },
+  {
+    "test_index": 690,
+    "scheme": "go",
+    "gitlab_native": "<2.0.0",
+    "expected_vers": "vers:golang/<2.0.0"
+  },
+  {
+    "test_index": 691,
+    "scheme": "go",
+    "gitlab_native": "<v0.4.0",
+    "expected_vers": "vers:golang/<0.4.0"
+  },
+  {
+    "test_index": 692,
+    "scheme": "go",
+    "gitlab_native": "<v0.3.0",
+    "expected_vers": "vers:golang/<0.3.0"
+  },
+  {
+    "test_index": 693,
+    "scheme": "go",
+    "gitlab_native": "<v0.2.0",
+    "expected_vers": "vers:golang/<0.2.0"
+  },
+  {
+    "test_index": 694,
+    "scheme": "go",
+    "gitlab_native": "<0.18.3||>=0.19.0 <0.19.2",
+    "expected_vers": "vers:golang/<0.18.3|>=0.19.0|<0.19.2"
+  },
+  {
+    "test_index": 695,
+    "scheme": "go",
+    "gitlab_native": "<1.1.2",
+    "expected_vers": "vers:golang/<1.1.2"
+  },
+  {
+    "test_index": 696,
+    "scheme": "go",
+    "gitlab_native": "<0.23.0",
+    "expected_vers": "vers:golang/<0.23.0"
+  },
+  {
+    "test_index": 697,
+    "scheme": "go",
+    "gitlab_native": "<v0.3.3",
+    "expected_vers": "vers:golang/<0.3.3"
+  },
+  {
+    "test_index": 698,
+    "scheme": "go",
+    "gitlab_native": "<v0.3.3",
+    "expected_vers": "vers:golang/<0.3.3"
+  },
+  {
+    "test_index": 699,
+    "scheme": "go",
+    "gitlab_native": "<v0.3.3",
+    "expected_vers": "vers:golang/<0.3.3"
+  },
+  {
+    "test_index": 700,
+    "scheme": "go",
+    "gitlab_native": "<v0.3.3",
+    "expected_vers": "vers:golang/<0.3.3"
+  },
+  {
+    "test_index": 701,
+    "scheme": "go",
+    "gitlab_native": "<v0.3.3",
+    "expected_vers": "vers:golang/<0.3.3"
+  },
+  {
+    "test_index": 702,
+    "scheme": "go",
+    "gitlab_native": "<v0.3.3",
+    "expected_vers": "vers:golang/<0.3.3"
+  },
+  {
+    "test_index": 703,
+    "scheme": "go",
+    "gitlab_native": "<0.2.4",
+    "expected_vers": "vers:golang/<0.2.4"
+  },
+  {
+    "test_index": 704,
+    "scheme": "go",
+    "gitlab_native": "<1.5.2",
+    "expected_vers": "vers:golang/<1.5.2"
+  },
+  {
+    "test_index": 705,
+    "scheme": "go",
+    "gitlab_native": "<3.0.15",
+    "expected_vers": "vers:golang/<3.0.15"
+  },
+  {
+    "test_index": 706,
+    "scheme": "go",
+    "gitlab_native": "<5.1.1",
+    "expected_vers": "vers:golang/<5.1.1"
+  },
+  {
+    "test_index": 707,
+    "scheme": "go",
+    "gitlab_native": "<=3.2.0",
+    "expected_vers": "vers:golang/<=3.2.0"
+  },
+  {
+    "test_index": 708,
+    "scheme": "go",
+    "gitlab_native": "<5.0.0",
+    "expected_vers": "vers:golang/<5.0.0"
+  },
+  {
+    "test_index": 709,
+    "scheme": "go",
+    "gitlab_native": ">=5.1.1 <6.0.0",
+    "expected_vers": "vers:golang/>=5.1.1|<6.0.0"
+  },
+  {
+    "test_index": 710,
+    "scheme": "go",
+    "gitlab_native": "<7.0.0",
+    "expected_vers": "vers:golang/<7.0.0"
+  },
+  {
+    "test_index": 711,
+    "scheme": "go",
+    "gitlab_native": "=v1.3.0",
+    "expected_vers": "vers:golang/1.3.0"
+  },
+  {
+    "test_index": 712,
+    "scheme": "go",
+    "gitlab_native": "<0.0.9",
+    "expected_vers": "vers:golang/<0.0.9"
+  },
+  {
+    "test_index": 713,
+    "scheme": "go",
+    "gitlab_native": "<v1.18.1",
+    "expected_vers": "vers:golang/<1.18.1"
+  },
+  {
+    "test_index": 714,
+    "scheme": "go",
+    "gitlab_native": "<1.18.1",
+    "expected_vers": "vers:golang/<1.18.1"
+  },
+  {
+    "test_index": 715,
+    "scheme": "go",
+    "gitlab_native": ">=v1.3.0 <=v1.3.6",
+    "expected_vers": "vers:golang/>=1.3.0|<=1.3.6"
+  },
+  {
+    "test_index": 716,
+    "scheme": "go",
+    "gitlab_native": "<1.9.8 || >=1.10.0 <1.10.3 || >=1.11.0 <1.11.1",
+    "expected_vers": "vers:golang/<1.9.8|>=1.10.0|<1.10.3|>=1.11.0|<1.11.1"
+  },
+  {
+    "test_index": 717,
+    "scheme": "go",
+    "gitlab_native": "<=v1.5.1",
+    "expected_vers": "vers:golang/<=1.5.1"
+  },
+  {
+    "test_index": 718,
+    "scheme": "go",
+    "gitlab_native": "<1.9.8 || >=1.10.0 <1.10.4 || >=1.11.0 <1.11.1",
+    "expected_vers": "vers:golang/<1.9.8|>=1.10.0|<1.10.4|>=1.11.0|<1.11.1"
+  },
+  {
+    "test_index": 719,
+    "scheme": "go",
+    "gitlab_native": ">=v1.5.0 <=v1.5.8 || >=v1.6.0 <=v1.6.7",
+    "expected_vers": "vers:golang/>=1.5.0|<=1.5.8|>=1.6.0|<=1.6.7"
+  },
+  {
+    "test_index": 720,
+    "scheme": "go",
+    "gitlab_native": "<1.11.8||>=1.12.0 <1.12.5||>=1.13.0 <1.13.2",
+    "expected_vers": "vers:golang/<1.11.8|>=1.12.0|<1.12.5|>=1.13.0|<1.13.2"
+  },
+  {
+    "test_index": 721,
+    "scheme": "go",
+    "gitlab_native": "<v1.8.6 || >=v1.9.0 <v1.9.5",
+    "expected_vers": "vers:golang/<1.8.6|>=1.9.0|<1.9.5"
+  },
+  {
+    "test_index": 722,
+    "scheme": "go",
+    "gitlab_native": "<1.11.7||>=1.12.0 <1.12.4||>=1.13.0 <1.13.1",
+    "expected_vers": "vers:golang/<1.11.7|>=1.12.0|<1.12.4|>=1.13.0|<1.13.1"
+  },
+  {
+    "test_index": 723,
+    "scheme": "go",
+    "gitlab_native": ">=1.12.0 <=1.12.1",
+    "expected_vers": "vers:golang/>=1.12.0|<=1.12.1"
+  },
+  {
+    "test_index": 724,
+    "scheme": "go",
+    "gitlab_native": ">=1.12.0 <=1.12.1",
+    "expected_vers": "vers:golang/>=1.12.0|<=1.12.1"
+  },
+  {
+    "test_index": 725,
+    "scheme": "go",
+    "gitlab_native": "<=1.2.10 || >=v1.3 <=v1.3.7 || >=v1.4.0 <=v1.4.3",
+    "expected_vers": "vers:golang/<=1.2.10|>=1.3.0|<=1.3.7|>=1.4.0|<=1.4.3"
+  },
+  {
+    "test_index": 726,
+    "scheme": "go",
+    "gitlab_native": "<1.8.6||>=1.9.0 <1.9.5",
+    "expected_vers": "vers:golang/<1.8.6|>=1.9.0|<1.9.5"
+  },
+  {
+    "test_index": 727,
+    "scheme": "go",
+    "gitlab_native": ">=v1.8.0 <v1.9.6 || >=v1.10.0 <v1.10.2",
+    "expected_vers": "vers:golang/>=1.8.0|<1.9.6|>=1.10.0|<1.10.2"
+  },
+  {
+    "test_index": 728,
+    "scheme": "go",
+    "gitlab_native": ">=v1.4.0 <v1.4.9 || >=v1.5.0 <v1.5.4",
+    "expected_vers": "vers:golang/>=1.4.0|<1.4.9|>=1.5.0|<1.5.4"
+  },
+  {
+    "test_index": 729,
+    "scheme": "go",
+    "gitlab_native": "<0.79.1",
+    "expected_vers": "vers:golang/<0.79.1"
+  },
+  {
+    "test_index": 730,
+    "scheme": "go",
+    "gitlab_native": "<1.5.1",
+    "expected_vers": "vers:golang/<1.5.1"
+  },
+  {
+    "test_index": 731,
+    "scheme": "go",
+    "gitlab_native": "<=v1.5.0",
+    "expected_vers": "vers:golang/<=1.5.0"
+  },
+  {
+    "test_index": 732,
+    "scheme": "go",
+    "gitlab_native": ">=0.9.0 <0.12.7",
+    "expected_vers": "vers:golang/>=0.9.0|<0.12.7"
+  },
+  {
+    "test_index": 733,
+    "scheme": "go",
+    "gitlab_native": "<1.13.4",
+    "expected_vers": "vers:golang/<1.13.4"
+  },
+  {
+    "test_index": 734,
+    "scheme": "go",
+    "gitlab_native": "<1.5.2",
+    "expected_vers": "vers:golang/<1.5.2"
+  },
+  {
+    "test_index": 735,
+    "scheme": "go",
+    "gitlab_native": "<=1.16.3",
+    "expected_vers": "vers:golang/<=1.16.3"
+  },
+  {
+    "test_index": 736,
+    "scheme": "go",
+    "gitlab_native": "<1.13.6",
+    "expected_vers": "vers:golang/<1.13.6"
+  },
+  {
+    "test_index": 737,
+    "scheme": "go",
+    "gitlab_native": "<1.13.0",
+    "expected_vers": "vers:golang/<1.13.0"
+  },
+  {
+    "test_index": 738,
+    "scheme": "go",
+    "gitlab_native": "<2.16.11",
+    "expected_vers": "vers:golang/<2.16.11"
+  },
+  {
+    "test_index": 739,
+    "scheme": "go",
+    "gitlab_native": "<2.16.11",
+    "expected_vers": "vers:golang/<2.16.11"
+  },
+  {
+    "test_index": 740,
+    "scheme": "go",
+    "gitlab_native": "<2.16.11",
+    "expected_vers": "vers:golang/<2.16.11"
+  },
+  {
+    "test_index": 741,
+    "scheme": "go",
+    "gitlab_native": "<2.16.11",
+    "expected_vers": "vers:golang/<2.16.11"
+  },
+  {
+    "test_index": 742,
+    "scheme": "go",
+    "gitlab_native": ">=3.0.0 <3.3.2",
+    "expected_vers": "vers:golang/>=3.0.0|<3.3.2"
+  },
+  {
+    "test_index": 743,
+    "scheme": "go",
+    "gitlab_native": ">=3.0.0 <3.3.2",
+    "expected_vers": "vers:golang/>=3.0.0|<3.3.2"
+  },
+  {
+    "test_index": 744,
+    "scheme": "go",
+    "gitlab_native": ">=3.0.0 <3.1.3",
+    "expected_vers": "vers:golang/>=3.0.0|<3.1.3"
+  },
+  {
+    "test_index": 745,
+    "scheme": "go",
+    "gitlab_native": "<3.6.1",
+    "expected_vers": "vers:golang/<3.6.1"
+  },
+  {
+    "test_index": 746,
+    "scheme": "go",
+    "gitlab_native": "<3.6.1",
+    "expected_vers": "vers:golang/<3.6.1"
+  },
+  {
+    "test_index": 747,
+    "scheme": "go",
+    "gitlab_native": ">=3.0.0 <3.3.2",
+    "expected_vers": "vers:golang/>=3.0.0|<3.3.2"
+  },
+  {
+    "test_index": 748,
+    "scheme": "go",
+    "gitlab_native": ">=3.0.0 <3.3.2",
+    "expected_vers": "vers:golang/>=3.0.0|<3.3.2"
+  },
+  {
+    "test_index": 749,
+    "scheme": "go",
+    "gitlab_native": ">=3.0 <3.5.1",
+    "expected_vers": "vers:golang/>=3.0.0|<3.5.1"
+  },
+  {
+    "test_index": 750,
+    "scheme": "go",
+    "gitlab_native": ">=2.0.0 <2.16.11||>=3.0.0 <3.3.2",
+    "expected_vers": "vers:golang/>=2.0.0|<2.16.11|>=3.0.0|<3.3.2"
+  },
+  {
+    "test_index": 751,
+    "scheme": "go",
+    "gitlab_native": "<2.16.11||>=3.0.0 <3.3.2",
+    "expected_vers": "vers:golang/<2.16.11|>=3.0.0|<3.3.2"
+  },
+  {
+    "test_index": 752,
+    "scheme": "go",
+    "gitlab_native": ">=3.0.0 <3.2.4",
+    "expected_vers": "vers:golang/>=3.0.0|<3.2.4"
+  },
+  {
+    "test_index": 753,
+    "scheme": "go",
+    "gitlab_native": ">=2.0.0 <2.16.11||>=3.0.0 <3.3.2",
+    "expected_vers": "vers:golang/>=2.0.0|<2.16.11|>=3.0.0|<3.3.2"
+  },
+  {
+    "test_index": 754,
+    "scheme": "go",
+    "gitlab_native": ">=2.0.0 <2.16.11||>=3.0.0 <3.3.2",
+    "expected_vers": "vers:golang/>=2.0.0|<2.16.11|>=3.0.0|<3.3.2"
+  },
+  {
+    "test_index": 755,
+    "scheme": "go",
+    "gitlab_native": ">=v1.3 <v1.3.5",
+    "expected_vers": "vers:golang/>=1.3.0|<1.3.5"
+  },
+  {
+    "test_index": 756,
+    "scheme": "go",
+    "gitlab_native": ">=1.5.0 <1.5.9||>=1.6.0 <1.6.8",
+    "expected_vers": "vers:golang/>=1.5.0|<1.5.9|>=1.6.0|<1.6.8"
+  },
+  {
+    "test_index": 757,
+    "scheme": "go",
+    "gitlab_native": "=1.13.0||>=1.12.0 <1.12.4||<1.11.7",
+    "expected_vers": "vers:golang/<1.11.7|>=1.12.0|<1.12.4|1.13.0"
+  },
+  {
+    "test_index": 758,
+    "scheme": "go",
+    "gitlab_native": "<v1.1.13 || >=v1.2.0 <v1.2.4",
+    "expected_vers": "vers:golang/<1.1.13|>=1.2.0|<1.2.4"
+  },
+  {
+    "test_index": 759,
+    "scheme": "go",
+    "gitlab_native": ">=1.5.0 <1.5.9||>=1.6.0 <1.6.8",
+    "expected_vers": "vers:golang/>=1.5.0|<1.5.9|>=1.6.0|<1.6.8"
+  },
+  {
+    "test_index": 760,
+    "scheme": "go",
+    "gitlab_native": ">=v1.1 <=v1.1.6",
+    "expected_vers": "vers:golang/>=1.1.0|<=1.1.6"
+  },
+  {
+    "test_index": 761,
+    "scheme": "go",
+    "gitlab_native": "<v1.2.2",
+    "expected_vers": "vers:golang/<1.2.2"
+  },
+  {
+    "test_index": 762,
+    "scheme": "go",
+    "gitlab_native": ">=1.1.0 <1.1.7",
+    "expected_vers": "vers:golang/>=1.1.0|<1.1.7"
+  },
+  {
+    "test_index": 763,
+    "scheme": "go",
+    "gitlab_native": "<1.7.8",
+    "expected_vers": "vers:golang/<1.7.8"
+  },
+  {
+    "test_index": 764,
+    "scheme": "go",
+    "gitlab_native": "<1.7.8",
+    "expected_vers": "vers:golang/<1.7.8"
+  }
+]
