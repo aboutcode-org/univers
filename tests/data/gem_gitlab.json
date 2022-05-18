@@ -1,0 +1,1904 @@
+[
+  {
+    "test_index": 1,
+    "scheme": "gem",
+    "gitlab_native": "<3.4.1||>=4.3.0 <4.3.1",
+    "expected_vers": "vers:gem/<3.4.1|>=4.3.0|<4.3.1"
+  },
+  {
+    "test_index": 2,
+    "scheme": "gem",
+    "gitlab_native": ">=4.0.0 <4.1.2",
+    "expected_vers": "vers:gem/>=4.0.0|<4.1.2"
+  },
+  {
+    "test_index": 3,
+    "scheme": "gem",
+    "gitlab_native": "<3.4.0||>=4.0.0 <4.1.2",
+    "expected_vers": "vers:gem/<3.4.0|>=4.0.0|<4.1.2"
+  },
+  {
+    "test_index": 4,
+    "scheme": "gem",
+    "gitlab_native": "<3.4.0||>=4.0.0 <4.1.2",
+    "expected_vers": "vers:gem/<3.4.0|>=4.0.0|<4.1.2"
+  },
+  {
+    "test_index": 5,
+    "scheme": "gem",
+    "gitlab_native": ">=1.0.0-alpha0 <1.1.1",
+    "expected_vers": "vers:gem/>=1.0.0-alpha0|<1.1.1"
+  },
+  {
+    "test_index": 6,
+    "scheme": "gem",
+    "gitlab_native": "<1.4.3||>=2.0.0 <2.0.2",
+    "expected_vers": "vers:gem/<1.4.3|>=2.0.0|<2.0.2"
+  },
+  {
+    "test_index": 7,
+    "scheme": "gem",
+    "gitlab_native": "<=3.6.2||>=3.7.0 <=3.7.3||>=3.8.0 <=3.8.3",
+    "expected_vers": "vers:gem/<=3.6.2|>=3.7.0|<=3.7.3|>=3.8.0|<=3.8.3"
+  },
+  {
+    "test_index": 8,
+    "scheme": "gem",
+    "gitlab_native": ">=1.10.0a <1.10.1||>=1.11.0a <1.11.2||>=1.12.0a <1.12.0",
+    "expected_vers": "vers:gem/>=1.10.0a|<1.10.1|>=1.11.0a|<1.11.2|>=1.12.0a|<1.12.0"
+  },
+  {
+    "test_index": 9,
+    "scheme": "gem",
+    "gitlab_native": "<1.0.1||>=1.1.0.alpha0 <1.1.2||>=1.2.0.alpha0 <1.2.1.1||>=1.3.0.alpha0 <1.3.1",
+    "expected_vers": "vers:gem/<1.0.1|>=1.1.0.alpha0|<1.1.2|>=1.2.0.alpha0|<1.2.1.1|>=1.3.0.alpha0|<1.3.1"
+  },
+  {
+    "test_index": 10,
+    "scheme": "gem",
+    "gitlab_native": "<1.0.1||>=1.1.0 <1.1.2",
+    "expected_vers": "vers:gem/<1.0.1|>=1.1.0|<1.1.2"
+  },
+  {
+    "test_index": 11,
+    "scheme": "gem",
+    "gitlab_native": ">=1.2.0.alpha0 <1.2.2||>=1.3.0.alpha0 <1.3.2",
+    "expected_vers": "vers:gem/>=1.2.0.alpha0|<1.2.2|>=1.3.0.alpha0|<1.3.2"
+  },
+  {
+    "test_index": 12,
+    "scheme": "gem",
+    "gitlab_native": ">=1.11.0a <1.11.4||>=1.12.0a <1.12.2||>=1.13.0a <1.13.12||>=2.0.0a <2.0.3||>=2.1.0a <2.1.2||>=2.2.0a <2.2.1",
+    "expected_vers": "vers:gem/>=1.11.0a|<1.11.4|>=1.12.0a|<1.12.2|>=1.13.0a|<1.13.12|>=2.0.0a|<2.0.3|>=2.1.0a|<2.1.2|>=2.2.0a|<2.2.1"
+  },
+  {
+    "test_index": 13,
+    "scheme": "gem",
+    "gitlab_native": ">=1.0.13 <=1.0.14||=0.1.4",
+    "expected_vers": "vers:gem/0.1.4|>=1.0.13|<=1.0.14"
+  },
+  {
+    "test_index": 14,
+    "scheme": "gem",
+    "gitlab_native": ">=0.7.0 <0.9.13",
+    "expected_vers": "vers:gem/>=0.7.0|<0.9.13"
+  },
+  {
+    "test_index": 15,
+    "scheme": "gem",
+    "gitlab_native": ">=0.3.0 <0.3.1||>=0.2.0 <0.2.1||<0.1.1",
+    "expected_vers": "vers:gem/<0.1.1|>=0.2.0|<0.2.1|>=0.3.0|<0.3.1"
+  },
+  {
+    "test_index": 16,
+    "scheme": "gem",
+    "gitlab_native": "<=0.1.0||>0.2.0 <0.3.1",
+    "expected_vers": "vers:gem/<=0.1.0|>0.2.0|<0.3.1"
+  },
+  {
+    "test_index": 17,
+    "scheme": "gem",
+    "gitlab_native": ">=0.1.0 <=0.3.0",
+    "expected_vers": "vers:gem/>=0.1.0|<=0.3.0"
+  },
+  {
+    "test_index": 18,
+    "scheme": "gem",
+    "gitlab_native": ">=1.2.6 <1.2.8",
+    "expected_vers": "vers:gem/>=1.2.6|<1.2.8"
+  },
+  {
+    "test_index": 19,
+    "scheme": "gem",
+    "gitlab_native": ">=1.0.0 <1.1.4",
+    "expected_vers": "vers:gem/>=1.0.0|<1.1.4"
+  },
+  {
+    "test_index": 20,
+    "scheme": "gem",
+    "gitlab_native": "<1.12.3||>2.0.0a <3.0.4",
+    "expected_vers": "vers:gem/<1.12.3|>2.0.0a|<3.0.4"
+  },
+  {
+    "test_index": 21,
+    "scheme": "gem",
+    "gitlab_native": ">=1.16.0 <2.2.16",
+    "expected_vers": "vers:gem/>=1.16.0|<2.2.16"
+  },
+  {
+    "test_index": 22,
+    "scheme": "gem",
+    "gitlab_native": ">=5.0.0 <5.0.3||>=5.1.0 <5.1.1||>=5.2.0 <5.2.5||>=5.3.0 <5.3.2",
+    "expected_vers": "vers:gem/>=5.0.0|<5.0.3|>=5.1.0|<5.1.1|>=5.2.0|<5.2.5|>=5.3.0|<5.3.2"
+  },
+  {
+    "test_index": 23,
+    "scheme": "gem",
+    "gitlab_native": ">=2.1.0 <4.2.6",
+    "expected_vers": "vers:gem/>=2.1.0|<4.2.6"
+  },
+  {
+    "test_index": 24,
+    "scheme": "gem",
+    "gitlab_native": "<1.4.1||>2.0.0a <2.0.0rc3",
+    "expected_vers": "vers:gem/<1.4.1|>2.0.0a|<2.0.0rc3"
+  },
+  {
+    "test_index": 25,
+    "scheme": "gem",
+    "gitlab_native": ">2.0.0a <2.1.2||<1.4.2",
+    "expected_vers": "vers:gem/<1.4.2|>2.0.0a|<2.1.2"
+  },
+  {
+    "test_index": 26,
+    "scheme": "gem",
+    "gitlab_native": ">=1.19 <1.22",
+    "expected_vers": "vers:gem/>=1.19|<1.22"
+  },
+  {
+    "test_index": 27,
+    "scheme": "gem",
+    "gitlab_native": ">=1.0.0 <2.5.4",
+    "expected_vers": "vers:gem/>=1.0.0|<2.5.4"
+  },
+  {
+    "test_index": 28,
+    "scheme": "gem",
+    "gitlab_native": ">=0.14.0 <=0.14.1",
+    "expected_vers": "vers:gem/>=0.14.0|<=0.14.1"
+  },
+  {
+    "test_index": 29,
+    "scheme": "gem",
+    "gitlab_native": ">=0.12.0 <=0.14.1",
+    "expected_vers": "vers:gem/>=0.12.0|<=0.14.1"
+  },
+  {
+    "test_index": 30,
+    "scheme": "gem",
+    "gitlab_native": ">=2.3.0 <2.4.1",
+    "expected_vers": "vers:gem/>=2.3.0|<2.4.1"
+  },
+  {
+    "test_index": 31,
+    "scheme": "gem",
+    "gitlab_native": "<=5.1.3||>=6.0.0 <=6.2.0",
+    "expected_vers": "vers:gem/<=5.1.3|>=6.0.0|<=6.2.0"
+  },
+  {
+    "test_index": 32,
+    "scheme": "gem",
+    "gitlab_native": "<5.2.10||>=6.0.0 <6.4.0",
+    "expected_vers": "vers:gem/<5.2.10|>=6.0.0|<6.4.0"
+  },
+  {
+    "test_index": 33,
+    "scheme": "gem",
+    "gitlab_native": "<1.3.2||>=2.0.1 <2.1.1",
+    "expected_vers": "vers:gem/<1.3.2|>=2.0.1|<2.1.1"
+  },
+  {
+    "test_index": 34,
+    "scheme": "gem",
+    "gitlab_native": "<1.3.2||>=2.0.1 <2.1.1",
+    "expected_vers": "vers:gem/<1.3.2|>=2.0.1|<2.1.1"
+  },
+  {
+    "test_index": 35,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0a <3.0.0.beta.3||>=2.12.0a <2.12.3||>=2.11.0a <2.11.3||>=2.10.0a <2.10.2||>=2.9.0a <2.9.4||>=2.8.0a <2.8.3||>=2.7.0a <2.7.1||>=2.5.0a <2.5.1||>=2.4.0a <2.4.6||>=2.3.0a <2.3.3||>=2.2.0a <2.2.3||>=2.1.0a <2.1.4||>=2.0.0 <2.0.5",
+    "expected_vers": "vers:gem/>=2.0.0|<2.0.5|>=2.1.0a|<2.1.4|>=2.2.0a|<2.2.3|>=2.3.0a|<2.3.3|>=2.4.0a|<2.4.6|>=2.5.0a|<2.5.1|>=2.7.0a|<2.7.1|>=2.8.0a|<2.8.3|>=2.9.0a|<2.9.4|>=2.10.0a|<2.10.2|>=2.11.0a|<2.11.3|>=2.12.0a|<2.12.3|>=3.0.0a|<3.0.0.beta.3"
+  },
+  {
+    "test_index": 36,
+    "scheme": "gem",
+    "gitlab_native": ">=2.0.0 <=2.12.4||>=3.0.0 <=4.0.0.beta7",
+    "expected_vers": "vers:gem/>=2.0.0|<=2.12.4|>=3.0.0|<=4.0.0.beta7"
+  },
+  {
+    "test_index": 37,
+    "scheme": "gem",
+    "gitlab_native": "<2.8.6||>=2.9.0 <2.9.6||>=2.10.0 <2.10.2",
+    "expected_vers": "vers:gem/<2.8.6|>=2.9.0|<2.9.6|>=2.10.0|<2.10.2"
+  },
+  {
+    "test_index": 38,
+    "scheme": "gem",
+    "gitlab_native": "<2.11.14||>=3.0.0 <3.0.5||>=3.1.0 <3.1.5",
+    "expected_vers": "vers:gem/<2.11.14|>=3.0.0|<3.0.5|>=3.1.0|<3.1.5"
+  },
+  {
+    "test_index": 39,
+    "scheme": "gem",
+    "gitlab_native": ">=0.12.29 <=0.12.40",
+    "expected_vers": "vers:gem/>=0.12.29|<=0.12.40"
+  },
+  {
+    "test_index": 40,
+    "scheme": "gem",
+    "gitlab_native": ">=0.14.14 <=1.14.1",
+    "expected_vers": "vers:gem/>=0.14.14|<=1.14.1"
+  },
+  {
+    "test_index": 41,
+    "scheme": "gem",
+    "gitlab_native": ">=5.0.0.alpha <5.0.0.beta1.1||>=4.2.0.alpha <4.2.5.1||>=4.1.0.alpha <4.1.14.1",
+    "expected_vers": "vers:gem/>=4.1.0.alpha|<4.1.14.1|>=4.2.0.alpha|<4.2.5.1|>=5.0.0.alpha|<5.0.0.beta1.1"
+  },
+  {
+    "test_index": 42,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0 <3.1.11 || >=3.2.0 <3.2.12",
+    "expected_vers": "vers:gem/>=3.0.0|<3.1.11|>=3.2.0|<3.2.12"
+  },
+  {
+    "test_index": 43,
+    "scheme": "gem",
+    "gitlab_native": ">0.5.0 <1.0.4||>=1.1.0 <1.1.3||>=1.2.0 <1.2.5",
+    "expected_vers": "vers:gem/>0.5.0|<1.0.4|>=1.1.0|<1.1.3|>=1.2.0|<1.2.5"
+  },
+  {
+    "test_index": 44,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0 <5.2.1",
+    "expected_vers": "vers:gem/>=3.0.0|<5.2.1"
+  },
+  {
+    "test_index": 45,
+    "scheme": "gem",
+    "gitlab_native": ">=1.1.0 <4.6.3",
+    "expected_vers": "vers:gem/>=1.1.0|<4.6.3"
+  },
+  {
+    "test_index": 46,
+    "scheme": "gem",
+    "gitlab_native": "<2.2.10||>=2.3.0a <2.3.8||>=3.0.0a <3.0.0.rc4||>=2.4.0a <2.4.5",
+    "expected_vers": "vers:gem/<2.2.10|>=2.3.0a|<2.3.8|>=2.4.0a|<2.4.5|>=3.0.0a|<3.0.0.rc4"
+  },
+  {
+    "test_index": 47,
+    "scheme": "gem",
+    "gitlab_native": ">=1.0.0.rc1 <=1.3.2",
+    "expected_vers": "vers:gem/>=1.0.0.rc1|<=1.3.2"
+  },
+  {
+    "test_index": 48,
+    "scheme": "gem",
+    "gitlab_native": "<3.7.11||>=4.0.0 <4.0.4||>=4.1.0 <4.1.11",
+    "expected_vers": "vers:gem/<3.7.11|>=4.0.0|<4.0.4|>=4.1.0|<4.1.11"
+  },
+  {
+    "test_index": 49,
+    "scheme": "gem",
+    "gitlab_native": ">=0.11.0 <=0.11.1||=0.30.0",
+    "expected_vers": "vers:gem/>=0.11.0|<=0.11.1|0.30.0"
+  },
+  {
+    "test_index": 50,
+    "scheme": "gem",
+    "gitlab_native": ">=3.7.0 <3.7.13||>=4.0.0 <4.0.5||>=4.1.0 <4.1.12",
+    "expected_vers": "vers:gem/>=3.7.0|<3.7.13|>=4.0.0|<4.0.5|>=4.1.0|<4.1.12"
+  },
+  {
+    "test_index": 51,
+    "scheme": "gem",
+    "gitlab_native": ">2.2.9 <=2.5.0",
+    "expected_vers": "vers:gem/>2.2.9|<=2.5.0"
+  },
+  {
+    "test_index": 52,
+    "scheme": "gem",
+    "gitlab_native": ">=2.6.0 <=3.0.2",
+    "expected_vers": "vers:gem/>=2.6.0|<=3.0.2"
+  },
+  {
+    "test_index": 53,
+    "scheme": "gem",
+    "gitlab_native": ">2.2.9 <=2.5.0",
+    "expected_vers": "vers:gem/>2.2.9|<=2.5.0"
+  },
+  {
+    "test_index": 54,
+    "scheme": "gem",
+    "gitlab_native": ">2.2.9 <=2.5.0",
+    "expected_vers": "vers:gem/>2.2.9|<=2.5.0"
+  },
+  {
+    "test_index": 55,
+    "scheme": "gem",
+    "gitlab_native": ">=2.6.0 <=3.0.2",
+    "expected_vers": "vers:gem/>=2.6.0|<=3.0.2"
+  },
+  {
+    "test_index": 56,
+    "scheme": "gem",
+    "gitlab_native": ">=2.6.0 <=3.0.2",
+    "expected_vers": "vers:gem/>=2.6.0|<=3.0.2"
+  },
+  {
+    "test_index": 57,
+    "scheme": "gem",
+    "gitlab_native": ">=2.0.0 <=2.6.13",
+    "expected_vers": "vers:gem/>=2.0.0|<=2.6.13"
+  },
+  {
+    "test_index": 58,
+    "scheme": "gem",
+    "gitlab_native": ">2.2.9 <=2.5.0",
+    "expected_vers": "vers:gem/>2.2.9|<=2.5.0"
+  },
+  {
+    "test_index": 59,
+    "scheme": "gem",
+    "gitlab_native": ">2.2.9 <=2.5.0",
+    "expected_vers": "vers:gem/>2.2.9|<=2.5.0"
+  },
+  {
+    "test_index": 60,
+    "scheme": "gem",
+    "gitlab_native": ">=2.6.0 <=3.0.2",
+    "expected_vers": "vers:gem/>=2.6.0|<=3.0.2"
+  },
+  {
+    "test_index": 61,
+    "scheme": "gem",
+    "gitlab_native": ">=0.8.11 <=0.9.0",
+    "expected_vers": "vers:gem/>=0.8.11|<=0.9.0"
+  },
+  {
+    "test_index": 62,
+    "scheme": "gem",
+    "gitlab_native": ">=2.6.0 <=3.0.2",
+    "expected_vers": "vers:gem/>=2.6.0|<=3.0.2"
+  },
+  {
+    "test_index": 63,
+    "scheme": "gem",
+    "gitlab_native": ">2.2.9 <=2.5.0",
+    "expected_vers": "vers:gem/>2.2.9|<=2.5.0"
+  },
+  {
+    "test_index": 64,
+    "scheme": "gem",
+    "gitlab_native": ">=2.7.6 <=3.0.2",
+    "expected_vers": "vers:gem/>=2.7.6|<=3.0.2"
+  },
+  {
+    "test_index": 65,
+    "scheme": "gem",
+    "gitlab_native": ">2.2.9 <=2.5.0",
+    "expected_vers": "vers:gem/>2.2.9|<=2.5.0"
+  },
+  {
+    "test_index": 66,
+    "scheme": "gem",
+    "gitlab_native": "<1.5.3||>2.0.0 <2.0.5",
+    "expected_vers": "vers:gem/<1.5.3|>2.0.0|<2.0.5"
+  },
+  {
+    "test_index": 67,
+    "scheme": "gem",
+    "gitlab_native": "<1.5.5 || >=1.6.0 <1.6.8 || >=1.7.0 <1.7.7",
+    "expected_vers": "vers:gem/<1.5.5|>=1.6.0|<1.6.8|>=1.7.0|<1.7.7"
+  },
+  {
+    "test_index": 68,
+    "scheme": "gem",
+    "gitlab_native": ">=2.0.0 <=2.0.1",
+    "expected_vers": "vers:gem/>=2.0.0|<=2.0.1"
+  },
+  {
+    "test_index": 69,
+    "scheme": "gem",
+    "gitlab_native": ">=7.0.0 <7.12.1||<6.25.1",
+    "expected_vers": "vers:gem/<6.25.1|>=7.0.0|<7.12.1"
+  },
+  {
+    "test_index": 70,
+    "scheme": "gem",
+    "gitlab_native": ">=3.1.0 <3.1.1||>=2.7.0 <2.7.21",
+    "expected_vers": "vers:gem/>=2.7.0|<2.7.21|>=3.1.0|<3.1.1"
+  },
+  {
+    "test_index": 71,
+    "scheme": "gem",
+    "gitlab_native": "<2.7.26||>=3.0.0 <3.6.2",
+    "expected_vers": "vers:gem/<2.7.26|>=3.0.0|<3.6.2"
+  },
+  {
+    "test_index": 72,
+    "scheme": "gem",
+    "gitlab_native": ">=6.0.0 <6.13.0",
+    "expected_vers": "vers:gem/>=6.0.0|<6.13.0"
+  },
+  {
+    "test_index": 73,
+    "scheme": "gem",
+    "gitlab_native": ">=2.7.0 <2.7.23||>3.2.0 <3.2.4",
+    "expected_vers": "vers:gem/>=2.7.0|<2.7.23|>3.2.0|<3.2.4"
+  },
+  {
+    "test_index": 74,
+    "scheme": "gem",
+    "gitlab_native": "<2.6.17||>=2.7.0 <2.7.18",
+    "expected_vers": "vers:gem/<2.6.17|>=2.7.0|<2.7.18"
+  },
+  {
+    "test_index": 75,
+    "scheme": "gem",
+    "gitlab_native": ">=7.0.0 <7.12.1||<6.25.1",
+    "expected_vers": "vers:gem/<6.25.1|>=7.0.0|<7.12.1"
+  },
+  {
+    "test_index": 76,
+    "scheme": "gem",
+    "gitlab_native": ">=2.7.0 <2.7.18",
+    "expected_vers": "vers:gem/>=2.7.0|<2.7.18"
+  },
+  {
+    "test_index": 77,
+    "scheme": "gem",
+    "gitlab_native": ">=2.7.1 <2.7.13",
+    "expected_vers": "vers:gem/>=2.7.1|<2.7.13"
+  },
+  {
+    "test_index": 78,
+    "scheme": "gem",
+    "gitlab_native": "<2.6.17||>=2.7.0 <2.7.18",
+    "expected_vers": "vers:gem/<2.6.17|>=2.7.0|<2.7.18"
+  },
+  {
+    "test_index": 79,
+    "scheme": "gem",
+    "gitlab_native": ">=2.7.0 <2.7.22||>=3.2.0 <3.2.2",
+    "expected_vers": "vers:gem/>=2.7.0|<2.7.22|>=3.2.0|<3.2.2"
+  },
+  {
+    "test_index": 80,
+    "scheme": "gem",
+    "gitlab_native": ">=2.0.0 <2.2.5 || >=3.0.0 <3.0.1",
+    "expected_vers": "vers:gem/>=2.0.0|<2.2.5|>=3.0.0|<3.0.1"
+  },
+  {
+    "test_index": 81,
+    "scheme": "gem",
+    "gitlab_native": ">=1.4.0 <1.5.4 || >=1.6 <2.0.5 || >=2.1.0 <2.1.3 || >=2.2.0 <2.2.3",
+    "expected_vers": "vers:gem/>=1.4.0|<1.5.4|>=1.6|<2.0.5|>=2.1.0|<2.1.3|>=2.2.0|<2.2.3"
+  },
+  {
+    "test_index": 82,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0 <3.2.15",
+    "expected_vers": "vers:gem/>=3.0.0|<3.2.15"
+  },
+  {
+    "test_index": 83,
+    "scheme": "gem",
+    "gitlab_native": ">=1.4.0 <1.5.4",
+    "expected_vers": "vers:gem/>=1.4.0|<1.5.4"
+  },
+  {
+    "test_index": 84,
+    "scheme": "gem",
+    "gitlab_native": ">=2.3.0 <2.8.0",
+    "expected_vers": "vers:gem/>=2.3.0|<2.8.0"
+  },
+  {
+    "test_index": 85,
+    "scheme": "gem",
+    "gitlab_native": ">=0.0.1 <=2.6.0",
+    "expected_vers": "vers:gem/>=0.0.1|<=2.6.0"
+  },
+  {
+    "test_index": 86,
+    "scheme": "gem",
+    "gitlab_native": ">=0.1.7 <=2.6.0",
+    "expected_vers": "vers:gem/>=0.1.7|<=2.6.0"
+  },
+  {
+    "test_index": 87,
+    "scheme": "gem",
+    "gitlab_native": ">=2.0.1 <=2.6.0",
+    "expected_vers": "vers:gem/>=2.0.1|<=2.6.0"
+  },
+  {
+    "test_index": 88,
+    "scheme": "gem",
+    "gitlab_native": ">=2.1.2.0 <=2.6.0",
+    "expected_vers": "vers:gem/>=2.1.2.0|<=2.6.0"
+  },
+  {
+    "test_index": 89,
+    "scheme": "gem",
+    "gitlab_native": ">=0.119.0 <=0.125.1",
+    "expected_vers": "vers:gem/>=0.119.0|<=0.125.1"
+  },
+  {
+    "test_index": 90,
+    "scheme": "gem",
+    "gitlab_native": "<3.0.17 || >=3.1.0 <3.1.8 || >=3.2.0 <3.2.8",
+    "expected_vers": "vers:gem/<3.0.17|>=3.1.0|<3.1.8|>=3.2.0|<3.2.8"
+  },
+  {
+    "test_index": 91,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0 <3.1.12 || >=3.2.0 <3.2.13",
+    "expected_vers": "vers:gem/>=3.0.0|<3.1.12|>=3.2.0|<3.2.13"
+  },
+  {
+    "test_index": 92,
+    "scheme": "gem",
+    "gitlab_native": "<2.3.16 || >=2.4.0 <3.0.20",
+    "expected_vers": "vers:gem/<2.3.16|>=2.4.0|<3.0.20"
+  },
+  {
+    "test_index": 93,
+    "scheme": "gem",
+    "gitlab_native": "<5.2.4.3||>=6.0.0 <6.0.3.1",
+    "expected_vers": "vers:gem/<5.2.4.3|>=6.0.0|<6.0.3.1"
+  },
+  {
+    "test_index": 94,
+    "scheme": "gem",
+    "gitlab_native": ">=4.1.0a <4.1.11||>=4.2.0a <4.2.2",
+    "expected_vers": "vers:gem/>=4.1.0a|<4.1.11|>=4.2.0a|<4.2.2"
+  },
+  {
+    "test_index": 95,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0 <3.0.12||>=3.1.0 <3.1.4||>=3.2.0 <3.2.2",
+    "expected_vers": "vers:gem/>=3.0.0|<3.0.12|>=3.1.0|<3.1.4|>=3.2.0|<3.2.2"
+  },
+  {
+    "test_index": 96,
+    "scheme": "gem",
+    "gitlab_native": "<3.2.22||>=4.0.0a <4.1.11||>=4.2.0a <4.2.2",
+    "expected_vers": "vers:gem/<3.2.22|>=4.0.0a|<4.1.11|>=4.2.0a|<4.2.2"
+  },
+  {
+    "test_index": 97,
+    "scheme": "gem",
+    "gitlab_native": ">=2.0.0 <2.3.13||>=3.0.0 <3.0.10",
+    "expected_vers": "vers:gem/>=2.0.0|<2.3.13|>=3.0.0|<3.0.10"
+  },
+  {
+    "test_index": 98,
+    "scheme": "gem",
+    "gitlab_native": ">=5.0.10 <5.1.11",
+    "expected_vers": "vers:gem/>=5.0.10|<5.1.11"
+  },
+  {
+    "test_index": 99,
+    "scheme": "gem",
+    "gitlab_native": ">=4.0.5 <4.0.33",
+    "expected_vers": "vers:gem/>=4.0.5|<4.0.33"
+  },
+  {
+    "test_index": 100,
+    "scheme": "gem",
+    "gitlab_native": ">=5.3.0 <5.3.2",
+    "expected_vers": "vers:gem/>=5.3.0|<5.3.2"
+  },
+  {
+    "test_index": 101,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0 <3.0.21 || >=4.0.0 <4.0.5",
+    "expected_vers": "vers:gem/>=3.0.0|<3.0.21|>=4.0.0|<4.0.5"
+  },
+  {
+    "test_index": 102,
+    "scheme": "gem",
+    "gitlab_native": ">=5.3.0 <5.3.2",
+    "expected_vers": "vers:gem/>=5.3.0|<5.3.2"
+  },
+  {
+    "test_index": 103,
+    "scheme": "gem",
+    "gitlab_native": "=4.0.0||=1.0",
+    "expected_vers": "vers:gem/1.0|4.0.0"
+  },
+  {
+    "test_index": 104,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0 <5.3.2",
+    "expected_vers": "vers:gem/>=3.0.0|<5.3.2"
+  },
+  {
+    "test_index": 105,
+    "scheme": "gem",
+    "gitlab_native": ">=5.3.0 <5.3.2",
+    "expected_vers": "vers:gem/>=5.3.0|<5.3.2"
+  },
+  {
+    "test_index": 106,
+    "scheme": "gem",
+    "gitlab_native": ">=4.0.0a <4.0.60||>=5.0.0a <5.0.22",
+    "expected_vers": "vers:gem/>=4.0.0a|<4.0.60|>=5.0.0a|<5.0.22"
+  },
+  {
+    "test_index": 107,
+    "scheme": "gem",
+    "gitlab_native": ">=2.0.2 <=3.1.1",
+    "expected_vers": "vers:gem/>=2.0.2|<=3.1.1"
+  },
+  {
+    "test_index": 108,
+    "scheme": "gem",
+    "gitlab_native": ">=0.2.0 <0.2.2||>=0.4.0 <0.4.2",
+    "expected_vers": "vers:gem/>=0.2.0|<0.2.2|>=0.4.0|<0.4.2"
+  },
+  {
+    "test_index": 109,
+    "scheme": "gem",
+    "gitlab_native": ">=0.4.0 <=0.5.2",
+    "expected_vers": "vers:gem/>=0.4.0|<=0.5.2"
+  },
+  {
+    "test_index": 110,
+    "scheme": "gem",
+    "gitlab_native": ">=2.0.0 <2.0.13||>=2.1.0 <2.1.11||>=2.2.0 <2.2.5||>=2.3.0 <2.3.10||>=2.4.0 <2.4.11||>=2.5.0 <2.5.3||>=2.6.0 <2.6.3||>=2.7.0 <2.7.8||>=2.8.0 <2.8.2||>=2.9.0 <2.9.2||>=2.10.0 <2.10.4||>=2.11.0 <2.11.2",
+    "expected_vers": "vers:gem/>=2.0.0|<2.0.13|>=2.1.0|<2.1.11|>=2.2.0|<2.2.5|>=2.3.0|<2.3.10|>=2.4.0|<2.4.11|>=2.5.0|<2.5.3|>=2.6.0|<2.6.3|>=2.7.0|<2.7.8|>=2.8.0|<2.8.2|>=2.9.0|<2.9.2|>=2.10.0|<2.10.4|>=2.11.0|<2.11.2"
+  },
+  {
+    "test_index": 111,
+    "scheme": "gem",
+    "gitlab_native": "<2.5.5.rc1||>=2.6.0.alpha0 <2.6.6.rc1||>=2.7.0.alpha0 <2.7.0.rc1",
+    "expected_vers": "vers:gem/<2.5.5.rc1|>=2.6.0.alpha0|<2.6.6.rc1|>=2.7.0.alpha0|<2.7.0.rc1"
+  },
+  {
+    "test_index": 112,
+    "scheme": "gem",
+    "gitlab_native": ">=2.3.2 <=2.4.3",
+    "expected_vers": "vers:gem/>=2.3.2|<=2.4.3"
+  },
+  {
+    "test_index": 113,
+    "scheme": "gem",
+    "gitlab_native": ">=2.3.2 <=2.4.1",
+    "expected_vers": "vers:gem/>=2.3.2|<=2.4.1"
+  },
+  {
+    "test_index": 114,
+    "scheme": "gem",
+    "gitlab_native": ">=2.0.0.rc3 <2.0.2",
+    "expected_vers": "vers:gem/>=2.0.0.rc3|<2.0.2"
+  },
+  {
+    "test_index": 115,
+    "scheme": "gem",
+    "gitlab_native": "<2.0.1||>=3.0.0 <3.0.2||>=3.1.0 <3.1.2||=3.2.0",
+    "expected_vers": "vers:gem/<2.0.1|>=3.0.0|<3.0.2|>=3.1.0|<3.1.2|3.2.0"
+  },
+  {
+    "test_index": 116,
+    "scheme": "gem",
+    "gitlab_native": ">=0.119.0 <=0.125.1",
+    "expected_vers": "vers:gem/>=0.119.0|<=0.125.1"
+  },
+  {
+    "test_index": 117,
+    "scheme": "gem",
+    "gitlab_native": ">=0.5.0 <1.9.4",
+    "expected_vers": "vers:gem/>=0.5.0|<1.9.4"
+  },
+  {
+    "test_index": 118,
+    "scheme": "gem",
+    "gitlab_native": "<1.0.3 || >=1.1.0 <1.1.4 || >=1.2.0 <2.0.2",
+    "expected_vers": "vers:gem/<1.0.3|>=1.1.0|<1.1.4|>=1.2.0|<2.0.2"
+  },
+  {
+    "test_index": 119,
+    "scheme": "gem",
+    "gitlab_native": ">=0.1.33 <=1.1.2",
+    "expected_vers": "vers:gem/>=0.1.33|<=1.1.2"
+  },
+  {
+    "test_index": 120,
+    "scheme": "gem",
+    "gitlab_native": ">=0.5.0 <0.5.4",
+    "expected_vers": "vers:gem/>=0.5.0|<0.5.4"
+  },
+  {
+    "test_index": 121,
+    "scheme": "gem",
+    "gitlab_native": "<2.8.6||>=2.9.0 <2.9.6||>=2.10.0 <2.10.2",
+    "expected_vers": "vers:gem/<2.8.6|>=2.9.0|<2.9.6|>=2.10.0|<2.10.2"
+  },
+  {
+    "test_index": 122,
+    "scheme": "gem",
+    "gitlab_native": "<2.11.14||>=3.0.0 <3.0.5||>=3.1.0 <3.1.5",
+    "expected_vers": "vers:gem/<2.11.14|>=3.0.0|<3.0.5|>=3.1.0|<3.1.5"
+  },
+  {
+    "test_index": 123,
+    "scheme": "gem",
+    "gitlab_native": ">=2.31.0 <2.31.2||>=2.32.0 <2.49.1",
+    "expected_vers": "vers:gem/>=2.31.0|<2.31.2|>=2.32.0|<2.49.1"
+  },
+  {
+    "test_index": 124,
+    "scheme": "gem",
+    "gitlab_native": "<3.9.0||>=5.0.0 <5.2.0||>=6.0.0 <6.3.0",
+    "expected_vers": "vers:gem/<3.9.0|>=5.0.0|<5.2.0|>=6.0.0|<6.3.0"
+  },
+  {
+    "test_index": 125,
+    "scheme": "gem",
+    "gitlab_native": "<3.8.0||>=5.0.0 <5.1.0||>=6.0.0 <6.2.0",
+    "expected_vers": "vers:gem/<3.8.0|>=5.0.0|<5.1.0|>=6.0.0|<6.2.0"
+  },
+  {
+    "test_index": 126,
+    "scheme": "gem",
+    "gitlab_native": "<1.5.5||>=2.0.0.beta1 <2.0.0",
+    "expected_vers": "vers:gem/<1.5.5|>=2.0.0.beta1|<2.0.0"
+  },
+  {
+    "test_index": 127,
+    "scheme": "gem",
+    "gitlab_native": ">=0.2.0 <=0.3.2",
+    "expected_vers": "vers:gem/>=0.2.0|<=0.3.2"
+  },
+  {
+    "test_index": 128,
+    "scheme": "gem",
+    "gitlab_native": ">0.11.0 <0.13.3",
+    "expected_vers": "vers:gem/>0.11.0|<0.13.3"
+  },
+  {
+    "test_index": 129,
+    "scheme": "gem",
+    "gitlab_native": ">=0.0.0 <0.12.1",
+    "expected_vers": "vers:gem/>=0.0.0|<0.12.1"
+  },
+  {
+    "test_index": 130,
+    "scheme": "gem",
+    "gitlab_native": ">=0.0.0 <0.12.1",
+    "expected_vers": "vers:gem/>=0.0.0|<0.12.1"
+  },
+  {
+    "test_index": 131,
+    "scheme": "gem",
+    "gitlab_native": ">=0.0.0 <0.12.1",
+    "expected_vers": "vers:gem/>=0.0.0|<0.12.1"
+  },
+  {
+    "test_index": 132,
+    "scheme": "gem",
+    "gitlab_native": "<=0.14.1||>=0.15.0 <=0.15.1||>=0.16.0 <=0.16.3||>=0.17.0 <=0.17.2||=0.18.0",
+    "expected_vers": "vers:gem/<=0.14.1|>=0.15.0|<=0.15.1|>=0.16.0|<=0.16.3|>=0.17.0|<=0.17.2|0.18.0"
+  },
+  {
+    "test_index": 133,
+    "scheme": "gem",
+    "gitlab_native": ">=0.0.0 <0.12.1",
+    "expected_vers": "vers:gem/>=0.0.0|<0.12.1"
+  },
+  {
+    "test_index": 134,
+    "scheme": "gem",
+    "gitlab_native": ">=3.7.0 <3.7.13||>=4.0.0 <4.0.5||>=4.1.0 <4.1.12",
+    "expected_vers": "vers:gem/>=3.7.0|<3.7.13|>=4.0.0|<4.0.5|>=4.1.0|<4.1.12"
+  },
+  {
+    "test_index": 135,
+    "scheme": "gem",
+    "gitlab_native": ">=9.0.0.pre1 <9.2.5",
+    "expected_vers": "vers:gem/>=9.0.0.pre1|<9.2.5"
+  },
+  {
+    "test_index": 136,
+    "scheme": "gem",
+    "gitlab_native": ">=8.0 <=9.2.4",
+    "expected_vers": "vers:gem/>=8.0|<=9.2.4"
+  },
+  {
+    "test_index": 137,
+    "scheme": "gem",
+    "gitlab_native": ">=8.0 <=9.2.4",
+    "expected_vers": "vers:gem/>=8.0|<=9.2.4"
+  },
+  {
+    "test_index": 138,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0 <3.0.4",
+    "expected_vers": "vers:gem/>=3.0.0|<3.0.4"
+  },
+  {
+    "test_index": 139,
+    "scheme": "gem",
+    "gitlab_native": ">=2.0.0 <2.3.13||>=3.0.0 <3.0.10",
+    "expected_vers": "vers:gem/>=2.0.0|<2.3.13|>=3.0.0|<3.0.10"
+  },
+  {
+    "test_index": 140,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0.alpha <3.2.22.3",
+    "expected_vers": "vers:gem/>=3.0.0.alpha|<3.2.22.3"
+  },
+  {
+    "test_index": 141,
+    "scheme": "gem",
+    "gitlab_native": ">=3.2.0a <3.2.20||>=4.0.0a <4.0.11||>=4.1.0a <4.1.7||>=4.2.0.a <4.2.0.beta3",
+    "expected_vers": "vers:gem/>=3.2.0a|<3.2.20|>=4.0.0a|<4.0.11|>=4.1.0a|<4.1.7|>=4.2.0.a|<4.2.0.beta3"
+  },
+  {
+    "test_index": 142,
+    "scheme": "gem",
+    "gitlab_native": ">=4.0.0 <4.0.2",
+    "expected_vers": "vers:gem/>=4.0.0|<4.0.2"
+  },
+  {
+    "test_index": 143,
+    "scheme": "gem",
+    "gitlab_native": "<2.3.18 || >=2.4.0 <3.1.12 || >=3.2.0 <3.2.13",
+    "expected_vers": "vers:gem/<2.3.18|>=2.4.0|<3.1.12|>=3.2.0|<3.2.13"
+  },
+  {
+    "test_index": 144,
+    "scheme": "gem",
+    "gitlab_native": "<3.2.17||>=4.0 <4.0.3||>=4.1.0 <4.1.1",
+    "expected_vers": "vers:gem/<3.2.17|>=4.0|<4.0.3|>=4.1.0|<4.1.1"
+  },
+  {
+    "test_index": 145,
+    "scheme": "gem",
+    "gitlab_native": ">=6.0.0 <=6.0.4||>=6.1.0 <=6.1.4",
+    "expected_vers": "vers:gem/>=6.0.0|<=6.0.4|>=6.1.0|<=6.1.4"
+  },
+  {
+    "test_index": 146,
+    "scheme": "gem",
+    "gitlab_native": ">=3.2.0.0.alpha <3.2.22.2||>=4.0.0.0.alpha <4.1.14.2||>=4.2.0.0.alpha <4.2.5.2",
+    "expected_vers": "vers:gem/>=3.2.0.0.alpha|<3.2.22.2|>=4.0.0.0.alpha|<4.1.14.2|>=4.2.0.0.alpha|<4.2.5.2"
+  },
+  {
+    "test_index": 147,
+    "scheme": "gem",
+    "gitlab_native": "<2.3.15 || >=2.4.0 <3.0.19 || >=3.1.0 <3.1.10 || >=3.2.0 <3.2.11",
+    "expected_vers": "vers:gem/<2.3.15|>=2.4.0|<3.0.19|>=3.1.0|<3.1.10|>=3.2.0|<3.2.11"
+  },
+  {
+    "test_index": 148,
+    "scheme": "gem",
+    "gitlab_native": ">=6.0.0 <6.0.3.4",
+    "expected_vers": "vers:gem/>=6.0.0|<6.0.3.4"
+  },
+  {
+    "test_index": 149,
+    "scheme": "gem",
+    "gitlab_native": ">=4.2.0.alpha <4.2.5.1||>=4.0.0.alpha <4.1.14.1",
+    "expected_vers": "vers:gem/>=4.0.0.alpha|<4.1.14.1|>=4.2.0.alpha|<4.2.5.1"
+  },
+  {
+    "test_index": 150,
+    "scheme": "gem",
+    "gitlab_native": "<3.2.16||>=4.0 <4.0.2",
+    "expected_vers": "vers:gem/<3.2.16|>=4.0|<4.0.2"
+  },
+  {
+    "test_index": 151,
+    "scheme": "gem",
+    "gitlab_native": ">=2.3.0.alpha0 <2.3.13",
+    "expected_vers": "vers:gem/>=2.3.0.alpha0|<2.3.13"
+  },
+  {
+    "test_index": 152,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0 <3.0.16 || >=3.1.0 <3.1.7 || >=3.2.0 <3.2.7",
+    "expected_vers": "vers:gem/>=3.0.0|<3.0.16|>=3.1.0|<3.1.7|>=3.2.0|<3.2.7"
+  },
+  {
+    "test_index": 153,
+    "scheme": "gem",
+    "gitlab_native": "<3.0.17 || >=3.1.0 <3.1.8 || >=3.2.0 <3.2.8",
+    "expected_vers": "vers:gem/<3.0.17|>=3.1.0|<3.1.8|>=3.2.0|<3.2.8"
+  },
+  {
+    "test_index": 154,
+    "scheme": "gem",
+    "gitlab_native": ">=5.0.0.alpha <5.0.0.beta1.1||>=4.2.0.alpha <4.2.5.1||>=4.0.0.alpha <4.1.14.1||<3.2.22.1",
+    "expected_vers": "vers:gem/<3.2.22.1|>=4.0.0.alpha|<4.1.14.1|>=4.2.0.alpha|<4.2.5.1|>=5.0.0.alpha|<5.0.0.beta1.1"
+  },
+  {
+    "test_index": 155,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0.alpha0 <3.0.12||>=3.1.0.alpha0 <3.1.4||>=3.2.0.alpha0 <3.2.2",
+    "expected_vers": "vers:gem/>=3.0.0.alpha0|<3.0.12|>=3.1.0.alpha0|<3.1.4|>=3.2.0.alpha0|<3.2.2"
+  },
+  {
+    "test_index": 156,
+    "scheme": "gem",
+    "gitlab_native": "<3.0.13||>=3.1.0 <3.1.5||>=3.2.0 <3.2.4",
+    "expected_vers": "vers:gem/<3.0.13|>=3.1.0|<3.1.5|>=3.2.0|<3.2.4"
+  },
+  {
+    "test_index": 157,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0 <3.0.10",
+    "expected_vers": "vers:gem/>=3.0.0|<3.0.10"
+  },
+  {
+    "test_index": 158,
+    "scheme": "gem",
+    "gitlab_native": ">=3.2.0.0.alpha <3.2.22.2",
+    "expected_vers": "vers:gem/>=3.2.0.0.alpha|<3.2.22.2"
+  },
+  {
+    "test_index": 159,
+    "scheme": "gem",
+    "gitlab_native": ">=6.0.0 <6.0.3.7||>=6.1.0 <6.1.0.2",
+    "expected_vers": "vers:gem/>=6.0.0|<6.0.3.7|>=6.1.0|<6.1.0.2"
+  },
+  {
+    "test_index": 160,
+    "scheme": "gem",
+    "gitlab_native": ">=3.2.0a <3.2.21||>=4.0.0a <4.0.11.1||>=4.1.0a <4.1.7.1",
+    "expected_vers": "vers:gem/>=3.2.0a|<3.2.21|>=4.0.0a|<4.0.11.1|>=4.1.0a|<4.1.7.1"
+  },
+  {
+    "test_index": 161,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0.alpha0 <3.0.11||>=3.1.0.alpha0 <3.1.2",
+    "expected_vers": "vers:gem/>=3.0.0.alpha0|<3.0.11|>=3.1.0.alpha0|<3.1.2"
+  },
+  {
+    "test_index": 162,
+    "scheme": "gem",
+    "gitlab_native": ">=5.2.0.0 <5.2.4.6||>=6.0.0.0 <6.0.3.7||>=6.1.0.0 <6.1.3.1",
+    "expected_vers": "vers:gem/>=5.2.0.0|<5.2.4.6|>=6.0.0.0|<6.0.3.7|>=6.1.0.0|<6.1.3.1"
+  },
+  {
+    "test_index": 163,
+    "scheme": "gem",
+    "gitlab_native": ">=2.3.0 <2.3.13",
+    "expected_vers": "vers:gem/>=2.3.0|<2.3.13"
+  },
+  {
+    "test_index": 164,
+    "scheme": "gem",
+    "gitlab_native": ">=5.0.0.alpha <5.0.0.beta1.1||>=4.2.0.alpha <4.2.5.1||>=4.0.0.alpha <4.1.14.1||<3.2.22.1",
+    "expected_vers": "vers:gem/<3.2.22.1|>=4.0.0.alpha|<4.1.14.1|>=4.2.0.alpha|<4.2.5.1|>=5.0.0.alpha|<5.0.0.beta1.1"
+  },
+  {
+    "test_index": 165,
+    "scheme": "gem",
+    "gitlab_native": ">=6.0.0 <=6.0.4.1||>=6.1.0 <=6.1.4.1",
+    "expected_vers": "vers:gem/>=6.0.0|<=6.0.4.1|>=6.1.0|<=6.1.4.1"
+  },
+  {
+    "test_index": 166,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.6 <3.2.16||>=4.0.0.beta1 <4.0.2",
+    "expected_vers": "vers:gem/>=3.0.6|<3.2.16|>=4.0.0.beta1|<4.0.2"
+  },
+  {
+    "test_index": 167,
+    "scheme": "gem",
+    "gitlab_native": "<5.2.4.6||>=5.2.5 <5.2.6||>=6.0.0 <6.0.3.7||>=6.1.0 <6.1.3.2",
+    "expected_vers": "vers:gem/<5.2.4.6|>=5.2.5|<5.2.6|>=6.0.0|<6.0.3.7|>=6.1.0|<6.1.3.2"
+  },
+  {
+    "test_index": 168,
+    "scheme": "gem",
+    "gitlab_native": "<5.2.4.3||>=6.0.0 <6.0.3.1||=10.0",
+    "expected_vers": "vers:gem/<5.2.4.3|>=6.0.0|<6.0.3.1|10.0"
+  },
+  {
+    "test_index": 169,
+    "scheme": "gem",
+    "gitlab_native": "<2.3.18 || >=2.4.0 <3.1.12 || >=3.2.0 <3.2.13",
+    "expected_vers": "vers:gem/<2.3.18|>=2.4.0|<3.1.12|>=3.2.0|<3.2.13"
+  },
+  {
+    "test_index": 170,
+    "scheme": "gem",
+    "gitlab_native": "<3.2.16||>=4.0.0 <4.0.5||>=4.1.0 <4.1.1",
+    "expected_vers": "vers:gem/<3.2.16|>=4.0.0|<4.0.5|>=4.1.0|<4.1.1"
+  },
+  {
+    "test_index": 171,
+    "scheme": "gem",
+    "gitlab_native": ">=2.0.0 <3.2.16||>=4.0.0.beta1 <4.0.2",
+    "expected_vers": "vers:gem/>=2.0.0|<3.2.16|>=4.0.0.beta1|<4.0.2"
+  },
+  {
+    "test_index": 172,
+    "scheme": "gem",
+    "gitlab_native": ">=5.0.0.0 <=5.2.6.1||>=6.0.0.0 <=6.0.4.5||>=6.1.0.0 <=6.1.4.5||>=7.0.0.0 <=7.0.2.1",
+    "expected_vers": "vers:gem/>=5.0.0.0|<=5.2.6.1|>=6.0.0.0|<=6.0.4.5|>=6.1.0.0|<=6.1.4.5|>=7.0.0.0|<=7.0.2.1"
+  },
+  {
+    "test_index": 173,
+    "scheme": "gem",
+    "gitlab_native": ">=6.0.0 <6.0.3.5||>=6.1.0 <6.1.2.1||=33",
+    "expected_vers": "vers:gem/>=6.0.0|<6.0.3.5|>=6.1.0|<6.1.2.1|33"
+  },
+  {
+    "test_index": 174,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0 <3.0.17 || >=3.1.0 <3.1.8 || >=3.2.0 <3.2.8",
+    "expected_vers": "vers:gem/>=3.0.0|<3.0.17|>=3.1.0|<3.1.8|>=3.2.0|<3.2.8"
+  },
+  {
+    "test_index": 175,
+    "scheme": "gem",
+    "gitlab_native": "<3.0.14||>=3.1.0 <3.1.6||>=3.2.0 <3.2.6",
+    "expected_vers": "vers:gem/<3.0.14|>=3.1.0|<3.1.6|>=3.2.0|<3.2.6"
+  },
+  {
+    "test_index": 176,
+    "scheme": "gem",
+    "gitlab_native": "<5.2.4.3||>=6.0.0 <6.0.3.1",
+    "expected_vers": "vers:gem/<5.2.4.3|>=6.0.0|<6.0.3.1"
+  },
+  {
+    "test_index": 177,
+    "scheme": "gem",
+    "gitlab_native": "<3.2.16||>=4.0.0 <4.0.2",
+    "expected_vers": "vers:gem/<3.2.16|>=4.0.0|<4.0.2"
+  },
+  {
+    "test_index": 178,
+    "scheme": "gem",
+    "gitlab_native": ">=0.3.0 <1.2",
+    "expected_vers": "vers:gem/>=0.3.0|<1.2"
+  },
+  {
+    "test_index": 179,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0 <3.12.6||>=4.0.0 <4.3.5",
+    "expected_vers": "vers:gem/>=3.0.0|<3.12.6|>=4.0.0|<4.3.5"
+  },
+  {
+    "test_index": 180,
+    "scheme": "gem",
+    "gitlab_native": "<=4.3.8||>=5.0.0 <=5.5.0",
+    "expected_vers": "vers:gem/<=4.3.8|>=5.0.0|<=5.5.0"
+  },
+  {
+    "test_index": 181,
+    "scheme": "gem",
+    "gitlab_native": "<4.3.8||>=5.0.0 <5.3.1",
+    "expected_vers": "vers:gem/<4.3.8|>=5.0.0|<5.3.1"
+  },
+  {
+    "test_index": 182,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0 <3.12.6||>=4.0.0 <4.3.5",
+    "expected_vers": "vers:gem/>=3.0.0|<3.12.6|>=4.0.0|<4.3.5"
+  },
+  {
+    "test_index": 183,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0 <3.12.2||>=4.0.0 <4.3.1",
+    "expected_vers": "vers:gem/>=3.0.0|<3.12.2|>=4.0.0|<4.3.1"
+  },
+  {
+    "test_index": 184,
+    "scheme": "gem",
+    "gitlab_native": "<4.3.11||>=5.0.0 <5.6.2",
+    "expected_vers": "vers:gem/<4.3.11|>=5.0.0|<5.6.2"
+  },
+  {
+    "test_index": 185,
+    "scheme": "gem",
+    "gitlab_native": "<=3.12.3||>=4.0.0 <=4.3.2",
+    "expected_vers": "vers:gem/<=3.12.3|>=4.0.0|<=4.3.2"
+  },
+  {
+    "test_index": 186,
+    "scheme": "gem",
+    "gitlab_native": "<4.3.12||>=5.0.0 <5.6.4",
+    "expected_vers": "vers:gem/<4.3.12|>=5.0.0|<5.6.4"
+  },
+  {
+    "test_index": 187,
+    "scheme": "gem",
+    "gitlab_native": "<=3.12.3||>=4.0.0 <=4.3.2",
+    "expected_vers": "vers:gem/<=3.12.3|>=4.0.0|<=4.3.2"
+  },
+  {
+    "test_index": 188,
+    "scheme": "gem",
+    "gitlab_native": ">=1.3.0 <1.3.1 || >=1.2.0 <1.2.2 || >=1.1.0 <1.1.1 || >=1.0.0 <1.0.4",
+    "expected_vers": "vers:gem/>=1.0.0|<1.0.4|>=1.1.0|<1.1.1|>=1.2.0|<1.2.2|>=1.3.0|<1.3.1"
+  },
+  {
+    "test_index": 189,
+    "scheme": "gem",
+    "gitlab_native": ">=1.1.0.rc1 <1.1.0.rc5",
+    "expected_vers": "vers:gem/>=1.1.0.rc1|<1.1.0.rc5"
+  },
+  {
+    "test_index": 190,
+    "scheme": "gem",
+    "gitlab_native": ">=1.79.0 <13.3.9||>=13.4.0 <13.4.5||>=13.5.0 <13.5.2",
+    "expected_vers": "vers:gem/>=1.79.0|<13.3.9|>=13.4.0|<13.4.5|>=13.5.0|<13.5.2"
+  },
+  {
+    "test_index": 191,
+    "scheme": "gem",
+    "gitlab_native": ">=2.1.0pre1 <2.1.1",
+    "expected_vers": "vers:gem/>=2.1.0pre1|<2.1.1"
+  },
+  {
+    "test_index": 192,
+    "scheme": "gem",
+    "gitlab_native": "<1.6.0||>=1.6.2 <1.6.3",
+    "expected_vers": "vers:gem/<1.6.0|>=1.6.2|<1.6.3"
+  },
+  {
+    "test_index": 193,
+    "scheme": "gem",
+    "gitlab_native": "<1.7.6||>=2.0.0 <2.0.2",
+    "expected_vers": "vers:gem/<1.7.6|>=2.0.0|<2.0.2"
+  },
+  {
+    "test_index": 194,
+    "scheme": "gem",
+    "gitlab_native": ">=0.4.0 <=0.4.1",
+    "expected_vers": "vers:gem/>=0.4.0|<=0.4.1"
+  },
+  {
+    "test_index": 195,
+    "scheme": "gem",
+    "gitlab_native": ">=0.119.0 <=0.125.1",
+    "expected_vers": "vers:gem/>=0.119.0|<=0.125.1"
+  },
+  {
+    "test_index": 196,
+    "scheme": "gem",
+    "gitlab_native": "<2.1.4||>=2.2.0 <2.2.3",
+    "expected_vers": "vers:gem/<2.1.4|>=2.2.0|<2.2.3"
+  },
+  {
+    "test_index": 197,
+    "scheme": "gem",
+    "gitlab_native": "<1.6.12||>1.6.12 <2.0.8",
+    "expected_vers": "vers:gem/<1.6.12|>1.6.12|<2.0.8"
+  },
+  {
+    "test_index": 198,
+    "scheme": "gem",
+    "gitlab_native": ">=1.3.0 <=1.4.2",
+    "expected_vers": "vers:gem/>=1.3.0|<=1.4.2"
+  },
+  {
+    "test_index": 199,
+    "scheme": "gem",
+    "gitlab_native": ">=1.1.0 <1.1.6 || >=1.2.0 <1.2.8 || >=1.3.0 <1.3.10 || >=1.4.0 <1.4.5 || >=1.5.0 <1.5.2",
+    "expected_vers": "vers:gem/>=1.1.0|<1.1.6|>=1.2.0|<1.2.8|>=1.3.0|<1.3.10|>=1.4.0|<1.4.5|>=1.5.0|<1.5.2"
+  },
+  {
+    "test_index": 200,
+    "scheme": "gem",
+    "gitlab_native": ">=0.4 <=1.4.1",
+    "expected_vers": "vers:gem/>=0.4|<=1.4.1"
+  },
+  {
+    "test_index": 201,
+    "scheme": "gem",
+    "gitlab_native": ">=1.4.0 <1.4.5 || >=1.5.0 <1.5.2",
+    "expected_vers": "vers:gem/>=1.4.0|<1.4.5|>=1.5.0|<1.5.2"
+  },
+  {
+    "test_index": 202,
+    "scheme": "gem",
+    "gitlab_native": "<1.1.3||>=1.2.0 <1.2.5||>=1.3.0.beta <1.3.6",
+    "expected_vers": "vers:gem/<1.1.3|>=1.2.0|<1.2.5|>=1.3.0.beta|<1.3.6"
+  },
+  {
+    "test_index": 203,
+    "scheme": "gem",
+    "gitlab_native": "<1.4.6||>=1.5.0a <1.5.4||>=1.6.0a <1.6.2",
+    "expected_vers": "vers:gem/<1.4.6|>=1.5.0a|<1.5.4|>=1.6.0a|<1.6.2"
+  },
+  {
+    "test_index": 204,
+    "scheme": "gem",
+    "gitlab_native": ">=2.0.4 <=2.0.5",
+    "expected_vers": "vers:gem/>=2.0.4|<=2.0.5"
+  },
+  {
+    "test_index": 205,
+    "scheme": "gem",
+    "gitlab_native": ">=1.1.0 <=1.4.3",
+    "expected_vers": "vers:gem/>=1.1.0|<=1.4.3"
+  },
+  {
+    "test_index": 206,
+    "scheme": "gem",
+    "gitlab_native": ">=1.6.0 <1.6.11||>=2.0.0 <2.0.6",
+    "expected_vers": "vers:gem/>=1.6.0|<1.6.11|>=2.0.0|<2.0.6"
+  },
+  {
+    "test_index": 207,
+    "scheme": "gem",
+    "gitlab_native": ">=0.8.0 <0.8.7.1",
+    "expected_vers": "vers:gem/>=0.8.0|<0.8.7.1"
+  },
+  {
+    "test_index": 208,
+    "scheme": "gem",
+    "gitlab_native": ">=4.0.0.alpha <4.2.7.1||>=5.0.0.alpha <5.0.0.1",
+    "expected_vers": "vers:gem/>=4.0.0.alpha|<4.2.7.1|>=5.0.0.alpha|<5.0.0.1"
+  },
+  {
+    "test_index": 209,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0 <4.2.11.1||>=5.0.0 <5.0.7.2||>=5.1.0 <5.1.6.2||>=5.2.0 <5.2.2.1",
+    "expected_vers": "vers:gem/>=3.0.0|<4.2.11.1|>=5.0.0|<5.0.7.2|>=5.1.0|<5.1.6.2|>=5.2.0|<5.2.2.1"
+  },
+  {
+    "test_index": 210,
+    "scheme": "gem",
+    "gitlab_native": ">=4.0.0.0.alpha <4.1.14.2",
+    "expected_vers": "vers:gem/>=4.0.0.0.alpha|<4.1.14.2"
+  },
+  {
+    "test_index": 211,
+    "scheme": "gem",
+    "gitlab_native": ">=5.0.0.alpha <5.0.0.beta1.1||>=4.2.0.alpha <4.2.5.1||<4.1.14.1",
+    "expected_vers": "vers:gem/<4.1.14.1|>=4.2.0.alpha|<4.2.5.1|>=5.0.0.alpha|<5.0.0.beta1.1"
+  },
+  {
+    "test_index": 212,
+    "scheme": "gem",
+    "gitlab_native": "<5.2.4.2||>=6.0.0 <6.0.2.2",
+    "expected_vers": "vers:gem/<5.2.4.2|>=6.0.0|<6.0.2.2"
+  },
+  {
+    "test_index": 213,
+    "scheme": "gem",
+    "gitlab_native": "<5.2.4.4||>=6.0.0.0 <6.0.3.3",
+    "expected_vers": "vers:gem/<5.2.4.4|>=6.0.0.0|<6.0.3.3"
+  },
+  {
+    "test_index": 214,
+    "scheme": "gem",
+    "gitlab_native": "<4.2.11.1||>=5.0.0 <5.0.7.2||>=5.1.0 <5.1.6.2||>=5.2.0 <5.2.2.1",
+    "expected_vers": "vers:gem/<4.2.11.1|>=5.0.0|<5.0.7.2|>=5.1.0|<5.1.6.2|>=5.2.0|<5.2.2.1"
+  },
+  {
+    "test_index": 215,
+    "scheme": "gem",
+    "gitlab_native": "<0.26.6||>=0.27.0 <0.27.4",
+    "expected_vers": "vers:gem/<0.26.6|>=0.27.0|<0.27.4"
+  },
+  {
+    "test_index": 216,
+    "scheme": "gem",
+    "gitlab_native": "<0.21.3||>0.22a",
+    "expected_vers": "vers:gem/<0.21.3|>0.22a"
+  },
+  {
+    "test_index": 217,
+    "scheme": "gem",
+    "gitlab_native": "=3.0.23||=3.0.28",
+    "expected_vers": "vers:gem/3.0.23|3.0.28"
+  },
+  {
+    "test_index": 218,
+    "scheme": "gem",
+    "gitlab_native": ">=2.0.4 <4.0.0.beta1",
+    "expected_vers": "vers:gem/>=2.0.4|<4.0.0.beta1"
+  },
+  {
+    "test_index": 219,
+    "scheme": "gem",
+    "gitlab_native": ">=2.0 <2.7.7",
+    "expected_vers": "vers:gem/>=2.0|<2.7.7"
+  },
+  {
+    "test_index": 220,
+    "scheme": "gem",
+    "gitlab_native": "<2.8.6||>=2.9.0 <2.9.6||>=2.10.0 <2.10.2",
+    "expected_vers": "vers:gem/<2.8.6|>=2.9.0|<2.9.6|>=2.10.0|<2.10.2"
+  },
+  {
+    "test_index": 221,
+    "scheme": "gem",
+    "gitlab_native": ">=1.6.1 <1.8.0",
+    "expected_vers": "vers:gem/>=1.6.1|<1.8.0"
+  },
+  {
+    "test_index": 222,
+    "scheme": "gem",
+    "gitlab_native": ">=1.6.10 <=1.6.13",
+    "expected_vers": "vers:gem/>=1.6.10|<=1.6.13"
+  },
+  {
+    "test_index": 223,
+    "scheme": "gem",
+    "gitlab_native": "<2.8.6||>=2.9.0 <2.9.6||>=2.10.0 <2.10.2",
+    "expected_vers": "vers:gem/<2.8.6|>=2.9.0|<2.9.6|>=2.10.0|<2.10.2"
+  },
+  {
+    "test_index": 224,
+    "scheme": "gem",
+    "gitlab_native": "<2.11.14||>=3.0.0 <3.0.5||>=3.1.0 <3.1.5",
+    "expected_vers": "vers:gem/<2.11.14|>=3.0.0|<3.0.5|>=3.1.0|<3.1.5"
+  },
+  {
+    "test_index": 225,
+    "scheme": "gem",
+    "gitlab_native": "<2.11.12||>=3.0.0 <3.0.3||>=3.1.0 <3.1.3",
+    "expected_vers": "vers:gem/<2.11.12|>=3.0.0|<3.0.3|>=3.1.0|<3.1.3"
+  },
+  {
+    "test_index": 226,
+    "scheme": "gem",
+    "gitlab_native": "<2.11.13||>=3.0.0 <3.0.4||>=3.1.0 <3.1.4",
+    "expected_vers": "vers:gem/<2.11.13|>=3.0.0|<3.0.4|>=3.1.0|<3.1.4"
+  },
+  {
+    "test_index": 227,
+    "scheme": "gem",
+    "gitlab_native": ">=5.2.0 <5.2.1.1",
+    "expected_vers": "vers:gem/>=5.2.0|<5.2.1.1"
+  },
+  {
+    "test_index": 228,
+    "scheme": "gem",
+    "gitlab_native": "<5.2.4.2||>=6.0.0 <6.0.3.1",
+    "expected_vers": "vers:gem/<5.2.4.2|>=6.0.0|<6.0.3.1"
+  },
+  {
+    "test_index": 229,
+    "scheme": "gem",
+    "gitlab_native": ">=5.2.0 <=5.2.6.2||>=6.0.0 <=6.0.4.6||>=6.1.0 <=6.1.4.6||>=7.0.0 <=7.0.2.2",
+    "expected_vers": "vers:gem/>=5.2.0|<=5.2.6.2|>=6.0.0|<=6.0.4.6|>=6.1.0|<=6.1.4.6|>=7.0.0|<=7.0.2.2"
+  },
+  {
+    "test_index": 230,
+    "scheme": "gem",
+    "gitlab_native": ">=3.1.0 <=3.1.3",
+    "expected_vers": "vers:gem/>=3.1.0|<=3.1.3"
+  },
+  {
+    "test_index": 231,
+    "scheme": "gem",
+    "gitlab_native": "<3.1.3||>=4.0.0a <4.0.4",
+    "expected_vers": "vers:gem/<3.1.3|>=4.0.0a|<4.0.4"
+  },
+  {
+    "test_index": 232,
+    "scheme": "gem",
+    "gitlab_native": ">=1.5 <1.5.11 || >=1.6 <1.6.1",
+    "expected_vers": "vers:gem/>=1.5|<1.5.11|>=1.6|<1.6.1"
+  },
+  {
+    "test_index": 233,
+    "scheme": "gem",
+    "gitlab_native": ">=1.6.0 <=1.6.7",
+    "expected_vers": "vers:gem/>=1.6.0|<=1.6.7"
+  },
+  {
+    "test_index": 234,
+    "scheme": "gem",
+    "gitlab_native": "<1.6.6.3||>=1.6.7.rc2 <1.6.7.rc4",
+    "expected_vers": "vers:gem/<1.6.6.3|>=1.6.7.rc2|<1.6.7.rc4"
+  },
+  {
+    "test_index": 235,
+    "scheme": "gem",
+    "gitlab_native": ">=1.5 <1.5.11 || >=1.6 <1.6.1",
+    "expected_vers": "vers:gem/>=1.5|<1.5.11|>=1.6|<1.6.1"
+  },
+  {
+    "test_index": 236,
+    "scheme": "gem",
+    "gitlab_native": "<1.6.6.4 ||>=1.6.7.rc2 <1.6.7.rc4",
+    "expected_vers": "vers:gem/<1.6.6.4|>=1.6.7.rc2|<1.6.7.rc4"
+  },
+  {
+    "test_index": 237,
+    "scheme": "gem",
+    "gitlab_native": ">=1.6.0.0a <1.6.7.2",
+    "expected_vers": "vers:gem/>=1.6.0.0a|<1.6.7.2"
+  },
+  {
+    "test_index": 238,
+    "scheme": "gem",
+    "gitlab_native": "<1.6.6.4||>=1.6.7.rc1 <1.6.7.rc4",
+    "expected_vers": "vers:gem/<1.6.6.4|>=1.6.7.rc1|<1.6.7.rc4"
+  },
+  {
+    "test_index": 239,
+    "scheme": "gem",
+    "gitlab_native": ">=1.6.0.rc1 <1.6.7.1",
+    "expected_vers": "vers:gem/>=1.6.0.rc1|<1.6.7.1"
+  },
+  {
+    "test_index": 240,
+    "scheme": "gem",
+    "gitlab_native": ">=3.2.0 <3.5.2",
+    "expected_vers": "vers:gem/>=3.2.0|<3.5.2"
+  },
+  {
+    "test_index": 241,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0 <3.12.6||>=4.0.0 <4.3.5",
+    "expected_vers": "vers:gem/>=3.0.0|<3.12.6|>=4.0.0|<4.3.5"
+  },
+  {
+    "test_index": 242,
+    "scheme": "gem",
+    "gitlab_native": "<4.3.8||>=5.0.0 <5.3.1",
+    "expected_vers": "vers:gem/<4.3.8|>=5.0.0|<5.3.1"
+  },
+  {
+    "test_index": 243,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0 <3.12.6||>=4.0.0 <4.3.5",
+    "expected_vers": "vers:gem/>=3.0.0|<3.12.6|>=4.0.0|<4.3.5"
+  },
+  {
+    "test_index": 244,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0 <3.12.2||>=4.0.0 <4.3.1",
+    "expected_vers": "vers:gem/>=3.0.0|<3.12.2|>=4.0.0|<4.3.1"
+  },
+  {
+    "test_index": 245,
+    "scheme": "gem",
+    "gitlab_native": "<=3.12.3||>=4.0.0 <=4.3.2",
+    "expected_vers": "vers:gem/<=3.12.3|>=4.0.0|<=4.3.2"
+  },
+  {
+    "test_index": 246,
+    "scheme": "gem",
+    "gitlab_native": "<4.3.12||>=5.0.0 <5.6.4",
+    "expected_vers": "vers:gem/<4.3.12|>=5.0.0|<5.6.4"
+  },
+  {
+    "test_index": 247,
+    "scheme": "gem",
+    "gitlab_native": "<=3.12.3||>=4.0.0 <=4.3.2",
+    "expected_vers": "vers:gem/<=3.12.3|>=4.0.0|<=4.3.2"
+  },
+  {
+    "test_index": 248,
+    "scheme": "gem",
+    "gitlab_native": "<=4.0.1||>=4.1.0 <=4.4.1",
+    "expected_vers": "vers:gem/<=4.0.1|>=4.1.0|<=4.4.1"
+  },
+  {
+    "test_index": 249,
+    "scheme": "gem",
+    "gitlab_native": ">=5.1.0 <5.1.6.1||>=4.2.0 <4.2.11||>=5.0.0 <5.0.7.1||>=5.2.0 <5.2.1.1",
+    "expected_vers": "vers:gem/>=4.2.0|<4.2.11|>=5.0.0|<5.0.7.1|>=5.1.0|<5.1.6.1|>=5.2.0|<5.2.1.1"
+  },
+  {
+    "test_index": 250,
+    "scheme": "gem",
+    "gitlab_native": ">=2.0.0 <2.2.3||>=2.3.0 <2.3.4",
+    "expected_vers": "vers:gem/>=2.0.0|<2.2.3|>=2.3.0|<2.3.4"
+  },
+  {
+    "test_index": 251,
+    "scheme": "gem",
+    "gitlab_native": "<2.2.2||>=2.3.0 <2.3.5",
+    "expected_vers": "vers:gem/<2.2.2|>=2.3.0|<2.3.5"
+  },
+  {
+    "test_index": 252,
+    "scheme": "gem",
+    "gitlab_native": ">4.0.0.beta <4.0.3 || =4.1.0.beta1",
+    "expected_vers": "vers:gem/>4.0.0.beta|<4.0.3|4.1.0.beta1"
+  },
+  {
+    "test_index": 253,
+    "scheme": "gem",
+    "gitlab_native": "<2.3.11||>=3.0.0 <3.0.4",
+    "expected_vers": "vers:gem/<2.3.11|>=3.0.0|<3.0.4"
+  },
+  {
+    "test_index": 254,
+    "scheme": "gem",
+    "gitlab_native": ">=6.1.0 <=6.1.3.2",
+    "expected_vers": "vers:gem/>=6.1.0|<=6.1.3.2"
+  },
+  {
+    "test_index": 255,
+    "scheme": "gem",
+    "gitlab_native": ">=5.2.0 <5.2.1.1",
+    "expected_vers": "vers:gem/>=5.2.0|<5.2.1.1"
+  },
+  {
+    "test_index": 256,
+    "scheme": "gem",
+    "gitlab_native": ">=5.2.0 <5.2.2.1||>=6.0.0.beta1 <6.0.0",
+    "expected_vers": "vers:gem/>=5.2.0|<5.2.2.1|>=6.0.0.beta1|<6.0.0"
+  },
+  {
+    "test_index": 257,
+    "scheme": "gem",
+    "gitlab_native": "<5.2.4.3||>=6.0.0 <6.0.3.1",
+    "expected_vers": "vers:gem/<5.2.4.3|>=6.0.0|<6.0.3.1"
+  },
+  {
+    "test_index": 258,
+    "scheme": "gem",
+    "gitlab_native": "<3.2.17 || >=4.0.0.beta <4.0.3 || =4.1.0.beta1",
+    "expected_vers": "vers:gem/<3.2.17|>=4.0.0.beta|<4.0.3|4.1.0.beta1"
+  },
+  {
+    "test_index": 259,
+    "scheme": "gem",
+    "gitlab_native": ">=6.0.0 <6.0.4.1||>=6.1.0 <6.1.4.1",
+    "expected_vers": "vers:gem/>=6.0.0|<6.0.4.1|>=6.1.0|<6.1.4.1"
+  },
+  {
+    "test_index": 260,
+    "scheme": "gem",
+    "gitlab_native": ">=4.0.0 <=4.2.5.1",
+    "expected_vers": "vers:gem/>=4.0.0|<=4.2.5.1"
+  },
+  {
+    "test_index": 261,
+    "scheme": "gem",
+    "gitlab_native": ">=6.0.0 <6.0.3.4",
+    "expected_vers": "vers:gem/>=6.0.0|<6.0.3.4"
+  },
+  {
+    "test_index": 262,
+    "scheme": "gem",
+    "gitlab_native": ">=6.0.0 <6.0.3.2",
+    "expected_vers": "vers:gem/>=6.0.0|<6.0.3.2"
+  },
+  {
+    "test_index": 263,
+    "scheme": "gem",
+    "gitlab_native": ">=4.2.0 <5.2.4.5||>=6.0.0 <6.0.3.5||>=6.1.0 <6.1.2.1",
+    "expected_vers": "vers:gem/>=4.2.0|<5.2.4.5|>=6.0.0|<6.0.3.5|>=6.1.0|<6.1.2.1"
+  },
+  {
+    "test_index": 264,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0 <3.2.16||>=4.0.0.beta1 <4.0.2",
+    "expected_vers": "vers:gem/>=3.0.0|<3.2.16|>=4.0.0.beta1|<4.0.2"
+  },
+  {
+    "test_index": 265,
+    "scheme": "gem",
+    "gitlab_native": ">=4.2.0 <=4.2.7",
+    "expected_vers": "vers:gem/>=4.2.0|<=4.2.7"
+  },
+  {
+    "test_index": 266,
+    "scheme": "gem",
+    "gitlab_native": ">=1.1.0 <1.1.6",
+    "expected_vers": "vers:gem/>=1.1.0|<1.1.6"
+  },
+  {
+    "test_index": 267,
+    "scheme": "gem",
+    "gitlab_native": "<4.2.11.1||>=5.0.0 <5.0.7.2||>=5.1.0 <5.1.6.2||>=5.2.0 <5.2.2.1",
+    "expected_vers": "vers:gem/<4.2.11.1|>=5.0.0|<5.0.7.2|>=5.1.0|<5.1.6.2|>=5.2.0|<5.2.2.1"
+  },
+  {
+    "test_index": 268,
+    "scheme": "gem",
+    "gitlab_native": "<5.2.4.3||>=6.0.0 <6.0.3.1",
+    "expected_vers": "vers:gem/<5.2.4.3|>=6.0.0|<6.0.3.1"
+  },
+  {
+    "test_index": 269,
+    "scheme": "gem",
+    "gitlab_native": ">=2.0.0 <2.3.11||>=3.0.0 <3.0.7",
+    "expected_vers": "vers:gem/>=2.0.0|<2.3.11|>=3.0.0|<3.0.7"
+  },
+  {
+    "test_index": 270,
+    "scheme": "gem",
+    "gitlab_native": "<5.2.4.2||>=6.0.0 <6.0.3.1",
+    "expected_vers": "vers:gem/<5.2.4.2|>=6.0.0|<6.0.3.1"
+  },
+  {
+    "test_index": 271,
+    "scheme": "gem",
+    "gitlab_native": ">=2.1.0 <2.3.11||>=3.0.0 <3.0.4",
+    "expected_vers": "vers:gem/>=2.1.0|<2.3.11|>=3.0.0|<3.0.4"
+  },
+  {
+    "test_index": 272,
+    "scheme": "gem",
+    "gitlab_native": ">=2.1.0 <2.2.3||>=2.3.0 <2.3.4",
+    "expected_vers": "vers:gem/>=2.1.0|<2.2.3|>=2.3.0|<2.3.4"
+  },
+  {
+    "test_index": 273,
+    "scheme": "gem",
+    "gitlab_native": "<3.2.22.2||>=4.0.0.0 <4.1.14.2",
+    "expected_vers": "vers:gem/<3.2.22.2|>=4.0.0.0|<4.1.14.2"
+  },
+  {
+    "test_index": 274,
+    "scheme": "gem",
+    "gitlab_native": ">=6.0.0 <6.0.3.7||>=6.1.0 <6.1.0.2",
+    "expected_vers": "vers:gem/>=6.0.0|<6.0.3.7|>=6.1.0|<6.1.0.2"
+  },
+  {
+    "test_index": 275,
+    "scheme": "gem",
+    "gitlab_native": ">=4.0.0 <=5.0.0",
+    "expected_vers": "vers:gem/>=4.0.0|<=5.0.0"
+  },
+  {
+    "test_index": 276,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0 <3.0.11||>=3.1.0 <3.1.2",
+    "expected_vers": "vers:gem/>=3.0.0|<3.0.11|>=3.1.0|<3.1.2"
+  },
+  {
+    "test_index": 277,
+    "scheme": "gem",
+    "gitlab_native": ">=5.2.0.0 <5.2.4.6||>=6.0.0.0 <6.0.3.7||>=6.1.0.0 <6.1.3.1",
+    "expected_vers": "vers:gem/>=5.2.0.0|<5.2.4.6|>=6.0.0.0|<6.0.3.7|>=6.1.0.0|<6.1.3.1"
+  },
+  {
+    "test_index": 278,
+    "scheme": "gem",
+    "gitlab_native": ">=4.0.0 <=5.0.0",
+    "expected_vers": "vers:gem/>=4.0.0|<=5.0.0"
+  },
+  {
+    "test_index": 279,
+    "scheme": "gem",
+    "gitlab_native": ">=4.2.0 <4.2.11||>=5.0.0 <5.0.7.1||>=5.1.0 <5.1.6.1||>=5.2.0 <5.2.1.1",
+    "expected_vers": "vers:gem/>=4.2.0|<4.2.11|>=5.0.0|<5.0.7.1|>=5.1.0|<5.1.6.1|>=5.2.0|<5.2.1.1"
+  },
+  {
+    "test_index": 280,
+    "scheme": "gem",
+    "gitlab_native": ">=6.0.4.2 <=6.1.4.2||=7.0.0",
+    "expected_vers": "vers:gem/>=6.0.4.2|<=6.1.4.2|7.0.0"
+  },
+  {
+    "test_index": 281,
+    "scheme": "gem",
+    "gitlab_native": "<5.2.4.6||>=5.2.5 <5.2.6||>=6.0.0 <6.0.3.7||>=6.1.0 <6.1.3.2",
+    "expected_vers": "vers:gem/<5.2.4.6|>=5.2.5|<5.2.6|>=6.0.0|<6.0.3.7|>=6.1.0|<6.1.3.2"
+  },
+  {
+    "test_index": 282,
+    "scheme": "gem",
+    "gitlab_native": "<5.2.4.3||>=6.0.0 <6.0.3.1",
+    "expected_vers": "vers:gem/<5.2.4.3|>=6.0.0|<6.0.3.1"
+  },
+  {
+    "test_index": 283,
+    "scheme": "gem",
+    "gitlab_native": ">=4.1 <4.1.1 || >4.0 <4.0.5 || >=0.0 <3.2.18",
+    "expected_vers": "vers:gem/>=0.0|<3.2.18|>4.0|<4.0.5|>=4.1|<4.1.1"
+  },
+  {
+    "test_index": 284,
+    "scheme": "gem",
+    "gitlab_native": ">=1.1.0 <1.1.6",
+    "expected_vers": "vers:gem/>=1.1.0|<1.1.6"
+  },
+  {
+    "test_index": 285,
+    "scheme": "gem",
+    "gitlab_native": "<4.2.11.1||>=5.0.0 <5.0.7.2||>=5.1.0 <5.1.6.2||>=5.2.0 <5.2.2.1",
+    "expected_vers": "vers:gem/<4.2.11.1|>=5.0.0|<5.0.7.2|>=5.1.0|<5.1.6.2|>=5.2.0|<5.2.2.1"
+  },
+  {
+    "test_index": 286,
+    "scheme": "gem",
+    "gitlab_native": ">=5.0.0 <5.2.6.2||>=6.0.0 <6.0.4.6||>=6.1.0 <6.1.4.6||>=7.0.0 <7.0.2.2",
+    "expected_vers": "vers:gem/>=5.0.0|<5.2.6.2|>=6.0.0|<6.0.4.6|>=6.1.0|<6.1.4.6|>=7.0.0|<7.0.2.2"
+  },
+  {
+    "test_index": 287,
+    "scheme": "gem",
+    "gitlab_native": ">=6.0.0 <6.0.3.5||>=6.1.0 <6.1.2.1",
+    "expected_vers": "vers:gem/>=6.0.0|<6.0.3.5|>=6.1.0|<6.1.2.1"
+  },
+  {
+    "test_index": 288,
+    "scheme": "gem",
+    "gitlab_native": ">=2.1.0 <2.1.3||>=2.2.0 <2.2.2",
+    "expected_vers": "vers:gem/>=2.1.0|<2.1.3|>=2.2.0|<2.2.2"
+  },
+  {
+    "test_index": 289,
+    "scheme": "gem",
+    "gitlab_native": "<5.2.4.3||>=6.0.0 <6.0.3.1",
+    "expected_vers": "vers:gem/<5.2.4.3|>=6.0.0|<6.0.3.1"
+  },
+  {
+    "test_index": 290,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0.beta <3.2.17",
+    "expected_vers": "vers:gem/>=3.0.0.beta|<3.2.17"
+  },
+  {
+    "test_index": 291,
+    "scheme": "gem",
+    "gitlab_native": ">=2.3.9 <2.3.10||>=3.0.0 <3.0.1",
+    "expected_vers": "vers:gem/>=2.3.9|<2.3.10|>=3.0.0|<3.0.1"
+  },
+  {
+    "test_index": 292,
+    "scheme": "gem",
+    "gitlab_native": ">=1.0.0 <1.2.0",
+    "expected_vers": "vers:gem/>=1.0.0|<1.2.0"
+  },
+  {
+    "test_index": 293,
+    "scheme": "gem",
+    "gitlab_native": ">=5.2.0 <5.2.2.1||>=6.0.0.beta1 <6.0.0",
+    "expected_vers": "vers:gem/>=5.2.0|<5.2.2.1|>=6.0.0.beta1|<6.0.0"
+  },
+  {
+    "test_index": 294,
+    "scheme": "gem",
+    "gitlab_native": "<2.3.18 || >=2.4.0 <3.0.0 || >=3.1.0 <3.1.12 || >=3.2.0 <3.2.13",
+    "expected_vers": "vers:gem/<2.3.18|>=2.4.0|<3.0.0|>=3.1.0|<3.1.12|>=3.2.0|<3.2.13"
+  },
+  {
+    "test_index": 295,
+    "scheme": "gem",
+    "gitlab_native": ">=3.2.0 <4.0.3",
+    "expected_vers": "vers:gem/>=3.2.0|<4.0.3"
+  },
+  {
+    "test_index": 296,
+    "scheme": "gem",
+    "gitlab_native": ">=2.0.0 <2.3.13||>=3.0.0 <3.0.10",
+    "expected_vers": "vers:gem/>=2.0.0|<2.3.13|>=3.0.0|<3.0.10"
+  },
+  {
+    "test_index": 297,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0 <3.0.13||>=3.1.0 <3.1.5||>=3.2.0 <3.2.4",
+    "expected_vers": "vers:gem/>=3.0.0|<3.0.13|>=3.1.0|<3.1.5|>=3.2.0|<3.2.4"
+  },
+  {
+    "test_index": 298,
+    "scheme": "gem",
+    "gitlab_native": ">=4.2.0 <5.2.4.5||>=6.0.0 <6.0.3.5||>=6.1.0 <6.1.2.1",
+    "expected_vers": "vers:gem/>=4.2.0|<5.2.4.5|>=6.0.0|<6.0.3.5|>=6.1.0|<6.1.2.1"
+  },
+  {
+    "test_index": 299,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0 <3.0.18||>=3.1.0 <3.1.9||>=3.2.0 <3.2.10",
+    "expected_vers": "vers:gem/>=3.0.0|<3.0.18|>=3.1.0|<3.1.9|>=3.2.0|<3.2.10"
+  },
+  {
+    "test_index": 300,
+    "scheme": "gem",
+    "gitlab_native": ">=4.0.0.alpha <4.2.7.1",
+    "expected_vers": "vers:gem/>=4.0.0.alpha|<4.2.7.1"
+  },
+  {
+    "test_index": 301,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0 <3.0.13||>=3.1.0 <3.1.5||>=3.2.0 <3.2.4",
+    "expected_vers": "vers:gem/>=3.0.0|<3.0.13|>=3.1.0|<3.1.5|>=3.2.0|<3.2.4"
+  },
+  {
+    "test_index": 302,
+    "scheme": "gem",
+    "gitlab_native": ">4.0.0 <4.0.7||>4.1.0 <4.1.3",
+    "expected_vers": "vers:gem/>4.0.0|<4.0.7|>4.1.0|<4.1.3"
+  },
+  {
+    "test_index": 303,
+    "scheme": "gem",
+    "gitlab_native": "<2.3.17 || >=2.4.0 <3.1.0",
+    "expected_vers": "vers:gem/<2.3.17|>=2.4.0|<3.1.0"
+  },
+  {
+    "test_index": 304,
+    "scheme": "gem",
+    "gitlab_native": ">=5.0.0.alpha <5.0.0.beta1.1||>=4.2.0.alpha <4.2.5.1||>=4.0.0.alpha <4.1.14.1||>=3.1.0.alpha <3.2.22.1",
+    "expected_vers": "vers:gem/>=3.1.0.alpha|<3.2.22.1|>=4.0.0.alpha|<4.1.14.1|>=4.2.0.alpha|<4.2.5.1|>=5.0.0.alpha|<5.0.0.beta1.1"
+  },
+  {
+    "test_index": 305,
+    "scheme": "gem",
+    "gitlab_native": ">4.0.0 <4.0.9||>4.1.0 <4.1.5",
+    "expected_vers": "vers:gem/>4.0.0|<4.0.9|>4.1.0|<4.1.5"
+  },
+  {
+    "test_index": 306,
+    "scheme": "gem",
+    "gitlab_native": ">2.0.0 <3.2.19",
+    "expected_vers": "vers:gem/>2.0.0|<3.2.19"
+  },
+  {
+    "test_index": 307,
+    "scheme": "gem",
+    "gitlab_native": "<3.0.19 || >=3.1.0 <3.1.10 || >=3.2.0 <3.2.11",
+    "expected_vers": "vers:gem/<3.0.19|>=3.1.0|<3.1.10|>=3.2.0|<3.2.11"
+  },
+  {
+    "test_index": 308,
+    "scheme": "gem",
+    "gitlab_native": ">=3.0.0 <3.0.4",
+    "expected_vers": "vers:gem/>=3.0.0|<3.0.4"
+  },
+  {
+    "test_index": 309,
+    "scheme": "gem",
+    "gitlab_native": "<3.0.14||>=3.1.0 <3.1.6||>=3.2.0 <3.2.6",
+    "expected_vers": "vers:gem/<3.0.14|>=3.1.0|<3.1.6|>=3.2.0|<3.2.6"
+  },
+  {
+    "test_index": 310,
+    "scheme": "gem",
+    "gitlab_native": ">0.0.0a <0.6.4||>0.7.0a <0.7.3",
+    "expected_vers": "vers:gem/>0.0.0a|<0.6.4|>0.7.0a|<0.7.3"
+  },
+  {
+    "test_index": 311,
+    "scheme": "gem",
+    "gitlab_native": ">=1.2 <3.5.0",
+    "expected_vers": "vers:gem/>=1.2|<3.5.0"
+  },
+  {
+    "test_index": 312,
+    "scheme": "gem",
+    "gitlab_native": ">=3.11 <6.3.1",
+    "expected_vers": "vers:gem/>=3.11|<6.3.1"
+  },
+  {
+    "test_index": 313,
+    "scheme": "gem",
+    "gitlab_native": ">=1.0.3 <3.5.0",
+    "expected_vers": "vers:gem/>=1.0.3|<3.5.0"
+  },
+  {
+    "test_index": 314,
+    "scheme": "gem",
+    "gitlab_native": ">=2.3.0 <3.9.5 || >=3.10 <3.12 || >=4.0.0.preview2 <4.0.0.rc.2",
+    "expected_vers": "vers:gem/>=2.3.0|<3.9.5|>=3.10|<3.12|>=4.0.0.preview2|<4.0.0.rc.2"
+  },
+  {
+    "test_index": 315,
+    "scheme": "gem",
+    "gitlab_native": ">=4.2.2 <4.3.6",
+    "expected_vers": "vers:gem/>=4.2.2|<4.3.6"
+  },
+  {
+    "test_index": 316,
+    "scheme": "gem",
+    "gitlab_native": ">=3.1.4 <5.2.0",
+    "expected_vers": "vers:gem/>=3.1.4|<5.2.0"
+  },
+  {
+    "test_index": 317,
+    "scheme": "gem",
+    "gitlab_native": "<0.5.1||>=0.6.0 <0.6.6",
+    "expected_vers": "vers:gem/<0.5.1|>=0.6.0|<0.6.6"
+  }
+]
