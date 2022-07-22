@@ -10,7 +10,7 @@ import unittest
 
 class BaseTests(unittest.TestCase):
     def test_codestyle(self):
-        args = "venv/bin/black --check -l 100 setup.py src tests"
+        args = "black --check -l 100 setup.py src tests"
         try:
             subprocess.check_output(args.split())
         except subprocess.CalledProcessError as e:

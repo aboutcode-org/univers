@@ -22,7 +22,7 @@ class BaseTests(unittest.TestCase):
         if setup_cfg["metadata"]["name"] != "skeleton":
             return
 
-        args = "venv/bin/black --check -l 100 setup.py etc tests"
+        args = "black --check -l 100 setup.py etc tests"
         try:
             subprocess.check_output(args.split())
         except subprocess.CalledProcessError as e:
