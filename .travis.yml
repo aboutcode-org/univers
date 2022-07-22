@@ -16,7 +16,9 @@ python:
   - "3.9"
 
 # Scripts to run at install stage
-install: ./configure --dev
+install: |
+  ./configure --dev
+  source venv/bin/activate
 
 # Scripts to run at script stage
-script: venv/bin/pytest
+script: pytest
