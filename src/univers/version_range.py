@@ -223,6 +223,41 @@ def from_osv_v1(data, scheme):
     """
 
 
+def get_allof_constraints(cls, clause):
+    """
+    Return a list of VersionConstraint given an AllOf ``clause``.
+    """
+    if not isinstance(clause, AllOf):
+        raise ValueError(f"Unknown clause type: {clause!r}")
+    allof_constraints = []
+    for constraint in clause.clauses:
+        comparator = cls.vers_by_native_comparators[constraint.operator]
+        version = cls.version_class(str(constraint.target))
+        constraint = VersionConstraint(comparator=comparator, version=version)
+        allof_constraints.append(constraint)
+    return allof_constraints
+
+
+def get_npm_version_constraint_for_tilde_and_caret(string, cls):
+    """
+    Return a VersionConstraint for the provided ``string``.
+    """
+    spec = semantic_version.NpmSpec(string)
+    clause = spec.clause.simplify()
+    if isinstance(clause, (AnyOf, AllOf)):
+        anyof_constraints = []
+        if isinstance(clause, AnyOf):
+            for allof_clause in clause.clauses:
+                anyof_constraints.extend(get_allof_constraints(cls, allof_clause))
+        elif isinstance(clause, AllOf):
+            alloc = get_allof_constraints(cls, clause)
+            anyof_constraints.extend(alloc)
+        else:
+            raise ValueError(f"Unknown clause type: {spec!r}")
+
+    return anyof_constraints
+
+
 class NpmVersionRange(VersionRange):
     scheme = "npm"
     version_class = versions.SemverVersion
@@ -245,35 +280,49 @@ class NpmVersionRange(VersionRange):
 
         # an NpmSpec handles parsing of both the semver versions and node-semver
         # ranges at once
-        spec = semantic_version.NpmSpec(string)
 
-        clause = spec.clause.simplify()
-        assert isinstance(clause, (AnyOf, AllOf))
-        anyof_constraints = []
-        if isinstance(clause, AnyOf):
-            for allof_clause in clause.clauses:
-                anyof_constraints.extend(get_allof_constraints(cls, allof_clause))
-        elif isinstance(clause, AllOf):
-            alloc = get_allof_constraints(cls, clause)
-            anyof_constraints.extend(alloc)
-        else:
-            raise ValueError(f"Unknown clause type: {spec!r}")
+        if string == "*":
+            return cls(
+                constraints=[
+                    VersionConstraint.from_string(string="*", version_class=cls.version_class)
+                ]
+            )
 
-        return cls(constraints=anyof_constraints)
-
-
-def get_allof_constraints(cls, clause):
-    """
-    Return a list of VersionConstraint given an AllOf ``clause``.
-    """
-    assert isinstance(clause, AllOf)
-    allof_constraints = []
-    for constraint in clause.clauses:
-        comparator = cls.vers_by_native_comparators[constraint.operator]
-        version = cls.version_class(str(constraint.target))
-        constraint = VersionConstraint(comparator=comparator, version=version)
-        allof_constraints.append(constraint)
-    return allof_constraints
+        constraints = []
+        comparator = ""
+        vrc = cls.version_class
+        # A constraint item can be a comparator or a version or a version with comparator
+        # If it's empty continue
+        # If it's in `vers_by_native_comparators`, append it with the comparator and continue
+        # If it's a version, make version constraint from the version and use the comparator from the previous item and make comparator empty
+        # If it's a version with comparator, use split_req to get version and comparator to form constraint and make comparator empty
+        for constraint_item in string.split(" "):
+            if not constraint_item or constraint_item == "||":
+                continue
+            if "".join([comparator, constraint_item]) in cls.vers_by_native_comparators:
+                comparator = "".join([comparator, constraint_item])
+                comparator = cls.vers_by_native_comparators[comparator]
+                continue
+            if comparator:
+                constraint_item = constraint_item.lstrip("vV")
+                constraints.append(
+                    VersionConstraint(comparator=comparator, version=vrc(constraint_item))
+                )
+            else:
+                if constraint_item.startswith("~") or constraint_item.startswith("^"):
+                    constraints.extend(
+                        get_npm_version_constraint_for_tilde_and_caret(constraint_item, cls)
+                    )
+                else:
+                    comparator, version_constraint = split_req(
+                        constraint_item, cls.vers_by_native_comparators, default="="
+                    )
+                    version_constraint = version_constraint.lstrip("vV")
+                    constraints.append(
+                        VersionConstraint(comparator=comparator, version=vrc(version_constraint))
+                    )
+            comparator = ""
+        return cls(constraints=constraints)
 
 
 class GemVersionRange(VersionRange):
