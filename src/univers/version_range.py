@@ -238,7 +238,7 @@ def get_allof_constraints(cls, clause):
     return allof_constraints
 
 
-def get_npm_version_constraint_for_tilde_and_caret(string, cls):
+def get_npm_version_constraints_from_semver_npm_spec(string, cls):
     """
     Return a VersionConstraint for the provided ``string``.
     """
@@ -254,7 +254,6 @@ def get_npm_version_constraint_for_tilde_and_caret(string, cls):
             anyof_constraints.extend(alloc)
         else:
             raise ValueError(f"Unknown clause type: {spec!r}")
-
     return anyof_constraints
 
 
@@ -289,39 +288,56 @@ class NpmVersionRange(VersionRange):
             )
 
         constraints = []
-        comparator = ""
         vrc = cls.version_class
         # A constraint item can be a comparator or a version or a version with comparator
         # If it's empty continue
         # If it's in `vers_by_native_comparators`, append it with the comparator and continue
         # If it's a version, make version constraint from the version and use the comparator from the previous item and make comparator empty
         # If it's a version with comparator, use split_req to get version and comparator to form constraint and make comparator empty
-        for constraint_item in string.split(" "):
-            if not constraint_item or constraint_item == "||":
+
+        for range in string.split("||"):
+            if " - " in range:
+                constraints.extend(get_npm_version_constraints_from_semver_npm_spec(range, cls))
                 continue
-            if "".join([comparator, constraint_item]) in cls.vers_by_native_comparators:
-                comparator = "".join([comparator, constraint_item])
-                comparator = cls.vers_by_native_comparators[comparator]
-                continue
-            if comparator:
-                constraint_item = constraint_item.lstrip("vV")
-                constraints.append(
-                    VersionConstraint(comparator=comparator, version=vrc(constraint_item))
-                )
-            else:
-                if constraint_item.startswith("~") or constraint_item.startswith("^"):
-                    constraints.extend(
-                        get_npm_version_constraint_for_tilde_and_caret(constraint_item, cls)
+            comparator = ""
+            for constraint in range.split(" "):
+                if not constraint:
+                    continue
+                if "".join([comparator, constraint]) in cls.vers_by_native_comparators:
+                    comparator = "".join([comparator, constraint])
+                    comparator = cls.vers_by_native_comparators[comparator]
+                    continue
+                if comparator:
+                    if constraint.endswith(".x"):
+                        constraints.extend(
+                            get_npm_version_constraints_from_semver_npm_spec(constraint, cls)
+                        )
+                        continue
+                    constraint = constraint.lstrip("vV")
+                    constraints.append(
+                        VersionConstraint(comparator=comparator, version=vrc(constraint))
                     )
                 else:
-                    comparator, version_constraint = split_req(
-                        constraint_item, cls.vers_by_native_comparators, default="="
-                    )
-                    version_constraint = version_constraint.lstrip("vV")
-                    constraints.append(
-                        VersionConstraint(comparator=comparator, version=vrc(version_constraint))
-                    )
-            comparator = ""
+                    if constraint.endswith(".x"):
+                        constraints.extend(
+                            get_npm_version_constraints_from_semver_npm_spec(constraint, cls)
+                        )
+                        continue
+                    if constraint.startswith("~") or constraint.startswith("^"):
+                        constraints.extend(
+                            get_npm_version_constraints_from_semver_npm_spec(constraint, cls)
+                        )
+                    else:
+                        comparator, version_constraint = split_req(
+                            constraint, cls.vers_by_native_comparators, default="="
+                        )
+                        version_constraint = version_constraint.lstrip("vV")
+                        constraints.append(
+                            VersionConstraint(
+                                comparator=comparator, version=vrc(version_constraint)
+                            )
+                        )
+                comparator = ""
         return cls(constraints=constraints)
 
 

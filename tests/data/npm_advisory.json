@@ -728,13 +728,13 @@
   {
     "test_index": 122,
     "scheme": "npm",
-    "npm_native": ">=2.0.0-alpha8",
+    "npm_native": ">=v2.0.0-alpha8",
     "expected_vers": "vers:npm/>=2.0.0-alpha8"
   },
   {
     "test_index": 123,
     "scheme": "npm",
-    "npm_native": "<=2.0.0-alpha7",
+    "npm_native": "<=v2.0.0-alpha7",
     "expected_vers": "vers:npm/<=2.0.0-alpha7"
   },
   {
@@ -1406,13 +1406,13 @@
   {
     "test_index": 235,
     "scheme": "npm",
-    "npm_native": ">=v2.6.0",
+    "npm_native": ">=2.6.0",
     "expected_vers": "vers:npm/>=2.6.0"
   },
   {
     "test_index": 236,
     "scheme": "npm",
-    "npm_native": "<v2.6.0",
+    "npm_native": "<2.6.0",
     "expected_vers": "vers:npm/<2.6.0"
   },
   {
@@ -1653,13 +1653,13 @@
     "test_index": 276,
     "scheme": "npm",
     "npm_native": ">= 2.2.x",
-    "expected_vers": "vers:npm/>=2.2.0+x"
+    "expected_vers": "vers:npm/>=2.2.0|<2.3.0"
   },
   {
     "test_index": 277,
     "scheme": "npm",
     "npm_native": "2.0.x || 2.1.x",
-    "expected_vers": "vers:npm/2.0.0+x|2.1.0+x"
+    "expected_vers": "vers:npm/>=2.0.0|<2.1.0|>=2.1.0|<2.2.0"
   },
   {
     "test_index": 278,
@@ -2481,7 +2481,7 @@
     "test_index": 414,
     "scheme": "npm",
     "npm_native": ">= 1.x",
-    "expected_vers": "vers:npm/>=1.0.0+x"
+    "expected_vers": "vers:npm/>=1.0.0|<2.0.0"
   },
   {
     "test_index": 415,
@@ -3429,7 +3429,7 @@
     "test_index": 572,
     "scheme": "npm",
     "npm_native": ">=3.4.6 < 4.0.0|| >=4.0.5",
-    "expected_vers": "vers:npm/>=3.4.6|<4.0.0--|>=4.0.5"
+    "expected_vers": "vers:npm/>=3.4.6|<4.0.0|>=4.0.5"
   },
   {
     "test_index": 573,
@@ -4077,7 +4077,7 @@
     "test_index": 680,
     "scheme": "npm",
     "npm_native": ">= 1.x",
-    "expected_vers": "vers:npm/>=1.0.0+x"
+    "expected_vers": "vers:npm/>=1.0.0|<2.0.0"
   },
   {
     "test_index": 681,
@@ -5272,5 +5272,41 @@
     "scheme": "npm",
     "npm_native": "<3.0.1",
     "expected_vers": "vers:npm/<3.0.1"
+  },
+  {
+    "test_index": 880,
+    "scheme": "npm",
+    "npm_native": "^1.2.9",
+    "expected_vers": "vers:npm/>=1.2.9|<2.0.0"
+  },
+  {
+    "test_index": 881,
+    "scheme": "npm",
+    "npm_native": "~3.8.2",
+    "expected_vers": "vers:npm/>=3.8.2|<3.9.0"
+  },
+  {
+    "test_index": 882,
+    "scheme": "npm",
+    "npm_native": "5.0.0 - 7.2.3",
+    "expected_vers": "vers:npm/>=5.0.0|<=7.2.3"
+  },
+  {
+    "test_index": 883,
+    "scheme": "npm",
+    "npm_native": "2.1 || 2.6",
+    "expected_vers": "vers:npm/2.1.0|2.6.0"
+  },
+  {
+    "test_index": 884,
+    "scheme": "npm",
+    "npm_native": "1.1.2 1.2.2",
+    "expected_vers": "vers:npm/1.1.2|1.2.2"
+  },
+  {
+    "test_index": 885,
+    "scheme": "npm",
+    "npm_native": "<=2.1 >=1.1",
+    "expected_vers": "vers:npm/>=1.1.0|<=2.1.0"
   }
 ]
