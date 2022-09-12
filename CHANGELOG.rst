@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+Version v30.8.0
+----------------
+
+- Fix npm version ranges
+
+
 Version v30.7.0
 ----------------
 
