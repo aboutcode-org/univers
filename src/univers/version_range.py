@@ -297,20 +297,24 @@ class NpmVersionRange(VersionRange):
 
         for range in string.split("||"):
             if " - " in range:
-                constraints.extend(get_npm_version_constraints_from_semver_npm_spec(range, cls))
+                constraints.extend(
+                    get_npm_version_constraints_from_semver_npm_spec(string=range, cls=cls)
+                )
                 continue
             comparator = ""
             for constraint in range.split(" "):
                 if not constraint:
                     continue
-                if "".join([comparator, constraint]) in cls.vers_by_native_comparators:
-                    comparator = "".join([comparator, constraint])
-                    comparator = cls.vers_by_native_comparators[comparator]
+                cmp = "".join([comparator, constraint])
+                if cmp in cls.vers_by_native_comparators:
+                    comparator = cls.vers_by_native_comparators[cmp]
                     continue
                 if comparator:
                     if constraint.endswith(".x"):
                         constraints.extend(
-                            get_npm_version_constraints_from_semver_npm_spec(constraint, cls)
+                            get_npm_version_constraints_from_semver_npm_spec(
+                                string=constraint, cls=cls
+                            )
                         )
                     else:
                         constraint = constraint.lstrip("vV")
@@ -324,11 +328,15 @@ class NpmVersionRange(VersionRange):
                         or constraint.startswith("^")
                     ):
                         constraints.extend(
-                            get_npm_version_constraints_from_semver_npm_spec(constraint, cls)
+                            get_npm_version_constraints_from_semver_npm_spec(
+                                string=constraint, cls=cls
+                            )
                         )
                     else:
                         comparator, version_constraint = split_req(
-                            constraint, cls.vers_by_native_comparators, default="="
+                            string=constraint,
+                            comparators=cls.vers_by_native_comparators,
+                            default="=",
                         )
                         version_constraint = version_constraint.lstrip("vV")
                         constraints.append(
