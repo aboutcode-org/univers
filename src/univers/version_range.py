@@ -302,9 +302,7 @@ class NpmVersionRange(VersionRange):
                 )
                 continue
             comparator = ""
-            for constraint in range.split(" "):
-                if not constraint:
-                    continue
+            for constraint in range.split():
                 cmp = "".join([comparator, constraint])
                 if cmp in cls.vers_by_native_comparators:
                     comparator = cls.vers_by_native_comparators[cmp]
