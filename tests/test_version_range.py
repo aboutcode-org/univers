@@ -281,7 +281,15 @@ class TestVersionRange(TestCase):
 
 VERSION_RANGE_TESTS_BY_SCHEME = {
     "nginx": ["0.8.40+", "0.7.52-0.8.39", "0.9.10", "1.5.0+, 1.4.1+"],
-    "npm": ["^1.2.9", "~3.8.2", "5.0.0 - 7.2.3", "2.1 || 2.6", "1.1.2 1.2.2", "<=2.1 >=1.1"],
+    "npm": [
+        "^1.2.9",
+        "~3.8.2",
+        "5.0.0 - 7.2.3",
+        "2.1.0 || 2.6.0",
+        "1.1.2 1.2.2",
+        "<=2.1.0 >=1.1.0",
+        "1.2.x",
+    ],
     "openssl": ["1.1.1ak", "1.1.0", "3.0.2", "3.0.1, 0.9.7a", "1.0.2ck, 3.1.2"],
     "pypi": [">= 1.0", "<2.1.0", "!=5"],
 }
@@ -375,5 +383,13 @@ def test_composer_gitlab_version_range_parse(test_case):
     result = from_gitlab_native(
         gitlab_scheme=test_case["scheme"],
         string=test_case["gitlab_native"],
+    )
+    assert str(result) == test_case["expected_vers"]
+
+
+@pytest.mark.parametrize("test_case", json.load(open("./tests/data/npm_advisory.json")))
+def test_npm_advisory_version_range_parse(test_case):
+    result = NpmVersionRange.from_native(
+        string=test_case["npm_native"],
     )
     assert str(result) == test_case["expected_vers"]
