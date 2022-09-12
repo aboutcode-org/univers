@@ -312,18 +312,17 @@ class NpmVersionRange(VersionRange):
                         constraints.extend(
                             get_npm_version_constraints_from_semver_npm_spec(constraint, cls)
                         )
-                        continue
-                    constraint = constraint.lstrip("vV")
-                    constraints.append(
-                        VersionConstraint(comparator=comparator, version=vrc(constraint))
-                    )
-                else:
-                    if constraint.endswith(".x"):
-                        constraints.extend(
-                            get_npm_version_constraints_from_semver_npm_spec(constraint, cls)
+                    else:
+                        constraint = constraint.lstrip("vV")
+                        constraints.append(
+                            VersionConstraint(comparator=comparator, version=vrc(constraint))
                         )
-                        continue
-                    if constraint.startswith("~") or constraint.startswith("^"):
+                else:
+                    if (
+                        constraint.endswith(".x")
+                        or constraint.startswith("~")
+                        or constraint.startswith("^")
+                    ):
                         constraints.extend(
                             get_npm_version_constraints_from_semver_npm_spec(constraint, cls)
                         )
