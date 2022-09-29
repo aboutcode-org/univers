@@ -891,7 +891,7 @@ class AlpineLinuxVersionRange(VersionRange):
 
 
 class ArchLinuxVersionRange(VersionRange):
-    scheme = "archlinux"
+    scheme = "alpm"
     version_class = versions.ArchLinuxVersion
 
 
@@ -1183,7 +1183,7 @@ RANGE_CLASS_BY_SCHEMES = {
     "mozilla": MozillaVersionRange,
     "github": GitHubVersionRange,
     "ebuild": EbuildVersionRange,
-    "archlinux": ArchLinuxVersionRange,
+    "alpm": ArchLinuxVersionRange,
     "nginx": NginxVersionRange,
     "openssl": OpensslVersionRange,
 }
