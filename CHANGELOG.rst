@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+Version v30.9.0
+----------------
+
+- Change type of archlinux version ranges to alpm.
+
+
 Version v30.8.0
 ----------------
 
