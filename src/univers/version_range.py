@@ -25,6 +25,18 @@ class InvalidVersionRange(Exception):
     """
 
 
+INVERTED_COMPARATORS = {
+    ">=": "<",
+    "<=": ">",
+    "!=": "=",
+    "<": ">=",
+    ">": "<=",
+    "=": "!=",
+    "*": "^",
+    "^": "*",
+}
+
+
 @attr.s(frozen=True, order=False, eq=True, hash=True)
 class VersionRange:
     """
@@ -163,6 +175,33 @@ class VersionRange:
             constraint = VersionConstraint(comparator="=", version=version_obj)
             constraints.append(constraint)
         return cls(constraints=constraints)
+
+    def inverse(self):
+        """
+        Return the inverse of this VersionRange. For example, if this range is
+        ">=1.0.0", the inverse is "<1.0.0".
+        >>> VersionRange.from_string("vers:npm/>=1.0.0").inverse()
+        NpmVersionRange(constraints=(VersionConstraint(comparator='<', version=SemverVersion(string='1.0.0')),))
+        """
+        inverted_constraints = []
+        for constraint in self.constraints:
+            if constraint.comparator in INVERTED_COMPARATORS:
+                inverted_comparator = INVERTED_COMPARATORS[constraint.comparator]
+            else:
+                raise NotImplementedError(
+                    f"Cannot invert a range with a {constraint.comparator!r} comparator."
+                )
+            if inverted_comparator == "*" or inverted_comparator == "^":
+                inverted_constraint = VersionConstraint.from_string(
+                    string=inverted_comparator, version_class=self.version_class
+                )
+            else:
+                inverted_constraint = VersionConstraint(
+                    comparator=inverted_comparator,
+                    version=constraint.version,
+                )
+            inverted_constraints.append(inverted_constraint)
+        return self.__class__(constraints=inverted_constraints)
 
     def __str__(self):
         constraints = "|".join(str(c) for c in sorted(self.constraints))
