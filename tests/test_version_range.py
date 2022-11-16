@@ -395,10 +395,11 @@ def test_npm_advisory_version_range_parse(test_case):
     assert str(result) == test_case["expected_vers"]
 
 
-@pytest.mark.parametrize("test_case", json.load(open("./tests/data/npm_advisory.json")))
-def test_npm_advisory_inverse_version_range_parse(test_case):
-    result = NpmVersionRange.from_native(
-        string=test_case["npm_native"],
-    ).inverse()
-    result = result.inverse()
-    assert str(result) == test_case["expected_vers"]
+@pytest.mark.parametrize("test_case", json.load(open("./tests/data/inverse-data.json")))
+def test_inverse(test_case):
+    result = NpmVersionRange.from_string(test_case["original"])
+    if test_case["inverted"]:
+        inverted = NpmVersionRange.from_string(test_case["inverted"])
+        assert result.invert() == inverted
+    else:
+        assert result.invert() is None

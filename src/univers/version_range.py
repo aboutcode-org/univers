@@ -32,8 +32,6 @@ INVERTED_COMPARATORS = {
     "<": ">=",
     ">": "<=",
     "=": "!=",
-    "*": "^",
-    "^": "*",
 }
 
 
@@ -176,7 +174,7 @@ class VersionRange:
             constraints.append(constraint)
         return cls(constraints=constraints)
 
-    def inverse(self):
+    def invert(self):
         """
         Return the inverse of this VersionRange. For example, if this range is
         ">=1.0.0", the inverse is "<1.0.0".
@@ -184,6 +182,11 @@ class VersionRange:
         NpmVersionRange(constraints=(VersionConstraint(comparator='<', version=SemverVersion(string='1.0.0')),))
         """
         inverted_constraints = []
+
+        if len(self.constraints) == 1 and self.constraints[0].comparator == "*":
+            # The inverse of "*" is an empty range.
+            return None
+
         for constraint in self.constraints:
             if constraint.comparator in INVERTED_COMPARATORS:
                 inverted_comparator = INVERTED_COMPARATORS[constraint.comparator]
@@ -191,15 +194,10 @@ class VersionRange:
                 raise NotImplementedError(
                     f"Cannot invert a range with a {constraint.comparator!r} comparator."
                 )
-            if inverted_comparator == "*" or inverted_comparator == "^":
-                inverted_constraint = VersionConstraint.from_string(
-                    string=inverted_comparator, version_class=self.version_class
-                )
-            else:
-                inverted_constraint = VersionConstraint(
-                    comparator=inverted_comparator,
-                    version=constraint.version,
-                )
+            inverted_constraint = VersionConstraint(
+                comparator=inverted_comparator,
+                version=constraint.version,
+            )
             inverted_constraints.append(inverted_constraint)
         return self.__class__(constraints=inverted_constraints)
 

@@ -39,14 +39,6 @@ def operator_star(a, b):
     return True
 
 
-def operator_null(a, b):
-    """
-    Comparison operator for the star "^" constraint comparator. Since it does not matches
-    any version, it is always False.
-    """
-    return False
-
-
 # note: ORDER MATTER here: we tests startswith(key) for each key in sequence
 COMPARATORS = {
     ">=": operator.ge,
@@ -56,7 +48,6 @@ COMPARATORS = {
     ">": operator.gt,
     "=": operator.eq,
     "*": operator_star,
-    "^": operator_null,
 }
 
 
@@ -159,10 +150,10 @@ class VersionConstraint:
         if comparator not in COMPARATORS:
             raise ValueError(f"Unknown comparator: {comparator!r}")
 
-        if not version and comparator not in ["*", "^"]:
+        if not version and comparator != "*":
             raise ValueError("Empty version")
 
-        if comparator in ["*", "^"]:
+        if comparator == "*":
             version = None
         else:
             version = version_class(version)
