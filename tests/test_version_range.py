@@ -395,11 +395,18 @@ def test_npm_advisory_version_range_parse(test_case):
     assert str(result) == test_case["expected_vers"]
 
 
-@pytest.mark.parametrize("test_case", json.load(open("./tests/data/inverse-data.json")))
-def test_inverse(test_case):
-    result = NpmVersionRange.from_string(test_case["original"])
-    if test_case["inverted"]:
-        inverted = NpmVersionRange.from_string(test_case["inverted"])
-        assert result.invert() == inverted
-    else:
-        assert result.invert() is None
+def test_inverse():
+    vers_with_equal_operator = VersionRange.from_string("vers:gem/1.0")
+    assert str(vers_with_equal_operator.invert()) == "vers:gem/!=1.0"
+    assert VersionRange.from_string("vers:gem/!=1.0").invert() == vers_with_equal_operator
+
+    vers_with_less_than_operator = VersionRange.from_string("vers:gem/<1.0")
+    assert str(vers_with_less_than_operator.invert()) == "vers:gem/>=1.0"
+    assert VersionRange.from_string("vers:gem/>=1.0").invert() == vers_with_less_than_operator
+
+    vers_with_greater_than_operator = VersionRange.from_string("vers:gem/>1.0")
+    assert str(vers_with_greater_than_operator.invert()) == "vers:gem/<=1.0"
+    assert VersionRange.from_string("vers:gem/<=1.0").invert() == vers_with_greater_than_operator
+
+    vers_with_complex_constraints = VersionRange.from_string("vers:gem/<=1.0|>=3.0|<4.0|!=5.0")
+    assert str(vers_with_complex_constraints.invert()) == "vers:gem/>1.0|<3.0|>=4.0|5.0"
