@@ -5,7 +5,7 @@ Changelog
 Version v30.9.1
 ----------------
 
-- Add inverse function to VersionRange.
+- Add invert function to VersionRange.
 
 
 Version v30.9.0
