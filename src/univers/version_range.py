@@ -178,7 +178,7 @@ class VersionRange:
         """
         Return the inverse of this VersionRange. For example, if this range is
         ">=1.0.0", the inverse is "<1.0.0".
-        >>> VersionRange.from_string("vers:npm/>=1.0.0").inverse()
+        >>> VersionRange.from_string("vers:npm/>=1.0.0").invert()
         NpmVersionRange(constraints=(VersionConstraint(comparator='<', version=SemverVersion(string='1.0.0')),))
         """
         inverted_constraints = []
