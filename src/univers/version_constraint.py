@@ -136,6 +136,11 @@ class VersionConstraint:
         return self.comparator == "*"
 
     def invert(self):
+        """
+        Return a new VersionConstraint instance with the comparator inverted.
+        For example::
+        >>> assert str(VersionConstraint(comparator=">=", version=Version("2.3")).invert()) == "<2.3"
+        """
         INVERTED_COMPARATORS = {
             ">=": "<",
             "<=": ">",

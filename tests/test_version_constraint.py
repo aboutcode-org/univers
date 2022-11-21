@@ -60,3 +60,30 @@ def test_semver_comparison(version, spec, expected):
         version_class=versions.SemverVersion,
     )
     assert (version in constraint) is expected
+
+
+@pytest.mark.parametrize(
+    "original, inverted",
+    [
+        (">2.7.1", "<=2.7.1"),
+        ("!=1.1.0", "=1.1.0"),
+        ("=2.0.0", "!=2.0.0"),
+        ("<=0.9999.9999", ">0.9999.9999"),
+        (">=0.2.9", "<0.2.9"),
+        ("<1.9999.9999", ">=1.9999.9999"),
+        ("*", None),
+    ],
+)
+def test_invert_opertaion(original, inverted):
+    constraint = VersionConstraint.from_string(
+        string=original,
+        version_class=versions.SemverVersion,
+    )
+    if inverted:
+        inverted_constraint = VersionConstraint.from_string(
+            string=inverted,
+            version_class=versions.SemverVersion,
+        )
+        assert constraint.invert() == inverted_constraint
+    else:
+        assert constraint.invert() is None

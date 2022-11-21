@@ -395,7 +395,7 @@ def test_npm_advisory_version_range_parse(test_case):
     assert str(result) == test_case["expected_vers"]
 
 
-def test_inverse():
+def test_invert():
     vers_with_equal_operator = VersionRange.from_string("vers:gem/1.0")
     assert str(vers_with_equal_operator.invert()) == "vers:gem/!=1.0"
     assert VersionRange.from_string("vers:gem/!=1.0").invert() == vers_with_equal_operator
@@ -410,3 +410,6 @@ def test_inverse():
 
     vers_with_complex_constraints = VersionRange.from_string("vers:gem/<=1.0|>=3.0|<4.0|!=5.0")
     assert str(vers_with_complex_constraints.invert()) == "vers:gem/>1.0|<3.0|>=4.0|5.0"
+
+    vers_with_star_operator = VersionRange.from_string("vers:gem/*")
+    assert vers_with_star_operator.invert() == None
