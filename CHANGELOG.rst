@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+Version v30.9.1
+----------------
+
+- Add invert function to VersionRange.
+
+
 Version v30.9.0
 ----------------
 

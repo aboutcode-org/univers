@@ -132,6 +132,33 @@ class VersionConstraint:
         # we compare tuples, version first
         return (self.version, self.comparator).__lt__((other.version, other.comparator))
 
+    def is_star(self):
+        return self.comparator == "*"
+
+    def invert(self):
+        """
+        Return a new VersionConstraint instance with the comparator inverted.
+        For example::
+        >>> assert str(VersionConstraint(comparator=">=", version=Version("2.3")).invert()) == "<2.3"
+        """
+        INVERTED_COMPARATORS = {
+            ">=": "<",
+            "<=": ">",
+            "!=": "=",
+            "<": ">=",
+            ">": "<=",
+            "=": "!=",
+        }
+
+        if self.is_star():
+            return None
+
+        inverted_comparator = INVERTED_COMPARATORS[self.comparator]
+        return self.__class__(
+            comparator=inverted_comparator,
+            version=self.version,
+        )
+
     @classmethod
     def from_string(cls, string, version_class):
         """
