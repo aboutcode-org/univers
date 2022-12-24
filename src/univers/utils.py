@@ -4,6 +4,8 @@
 #
 # Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
+import semantic_version
+
 
 def remove_spaces(string):
     return "".join(string.split())
@@ -27,3 +29,15 @@ def cmp(x, y):
     else:
         # note that this is the minimal replacement function
         return (x > y) - (x < y)
+
+
+class SortableSemverVersion(semantic_version.Version):
+    """
+    TODO: This is temporary workaround for unstable sort
+    Revert this and associated changes once the upstream is fixed.
+    https://github.com/rbarrois/python-semanticversion/issues/132
+    """
+
+    @property
+    def precedence_key(self):
+        return super().precedence_key + (self.build,)

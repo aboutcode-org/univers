@@ -168,12 +168,12 @@ def test_semver():
 
 def test_segments():
     # modifying the segments of a version should not affect the segments of the cached version object
-    ver = GemVersion("9.8.7")
-    secondseg = ver.segments[2]
+    ver_segment = list(GemVersion("9.8.7").segments)
+    secondseg = ver_segment[2]
     secondseg += 1
 
     refute_version_eql("9.8.8", "9.8.7")
-    assert GemVersion("9.8.7").segments == [9, 8, 7]
+    assert list(GemVersion("9.8.7").segments) == [9, 8, 7]
 
 
 def test_split_segments():
@@ -181,9 +181,9 @@ def test_split_segments():
 
 
 def test_canonical_segments():
-    assert GemVersion("1.0.0").canonical_segments == [1]
-    assert GemVersion("1.0.0.a.1.0").canonical_segments == [1, "a", 1]
-    assert GemVersion("1.2.3-1").canonical_segments == [1, 2, 3, "pre", 1]
+    assert list(GemVersion("1.0.0").canonical_segments) == [1]
+    assert list(GemVersion("1.0.0.a.1.0").canonical_segments) == [1, "a", 1]
+    assert list(GemVersion("1.2.3-1").canonical_segments) == [1, 2, 3, "pre", 1]
 
 
 def test_frozen_version():

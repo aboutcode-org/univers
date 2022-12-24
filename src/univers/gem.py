@@ -199,19 +199,14 @@ class GemVersion:
         if not self.is_correct(version):
             raise InvalidVersionError(version)
 
-        # If version is an empty string convert it to 0
         version = str(version).strip()
-
         self.original = version
 
+        # If version is an empty string convert it to 0
         if not version:
             version = "0"
 
         self.version = version.replace("-", ".pre.")
-        self._segments = ()
-        self._canonical_segments = ()
-        self._bump = None
-        self._release = None
 
     def __str__(self):
         return self.original
@@ -225,10 +220,10 @@ class GemVersion:
         return self.version == other.version
 
     def __hash__(self):
-        return hash(self.canonical_segments)
+        return hash(tuple(list(self.canonical_segments)))
 
     def __eq__(self, other):
-        return self.canonical_segments == other.canonical_segments
+        return list(self.canonical_segments) == list(other.canonical_segments)
 
     def __lt__(self, other):
         return self.__cmp__(other) < 0
@@ -242,6 +237,26 @@ class GemVersion:
     def __ge__(self, other):
         return self.__cmp__(other) >= 0
 
+    @property
+    def segments(self):
+        """
+        Yield segments for this version where segments are
+        ints or strings parsed from the original version string.
+        """
+        find_segments = re.compile(r"[0-9]+|[a-z]+", re.IGNORECASE).findall
+        for seg in find_segments(self.version):
+            yield int(seg) if seg.isdigit() else seg
+
+    @property
+    def canonical_segments(self):
+        """
+        Yield  "canonical segments" for this version using
+        the Rubygems way for canonicalization.
+        """
+        for segments in self.split_segments():
+            segs = list(dropwhile(lambda s: s == 0, reversed(segments)))
+            yield from reversed(segs)
+
     def bump(self):
         """
         Return a new version object where the next to the last revision number
@@ -252,22 +267,19 @@ class GemVersion:
         >>> assert GemVersion("5.3.1").bump() == GemVersion("5.4"), repr(GemVersion("5.3.1").bump())
         >>> assert GemVersion("5.3.1.4-2").bump() == GemVersion("5.3.2"), GemVersion("5.3.1.4-2").bump()
         """
-        if not self._bump:
-            segments = []
-            for seg in self.segments:
-                if isinstance(seg, str):
-                    break
-                else:
-                    segments.append(seg)
+        segments = []
+        for seg in self.segments:
+            if isinstance(seg, str):
+                break
+            else:
+                segments.append(seg)
 
-            if len(segments) > 1:
-                segments.pop()
+        if len(segments) > 1:
+            segments.pop()
 
-            segments[-1] += 1
-            segments = [str(r) for r in segments]
-            self._bump = GemVersion(".".join(segments))
-
-        return self._bump
+        segments[-1] += 1
+        segments = [str(r) for r in segments]
+        return GemVersion(".".join(segments))
 
     def release(self):
         """
@@ -275,17 +287,13 @@ class GemVersion:
         1.2.0.a -> 1.2.0). Non-prerelease versions return themselves. A release
         is composed only of numeric segments.
         """
-        if not self._release:
-            if self.prerelease():
-                segments = self.segments
-                while any(isinstance(s, str) for s in segments):
-                    segments.pop()
-                segments = (str(s) for s in segments)
-                self._release = GemVersion(".".join(segments))
-            else:
-                self._release = self
-
-        return self._release
+        if self.prerelease():
+            segments = list(self.segments)
+            while any(isinstance(s, str) for s in segments):
+                segments.pop()
+            segments = (str(s) for s in segments)
+            return GemVersion(".".join(segments))
+        return self
 
     def prerelease(self):
         """
@@ -293,47 +301,6 @@ class GemVersion:
         A version is considered a prerelease if it contains a letter.
         """
         return any(not str(s).isdigit() for s in self.segments)
-
-    @property
-    def segments(self):
-        """
-        Return a new sequence of segments for this version where segments are
-        ints or strings parsed from the original version string.
-        """
-        if not self._segments:
-            self._segments = self.get_segments()
-        return list(self._segments)
-
-    def get_segments(self):
-        """
-        Return a sequence of segments for this version where segments are ints
-        or strings parsed from the original version string.
-        """
-        find_segments = re.compile(r"[0-9]+|[a-z]+", re.IGNORECASE).findall
-        segments = []
-        for seg in find_segments(self.version):
-            if seg.isdigit():
-                seg = int(seg)
-            segments.append(seg)
-        return tuple(segments)
-
-    @property
-    def canonical_segments(self):
-        if not self._canonical_segments:
-            self._canonical_segments = self.get_canonical_segments()
-        return list(self._canonical_segments)
-
-    def get_canonical_segments(self):
-        """
-        Return a new sequence of "canonical segments" for this version using
-        the Rubygems way.
-        """
-        canonical_segments = []
-        for segments in self.split_segments():
-            segs = list(dropwhile(lambda s: s == 0, reversed(segments)))
-            segs = reversed(segs)
-            canonical_segments.extend(segs)
-        return tuple(canonical_segments)
 
     def split_segments(self):
         """
@@ -380,11 +347,11 @@ class GemVersion:
         if self.version == other.version:
             return 0
 
-        lhsegments = self.canonical_segments
+        lhsegments = list(self.canonical_segments)
         if trace:
             print(f"  lhsegments: canonical_segments: {lhsegments!r}")
 
-        rhsegments = other.canonical_segments
+        rhsegments = list(other.canonical_segments)
         if trace:
             print(f"  rhsegments: canonical_segments: {rhsegments!r}")
 

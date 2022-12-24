@@ -8,7 +8,7 @@ from functools import total_ordering
 import functools
 
 import attr
-import semantic_version
+from univers.utils import SortableSemverVersion
 from packaging import version as packaging_version
 
 from univers import arch
@@ -209,7 +209,7 @@ class SemverVersion(Version):
 
     @classmethod
     def build_value(cls, string):
-        return semantic_version.Version.coerce(string)
+        return SortableSemverVersion.coerce(string)
 
     @classmethod
     def is_valid(cls, string):
@@ -431,14 +431,14 @@ class AlpineLinuxVersion(Version):
 class ComposerVersion(SemverVersion):
     @classmethod
     def build_value(cls, string):
-        return semantic_version.Version.coerce(string.lstrip("vV"))
+        return SortableSemverVersion.coerce(string.lstrip("vV"))
 
 
 @attr.s(frozen=True, order=False, eq=False, hash=True)
 class GolangVersion(SemverVersion):
     @classmethod
     def build_value(cls, string):
-        return semantic_version.Version.coerce(string.lstrip("vV"))
+        return SortableSemverVersion.coerce(string.lstrip("vV"))
 
 
 @attr.s(frozen=True, order=False, eq=False, hash=True)
@@ -605,7 +605,7 @@ class OpensslVersion(Version):
         True
         """
         if SemverVersion.is_valid(string):
-            sem = semantic_version.Version.coerce(string)
+            sem = SortableSemverVersion.coerce(string)
             return sem.major >= 3
 
     @classmethod
