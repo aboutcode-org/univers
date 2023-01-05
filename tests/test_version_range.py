@@ -9,7 +9,7 @@ from unittest import TestCase
 import pytest
 
 from univers.version_constraint import VersionConstraint
-from univers.version_range import GemVersionRange
+from univers.version_range import GemVersionRange, MattermostVersionRange
 from univers.version_range import from_gitlab_native
 from univers.version_range import NugetVersionRange
 from univers.version_range import InvalidVersionRange
@@ -413,3 +413,17 @@ def test_invert():
 
     vers_with_star_operator = VersionRange.from_string("vers:gem/*")
     assert vers_with_star_operator.invert() == None
+
+
+def test_mattermost_version_range():
+    assert MattermostVersionRange(
+        constraints=[
+            VersionConstraint(comparator="=", version=SemverVersion("5.0")),
+        ]
+    ) == VersionRange.from_string("vers:mattermost/5.0")
+
+    assert MattermostVersionRange(
+        constraints=[
+            VersionConstraint(comparator=">=", version=SemverVersion("5.0")),
+        ]
+    ) == VersionRange.from_string("vers:mattermost/>=5.0")
