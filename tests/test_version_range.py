@@ -9,7 +9,8 @@ from unittest import TestCase
 import pytest
 
 from univers.version_constraint import VersionConstraint
-from univers.version_range import GemVersionRange, MattermostVersionRange
+from univers.version_range import GemVersionRange
+from univers.version_range import MattermostVersionRange
 from univers.version_range import from_gitlab_native
 from univers.version_range import NugetVersionRange
 from univers.version_range import InvalidVersionRange
