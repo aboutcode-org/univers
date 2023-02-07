@@ -225,7 +225,7 @@ class GemVersion:
         return self.version == other.version
 
     def __hash__(self):
-        return hash(self.canonical_segments)
+        return hash(tuple(self.canonical_segments))
 
     def __eq__(self, other):
         return self.canonical_segments == other.canonical_segments
@@ -321,7 +321,7 @@ class GemVersion:
     def canonical_segments(self):
         if not self._canonical_segments:
             self._canonical_segments = self.get_canonical_segments()
-        return list(self._canonical_segments)
+        return tuple(self._canonical_segments)
 
     def get_canonical_segments(self):
         """
