@@ -74,7 +74,9 @@ def create_test_function(ver1, ver2, expected, name):
     """
 
     def test_rpm_version(self):
-        print(f"testing (ver1={ver1}, ver2={ver2}, expected=expected{expected}")
+        ver1_str = str(ver1).encode("utf-8")
+        ver2_str = str(ver2).encode("utf-8")
+        print(f"testing (ver1={ver1_str}, ver2={ver2_str}, expected=expected{expected}")
         result = vercmp.vercmp(ver1, ver2)
         if result != expected:
             assert result == (expected, ver1, ver2)
