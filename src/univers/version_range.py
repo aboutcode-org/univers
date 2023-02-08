@@ -1092,6 +1092,11 @@ class OpensslVersionRange(VersionRange):
         return cls(constraints=constraints)
 
 
+class MattermostVersionRange(VersionRange):
+    scheme = "mattermost"
+    version_class = versions.SemverVersion
+
+
 def from_gitlab_native(gitlab_scheme, string):
     purl_scheme = PURL_TYPE_BY_GITLAB_SCHEME[gitlab_scheme]
     vrc = RANGE_CLASS_BY_SCHEMES[purl_scheme]
@@ -1217,6 +1222,7 @@ RANGE_CLASS_BY_SCHEMES = {
     "alpm": ArchLinuxVersionRange,
     "nginx": NginxVersionRange,
     "openssl": OpensslVersionRange,
+    "mattermost": MattermostVersionRange,
 }
 
 PURL_TYPE_BY_GITLAB_SCHEME = {
