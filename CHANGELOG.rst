@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+Version v30.9.2
+----------------
+
+- Fix unhashable error in GemVersion.  
+
+
 Version v30.9.1
 ----------------
 
