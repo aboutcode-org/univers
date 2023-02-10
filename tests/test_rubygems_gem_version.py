@@ -185,6 +185,7 @@ def test_canonical_segments():
     assert GemVersion("1.0.0.a.1.0").canonical_segments == (1, "a", 1)
     assert GemVersion("1.2.3-1").canonical_segments == (1, 2, 3, "pre", 1)
 
+
 def test_GemVersion_is_hashable():
     hash(GemVersion("1.0.0"))
 
