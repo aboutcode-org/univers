@@ -6,12 +6,17 @@
 
 import attr
 import semantic_version
-from packaging.specifiers import InvalidSpecifier, SpecifierSet
-from semantic_version.base import AllOf, AnyOf
+from packaging.specifiers import InvalidSpecifier
+from packaging.specifiers import SpecifierSet
+from semantic_version.base import AllOf
+from semantic_version.base import AnyOf
 
-from univers import gem, maven, versions
+from univers import gem
+from univers import maven
+from univers import versions
 from univers.utils import remove_spaces
-from univers.version_constraint import VersionConstraint, contains_version
+from univers.version_constraint import VersionConstraint
+from univers.version_constraint import contains_version
 
 
 class InvalidVersionRange(Exception):
