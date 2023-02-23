@@ -4,8 +4,8 @@
 #
 # Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
-from univers.version_range import MavenVersionRange
 from univers.version_constraint import VersionConstraint
+from univers.version_range import MavenVersionRange
 from univers.versions import MavenVersion
 
 

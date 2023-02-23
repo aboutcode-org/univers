@@ -7,6 +7,7 @@
 import operator
 
 import pytest
+
 from univers.versions import LegacyOpensslVersion
 from univers.versions import OpensslVersion
 from univers.versions import SemverVersion

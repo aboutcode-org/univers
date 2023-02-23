@@ -7,6 +7,7 @@
 
 
 from unittest import TestCase
+
 from univers.gentoo import vercmp
 
 

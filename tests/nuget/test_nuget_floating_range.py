@@ -8,7 +8,6 @@ import pytest
 from univers.version_range import NugetVersionRange as VersionRange
 from univers.versions import NugetVersion as NuGetVersion
 
-
 """
 NuGet Float ranges are not yet supported in Univers.
 

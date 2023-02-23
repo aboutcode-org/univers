@@ -8,11 +8,11 @@
 
 import unittest
 
+from univers.maven import Restriction
+from univers.maven import RestrictionParseError
 from univers.maven import Version
 from univers.maven import VersionRange
-from univers.maven import RestrictionParseError
 from univers.maven import VersionRangeParseError
-from univers.maven import Restriction
 
 
 class TestRestriction(unittest.TestCase):
