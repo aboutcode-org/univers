@@ -397,6 +397,21 @@ def test_npm_advisory_version_range_parse(test_case):
     assert str(result) == test_case["expected_vers"]
 
 
+@pytest.mark.parametrize("test_case", json.load(open("./tests/data/conan_advisory.json")))
+def test_conan_advisory_version_range_parse(test_case):
+    if test_case["expected_vers"] is None:
+        # with pytest.raises(InvalidVersionRange):
+        with pytest.raises(InvalidVersion):
+            # ConanVersionRange.from_native(string=test_case["conan_native"])
+            ConanVersionRange.from_native(string=test_case["native"])
+        return
+    result = ConanVersionRange.from_native(
+        # string=test_case["conan_native"],
+        string=test_case["native"],
+    )
+    assert str(result) == test_case["expected_vers"]
+
+
 def test_invert():
     vers_with_equal_operator = VersionRange.from_string("vers:gem/1.0")
     assert str(vers_with_equal_operator.invert()) == "vers:gem/!=1.0"
