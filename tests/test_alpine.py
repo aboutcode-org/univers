@@ -8,6 +8,7 @@ import operator
 from typing import NamedTuple
 
 import pytest
+
 from univers.versions import AlpineLinuxVersion
 from univers.versions import InvalidVersion
 

@@ -15,8 +15,8 @@ from functools import cmp_to_key
 from itertools import zip_longest
 
 from attr import asdict
-from attr import attrs
 from attr import attrib
+from attr import attrs
 
 logger = logging.getLogger(__name__)
 

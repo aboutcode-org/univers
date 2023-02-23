@@ -16,9 +16,9 @@ from unittest import TestCase
 import pytest
 
 import univers.debian as version
+from univers.debian import Version
 from univers.debian import compare_strings
 from univers.debian import compare_versions
-from univers.debian import Version
 
 """
 Parse, compare and sort Debian package versions.

@@ -8,6 +8,7 @@ import operator
 from functools import total_ordering
 
 import attr
+
 from univers.utils import remove_spaces
 from univers.versions import Version
 

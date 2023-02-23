@@ -22,3 +22,16 @@ class BaseTests(unittest.TestCase):
                 "  python -m black -l 100 setup.py src tests",
                 e.output,
             ) from e
+
+        args = "isort --check-only src tests setup.py"
+        try:
+            subprocess.check_output(args.split())
+        except Exception as e:
+            print("===========================================================")
+            print(e.output)
+            print("===========================================================")
+            raise Exception(
+                "Unsorted imports, please sort your imports using isort. "
+                "Alternatively, run ``isort src tests setup.py``",
+                e.output,
+            ) from e

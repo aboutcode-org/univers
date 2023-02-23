@@ -4,8 +4,9 @@
 #
 # Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
-from packaging import version as packaging_version
 from unittest import TestCase
+
+from packaging import version as packaging_version
 
 from univers import versions
 

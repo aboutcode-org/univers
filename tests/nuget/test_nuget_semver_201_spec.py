@@ -5,8 +5,8 @@
 
 import pytest
 
-from univers.utils import cmp
 from univers import nuget
+from univers.utils import cmp
 
 
 # A normal version number MUST take the form X.Y.Z

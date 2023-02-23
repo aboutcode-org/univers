@@ -9,9 +9,9 @@ import json
 import os
 import re
 import unittest
+from unittest.case import expectedFailure
 
 from univers.version_range import VersionRange
-from unittest.case import expectedFailure
 
 
 def create_test_function(

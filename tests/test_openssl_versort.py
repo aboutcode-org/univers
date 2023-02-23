@@ -7,6 +7,7 @@
 from pathlib import Path
 
 from commoncode import testcase
+
 from tests import util_tests
 from univers.versions import OpensslVersion
 

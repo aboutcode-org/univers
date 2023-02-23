@@ -4,8 +4,8 @@
 #
 # Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
-from functools import total_ordering
 import functools
+from functools import total_ordering
 
 import attr
 import semantic_version
@@ -14,9 +14,9 @@ from packaging import version as packaging_version
 from univers import arch
 from univers import debian
 from univers import gem
-from univers import nuget
 from univers import gentoo
 from univers import maven
+from univers import nuget
 from univers import rpm
 from univers.utils import remove_spaces
 
