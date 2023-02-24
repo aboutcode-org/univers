@@ -362,7 +362,7 @@ def test_conan_gitlab_version_range_parse(test_case):
             Conan1VersionRange.from_native(string=test_case["native"])
         return
     result = from_gitlab_native(
-        gitlab_scheme=test_case["scheme"],
+        gitlab_scheme=test_case["gitlab_scheme"],
         string=test_case["native"],
     )
     assert str(result) == test_case["expected_vers"]

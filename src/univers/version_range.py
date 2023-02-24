@@ -1244,5 +1244,5 @@ PURL_TYPE_BY_GITLAB_SCHEME = {
     "nuget": "nuget",
     "pypi": "pypi",
     "packagist": "composer",
-    "conan1": "conan1",
+    "conan": "conan1",
 }
