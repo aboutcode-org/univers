@@ -377,8 +377,8 @@ class NpmVersionRange(VersionRange):
         return cls(constraints=constraints)
 
 
-class Conan1VersionRange(NpmVersionRange):
-    scheme = "conan1"
+class ConanVersionRange(NpmVersionRange):
+    scheme = "conan"
     version_class = versions.SemverVersion
 
 
@@ -1106,7 +1106,7 @@ def from_gitlab_native(gitlab_scheme, string):
     purl_scheme = PURL_TYPE_BY_GITLAB_SCHEME[gitlab_scheme]
     vrc = RANGE_CLASS_BY_SCHEMES[purl_scheme]
     supported_native_implementations = [
-        Conan1VersionRange,
+        ConanVersionRange,
     ]
     if vrc in supported_native_implementations:
         return vrc.from_native(string)
@@ -1233,7 +1233,7 @@ RANGE_CLASS_BY_SCHEMES = {
     "nginx": NginxVersionRange,
     "openssl": OpensslVersionRange,
     "mattermost": MattermostVersionRange,
-    "conan1": Conan1VersionRange,
+    "conan": ConanVersionRange,
 }
 
 PURL_TYPE_BY_GITLAB_SCHEME = {
@@ -1244,5 +1244,5 @@ PURL_TYPE_BY_GITLAB_SCHEME = {
     "nuget": "nuget",
     "pypi": "pypi",
     "packagist": "composer",
-    "conan": "conan1",
+    "conan": "conan",
 }

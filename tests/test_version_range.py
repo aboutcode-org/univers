@@ -11,7 +11,7 @@ import pytest
 
 from univers.version_constraint import VersionConstraint
 from univers.version_range import RANGE_CLASS_BY_SCHEMES
-from univers.version_range import Conan1VersionRange
+from univers.version_range import ConanVersionRange
 from univers.version_range import GemVersionRange
 from univers.version_range import InvalidVersionRange
 from univers.version_range import MattermostVersionRange
@@ -359,7 +359,7 @@ def test_pypi_gitlab_version_range_parse(test_case):
 def test_conan_gitlab_version_range_parse(test_case):
     if test_case["expected_vers"] is None:
         with pytest.raises(InvalidVersion):
-            Conan1VersionRange.from_native(string=test_case["native"])
+            ConanVersionRange.from_native(string=test_case["native"])
         return
     result = from_gitlab_native(
         gitlab_scheme=test_case["gitlab_scheme"],
@@ -416,9 +416,9 @@ def test_npm_advisory_version_range_parse(test_case):
 def test_conan_advisory_version_range_parse(test_case):
     if test_case["expected_vers"] is None:
         with pytest.raises(InvalidVersion):
-            Conan1VersionRange.from_native(string=test_case["native"])
+            ConanVersionRange.from_native(string=test_case["native"])
         return
-    result = Conan1VersionRange.from_native(
+    result = ConanVersionRange.from_native(
         string=test_case["native"],
     )
     assert str(result) == test_case["expected_vers"]
