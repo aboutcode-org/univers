@@ -3,12 +3,10 @@ from collections import namedtuple
 from univers.conan.errors import ConanException
 from univers.conan.version import Version
 
-
 _Condition = namedtuple("_Condition", ["operator", "version"])
 
 
 class _ConditionSet:
-
     def __init__(self, expression, prerelease):
         expressions = expression.split()
         self.prerelease = prerelease

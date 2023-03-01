@@ -5,9 +5,10 @@ from univers.conan.errors import ConanException
 
 @total_ordering
 class _VersionItem:
-    """ a single "digit" in a version, like X.Y.Z all X and Y and Z are VersionItems
+    """a single "digit" in a version, like X.Y.Z all X and Y and Z are VersionItems
     They can be int or strings
     """
+
     def __init__(self, item):
         try:
             self._v = int(item)
@@ -51,6 +52,7 @@ class Version:
     This is NOT an implementation of semver, as users may use any pattern in their versions.
     It is just a helper to parse "." or "-" and compare taking into account integers when possible
     """
+
     def __init__(self, value):
         value = str(value)
         self._value = value
@@ -93,7 +95,7 @@ class Version:
         # better not make it public yet, keep it internal
         items = list(self._items[:index])
         try:
-            items.append(self._items[index]+1)
+            items.append(self._items[index] + 1)
         except TypeError:
             raise ConanException(f"Cannot bump '{self._value} version index {index}, not an int")
         items.extend([0] * (len(items) - index - 1))
@@ -166,8 +168,11 @@ class Version:
         if not isinstance(other, Version):
             other = Version(other)
 
-        return (self._nonzero_items, self._pre, self._build) ==\
-               (other._nonzero_items, other._pre, other._build)
+        return (self._nonzero_items, self._pre, self._build) == (
+            other._nonzero_items,
+            other._pre,
+            other._build,
+        )
 
     def __hash__(self):
         return hash((self._nonzero_items, self._pre, self._build))
@@ -180,16 +185,23 @@ class Version:
 
         if self._pre:
             if other._pre:  # both are pre-releases
-                return (self._nonzero_items, self._pre, self._build) < \
-                       (other._nonzero_items, other._pre, other._build)
+                return (self._nonzero_items, self._pre, self._build) < (
+                    other._nonzero_items,
+                    other._pre,
+                    other._build,
+                )
             else:  # Left hand is pre-release, right side is regular
-                if self._nonzero_items == other._nonzero_items:  # Problem only happens if both equal
+                if (
+                    self._nonzero_items == other._nonzero_items
+                ):  # Problem only happens if both equal
                     return True
                 else:
                     return self._nonzero_items < other._nonzero_items
         else:
             if other._pre:  # Left hand is regular, right side is pre-release
-                if self._nonzero_items == other._nonzero_items:  # Problem only happens if both equal
+                if (
+                    self._nonzero_items == other._nonzero_items
+                ):  # Problem only happens if both equal
                     return False
                 else:
                     return self._nonzero_items < other._nonzero_items

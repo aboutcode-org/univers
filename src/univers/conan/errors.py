@@ -13,7 +13,7 @@ from contextlib import contextmanager
 
 @contextmanager
 def conanfile_remove_attr(conanfile, names, method):
-    """ remove some self.xxxx attribute from the class, so it raises an exception if used
+    """remove some self.xxxx attribute from the class, so it raises an exception if used
     within a given conanfile method
     """
     original_class = type(conanfile)
@@ -21,10 +21,11 @@ def conanfile_remove_attr(conanfile, names, method):
     def _prop(attr_name):
         def _m(_):
             raise ConanException(f"'self.{attr_name}' access in '{method}()' method is forbidden")
+
         return property(_m)
 
     try:
-        new_class = type(original_class.__name__, (original_class, ), {})
+        new_class = type(original_class.__name__, (original_class,), {})
         conanfile.__class__ = new_class
         for name in names:
             setattr(new_class, name, _prop(name))
@@ -40,9 +41,12 @@ def conanfile_exception_formatter(conanfile_name, func_name):
     """
 
     def _raise_conanfile_exc(e):
-        from conan.api.output import LEVEL_DEBUG, conan_output_level
+        from conan.api.output import LEVEL_DEBUG
+        from conan.api.output import conan_output_level
+
         if conan_output_level <= LEVEL_DEBUG:
             import traceback
+
             raise ConanExceptionInUserConanfileMethod(traceback.format_exc())
         m = _format_conanfile_exception(conanfile_name, func_name, e)
         raise ConanExceptionInUserConanfileMethod(m)
@@ -54,12 +58,17 @@ def conanfile_exception_formatter(conanfile_name, func_name):
         msg = "{}: Invalid configuration: {}".format(str(conanfile_name), exc)
         raise ConanInvalidConfiguration(msg)
     except AttributeError as exc:
-        list_methods = [m for m in dir(list) if not m.startswith('__')]
-        if "NoneType" in str(exc) and func_name in ['layout', 'package_info'] and \
-            any(method in str(exc) for method in list_methods):
-            raise ConanException("{}: {}. No default values are set for components. You are probably "
-                                 "trying to manipulate a component attribute in the '{}' method "
-                                 "without defining it previously".format(str(conanfile_name), exc, func_name))
+        list_methods = [m for m in dir(list) if not m.startswith("__")]
+        if (
+            "NoneType" in str(exc)
+            and func_name in ["layout", "package_info"]
+            and any(method in str(exc) for method in list_methods)
+        ):
+            raise ConanException(
+                "{}: {}. No default values are set for components. You are probably "
+                "trying to manipulate a component attribute in the '{}' method "
+                "without defining it previously".format(str(conanfile_name), exc, func_name)
+            )
         else:
             _raise_conanfile_exc(exc)
     except Exception as exc:
@@ -74,6 +83,7 @@ def _format_conanfile_exception(scope, method, exception):
     """
     import sys
     import traceback
+
     try:
         conanfile_reached = False
         tb = sys.exc_info()[2]
@@ -91,8 +101,11 @@ def _format_conanfile_exception(scope, method, exception):
                     msg = "%s: Error in %s() method" % (scope, method)
                     msg += ", line %d\n\t%s" % (line, contents)
                 else:
-                    msg = ("while calling '%s', line %d\n\t%s" % (name, line, contents)
-                           if line else "\n\t%s" % contents)
+                    msg = (
+                        "while calling '%s', line %d\n\t%s" % (name, line, contents)
+                        if line
+                        else "\n\t%s" % contents
+                    )
                 content_lines.append(msg)
                 conanfile_reached = True
             index += 1
@@ -105,8 +118,9 @@ def _format_conanfile_exception(scope, method, exception):
 
 class ConanException(Exception):
     """
-         Generic conans exception
+    Generic conans exception
     """
+
     def __init__(self, *args, **kwargs):
         self.info = None
         self.remote = kwargs.pop("remote", None)
@@ -119,6 +133,7 @@ class ConanException(Exception):
 
     def __str__(self):
         from conans.util.files import exception_message_safe
+
         msg = super(ConanException, self).__str__()
         if self.remote:
             return "{}.{}".format(exception_message_safe(msg), self.remote_message())
@@ -127,18 +142,20 @@ class ConanException(Exception):
 
 
 class ConanReferenceDoesNotExistInDB(ConanException):
-    """ Reference does not exist in cache db """
+    """Reference does not exist in cache db"""
+
     pass
 
 
 class ConanReferenceAlreadyExistsInDB(ConanException):
-    """ Reference already exists in cache db """
+    """Reference already exists in cache db"""
+
     pass
 
 
 class NoRemoteAvailable(ConanException):
-    """ No default remote configured or the specified remote do not exists
-    """
+    """No default remote configured or the specified remote do not exists"""
+
     pass
 
 
@@ -162,6 +179,7 @@ class ConanInvalidConfiguration(ConanExceptionInUserConanfileMethod):
     """
     This binary, for the requested configuration and package-id cannot be built
     """
+
     pass
 
 
@@ -172,35 +190,39 @@ class ConanMigrationError(ConanException):
 # Remote exceptions #
 class InternalErrorException(ConanException):
     """
-         Generic 500 error
+    Generic 500 error
     """
+
     pass
 
 
 class RequestErrorException(ConanException):
     """
-         Generic 400 error
+    Generic 400 error
     """
+
     pass
 
 
 class AuthenticationException(ConanException):  # 401
     """
-        401 error
+    401 error
     """
+
     pass
 
 
 class ForbiddenException(ConanException):  # 403
     """
-        403 error
+    403 error
     """
+
     pass
 
 
 class NotFoundException(ConanException):  # 404
     """
-        404 error
+    404 error
     """
 
     def __init__(self, *args, **kwargs):
@@ -209,10 +231,12 @@ class NotFoundException(ConanException):  # 404
 
 
 class RecipeNotFoundException(NotFoundException):
-
     def __init__(self, ref, remote=None):
         from conans.model.recipe_ref import RecipeReference
-        assert isinstance(ref, RecipeReference), "RecipeNotFoundException requires a RecipeReference"
+
+        assert isinstance(
+            ref, RecipeReference
+        ), "RecipeNotFoundException requires a RecipeReference"
         self.ref = ref
         super(RecipeNotFoundException, self).__init__(remote=remote)
 
@@ -222,31 +246,35 @@ class RecipeNotFoundException(NotFoundException):
 
 
 class PackageNotFoundException(NotFoundException):
-
     def __init__(self, pref, remote=None):
         from conans.model.package_ref import PkgReference
+
         assert isinstance(pref, PkgReference), "PackageNotFoundException requires a PkgReference"
         self.pref = pref
 
         super(PackageNotFoundException, self).__init__(remote=remote)
 
     def __str__(self):
-        return "Binary package not found: '{}'{}".format(self.pref.repr_notime(),
-                                                         self.remote_message())
+        return "Binary package not found: '{}'{}".format(
+            self.pref.repr_notime(), self.remote_message()
+        )
 
 
 class UserInterfaceErrorException(RequestErrorException):
     """
-        420 error
+    420 error
     """
+
     pass
 
 
-EXCEPTION_CODE_MAPPING = {InternalErrorException: 500,
-                          RequestErrorException: 400,
-                          AuthenticationException: 401,
-                          ForbiddenException: 403,
-                          NotFoundException: 404,
-                          RecipeNotFoundException: 404,
-                          PackageNotFoundException: 404,
-                          UserInterfaceErrorException: 420}
+EXCEPTION_CODE_MAPPING = {
+    InternalErrorException: 500,
+    RequestErrorException: 400,
+    AuthenticationException: 401,
+    ForbiddenException: 403,
+    NotFoundException: 404,
+    RecipeNotFoundException: 404,
+    PackageNotFoundException: 404,
+    UserInterfaceErrorException: 420,
+}
