@@ -1,6 +1,6 @@
 import pytest
 
-from univers.conan.version import Version
+from univers.versions import ConanVersion
 
 v = [
     ("1", "2"),
@@ -45,8 +45,8 @@ v = [
 
 @pytest.mark.parametrize("v1, v2", v)
 def test_comparison(v1, v2):
-    v1 = Version(v1)
-    v2 = Version(v2)
+    v1 = ConanVersion(v1)
+    v2 = ConanVersion(v2)
     assert v1 < v2
     assert v2 > v1
     assert v1 != v2
@@ -55,7 +55,7 @@ def test_comparison(v1, v2):
 
 
 def test_comparison_with_integer():
-    v1 = Version("13.0")
+    v1 = ConanVersion("13.0")
     # Issue: https://github.com/conan-io/conan/issues/12907
     assert v1 > 5
     assert v1 >= 5
@@ -86,14 +86,14 @@ e = [
 
 @pytest.mark.parametrize("v1, v2", e)
 def test_equality(v1, v2):
-    v1 = Version(v1)
-    v2 = Version(v2)
+    v1 = ConanVersion(v1)
+    v2 = ConanVersion(v2)
     assert v1 == v2
     assert not v1 != v2
 
 
 def test_elem_comparison():
-    v1 = Version("1.2.3b.4-pre.1.2b+build.1.1b")
+    v1 = ConanVersion("1.2.3b.4-pre.1.2b+build.1.1b")
     major = v1.major
     assert major < 2
     assert major < "2"

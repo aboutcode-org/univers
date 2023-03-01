@@ -1,7 +1,7 @@
 import pytest
 
 from univers.conan.errors import ConanException
-from univers.conan.version import Version
+from univers.conan.version import ConanVersion
 from univers.conan.version_range import VersionRange
 
 values = [
@@ -55,10 +55,10 @@ def test_range(version_range, conditions, versions_in, versions_out):
             assert condition.version == expected_condition[1]
 
     for v in versions_in:
-        assert Version(v) in r
+        assert ConanVersion(v) in r
 
     for v in versions_out:
-        assert Version(v) not in r
+        assert ConanVersion(v) not in r
 
 
 def test_wrong_range_syntax():

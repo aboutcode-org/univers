@@ -1,6 +1,6 @@
 import pytest
 
-from univers.conan.version import Version
+from univers.conan.version import ConanVersion
 
 values = [
     ["1.0.0", 0, "2.0.0"],
@@ -13,6 +13,6 @@ values = [
 
 @pytest.mark.parametrize("version, index, result", values)
 def test_version_bump(version, index, result):
-    r = Version(version)
+    r = ConanVersion(version)
     bumped = r.bump(index)
     assert bumped == result

@@ -18,6 +18,7 @@ from univers import gentoo
 from univers import maven
 from univers import nuget
 from univers import rpm
+from univers.conan.version import ConanVersion as conan_version
 from univers.utils import remove_spaces
 
 """
@@ -139,6 +140,7 @@ class Version:
 
     def __lt__(self, other):
         if not isinstance(other, self.__class__):
+            print('Hello!')
             return NotImplemented
         return self.value.__lt__(other.value)
 
@@ -650,3 +652,96 @@ class OpensslVersion(Version):
             return self.value.__ge__(other.value)
         # version value are of diff type, then semver one is always ahead of legacy
         return isinstance(self.value, SemverVersion)
+
+class ConanVersion(Version):
+    @classmethod
+    def build_value(cls, string):
+        return conan_version(string)
+
+    # def __eq__(self, other):
+        # if not isinstance(other, self.__class__):
+        #     return NotImplemented
+        # return conan_version.vercmp(self.value, other.value) == 0
+
+    def __eq__(self, other):
+        if other is None:
+            return False
+        if not isinstance(other, conan_version):
+            other = conan_version(other)
+
+    @classmethod
+    def is_valid(cls, string):
+        try:
+            cls.build_value(string)
+            return True
+        except ValueError:
+            return False
+
+    @property
+    def major(self):
+        return self.value and self.value.major
+
+    @property
+    def minor(self):
+        return self.value and self.value.minor
+
+    @property
+    def patch(self):
+        return self.value and self.value.patch
+
+    @property
+    def prerelease(self):
+        return self.value and self.value.prerelease
+
+    @property
+    def build(self):
+        return self.value and self.value.build
+
+    def next_major(self):
+        return self.value and self.value.next_major()
+
+    def next_minor(self):
+        return self.value and self.value.next_minor()
+
+    def next_patch(self):
+        return self.value and self.value.next_patch()
+
+    @property
+    def micro(self):
+        # self.value()
+        return self.value and self.value.micro
+
+    @property
+    def pre(self):
+        return self.value and self.value._pre
+
+    def __lt__(self, other):
+        if other is None:
+            return False
+        if not isinstance(other, conan_version):
+            other = conan_version(other)
+
+        if self.value._pre:
+            if other._pre:  # both are pre-releases
+                return (self.value._nonzero_items, self.value._pre, self.value._build) < (
+                    other._nonzero_items,
+                    other._pre,
+                    other._build,
+                )
+            else:  # Left hand is pre-release, right side is regular
+                if (
+                    self.value._nonzero_items == other._nonzero_items
+                ):  # Problem only happens if both equal
+                    return True
+                else:
+                    return self.value._nonzero_items < other._nonzero_items
+        else:
+            if other._pre:  # Left hand is regular, right side is pre-release
+                if (
+                    self.value._nonzero_items == other._nonzero_items
+                ):  # Problem only happens if both equal
+                    return False
+                else:
+                    return self.value._nonzero_items < other._nonzero_items
+            else:  # None of them is pre-release
+                return (self.value._nonzero_items, self.value._build) < (other._nonzero_items, other._build)
