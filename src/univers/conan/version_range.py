@@ -1,7 +1,7 @@
 from collections import namedtuple
 
-from conans.errors import ConanException
-from conans.model.recipe_ref import Version
+from univers.conan.errors import ConanException
+from univers.conan.version import Version
 
 
 _Condition = namedtuple("_Condition", ["operator", "version"])

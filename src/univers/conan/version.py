@@ -1,6 +1,6 @@
 from functools import total_ordering
 
-from conans.errors import ConanException
+from univers.conan.errors import ConanException
 
 
 @total_ordering
