@@ -1,6 +1,6 @@
 import pytest
 
-from univers.conan.version import ConanVersion
+from univers.versions import ConanVersion
 
 values = [
     ["1.0.0", 0, "2.0.0"],

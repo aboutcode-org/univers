@@ -14,6 +14,7 @@ from semantic_version.base import AnyOf
 from univers import gem
 from univers import maven
 from univers import versions
+from univers.conan.version_range import VersionRange as conan_version_range
 from univers.utils import remove_spaces
 from univers.version_constraint import VersionConstraint
 from univers.version_constraint import contains_version
@@ -377,9 +378,27 @@ class NpmVersionRange(VersionRange):
         return cls(constraints=constraints)
 
 
-class ConanVersionRange(NpmVersionRange):
+class ConanVersionRange(VersionRange):
     scheme = "conan"
-    version_class = versions.SemverVersion
+    version_class = versions.ConanVersion
+
+    @classmethod
+    def from_native(cls, string):
+        """
+        Return a VersionRange built from a conan range ``string``.
+        """
+        condition_sets = conan_version_range(string).condition_sets
+        constraints = []
+        for conditions in condition_sets:
+            for condition in conditions.conditions:
+                comparator = condition.operator
+                version = condition.version
+                constraints.append(
+                    VersionConstraint(
+                        comparator=comparator, version=cls.version_class(str(version))
+                    )
+                )
+        return cls(constraints=constraints)
 
 
 class GemVersionRange(VersionRange):

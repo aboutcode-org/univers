@@ -1,8 +1,8 @@
 import pytest
 
 from univers.conan.errors import ConanException
-from univers.conan.version import ConanVersion
 from univers.conan.version_range import VersionRange
+from univers.versions import ConanVersion
 
 values = [
     [">1.0.0", [[[">", "1.0.0"]]], ["1.0.1"], ["0.1"]],

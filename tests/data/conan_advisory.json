@@ -24,14 +24,14 @@
         "test_index": 4,
         "scheme": "conan",
         "native": "=3.7",
-        "expected_vers": "vers:conan/3.7.0",
+        "expected_vers": "vers:conan/3.7",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 5,
         "scheme": "conan",
         "native": "<0",
-        "expected_vers": "vers:conan/<0.0.0",
+        "expected_vers": "vers:conan/<0",
         "gitlab_scheme": "conan"
     },
     {
@@ -220,7 +220,7 @@
         "test_index": 32,
         "scheme": "conan",
         "native": "<2021.07.22.00",
-        "expected_vers": "vers:conan/<2021.7.22+00",
+        "expected_vers": "vers:conan/<2021.07.22.00",
         "gitlab_scheme": "conan"
     },
     {
@@ -325,14 +325,14 @@
         "test_index": 47,
         "scheme": "conan",
         "native": "<=3.2",
-        "expected_vers": "vers:conan/<=3.2.0",
+        "expected_vers": "vers:conan/<=3.2",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 48,
         "scheme": "conan",
         "native": "<=3.2",
-        "expected_vers": "vers:conan/<=3.2.0",
+        "expected_vers": "vers:conan/<=3.2",
         "gitlab_scheme": "conan"
     },
     {
@@ -801,7 +801,7 @@
         "test_index": 115,
         "scheme": "conan",
         "native": "<2021-10-15",
-        "expected_vers": "vers:conan/<2021.0.0-10-15",
+        "expected_vers": "vers:conan/<2021-10-15",
         "gitlab_scheme": "conan"
     },
     {
@@ -1018,7 +1018,7 @@
         "test_index": 146,
         "scheme": "conan",
         "native": "<=0.14",
-        "expected_vers": "vers:conan/<=0.14.0",
+        "expected_vers": "vers:conan/<=0.14",
         "gitlab_scheme": "conan"
     },
     {
@@ -1137,7 +1137,7 @@
         "test_index": 163,
         "scheme": "conan",
         "native": "=3.3",
-        "expected_vers": "vers:conan/3.3.0",
+        "expected_vers": "vers:conan/3.3",
         "gitlab_scheme": "conan"
     },
     {
@@ -1417,21 +1417,21 @@
         "test_index": 203,
         "scheme": "conan",
         "native": "<9d",
-        "expected_vers": "vers:conan/<9.0.0-d",
+        "expected_vers": "vers:conan/<9d",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 204,
         "scheme": "conan",
         "native": "<9d",
-        "expected_vers": "vers:conan/<9.0.0-d",
+        "expected_vers": "vers:conan/<9d",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 205,
         "scheme": "conan",
         "native": "<1.64",
-        "expected_vers": "vers:conan/<1.64.0",
+        "expected_vers": "vers:conan/<1.64",
         "gitlab_scheme": "conan"
     },
     {
@@ -1452,14 +1452,14 @@
         "test_index": 208,
         "scheme": "conan",
         "native": "<0.20",
-        "expected_vers": "vers:conan/<0.20.0",
+        "expected_vers": "vers:conan/<0.20",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 209,
         "scheme": "conan",
         "native": "<=0.20",
-        "expected_vers": "vers:conan/<=0.20.0",
+        "expected_vers": "vers:conan/<=0.20",
         "gitlab_scheme": "conan"
     },
     {
@@ -2068,7 +2068,7 @@
         "test_index": 296,
         "scheme": "conan",
         "native": "<6.3",
-        "expected_vers": "vers:conan/<6.3.0",
+        "expected_vers": "vers:conan/<6.3",
         "gitlab_scheme": "conan"
     },
     {
@@ -2439,77 +2439,77 @@
         "test_index": 349,
         "scheme": "conan",
         "native": ">=1.1.1d <=1.1.1f",
-        "expected_vers": "vers:conan/>=1.1.1-d|<=1.1.1-f",
+        "expected_vers": "vers:conan/>=1.1.1d|<=1.1.1f",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 350,
         "scheme": "conan",
         "native": ">=1.0.2 <=1.0.2v",
-        "expected_vers": "vers:conan/>=1.0.2|<=1.0.2",
+        "expected_vers": "vers:conan/<=1.0.2|>=1.0.2",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 351,
         "scheme": "conan",
         "native": ">=1.0.2 <=1.0.2w||>=1.1.1 <=1.1.1h",
-        "expected_vers": "vers:conan/<=1.0.2-w|>=1.0.2|<=1.1.1-h|>=1.1.1",
+        "expected_vers": "vers:conan/>=1.0.2|<=1.0.2w|>=1.1.1|<=1.1.1h",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 352,
         "scheme": "conan",
         "native": "=1.0.2s",
-        "expected_vers": "vers:conan/1.0.2-s",
+        "expected_vers": "vers:conan/1.0.2s",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 353,
         "scheme": "conan",
         "native": ">=1.0.2 <1.0.2y||>=1.1.1 <1.1.1j",
-        "expected_vers": "vers:conan/<1.0.2-y|>=1.0.2|<1.1.1-j|>=1.1.1",
+        "expected_vers": "vers:conan/>=1.0.2|<1.0.2y|>=1.1.1|<1.1.1j",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 354,
         "scheme": "conan",
         "native": ">=1.0.2 <1.0.2y||>=1.1.1 <1.1.1j",
-        "expected_vers": "vers:conan/<1.0.2-y|>=1.0.2|<1.1.1-j|>=1.1.1",
+        "expected_vers": "vers:conan/>=1.0.2|<1.0.2y|>=1.1.1|<1.1.1j",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 355,
         "scheme": "conan",
         "native": "<0",
-        "expected_vers": "vers:conan/<0.0.0",
+        "expected_vers": "vers:conan/<0",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 356,
         "scheme": "conan",
         "native": ">=1.1.1 <1.1.1k",
-        "expected_vers": "vers:conan/<1.1.1-k|>=1.1.1",
+        "expected_vers": "vers:conan/>=1.1.1|<1.1.1k",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 357,
         "scheme": "conan",
         "native": ">=1.1.1h <1.1.1k",
-        "expected_vers": "vers:conan/>=1.1.1-h|<1.1.1-k",
+        "expected_vers": "vers:conan/>=1.1.1h|<1.1.1k",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 358,
         "scheme": "conan",
         "native": ">=1.1.1 <1.1.1l",
-        "expected_vers": "vers:conan/<1.1.1-l|>=1.1.1",
+        "expected_vers": "vers:conan/>=1.1.1|<1.1.1l",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 359,
         "scheme": "conan",
         "native": ">=1.0.2 <1.0.2za||>=1.1.1 <1.1.1l",
-        "expected_vers": "vers:conan/<1.0.2-za|>=1.0.2|<1.1.1-l|>=1.1.1",
+        "expected_vers": "vers:conan/>=1.0.2|<1.0.2za|>=1.1.1|<1.1.1l",
         "gitlab_scheme": "conan"
     },
     {
@@ -2523,21 +2523,21 @@
         "test_index": 361,
         "scheme": "conan",
         "native": ">=1.0.2 <1.1.1m||=3.0.0",
-        "expected_vers": "vers:conan/>=1.0.2|<1.1.1-m|3.0.0",
+        "expected_vers": "vers:conan/>=1.0.2|<1.1.1m|3.0.0",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 362,
         "scheme": "conan",
         "native": ">=1.0.2 <1.0.2zd||>=1.1.0 <1.1.1n||>=3.0.0 <3.0.2",
-        "expected_vers": "vers:conan/<1.0.2-zd|>=1.0.2|>=1.1.0|<1.1.1-n|>=3.0.0|<3.0.2",
+        "expected_vers": "vers:conan/>=1.0.2|<1.0.2zd|>=1.1.0|<1.1.1n|>=3.0.0|<3.0.2",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 363,
         "scheme": "conan",
         "native": ">=1.0.2 <1.0.2ze||>=1.1.1 <1.1.1o||>=3.0.0 <3.0.3",
-        "expected_vers": "vers:conan/<1.0.2-ze|>=1.0.2|<1.1.1-o|>=1.1.1|>=3.0.0|<3.0.3",
+        "expected_vers": "vers:conan/>=1.0.2|<1.0.2ze|>=1.1.1|<1.1.1o|>=3.0.0|<3.0.3",
         "gitlab_scheme": "conan"
     },
     {
@@ -2565,14 +2565,14 @@
         "test_index": 367,
         "scheme": "conan",
         "native": ">=1.0.2 <1.0.2zf||>=1.1.1 <1.1.1p||>=3.0.0 <3.0.4",
-        "expected_vers": "vers:conan/<1.0.2-zf|>=1.0.2|<1.1.1-p|>=1.1.1|>=3.0.0|<3.0.4",
+        "expected_vers": "vers:conan/>=1.0.2|<1.0.2zf|>=1.1.1|<1.1.1p|>=3.0.0|<3.0.4",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 368,
         "scheme": "conan",
         "native": ">=1.1.1 <1.1.1q||>=3.0.0 <3.0.5",
-        "expected_vers": "vers:conan/<1.1.1-q|>=1.1.1|>=3.0.0|<3.0.5",
+        "expected_vers": "vers:conan/>=1.1.1|<1.1.1q|>=3.0.0|<3.0.5",
         "gitlab_scheme": "conan"
     },
     {
@@ -2614,21 +2614,21 @@
         "test_index": 374,
         "scheme": "conan",
         "native": "<8.44",
-        "expected_vers": "vers:conan/<8.44.0",
+        "expected_vers": "vers:conan/<8.44",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 375,
         "scheme": "conan",
         "native": "<10.40",
-        "expected_vers": "vers:conan/<10.40.0",
+        "expected_vers": "vers:conan/<10.40",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 376,
         "scheme": "conan",
         "native": "<10.40",
-        "expected_vers": "vers:conan/<10.40.0",
+        "expected_vers": "vers:conan/<10.40",
         "gitlab_scheme": "conan"
     },
     {
@@ -2649,14 +2649,14 @@
         "test_index": 379,
         "scheme": "conan",
         "native": "=1.3",
-        "expected_vers": "vers:conan/1.3.0",
+        "expected_vers": "vers:conan/1.3",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 380,
         "scheme": "conan",
         "native": "=2.2",
-        "expected_vers": "vers:conan/2.2.0",
+        "expected_vers": "vers:conan/2.2",
         "gitlab_scheme": "conan"
     },
     {
@@ -2670,14 +2670,14 @@
         "test_index": 382,
         "scheme": "conan",
         "native": ">=4.0 <4.4.1",
-        "expected_vers": "vers:conan/>=4.0.0|<4.4.1",
+        "expected_vers": "vers:conan/>=4.0|<4.4.1",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 383,
         "scheme": "conan",
         "native": ">=4.0 <4.4.3",
-        "expected_vers": "vers:conan/>=4.0.0|<4.4.3",
+        "expected_vers": "vers:conan/>=4.0|<4.4.3",
         "gitlab_scheme": "conan"
     },
     {
@@ -2691,21 +2691,21 @@
         "test_index": 385,
         "scheme": "conan",
         "native": "=cci.20200203",
-        "expected_vers": null,
+        "expected_vers": "vers:conan/cci.20200203",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 386,
         "scheme": "conan",
         "native": "=2.27",
-        "expected_vers": "vers:conan/2.27.0",
+        "expected_vers": "vers:conan/2.27",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 387,
         "scheme": "conan",
         "native": "=2.27",
-        "expected_vers": "vers:conan/2.27.0",
+        "expected_vers": "vers:conan/2.27",
         "gitlab_scheme": "conan"
     },
     {
@@ -2733,14 +2733,14 @@
         "test_index": 391,
         "scheme": "conan",
         "native": "<2021.02.22.00",
-        "expected_vers": "vers:conan/<2021.2.22+00",
+        "expected_vers": "vers:conan/<2021.02.22.00",
         "gitlab_scheme": "conan"
     },
     {
         "test_index": 392,
         "scheme": "conan",
         "native": "<1.05.01",
-        "expected_vers": "vers:conan/<1.5.1",
+        "expected_vers": "vers:conan/<1.05.01",
         "gitlab_scheme": "conan"
     },
     {

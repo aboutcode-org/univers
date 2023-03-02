@@ -18,7 +18,7 @@ from univers import gentoo
 from univers import maven
 from univers import nuget
 from univers import rpm
-from univers.conan.version import ConanVersion as conan_version
+from univers.conan.version import Version as conan_version
 from univers.utils import remove_spaces
 
 """
@@ -140,7 +140,6 @@ class Version:
 
     def __lt__(self, other):
         if not isinstance(other, self.__class__):
-            print('Hello!')
             return NotImplemented
         return self.value.__lt__(other.value)
 
@@ -653,21 +652,13 @@ class OpensslVersion(Version):
         # version value are of diff type, then semver one is always ahead of legacy
         return isinstance(self.value, SemverVersion)
 
+
+@attr.s(frozen=True, order=False, eq=False, hash=True)
+@total_ordering
 class ConanVersion(Version):
     @classmethod
     def build_value(cls, string):
         return conan_version(string)
-
-    # def __eq__(self, other):
-        # if not isinstance(other, self.__class__):
-        #     return NotImplemented
-        # return conan_version.vercmp(self.value, other.value) == 0
-
-    def __eq__(self, other):
-        if other is None:
-            return False
-        if not isinstance(other, conan_version):
-            other = conan_version(other)
 
     @classmethod
     def is_valid(cls, string):
@@ -697,6 +688,46 @@ class ConanVersion(Version):
     def build(self):
         return self.value and self.value.build
 
+    @property
+    def micro(self):
+        return self.value and self.value.micro
+
+    @property
+    def pre(self):
+        return self.value and self.value._pre
+
+    @property
+    def nonzero_items(self):
+        return self.value and self.value._nonzero_items
+
+    @property
+    def main(self):
+        return self.value._items
+
+    @property
+    def major(self):
+        try:
+            return self.value.main[0]
+        except IndexError:
+            return None
+
+    @property
+    def minor(self):
+        try:
+            return self.value.main[1]
+        except IndexError:
+            return None
+
+    @property
+    def patch(self):
+        try:
+            return self.value.main[2]
+        except IndexError:
+            return None
+
+    def upper_bound(self, index):
+        return self.value and self.value.upper_bound(index)
+
     def next_major(self):
         return self.value and self.value.next_major()
 
@@ -706,42 +737,41 @@ class ConanVersion(Version):
     def next_patch(self):
         return self.value and self.value.next_patch()
 
-    @property
-    def micro(self):
-        # self.value()
-        return self.value and self.value.micro
+    def bump(self, index):
+        return self.value and self.value.bump(index)
 
-    @property
-    def pre(self):
-        return self.value and self.value._pre
+    def __eq__(self, other):
+        if other is None:
+            return False
+        if not isinstance(other, ConanVersion):
+            other = ConanVersion.build_value(other)
+            return self.value == other
+        return self.value == other.value
 
     def __lt__(self, other):
         if other is None:
             return False
-        if not isinstance(other, conan_version):
-            other = conan_version(other)
+        if not isinstance(other, ConanVersion):
+            other = ConanVersion(str(other))
+        return self.value < other.value
 
-        if self.value._pre:
-            if other._pre:  # both are pre-releases
-                return (self.value._nonzero_items, self.value._pre, self.value._build) < (
-                    other._nonzero_items,
-                    other._pre,
-                    other._build,
-                )
-            else:  # Left hand is pre-release, right side is regular
-                if (
-                    self.value._nonzero_items == other._nonzero_items
-                ):  # Problem only happens if both equal
-                    return True
-                else:
-                    return self.value._nonzero_items < other._nonzero_items
-        else:
-            if other._pre:  # Left hand is regular, right side is pre-release
-                if (
-                    self.value._nonzero_items == other._nonzero_items
-                ):  # Problem only happens if both equal
-                    return False
-                else:
-                    return self.value._nonzero_items < other._nonzero_items
-            else:  # None of them is pre-release
-                return (self.value._nonzero_items, self.value._build) < (other._nonzero_items, other._build)
+    def __le__(self, other):
+        if other is None:
+            return False
+        if not isinstance(other, ConanVersion):
+            other = ConanVersion(str(other))
+        return self.value <= other.value
+
+    def __gt__(self, other):
+        if other is None:
+            return False
+        if not isinstance(other, ConanVersion):
+            other = ConanVersion(str(other))
+        return self.value > other.value
+
+    def __ge__(self, other):
+        if other is None:
+            return False
+        if not isinstance(other, ConanVersion):
+            other = ConanVersion(str(other))
+        return self.value >= other.value

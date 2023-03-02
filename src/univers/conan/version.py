@@ -47,7 +47,7 @@ class _VersionItem:
 
 
 @total_ordering
-class ConanVersion:
+class Version:
     """
     This is NOT an implementation of semver, as users may use any pattern in their versions.
     It is just a helper to parse "." or "-" and compare taking into account integers when possible
@@ -60,7 +60,7 @@ class ConanVersion:
         items = value.rsplit("+", 1)  # split for build
         if len(items) == 2:
             value, build = items
-            self._build = ConanVersion(build)  # This is a nested version by itself
+            self._build = Version(build)  # This is a nested version by itself
         else:
             value = items[0]
             self._build = None
@@ -68,7 +68,7 @@ class ConanVersion:
         items = value.rsplit("-", 1)  # split for pre-release
         if len(items) == 2:
             value, pre = items
-            self._pre = ConanVersion(pre)  # This is a nested version by itself
+            self._pre = Version(pre)  # This is a nested version by itself
         else:
             value = items[0]
             self._pre = None
@@ -101,7 +101,7 @@ class ConanVersion:
         items.extend([0] * (len(items) - index - 1))
         v = ".".join(str(i) for i in items)
         # prerelease and build are dropped while bumping digits
-        result = ConanVersion(v)
+        result = Version(v)
         return result
 
     def upper_bound(self, index):
@@ -113,7 +113,7 @@ class ConanVersion:
         items.extend([0] * (len(items) - index - 1))
         v = ".".join(str(i) for i in items)
         v += "-"  # Exclude prereleases
-        result = ConanVersion(v)
+        result = Version(v)
         return result
 
     @property
@@ -165,8 +165,8 @@ class ConanVersion:
     def __eq__(self, other):
         if other is None:
             return False
-        if not isinstance(other, ConanVersion):
-            other = ConanVersion(other)
+        if not isinstance(other, Version):
+            other = Version(other)
 
         return (self._nonzero_items, self._pre, self._build) == (
             other._nonzero_items,
@@ -180,8 +180,8 @@ class ConanVersion:
     def __lt__(self, other):
         if other is None:
             return False
-        if not isinstance(other, ConanVersion):
-            other = ConanVersion(other)
+        if not isinstance(other, Version):
+            other = Version(other)
 
         if self._pre:
             if other._pre:  # both are pre-releases

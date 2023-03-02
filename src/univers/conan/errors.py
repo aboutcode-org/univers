@@ -41,13 +41,6 @@ def conanfile_exception_formatter(conanfile_name, func_name):
     """
 
     def _raise_conanfile_exc(e):
-        from conan.api.output import LEVEL_DEBUG
-        from conan.api.output import conan_output_level
-
-        if conan_output_level <= LEVEL_DEBUG:
-            import traceback
-
-            raise ConanExceptionInUserConanfileMethod(traceback.format_exc())
         m = _format_conanfile_exception(conanfile_name, func_name, e)
         raise ConanExceptionInUserConanfileMethod(m)
 
@@ -132,13 +125,18 @@ class ConanException(Exception):
         return ""
 
     def __str__(self):
-        from conans.util.files import exception_message_safe
 
         msg = super(ConanException, self).__str__()
-        if self.remote:
-            return "{}.{}".format(exception_message_safe(msg), self.remote_message())
 
-        return exception_message_safe(msg)
+        try:
+            msg = str(msg)
+        except Exception:
+            msg = repr(msg)
+
+        if self.remote:
+            return "{}.{}".format(msg, self.remote_message())
+
+        return msg
 
 
 class ConanReferenceDoesNotExistInDB(ConanException):
@@ -230,36 +228,6 @@ class NotFoundException(ConanException):  # 404
         super(NotFoundException, self).__init__(*args, **kwargs)
 
 
-class RecipeNotFoundException(NotFoundException):
-    def __init__(self, ref, remote=None):
-        from conans.model.recipe_ref import RecipeReference
-
-        assert isinstance(
-            ref, RecipeReference
-        ), "RecipeNotFoundException requires a RecipeReference"
-        self.ref = ref
-        super(RecipeNotFoundException, self).__init__(remote=remote)
-
-    def __str__(self):
-        tmp = repr(self.ref)
-        return "Recipe not found: '{}'".format(tmp, self.remote_message())
-
-
-class PackageNotFoundException(NotFoundException):
-    def __init__(self, pref, remote=None):
-        from conans.model.package_ref import PkgReference
-
-        assert isinstance(pref, PkgReference), "PackageNotFoundException requires a PkgReference"
-        self.pref = pref
-
-        super(PackageNotFoundException, self).__init__(remote=remote)
-
-    def __str__(self):
-        return "Binary package not found: '{}'{}".format(
-            self.pref.repr_notime(), self.remote_message()
-        )
-
-
 class UserInterfaceErrorException(RequestErrorException):
     """
     420 error
@@ -274,7 +242,5 @@ EXCEPTION_CODE_MAPPING = {
     AuthenticationException: 401,
     ForbiddenException: 403,
     NotFoundException: 404,
-    RecipeNotFoundException: 404,
-    PackageNotFoundException: 404,
     UserInterfaceErrorException: 420,
 }
