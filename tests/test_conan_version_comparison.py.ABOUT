@@ -1,0 +1,8 @@
+about_resource: test_conan_version_comparison.py
+package_url: pkg:pypi/conan@2.0.0
+copyright: |
+    Copyright (c) 2019 JFrog LTD
+download_url: https://github.com/conan-io/conan/tree/release/2.0/conans/test/unittests/model/version/test_conan_version_comparison.py
+license_expression: MIT
+homepage_url: https://github.com/conan-io/conan
+notice_file: test_conan_version_comparison.py.NOTICE
