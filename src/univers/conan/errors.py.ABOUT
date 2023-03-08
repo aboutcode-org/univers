@@ -1,0 +1,8 @@
+about_resource: errors.py
+package_url: pkg:pypi/conan@2.0.0
+copyright: |
+    Copyright (c) 2019 JFrog LTD
+download_url: https://github.com/conan-io/conan/blob/release/2.0/conans/errors.py
+license_expression: MIT
+homepage_url: https://github.com/conan-io/conan
+notice_file: errors.py.NOTICE

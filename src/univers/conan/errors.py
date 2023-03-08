@@ -1,3 +1,9 @@
+#
+# Copyright (c) 2019 JFrog LTD
+# SPDX-License-Identifier: MIT
+#
+# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
+
 """
     Exceptions raised and handled in Conan
     These exceptions are mapped between server (as an HTTP response) and client
