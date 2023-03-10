@@ -18,6 +18,7 @@ from univers import gentoo
 from univers import maven
 from univers import nuget
 from univers import rpm
+from univers.conan.version import Version as conan_version
 from univers.utils import remove_spaces
 
 """
@@ -650,3 +651,127 @@ class OpensslVersion(Version):
             return self.value.__ge__(other.value)
         # version value are of diff type, then semver one is always ahead of legacy
         return isinstance(self.value, SemverVersion)
+
+
+@attr.s(frozen=True, order=False, eq=False, hash=True)
+@total_ordering
+class ConanVersion(Version):
+    @classmethod
+    def build_value(cls, string):
+        return conan_version(string)
+
+    @classmethod
+    def is_valid(cls, string):
+        try:
+            cls.build_value(string)
+            return True
+        except ValueError:
+            return False
+
+    @property
+    def major(self):
+        return self.value and self.value.major
+
+    @property
+    def minor(self):
+        return self.value and self.value.minor
+
+    @property
+    def patch(self):
+        return self.value and self.value.patch
+
+    @property
+    def prerelease(self):
+        return self.value and self.value.prerelease
+
+    @property
+    def build(self):
+        return self.value and self.value.build
+
+    @property
+    def micro(self):
+        return self.value and self.value.micro
+
+    @property
+    def pre(self):
+        return self.value and self.value._pre
+
+    @property
+    def nonzero_items(self):
+        return self.value and self.value._nonzero_items
+
+    @property
+    def main(self):
+        return self.value._items
+
+    @property
+    def major(self):
+        try:
+            return self.value.main[0]
+        except IndexError:
+            return None
+
+    @property
+    def minor(self):
+        try:
+            return self.value.main[1]
+        except IndexError:
+            return None
+
+    @property
+    def patch(self):
+        try:
+            return self.value.main[2]
+        except IndexError:
+            return None
+
+    def upper_bound(self, index):
+        return self.value and self.value.upper_bound(index)
+
+    def next_major(self):
+        return self.value and self.value.next_major()
+
+    def next_minor(self):
+        return self.value and self.value.next_minor()
+
+    def next_patch(self):
+        return self.value and self.value.next_patch()
+
+    def bump(self, index):
+        return self.value and self.value.bump(index)
+
+    def __eq__(self, other):
+        if other is None:
+            return False
+        if not isinstance(other, ConanVersion):
+            other = ConanVersion.build_value(other)
+            return self.value == other
+        return self.value == other.value
+
+    def __lt__(self, other):
+        if other is None:
+            return False
+        if not isinstance(other, ConanVersion):
+            other = ConanVersion(str(other))
+        return self.value < other.value
+
+    def __le__(self, other):
+        if other is None:
+            return False
+        if not isinstance(other, ConanVersion):
+            other = ConanVersion(str(other))
+        return self.value <= other.value
+
+    def __gt__(self, other):
+        if other is None:
+            return False
+        if not isinstance(other, ConanVersion):
+            other = ConanVersion(str(other))
+        return self.value > other.value
+
+    def __ge__(self, other):
+        if other is None:
+            return False
+        if not isinstance(other, ConanVersion):
+            other = ConanVersion(str(other))
+        return self.value >= other.value

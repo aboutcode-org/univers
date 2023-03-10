@@ -11,6 +11,7 @@ import pytest
 
 from univers.version_constraint import VersionConstraint
 from univers.version_range import RANGE_CLASS_BY_SCHEMES
+from univers.version_range import ConanVersionRange
 from univers.version_range import GemVersionRange
 from univers.version_range import InvalidVersionRange
 from univers.version_range import MattermostVersionRange
@@ -20,6 +21,7 @@ from univers.version_range import OpensslVersionRange
 from univers.version_range import PypiVersionRange
 from univers.version_range import VersionRange
 from univers.version_range import from_gitlab_native
+from univers.versions import InvalidVersion
 from univers.versions import NugetVersion
 from univers.versions import OpensslVersion
 from univers.versions import PypiVersion
@@ -353,6 +355,19 @@ def test_pypi_gitlab_version_range_parse(test_case):
     assert str(result) == test_case["expected_vers"]
 
 
+@pytest.mark.parametrize("test_case", json.load(open("./tests/data/conan_advisory.json")))
+def test_conan_gitlab_version_range_parse(test_case):
+    if test_case["expected_vers"] is None:
+        with pytest.raises(InvalidVersion):
+            ConanVersionRange.from_native(string=test_case["native"])
+        return
+    result = from_gitlab_native(
+        gitlab_scheme=test_case["gitlab_scheme"],
+        string=test_case["native"],
+    )
+    assert str(result) == test_case["expected_vers"]
+
+
 @pytest.mark.parametrize("test_case", json.load(open("./tests/data/npm_gitlab.json")))
 def test_npm_gitlab_version_range_parse(test_case):
     result = from_gitlab_native(
@@ -393,6 +408,18 @@ def test_composer_gitlab_version_range_parse(test_case):
 def test_npm_advisory_version_range_parse(test_case):
     result = NpmVersionRange.from_native(
         string=test_case["npm_native"],
+    )
+    assert str(result) == test_case["expected_vers"]
+
+
+@pytest.mark.parametrize("test_case", json.load(open("./tests/data/conan_advisory.json")))
+def test_conan_advisory_version_range_parse(test_case):
+    if test_case["expected_vers"] is None:
+        with pytest.raises(InvalidVersion):
+            ConanVersionRange.from_native(string=test_case["native"])
+        return
+    result = ConanVersionRange.from_native(
+        string=test_case["native"],
     )
     assert str(result) == test_case["expected_vers"]
 
