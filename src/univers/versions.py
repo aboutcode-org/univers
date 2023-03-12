@@ -4,9 +4,6 @@
 #
 # Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
-import functools
-from functools import total_ordering
-
 import attr
 import semantic_version
 from packaging import version as packaging_version
@@ -59,7 +56,7 @@ def is_valid_alpine_version(s):
     return str(i) == left
 
 
-@attr.s(frozen=True, order=False, hash=True)
+@attr.s(frozen=True, order=True, eq=True, hash=True)
 class Version:
     """
     Base version mixin to subclass for each version syntax implementation.
@@ -73,14 +70,16 @@ class Version:
     """
 
     # the original string used to build this Version
-    string = attr.ib(type=str)
+    string = attr.ib(type=str, eq=False, order=False, hash=False)
 
     # the normalized string for this Version, stored without spaces and
     # lowercased. Any leading v is removed too.
-    normalized_string = attr.ib(type=str, default=None, repr=False)
+    normalized_string = attr.ib(
+        type=str, default=None, repr=False, eq=False, order=False, hash=False
+    )
 
     # a comparable scheme-specific version object constructed from the version string
-    value = attr.ib(default=None, repr=False)
+    value = attr.ib(default=None, repr=False, eq=True, order=True, hash=True)
 
     def __attrs_post_init__(self):
         normalized_string = self.normalize(self.string)
@@ -110,7 +109,7 @@ class Version:
         Return a normalized version string from ``string ``. Subclass can override.
         """
         # FIXME: Is removing spaces and strip v the right thing to do?
-        return remove_spaces(string).rstrip("v ").strip()
+        return remove_spaces(string).lstrip("vV")
 
     @classmethod
     def build_value(self, string):
@@ -133,33 +132,7 @@ class Version:
     def __str__(self):
         return str(self.value)
 
-    def __eq__(self, other):
-        if not isinstance(other, self.__class__):
-            return NotImplemented
-        return self.value.__eq__(other.value)
 
-    def __lt__(self, other):
-        if not isinstance(other, self.__class__):
-            return NotImplemented
-        return self.value.__lt__(other.value)
-
-    def __gt__(self, other):
-        if not isinstance(other, self.__class__):
-            return NotImplemented
-        return self.value.__gt__(other.value)
-
-    def __le__(self, other):
-        if not isinstance(other, self.__class__):
-            return NotImplemented
-        return self.value.__le__(other.value)
-
-    def __ge__(self, other):
-        if not isinstance(other, self.__class__):
-            return NotImplemented
-        return self.value.__ge__(other.value)
-
-
-@attr.s(frozen=True, order=False, hash=True)
 class GenericVersion(Version):
     @classmethod
     def is_valid(cls, string):
@@ -174,13 +147,13 @@ class GenericVersion(Version):
         return super(GenericVersion, cls).is_valid(string)
 
 
-@attr.s(frozen=True, order=False, eq=False, hash=True)
 class PypiVersion(Version):
     """
     Python PEP 440 version as implemented in packaging with fallback to "legacy"
     """
 
     # TODO: ensure we deal with triple equal
+    # TODO: use packvers and handle legacy versions
 
     @classmethod
     def build_value(cls, string):
@@ -199,10 +172,14 @@ class PypiVersion(Version):
         except packaging_version.InvalidVersion:
             return False
 
-        return False
+
+class EnhancedSemanticVersion(semantic_version.Version):
+    @property
+    def precedence_key(self):
+        key = super(EnhancedSemanticVersion, self).precedence_key
+        return key + (self.build or ())
 
 
-@attr.s(frozen=True, order=False, eq=False, hash=True)
 class SemverVersion(Version):
     """
     Strict semver v2.0 with 3 segments.
@@ -210,7 +187,7 @@ class SemverVersion(Version):
 
     @classmethod
     def build_value(cls, string):
-        return semantic_version.Version.coerce(string)
+        return EnhancedSemanticVersion.coerce(string)
 
     @classmethod
     def is_valid(cls, string):
@@ -265,7 +242,6 @@ def is_even(s):
     return (int(s) % 2) == 0
 
 
-@attr.s(frozen=True, order=False, eq=False, hash=True)
 class NginxVersion(SemverVersion):
     """
     Semver with 3 segments and extra attribute for stable vs. unstable branches
@@ -279,7 +255,6 @@ class NginxVersion(SemverVersion):
         return is_even(self.minor)
 
 
-@attr.s(frozen=True, order=False, eq=False, hash=True)
 class RubygemsVersion(Version):
     """
     Rubygems encourages semver version but does not enforce it.
@@ -296,7 +271,6 @@ class RubygemsVersion(Version):
         return gem.GemVersion.is_correct(string)
 
 
-@attr.s(frozen=True, order=False, eq=False, hash=True)
 class ArchLinuxVersion(Version):
     def __eq__(self, other):
         if not isinstance(other, self.__class__):
@@ -324,7 +298,6 @@ class ArchLinuxVersion(Version):
         return arch.vercmp(self.value, other.value) >= 0
 
 
-@attr.s(frozen=True, order=False, eq=False, hash=True)
 class DebianVersion(Version):
     @classmethod
     def build_value(cls, string):
@@ -335,7 +308,6 @@ class DebianVersion(Version):
         return debian.Version.is_valid(string)
 
 
-@attr.s(frozen=True, order=False, eq=False, hash=True)
 class MavenVersion(Version):
     # See https://maven.apache.org/enforcer/enforcer-rules/versionRanges.html
     # https://github.com/apache/maven/tree/master/maven-artifact/src/main/java/org/apache/maven/artifact/versioning
@@ -346,8 +318,6 @@ class MavenVersion(Version):
 
 
 # We will use total ordering to sort the versions, since these versions also consider prereleases.
-@attr.s(frozen=True, order=False, eq=False, hash=True)
-@functools.total_ordering
 class NugetVersion(Version):
     # See https://docs.microsoft.com/en-us/nuget/concepts/package-versioning
 
@@ -363,24 +333,10 @@ class NugetVersion(Version):
         except ValueError:
             return False
 
-    def __str__(self):
-        return str(self.string)
 
-    def __lt__(self, other):
-        return nuget.Version.from_string(self.string) < nuget.Version.from_string(other.string)
-
-    def __eq__(self, other):
-        return nuget.Version.from_string(self.string) == nuget.Version.from_string(other.string)
-
-
-@attr.s(frozen=True, order=False, eq=False, hash=True)
 class RpmVersion(Version):
     """
     Represent an RPM version.
-
-    For example::
-
-    # 1:1.1.4|>=2.8.16|<=2.8.16-z
     """
 
     @classmethod
@@ -388,8 +344,6 @@ class RpmVersion(Version):
         return rpm.RpmVersion.from_string(string)
 
 
-@total_ordering
-@attr.s(frozen=True, order=False, eq=False, hash=True)
 class GentooVersion(Version):
     @classmethod
     def is_valid(cls, string):
@@ -405,44 +359,30 @@ class GentooVersion(Version):
             return NotImplemented
         return gentoo.vercmp(self.value, other.value) == -1
 
+    def __gt__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return gentoo.vercmp(self.value, other.value) == 1
 
-@attr.s(frozen=True, order=False, eq=False, hash=True)
-class AlpineLinuxVersion(Version):
+
+class AlpineLinuxVersion(GentooVersion):
     @classmethod
     def is_valid(cls, string):
         return is_valid_alpine_version(string) and gentoo.is_valid(string)
 
-    def __eq__(self, other):
-        if not isinstance(other, self.__class__):
-            return NotImplemented
-        return gentoo.vercmp(self.value, other.value) == 0
 
-    def __lt__(self, other):
-        if not isinstance(other, self.__class__):
-            return NotImplemented
-        return gentoo.vercmp(self.value, other.value) < 0
-
-    def __gt__(self, other):
-        if not isinstance(other, self.__class__):
-            return NotImplemented
-        return gentoo.vercmp(self.value, other.value) > 0
-
-
-@attr.s(frozen=True, order=False, eq=False, hash=True)
 class ComposerVersion(SemverVersion):
     @classmethod
     def build_value(cls, string):
-        return semantic_version.Version.coerce(string.lstrip("vV"))
+        return super().build_value(string.lstrip("vV"))
 
 
-@attr.s(frozen=True, order=False, eq=False, hash=True)
 class GolangVersion(SemverVersion):
     @classmethod
     def build_value(cls, string):
-        return semantic_version.Version.coerce(string.lstrip("vV"))
+        return super().build_value(string.lstrip("vV"))
 
 
-@attr.s(frozen=True, order=False, eq=False, hash=True)
 class LegacyOpensslVersion(Version):
     """
     Represent an Legacy Openssl Version.
@@ -558,7 +498,6 @@ class LegacyOpensslVersion(Version):
         return self.patch.startswith(("-beta", "-alpha"))
 
 
-@attr.s(frozen=True, order=False, eq=False, hash=True)
 class OpensslVersion(Version):
     """
     Internally tracks two types of openssl versions
@@ -654,7 +593,6 @@ class OpensslVersion(Version):
 
 
 @attr.s(frozen=True, order=False, eq=False, hash=True)
-@total_ordering
 class ConanVersion(Version):
     @classmethod
     def build_value(cls, string):
@@ -775,3 +713,22 @@ class ConanVersion(Version):
         if not isinstance(other, ConanVersion):
             other = ConanVersion(str(other))
         return self.value >= other.value
+
+
+AVAILABLE_VERSIONS = [
+    SemverVersion,
+    GolangVersion,
+    PypiVersion,
+    GenericVersion,
+    ComposerVersion,
+    NginxVersion,
+    ArchLinuxVersion,
+    DebianVersion,
+    RpmVersion,
+    MavenVersion,
+    NugetVersion,
+    GentooVersion,
+    OpensslVersion,
+    LegacyOpensslVersion,
+    AlpineLinuxVersion,
+]

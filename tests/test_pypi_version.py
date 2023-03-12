@@ -8,7 +8,8 @@ from unittest import TestCase
 
 from packaging import version as packaging_version
 
-from univers import versions
+from univers.versions import InvalidVersion
+from univers.versions import PypiVersion
 
 # version comparison is already tested at:
 # https://github.com/pypa/packaging/blob/main/tests/test_version.py
@@ -16,6 +17,16 @@ from univers import versions
 
 class TestPYPIVersion(TestCase):
     def test_constructor(self):
-        pypi_version = versions.PypiVersion("2.4.5")
+        pypi_version = PypiVersion("2.4.5")
         assert pypi_version.value == packaging_version.Version("2.4.5")
-        self.assertRaises(versions.InvalidVersion, versions.PypiVersion, "2.//////")
+        self.assertRaises(InvalidVersion, PypiVersion, "2.//////")
+
+    def test_compare(self):
+        pypi_version = PypiVersion("2.4.5")
+        assert pypi_version == PypiVersion("2.4.5")
+        assert pypi_version != PypiVersion("2.4.6")
+        assert pypi_version > PypiVersion("2.4.4")
+        assert pypi_version >= PypiVersion("2.4.4")
+        assert pypi_version < PypiVersion("2.4.6")
+        assert pypi_version <= PypiVersion("2.4.6")
+        assert PypiVersion("2.4") == PypiVersion("2.4.0")
