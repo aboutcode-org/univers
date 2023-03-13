@@ -170,11 +170,6 @@
     "value": "0.9.8"
   },
   {
-    "string": "0.9.8v",
-    "normalized_string": "0.9.8",
-    "value": "0.9.8"
-  },
-  {
     "string": "0.9.8a",
     "normalized_string": "0.9.8a",
     "value": "0.9.8a"
@@ -278,6 +273,11 @@
     "string": "0.9.8u",
     "normalized_string": "0.9.8u",
     "value": "0.9.8u"
+  },
+  {
+    "string": "0.9.8v",
+    "normalized_string": "0.9.8v",
+    "value": "0.9.8v"
   },
   {
     "string": "0.9.8w",
@@ -555,11 +555,6 @@
     "value": "1.0.2"
   },
   {
-    "string": "1.0.2v",
-    "normalized_string": "1.0.2",
-    "value": "1.0.2"
-  },
-  {
     "string": "1.0.2a",
     "normalized_string": "1.0.2a",
     "value": "1.0.2a"
@@ -665,6 +660,11 @@
     "value": "1.0.2u"
   },
   {
+    "string": "1.0.2v",
+    "normalized_string": "1.0.2v",
+    "value": "1.0.2v"
+  },
+  {
     "string": "1.0.2w",
     "normalized_string": "1.0.2w",
     "value": "1.0.2w"
@@ -696,8 +696,8 @@
   },
   {
     "string": "1.0.2zc-dev",
-    "normalized_string": "1.0.2zc-de",
-    "value": "1.0.2zc-de"
+    "normalized_string": "1.0.2zc-dev",
+    "value": "1.0.2zc-dev"
   },
   {
     "string": "1.0.2zd",

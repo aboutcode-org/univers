@@ -592,7 +592,6 @@ class OpensslVersion(Version):
         return isinstance(self.value, SemverVersion)
 
 
-@attr.s(frozen=True, order=False, eq=False, hash=True)
 class ConanVersion(Version):
     @classmethod
     def build_value(cls, string):
@@ -677,42 +676,6 @@ class ConanVersion(Version):
 
     def bump(self, index):
         return self.value and self.value.bump(index)
-
-    def __eq__(self, other):
-        if other is None:
-            return False
-        if not isinstance(other, ConanVersion):
-            other = ConanVersion.build_value(other)
-            return self.value == other
-        return self.value == other.value
-
-    def __lt__(self, other):
-        if other is None:
-            return False
-        if not isinstance(other, ConanVersion):
-            other = ConanVersion(str(other))
-        return self.value < other.value
-
-    def __le__(self, other):
-        if other is None:
-            return False
-        if not isinstance(other, ConanVersion):
-            other = ConanVersion(str(other))
-        return self.value <= other.value
-
-    def __gt__(self, other):
-        if other is None:
-            return False
-        if not isinstance(other, ConanVersion):
-            other = ConanVersion(str(other))
-        return self.value > other.value
-
-    def __ge__(self, other):
-        if other is None:
-            return False
-        if not isinstance(other, ConanVersion):
-            other = ConanVersion(str(other))
-        return self.value >= other.value
 
 
 AVAILABLE_VERSIONS = [

@@ -2446,7 +2446,7 @@
         "test_index": 350,
         "scheme": "conan",
         "native": ">=1.0.2 <=1.0.2v",
-        "expected_vers": "vers:conan/<=1.0.2|>=1.0.2",
+        "expected_vers": "vers:conan/>=1.0.2|<=1.0.2v",
         "gitlab_scheme": "conan"
     },
     {
