@@ -218,13 +218,13 @@ class SemverVersion(Version):
         return self.value and self.value.build
 
     def next_major(self):
-        return self.value and self.value.next_major()
+        return self.value and SemverVersion(str(self.value.next_major()))
 
     def next_minor(self):
-        return self.value and self.value.next_minor()
+        return self.value and SemverVersion(str(self.value.next_minor()))
 
     def next_patch(self):
-        return self.value and self.value.next_patch()
+        return self.value and SemverVersion(str(self.value.next_patch()))
 
 
 def is_even(s):
@@ -315,6 +315,14 @@ class MavenVersion(Version):
     @classmethod
     def build_value(cls, string):
         return maven.Version(string)
+
+    @classmethod
+    def is_valid(cls, string):
+        try:
+            cls.build_value(string)
+            return True
+        except ValueError:
+            return False
 
 
 # We will use total ordering to sort the versions, since these versions also consider prereleases.
