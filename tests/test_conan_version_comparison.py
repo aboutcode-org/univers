@@ -63,12 +63,12 @@ def test_comparison(v1, v2):
 def test_comparison_with_integer():
     v1 = ConanVersion("13.0")
     # Issue: https://github.com/conan-io/conan/issues/12907
-    assert v1 > 5
-    assert v1 >= 5
-    assert v1 < 20
-    assert v1 <= 20
-    assert v1 == 13
-    assert v1 != 14
+    assert v1 > ConanVersion("5")
+    assert v1 >= ConanVersion("5")
+    assert v1 < ConanVersion("20")
+    assert v1 <= ConanVersion("20")
+    assert v1 == ConanVersion("13")
+    assert v1 != ConanVersion("14")
 
 
 e = [

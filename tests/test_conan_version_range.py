@@ -58,7 +58,7 @@ def test_range(version_range, conditions, versions_in, versions_out):
     for condition_set, expected_condition_set in zip(r.condition_sets, conditions):
         for condition, expected_condition in zip(condition_set.conditions, expected_condition_set):
             assert condition.operator == expected_condition[0]
-            assert condition.version == expected_condition[1]
+            assert condition.version == ConanVersion(expected_condition[1])
 
     for v in versions_in:
         assert ConanVersion(v) in r
