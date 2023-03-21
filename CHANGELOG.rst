@@ -2,6 +2,13 @@ Changelog
 =========
 
 
+Version v30.10.0
+----------------
+
+- Add support for conan version and version range.
+- Fix version comparison for all the versions.
+
+
 Version v30.9.2
 ----------------
 
