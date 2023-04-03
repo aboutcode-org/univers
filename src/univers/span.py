@@ -31,7 +31,13 @@ from collections.abc import Set
 from itertools import count
 from itertools import groupby
 
-from intbitset import intbitset
+try:
+    from intbitset import intbitset
+
+    spanset = intbitset
+except:
+    spanset = set
+
 
 """
 Ranges and intervals of integers using bitmaps.
@@ -99,24 +105,24 @@ class Span(Set):
         len_args = len(args)
 
         if len_args == 0:
-            self._set = intbitset()
+            self._set = spanset()
 
         elif len_args == 1:
             # args0 is a single int or an iterable of ints
             if isinstance(args[0], int):
-                self._set = intbitset(args)
+                self._set = spanset(args)
             else:
                 # some sequence or iterable
-                self._set = intbitset(list(args[0]))
+                self._set = spanset(list(args[0]))
 
         elif len_args == 2:
             # args0 and args1 describe a start and end closed range
-            self._set = intbitset(range(args[0], args[1] + 1))
+            self._set = spanset(range(args[0], args[1] + 1))
 
         else:
             # args0 is a single int or args is an iterable of ints
             # args is an iterable of ints
-            self._set = intbitset(list(args))
+            self._set = spanset(list(args))
 
     @classmethod
     def _from_iterable(cls, it):
@@ -211,9 +217,9 @@ class Span(Set):
             return self._set.__contains__(other)
 
         if isinstance(other, (set, frozenset)):
-            return self._set.issuperset(intbitset(other))
+            return self._set.issuperset(spanset(other))
 
-        if isinstance(other, intbitset):
+        if isinstance(other, spanset):
             return self._set.issuperset(other)
 
     @property
@@ -230,12 +236,16 @@ class Span(Set):
     def start(self):
         if not self._set:
             raise TypeError("Empty Span has no start.")
+        if isinstance(self._set, set):
+            return sorted(self._set)[0]
         return self._set[0]
 
     @property
     def end(self):
         if not self._set:
             raise TypeError("Empty Span has no end.")
+        if isinstance(self._set, set):
+            return sorted(self._set)[-1]
         return self._set[-1]
 
     @classmethod
