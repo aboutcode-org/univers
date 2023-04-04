@@ -18,6 +18,7 @@ from univers.conan.version_range import VersionRange as conan_version_range
 from univers.utils import remove_spaces
 from univers.version_constraint import VersionConstraint
 from univers.version_constraint import contains_version
+from univers.versions import CargoVersion
 
 
 class InvalidVersionRange(Exception):
@@ -299,7 +300,8 @@ class NpmVersionRange(VersionRange):
         ">=": ">=",
         "<": "<",
         ">": ">",
-        "=": "=",  # This is not a native node-semver comparator, but is used in the gitlab version range for npm packages.
+        "=": "=",
+        # This is not a native node-semver comparator, but is used in the gitlab version range for npm packages.
     }
 
     @classmethod
@@ -797,7 +799,8 @@ class ComposerVersionRange(VersionRange):
         ">=": ">=",
         "<": "<",
         ">": ">",
-        "=": "=",  # This is not a native composer-semver comparator, but is used in the gitlab version range for composer packages.
+        "=": "=",
+        # This is not a native composer-semver comparator, but is used in the gitlab version range for composer packages.
     }
 
 
@@ -899,7 +902,8 @@ class GolangVersionRange(VersionRange):
         ">=": ">=",
         "<": "<",
         ">": ">",
-        "=": "=",  # This is not a native golang-semver comparator, but is used in the gitlab version range for go packages.
+        "=": "=",
+        # This is not a native golang-semver comparator, but is used in the gitlab version range for go packages.
     }
 
 
@@ -922,7 +926,51 @@ class HexVersionRange(VersionRange):
 
 class CargoVersionRange(VersionRange):
     scheme = "cargo"
-    version_class = versions.SemverVersion
+    version_class = versions.CargoVersion
+
+    @classmethod
+    def from_native(cls, string):
+        """
+        Return a VersionRange built from a scheme-specific, native version range
+        ``string``. Subclasses can implement.
+        """
+        if string == "*":
+            return cls(
+                constraints=[VersionConstraint(comparator="*", version_class=cls.version_class)]
+            )
+
+        constraint_strings = string.split(",")
+        constraints = []
+
+        # caret
+        if string.startswith("^"):
+            string = string.replace("^", "=")
+
+        # tilde
+        if string.startswith("~"):
+            version = string.lstrip("~")
+            lower_bound = CargoVersion(version)
+            if lower_bound.minor == 0 and lower_bound.patch == 0:
+                upper_bound = CargoVersion(str(lower_bound.value.next_major()))
+            else:
+                upper_bound = CargoVersion(str(lower_bound.value.next_minor()))
+
+            return cls(
+                constraints=(
+                    VersionConstraint(comparator=">=", version=lower_bound),
+                    VersionConstraint(comparator="<", version=upper_bound),
+                )
+            )
+
+        for constraint in constraint_strings:
+            if not constraint:
+                raise InvalidVersionRange
+            else:
+                vs = VersionConstraint.split(string)
+                version = cls.version_class(vs[1])
+                constraint = VersionConstraint(comparator=vs[0], version=version)
+                constraints.append(constraint)
+        return cls(constraints=tuple(constraints))
 
 
 class MozillaVersionRange(VersionRange):
