@@ -175,6 +175,14 @@ class Version:
         # Revision is the same, so ignore it for comparison purposes.
         return self._base_semver < other._base_semver
 
+    def __hash__(self):
+        return hash(
+            (
+                self._base_semver.to_tuple(),
+                self._revision,
+            )
+        )
+
     @classmethod
     def from_string(cls, str_version):
         if not str_version:
