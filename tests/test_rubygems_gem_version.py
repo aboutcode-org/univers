@@ -173,7 +173,7 @@ def test_segments():
     secondseg += 1
 
     refute_version_eql("9.8.8", "9.8.7")
-    assert GemVersion("9.8.7").segments == [9, 8, 7]
+    assert GemVersion("9.8.7").segments == (9, 8, 7)
 
 
 def test_split_segments():
