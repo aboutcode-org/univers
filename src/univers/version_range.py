@@ -223,9 +223,9 @@ class VersionRange:
 
     def __eq__(self, other):
         return (
-            self.scheme == other.scheme
-            and self.version_class == other.version_class
-            and self.constraints == other.constraints
+                self.scheme == other.scheme
+                and self.version_class == other.version_class
+                and self.constraints == other.constraints
         )
 
 
@@ -355,9 +355,9 @@ class NpmVersionRange(VersionRange):
                         )
                 else:
                     if (
-                        constraint.endswith(".x")
-                        or constraint.startswith("~")
-                        or constraint.startswith("^")
+                            constraint.endswith(".x")
+                            or constraint.startswith("~")
+                            or constraint.startswith("^")
                     ):
                         constraints.extend(
                             get_npm_version_constraints_from_semver_npm_spec(
@@ -936,40 +936,72 @@ class CargoVersionRange(VersionRange):
         """
         if string == "*":
             return cls(
-                constraints=[VersionConstraint(comparator="*", version_class=cls.version_class)]
+                constraints=(VersionConstraint(comparator="*", version_class=cls.version_class),)
             )
 
-        constraint_strings = string.split(",")
         constraints = []
+        cleaned_string = remove_spaces(string).lower()
+        for version in cleaned_string.split(","):
+            if not version:
+                raise InvalidVersionRange(f"InvalidVersionRange : {string}")
 
-        # caret
-        if string.startswith("^"):
-            string = string.replace("^", "=")
+            # wildcard
+            if "*" in version:
+                if "*" in version and not version.endswith("*") or constraints:
+                    raise InvalidVersionRange(
+                        f"Unsupported star in the middle of a version: it should be a trailing star only: {string}")
 
-        # tilde
-        if string.startswith("~"):
-            version = string.lstrip("~")
-            lower_bound = CargoVersion(version)
-            if lower_bound.minor == 0 and lower_bound.patch == 0:
-                upper_bound = CargoVersion(str(lower_bound.value.next_major()))
+                if version.endswith(".*.*"):
+                    version = version.replace(".*.*", ".*")
+
+                segments_count = len(version.split("."))
+                lower_bound = cls.version_class(version.replace("*", "0"))
+                if segments_count == 2:
+                    upper_bound = cls.version_class(str(lower_bound.next_major()))
+                elif segments_count == 3:
+                    upper_bound = cls.version_class(str(lower_bound.next_minor()))
+                else:
+                    raise InvalidVersionRange(f"Invalid version: not a semver version: {string}")
+
+                vstart = VersionConstraint(comparator=">=", version=lower_bound)
+                vend = VersionConstraint(comparator="<", version=upper_bound)
+                constraints.extend([vstart, vend])
+
+            # caret
+            elif version.startswith("^"):
+                version = version.lstrip("^")
+                upper_bound = None
+                lower_bound = cls.version_class(version)
+                if (lower_bound.major != 0 or version == "0") and version != "0.0":
+                    upper_bound = cls.version_class(str(lower_bound.value.next_major()))
+                else:
+                    if lower_bound.minor != 0 or version == "0.0":
+                        upper_bound = cls.version_class(str(lower_bound.value.next_minor()))
+                    elif lower_bound.patch != 0:
+                        upper_bound = cls.version_class(str(lower_bound.value.next_patch()))
+
+                vstart = VersionConstraint(comparator=">=", version=lower_bound)
+                vend = VersionConstraint(comparator="<", version=upper_bound)
+                constraints.extend([vstart, vend])
+
+            # tilde
+            elif version.startswith("~"):
+                version = version.lstrip("~")
+                lower_bound = cls.version_class(version)
+                if lower_bound.minor == 0 and lower_bound.patch == 0:
+                    upper_bound = cls.version_class(str(lower_bound.value.next_major()))
+                else:
+                    upper_bound = cls.version_class(str(lower_bound.value.next_minor()))
+
+                vstart = VersionConstraint(comparator=">=", version=lower_bound)
+                vend = VersionConstraint(comparator="<", version=upper_bound)
+                constraints.extend([vstart, vend])
+
             else:
-                upper_bound = CargoVersion(str(lower_bound.value.next_minor()))
-
-            return cls(
-                constraints=(
-                    VersionConstraint(comparator=">=", version=lower_bound),
-                    VersionConstraint(comparator="<", version=upper_bound),
-                )
-            )
-
-        for constraint in constraint_strings:
-            if not constraint:
-                raise InvalidVersionRange
-            else:
-                vs = VersionConstraint.split(string)
-                version = cls.version_class(vs[1])
-                constraint = VersionConstraint(comparator=vs[0], version=version)
+                comparator, version = VersionConstraint.split(version)
+                constraint = VersionConstraint(comparator=comparator, version=cls.version_class(version))
                 constraints.append(constraint)
+
         return cls(constraints=tuple(constraints))
 
 
