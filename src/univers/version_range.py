@@ -99,7 +99,9 @@ class VersionRange:
         such as "vers:npm/1.2.3,>=2.0.0"
         """
         if not vers or not isinstance(vers, str) or not vers.strip():
-            raise ValueError("A vers string argument is required.")
+            raise ValueError(
+                f"{vers!r} is not a valid argument, a valid ``vers`` string argument is required."
+            )
 
         # Spaces are not significant and removed in a canonical form.
         vers = remove_spaces(vers)
