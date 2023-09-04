@@ -357,11 +357,26 @@ class NpmVersionRange(VersionRange):
                             VersionConstraint(comparator=comparator, version=vrc(constraint))
                         )
                 else:
-                    if (
-                        constraint.endswith(".x")
-                        or constraint.startswith("~")
-                        or constraint.startswith("^")
-                    ):
+                    # Handle caret range expression.
+                    if constraint.startswith("^"):
+                        base_version = vrc(constraint.lstrip("^"))
+                        prerelease = base_version.value.prerelease
+                        base_version.value.prerelease = ()
+                        if base_version.major:
+                            high = base_version.next_major()
+                        elif base_version.minor:
+                            high = base_version.next_minor()
+                        else:
+                            high = base_version.next_patch()
+                        base_version.value.prerelease = prerelease
+                        lower = base_version
+                        constraints.extend(
+                            [
+                                VersionConstraint(comparator=">=", version=lower),
+                                VersionConstraint(comparator="<", version=high),
+                            ]
+                        )
+                    elif constraint.endswith(".x") or constraint.startswith("~"):
                         constraints.extend(
                             get_npm_version_constraints_from_semver_npm_spec(
                                 string=constraint, cls=cls
