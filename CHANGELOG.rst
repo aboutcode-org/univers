@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+Version v30.11.0
+----------------
+
+- Use proper exception subclass for invalid constraints error.
+
+
 Version v30.10.1
 ----------------
 
