@@ -664,11 +664,6 @@ class PypiVersionRange(VersionRange):
         ">=": ">=",
         "<": "<",
         ">": ">",
-        # per https://www.python.org/dev/peps/pep-0440/#compatible-release
-        # For a given release identifier V.N, the compatible release clause is
-        # approximately equivalent to the pair of comparison clauses:
-        # >= V.N, == V.*
-        "~=": None,
         # 01.01.01 is NOT equal to 1.1.1 using === which is strict string
         # equality this is a rare and eventually non-suggested approach
         "===": None,
@@ -681,7 +676,7 @@ class PypiVersionRange(VersionRange):
         Raise an a univers.versions.InvalidVersion
         """
         # TODO: environment markers are yet supported
-        # TODO: handle  .* version, ~= and === operators
+        # TODO: handle === operators
 
         if ";" in string:
             raise InvalidVersionRange(f"Unsupported PyPI environment marker: {string!r}")
@@ -693,6 +688,8 @@ class PypiVersionRange(VersionRange):
             raise InvalidVersionRange(
                 f"Unsupported character: {unsupported_chars!r} " f"in PyPI version: {string!r}"
             )
+
+        string = cls.sanitize_constraints(string)
 
         try:
             specifiers = SpecifierSet(string)
@@ -707,12 +704,8 @@ class PypiVersionRange(VersionRange):
             operator = spec.operator
             version = spec.version
 
-            if operator == "~=" or operator == "===":
+            if operator == "===":
                 msg = f"Unsupported PyPI version constraint operator: {spec!r}"
-                unsupported_messages.append(msg)
-
-            if str(version).endswith(".*"):
-                msg = f"Unsupported PyPI version: {spec!r}"
                 unsupported_messages.append(msg)
 
             try:
@@ -728,6 +721,35 @@ class PypiVersionRange(VersionRange):
             raise InvalidVersionRange(*unsupported_messages)
 
         return cls(constraints=constraints)
+
+    @classmethod
+    def sanitize_constraints(cls, string):
+        constraints = []
+        try:
+            specifiers = SpecifierSet(string)
+        except InvalidSpecifier as e:
+            raise InvalidVersionRange() from e
+        for spec in specifiers:
+            operator = spec.operator
+            version = spec.version
+            if "*" in version:
+                pos = version.find("*")
+                version = version[: pos - 1]
+                if "==" in operator:
+                    constraints.extend(
+                        [f">= {version}", f"< {version[:pos - 2]}{str(int(version[pos - 2]) + 1)}"]
+                    )
+                elif "!=" in operator:
+                    constraints.extend(
+                        [f"< {version}", f">= {version[:pos - 2]}{str(int(version[pos - 2]) + 1)}"]
+                    )
+            elif "~=" in operator:
+                parts = version.split(".")
+                parts[-2] = str(int(parts[-2]) + 1)
+                constraints.extend([f">= {version}", f"< {'.'.join(parts[:-1])}"])
+            else:
+                constraints.append(f"{operator} {version}")
+        return ", ".join(constraints)
 
 
 class MavenVersionRange(VersionRange):
