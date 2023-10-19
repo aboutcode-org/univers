@@ -357,13 +357,14 @@ def test_from_native_and_from_string_round_trip(scheme, native_ranges):
 @pytest.mark.parametrize(
     "range, will_pass, expected",
     [
-        (" ~= 0.9", False, "Unsupported PyPI version constraint operator"),
-        ("~= 1.3", False, "Unsupported PyPI version constraint operator"),
+        (" ~= 0.9", True, "vers:pypi/>=0.9|<1"),
+        ("~= 1.3", True, "vers:pypi/>=1.3|<2"),
         (" >= 1.0", True, "vers:pypi/>=1.0"),
-        (" != 1.3.4.*", False, "Unsupported PyPI version"),
+        (" != 1.3.4.*", True, "vers:pypi/<1.3.4|>=1.3.5"),
         ("< 2.0", True, "vers:pypi/<2.0"),
         ("~= 1.3.4.*", False, ""),
-        ("==1. *", False, "Unsupported PyPI version"),
+        ("==1. *", True, "vers:pypi/>=1|<2"),
+        ("!=1.2.*", True, "vers:pypi/<1.2|>=1.3"),
         ("==1.3.4 ) (", False, "Unsupported character"),
         ("===1.0", False, "Unsupported PyPI version"),
     ],
@@ -375,6 +376,7 @@ def test_PypiVersionRange_raises_ivr_for_unsupported_and_invalid_ranges(range, w
             raise Exception("Exception not raised")
         except InvalidVersionRange as ivre:
             assert expected in str(ivre)
+
     else:
         assert expected == str(PypiVersionRange.from_native(range))
 
