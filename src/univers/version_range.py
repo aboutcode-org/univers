@@ -223,9 +223,9 @@ class VersionRange:
 
     def __eq__(self, other):
         return (
-                self.scheme == other.scheme
-                and self.version_class == other.version_class
-                and self.constraints == other.constraints
+            self.scheme == other.scheme
+            and self.version_class == other.version_class
+            and self.constraints == other.constraints
         )
 
 
@@ -355,9 +355,9 @@ class NpmVersionRange(VersionRange):
                         )
                 else:
                     if (
-                            constraint.endswith(".x")
-                            or constraint.startswith("~")
-                            or constraint.startswith("^")
+                        constraint.endswith(".x")
+                        or constraint.startswith("~")
+                        or constraint.startswith("^")
                     ):
                         constraints.extend(
                             get_npm_version_constraints_from_semver_npm_spec(
@@ -949,7 +949,8 @@ class CargoVersionRange(VersionRange):
             if "*" in version:
                 if "*" in version and not version.endswith("*") or constraints:
                     raise InvalidVersionRange(
-                        f"Unsupported star in the middle of a version: it should be a trailing star only: {string}")
+                        f"Unsupported star in the middle of a version: it should be a trailing star only: {string}"
+                    )
 
                 if version.endswith(".*.*"):
                     version = version.replace(".*.*", ".*")
@@ -999,7 +1000,9 @@ class CargoVersionRange(VersionRange):
 
             else:
                 comparator, version = VersionConstraint.split(version)
-                constraint = VersionConstraint(comparator=comparator, version=cls.version_class(version))
+                constraint = VersionConstraint(
+                    comparator=comparator, version=cls.version_class(version)
+                )
                 constraints.append(constraint)
 
         return cls(constraints=tuple(constraints))
