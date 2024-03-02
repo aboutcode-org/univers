@@ -124,7 +124,8 @@ class VersionRange:
         range_class = RANGE_CLASS_BY_SCHEMES.get(versioning_scheme)
         if not range_class:
             raise ValueError(
-                f"{vers!r} has an unknown versioning scheme: " f"{versioning_scheme!r}.",
+                f"{vers!r} has an unknown versioning scheme: "
+                f"{versioning_scheme!r}.",
             )
 
         version_class = range_class.version_class
@@ -293,8 +294,9 @@ def get_npm_version_constraints_from_semver_npm_spec(string, cls):
             raise ValueError(f"Unknown clause type: {spec!r}")
     return anyof_constraints
 
+
 class PubVersionRange(VersionRange):
-    
+
     scheme = "pub"
     version_class = versions.DartVersion
 
@@ -303,7 +305,7 @@ class PubVersionRange(VersionRange):
         ">=": ">=",
         "<": "<",
         ">": ">",
-        "=": "=", 
+        "=": "=",
     }
 
     @classmethod
@@ -314,15 +316,15 @@ class PubVersionRange(VersionRange):
         For example:
         >>> result = PubVersionRange.from_native("1.5.10")
         >>> assert str(result) == "vers:pub/1.5.10"
-        
+
         >>> result = PubVersionRange.from_native(">=1.2.23 <=1.9.0")
-        >>> assert str(result) = "vers:pub/>=1.2.23|<=1.9.0"
+        >>> assert str(result) == "vers:pub/>=1.2.23|<=1.9.0"
 
         >>> result = PubVersionRange.from_native("^1.4.8")
-        >>> assert str(result) == "vers:pub/>=1.4.8|<2.0.0"    
+        >>> assert str(result) == "vers:pub/>=1.4.8|<2.0.0"
 
-        """        
-        
+        """
+
         constraints = []
         comparator = ""
 
@@ -330,26 +332,26 @@ class PubVersionRange(VersionRange):
             # caret
             if constraint_item.startswith("^"):
                 base_version = cls.version_class(constraint_item.lstrip("^"))
-                
+
                 if base_version.major > 0:
                     upper = cls.version_class(str(base_version.next_major()))
                 elif base_version.major == 0:
                     upper = cls.version_class(str(base_version.next_minor()))
 
                 lower = base_version
-                
+
                 constraints.extend(
                     [
                         VersionConstraint(comparator=">=", version=lower),
-                        VersionConstraint(comparator="<", version=upper)
+                        VersionConstraint(comparator="<", version=upper),
                     ]
                 )
                 continue
-            
+
             else:
                 # comparator, version = split_req(
-                #     string = constraint_item, 
-                #     comparators=cls.vers_by_native_comparators, 
+                #     string = constraint_item,
+                #     comparators=cls.vers_by_native_comparators,
                 #     default="="
                 # )
 
@@ -360,9 +362,9 @@ class PubVersionRange(VersionRange):
                         comparator=comparator, version=cls.version_class(version)
                     )
                 )
-            
-            comparator = ""        
-            
+
+            comparator = ""
+
         return cls(constraints=constraints)
 
 
@@ -392,7 +394,9 @@ class NpmVersionRange(VersionRange):
         if string == "*":
             return cls(
                 constraints=[
-                    VersionConstraint.from_string(string="*", version_class=cls.version_class)
+                    VersionConstraint.from_string(
+                        string="*", version_class=cls.version_class
+                    )
                 ]
             )
 
@@ -407,7 +411,9 @@ class NpmVersionRange(VersionRange):
         for range in string.split("||"):
             if " - " in range:
                 constraints.extend(
-                    get_npm_version_constraints_from_semver_npm_spec(string=range, cls=cls)
+                    get_npm_version_constraints_from_semver_npm_spec(
+                        string=range, cls=cls
+                    )
                 )
                 continue
             comparator = ""
@@ -426,7 +432,9 @@ class NpmVersionRange(VersionRange):
                     else:
                         constraint = constraint.lstrip("vV")
                         constraints.append(
-                            VersionConstraint(comparator=comparator, version=vrc(constraint))
+                            VersionConstraint(
+                                comparator=comparator, version=vrc(constraint)
+                            )
                         )
                 else:
                     # Handle caret range expression.
@@ -756,14 +764,17 @@ class PypiVersionRange(VersionRange):
         # TODO: handle  .* version, ~= and === operators
 
         if ";" in string:
-            raise InvalidVersionRange(f"Unsupported PyPI environment marker: {string!r}")
+            raise InvalidVersionRange(
+                f"Unsupported PyPI environment marker: {string!r}"
+            )
 
         unsupported_chars = ";\\/|{}()`?'\"\t\n "
         string = "".join(string.split(" "))
 
         if any(c in string for c in unsupported_chars):
             raise InvalidVersionRange(
-                f"Unsupported character: {unsupported_chars!r} " f"in PyPI version: {string!r}"
+                f"Unsupported character: {unsupported_chars!r} "
+                f"in PyPI version: {string!r}"
             )
 
         try:
@@ -830,7 +841,9 @@ class MavenVersionRange(VersionRange):
 
             if lower_bound == upper_bound:
                 constraints.append(
-                    VersionConstraint(comparator="=", version=cls.version_class(str(lower_bound)))
+                    VersionConstraint(
+                        comparator="=", version=cls.version_class(str(lower_bound))
+                    )
                 )
                 continue
 
@@ -841,7 +854,8 @@ class MavenVersionRange(VersionRange):
                     comparator = ">"
                 constraints.append(
                     VersionConstraint(
-                        comparator=comparator, version=cls.version_class(str(lower_bound))
+                        comparator=comparator,
+                        version=cls.version_class(str(lower_bound)),
                     )
                 )
 
@@ -852,7 +866,8 @@ class MavenVersionRange(VersionRange):
                     comparator = "<"
                 constraints.append(
                     VersionConstraint(
-                        comparator=comparator, version=cls.version_class(str(upper_bound))
+                        comparator=comparator,
+                        version=cls.version_class(str(upper_bound)),
                     )
                 )
 
@@ -1135,7 +1150,9 @@ class NginxVersionRange(VersionRange):
         cleaned = remove_spaces(string).lower()
         if cleaned == "all":
             return cls(
-                constraints=[VersionConstraint(comparator="*", version_class=cls.version_class)]
+                constraints=[
+                    VersionConstraint(comparator="*", version_class=cls.version_class)
+                ]
             )
 
         constraints = []
@@ -1246,7 +1263,9 @@ def from_gitlab_native(gitlab_scheme, string):
             continue
         if comparator:
             constraints.append(
-                VersionConstraint(comparator=comparator, version=vrc.version_class(constraint_item))
+                VersionConstraint(
+                    comparator=comparator, version=vrc.version_class(constraint_item)
+                )
             )
         else:
             comparator, version_constraint = split_req(
@@ -1319,7 +1338,9 @@ def build_range_from_github_advisory_constraint(scheme: str, string: str):
     constraints = []
     vrc = RANGE_CLASS_BY_SCHEMES[scheme]
     for constraint in constraint_strings:
-        constraints.append(build_constraint_from_github_advisory_string(scheme, constraint))
+        constraints.append(
+            build_constraint_from_github_advisory_string(scheme, constraint)
+        )
     return vrc(constraints=constraints)
 
 
@@ -1345,7 +1366,7 @@ RANGE_CLASS_BY_SCHEMES = {
     "openssl": OpensslVersionRange,
     "mattermost": MattermostVersionRange,
     "conan": ConanVersionRange,
-    "pub" : PubVersionRange,
+    "pub": PubVersionRange,
 }
 
 PURL_TYPE_BY_GITLAB_SCHEME = {
