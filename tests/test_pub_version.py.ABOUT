@@ -1,0 +1,8 @@
+about_resource: test_pub_version.py
+package_url: pkg:pub/pub_semver@2.1.1
+download_url: https://github.com/dart-lang/pub_semver/blob/master/test/version_test.dart
+homepage_url: https://github.com/dart-lang/pub_semver
+license_expression: BSD-3-Clause
+notice_file: test_pub_version.py.NOTICE
+copyright: Copyright (c) nexB Inc. and others.
+    

@@ -385,6 +385,12 @@ class ComposerVersion(SemverVersion):
         return super().build_value(string.lstrip("vV"))
 
 
+class DartVersion(SemverVersion):
+    @classmethod
+    def build_value(cls, string):
+        return super().build_value(string)
+
+
 class GolangVersion(SemverVersion):
     @classmethod
     def build_value(cls, string):
@@ -487,18 +493,22 @@ class LegacyOpensslVersion(Version):
         if not isinstance(other, self.__class__):
             return NotImplemented
         # Check if versions have the same base, and `one and only one` of them is a pre-release.
-        if (self.major, self.minor, self.build) == (other.major, other.minor, other.build) and (
-            self.is_prerelease() != other.is_prerelease()
-        ):
+        if (self.major, self.minor, self.build) == (
+            other.major,
+            other.minor,
+            other.build,
+        ) and (self.is_prerelease() != other.is_prerelease()):
             return self.is_prerelease()
         return self.value.__lt__(other.value)
 
     def __gt__(self, other):
         if not isinstance(other, self.__class__):
             return NotImplemented
-        if (self.major, self.minor, self.build) == (other.major, other.minor, other.build) and (
-            self.is_prerelease() != other.is_prerelease()
-        ):
+        if (self.major, self.minor, self.build) == (
+            other.major,
+            other.minor,
+            other.build,
+        ) and (self.is_prerelease() != other.is_prerelease()):
             return other.is_prerelease()
         return self.value.__gt__(other.value)
 
@@ -702,4 +712,5 @@ AVAILABLE_VERSIONS = [
     OpensslVersion,
     LegacyOpensslVersion,
     AlpineLinuxVersion,
+    DartVersion,
 ]
