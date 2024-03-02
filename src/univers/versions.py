@@ -385,6 +385,11 @@ class ComposerVersion(SemverVersion):
         return super().build_value(string.lstrip("vV"))
 
 
+class DartVersion(SemverVersion):
+    @classmethod
+    def build_value(cls, string):
+        return super().build_value(string)
+
 class GolangVersion(SemverVersion):
     @classmethod
     def build_value(cls, string):
@@ -702,4 +707,5 @@ AVAILABLE_VERSIONS = [
     OpensslVersion,
     LegacyOpensslVersion,
     AlpineLinuxVersion,
+    DartVersion,
 ]

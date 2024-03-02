@@ -293,6 +293,78 @@ def get_npm_version_constraints_from_semver_npm_spec(string, cls):
             raise ValueError(f"Unknown clause type: {spec!r}")
     return anyof_constraints
 
+class PubVersionRange(VersionRange):
+    
+    scheme = "pub"
+    version_class = versions.DartVersion
+
+    vers_by_native_comparators = {
+        "<=": "<=",
+        ">=": ">=",
+        "<": "<",
+        ">": ">",
+        "=": "=", 
+    }
+
+    @classmethod
+    def from_native(cls, string):
+        """
+        Return a VersionRange built from an pub range ``string``.
+
+        For example:
+        >>> result = PubVersionRange.from_native("1.5.10")
+        >>> assert str(result) == "vers:pub/1.5.10"
+        
+        >>> result = PubVersionRange.from_native(">=1.2.23 <=1.9.0")
+        >>> assert str(result) = "vers:pub/>=1.2.23|<=1.9.0"
+
+        >>> result = PubVersionRange.from_native("^1.4.8")
+        >>> assert str(result) == "vers:pub/>=1.4.8|<2.0.0"    
+
+        """        
+        
+        constraints = []
+        comparator = ""
+
+        for constraint_item in string.split():
+            # caret
+            if constraint_item.startswith("^"):
+                base_version = cls.version_class(constraint_item.lstrip("^"))
+                
+                if base_version.major > 0:
+                    upper = cls.version_class(str(base_version.next_major()))
+                elif base_version.major == 0:
+                    upper = cls.version_class(str(base_version.next_minor()))
+
+                lower = base_version
+                
+                constraints.extend(
+                    [
+                        VersionConstraint(comparator=">=", version=lower),
+                        VersionConstraint(comparator="<", version=upper)
+                    ]
+                )
+                continue
+            
+            else:
+                # comparator, version = split_req(
+                #     string = constraint_item, 
+                #     comparators=cls.vers_by_native_comparators, 
+                #     default="="
+                # )
+
+                comparator, version = VersionConstraint.split(constraint_item)
+
+                constraints.append(
+                    VersionConstraint(
+                        comparator=comparator, version=cls.version_class(version)
+                    )
+                )
+            
+            comparator = ""        
+            
+        return cls(constraints=constraints)
+
 
 class NpmVersionRange(VersionRange):
     scheme = "npm"
@@ -1273,6 +1345,7 @@ RANGE_CLASS_BY_SCHEMES = {
     "openssl": OpensslVersionRange,
     "mattermost": MattermostVersionRange,
     "conan": ConanVersionRange,
+    "pub" : PubVersionRange,
 }
 
 PURL_TYPE_BY_GITLAB_SCHEME = {
