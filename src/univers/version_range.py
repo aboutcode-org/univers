@@ -805,7 +805,7 @@ class NugetVersionRange(MavenVersionRange):
     version_class = versions.NugetVersion
 
 
-class ComposerVersionRange(VersionRange):
+class ComposerVersionRange(NpmVersionRange):
     # TODO composer may need its own scheme see https//github.com/nexB/univers/issues/5
     # and https//getcomposer.org/doc/articles/versions.md
     scheme = "composer"
