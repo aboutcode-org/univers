@@ -1129,6 +1129,8 @@ def from_gitlab_native(gitlab_scheme, string):
     vrc = RANGE_CLASS_BY_SCHEMES[purl_scheme]
     supported_native_implementations = [
         ConanVersionRange,
+        MavenVersionRange,
+        NugetVersionRange,
     ]
     if vrc in supported_native_implementations:
         return vrc.from_native(string)
