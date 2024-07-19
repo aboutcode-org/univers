@@ -1137,8 +1137,13 @@ def from_gitlab_native(gitlab_scheme, string):
     constraint_items = []
     constraints = []
     split = " "
-    split_by_comma_schemes = ["pypi", "composer"]
-    if purl_scheme in split_by_comma_schemes:
+    if purl_scheme == "pypi":
+        split = ","
+
+    # GitLab advisory for composer uses both `,` and space for separating constraints.
+    # https://gitlab.com/gitlab-org/security-products/gemnasium-db/-/blob/8ba4872b659cf5a306e0d47abdd0e428948bf41c/packagist/illuminate/cookie/GHSA-2867-6rrm-38gr.yml
+    # https://gitlab.com/gitlab-org/security-products/gemnasium-db/-/blob/8ba4872b659cf5a306e0d47abdd0e428948bf41c/packagist/contao-components/mediaelement/CVE-2016-4567.yml
+    if purl_scheme == "composer" and "," in string:
         split = ","
     pipe_separated_constraints = string.split("||")
     for pipe_separated_constraint in pipe_separated_constraints:
