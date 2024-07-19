@@ -1122,7 +1122,10 @@ class MattermostVersionRange(VersionRange):
 
 
 def from_gitlab_native(gitlab_scheme, string):
-    purl_scheme = PURL_TYPE_BY_GITLAB_SCHEME[gitlab_scheme]
+    purl_scheme = gitlab_scheme
+    if gitlab_scheme not in PURL_TYPE_BY_GITLAB_SCHEME.values():
+        purl_scheme = PURL_TYPE_BY_GITLAB_SCHEME[gitlab_scheme]
+
     vrc = RANGE_CLASS_BY_SCHEMES[purl_scheme]
     supported_native_implementations = [
         ConanVersionRange,
