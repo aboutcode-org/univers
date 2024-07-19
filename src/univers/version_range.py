@@ -446,7 +446,7 @@ class GemVersionRange(VersionRange):
         return cls(constraints=constraints)
 
 
-def split_req(string, comparators, default=None, strip=""):
+def split_req(string, comparators, comparators_rear={}, default=None, strip=""):
     """
     Return a tuple of (vers comparator, version) strings given an common version
     requirement``string`` such as "> 2.3" or "<= 2.3" using the ``comparators``
@@ -467,6 +467,8 @@ def split_req(string, comparators, default=None, strip=""):
     >>> assert split_req(">= 2.3", comparators=comps) == (">=", "2.3",)
     >>> assert split_req("<= 2.3", comparators=comps) == ("<=", "2.3",)
     >>> assert split_req("(< =  2.3 )", comparators=comps, strip=")(") == ("<=", "2.3",)
+    >>> comps_rear =  {")": "<", "]": "<="}
+    >>> assert split_req(" 2.3 ]", comparators=comps, comparators_rear=comps_rear) == ("<=", "2.3",)
 
     With a default, we return the default comparator::
 
@@ -485,6 +487,12 @@ def split_req(string, comparators, default=None, strip=""):
     for native_comparator, vers_comparator in comparators.items():
         if constraint_string.startswith(native_comparator):
             version = constraint_string.lstrip(native_comparator)
+            return vers_comparator, version
+
+    # Some bracket notation comparators starts from end.
+    for native_comparator, vers_comparator in comparators_rear.items():
+        if constraint_string.endswith(native_comparator):
+            version = constraint_string.rstrip(native_comparator)
             return vers_comparator, version
 
     if default:
@@ -749,7 +757,8 @@ class MavenVersionRange(VersionRange):
                     comparator = ">"
                 constraints.append(
                     VersionConstraint(
-                        comparator=comparator, version=cls.version_class(str(lower_bound))
+                        comparator=comparator,
+                        version=cls.version_class(str(lower_bound)),
                     )
                 )
 
@@ -760,7 +769,8 @@ class MavenVersionRange(VersionRange):
                     comparator = "<"
                 constraints.append(
                     VersionConstraint(
-                        comparator=comparator, version=cls.version_class(str(upper_bound))
+                        comparator=comparator,
+                        version=cls.version_class(str(upper_bound)),
                     )
                 )
 
@@ -1136,6 +1146,7 @@ def from_gitlab_native(gitlab_scheme, string):
         return vrc.from_native(string)
     constraint_items = []
     constraints = []
+
     split = " "
     if purl_scheme == "pypi":
         split = ","
@@ -1145,6 +1156,7 @@ def from_gitlab_native(gitlab_scheme, string):
     # https://gitlab.com/gitlab-org/security-products/gemnasium-db/-/blob/8ba4872b659cf5a306e0d47abdd0e428948bf41c/packagist/contao-components/mediaelement/CVE-2016-4567.yml
     if purl_scheme == "composer" and "," in string:
         split = ","
+
     pipe_separated_constraints = string.split("||")
     for pipe_separated_constraint in pipe_separated_constraints:
         space_seperated_constraints = pipe_separated_constraint.split(split)
