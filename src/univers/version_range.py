@@ -4,6 +4,9 @@
 #
 # Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
+from typing import List
+from typing import Union
+
 import attr
 import semantic_version
 from packaging.specifiers import InvalidSpecifier
@@ -1222,7 +1225,7 @@ def build_constraint_from_github_advisory_string(scheme: str, string: str):
     return VersionConstraint(comparator=comparator, version=version)
 
 
-def build_range_from_github_advisory_constraint(scheme: str, string: str):
+def build_range_from_github_advisory_constraint(scheme: str, string: Union[str, List]):
     """
     Github has a special syntax for version ranges.
     For example:
@@ -1231,7 +1234,7 @@ def build_range_from_github_advisory_constraint(scheme: str, string: str):
     Github native version range looks like:
     ``>= 1.0.0, < 1.0.1``
 
-    Return a VersionRange built from a ``string`` single github-native
+    Return a VersionRange built from a ``string`` single or multiple github-native
     version relationship string.
 
     For example::
@@ -1245,12 +1248,89 @@ def build_range_from_github_advisory_constraint(scheme: str, string: str):
     >>> vr = build_range_from_github_advisory_constraint("pypi","= 9.0")
     >>> assert str(vr) == "vers:pypi/9.0"
     """
-    constraint_strings = string.split(",")
+    if isinstance(string, str):
+        string = [string]
+
     constraints = []
     vrc = RANGE_CLASS_BY_SCHEMES[scheme]
-    for constraint in constraint_strings:
-        constraints.append(build_constraint_from_github_advisory_string(scheme, constraint))
+    for item in string:
+        constraint_strings = item.split(",")
+
+        for constraint in constraint_strings:
+            constraints.append(build_constraint_from_github_advisory_string(scheme, constraint))
     return vrc(constraints=constraints)
+
+
+vers_by_snyk_native_comparators = {
+    "==": "=",
+    "=": "=",
+    "!=": "!=",
+    "<=": "<=",
+    ">=": ">=",
+    "<": "<",
+    ">": ">",
+    "(": ">",
+    "[": ">=",
+}
+
+vers_by_snyk_native_comparators_rear = {
+    ")": "<",
+    "]": "<=",
+}
+
+
+def build_range_from_snyk_advisory_string(scheme: str, string: Union[str, List]):
+    """
+    Return a VersionRange built from a ``string`` single or multiple snyk
+    version relationship string.
+    Snyk version range looks like:
+        ">=4.0.0, <4.0.10.16"
+        ">=4.1.0 <4.4.15.7"
+        "[3.0.0,3.1.25)"
+        "(,9.21]"
+        "[1.4.5,)"
+
+    For example::
+
+    >>> vr = build_range_from_snyk_advisory_string("pypi", ">=4.0.0, <4.0.10")
+    >>> assert str(vr) == "vers:pypi/>=4.0.0|<4.0.10"
+    >>> vr = build_range_from_snyk_advisory_string("composer", ">=4.1.0 <4.4.15.7")
+    >>> assert str(vr) == "vers:composer/>=4.1.0|<4.4.15.7"
+    >>> vr = build_range_from_snyk_advisory_string("pypi", "(,9.21]")
+    >>> assert str(vr) == "vers:pypi/<=9.21"
+    """
+    # https://security.snyk.io/package/golang/github.com%2Fmattermost%2Fmattermost%2Fserver%2Fpublic%2Fmodel
+    # >=9.6.0-rc1 <9.8.1-rc1
+    version_constraints = []
+    vrc = RANGE_CLASS_BY_SCHEMES[scheme]
+
+    if isinstance(string, str):
+        string = [string]
+
+    for item in string:
+        delimiter = "," if "," in item else " "
+        if delimiter == ",":
+            snyk_constraints = item.strip().replace(" ", "")
+            constraints = snyk_constraints.split(",")
+        else:
+            snyk_constraints = item.strip()
+            constraints = snyk_constraints.split(" ")
+
+        for constraint in constraints:
+            comparator, version = split_req(
+                string=constraint,
+                comparators=vers_by_snyk_native_comparators,
+                comparators_rear=vers_by_snyk_native_comparators_rear,
+            )
+            if comparator and version:
+                version = vrc.version_class(version)
+                version_constraints.append(
+                    VersionConstraint(
+                        comparator=comparator,
+                        version=version,
+                    )
+                )
+    return vrc(constraints=version_constraints)
 
 
 RANGE_CLASS_BY_SCHEMES = {
