@@ -1294,8 +1294,8 @@ def build_range_from_snyk_advisory_string(scheme: str, string: Union[str, List])
 
     >>> vr = build_range_from_snyk_advisory_string("pypi", ">=4.0.0, <4.0.10")
     >>> assert str(vr) == "vers:pypi/>=4.0.0|<4.0.10"
-    >>> vr = build_range_from_snyk_advisory_string("composer", ">=4.1.0 <4.4.15.7")
-    >>> assert str(vr) == "vers:composer/>=4.1.0|<4.4.15.7"
+    >>> vr = build_range_from_snyk_advisory_string("golang", ">=9.6.0-rc1 <9.8.1-rc1")
+    >>> assert str(vr) == "vers:golang/>=9.6.0-rc1|<9.8.1-rc1"
     >>> vr = build_range_from_snyk_advisory_string("pypi", "(,9.21]")
     >>> assert str(vr) == "vers:pypi/<=9.21"
     """
@@ -1330,6 +1330,35 @@ def build_range_from_snyk_advisory_string(scheme: str, string: Union[str, List])
                         version=version,
                     )
                 )
+    return vrc(constraints=version_constraints)
+
+
+def build_range_from_discrete_version_string(scheme: str, string: Union[str, List]):
+    """
+    Return VersionRange computed from discrete versions.
+    Discrete version range looks like:
+        ["1.5","3.1.2","3.1-beta"]
+
+    For example::
+
+    # >>> vr = build_constraints_from_discrete_version_string("pypi", ["1.5","3.1.2","3.1-beta"])
+    # >>> assert str(vr) == "vers:pypi/1.5|3.1-beta|3.1.2"
+    # >>> vr = build_constraints_from_discrete_version_string("pypi","9.21")
+    # >>> assert str(vr) == "vers:pypi/9.21"
+    """
+    version_constraints = []
+    vrc = RANGE_CLASS_BY_SCHEMES[scheme]
+
+    if isinstance(string, str):
+        string = [string]
+
+    for item in string:
+        version = item.strip().lstrip("vV")
+        version_constraints.append(
+            VersionConstraint(
+                version=version,
+            )
+        )
     return vrc(constraints=version_constraints)
 
 
