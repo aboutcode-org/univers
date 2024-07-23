@@ -1354,6 +1354,10 @@ def build_range_from_discrete_version_string(scheme: str, string: Union[str, Lis
 
     for item in string:
         version = item.strip().lstrip("vV")
+        if version == "0":
+            continue
+
+        version = vrc.version_class(version)
         version_constraints.append(
             VersionConstraint(
                 version=version,
