@@ -20,6 +20,7 @@ from univers.version_range import NugetVersionRange
 from univers.version_range import OpensslVersionRange
 from univers.version_range import PypiVersionRange
 from univers.version_range import VersionRange
+from univers.version_range import build_range_from_snyk_advisory_string
 from univers.version_range import from_gitlab_native
 from univers.versions import InvalidVersion
 from univers.versions import NugetVersion
@@ -43,7 +44,7 @@ class TestVersionRange(TestCase):
         assert str(version_range) == "vers:pypi/>=0.0.0|0.0.1|0.0.2|0.0.3|0.0.4|0.0.5|0.0.6"
 
     def test_VersionRange_pypi_does_not_contain_basic(self):
-        vers = "vers:pypi/0.0.2|0.0.6|>=0.0.0|0.0.1|0.0.4|0.0.5|0.0.3"
+        vers = "vers:pypi/0.0.2|0.0.6|>=3.0.0|0.0.1|0.0.4|0.0.5|0.0.3"
         version_range = VersionRange.from_string(vers)
         assert not version_range.contains(PypiVersion("2.0.3"))
 
@@ -84,6 +85,11 @@ class TestVersionRange(TestCase):
         vers = "vers:pypi/>=1.0.0|<=2.0.0"
         version_range = VersionRange.from_string(vers)
         assert version_range.contains(PypiVersion("1.5"))
+
+    def test_VersionRange_contains_filterd_constraint_edge_case(self):
+        vers = "vers:pypi/<=1.3.0|3.0.0"
+        version_range = VersionRange.from_string(vers)
+        assert version_range.contains(PypiVersion("1.0.0"))
 
     def test_VersionRange_from_string_pypi(self):
         vers = "vers:pypi/0.0.2|0.0.6|0.0.0|0.0.1|0.0.4|0.0.5|0.0.3"
@@ -489,3 +495,54 @@ def test_mattermost_version_range():
             VersionConstraint(comparator=">=", version=SemverVersion("5.0")),
         ]
     ) == VersionRange.from_string("vers:mattermost/>=5.0")
+
+
+def test_build_range_from_snyk_advisory_string():
+    expression = [">=4.0.0, <4.0.10", ">7.0.0, <8.0.1"]
+    vr = build_range_from_snyk_advisory_string("pypi", expression)
+    expected = "vers:pypi/>=4.0.0|<4.0.10|>7.0.0|<8.0.1"
+
+    assert str(vr) == expected
+
+
+def test_build_range_from_snyk_advisory_string_bracket():
+    expression = ["[3.0.0,3.1.25)", "[1.0.0,1.0.5)"]
+    vr = build_range_from_snyk_advisory_string("nuget", expression)
+    expected = "vers:nuget/>=1.0.0|<1.0.5|>=3.0.0|<3.1.25"
+
+    assert str(vr) == expected
+
+
+def test_build_range_from_snyk_advisory_string_spaced():
+    expression = [">=4.1.0 <4.4.1", ">2.1.0 <=3.2.7"]
+    vr = build_range_from_snyk_advisory_string("composer", expression)
+    expected = "vers:composer/>2.1.0|<=3.2.7|>=4.1.0|<4.4.1"
+
+    assert str(vr) == expected
+
+
+def test_version_range_normalize_case1():
+    known_versions = ["4.0.0", "3.0.0", "1.0.0", "2.0.0", "1.3.0", "1.1.0", "1.2.0"]
+
+    vr = VersionRange.from_string("vers:pypi/<=1.1.0|>=1.2.0|<=1.3.0|3.0.0")
+    nvr = vr.normalize(known_versions=known_versions)
+
+    assert str(nvr) == "vers:pypi/>=1.0.0|<=1.3.0|3.0.0"
+
+
+def test_version_range_normalize_case2():
+    known_versions = ["4.0.0", "3.0.0", "1.0.0", "2.0.0", "1.3.0", "1.1.0", "1.2.0"]
+
+    vr = VersionRange.from_string("vers:pypi/<=1.3.0|3.0.0")
+    nvr = vr.normalize(known_versions=known_versions)
+
+    assert str(nvr) == "vers:pypi/>=1.0.0|<=1.3.0|3.0.0"
+
+
+def test_version_range_normalize_case3():
+    known_versions = ["4.0.0", "3.0.0", "1.0.0", "2.0.0", "1.3.0", "1.1.0", "1.2.0"]
+
+    vr = VersionRange.from_string("vers:pypi/<2.0.0|3.0.0")
+    nvr = vr.normalize(known_versions=known_versions)
+
+    assert str(nvr) == "vers:pypi/>=1.0.0|<=1.3.0|3.0.0"

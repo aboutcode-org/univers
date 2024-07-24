@@ -7533,7 +7533,7 @@
     "test_index": 1256,
     "scheme": "packagist",
     "gitlab_native": "<=3.8.0||>=4.0.0-alpha <=4.0.0-rc2",
-    "expected_vers": "vers:composer/<=3.8.0|>=4.0.0-alpha--4.0.0-rc2"
+    "expected_vers": "vers:composer/<=3.8.0|>=4.0.0-alpha|<=4.0.0-rc2"
   },
   {
     "test_index": 1257,

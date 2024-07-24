@@ -4,6 +4,9 @@
 #
 # Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
 
+from typing import List
+from typing import Union
+
 import attr
 import semantic_version
 from packaging.specifiers import InvalidSpecifier
@@ -231,6 +234,37 @@ class VersionRange:
             and self.version_class == other.version_class
             and self.constraints == other.constraints
         )
+
+    def normalize(self, known_versions: List[str]):
+        """
+        Return a new VersionRange normalized and simplified using the universe of
+        ``known_versions`` list of version strings.
+        """
+        versions = sorted([self.version_class(i) for i in known_versions])
+
+        resolved = []
+        contiguous = []
+        for kv in versions:
+            if self.__contains__(kv):
+                contiguous.append(kv)
+            elif contiguous:
+                resolved.append(contiguous)
+                contiguous = []
+
+        if contiguous:
+            resolved.append(contiguous)
+
+        version_constraints = []
+        for contiguous_segment in resolved:
+            lower_bound = contiguous_segment[0]
+            upper_bound = contiguous_segment[-1]
+            if lower_bound == upper_bound:
+                version_constraints.append(VersionConstraint(version=lower_bound))
+            else:
+                version_constraints.append(VersionConstraint(comparator=">=", version=lower_bound))
+                version_constraints.append(VersionConstraint(comparator="<=", version=upper_bound))
+
+        return self.__class__(constraints=version_constraints)
 
 
 def from_cve_v4(data, scheme):
@@ -769,7 +803,8 @@ class MavenVersionRange(VersionRange):
                     comparator = ">"
                 constraints.append(
                     VersionConstraint(
-                        comparator=comparator, version=cls.version_class(str(lower_bound))
+                        comparator=comparator,
+                        version=cls.version_class(str(lower_bound)),
                     )
                 )
 
@@ -780,7 +815,8 @@ class MavenVersionRange(VersionRange):
                     comparator = "<"
                 constraints.append(
                     VersionConstraint(
-                        comparator=comparator, version=cls.version_class(str(upper_bound))
+                        comparator=comparator,
+                        version=cls.version_class(str(upper_bound)),
                     )
                 )
 
@@ -1142,19 +1178,31 @@ class MattermostVersionRange(VersionRange):
 
 
 def from_gitlab_native(gitlab_scheme, string):
-    purl_scheme = PURL_TYPE_BY_GITLAB_SCHEME[gitlab_scheme]
+    purl_scheme = gitlab_scheme
+    if gitlab_scheme not in PURL_TYPE_BY_GITLAB_SCHEME.values():
+        purl_scheme = PURL_TYPE_BY_GITLAB_SCHEME[gitlab_scheme]
+
     vrc = RANGE_CLASS_BY_SCHEMES[purl_scheme]
     supported_native_implementations = [
         ConanVersionRange,
+        MavenVersionRange,
+        NugetVersionRange,
     ]
     if vrc in supported_native_implementations:
         return vrc.from_native(string)
     constraint_items = []
     constraints = []
+
     split = " "
-    split_by_comma_schemes = ["pypi", "composer"]
-    if purl_scheme in split_by_comma_schemes:
+    if purl_scheme == "pypi":
         split = ","
+
+    # GitLab advisory for composer uses both `,` and space for separating constraints.
+    # https://gitlab.com/gitlab-org/security-products/gemnasium-db/-/blob/8ba4872b659cf5a306e0d47abdd0e428948bf41c/packagist/illuminate/cookie/GHSA-2867-6rrm-38gr.yml
+    # https://gitlab.com/gitlab-org/security-products/gemnasium-db/-/blob/8ba4872b659cf5a306e0d47abdd0e428948bf41c/packagist/contao-components/mediaelement/CVE-2016-4567.yml
+    if purl_scheme == "composer" and "," in string:
+        split = ","
+
     pipe_separated_constraints = string.split("||")
     for pipe_separated_constraint in pipe_separated_constraints:
         space_seperated_constraints = pipe_separated_constraint.split(split)
@@ -1220,7 +1268,7 @@ def build_constraint_from_github_advisory_string(scheme: str, string: str):
     return VersionConstraint(comparator=comparator, version=version)
 
 
-def build_range_from_github_advisory_constraint(scheme: str, string: str):
+def build_range_from_github_advisory_constraint(scheme: str, string: Union[str, List]):
     """
     Github has a special syntax for version ranges.
     For example:
@@ -1229,7 +1277,7 @@ def build_range_from_github_advisory_constraint(scheme: str, string: str):
     Github native version range looks like:
     ``>= 1.0.0, < 1.0.1``
 
-    Return a VersionRange built from a ``string`` single github-native
+    Return a VersionRange built from a ``string`` single or multiple github-native
     version relationship string.
 
     For example::
@@ -1243,12 +1291,110 @@ def build_range_from_github_advisory_constraint(scheme: str, string: str):
     >>> vr = build_range_from_github_advisory_constraint("pypi","= 9.0")
     >>> assert str(vr) == "vers:pypi/9.0"
     """
-    constraint_strings = string.split(",")
+    if isinstance(string, str):
+        string = [string]
+
     constraints = []
     vrc = RANGE_CLASS_BY_SCHEMES[scheme]
-    for constraint in constraint_strings:
-        constraints.append(build_constraint_from_github_advisory_string(scheme, constraint))
+    for item in string:
+        constraint_strings = item.split(",")
+
+        for constraint in constraint_strings:
+            constraints.append(build_constraint_from_github_advisory_string(scheme, constraint))
     return vrc(constraints=constraints)
+
+
+vers_by_snyk_native_comparators = {
+    "==": "=",
+    "=": "=",
+    "!=": "!=",
+    "<=": "<=",
+    ">=": ">=",
+    "<": "<",
+    ">": ">",
+}
+
+
+def split_req_bracket_notation(string):
+    """
+    Return a tuple of (vers comparator, version) strings given an bracket notation
+    version requirement ``string`` such as "(2.3" or "3.9]"
+
+    For example::
+
+    >>> assert split_req_bracket_notation(" 2.3 ]") == ("<=", "2.3")
+    >>> assert split_req_bracket_notation("( 3.9") == (">", "3.9")
+    """
+    comparators_front = {"(": ">", "[": ">="}
+    comparators_rear = {")": "<", "]": "<="}
+
+    constraint_string = remove_spaces(string).strip()
+
+    for native_comparator, vers_comparator in comparators_front.items():
+        if constraint_string.startswith(native_comparator):
+            version = constraint_string.lstrip(native_comparator)
+            return vers_comparator, version
+
+    for native_comparator, vers_comparator in comparators_rear.items():
+        if constraint_string.endswith(native_comparator):
+            version = constraint_string.rstrip(native_comparator)
+            return vers_comparator, version
+
+    raise ValueError(f"Unknown comparator in version requirement: {string!r} ")
+
+
+def build_range_from_snyk_advisory_string(scheme: str, string: Union[str, List]):
+    """
+    Return a VersionRange built from a ``string`` single or multiple snyk
+    version relationship string.
+    Snyk version range looks like:
+        ">=4.0.0, <4.0.10.16"
+        ">=4.1.0 <4.4.15.7"
+        "[3.0.0,3.1.25)"
+        "(,9.21]"
+        "[1.4.5,)"
+
+    For example::
+
+    >>> vr = build_range_from_snyk_advisory_string("pypi", ">=4.0.0, <4.0.10")
+    >>> assert str(vr) == "vers:pypi/>=4.0.0|<4.0.10"
+    >>> vr = build_range_from_snyk_advisory_string("golang", ">=9.6.0-rc1 <9.8.1-rc1")
+    >>> assert str(vr) == "vers:golang/>=9.6.0-rc1|<9.8.1-rc1"
+    >>> vr = build_range_from_snyk_advisory_string("pypi", "(,9.21]")
+    >>> assert str(vr) == "vers:pypi/<=9.21"
+    """
+    version_constraints = []
+    vrc = RANGE_CLASS_BY_SCHEMES[scheme]
+
+    if isinstance(string, str):
+        string = [string]
+
+    for item in string:
+        delimiter = "," if "," in item else " "
+        if delimiter == ",":
+            snyk_constraints = item.strip().replace(" ", "")
+            constraints = snyk_constraints.split(",")
+        else:
+            snyk_constraints = item.strip()
+            constraints = snyk_constraints.split(" ")
+
+        for constraint in constraints:
+            if any(comp in constraint for comp in "[]()"):
+                comparator, version = split_req_bracket_notation(string=constraint)
+            else:
+                comparator, version = split_req(
+                    string=constraint,
+                    comparators=vers_by_snyk_native_comparators,
+                )
+            if comparator and version:
+                version = vrc.version_class(version)
+                version_constraints.append(
+                    VersionConstraint(
+                        comparator=comparator,
+                        version=version,
+                    )
+                )
+    return vrc(constraints=version_constraints)
 
 
 RANGE_CLASS_BY_SCHEMES = {
