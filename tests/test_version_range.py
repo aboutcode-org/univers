@@ -20,7 +20,6 @@ from univers.version_range import NugetVersionRange
 from univers.version_range import OpensslVersionRange
 from univers.version_range import PypiVersionRange
 from univers.version_range import VersionRange
-from univers.version_range import build_range_from_discrete_version_string
 from univers.version_range import build_range_from_snyk_advisory_string
 from univers.version_range import from_gitlab_native
 from univers.versions import InvalidVersion
@@ -485,14 +484,6 @@ def test_build_range_from_snyk_advisory_string_spaced():
     expression = [">=4.1.0 <4.4.1", ">2.1.0 <=3.2.7"]
     vr = build_range_from_snyk_advisory_string("composer", expression)
     expected = "vers:composer/>2.1.0|<=3.2.7|>=4.1.0|<4.4.1"
-
-    assert str(vr) == expected
-
-
-def test_build_range_from_discrete_version_string():
-    expression = ["4.1.0", " 4.4.1", "2.1.0 ", "    3.2.7  "]
-    vr = build_range_from_discrete_version_string("pypi", expression)
-    expected = "vers:pypi/2.1.0|3.2.7|4.1.0|4.4.1"
 
     assert str(vr) == expected
 

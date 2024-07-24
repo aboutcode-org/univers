@@ -1377,36 +1377,6 @@ def build_range_from_snyk_advisory_string(scheme: str, string: Union[str, List])
     return vrc(constraints=version_constraints)
 
 
-def build_range_from_discrete_version_string(scheme: str, string: Union[str, List]):
-    """
-    Return VersionRange computed from discrete versions.
-    Discrete version range looks like:
-        ["1.5","3.1.2","3.1-beta"]
-
-    For example::
-
-    # >>> vr = build_constraints_from_discrete_version_string("pypi", ["1.5","3.1.2","3.1-beta"])
-    # >>> assert str(vr) == "vers:pypi/1.5|3.1-beta|3.1.2"
-    # >>> vr = build_constraints_from_discrete_version_string("pypi","9.21")
-    # >>> assert str(vr) == "vers:pypi/9.21"
-    """
-    version_constraints = []
-    vrc = RANGE_CLASS_BY_SCHEMES[scheme]
-
-    if isinstance(string, str):
-        string = [string]
-
-    for item in string:
-        version = item.strip()
-        version = vrc.version_class(version)
-        version_constraints.append(
-            VersionConstraint(
-                version=version,
-            )
-        )
-    return vrc(constraints=version_constraints)
-
-
 RANGE_CLASS_BY_SCHEMES = {
     "npm": NpmVersionRange,
     "deb": DebianVersionRange,
