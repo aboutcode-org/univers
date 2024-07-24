@@ -480,7 +480,7 @@ class GemVersionRange(VersionRange):
         return cls(constraints=constraints)
 
 
-def split_req(string, comparators, comparators_rear={}, default=None, strip=""):
+def split_req(string, comparators, default=None, strip=""):
     """
     Return a tuple of (vers comparator, version) strings given an common version
     requirement``string`` such as "> 2.3" or "<= 2.3" using the ``comparators``
@@ -501,8 +501,6 @@ def split_req(string, comparators, comparators_rear={}, default=None, strip=""):
     >>> assert split_req(">= 2.3", comparators=comps) == (">=", "2.3",)
     >>> assert split_req("<= 2.3", comparators=comps) == ("<=", "2.3",)
     >>> assert split_req("(< =  2.3 )", comparators=comps, strip=")(") == ("<=", "2.3",)
-    >>> comps_rear =  {")": "<", "]": "<="}
-    >>> assert split_req(" 2.3 ]", comparators=comps, comparators_rear=comps_rear) == ("<=", "2.3",)
 
     With a default, we return the default comparator::
 
@@ -521,12 +519,6 @@ def split_req(string, comparators, comparators_rear={}, default=None, strip=""):
     for native_comparator, vers_comparator in comparators.items():
         if constraint_string.startswith(native_comparator):
             version = constraint_string.lstrip(native_comparator)
-            return vers_comparator, version
-
-    # Some bracket notation comparators starts from end.
-    for native_comparator, vers_comparator in comparators_rear.items():
-        if constraint_string.endswith(native_comparator):
-            version = constraint_string.rstrip(native_comparator)
             return vers_comparator, version
 
     if default:
@@ -1300,14 +1292,35 @@ vers_by_snyk_native_comparators = {
     ">=": ">=",
     "<": "<",
     ">": ">",
-    "(": ">",
-    "[": ">=",
 }
 
-vers_by_snyk_native_comparators_rear = {
-    ")": "<",
-    "]": "<=",
-}
+
+def split_req_bracket_notation(string):
+    """
+    Return a tuple of (vers comparator, version) strings given an bracket notation
+    version requirement ``string`` such as "(2.3" or "3.9]"
+
+    For example::
+
+    >>> assert split_req_bracket_notation(" 2.3 ]") == ("<=", "2.3")
+    >>> assert split_req_bracket_notation("( 3.9") == (">", "3.9")
+    """
+    comparators_front = {"(": ">", "[": ">="}
+    comparators_rear = {")": "<", "]": "<="}
+
+    constraint_string = remove_spaces(string).strip()
+
+    for native_comparator, vers_comparator in comparators_front.items():
+        if constraint_string.startswith(native_comparator):
+            version = constraint_string.lstrip(native_comparator)
+            return vers_comparator, version
+
+    for native_comparator, vers_comparator in comparators_rear.items():
+        if constraint_string.endswith(native_comparator):
+            version = constraint_string.rstrip(native_comparator)
+            return vers_comparator, version
+
+    raise ValueError(f"Unknown comparator in version requirement: {string!r} ")
 
 
 def build_range_from_snyk_advisory_string(scheme: str, string: Union[str, List]):
@@ -1346,11 +1359,13 @@ def build_range_from_snyk_advisory_string(scheme: str, string: Union[str, List])
             constraints = snyk_constraints.split(" ")
 
         for constraint in constraints:
-            comparator, version = split_req(
-                string=constraint,
-                comparators=vers_by_snyk_native_comparators,
-                comparators_rear=vers_by_snyk_native_comparators_rear,
-            )
+            if any(comp in constraint for comp in "[]()"):
+                comparator, version = split_req_bracket_notation(string=constraint)
+            else:
+                comparator, version = split_req(
+                    string=constraint,
+                    comparators=vers_by_snyk_native_comparators,
+                )
             if comparator and version:
                 version = vrc.version_class(version)
                 version_constraints.append(
@@ -1382,10 +1397,7 @@ def build_range_from_discrete_version_string(scheme: str, string: Union[str, Lis
         string = [string]
 
     for item in string:
-        version = item.strip().lstrip("vV")
-        if version == "0":
-            continue
-
+        version = item.strip()
         version = vrc.version_class(version)
         version_constraints.append(
             VersionConstraint(
