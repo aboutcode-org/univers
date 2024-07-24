@@ -506,6 +506,10 @@ def contains_version(version, constraints):
     if not constraints:
         return False
 
+    # If we end up with constraints list contains only one item.
+    if len(constraints) == 1:
+        return version in constraints[0]
+
     # Iterate over the current and next contiguous constraints pairs (aka. pairwise)
     # in the second list.
     # For each current and next constraint:
