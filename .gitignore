@@ -2,6 +2,7 @@
 *.py[cod]
 
 # virtualenv and other misc bits
+/src/*.egg-info
 *.egg-info
 /dist
 /build
@@ -71,3 +72,6 @@ tcl
 
 # Ignore Jupyter Notebook related temp files
 .ipynb_checkpoints/
+
+# Nix
+/result*

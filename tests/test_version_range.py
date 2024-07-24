@@ -222,6 +222,39 @@ class TestVersionRange(TestCase):
         version_range = NpmVersionRange.from_native(npm_range)
         assert version_range == expected
 
+    def test_NpmVersionRange_from_native_with_prerelease_carate_range(self):
+        npm_range = "^1.2.3-beta.1"
+        expected = NpmVersionRange(
+            constraints=(
+                VersionConstraint(comparator=">=", version=SemverVersion(string="1.2.3-beta.1")),
+                VersionConstraint(comparator="<", version=SemverVersion(string="2.0.0")),
+            )
+        )
+        version_range = NpmVersionRange.from_native(npm_range)
+        assert version_range == expected
+
+    def test_NpmVersionRange_from_native_with_prerelease_carate_range_wihtout_major(self):
+        npm_range = "^0.2.1-beta"
+        expected = NpmVersionRange(
+            constraints=(
+                VersionConstraint(comparator=">=", version=SemverVersion(string="0.2.1-beta")),
+                VersionConstraint(comparator="<", version=SemverVersion(string="0.3.0")),
+            )
+        )
+        version_range = NpmVersionRange.from_native(npm_range)
+        assert version_range == expected
+
+    def test_NpmVersionRange_from_native_with_prerelease_carate_range_wihtout_major_and_minor(self):
+        npm_range = "^0.0.2-beta"
+        expected = NpmVersionRange(
+            constraints=(
+                VersionConstraint(comparator=">=", version=SemverVersion(string="0.0.2-beta")),
+                VersionConstraint(comparator="<", version=SemverVersion(string="0.0.3")),
+            )
+        )
+        version_range = NpmVersionRange.from_native(npm_range)
+        assert version_range == expected
+
     def test_NpmVersionRange_from_native_with_approximately_equal_to_operator(self):
         npm_range = "~3.8.2"
         expected = NpmVersionRange(

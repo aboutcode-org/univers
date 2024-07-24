@@ -471,6 +471,10 @@ def simplify_constraints(constraints):
     return sorted(set(unequal_constraints + constraints))
 
 
+class InvalidConstraintsError(Exception):
+    pass
+
+
 def contains_version(version, constraints):
     """
     Return True an assertion error if the ``constraints`` list contains the
@@ -543,7 +547,10 @@ def contains_version(version, constraints):
 
         else:
             # this should never happen as the constraints must be valid going in
-            raise Exception(f"Invalid constraints sequence: {constraints }")
+            raise InvalidConstraintsError(
+                f"Invalid constraints sequence: ('{cur_comp} {cur_constraint.version}',"
+                f"'{nxt_comp} {nxt_constraint.version}') in {constraints!r}"
+            )
 
     # If this is the last iteration and next comparator is ">" or >="
     # and the "tested version" is greater than the next version

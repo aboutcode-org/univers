@@ -101,6 +101,11 @@ class VersionRange:
         Return a VersionRange built from a ``vers`` version range spec string,
         such as "vers:npm/1.2.3,>=2.0.0"
         """
+        if not vers or not isinstance(vers, str) or not vers.strip():
+            raise ValueError(
+                f"{vers!r} is not a valid argument, a valid ``vers`` string argument is required."
+            )
+
         # Spaces are not significant and removed in a canonical form.
         vers = remove_spaces(vers)
 
@@ -386,11 +391,26 @@ class NpmVersionRange(VersionRange):
                             VersionConstraint(comparator=comparator, version=vrc(constraint))
                         )
                 else:
-                    if (
-                        constraint.endswith(".x")
-                        or constraint.startswith("~")
-                        or constraint.startswith("^")
-                    ):
+                    # Handle caret range expression.
+                    if constraint.startswith("^"):
+                        base_version = vrc(constraint.lstrip("^"))
+                        prerelease = base_version.value.prerelease
+                        base_version.value.prerelease = ()
+                        if base_version.major:
+                            high = base_version.next_major()
+                        elif base_version.minor:
+                            high = base_version.next_minor()
+                        else:
+                            high = base_version.next_patch()
+                        base_version.value.prerelease = prerelease
+                        lower = base_version
+                        constraints.extend(
+                            [
+                                VersionConstraint(comparator=">=", version=lower),
+                                VersionConstraint(comparator="<", version=high),
+                            ]
+                        )
+                    elif constraint.endswith(".x") or constraint.startswith("~"):
                         constraints.extend(
                             get_npm_version_constraints_from_semver_npm_spec(
                                 string=constraint, cls=cls

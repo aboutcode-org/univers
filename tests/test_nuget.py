@@ -19,6 +19,7 @@
 
 import unittest
 
+from univers.nuget import Version
 from univers.versions import NugetVersion
 
 
@@ -77,3 +78,13 @@ class NuGetTest(unittest.TestCase):
         self.check_order(self.assertLess, "1.0.0-pre", "1.0.0.1-alpha")
         self.check_order(self.assertLess, "1.0.0", "1.0.0.1-alpha")
         self.check_order(self.assertLess, "0.9.9.1", "1.0.0")
+
+    def test_NugetVersion_hash(self):
+        vers1 = NugetVersion("1.0.1+23")
+        vers2 = NugetVersion("1.0.1+23")
+        assert hash(vers1) == hash(vers2)
+
+    def test_nuget_semver_hash(self):
+        vers1 = Version.from_string("51.0.0+2")
+        vers2 = Version.from_string("51.0.0+2")
+        assert hash(vers1) == hash(vers2)

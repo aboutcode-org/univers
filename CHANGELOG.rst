@@ -2,6 +2,22 @@ Changelog
 =========
 
 
+Version v30.11.0
+----------------
+
+- Use proper exception subclass for invalid constraints error.
+
+
+Version v30.10.1
+----------------
+
+- Add Nix flake as a build system.
+- Refactor gem and make nuget hashable.
+- Update skeleton.
+- Handle NoneType in VersionRange.from_string.
+- Handle npm prerelease caret range expression.
+
+
 Version v30.10.0
 ----------------
 
