@@ -18,20 +18,20 @@ from univers.versions import SemverVersion
 class TestNormalizedVersionRange(TestCase):
     purl_type = "pypi"
     all_versions = versions = [
-        "1.0",
-        "1.1",
-        "1.2",
-        "1.3",
-        "2.0",
-        "3.0",
+        "1.0.0",
+        "1.1.0",
+        "1.2.0",
+        "1.3.0",
+        "2.0.0",
+        "3.0.0",
     ]
     versions = [SemverVersion(i) for i in all_versions]
 
     def test_get_region(self):
 
-        constraint1 = VersionConstraint(comparator="<=", version=SemverVersion("1.0"))
-        constraint2 = VersionConstraint(comparator="!=", version=SemverVersion("1.1"))
-        constraint3 = VersionConstraint(comparator=">", version=SemverVersion("1.3"))
+        constraint1 = VersionConstraint(comparator="<=", version=SemverVersion("1.0.0"))
+        constraint2 = VersionConstraint(comparator="!=", version=SemverVersion("1.1.0"))
+        constraint3 = VersionConstraint(comparator=">", version=SemverVersion("1.3.0"))
 
         assert get_region(constraint=constraint1, versions=self.versions) == Span(0)
         assert get_region(constraint=constraint2, versions=self.versions) == Span(0).union(
@@ -64,7 +64,19 @@ class TestNormalizedVersionRange(TestCase):
         assert str(vr4) == "vers:pypi/1.0.0|>=1.2.0|<=1.3.0|3.0.0"
 
     def test_NormalizedVersionRange_from_vers(self):
-        vr = VersionRange.from_string("vers:pypi/<=1.3|>=2.0|<3.0.0")
-        nvr = NormalizedVersionRange.from_vers(vers_range=vr, all_versions=self.all_versions)
+        vr1 = VersionRange.from_string("vers:pypi/<=1.1.0|>=1.2.0|<=1.3.0|3.0.0")
+        nvr1 = NormalizedVersionRange.from_vers(vers_range=vr1, all_versions=self.all_versions)
 
-        assert str(nvr) == "vers:pypi/>=1.0|<=2.0"
+        vr2 = VersionRange.from_string("vers:pypi/>=1.0.0|<=1.1.0|>=1.2.0|<=1.3.0|3.0.0")
+        nvr2 = NormalizedVersionRange.from_vers(vers_range=vr2, all_versions=self.all_versions)
+
+        vr3 = VersionRange.from_string("vers:pypi/<=1.3.0|3.0.0")
+        nvr3 = NormalizedVersionRange.from_vers(vers_range=vr3, all_versions=self.all_versions)
+
+        vr4 = VersionRange.from_string("vers:pypi/<2.0.0|3.0.0")
+        nvr4 = NormalizedVersionRange.from_vers(vers_range=vr4, all_versions=self.all_versions)
+
+        assert str(nvr1) == "vers:pypi/>=1.0.0|<=1.3.0|3.0.0"
+        assert str(nvr2) == "vers:pypi/>=1.0.0|<=1.3.0|3.0.0"
+        assert str(nvr3) == "vers:pypi/>=1.0.0|<=1.3.0|3.0.0"
+        assert str(nvr4) == "vers:pypi/>=1.0.0|<=1.3.0|3.0.0"

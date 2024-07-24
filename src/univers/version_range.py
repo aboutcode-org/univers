@@ -1299,8 +1299,6 @@ def build_range_from_snyk_advisory_string(scheme: str, string: Union[str, List])
     >>> vr = build_range_from_snyk_advisory_string("pypi", "(,9.21]")
     >>> assert str(vr) == "vers:pypi/<=9.21"
     """
-    # https://security.snyk.io/package/golang/github.com%2Fmattermost%2Fmattermost%2Fserver%2Fpublic%2Fmodel
-    # >=9.6.0-rc1 <9.8.1-rc1
     version_constraints = []
     vrc = RANGE_CLASS_BY_SCHEMES[scheme]
 
