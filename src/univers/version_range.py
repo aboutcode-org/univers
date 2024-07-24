@@ -230,6 +230,37 @@ class VersionRange:
             and self.constraints == other.constraints
         )
 
+    def normalize(self, known_versions: List[str]):
+        """
+        Return a new VersionRange normalized and simplified using the universe of
+        ``known_versions`` list of version strings.
+        """
+        versions = sorted([self.version_class(i) for i in known_versions])
+
+        resolved = []
+        contiguous = []
+        for kv in versions:
+            if self.__contains__(kv):
+                contiguous.append(kv)
+            elif contiguous:
+                resolved.append(contiguous)
+                contiguous = []
+
+        if contiguous:
+            resolved.append(contiguous)
+
+        version_constraints = []
+        for contiguous_segment in resolved:
+            lower_bound = contiguous_segment[0]
+            upper_bound = contiguous_segment[-1]
+            if lower_bound == upper_bound:
+                version_constraints.append(VersionConstraint(version=lower_bound))
+            else:
+                version_constraints.append(VersionConstraint(comparator=">=", version=lower_bound))
+                version_constraints.append(VersionConstraint(comparator="<=", version=upper_bound))
+
+        return self.__class__(constraints=version_constraints)
+
 
 def from_cve_v4(data, scheme):
     """
