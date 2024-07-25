@@ -2,6 +2,15 @@ Changelog
 =========
 
 
+Version v30.12.0
+----------------
+
+- Support VersionRange normalization using known versions. https://github.com/nexB/univers/pull/108
+- Fix the edge case resulting in incorrect ``contains`` resolution in VersionRange. https://github.com/nexB/univers/issues/137 https://github.com/nexB/univers/pull/108
+- Use native impl to parse Maven and NuGet range expression in ``from_gitlab_native``. https://github.com/nexB/univers/issues/136 https://github.com/nexB/univers/pull/108
+- Fix incorrect parsing of composer range in  ``from_gitlab_native``. https://github.com/nexB/univers/issues/136 https://github.com/nexB/univers/pull/108
+
+
 Version v30.11.0
 ----------------
 
