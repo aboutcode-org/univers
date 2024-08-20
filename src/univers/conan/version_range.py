@@ -2,7 +2,7 @@
 # Copyright (c) 2019 JFrog LTD
 # SPDX-License-Identifier: MIT
 #
-# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
+# Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
 from collections import namedtuple
 

@@ -2,7 +2,7 @@
 # Copyright (c) nexB Inc. and others.
 # SPDX-License-Identifier: Apache-2.0
 #
-# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
+# Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
 from univers.utils import remove_spaces
 from univers.version_constraint import VersionConstraint

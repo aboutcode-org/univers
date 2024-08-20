@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: BSD-3-Clause
 # Version comparison utility extracted from pkgcore and further stripped down.
 #
-# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
+# Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
 import re
 

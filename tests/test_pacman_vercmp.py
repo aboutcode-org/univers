@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # this has been significantly modified from the original
 #
-# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
+# Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
 from univers.versions import ArchLinuxVersion
 

@@ -31,7 +31,7 @@ final: prev: rec {
 
             meta = with lib; {
               description = "Library for parsing version ranges and expressions";
-              homepage = "https://github.com/nexB/univers";
+              homepage = "https://github.com/aboutcode-org/univers";
               license = with licenses; [ asl20 bsd3 mit ];
             };
           })

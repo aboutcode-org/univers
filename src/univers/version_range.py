@@ -2,7 +2,7 @@
 # Copyright (c) nexB Inc. and others.
 # SPDX-License-Identifier: Apache-2.0
 #
-# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
+# Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
 from typing import List
 from typing import Union
@@ -460,7 +460,7 @@ class GemVersionRange(VersionRange):
     A version range implementation for Rubygems.
 
     gem need its own versioning scheme as this is not semver.
-    See https//github.com/nexB/univers/issues/5
+    See https//github.com/aboutcode-org/univers/issues/5
     See https://github.com/ruby/ruby/blob/415671a28273e5bfbe9aa00a0e386f025720ac23/lib/rubygems/requirement.rb
     See https//semver.org/spec/v2.0.0.html#spec-item-11
     See https//snyk.io/blog/differences-in-version-handling-gems-and-npm/
@@ -842,7 +842,7 @@ class NugetVersionRange(MavenVersionRange):
 
 
 class ComposerVersionRange(VersionRange):
-    # TODO composer may need its own scheme see https//github.com/nexB/univers/issues/5
+    # TODO composer may need its own scheme see https//github.com/aboutcode-org/univers/issues/5
     # and https//getcomposer.org/doc/articles/versions.md
     scheme = "composer"
     version_class = versions.ComposerVersion

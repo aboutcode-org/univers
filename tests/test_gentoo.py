@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: GPL-2.0-only
 # this has been significantly modified from the original
 #
-# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
+# Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
 
 from unittest import TestCase

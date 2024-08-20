@@ -16,7 +16,7 @@ ranges and to compare two software package versions in VulnerableCode.
 Package version ranges and version constraints are useful and essential:
 
 - When relating a known vulnerability or bug to a range of affected package
-  versions. For instance a statement such as "vulnerability 123 affects 
+  versions. For instance a statement such as "vulnerability 123 affects
   package bar, version 3.1 and version 4.2 but not version 5" defines a
   range of bar versions affected by a vulnerability.
 
@@ -78,7 +78,7 @@ include:
   This is supported in part by the `semantic_version
   <https://github.com/rbarrois/python-semanticversion>`_ library.
 
-- pypi: handled by Python's packaging library and the standard 
+- pypi: handled by Python's packaging library and the standard
   ``packaging.version`` module.
 
 - Rubygems which use a semver-like but not-quite-semver scheme and there can be
@@ -89,26 +89,26 @@ include:
   "OR" between constraints (that it call requirements).
   Gem are handled by Python port of the Rubygems requirements and version
   handling code from the `puppeteer tool
-  <https://github.com/nexB/univers/blob/main/src/univers/debian.py.ABOUT>`_
+  <https://github.com/aboutcode-org/univers/blob/main/src/univers/debian.py.ABOUT>`_
 
 - debian: handled by the  `debian-inspector library
-  <https://github.com/nexB/univers/blob/main/src/univers/debian.py.ABOUT>`_.
+  <https://github.com/aboutcode-org/univers/blob/main/src/univers/debian.py.ABOUT>`_.
 
 - maven: handled by the embedded `pymaven library
-  <https://github.com/nexB/univers/blob/main/src/univers/pymaven.py.ABOUT>`_.
+  <https://github.com/aboutcode-org/univers/blob/main/src/univers/pymaven.py.ABOUT>`_.
 
 - rpm: handled by the embedded `rpm_vercmp library
-  <https://github.com/nexB/univers/blob/main/src/univers/rpm.py.ABOUT>`_.
+  <https://github.com/aboutcode-org/univers/blob/main/src/univers/rpm.py.ABOUT>`_.
 
 - golang (using semver)
 
 - PHP composer
 
 - ebuild/gentoo: handled by the embedded `gentoo_vercmp module
-  <https://github.com/nexB/univers/blob/main/src/univers/gentoo.py.ABOUT>`_.
+  <https://github.com/aboutcode-org/univers/blob/main/src/univers/gentoo.py.ABOUT>`_.
 
 - arch linux: handled by the embedded `arch utility module borrowed from msys2
-  <https://github.com/nexB/univers/blob/main/src/univers/arch.py.ABOUT>`_.
+  <https://github.com/aboutcode-org/univers/blob/main/src/univers/arch.py.ABOUT>`_.
 
 - Alpine linux: handled using the base Gentoo version support and extras
   specific to Alpine.
@@ -172,7 +172,7 @@ Test if a version is within or outside a version range:
 Development
 ============
 
-Run these commands, starting from a git clone of https://github.com/nexB/univers ::
+Run these commands, starting from a git clone of https://github.com/aboutcode-org/univers ::
 
     $ ./configure --dev
     $ source venv/bin/active
@@ -181,7 +181,7 @@ Run these commands, starting from a git clone of https://github.com/nexB/univers
 
 We use the same development process as other AboutCode projects.
 
-Visit https://github.com/nexB/univers and
+Visit https://github.com/aboutcode-org/univers and
 https://gitter.im/aboutcode-org/vulnerablecode and
 https://gitter.im/aboutcode-org/aboutcode for support and chat.
 

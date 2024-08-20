@@ -7,7 +7,7 @@
 # stripped down and significantly modified from the original at python-rpm-vercmp
 # Also includes updates from Facebook antlir merged in.
 #
-# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
+# Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
 import re
 from typing import NamedTuple
