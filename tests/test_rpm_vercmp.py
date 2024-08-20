@@ -76,8 +76,7 @@ def create_test_function(ver1, ver2, expected, name):
     def test_rpm_version(self):
         ver1_str = str(ver1).encode("utf-8")
         ver2_str = str(ver2).encode("utf-8")
-        print(
-            f"testing (ver1={ver1_str}, ver2={ver2_str}, expected=expected{expected}")
+        print(f"testing (ver1={ver1_str}, ver2={ver2_str}, expected=expected{expected}")
         result = vercmp.vercmp(ver1, ver2)
         if result != expected:
             assert result == (expected, ver1, ver2)
@@ -93,8 +92,7 @@ def get_tests():
     test_file = os.path.join(os.path.dirname(__file__), "data", "rpmvercmp.at")
 
     with io.open(test_file, encoding="utf-8") as rpmtests:
-        tests = list(parse_rpmvercmp_tests(
-            rpmtests, with_buggy_comparisons=True))
+        tests = list(parse_rpmvercmp_tests(rpmtests, with_buggy_comparisons=True))
         for test_count, (ver1, ver2, expected) in enumerate(tests, 1):
             name = f"test_rpm_version_{test_count}"
             yield create_test_function(ver1, ver2, expected, name)

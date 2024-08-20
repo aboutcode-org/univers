@@ -28,8 +28,7 @@ def test_version():
     assert Version.is_valid("1.2.3")
     assert not Version.is_valid(None)
     assert Version.normalize("v1.2.3") == "1.2.3"
-    assert Version("1.2.3").satisfies(VersionConstraint(
-        comparator=">=", version=Version("1.2.3")))
+    assert Version("1.2.3").satisfies(VersionConstraint(comparator=">=", version=Version("1.2.3")))
 
 
 def test_pypi_version():
@@ -79,8 +78,7 @@ def test_semver_version():
     assert version.next_patch() == SemverVersion("1.2.3")
     assert SemverVersion("1.2.3").next_patch() == SemverVersion("1.2.4")
     assert version.satisfies(
-        VersionConstraint(
-            comparator=">=", version=SemverVersion("1.2.3-pre.1+build.1"))
+        VersionConstraint(comparator=">=", version=SemverVersion("1.2.3-pre.1+build.1"))
     )
     assert SemverVersion("1.0.0") == SemverVersion("1.0")
     assert SemverVersion("1.2.3+42") != SemverVersion("1.2.3+23")

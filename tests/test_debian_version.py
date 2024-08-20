@@ -91,8 +91,7 @@ class DebianVersionTest(TestCase):
     def test_compare_strings_can_sort(self):
         # taken from
         # http://www.debian.org/doc/debian-policy/ch-controlfields.html#s-f-Version
-        result = sorted(["a", "", "~", "~~a", "~~"],
-                        key=version.compare_strings_key)
+        result = sorted(["a", "", "~", "~~a", "~~"], key=version.compare_strings_key)
         expected = ["~~", "~~a", "~", "", "a"]
         assert expected == result
 
@@ -152,10 +151,8 @@ class DebianVersionTest(TestCase):
         assert compare_versions("9.0.0", "10.0.0") == -1
 
         assert compare_versions("1.2.3-1~deb7u1", "1.2.3-1") == -1
-        assert compare_versions(
-            "2.7.4+reloaded2-13ubuntu1", "2.7.4+reloaded2-13+deb9u1") == -1
-        assert compare_versions("2.7.4+reloaded2-13",
-                                "2.7.4+reloaded2-13+deb9u1") == -1
+        assert compare_versions("2.7.4+reloaded2-13ubuntu1", "2.7.4+reloaded2-13+deb9u1") == -1
+        assert compare_versions("2.7.4+reloaded2-13", "2.7.4+reloaded2-13+deb9u1") == -1
 
         # greater than
         assert compare_versions("0.0.1-0", "0:0.0.0") == 1
@@ -166,10 +163,8 @@ class DebianVersionTest(TestCase):
         assert compare_versions("9.0.0", "1.0.0") == 1
 
         assert compare_versions("1.2.3-1", "1.2.3-1~deb7u1") == 1
-        assert compare_versions(
-            "2.7.4+reloaded2-13+deb9u1", "2.7.4+reloaded2-13ubuntu1") == 1
-        assert compare_versions(
-            "2.7.4+reloaded2-13+deb9u1", "2.7.4+reloaded2-13") == 1
+        assert compare_versions("2.7.4+reloaded2-13+deb9u1", "2.7.4+reloaded2-13ubuntu1") == 1
+        assert compare_versions("2.7.4+reloaded2-13+deb9u1", "2.7.4+reloaded2-13") == 1
 
         # unicode
         assert compare_versions("2:0.0.44-1", "2:0.0.44-nobin") == -1

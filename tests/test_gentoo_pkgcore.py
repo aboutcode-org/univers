@@ -16,12 +16,10 @@ def generate_misc_sufs():
     suf_nums = list(range(100))
     shuffle(suf_nums)
 
-    good_sufs = simple_good_sufs + \
-        [f"{x}{suf_nums.pop()}" for x in simple_good_sufs]
+    good_sufs = simple_good_sufs + [f"{x}{suf_nums.pop()}" for x in simple_good_sufs]
 
     l = len(good_sufs)
-    good_sufs = good_sufs + [good_sufs[x] +
-                             good_sufs[l - x - 1] for x in range(l)]
+    good_sufs = good_sufs + [good_sufs[x] + good_sufs[l - x - 1] for x in range(l)]
 
     bad_sufs = ["_a", "_9", "_"] + [x + " " for x in simple_good_sufs]
     return good_sufs, bad_sufs
@@ -65,8 +63,7 @@ class TestCPV:
                     v_r = parse_version_and_revision(version)
                     expected_rev = rev.lstrip("-r")
                     expected_rev = expected_rev and int(expected_rev) or 0
-                    assert v_r == (
-                        ver, expected_rev), f"Failed to parse: {version}"
+                    assert v_r == (ver, expected_rev), f"Failed to parse: {version}"
                 except Exception as e:
                     raise Exception(f"Failed to parse: {version!r}") from e
 

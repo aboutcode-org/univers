@@ -240,8 +240,7 @@ class TestVersion(unittest.TestCase):
 
         for test, expected in test_pairs:
             v = Version(test)
-            assert v._parsed == expected, "Version(%s) == %s, want %s" % (
-                test, v._parsed, expected)
+            assert v._parsed == expected, "Version(%s) == %s, want %s" % (test, v._parsed, expected)
 
     def test_version_qualifiers(self):
         version_qualifiers = (
@@ -269,7 +268,7 @@ class TestVersion(unittest.TestCase):
             "1-123",
         )
         for idx, low in enumerate(version_qualifiers[:-1]):
-            for high in version_qualifiers[idx + 1:]:
+            for high in version_qualifiers[idx + 1 :]:
                 self._assert_version_order(low, high)
 
     def test_version_numbers(self):
@@ -301,7 +300,7 @@ class TestVersion(unittest.TestCase):
             "11m",
         )
         for idx, low in enumerate(version_numbers[:-1]):
-            for high in version_numbers[idx + 1:]:
+            for high in version_numbers[idx + 1 :]:
                 self._assert_version_order(low, high)
 
         unicode_version_numbers = (
@@ -333,7 +332,7 @@ class TestVersion(unittest.TestCase):
             "11m",
         )
         for idx, low in enumerate(unicode_version_numbers[:-1]):
-            for high in unicode_version_numbers[idx + 1:]:
+            for high in unicode_version_numbers[idx + 1 :]:
                 self._assert_version_order(low, high)
 
     def test_version_equality(self):
@@ -623,8 +622,7 @@ class TestVersionRange(unittest.TestCase):
     def test_str(self):
         for inp in ("[1.0,2.0]", "1.0"):
             actual = str(VersionRange(inp))
-            assert inp == actual, "VersionRange(%s) == %s, wanted %s" % (
-                inp, actual, inp)
+            assert inp == actual, "VersionRange(%s) == %s, wanted %s" % (inp, actual, inp)
 
     def test_fromversion(self):
         v = Version("1.0")
@@ -633,8 +631,7 @@ class TestVersionRange(unittest.TestCase):
         assert vr.version == v
 
     def test_match_versions(self):
-        versions = [Version("0.1"), Version("1.0"), Version(
-            "1.1"), Version("2.0"), Version("2.1")]
+        versions = [Version("0.1"), Version("1.0"), Version("1.1"), Version("2.0"), Version("2.1")]
         vr = VersionRange("(1.0,2.0]")
         assert vr.match_version(versions) == "2.0"
         assert vr.match_version(versions[:3]) == "1.1"
