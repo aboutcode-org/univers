@@ -3,7 +3,7 @@
 # URL: https://github.com/xolox/python-deb-pkg-tools
 # SPDX-License-Identifier: MIT
 #
-# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
+# Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
 
 from unittest import TestCase
@@ -16,7 +16,8 @@ class DebPkgToolsTestCase(TestCase):
         # Check version sorting implemented on top of `=' and `<<' comparisons.
         expected_order = ["0.1", "0.5", "1.0", "2.0", "3.0", "1:0.4", "2:0.3"]
         assert list(sorted(expected_order)) != expected_order
-        result = [str(v) for v in sorted(map(Version.from_string, expected_order))]
+        result = [str(v)
+                  for v in sorted(map(Version.from_string, expected_order))]
         assert result == expected_order
 
     def test_version_comparison(self):

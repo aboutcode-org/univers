@@ -4,7 +4,7 @@
 # Version comparison utility extracted from pymaven and further stripped down
 # and significantly modified from the original at pymaven
 #
-# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
+# Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
 import functools
 from itertools import zip_longest

@@ -1,12 +1,12 @@
 #
 # Copyright (c) nexB Inc. and others.
-# Extracted from http://nexb.com and https://github.com/nexB/debian_inspector/
+# Extracted from http://nexb.com and https://github.com/aboutcode-org/debian_inspector/
 # Copyright (c) Peter Odding
 # Author: Peter Odding <peter@peterodding.com>
 # URL: https://github.com/xolox/python-deb-pkg-tools
 # SPDX-License-Identifier: MIT
 #
-# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
+# Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
 import logging
 import operator as operator_module
@@ -27,7 +27,7 @@ This module is an implementation of the version comparison and sorting algorithm
 described at
 https://www.debian.org/doc/debian-policy/ch-controlfields.html#s-f-Version
 
-This has been substantially modified and enhanced from the original 
+This has been substantially modified and enhanced from the original
 python-deb-pkg-tools by Peter Odding to extract only the subset that
 does the version parsing, comparison and version constraints evaluation.
 

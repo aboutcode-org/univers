@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # this has been significantly modified from the original
 #
-# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
+# Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
 # notes: This has been substantially modified and enhanced from the original
 # puppeteer code to extract the Ruby version handling code.

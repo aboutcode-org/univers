@@ -4,7 +4,7 @@
 # Copyright 2022 Google LLC
 # modified by nexB and others for integration in the Univers library
 #
-# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
+# Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
 import functools
 import re

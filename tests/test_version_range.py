@@ -2,7 +2,7 @@
 # Copyright (c) nexB Inc. and others.
 # SPDX-License-Identifier: Apache-2.0
 #
-# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
+# Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
 import json
 from unittest import TestCase
@@ -34,14 +34,16 @@ class TestVersionRange(TestCase):
     def test_VersionRange_afrom_string(self):
         version_range = VersionRange.from_string("vers:pypi/>0.0.2")
         assert version_range == PypiVersionRange(
-            constraints=[VersionConstraint(comparator=">", version=PypiVersion(string="0.0.2"))]
+            constraints=[VersionConstraint(
+                comparator=">", version=PypiVersion(string="0.0.2"))]
         )
 
     def test_VersionRange_to_string(self):
         vers = "vers:pypi/0.0.2|0.0.6|>=0.0.0|0.0.1|0.0.4|0.0.5|0.0.3"
         version_range = VersionRange.from_string(vers)
         # note the sorting taking place
-        assert str(version_range) == "vers:pypi/>=0.0.0|0.0.1|0.0.2|0.0.3|0.0.4|0.0.5|0.0.6"
+        assert str(
+            version_range) == "vers:pypi/>=0.0.0|0.0.1|0.0.2|0.0.3|0.0.4|0.0.5|0.0.6"
 
     def test_VersionRange_pypi_does_not_contain_basic(self):
         vers = "vers:pypi/0.0.2|0.0.6|>=3.0.0|0.0.1|0.0.4|0.0.5|0.0.3"
@@ -97,25 +99,36 @@ class TestVersionRange(TestCase):
         assert version_range.scheme == "pypi"
         # note the sorting taking place
         expected = (
-            VersionConstraint(comparator="=", version=PypiVersion(string="0.0.0")),
-            VersionConstraint(comparator="=", version=PypiVersion(string="0.0.1")),
-            VersionConstraint(comparator="=", version=PypiVersion(string="0.0.2")),
-            VersionConstraint(comparator="=", version=PypiVersion(string="0.0.3")),
-            VersionConstraint(comparator="=", version=PypiVersion(string="0.0.4")),
-            VersionConstraint(comparator="=", version=PypiVersion(string="0.0.5")),
-            VersionConstraint(comparator="=", version=PypiVersion(string="0.0.6")),
+            VersionConstraint(
+                comparator="=", version=PypiVersion(string="0.0.0")),
+            VersionConstraint(
+                comparator="=", version=PypiVersion(string="0.0.1")),
+            VersionConstraint(
+                comparator="=", version=PypiVersion(string="0.0.2")),
+            VersionConstraint(
+                comparator="=", version=PypiVersion(string="0.0.3")),
+            VersionConstraint(
+                comparator="=", version=PypiVersion(string="0.0.4")),
+            VersionConstraint(
+                comparator="=", version=PypiVersion(string="0.0.5")),
+            VersionConstraint(
+                comparator="=", version=PypiVersion(string="0.0.6")),
         )
         assert version_range.constraints == expected
         # note the sorting taking place
-        assert str(version_range) == "vers:pypi/0.0.0|0.0.1|0.0.2|0.0.3|0.0.4|0.0.5|0.0.6"
+        assert str(
+            version_range) == "vers:pypi/0.0.0|0.0.1|0.0.2|0.0.3|0.0.4|0.0.5|0.0.6"
 
-        version_range1 = VersionRange.from_string(vers, simplify=False, validate=True)
+        version_range1 = VersionRange.from_string(
+            vers, simplify=False, validate=True)
         assert version_range1.constraints == expected
 
-        version_range2 = VersionRange.from_string(vers, simplify=True, validate=False)
+        version_range2 = VersionRange.from_string(
+            vers, simplify=True, validate=False)
         assert version_range2.constraints == expected
 
-        version_range3 = VersionRange.from_string(vers, simplify=True, validate=True)
+        version_range3 = VersionRange.from_string(
+            vers, simplify=True, validate=True)
         assert version_range3.constraints == expected
 
     def test_VersionRange_from_string_pypi_complex_simplify(self):
@@ -127,74 +140,90 @@ class TestVersionRange(TestCase):
             raise Exception(f"Exception not raised: {vers}")
         except ValueError:
             pass
-        version_range = VersionRange.from_string(vers, validate=True, simplify=True)
+        version_range = VersionRange.from_string(
+            vers, validate=True, simplify=True)
         assert str(version_range) == "vers:pypi/>0.0.0|<0.0.5|>=0.0.6"
 
     def test_VersionRange_from_string_pypi_complex_simplify_and_validate(self):
         vers = "vers:pypi/>0.0.0|>=0.0.1|0.0.2|0.0.3|0.0.4|<0.0.5|>=0.0.6|!=0.8"
         version_range = VersionRange.from_string(vers, simplify=True)
         assert str(version_range) == "vers:pypi/>0.0.0|<0.0.5|>=0.0.6|!=0.8"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
+        version_range = VersionRange.from_string(
+            vers, simplify=True, validate=True)
 
     def test_VersionRange_from_string_pypi_complex_simplify2(self):
         vers = (
             "vers:pypi/>0.0.0|>=0.0.1|>=0.0.1|0.0.2|0.0.3|0.0.4|<0.0.5|<=0.0.6|!=0.7|8.0|>12|<15.3"
         )
         version_range = VersionRange.from_string(vers, simplify=True)
-        assert str(version_range) == "vers:pypi/>0.0.0|<=0.0.6|!=0.7|8.0|>12|<15.3"
+        assert str(
+            version_range) == "vers:pypi/>0.0.0|<=0.0.6|!=0.7|8.0|>12|<15.3"
 
     def test_VersionRange_from_string_pypi_simple_cases(self):
         vers = "vers:pypi/>0.0.1"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
+        version_range = VersionRange.from_string(
+            vers, simplify=True, validate=True)
         assert str(version_range) == vers
 
         vers = "vers:pypi/>=0.0.1"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
+        version_range = VersionRange.from_string(
+            vers, simplify=True, validate=True)
         assert str(version_range) == vers
 
         vers = "vers:pypi/<0.0.1"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
+        version_range = VersionRange.from_string(
+            vers, simplify=True, validate=True)
         assert str(version_range) == vers
 
         vers = "vers:pypi/<=0.0.1"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
+        version_range = VersionRange.from_string(
+            vers, simplify=True, validate=True)
         assert str(version_range) == vers
 
         vers = "vers:pypi/0.0.1"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
+        version_range = VersionRange.from_string(
+            vers, simplify=True, validate=True)
         assert str(version_range) == vers
 
         vers = "vers:pypi/!=0.0.1"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
+        version_range = VersionRange.from_string(
+            vers, simplify=True, validate=True)
         assert str(version_range) == vers
 
         vers = "vers:pypi/*"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
+        version_range = VersionRange.from_string(
+            vers, simplify=True, validate=True)
         assert str(version_range) == vers
 
     def test_VersionRange_from_string_pypi_two_cases(self):
         vers = "vers:pypi/>0.0.1|<0.1"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
+        version_range = VersionRange.from_string(
+            vers, simplify=True, validate=True)
         assert str(version_range) == vers
 
         vers = "vers:pypi/>=0.0.1|<0.1"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
+        version_range = VersionRange.from_string(
+            vers, simplify=True, validate=True)
         assert str(version_range) == vers
 
         vers = "vers:pypi/<0.0.1|>0.1"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
+        version_range = VersionRange.from_string(
+            vers, simplify=True, validate=True)
         assert str(version_range) == vers
 
         vers = "vers:pypi/<=0.0.1|>0.1"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
+        version_range = VersionRange.from_string(
+            vers, simplify=True, validate=True)
         assert str(version_range) == vers
 
         vers = "vers:pypi/0.0.1|>0.1"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
+        version_range = VersionRange.from_string(
+            vers, simplify=True, validate=True)
         assert str(version_range) == vers
 
         vers = "vers:pypi/!=0.0.1|>0.1"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
+        version_range = VersionRange.from_string(
+            vers, simplify=True, validate=True)
         assert str(version_range) == vers
 
     def test_GemVersionRange_from_native_range_with_pessimistic_operator(self):
@@ -202,21 +231,26 @@ class TestVersionRange(TestCase):
         version_range = GemVersionRange.from_native(gem_range)
         assert version_range.to_string() == "vers:gem/>=2.0.8|<2.1"
         assert version_range.constraints == (
-            VersionConstraint(comparator=">=", version=RubygemsVersion(string="2.0.8")),
-            VersionConstraint(comparator="<", version=RubygemsVersion(string="2.1")),
+            VersionConstraint(
+                comparator=">=", version=RubygemsVersion(string="2.0.8")),
+            VersionConstraint(
+                comparator="<", version=RubygemsVersion(string="2.1")),
         )
 
     def test_VersionRange_contains_works_for_star_range(self):
         from univers.versions import NginxVersion
 
-        assert NginxVersion("1.0.0") in VersionRange.from_string("vers:nginx/*")
+        assert NginxVersion(
+            "1.0.0") in VersionRange.from_string("vers:nginx/*")
 
     def test_NpmVersionRange_from_native_with_compatible_with_version_operator(self):
         npm_range = "^1.2.9"
         expected = NpmVersionRange(
             constraints=(
-                VersionConstraint(comparator=">=", version=SemverVersion(string="1.2.9")),
-                VersionConstraint(comparator="<", version=SemverVersion(string="2.0.0")),
+                VersionConstraint(
+                    comparator=">=", version=SemverVersion(string="1.2.9")),
+                VersionConstraint(
+                    comparator="<", version=SemverVersion(string="2.0.0")),
             )
         )
         version_range = NpmVersionRange.from_native(npm_range)
@@ -226,8 +260,10 @@ class TestVersionRange(TestCase):
         npm_range = "^1.2.3-beta.1"
         expected = NpmVersionRange(
             constraints=(
-                VersionConstraint(comparator=">=", version=SemverVersion(string="1.2.3-beta.1")),
-                VersionConstraint(comparator="<", version=SemverVersion(string="2.0.0")),
+                VersionConstraint(
+                    comparator=">=", version=SemverVersion(string="1.2.3-beta.1")),
+                VersionConstraint(
+                    comparator="<", version=SemverVersion(string="2.0.0")),
             )
         )
         version_range = NpmVersionRange.from_native(npm_range)
@@ -237,8 +273,10 @@ class TestVersionRange(TestCase):
         npm_range = "^0.2.1-beta"
         expected = NpmVersionRange(
             constraints=(
-                VersionConstraint(comparator=">=", version=SemverVersion(string="0.2.1-beta")),
-                VersionConstraint(comparator="<", version=SemverVersion(string="0.3.0")),
+                VersionConstraint(
+                    comparator=">=", version=SemverVersion(string="0.2.1-beta")),
+                VersionConstraint(
+                    comparator="<", version=SemverVersion(string="0.3.0")),
             )
         )
         version_range = NpmVersionRange.from_native(npm_range)
@@ -248,8 +286,10 @@ class TestVersionRange(TestCase):
         npm_range = "^0.0.2-beta"
         expected = NpmVersionRange(
             constraints=(
-                VersionConstraint(comparator=">=", version=SemverVersion(string="0.0.2-beta")),
-                VersionConstraint(comparator="<", version=SemverVersion(string="0.0.3")),
+                VersionConstraint(
+                    comparator=">=", version=SemverVersion(string="0.0.2-beta")),
+                VersionConstraint(
+                    comparator="<", version=SemverVersion(string="0.0.3")),
             )
         )
         version_range = NpmVersionRange.from_native(npm_range)
@@ -259,8 +299,10 @@ class TestVersionRange(TestCase):
         npm_range = "~3.8.2"
         expected = NpmVersionRange(
             constraints=(
-                VersionConstraint(comparator=">=", version=SemverVersion(string="3.8.2")),
-                VersionConstraint(comparator="<", version=SemverVersion(string="3.9.0")),
+                VersionConstraint(
+                    comparator=">=", version=SemverVersion(string="3.8.2")),
+                VersionConstraint(
+                    comparator="<", version=SemverVersion(string="3.9.0")),
             )
         )
         version_range = NpmVersionRange.from_native(npm_range)
@@ -270,7 +312,8 @@ class TestVersionRange(TestCase):
         openssl_range = "0.9.8j"
         expected = OpensslVersionRange(
             constraints=(
-                VersionConstraint(comparator="=", version=OpensslVersion(string="0.9.8j")),
+                VersionConstraint(
+                    comparator="=", version=OpensslVersion(string="0.9.8j")),
             )
         )
         version_range = OpensslVersionRange.from_native(openssl_range)
@@ -279,7 +322,8 @@ class TestVersionRange(TestCase):
     def test_OpensslVersionRange_from_native_single_new_semver(self):
         openssl_range = "3.0.1"
         expected = OpensslVersionRange(
-            constraints=(VersionConstraint(comparator="=", version=OpensslVersion(string="3.0.1")),)
+            constraints=(VersionConstraint(comparator="=",
+                         version=OpensslVersion(string="3.0.1")),)
         )
         version_range = OpensslVersionRange.from_native(openssl_range)
         assert version_range == expected
@@ -288,8 +332,10 @@ class TestVersionRange(TestCase):
         openssl_range = "3.0.0, 1.0.1b"
         expected = OpensslVersionRange(
             constraints=(
-                VersionConstraint(comparator="=", version=OpensslVersion(string="1.0.1b")),
-                VersionConstraint(comparator="=", version=OpensslVersion(string="3.0.0")),
+                VersionConstraint(
+                    comparator="=", version=OpensslVersion(string="1.0.1b")),
+                VersionConstraint(
+                    comparator="=", version=OpensslVersion(string="3.0.0")),
             )
         )
         version_range = OpensslVersionRange.from_native(openssl_range)
@@ -299,11 +345,16 @@ class TestVersionRange(TestCase):
         sequence = ["3.0.0", "1.0.1b", "3.0.2", "0.9.7a ", "1.1.1ka"]
         expected = OpensslVersionRange(
             constraints=(
-                VersionConstraint(comparator="=", version=OpensslVersion(string="0.9.7a")),
-                VersionConstraint(comparator="=", version=OpensslVersion(string="1.0.1b")),
-                VersionConstraint(comparator="=", version=OpensslVersion(string="1.1.1ka")),
-                VersionConstraint(comparator="=", version=OpensslVersion(string="3.0.0")),
-                VersionConstraint(comparator="=", version=OpensslVersion(string="3.0.2")),
+                VersionConstraint(
+                    comparator="=", version=OpensslVersion(string="0.9.7a")),
+                VersionConstraint(
+                    comparator="=", version=OpensslVersion(string="1.0.1b")),
+                VersionConstraint(
+                    comparator="=", version=OpensslVersion(string="1.1.1ka")),
+                VersionConstraint(
+                    comparator="=", version=OpensslVersion(string="3.0.0")),
+                VersionConstraint(
+                    comparator="=", version=OpensslVersion(string="3.0.2")),
             )
         )
         version_range = OpensslVersionRange.from_versions(sequence)
@@ -313,8 +364,10 @@ class TestVersionRange(TestCase):
         nuget_range = "[1.0.0, 2.0.0)"
         expected = NugetVersionRange(
             constraints=(
-                VersionConstraint(comparator=">=", version=NugetVersion(string="1.0.0")),
-                VersionConstraint(comparator="<", version=NugetVersion(string="2.0.0")),
+                VersionConstraint(
+                    comparator=">=", version=NugetVersion(string="1.0.0")),
+                VersionConstraint(
+                    comparator="<", version=NugetVersion(string="2.0.0")),
             )
         )
         version_range = NugetVersionRange.from_native(nuget_range)
@@ -466,18 +519,23 @@ def test_conan_advisory_version_range_parse(test_case):
 def test_invert():
     vers_with_equal_operator = VersionRange.from_string("vers:gem/1.0")
     assert str(vers_with_equal_operator.invert()) == "vers:gem/!=1.0"
-    assert VersionRange.from_string("vers:gem/!=1.0").invert() == vers_with_equal_operator
+    assert VersionRange.from_string(
+        "vers:gem/!=1.0").invert() == vers_with_equal_operator
 
     vers_with_less_than_operator = VersionRange.from_string("vers:gem/<1.0")
     assert str(vers_with_less_than_operator.invert()) == "vers:gem/>=1.0"
-    assert VersionRange.from_string("vers:gem/>=1.0").invert() == vers_with_less_than_operator
+    assert VersionRange.from_string(
+        "vers:gem/>=1.0").invert() == vers_with_less_than_operator
 
     vers_with_greater_than_operator = VersionRange.from_string("vers:gem/>1.0")
     assert str(vers_with_greater_than_operator.invert()) == "vers:gem/<=1.0"
-    assert VersionRange.from_string("vers:gem/<=1.0").invert() == vers_with_greater_than_operator
+    assert VersionRange.from_string(
+        "vers:gem/<=1.0").invert() == vers_with_greater_than_operator
 
-    vers_with_complex_constraints = VersionRange.from_string("vers:gem/<=1.0|>=3.0|<4.0|!=5.0")
-    assert str(vers_with_complex_constraints.invert()) == "vers:gem/>1.0|<3.0|>=4.0|5.0"
+    vers_with_complex_constraints = VersionRange.from_string(
+        "vers:gem/<=1.0|>=3.0|<4.0|!=5.0")
+    assert str(vers_with_complex_constraints.invert()
+               ) == "vers:gem/>1.0|<3.0|>=4.0|5.0"
 
     vers_with_star_operator = VersionRange.from_string("vers:gem/*")
     assert vers_with_star_operator.invert() == None
@@ -522,7 +580,8 @@ def test_build_range_from_snyk_advisory_string_spaced():
 
 
 def test_version_range_normalize_case1():
-    known_versions = ["4.0.0", "3.0.0", "1.0.0", "2.0.0", "1.3.0", "1.1.0", "1.2.0"]
+    known_versions = ["4.0.0", "3.0.0", "1.0.0",
+                      "2.0.0", "1.3.0", "1.1.0", "1.2.0"]
 
     vr = VersionRange.from_string("vers:pypi/<=1.1.0|>=1.2.0|<=1.3.0|3.0.0")
     nvr = vr.normalize(known_versions=known_versions)
@@ -531,7 +590,8 @@ def test_version_range_normalize_case1():
 
 
 def test_version_range_normalize_case2():
-    known_versions = ["4.0.0", "3.0.0", "1.0.0", "2.0.0", "1.3.0", "1.1.0", "1.2.0"]
+    known_versions = ["4.0.0", "3.0.0", "1.0.0",
+                      "2.0.0", "1.3.0", "1.1.0", "1.2.0"]
 
     vr = VersionRange.from_string("vers:pypi/<=1.3.0|3.0.0")
     nvr = vr.normalize(known_versions=known_versions)
@@ -540,7 +600,8 @@ def test_version_range_normalize_case2():
 
 
 def test_version_range_normalize_case3():
-    known_versions = ["4.0.0", "3.0.0", "1.0.0", "2.0.0", "1.3.0", "1.1.0", "1.2.0"]
+    known_versions = ["4.0.0", "3.0.0", "1.0.0",
+                      "2.0.0", "1.3.0", "1.1.0", "1.2.0"]
 
     vr = VersionRange.from_string("vers:pypi/<2.0.0|3.0.0")
     nvr = vr.normalize(known_versions=known_versions)

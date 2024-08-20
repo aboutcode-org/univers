@@ -2,7 +2,7 @@
 # Copyright (c) nexB Inc. and others.
 # SPDX-License-Identifier: Apache-2.0
 #
-# Visit https://aboutcode.org and https://github.com/nexB/univers for support and download.
+# Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
 from pathlib import Path
 
@@ -22,7 +22,8 @@ class TestOpenssl(testcase.FileBasedTesting):
         results = [OpensslVersion(x.strip()) for x in all_openssl_versions]
         results.sort()
         results = [version_to_dict(x) for x in results]
-        expected_file = self.get_test_loc("openssl_versort_expected.json", must_exist=False)
+        expected_file = self.get_test_loc(
+            "openssl_versort_expected.json", must_exist=False)
         util_tests.check_results_against_json(results, expected_file)
 
 

@@ -1,6 +1,11 @@
 Changelog
 =========
 
+Version v30.12.1
+----------------
+
+- Update link references of ownership from nexB to aboutcode-org. https://github.com/aboutcode-org/univers/issues/140
+
 
 Version v30.12.0
 ----------------
@@ -37,7 +42,7 @@ Version v30.10.0
 Version v30.9.2
 ----------------
 
-- Fix unhashable error in GemVersion.  
+- Fix unhashable error in GemVersion.
 
 
 Version v30.9.1
@@ -89,7 +94,7 @@ Version v30.5.0
 Version v30.4.0
 ----------------
 
-- Add support for forming VersionRange from a list of versions.Thank you 
+- Add support for forming VersionRange from a list of versions.Thank you
   to Keshav Priyadarshi @keshav-space for this.
 
 
@@ -146,7 +151,7 @@ Version v30.0.0
 Version v21.4.9
 -----------------
 
-- Add support Gentoo style versions. 
+- Add support Gentoo style versions.
 
 
 Version v21.4.8
