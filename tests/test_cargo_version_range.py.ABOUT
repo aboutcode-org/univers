@@ -1,0 +1,10 @@
+about_resource: test_cargo_version_range.py
+package_url: pkg:cargo/semver@1.0.21
+download_url: https://github.com/dtolnay/semver/blob/f9cc2df9415c880bd3610c2cdb6785ac7cad31ea/tests/test_version_req.rs
+homepage_url: https://github.com/dtolnay/semver
+license_expression: |
+   MIT
+   Apache-2.0
+notice_file: |
+    test_cargo_version_range1.py.NOTICE
+    test_cargo_version_range2.py.NOTICE

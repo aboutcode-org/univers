@@ -25,6 +25,7 @@ For instance semver is a version syntax. Python and Debian use another syntax.
 Each subclass primary responsibility to is be comparable and orderable
 """
 
+
 # TODO: Add mozilla versions https://github.com/mozilla-releng/mozilla-version
 # TODO: Add conda versions https://github.com/conda/conda/blob/master/conda/models/version.py
 #       and https://docs.conda.io/projects/conda-build/en/latest/resources/package-spec.html#build-version-spec
@@ -686,6 +687,10 @@ class ConanVersion(Version):
         return self.value and self.value.bump(index)
 
 
+class CargoVersion(SemverVersion):
+    pass
+
+
 AVAILABLE_VERSIONS = [
     SemverVersion,
     GolangVersion,
@@ -702,4 +707,5 @@ AVAILABLE_VERSIONS = [
     OpensslVersion,
     LegacyOpensslVersion,
     AlpineLinuxVersion,
+    CargoVersion,
 ]

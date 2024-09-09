@@ -21,6 +21,7 @@ from univers.conan.version_range import VersionRange as conan_version_range
 from univers.utils import remove_spaces
 from univers.version_constraint import VersionConstraint
 from univers.version_constraint import contains_version
+from univers.versions import CargoVersion
 
 
 class InvalidVersionRange(Exception):
@@ -338,7 +339,8 @@ class NpmVersionRange(VersionRange):
         ">=": ">=",
         "<": "<",
         ">": ">",
-        "=": "=",  # This is not a native node-semver comparator, but is used in the gitlab version range for npm packages.
+        "=": "=",
+        # This is not a native node-semver comparator, but is used in the gitlab version range for npm packages.
     }
 
     @classmethod
@@ -853,7 +855,8 @@ class ComposerVersionRange(VersionRange):
         ">=": ">=",
         "<": "<",
         ">": ">",
-        "=": "=",  # This is not a native composer-semver comparator, but is used in the gitlab version range for composer packages.
+        "=": "=",
+        # This is not a native composer-semver comparator, but is used in the gitlab version range for composer packages.
     }
 
 
@@ -955,7 +958,8 @@ class GolangVersionRange(VersionRange):
         ">=": ">=",
         "<": "<",
         ">": ">",
-        "=": "=",  # This is not a native golang-semver comparator, but is used in the gitlab version range for go packages.
+        "=": "=",
+        # This is not a native golang-semver comparator, but is used in the gitlab version range for go packages.
     }
 
 
@@ -978,7 +982,86 @@ class HexVersionRange(VersionRange):
 
 class CargoVersionRange(VersionRange):
     scheme = "cargo"
-    version_class = versions.SemverVersion
+    version_class = versions.CargoVersion
+
+    @classmethod
+    def from_native(cls, string):
+        """
+        Return a VersionRange built from a scheme-specific, native version range
+        ``string``. Subclasses can implement.
+        """
+        if string == "*":
+            return cls(
+                constraints=(VersionConstraint(comparator="*", version_class=cls.version_class),)
+            )
+
+        constraints = []
+        cleaned_string = remove_spaces(string).lower()
+        for version in cleaned_string.split(","):
+            if not version:
+                raise InvalidVersionRange(f"InvalidVersionRange : {string}")
+
+            # wildcard
+            if "*" in version:
+                if "*" in version and not version.endswith("*") or constraints:
+                    raise InvalidVersionRange(
+                        f"Unsupported star in the middle of a version: it should be a trailing star only: {string}"
+                    )
+
+                if version.endswith(".*.*"):
+                    version = version.replace(".*.*", ".*")
+
+                segments_count = len(version.split("."))
+                lower_bound = cls.version_class(version.replace("*", "0"))
+                if segments_count == 2:
+                    upper_bound = cls.version_class(str(lower_bound.next_major()))
+                elif segments_count == 3:
+                    upper_bound = cls.version_class(str(lower_bound.next_minor()))
+                else:
+                    raise InvalidVersionRange(f"Invalid version: not a semver version: {string}")
+
+                vstart = VersionConstraint(comparator=">=", version=lower_bound)
+                vend = VersionConstraint(comparator="<", version=upper_bound)
+                constraints.extend([vstart, vend])
+
+            # caret
+            elif version.startswith("^"):
+                version = version.lstrip("^")
+                upper_bound = None
+                lower_bound = cls.version_class(version)
+                if (lower_bound.major != 0 or version == "0") and version != "0.0":
+                    upper_bound = cls.version_class(str(lower_bound.value.next_major()))
+                else:
+                    if lower_bound.minor != 0 or version == "0.0":
+                        upper_bound = cls.version_class(str(lower_bound.value.next_minor()))
+                    elif lower_bound.patch != 0:
+                        upper_bound = cls.version_class(str(lower_bound.value.next_patch()))
+
+                vstart = VersionConstraint(comparator=">=", version=lower_bound)
+                vend = VersionConstraint(comparator="<", version=upper_bound)
+                constraints.extend([vstart, vend])
+
+            # tilde
+            elif version.startswith("~"):
+                version = version.lstrip("~")
+                lower_bound = cls.version_class(version)
+                if lower_bound.minor == 0 and lower_bound.patch == 0:
+                    upper_bound = cls.version_class(str(lower_bound.value.next_major()))
+                else:
+                    upper_bound = cls.version_class(str(lower_bound.value.next_minor()))
+
+                vstart = VersionConstraint(comparator=">=", version=lower_bound)
+                vend = VersionConstraint(comparator="<", version=upper_bound)
+                constraints.extend([vstart, vend])
+
+            else:
+                comparator, version = VersionConstraint.split(version)
+                constraint = VersionConstraint(
+                    comparator=comparator, version=cls.version_class(version)
+                )
+                constraints.append(constraint)
+
+        return cls(constraints=tuple(constraints))
 
 
 class MozillaVersionRange(VersionRange):
