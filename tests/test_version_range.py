@@ -29,6 +29,7 @@ from univers.versions import OpensslVersion
 from univers.versions import PypiVersion
 from univers.versions import RubygemsVersion
 from univers.versions import SemverVersion
+from univers.versions import Version
 
 
 class TestVersionRange(TestCase):
