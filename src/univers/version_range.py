@@ -19,6 +19,8 @@ from univers import maven
 from univers import versions
 from univers.conan.version_range import VersionRange as conan_version_range
 from univers.utils import remove_spaces
+from univers.versions import AllVersion
+from univers.versions import NoneVersion
 from univers.version_constraint import VersionConstraint
 from univers.version_constraint import contains_version
 
@@ -220,6 +222,13 @@ class VersionRange:
         object. A version is contained in a VersionRange if it satisfies its
         constraints according to ``vers`` rules.
         """
+
+        if self.version_class is AllVersion:
+            return True
+        
+        if self.version_class is NoneVersion:
+            return False
+        
         if not isinstance(version, self.version_class):
             raise TypeError(
                 f"{version!r} is not of expected type: {self.version_class!r}",
@@ -712,9 +721,9 @@ class PypiVersionRange(VersionRange):
     def from_native(cls, string):
         """
         Return a VersionRange built from a PyPI PEP440 version specifiers ``string``.
-        Raise an a univers.versions.InvalidVersion
+        Raise a univers.versions.InvalidVersion
         """
-        # TODO: environment markers are yet supported
+        # TODO: environment markers are not yet supported
         # TODO: handle  .* version, ~= and === operators
 
         if ";" in string:
@@ -1177,6 +1186,16 @@ class MattermostVersionRange(VersionRange):
     version_class = versions.SemverVersion
 
 
+class AllVersionRange(VersionRange):
+    scheme = "all"
+    version_class = versions.AllVersion
+
+
+class NoneVersionRange(VersionRange):
+    scheme = "none"
+    version_class = versions.NoneVersion
+
+
 def from_gitlab_native(gitlab_scheme, string):
     purl_scheme = gitlab_scheme
     if gitlab_scheme not in PURL_TYPE_BY_GITLAB_SCHEME.values():
@@ -1419,6 +1438,8 @@ RANGE_CLASS_BY_SCHEMES = {
     "openssl": OpensslVersionRange,
     "mattermost": MattermostVersionRange,
     "conan": ConanVersionRange,
+    "all": AllVersionRange,
+    "none": NoneVersionRange,
 }
 
 PURL_TYPE_BY_GITLAB_SCHEME = {

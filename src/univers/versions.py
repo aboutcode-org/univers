@@ -123,7 +123,7 @@ class Version:
 
     def satisfies(self, constraint):
         """
-        Return True is this Version satisfies the ``constraint``
+        Return True if this Version satisfies the ``constraint``
         VersionConstraint. Satisfying means that this version is "within" the
         ``constraint``.
         """
@@ -131,6 +131,14 @@ class Version:
 
     def __str__(self):
         return str(self.value)
+
+
+class AllVersion(Version):
+    pass
+    
+
+class NoneVersion(Version):
+    pass
 
 
 class GenericVersion(Version):
