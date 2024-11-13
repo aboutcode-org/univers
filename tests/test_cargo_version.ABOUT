@@ -1,0 +1,5 @@
+about_resource: |
+    test_cargo_version_range.py
+    test_cargo_version.py
+
+download_url: https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html
