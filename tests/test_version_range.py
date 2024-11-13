@@ -554,6 +554,6 @@ def test_version_range_all():
     assert PypiVersion("2.0.3") in all_vers
 
 def test_version_range_none():
-    all_vers = VersionRange.from_string("vers:none/*")    
-    assert not all_vers.contains(Version("1.2.3"))
-    assert PypiVersion("2.0.3") not in all_vers
+    none_vers = VersionRange.from_string("vers:none/*")    
+    assert not none_vers.contains(Version("1.2.3"))
+    assert PypiVersion("2.0.3") not in none_vers
