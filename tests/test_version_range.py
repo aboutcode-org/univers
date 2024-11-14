@@ -550,6 +550,17 @@ def test_version_range_normalize_case3():
     assert str(nvr) == "vers:pypi/>=1.0.0|<=1.3.0|3.0.0"
 
 
+def test_version_range_all():
+    all_vers = VersionRange.from_string("vers:all/*")
+    assert all_vers.contains(Version("1.2.3"))
+    assert PypiVersion("2.0.3") in all_vers
+    # test for invalid all range specification
+    with pytest.raises(Exception):
+        VersionRange.from_string("vers:all/>1.2.3")
+    with pytest.raises(Exception):
+        VersionRange.from_string("vers:all/*|>1.2.3")
+
+
 def test_version_range_lexicographic():
     assert LexicographicVersion("1.2.3") in VersionRange.from_string(
         "vers:lexicographic/<1.2.4|>0.9"
