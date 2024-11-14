@@ -552,6 +552,11 @@ def test_version_range_all():
     all_vers = VersionRange.from_string("vers:all/*")
     assert all_vers.contains(Version("1.2.3"))
     assert PypiVersion("2.0.3") in all_vers
+    # test for invalid all range specification
+    with pytest.raises(Exception):
+        VersionRange.from_string("vers:all/>1.2.3")
+    with pytest.raises(Exception):
+        VersionRange.from_string("vers:all/*|>1.2.3")
 
 def test_version_range_none():
     none_vers = VersionRange.from_string("vers:none/*")    

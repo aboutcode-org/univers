@@ -134,11 +134,15 @@ class Version:
 
 
 class AllVersion(Version):
-    pass
+    @classmethod
+    def is_valid(cls, string):
+        return string == "vers:all/*"
     
 
 class NoneVersion(Version):
-    pass
+    @classmethod
+    def is_valid(cls, string):
+        return string == "vers:none/*"
 
 
 class GenericVersion(Version):
