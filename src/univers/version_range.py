@@ -19,10 +19,10 @@ from univers import maven
 from univers import versions
 from univers.conan.version_range import VersionRange as conan_version_range
 from univers.utils import remove_spaces
-from univers.versions import AllVersion
-from univers.versions import NoneVersion
 from univers.version_constraint import VersionConstraint
 from univers.version_constraint import contains_version
+from univers.versions import AllVersion
+from univers.versions import NoneVersion
 
 
 class InvalidVersionRange(Exception):
