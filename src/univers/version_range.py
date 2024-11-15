@@ -225,10 +225,10 @@ class VersionRange:
 
         if self.version_class is AllVersion:
             return True
-        
+
         if self.version_class is NoneVersion:
             return False
-        
+
         if not isinstance(version, self.version_class):
             raise TypeError(
                 f"{version!r} is not of expected type: {self.version_class!r}",

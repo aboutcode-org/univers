@@ -548,6 +548,7 @@ def test_version_range_normalize_case3():
 
     assert str(nvr) == "vers:pypi/>=1.0.0|<=1.3.0|3.0.0"
 
+
 def test_version_range_all():
     all_vers = VersionRange.from_string("vers:all/*")
     assert all_vers.contains(Version("1.2.3"))
@@ -558,8 +559,9 @@ def test_version_range_all():
     with pytest.raises(Exception):
         VersionRange.from_string("vers:all/*|>1.2.3")
 
+
 def test_version_range_none():
-    none_vers = VersionRange.from_string("vers:none/*")    
+    none_vers = VersionRange.from_string("vers:none/*")
     assert not none_vers.contains(Version("1.2.3"))
     assert PypiVersion("2.0.3") not in none_vers
     # test for invalid all range specification

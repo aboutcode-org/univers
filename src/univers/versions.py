@@ -137,7 +137,7 @@ class AllVersion(Version):
     @classmethod
     def is_valid(cls, string):
         return string == "vers:all/*"
-    
+
 
 class NoneVersion(Version):
     @classmethod
