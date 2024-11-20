@@ -959,6 +959,11 @@ class GolangVersionRange(VersionRange):
     }
 
 
+class LexicographicVersionRange(VersionRange):
+    scheme = "lexicographic"
+    version_class = versions.LexicographicVersion
+
+
 class GenericVersionRange(VersionRange):
     scheme = "generic"
     version_class = versions.SemverVersion
@@ -1407,6 +1412,7 @@ RANGE_CLASS_BY_SCHEMES = {
     "gem": GemVersionRange,
     "rpm": RpmVersionRange,
     "golang": GolangVersionRange,
+    "lexicographic": LexicographicVersionRange,
     "generic": GenericVersionRange,
     "apache": ApacheVersionRange,
     "hex": HexVersionRange,

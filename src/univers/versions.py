@@ -133,6 +133,19 @@ class Version:
         return str(self.value)
 
 
+class LexicographicVersion(Version):
+    @classmethod
+    def build_value(cls, string):
+        return str(string)
+
+    """
+    Create a string, even if, e.g., an integer is given
+    """
+
+    def normalize(cls, string):
+        return remove_spaces(str(string))
+
+
 class GenericVersion(Version):
     @classmethod
     def is_valid(cls, string):
@@ -690,6 +703,7 @@ AVAILABLE_VERSIONS = [
     SemverVersion,
     GolangVersion,
     PypiVersion,
+    LexicographicVersion,
     GenericVersion,
     ComposerVersion,
     NginxVersion,

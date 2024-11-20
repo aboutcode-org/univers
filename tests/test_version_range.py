@@ -23,6 +23,7 @@ from univers.version_range import VersionRange
 from univers.version_range import build_range_from_snyk_advisory_string
 from univers.version_range import from_gitlab_native
 from univers.versions import InvalidVersion
+from univers.versions import LexicographicVersion
 from univers.versions import NugetVersion
 from univers.versions import OpensslVersion
 from univers.versions import PypiVersion
@@ -546,3 +547,10 @@ def test_version_range_normalize_case3():
     nvr = vr.normalize(known_versions=known_versions)
 
     assert str(nvr) == "vers:pypi/>=1.0.0|<=1.3.0|3.0.0"
+
+
+def test_version_range_lexicographic():
+    assert LexicographicVersion("1.2.3") in VersionRange.from_string("vers:all/*")
+    assert LexicographicVersion(-123) in VersionRange.from_string("vers:all/*")
+    assert LexicographicVersion(None) in VersionRange.from_string("vers:lexicographic/*")
+    assert LexicographicVersion("ABC") in VersionRange.from_string("vers:lexicographic/>abc|<=None")
