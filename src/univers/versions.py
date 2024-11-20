@@ -13,6 +13,7 @@ from univers import debian
 from univers import gem
 from univers import gentoo
 from univers import intdot
+from univers import libversion
 from univers import maven
 from univers import nuget
 from univers import rpm
@@ -177,6 +178,16 @@ class IntdotVersion(Version):
     @classmethod
     def is_valid(cls, string):
         return intdot.IntdotVersion.is_valid(string)
+    
+
+class LibversionVersion(Version):
+    @classmethod
+    def is_valid(cls, string):
+        return libversion.LibversionVersion(string)
+
+    @classmethod
+    def build_value(cls, string):
+        return libversion.LibversionVersion(string)
 
 
 class GenericVersion(Version):

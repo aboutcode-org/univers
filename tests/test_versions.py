@@ -12,8 +12,12 @@ from univers.versions import DebianVersion
 from univers.versions import EnhancedSemanticVersion
 from univers.versions import GentooVersion
 from univers.versions import GolangVersion
+<<<<<<< HEAD
 from univers.versions import IntdotVersion
 from univers.versions import LexicographicVersion
+=======
+from univers.versions import LibversionVersion
+>>>>>>> 1533a12 (first libversion draft)
 from univers.versions import MavenVersion
 from univers.versions import NginxVersion
 from univers.versions import NugetVersion
@@ -241,3 +245,9 @@ def test_lexicographic_version():
     assert LexicographicVersion("Abc") < LexicographicVersion(None)
     assert LexicographicVersion("123") < LexicographicVersion("bbc")
     assert LexicographicVersion("2.3.4") > LexicographicVersion("1.2.3")
+
+
+def test_libversion_version():
+    assert LibversionVersion("1.2.3") == LibversionVersion("1.2.3")
+    assert LibversionVersion("1.2.3") > LibversionVersion("1.2.2")
+    assert LibversionVersion("1.2.3-alpha") > LibversionVersion("1.2.2")
