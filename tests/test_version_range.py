@@ -355,3 +355,13 @@ def test_version_range_none():
         VersionRange.from_string("vers:none/!1.2.3")
     with pytest.raises(Exception):
         VersionRange.from_string("vers:none/*|>1.2.3")
+
+
+def test_version_range_intdot():
+    intdot_range = IntdotVersionRange.from_string("vers:intdot/>1.2.3.4")
+    assert IntdotVersion("1.3.3") in intdot_range
+    assert IntdotVersion("0.3.3") not in intdot_range
+    assert IntdotVersion("1.3.3alpha") in intdot_range
+    assert IntdotVersion("1.2.2.pre") not in intdot_range
+    assert IntdotVersion("1010.23.234203.0") in IntdotVersionRange.from_string("vers:intdot/*")
+
