@@ -9,6 +9,7 @@ import semantic_version
 from packaging import version as packaging_version
 
 from univers import arch
+from univers import datetime
 from univers import debian
 from univers import gem
 from univers import gentoo
@@ -154,6 +155,16 @@ class IntdotVersion(Version):
     @classmethod
     def is_valid(cls, string):
         return intdot.IntdotVersion.is_valid(string)
+
+
+class DatetimeVersion(Version):
+    @classmethod
+    def is_valid(cls, string):
+        return datetime.DatetimeVersion.is_valid(string)
+    
+    @classmethod
+    def build_value(self, string):
+        return datetime.DatetimeVersion(string)
 
 
 class GenericVersion(Version):
@@ -726,4 +737,5 @@ AVAILABLE_VERSIONS = [
     LegacyOpensslVersion,
     AlpineLinuxVersion,
     IntdotVersion,
+    DatetimeVersion,
 ]

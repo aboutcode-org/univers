@@ -366,3 +366,16 @@ def test_version_range_intdot():
     assert IntdotVersion("1.3.3alpha") in intdot_range
     assert IntdotVersion("1.2.2.pre") not in intdot_range
     assert IntdotVersion("1010.23.234203.0") in IntdotVersionRange.from_string("vers:intdot/*")
+
+
+def test_version_range_datetime():
+    assert DatetimeVersion("2000-01-01T01:02:03.1234Z") in DatetimeVersionRange.from_string("vers:datetime/*")
+    assert DatetimeVersion("2021-05-05T01:02:03Z") in DatetimeVersionRange.from_string("vers:datetime/>2021-01-01T01:02:03.1234Z|<2022-01-01T01:02:03.1234Z")
+    datetime_constraints = DatetimeVersionRange(
+        constraints=(
+            VersionConstraint(comparator=">", version=DatetimeVersion(string="2000-01-01T01:02:03Z")),
+            VersionConstraint(comparator="<", version=DatetimeVersion(string="2002-01-01T01:02:03Z")),
+        )
+    )
+    assert DatetimeVersion("2001-01-01T01:02:03Z") in datetime_constraints
+
