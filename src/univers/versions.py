@@ -161,7 +161,7 @@ class DatetimeVersion(Version):
     @classmethod
     def is_valid(cls, string):
         return datetime.DatetimeVersion.is_valid(string)
-    
+
     @classmethod
     def build_value(self, string):
         return datetime.DatetimeVersion(string)

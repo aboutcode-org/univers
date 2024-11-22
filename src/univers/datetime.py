@@ -4,7 +4,9 @@
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
 import re
+
 from dateutil.parser import isoparse
+
 
 class DatetimeVersion:
     """
@@ -13,7 +15,9 @@ class DatetimeVersion:
     The timestamp must be RFC3339-compliant, i.e., a subset of ISO8601, where the date AND time are always specified. Therefore, we can use dateutil's ISO-parser but have to check for compliance with the RFC format first via a regex.
     """
 
-    VERSION_PATTERN = re.compile(r'^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$')
+    VERSION_PATTERN = re.compile(
+        r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$"
+    )
 
     def __init__(self, version):
         if not self.is_valid(version):
@@ -41,6 +45,7 @@ class DatetimeVersion:
     @classmethod
     def is_valid(cls, string):
         return cls.VERSION_PATTERN.match(string)
-        
+
+
 class InvalidVersionError(ValueError):
     pass
