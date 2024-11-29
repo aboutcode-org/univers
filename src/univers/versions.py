@@ -342,6 +342,16 @@ class NugetVersion(Version):
             return False
 
 
+class AlmaLinuxVersion(Version):
+    """
+    AlmaLinux version
+    """
+
+    @classmethod
+    def build_value(cls, string):
+        return rpm.RpmVersion.from_string(string)
+
+
 class RpmVersion(Version):
     """
     Represent an RPM version.
@@ -702,4 +712,5 @@ AVAILABLE_VERSIONS = [
     OpensslVersion,
     LegacyOpensslVersion,
     AlpineLinuxVersion,
+    AlmaLinuxVersion,
 ]

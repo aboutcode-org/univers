@@ -857,6 +857,87 @@ class ComposerVersionRange(VersionRange):
     }
 
 
+class AlmaLinuxVersionRange(VersionRange):
+    scheme = "almalinux"
+    version_class = versions.AlmaLinuxVersion
+
+    vers_by_native_comparators = {
+        "=": "=",
+        "<=": "<=",
+        ">=": ">=",
+        "<": "<",
+        ">": ">",
+        # seen in RPM code but never seen in the doc or in the wild so far
+        "<>": "!=",
+        # seen in a specfile parser code
+        "!=": "!=",
+        "==": "=",
+    }
+
+    @classmethod
+    def build_constraint_from_string(cls, string):
+        """
+        Return a VersionConstraint built from a single RPM version
+        relationship ``string``.
+
+        >>> vr = RpmVersionRange.build_constraint_from_string("= 5.0")
+        >>> assert str(vr) == "5.0", str(vr)
+        >>> vr = RpmVersionRange.build_constraint_from_string("> 2.23,")
+        >>> assert str(vr) == ">2.23", str(vr)
+        >>> vr = RpmVersionRange.build_constraint_from_string("<= 2.24")
+        >>> assert str(vr) == "<=2.24", str(vr)
+        """
+        comparator, version = split_req(
+            string=string,
+            comparators=cls.vers_by_native_comparators,
+            strip=",",
+        )
+        version = cls.version_class(version)
+        return VersionConstraint(comparator=comparator, version=version)
+
+    @classmethod
+    def from_native(cls, string):
+        """
+        Return a VersionRange built from a ``string`` single RPM
+        version requirement string.
+
+        For example::
+
+        >>> vr = RpmVersionRange.from_native("= 3.5.6")
+        >>> assert str(vr) == "vers:rpm/3.5.6", str(vr)
+        """
+        return cls(constraints=[cls.build_constraint_from_string(string)])
+
+    @classmethod
+    def from_natives(cls, strings):
+        """
+        Return a VersionRange built from a ``strings`` list of RPM
+        version requirements or a single requirement string.
+
+        For example::
+
+        >>> vr = RpmVersionRange.from_natives("= 3.5.6")
+        >>> assert str(vr) == "vers:rpm/3.5.6", str(vr)
+
+        >>> reqs = [">= 2.8.16"]
+        >>> vr = RpmVersionRange.from_natives(reqs)
+        >>> assert str(vr) == "vers:rpm/>=2.8.16", str(vr)
+
+        >>> reqs = [">= 1:1.1.4", ">= 2.8.16", "<= 2.8.16-z"]
+        >>> vr = RpmVersionRange.from_natives(reqs)
+        >>> assert str(vr) == "vers:rpm/>=2.8.16|<=2.8.16-z|>=1:1.1.4", str(vr)
+
+        >>> reqs = ["= 5.0", "> 2.23,", "< 2.24"]
+        >>> vr = RpmVersionRange.from_natives(reqs)
+        >>> assert str(vr) == "vers:rpm/>2.23|<2.24|5.0", str(vr)
+        """
+
+        if isinstance(strings, str):
+            return cls.from_native(strings)
+        constraints = [cls.build_constraint_from_string(rel) for rel in strings]
+        return cls(constraints=constraints)
+    
+
 class RpmVersionRange(VersionRange):
     # http://ftp.rpm.org/api/4.4.2.2/dependencies.html
     # http://ftp.rpm.org/max-rpm/s1-rpm-depend-manual-dependencies.html
@@ -1419,6 +1500,8 @@ RANGE_CLASS_BY_SCHEMES = {
     "openssl": OpensslVersionRange,
     "mattermost": MattermostVersionRange,
     "conan": ConanVersionRange,
+    "almalinux:8": AlmaLinuxVersionRange,
+    "almalinux:9": AlmaLinuxVersionRange,
 }
 
 PURL_TYPE_BY_GITLAB_SCHEME = {
