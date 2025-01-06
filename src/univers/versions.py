@@ -6,7 +6,7 @@
 
 import attr
 import semantic_version
-from packaging import version as packaging_version
+from packvers import version as packaging_version
 
 from univers import arch
 from univers import debian
