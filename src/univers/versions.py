@@ -218,13 +218,19 @@ class SemverVersion(Version):
         return self.value and self.value.build
 
     def next_major(self):
-        return self.value and SemverVersion(str(self.value.next_major()))
+        if self.prerelease:
+            return SemverVersion(f"{self.major + 1}.0.0")
+        return SemverVersion(str(self.value.next_major()))
 
     def next_minor(self):
-        return self.value and SemverVersion(str(self.value.next_minor()))
+        if self.prerelease:
+            return SemverVersion(f"{self.major}.{self.minor + 1}.0")
+        return SemverVersion(str(self.value.next_minor()))
 
     def next_patch(self):
-        return self.value and SemverVersion(str(self.value.next_patch()))
+        if self.prerelease:
+            return SemverVersion(f"{self.major}.{self.minor}.{self.patch}")
+        return SemverVersion(str(self.value.next_patch()))
 
 
 def is_even(s):
