@@ -842,8 +842,11 @@ class NugetVersionRange(MavenVersionRange):
 
 
 class ComposerVersionRange(VersionRange):
-    # TODO composer may need its own scheme see https//github.com/aboutcode-org/univers/issues/5
-    # and https//getcomposer.org/doc/articles/versions.md
+    """
+    Composer version range as documented at
+    https://getcomposer.org/doc/articles/versions.md
+    """
+
     scheme = "composer"
     version_class = versions.ComposerVersion
 
@@ -855,6 +858,75 @@ class ComposerVersionRange(VersionRange):
         ">": ">",
         "=": "=",  # This is not a native composer-semver comparator, but is used in the gitlab version range for composer packages.
     }
+
+    @classmethod
+    def from_native(cls, string):
+        """
+        Parse a Composer version range string into a version range object.
+        """
+        string = string.strip()
+
+        if string.startswith("^"):
+            base_version = string[1:]
+            base_version_obj = cls.version_class(base_version)
+            base_parts = base_version.split(".")
+            if base_parts[0] == "0":
+                upper_constraint = VersionConstraint(
+                    comparator="<", version=cls.version_class(f"0.{int(base_parts[1]) + 1}.0")
+                )
+            else:
+                upper_constraint = VersionConstraint(
+                    comparator="<", version=cls.version_class(f"{int(base_parts[0]) + 1}.0.0")
+                )
+            lower_constraint = VersionConstraint(comparator=">=", version=base_version_obj)
+            return cls(constraints=[lower_constraint, upper_constraint])
+
+        if string.startswith("~"):
+            base_version = string[1:]
+            base_version_obj = cls.version_class(base_version)
+            base_parts = base_version.split(".")
+
+            if len(base_parts) == 3:
+                upper_constraint = VersionConstraint(
+                    comparator="<",
+                    version=cls.version_class(f"{base_parts[0]}.{int(base_parts[1]) + 1}.0"),
+                )
+            else:
+                upper_constraint = VersionConstraint(
+                    comparator="<", version=cls.version_class(f"{int(base_parts[0]) + 1}.0.0")
+                )
+
+            lower_constraint = VersionConstraint(comparator=">=", version=base_version_obj)
+            return cls(constraints=[lower_constraint, upper_constraint])
+
+        if ".*" in string:
+            base_version = string.replace(".*", ".0")
+            base_version_obj = cls.version_class(base_version)
+            base_parts = base_version.split(".")
+            upper_constraint = VersionConstraint(
+                comparator="<",
+                version=cls.version_class(f"{base_parts[0]}.{int(base_parts[1]) + 1}.0"),
+            )
+            lower_constraint = VersionConstraint(comparator=">=", version=base_version_obj)
+            return cls(constraints=[lower_constraint, upper_constraint])
+
+        constraints = []
+
+        segments = string.split("||")
+
+        for segment in segments:
+            if not any(op in string for op in cls.vers_by_native_comparators):
+                segment = "==" + segment
+            specifiers = SpecifierSet(segment)
+            for spec in specifiers:
+                operator = spec.operator
+                version = spec.version
+                version = cls.version_class(version)
+                comparator = cls.vers_by_native_comparators.get(operator, "=")
+                constraint = VersionConstraint(comparator=comparator, version=version)
+                constraints.append(constraint)
+
+        return cls(constraints=constraints)
 
 
 class RpmVersionRange(VersionRange):
@@ -942,7 +1014,7 @@ class RpmVersionRange(VersionRange):
 
 class GolangVersionRange(VersionRange):
     """
-    Go modules use strict semver with pseudo numbering for Git repos
+    Go modules use strict semver with pseudo numbering for Git commits.
     https://go.dev/doc/modules/version-numbers
     """
 
@@ -957,6 +1029,39 @@ class GolangVersionRange(VersionRange):
         ">": ">",
         "=": "=",  # This is not a native golang-semver comparator, but is used in the gitlab version range for go packages.
     }
+
+    @classmethod
+    def from_native(cls, string):
+        """
+        Parse a native GoLang version range into a set of constraints.
+        """
+        constraints = []
+
+        segments = string.split("||")
+        for segment in segments:
+
+            if not any(op in string for op in cls.vers_by_native_comparators):
+                segment = "==" + segment
+
+            specifiers = SpecifierSet(segment)
+            for spec in specifiers:
+                operator = spec.operator
+                version = spec.version
+                version = cls.version_class(version)
+                comparator = cls.vers_by_native_comparators.get(operator, "=")
+                constraint = VersionConstraint(comparator=comparator, version=version)
+                constraints.append(constraint)
+
+        return cls(constraints=constraints)
+
+    @classmethod
+    def from_natives(cls, strings):
+        if isinstance(strings, str):
+            return cls.from_native(strings)
+        constraints = []
+        for rel in strings:
+            constraints.extend(cls.from_native(rel).constraints)
+        return cls(constraints=constraints)
 
 
 class GenericVersionRange(VersionRange):
