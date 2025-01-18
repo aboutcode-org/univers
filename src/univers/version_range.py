@@ -39,7 +39,7 @@ INVERTED_COMPARATORS = {
 }
 
 
-@attr.s(frozen=True, order=False, eq=True, hash=True)
+@attr.s(frozen=True, order=False, eq=False, hash=True)
 class VersionRange:
     """
     Base version range class. Subclasses must provide implement.

@@ -53,7 +53,7 @@ COMPARATORS = {
 
 
 @total_ordering
-@attr.s(frozen=True, repr=True, str=False, order=False, eq=True, hash=True)
+@attr.s(frozen=True, repr=True, str=False, order=False, eq=False, hash=True)
 class VersionConstraint:
     """
     Represent a single constraint composed of a comparator and a version.
