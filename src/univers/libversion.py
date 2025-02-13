@@ -51,69 +51,51 @@ class LibversionVersion:
     @staticmethod
     def parse_token_to_component(s):
         if s.isalpha():
-            start = 0
-            end = len(s)
             keyword_type = LibversionVersion.classify_keyword(s)
-
-            if keyword_type == KEYWORD_PRE_RELEASE:
-                metaorder = METAORDER_PRE_RELEASE
-            elif keyword_type == KEYWORD_POST_RELEASE:
-                metaorder = METAORDER_POST_RELEASE
-            else:
-                metaorder = METAORDER_PRE_RELEASE
-
-            return s, start, end, metaorder
+            metaorder = METAORDER_PRE_RELEASE if keyword_type == KEYWORD_PRE_RELEASE else METAORDER_POST_RELEASE
+            return s, metaorder
         else:
             s = s.lstrip("0")
-            start = 0
-            end = len(s)
-
-            if start == end:
-                metaorder = METAORDER_ZERO
-            else:
-                metaorder = METAORDER_NONZERO
-
-            return s, start, end, metaorder
+            metaorder = METAORDER_ZERO if s == "" else METAORDER_NONZERO
+            return s, metaorder
 
     @staticmethod
     def get_next_version_component(s):
         components = re.split(r"[^a-zA-Z0-9]+", s)
-
         for component in components:
             yield LibversionVersion.parse_token_to_component(component)
 
     def compare_components(self, other):
         min_len = min(len(self.components), len(other.components))
-
         for i in range(min_len):
             c1 = self.components[i]
             c2 = other.components[i]
 
             # Compare metaorder
-            if c1[3] < c2[3]:
+            if c1[1] < c2[1]:
                 return -1
-            elif c1[3] > c2[3]:
+            elif c1[1] > c2[1]:
                 return 1
 
             # Compare if components are empty
-            c1_is_empty = c1[1] == c1[2]
-            c2_is_empty = c2[1] == c2[2]
+            c1_is_empty = c1[0] == ""
+            c2_is_empty = c2[0] == ""
 
             if c1_is_empty and c2_is_empty:
-                return 0
+                continue
             elif c1_is_empty:
                 return -1
             elif c2_is_empty:
                 return 1
 
             # Compare if components are alpha or numeric
-            c1_is_alpha = c1[0][c1[1]].isalpha()
-            c2_is_alpha = c2[0][c2[1]].isalpha()
+            c1_is_alpha = c1[0].isalpha()
+            c2_is_alpha = c2[0].isalpha()
 
             if c1_is_alpha and c2_is_alpha:
-                if c1[0][c1[1]].lower() < c2[0][c2[1]].lower():
+                if c1[0].lower() < c2[0].lower():
                     return -1
-                elif c1[0][c1[1]].lower() > c2[0][c2[1]].lower():
+                elif c1[0].lower() > c2[0].lower():
                     return 1
             elif c1_is_alpha:
                 return -1
@@ -121,8 +103,8 @@ class LibversionVersion:
                 return 1
 
             # Numeric comparison
-            c1_value = int(c1[0][c1[1] : c1[2]])
-            c2_value = int(c2[0][c2[1] : c2[2]])
+            c1_value = int(c1[0]) if c1[0] else 0
+            c2_value = int(c2[0]) if c2[0] else 0
 
             if c1_value < c2_value:
                 return -1

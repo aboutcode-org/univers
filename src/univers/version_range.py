@@ -1186,6 +1186,11 @@ class OpensslVersionRange(VersionRange):
         return cls(constraints=constraints)
 
 
+class LibversionVersionRange(VersionRange):
+    scheme = "libversion"
+    version_class = versions.LibversionVersion
+
+
 class MattermostVersionRange(VersionRange):
     scheme = "mattermost"
     version_class = versions.SemverVersion
@@ -1446,6 +1451,7 @@ RANGE_CLASS_BY_SCHEMES = {
     "alpm": ArchLinuxVersionRange,
     "nginx": NginxVersionRange,
     "openssl": OpensslVersionRange,
+    "libversion": LibversionVersionRange,
     "mattermost": MattermostVersionRange,
     "conan": ConanVersionRange,
     "all": AllVersionRange,
