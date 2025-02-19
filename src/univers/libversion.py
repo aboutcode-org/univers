@@ -70,10 +70,14 @@ class LibversionVersion:
             yield LibversionVersion.parse_token_to_component(component)
 
     def compare_components(self, other):
-        min_len = min(len(self.components), len(other.components))
-        for i in range(min_len):
-            c1 = self.components[i]
-            c2 = other.components[i]
+        max_len = max(len(self.components), len(other.components))
+
+        for i in range(max_len):
+            """
+            Get current components or pad with zero
+            """
+            c1 = self.components[i] if i < len(self.components) else ("0", METAORDER_ZERO)
+            c2 = other.components[i] if i < len(other.components) else ("0", METAORDER_ZERO)
 
             """
             Compare based on metaorder
@@ -123,12 +127,4 @@ class LibversionVersion:
             elif c1_value > c2_value:
                 return 1
 
-        """
-        Components are equal; check for length of components
-        """
-        if len(self.components) < len(other.components):
-            return -1
-        elif len(self.components) > len(other.components):
-            return 1
-        else:
-            return 0
+        return 0
