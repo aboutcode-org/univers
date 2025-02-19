@@ -1,3 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
+
 import re
 
 PRE_RELEASE_KEYWORDS = ["alpha", "beta", "rc", "pre"]
@@ -71,13 +75,17 @@ class LibversionVersion:
             c1 = self.components[i]
             c2 = other.components[i]
 
-            # Compare metaorder
+            """
+            Compare based on metaorder
+            """
             if c1[1] < c2[1]:
                 return -1
             elif c1[1] > c2[1]:
                 return 1
 
-            # Compare if components are empty
+            """
+            Check based on empty components
+            """
             c1_is_empty = c1[0] == ""
             c2_is_empty = c2[0] == ""
 
@@ -88,7 +96,9 @@ class LibversionVersion:
             elif c2_is_empty:
                 return 1
 
-            # Compare if components are alpha or numeric
+            """
+            Compare based on alphabet or numeric
+            """ 
             c1_is_alpha = c1[0].isalpha()
             c2_is_alpha = c2[0].isalpha()
 
@@ -102,7 +112,9 @@ class LibversionVersion:
             elif c2_is_alpha:
                 return 1
 
-            # Numeric comparison
+            """
+            Compare based on numeric comparison
+            """ 
             c1_value = int(c1[0]) if c1[0] else 0
             c2_value = int(c2[0]) if c2[0] else 0
 
@@ -111,7 +123,9 @@ class LibversionVersion:
             elif c1_value > c2_value:
                 return 1
 
-        # All components compared are equal, check for more components
+        """
+        Components are equal; check for length of components
+        """
         if len(self.components) < len(other.components):
             return -1
         elif len(self.components) > len(other.components):
