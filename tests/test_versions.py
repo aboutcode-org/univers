@@ -249,5 +249,14 @@ def test_lexicographic_version():
 
 def test_libversion_version():
     assert LibversionVersion("1.2.3") == LibversionVersion("1.2.3")
+    assert LibversionVersion("1.2.3") != LibversionVersion("1.2.4")
+    assert LibversionVersion.is_valid("1.2.3")
+    assert not LibversionVersion.is_valid("1.2.3a-1-a")
+    assert LibversionVersion.normalize("v1.2.3") == "1.2.3"
     assert LibversionVersion("1.2.3") > LibversionVersion("1.2.2")
-    assert LibversionVersion("1.2.3-alpha") > LibversionVersion("1.2.2")
+    assert LibversionVersion("1.2.3") < LibversionVersion("1.3.0")
+    assert LibversionVersion("1.2.3") >= LibversionVersion("1.2.3")
+    assert LibversionVersion("1.2.3") <= LibversionVersion("1.2.3")
+    assert LibversionVersion("1.2.3-alpha") < LibversionVersion("1.2.3")
+    assert LibversionVersion("1.2.3-alpha") != LibversionVersion("1.2.3-beta")
+    assert LibversionVersion("1.0") == LibversionVersion("1.0.0")
