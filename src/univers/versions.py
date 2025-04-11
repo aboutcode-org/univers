@@ -133,6 +133,29 @@ class Version:
         return str(self.value)
 
 
+class LexicographicVersion(Version):
+    @classmethod
+    def build_value(cls, string):
+        return str(string)
+
+    """
+    Create a string, even if, e.g., an integer is given
+    """
+
+    @classmethod
+    def normalize(cls, string):
+        return remove_spaces(str(string))
+
+    def __lt__(self, other):
+        return self.value.encode('utf-8') < other.value.encode('utf-8')
+
+    def __gt__(self, other):
+        return self.value.encode('utf-8') > other.value.encode('utf-8')
+
+    def __eq__(self, other):
+        return self.value.encode('utf-8') == other.value.encode('utf-8')
+
+
 class GenericVersion(Version):
     @classmethod
     def is_valid(cls, string):
@@ -690,6 +713,7 @@ AVAILABLE_VERSIONS = [
     SemverVersion,
     GolangVersion,
     PypiVersion,
+    LexicographicVersion,
     GenericVersion,
     ComposerVersion,
     NginxVersion,
