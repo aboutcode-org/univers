@@ -110,3 +110,43 @@ def test_composer_invalid_syntax():
 def test_composer_range_str_representation():
     version_range = ComposerVersionRange.from_native(">=1.0.0, <2.0.0")
     assert str(version_range) == "vers:composer/>=1.0.0|<2.0.0"
+
+
+def test_composer_legacy_pipe():
+    version_range = ComposerVersionRange.from_native(">=1.0.0 | <2.0.0")
+    assert version_range == ComposerVersionRange(
+        constraints=(
+            VersionConstraint(comparator=">=", version=ComposerVersion(string="1.0.0")),
+            VersionConstraint(comparator="<", version=ComposerVersion(string="2.0.0")),
+        )
+    )
+
+
+def test_composer_hyphen_partial_range():
+    version_range = ComposerVersionRange.from_native("1.0 - 2.0")
+    assert version_range == ComposerVersionRange(
+        constraints=(
+            VersionConstraint(comparator=">=", version=ComposerVersion(string="1.0.0")),
+            VersionConstraint(comparator="<", version=ComposerVersion(string="2.1")),
+        )
+    )
+
+
+def test_composer_hyphen_full_range():
+    version_range = ComposerVersionRange.from_native("1.0.0 - 2.1.0")
+    assert version_range == ComposerVersionRange(
+        constraints=(
+            VersionConstraint(comparator=">=", version=ComposerVersion(string="1.0.0")),
+            VersionConstraint(comparator="<=", version=ComposerVersion(string="2.1.0")),
+        )
+    )
+
+
+def test_composer_x_wildcard():
+    version_range = ComposerVersionRange.from_native("1.5.x")
+    assert version_range == ComposerVersionRange(
+        constraints=(
+            VersionConstraint(comparator=">=", version=ComposerVersion(string="1.5.0")),
+            VersionConstraint(comparator="<", version=ComposerVersion(string="1.6.0")),
+        )
+    )

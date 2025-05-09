@@ -865,6 +865,30 @@ class ComposerVersionRange(VersionRange):
         Parse a Composer version range string into a version range object.
         """
         string = string.strip()
+        string = string.replace("|", "||")
+        string = string.replace(".x", ".*")
+
+        if "-" in string:
+            start, end = map(str.strip, string.split("-"))
+            start_parts = (start + ".0.0").split(".")[:3]
+            end_parts = (end + ".0.0").split(".")[:3]
+
+            if len(end.split(".")) < 3:
+                major = int(end_parts[0])
+                minor = int(end_parts[1])
+                upper_constraint = VersionConstraint(
+                    comparator="<", version=cls.version_class(f"{major}.{minor + 1}.0")
+                )
+            else:
+                upper_constraint = VersionConstraint(
+                    comparator="<=", version=cls.version_class(".".join(end_parts))
+                )
+
+            lower_constraint = VersionConstraint(
+                comparator=">=", version=cls.version_class(".".join(start_parts))
+            )
+
+            return cls(constraints=[lower_constraint, upper_constraint])
 
         if string.startswith("^"):
             base_version = string[1:]
