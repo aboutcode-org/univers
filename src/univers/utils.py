@@ -4,12 +4,14 @@
 #
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
+from typing import Any
 
-def remove_spaces(string):
+
+def remove_spaces(string: str) -> str:
     return "".join(string.split())
 
 
-def cmp(x, y):
+def cmp(x: Any, y: Any) -> int:
     """
     Replacement for built-in Python 2 function cmp that was removed in Python 3
     From https://docs.python.org/2/library/functions.html?highlight=cmp#cmp :
