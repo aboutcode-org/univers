@@ -78,7 +78,7 @@ class VersionRange:
         Return a VersionRange built from a scheme-specific, native version range
         ``string``. Subclasses can implement.
         """
-        return NotImplementedError
+        raise NotImplementedError
 
     @classmethod
     def from_natives(cls, strings):
@@ -86,7 +86,7 @@ class VersionRange:
         Return a VersionRange built from a ``strings`` list of scheme-
         specific native version range strings. Subclasses can implement.
         """
-        return NotImplementedError
+        raise NotImplementedError
 
     def to_native(self, *args, **kwargs):
         """
@@ -95,7 +95,7 @@ class VersionRange:
         extra arguments (such as a package name that some scheme may require
         like for deb and rpm.)
         """
-        return NotImplementedError
+        raise NotImplementedError
 
     @classmethod
     def from_string(cls, vers, simplify=False, validate=False):
@@ -176,7 +176,7 @@ class VersionRange:
         such as ["3.0.0", "1.0.1b", "3.0.2", "0.9.7a", "1.1.1ka"]
         """
         if not cls.scheme or not cls.version_class:
-            return NotImplementedError
+            raise NotImplementedError
 
         constraints = []
         for version in sequence:
