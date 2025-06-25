@@ -4,6 +4,9 @@
 #
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
+from collections.abc import Iterable
+from typing import Any
+from typing import Dict
 from typing import List
 from typing import Union
 
@@ -66,14 +69,14 @@ class VersionRange:
     # timeline
     constraints = attr.ib(type=tuple, default=attr.Factory(tuple))
 
-    def __attrs_post_init__(self, *args, **kwargs):
+    def __attrs_post_init__(self, *args, **kwargs) -> None:
         constraints = tuple(sorted(self.constraints))
         # Notes: setattr is used because this is an immutable frozen instance.
         # See https://www.attrs.org/en/stable/init.html?#post-init
         object.__setattr__(self, "constraints", constraints)
 
     @classmethod
-    def from_native(cls, string):
+    def from_native(cls, string: str):
         """
         Return a VersionRange built from a scheme-specific, native version range
         ``string``. Subclasses can implement.
@@ -81,7 +84,7 @@ class VersionRange:
         return NotImplementedError
 
     @classmethod
-    def from_natives(cls, strings):
+    def from_natives(cls, strings: Iterable[str]):
         """
         Return a VersionRange built from a ``strings`` list of scheme-
         specific native version range strings. Subclasses can implement.
@@ -98,7 +101,9 @@ class VersionRange:
         return NotImplementedError
 
     @classmethod
-    def from_string(cls, vers, simplify=False, validate=False):
+    def from_string(
+        cls, vers: str, simplify: bool = False, validate: bool = False
+    ) -> "RangeClassType":
         """
         Return a VersionRange built from a ``vers`` version range spec string,
         such as "vers:npm/1.2.3,>=2.0.0"
@@ -170,7 +175,7 @@ class VersionRange:
         return range_class(parsed_constraints)
 
     @classmethod
-    def from_versions(cls, sequence):
+    def from_versions(cls, sequence: Iterable[str]) -> "VersionRange":
         """
         Return a VersionRange built from a list of version strings,
         such as ["3.0.0", "1.0.1b", "3.0.2", "0.9.7a", "1.1.1ka"]
@@ -185,10 +190,10 @@ class VersionRange:
             constraints.append(constraint)
         return cls(constraints=constraints)
 
-    def is_star(self):
+    def is_star(self) -> bool:
         return len(self.constraints) == 1 and self.constraints[0].is_star()
 
-    def invert(self):
+    def invert(self) -> "VersionRange":
         """
         Return the inverse or complement of this VersionRange. For example, if this range is
         ">=1.0.0", the inverse is "<1.0.0".
@@ -206,17 +211,17 @@ class VersionRange:
 
         return self.__class__(constraints=inverted_constraints)
 
-    def __str__(self):
+    def __str__(self) -> str:
         constraints = "|".join(str(c) for c in sorted(self.constraints))
         return f"vers:{self.scheme}/{constraints}"
 
     to_string = __str__
 
-    def to_dict(self):
+    def to_dict(self) -> Dict[str, Any]:
         constraints = [c.to_dict() for c in self.constraints]
         return dict(scheme=self.scheme, constraints=constraints)
 
-    def __contains__(self, version):
+    def __contains__(self, version: versions.Version) -> bool:
         """
         Return True if this VersionRange contains the ``version`` Version
         object. A version is contained in a VersionRange if it satisfies its
@@ -237,14 +242,14 @@ class VersionRange:
 
     contains = __contains__
 
-    def __eq__(self, other):
+    def __eq__(self, other: "VersionRange") -> bool:
         return (
             self.scheme == other.scheme
             and self.version_class == other.version_class
             and self.constraints == other.constraints
         )
 
-    def normalize(self, known_versions: List[str]):
+    def normalize(self, known_versions: List[str]) -> "VersionRange":
         """
         Return a new VersionRange normalized and simplified using the universe of
         ``known_versions`` list of version strings.
@@ -276,14 +281,14 @@ class VersionRange:
         return self.__class__(constraints=version_constraints)
 
 
-def from_cve_v4(data, scheme):
+def from_cve_v4(data: Dict[str, Any], scheme: str) -> None:
     """
     Return a VersionRange build from the provided CVE V4 API ``data`` using the
     provided versioning vers ``scheme``.
     """
 
 
-def from_cve_v5(data, scheme):
+def from_cve_v5(data: Dict[str, Any], scheme: str) -> None:
     """
     Return a VersionRange build from the provided CVE V5 API ``data`` using the
     provided versioning vers ``scheme``.
@@ -296,14 +301,14 @@ def from_cve_v5(data, scheme):
     """
 
 
-def from_osv_v1(data, scheme):
+def from_osv_v1(data: Dict[str, Any], scheme: str) -> None:
     """
     Return a VersionRange build from the provided CVE V4 API data using the
     provided versioning vers ``scheme``.
     """
 
 
-def get_allof_constraints(cls, clause):
+def get_allof_constraints(cls: VersionRange, clause: AllOf) -> List[VersionConstraint]:
     """
     Return a list of VersionConstraint given an AllOf ``clause``.
     """
@@ -318,7 +323,9 @@ def get_allof_constraints(cls, clause):
     return allof_constraints
 
 
-def get_npm_version_constraints_from_semver_npm_spec(string, cls):
+def get_npm_version_constraints_from_semver_npm_spec(
+    string: str, cls: VersionRange
+) -> List[VersionConstraint]:
     """
     Return a VersionConstraint for the provided ``string``.
     """
@@ -1415,7 +1422,31 @@ def build_range_from_snyk_advisory_string(scheme: str, string: Union[str, List])
                 )
     return vrc(constraints=version_constraints)
 
-
+RangeClassType = Union[
+    NpmVersionRange,
+    DebianVersionRange,
+    PypiVersionRange,
+    MavenVersionRange,
+    NugetVersionRange,
+    ComposerVersionRange,
+    GemVersionRange,
+    RpmVersionRange,
+    GolangVersionRange,
+    GenericVersionRange,
+    ApacheVersionRange,
+    HexVersionRange,
+    CargoVersionRange,
+    MozillaVersionRange,
+    GitHubVersionRange,
+    EbuildVersionRange,
+    ArchLinuxVersionRange,
+    NginxVersionRange,
+    OpensslVersionRange,
+    MattermostVersionRange,
+    ConanVersionRange,
+    AllVersionRange,
+    NoneVersionRange,
+]
 RANGE_CLASS_BY_SCHEMES = {
     "npm": NpmVersionRange,
     "deb": DebianVersionRange,
