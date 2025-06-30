@@ -6,7 +6,7 @@
 
 from unittest import TestCase
 
-from packaging import version as packaging_version
+from packvers import version as packaging_version
 
 from univers.versions import InvalidVersion
 from univers.versions import PypiVersion
