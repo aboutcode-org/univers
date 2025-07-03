@@ -5,11 +5,21 @@
 # and significantly modified from the original at pymaven
 #
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
+from __future__ import annotations
 
 import functools
 from itertools import zip_longest
+from typing import TYPE_CHECKING
 
 from univers.utils import cmp
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
+    from typing import Any, Final
+    try:
+        from typing import Self
+    except ImportError:
+        from typing_extensions import Self
 
 
 # TODO: Use common exceptions with other modules
@@ -21,23 +31,23 @@ class RestrictionParseError(ValueError):
     pass
 
 
-EXCLUSIVE_CLOSE = ")"
-EXCLUSIVE_OPEN = "("
-INCLUSIVE_CLOSE = "]"
-INCLUSIVE_OPEN = "["
+EXCLUSIVE_CLOSE: Final[str] = ")"
+EXCLUSIVE_OPEN: Final[str] = "("
+INCLUSIVE_CLOSE: Final[str] = "]"
+INCLUSIVE_OPEN: Final[str] = "["
 
 # Known qualifiers, oldest to newest
-QUALIFIERS = ["alpha", "beta", "milestone", "rc", "snapshot", "", "sp"]
+QUALIFIERS: Final[list[str]] = ["alpha", "beta", "milestone", "rc", "snapshot", "", "sp"]
 
 # Well defined aliases
-ALIASES = {
+ALIASES: Final[dict[str, str]] = {
     "ga": "",
     "final": "",
     "cr": "rc",
 }
 
 
-def list2tuple(l):
+def list2tuple(l: Iterable[Any]) -> tuple[Any, ...]:
     return tuple(list2tuple(x) if isinstance(x, list) else x for x in l)
 
 
@@ -45,7 +55,7 @@ def list2tuple(l):
 class Restriction(object):
     """Describes a restriction in versioning"""
 
-    def __init__(self, spec=None):
+    def __init__(self, spec: str | None = None):
         """Create a restriction
 
         Restrictions are specified using a semi-mathematical notation:
@@ -93,7 +103,7 @@ class Restriction(object):
             self.lower_bound = version
             self.upper_bound = version
 
-    def __contains__(self, version):
+    def __contains__(self, version: Version) -> bool:
         """Return true if version is contained within the restriction
 
         version must be greater than the lower bound (or equal to it if the
@@ -116,7 +126,7 @@ class Restriction(object):
 
         return True
 
-    def __cmp__(self, other):
+    def __cmp__(self, other: Any) -> int:
         if self is other:
             return 0
 
@@ -134,10 +144,10 @@ class Restriction(object):
                     result = cmp(self.upper_bound_inclusive, other.upper_bound_inclusive)
         return result
 
-    def __eq__(self, other):
+    def __eq__(self, other: Any) -> bool:
         return self.__cmp__(other) == 0
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash(
             (
                 self.lower_bound,
@@ -147,13 +157,13 @@ class Restriction(object):
             )
         )
 
-    def __lt__(self, other):
+    def __lt__(self, other: Any) -> bool:
         return self.__cmp__(other) < 0
 
-    def __ne__(self, other):
+    def __ne__(self, other: Any) -> bool:
         return self.__cmp__(other) != 0
 
-    def __str__(self):
+    def __str__(self) -> str:
         s = "{open}{lower}{comma}{upper}{close}".format(
             open=(INCLUSIVE_OPEN if self.lower_bound_inclusive else EXCLUSIVE_OPEN),
             lower=self.lower_bound if self.lower_bound is not None else "",
@@ -167,7 +177,7 @@ class Restriction(object):
         )
         return s
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "<%s.%s(%r, %r, %r, %r)>" % (
             self.__module__,
             "Restriction",
@@ -178,7 +188,7 @@ class Restriction(object):
         )
 
     @classmethod
-    def fromstring(cls, spec):
+    def fromstring(cls, spec: str) -> Self:
         return cls(spec)
 
 
@@ -189,7 +199,7 @@ class VersionRange(object):
     Valid ranges are comma separated range specifications
     """
 
-    def __init__(self, spec):
+    def __init__(self, spec: str):
         """Create a VersionRange from a string specification
 
         :param spec string representation of a version or version range
@@ -245,7 +255,7 @@ class VersionRange(object):
         self.version = version
         self.restrictions = tuple(restrictions)
 
-    def __cmp__(self, other):
+    def __cmp__(self, other: Any) -> int:
         if self is other:
             return 0
 
@@ -262,28 +272,28 @@ class VersionRange(object):
 
         return result
 
-    def __contains__(self, version):
+    def __contains__(self, version: Version) -> bool:
         return any((version in r) for r in self.restrictions)
 
-    def __eq__(self, other):
+    def __eq__(self, other: Any) -> bool:
         return self.__cmp__(other) == 0
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash((self.version, self.restrictions))
 
-    def __lt__(self, other):
+    def __lt__(self, other: Any) -> bool:
         return self.__cmp__(other) < 0
 
-    def __ne__(self, other):
+    def __ne__(self, other: Any) -> bool:
         return self.__cmp__(other) != 0
 
-    def __str__(self):
+    def __str__(self) -> str:
         if self.version:
             return str(self.version)
         else:
             return ",".join(str(r) for r in self.restrictions)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "<%s.%s(%r, %r)>" % (
             self.__module__,
             "VersionRange",
@@ -291,7 +301,9 @@ class VersionRange(object):
             self.restrictions,
         )
 
-    def _intersection(self, l1, l2):
+    def _intersection(
+        self, l1: Iterable[Restriction], l2: Iterable[Restriction]
+    ) -> Iterable[Restriction]:
         """Return the intersection of l1 and l2
 
         :param l1 list of restrictions
@@ -304,14 +316,14 @@ class VersionRange(object):
         raise NotImplementedError
 
     @classmethod
-    def fromstring(cls, spec):
+    def fromstring(cls, spec: str) -> Self:
         return cls(spec)
 
     @classmethod
-    def from_version(cls, version):
+    def from_version(cls, version: Version) -> Self:
         return cls(str(version))
 
-    def restrict(self, version_range):
+    def restrict(self, version_range: VersionRange) -> VersionRange:
         """Returns a new VersionRange that is a restriction of this
         and the specified version range.
 
@@ -324,7 +336,7 @@ class VersionRange(object):
         """
         raise NotImplementedError
 
-    def match_version(self, versions):
+    def match_version(self, versions: Iterable[Version]) -> Version | None:
         matched = None
         for version in sorted(versions, reverse=True):
             if version in self:
@@ -335,9 +347,9 @@ class VersionRange(object):
 
 @functools.total_ordering
 class Version(object):
-    """Maven version objecjt"""
+    """Maven version object"""
 
-    def __init__(self, version):
+    def __init__(self, version: str):
         """Create a maven version
 
         The version string is examined one character at a time.
@@ -402,7 +414,7 @@ class Version(object):
 
         self._parsed = list2tuple(self._normalize(parsed))
 
-    def __cmp__(self, other):
+    def __cmp__(self, other: str | VersionRange | Self) -> int:
         if self is other:
             return 0
 
@@ -415,25 +427,29 @@ class Version(object):
 
         return self._compare(self._parsed, other._parsed)
 
-    def __eq__(self, other):
+    def __eq__(self, other: str | VersionRange | Self) -> bool:
         return self.__cmp__(other) == 0
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash(self._unparsed)
 
-    def __lt__(self, other):
+    def __lt__(self, other: str | VersionRange | Self) -> bool:
         return self.__cmp__(other) < 0
 
-    def __ne__(self, other):
+    def __ne__(self, other: str | VersionRange | Self) -> bool:
         return self.__cmp__(other) != 0
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "<%s.%s(%r)>" % (self.__module__, "Version", self._unparsed)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self._unparsed
 
-    def _compare(self, this, other):
+    def _compare(
+        self,
+        this: int | str | list[int | str] | tuple[int | str, ...],
+        other: int | str | list[int | str] | tuple[int | str, ...],
+    ) -> int:
         if isinstance(this, int):
             return self._int_compare(this, other)
         elif isinstance(this, str):
@@ -443,7 +459,7 @@ class Version(object):
         else:
             raise RuntimeError("Unknown type for t: %r" % this)
 
-    def _int_compare(self, this, other):
+    def _int_compare(self, this: int, other: int | str | list[Any] | tuple[Any, ...] | None) -> int:
         if isinstance(other, int):
             return this - other
         elif isinstance(other, (str, list, tuple)):
@@ -453,7 +469,9 @@ class Version(object):
         else:
             raise RuntimeError("other is of invalid type: %s" % type(other))
 
-    def _list_compare(self, l, other):
+    def _list_compare(
+        self, l: Iterable[Any], other: int | str | None | list[None | int | str]
+    ) -> int:
         if other is None:
             if len(l) == 0:
                 return 0
@@ -478,7 +496,7 @@ class Version(object):
         else:
             raise RuntimeError("other is of invalid type: %s" % type(other))
 
-    def _new_list(self, l):
+    def _new_list(self, l: list[Any]) -> list[Any]:
         """Create a new sublist, append it to the current list and return the
         sublist
 
@@ -491,7 +509,7 @@ class Version(object):
         l.append(sublist)
         return sublist
 
-    def _normalize(self, l):
+    def _normalize(self, l: list[Any]) -> list[Any]:
         for item in l[::-1]:
             if not item:
                 l.pop()
@@ -499,7 +517,7 @@ class Version(object):
                 break
         return l
 
-    def _string_compare(self, s, other):
+    def _string_compare(self, s: str, other: str | int | None | list[Any] | tuple[Any, ...]) -> int:
         """Compare string item `s` to `other`
 
         :param str s: string item to compare
@@ -523,7 +541,7 @@ class Version(object):
         else:
             raise RuntimeError("other is of invalid type: %s" % type(other))
 
-    def _parse_buffer(self, buf, followed_by_digit=False):
+    def _parse_buffer(self, buf: str, followed_by_digit: bool = False) -> str:
         """Parse the string buf to determine if it is string or an int
 
         :param str buf: string to parse
@@ -543,7 +561,7 @@ class Version(object):
 
         return ALIASES.get(buf, buf)
 
-    def _string_value(self, s):
+    def _string_value(self, s: str) -> str:
         """Convert a string into a comparable value.
 
         If the string is a known qualifier, or an alias of a known qualifier,
@@ -560,5 +578,5 @@ class Version(object):
         return "%d-%s" % (len(QUALIFIERS), s)
 
     @classmethod
-    def fromstring(cls, spec):
+    def fromstring(cls, spec: str) -> Self:
         return cls(spec)
