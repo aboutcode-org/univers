@@ -9,7 +9,12 @@ from __future__ import annotations
 import operator
 from collections.abc import Iterable
 from functools import total_ordering
-from typing import Any, Callable, Dict, List, Literal, Tuple
+from typing import Any
+from typing import Callable
+from typing import Dict
+from typing import List
+from typing import Literal
+from typing import Tuple
 
 import attr
 

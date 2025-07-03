@@ -16,7 +16,8 @@ from univers.utils import cmp
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
-    from typing import Any, Final
+    from typing import Any
+    from typing import Final
 
     try:
         from typing import Self

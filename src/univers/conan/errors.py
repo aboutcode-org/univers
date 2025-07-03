@@ -20,8 +20,10 @@ from contextlib import contextmanager
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from collections.abc import Iterable, Iterator
-    from typing import Any, Callable
+    from collections.abc import Iterable
+    from collections.abc import Iterator
+    from typing import Any
+    from typing import Callable
 
     try:
         from typing import Never

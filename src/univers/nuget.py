@@ -15,7 +15,9 @@ from typing import TYPE_CHECKING
 import semver
 
 if TYPE_CHECKING:
-    from typing import Any, Final, SupportsInt
+    from typing import Any
+    from typing import Final
+    from typing import SupportsInt
 
     try:
         from typing import Self

@@ -6,7 +6,8 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Union
+from typing import TYPE_CHECKING
+from typing import Union
 
 import attr
 import semantic_version
@@ -27,7 +28,9 @@ from univers.versions import NoneVersion
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
-    from typing import Any, Final, TypeAlias
+    from typing import Any
+    from typing import Final
+    from typing import TypeAlias
 
     try:
         from typing import Self
