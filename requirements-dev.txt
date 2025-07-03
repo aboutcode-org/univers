@@ -9,6 +9,6 @@ pytest-xdist==3.2.0
 toml==0.10.2
 typing-extensions==4.14.0
 zipp==3.6.0
-black==22.3.0
+black==25.1.0
 typed-ast==1.4.3
 pathspec==0.9.0
