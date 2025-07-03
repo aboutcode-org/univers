@@ -5,6 +5,7 @@
 # and significantly modified from the original at pymaven
 #
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
+
 from __future__ import annotations
 
 import functools

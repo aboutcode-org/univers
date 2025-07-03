@@ -6,6 +6,8 @@
 #
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
+from __future__ import annotations
+
 import functools
 import re
 from typing import TYPE_CHECKING

@@ -4,6 +4,8 @@
 #
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
+from __future__ import annotations
+
 from collections import namedtuple
 
 from univers.conan.errors import ConanException

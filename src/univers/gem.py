@@ -14,6 +14,8 @@
 # Originally from https://github.com/rubygems/rubygems and
 # https://github.com/coi-gov-pl/puppeter
 
+from __future__ import annotations
+
 import operator
 import re
 from collections import namedtuple

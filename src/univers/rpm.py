@@ -9,12 +9,13 @@
 #
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
+from __future__ import annotations
+
 import re
 from typing import NamedTuple
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typing import Any, Final, SupportsInt
     try:
         from typing import Self
     except ImportError:

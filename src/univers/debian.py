@@ -8,6 +8,8 @@
 #
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
+from __future__ import annotations
+
 import logging
 import operator as operator_module
 import re
@@ -90,9 +92,9 @@ class Version(object):
     sorting and 'natural order sorting'.
     """
 
-    epoch: int = attrib(default=0)
-    upstream: str | None  = attrib(default=None)
-    revision: str = attrib(default="0")
+    epoch = attrib(default=0)
+    upstream = attrib(default=None)
+    revision = attrib(default="0")
 
     def __str__(self, *args, **kwargs) -> str:
         if self.epoch:

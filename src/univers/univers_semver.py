@@ -4,6 +4,8 @@
 #
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
+from __future__ import annotations
+
 from univers.utils import remove_spaces
 from univers.version_constraint import VersionConstraint
 from univers.versions import SemverVersion

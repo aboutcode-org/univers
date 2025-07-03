@@ -3,9 +3,10 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
+
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Union
 
 import attr
 import semantic_version
@@ -1431,31 +1432,31 @@ def build_range_from_snyk_advisory_string(
                 )
     return vrc(constraints=version_constraints)
 
-RangeClassType: TypeAlias = (
-    NpmVersionRange
-    | DebianVersionRange
-    | PypiVersionRange
-    | MavenVersionRange
-    | NugetVersionRange
-    | ComposerVersionRange
-    | GemVersionRange
-    | RpmVersionRange
-    | GolangVersionRange
-    | GenericVersionRange
-    | ApacheVersionRange
-    | HexVersionRange
-    | CargoVersionRange
-    | MozillaVersionRange
-    | GitHubVersionRange
-    | EbuildVersionRange
-    | ArchLinuxVersionRange
-    | NginxVersionRange
-    | OpensslVersionRange
-    | MattermostVersionRange
-    | ConanVersionRange
-    | AllVersionRange
-    | NoneVersionRange
-)
+RangeClassType: TypeAlias = Union[
+    NpmVersionRange,
+    DebianVersionRange,
+    PypiVersionRange,
+    MavenVersionRange,
+    NugetVersionRange,
+    ComposerVersionRange,
+    GemVersionRange,
+    RpmVersionRange,
+    GolangVersionRange,
+    GenericVersionRange,
+    ApacheVersionRange,
+    HexVersionRange,
+    CargoVersionRange,
+    MozillaVersionRange,
+    GitHubVersionRange,
+    EbuildVersionRange,
+    ArchLinuxVersionRange,
+    NginxVersionRange,
+    OpensslVersionRange,
+    MattermostVersionRange,
+    ConanVersionRange,
+    AllVersionRange,
+    NoneVersionRange,
+]
 RANGE_CLASS_BY_SCHEMES: Final[dict[str, RangeClassType]] = {
     "npm": NpmVersionRange,
     "deb": DebianVersionRange,

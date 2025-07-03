@@ -4,6 +4,8 @@
 #
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
+from __future__ import annotations
+
 import operator
 from collections.abc import Iterable
 from functools import total_ordering
@@ -67,16 +69,16 @@ class VersionConstraint:
     """
 
     # one of the COMPARATORS
-    comparator: str = attr.ib(type=str, default="=")
+    comparator = attr.ib(type=str, default="=")
 
     # a Version subclass instance
-    version: Version = attr.ib(type=Version, default=None)
+    version = attr.ib(type=Version, default=None)
 
     # a function for the comparator
-    comp_operator: Callable = attr.ib(default=None, repr=False)
+    comp_operator = attr.ib(default=None, repr=False)
 
     # a Version subclass
-    version_class: Version = attr.ib(type=Version, default=None, repr=False)
+    version_class = attr.ib(type=Version, default=None, repr=False)
 
     def __attrs_post_init__(self) -> None:
         # Notes: setattr is used because this is an immutable frozen instance.

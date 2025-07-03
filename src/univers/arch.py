@@ -6,6 +6,8 @@
 #
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
+from __future__ import annotations
+
 import re
 from itertools import zip_longest
 from typing import Dict

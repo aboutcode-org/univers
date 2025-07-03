@@ -14,6 +14,8 @@
     see return_plugin.py
 
 """
+from __future__ import annotations
+
 from contextlib import contextmanager
 from typing import TYPE_CHECKING
 
