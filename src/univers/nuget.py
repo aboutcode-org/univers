@@ -16,6 +16,7 @@ import semver
 
 if TYPE_CHECKING:
     from typing import Any, Final, SupportsInt
+
     try:
         from typing import Self
     except ImportError:

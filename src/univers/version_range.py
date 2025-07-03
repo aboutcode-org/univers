@@ -28,6 +28,7 @@ from univers.versions import NoneVersion
 if TYPE_CHECKING:
     from collections.abc import Iterable
     from typing import Any, Final, TypeAlias
+
     try:
         from typing import Self
     except ImportError:
@@ -1431,6 +1432,7 @@ def build_range_from_snyk_advisory_string(
                     )
                 )
     return vrc(constraints=version_constraints)
+
 
 RangeClassType: TypeAlias = Union[
     NpmVersionRange,

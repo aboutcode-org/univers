@@ -17,6 +17,7 @@ from univers.utils import cmp
 if TYPE_CHECKING:
     from collections.abc import Iterable
     from typing import Any, Final
+
     try:
         from typing import Self
     except ImportError:

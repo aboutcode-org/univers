@@ -23,6 +23,7 @@ from attr import attrs
 
 if TYPE_CHECKING:
     from re import Match
+
     try:
         from typing import Self
     except ImportError:

@@ -25,6 +25,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from collections.abc import Iterable
     from typing import Any
+
     try:
         from typing import Self
     except ImportError:
@@ -227,7 +228,7 @@ class GemVersion:
     def __repr__(self) -> str:
         return f"GemVersion({self.original!r})"
 
-    def equal_strictly(self, other: Self) -> bool: 
+    def equal_strictly(self, other: Self) -> bool:
         return self.version == other.version
 
     def __hash__(self) -> int:

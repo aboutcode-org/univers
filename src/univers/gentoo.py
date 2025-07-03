@@ -46,7 +46,7 @@ def parse_version_and_revision(version_string: str) -> tuple[str, int]:
     return version, revision
 
 
-def vercmp(ver1: str , ver2: str ) -> int:
+def vercmp(ver1: str, ver2: str) -> int:
     """
     Compare two versions ``ver1`` and ``ver2`` and return 0, 1, or -1 according
     to the Python 2 cmp() semantics:

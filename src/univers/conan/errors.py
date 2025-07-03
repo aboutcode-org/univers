@@ -5,13 +5,13 @@
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
 """
-    Exceptions raised and handled in Conan
-    These exceptions are mapped between server (as an HTTP response) and client
-    through the REST API. When an error happens in server its translated to an HTTP
-    error code that its sent to client. Client reads the server code and raise the
-    matching exception.
+Exceptions raised and handled in Conan
+These exceptions are mapped between server (as an HTTP response) and client
+through the REST API. When an error happens in server its translated to an HTTP
+error code that its sent to client. Client reads the server code and raise the
+matching exception.
 
-    see return_plugin.py
+see return_plugin.py
 
 """
 from __future__ import annotations
@@ -22,6 +22,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from collections.abc import Iterable, Iterator
     from typing import Any, Callable
+
     try:
         from typing import Never
     except ImportError:
