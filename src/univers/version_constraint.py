@@ -4,8 +4,17 @@
 #
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
+from __future__ import annotations
+
 import operator
+from collections.abc import Iterable
 from functools import total_ordering
+from typing import Any
+from typing import Callable
+from typing import Dict
+from typing import List
+from typing import Literal
+from typing import Tuple
 
 import attr
 
@@ -19,7 +28,7 @@ except ImportError:
     # back from docs at https://docs.python.org/3/library/itertools.html#itertools.pairwise
     import itertools
 
-    def pairwise(iterable):
+    def pairwise(iterable: Iterable[Any]) -> Iterable[Tuple[Any, Any]]:
         a, b = itertools.tee(iterable)
         next(b, None)
         return zip(a, b)
@@ -32,7 +41,7 @@ ecosystem)
 """
 
 
-def operator_star(a, b):
+def operator_star(a: Any, b: Any) -> Literal[True]:
     """
     Comparison operator for the star "*" constraint comparator. Since it matches
     any version, it is always True.
@@ -76,7 +85,7 @@ class VersionConstraint:
     # a Version subclass
     version_class = attr.ib(type=Version, default=None, repr=False)
 
-    def __attrs_post_init__(self):
+    def __attrs_post_init__(self) -> None:
         # Notes: setattr is used because this is an immutable frozen instance.
         # See https://www.attrs.org/en/stable/init.html?#post-init
         try:
@@ -95,7 +104,7 @@ class VersionConstraint:
             else:
                 raise ValueError("Cannot build a VersionConstraint without a version class")
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         Return a string representing this constraint.
         For example::
@@ -116,27 +125,27 @@ class VersionConstraint:
 
     to_string = __str__
 
-    def to_dict(self):
+    def to_dict(self) -> Dict[str, str]:
         return dict(comparator=self.comparator, version=str(self.version))
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash(str(self))
 
-    def __eq__(self, other):
+    def __eq__(self, other: "VersionConstraint") -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
         return self.comparator == other.comparator and self.version == other.version
 
-    def __lt__(self, other):
+    def __lt__(self, other: "VersionConstraint") -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
         # we compare tuples, version first
         return (self.version, self.comparator).__lt__((other.version, other.comparator))
 
-    def is_star(self):
+    def is_star(self) -> bool:
         return self.comparator == "*"
 
-    def invert(self):
+    def invert(self) -> "VersionConstraint":
         """
         Return a new VersionConstraint instance with the comparator inverted.
         For example::
@@ -161,7 +170,7 @@ class VersionConstraint:
         )
 
     @classmethod
-    def from_string(cls, string, version_class):
+    def from_string(cls, string: str, version_class: Version) -> "VersionConstraint":
         """
         Return a single VersionConstraint built from a constraint ``string`` and
         a ``version_class`` Version class.
@@ -188,7 +197,7 @@ class VersionConstraint:
         return cls(comparator=comparator, version=version, version_class=version_class)
 
     @staticmethod
-    def split(string):
+    def split(string: str) -> Tuple[str, str]:
         """
         Return a tuple of (comparator, version) strings given a
         constraint ``string`` such as ">=2.3".
@@ -220,7 +229,7 @@ class VersionConstraint:
         # default to equality
         return "=", constraint_string
 
-    def __contains__(self, version):
+    def __contains__(self, version: Version) -> bool:
         """
         Return a True if the ``version`` Version is contained in this
         VersionConstraint or "satisfies" this VersionConstraint.
@@ -262,7 +271,7 @@ class VersionConstraint:
     contains = __contains__
 
     @classmethod
-    def validate(cls, constraints):
+    def validate(cls, constraints: List["VersionConstraint"] | Tuple["VersionConstraint"]):
         """
         Raise an assertion error if the ``constraints`` is not a list of
         VersionConstraint objects or if two VersionConstraint contain the same
@@ -292,7 +301,7 @@ class VersionConstraint:
         return validate_comparators(constraints)
 
     @classmethod
-    def simplify(cls, constraints):
+    def simplify(cls, constraints: Iterable["VersionConstraint"]) -> List["VersionConstraint"]:
         """
         Return a new simplified ``constraints`` list with duplicated constraints
         removed. This includes removing exact duplicates and redundant
@@ -303,7 +312,7 @@ class VersionConstraint:
         return constraints
 
 
-def deduplicate(constraints):
+def deduplicate(constraints: Iterable[Any]) -> List[Any]:
     """
     Return a new ``constraints`` list with exact duplicated constraints removed.
     """
@@ -316,7 +325,7 @@ def deduplicate(constraints):
     return unique
 
 
-def validate_comparators(constraints):
+def validate_comparators(constraints: Iterable[VersionConstraint]) -> bool:
     """
     Raise an assertion error if the ``constraints`` list contains an invalid
     sequence of constraint comparators according to ``vers`` rules.
@@ -399,7 +408,7 @@ def validate_comparators(constraints):
     return True
 
 
-def simplify_constraints(constraints):
+def simplify_constraints(constraints: Iterable[VersionConstraint]) -> List[VersionConstraint]:
     """
     Return a list of VersionConstraint given a ``constraints`` list by
     discarding redundant constraints according to ``vers`` rules.
@@ -475,7 +484,7 @@ class InvalidConstraintsError(Exception):
     pass
 
 
-def contains_version(version, constraints):
+def contains_version(version: Version, constraints: Iterable[VersionConstraint]) -> bool:
     """
     Return True an assertion error if the ``constraints`` list contains the
     ``version`` Version object according to ``vers`` rules.

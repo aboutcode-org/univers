@@ -4,9 +4,18 @@
 #
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
+from __future__ import annotations
+
 from functools import total_ordering
+from typing import TYPE_CHECKING
 
 from univers.conan.errors import ConanException
+
+if TYPE_CHECKING:
+    try:
+        from typing import Self
+    except ImportError:
+        from typing_extensions import Self
 
 
 @total_ordering
@@ -15,32 +24,32 @@ class _VersionItem:
     They can be int or strings
     """
 
-    def __init__(self, item):
+    def __init__(self, item: str | int | Self):
         try:
             self._v = int(item)
         except ValueError:
             self._v = item
 
     @property
-    def value(self):
+    def value(self) -> int:
         return self._v
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str(self._v)
 
-    def __add__(self, other):
+    def __add__(self, other: Self) -> int:
         # necessary for the "bump()" functionality. Other aritmetic operations are missing
         return self._v + other
 
-    def __eq__(self, other):
+    def __eq__(self, other: str | int | Self) -> bool:
         if not isinstance(other, _VersionItem):
             other = _VersionItem(other)
         return self._v == other._v
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash(self._v)
 
-    def __lt__(self, other):
+    def __lt__(self, other: str | int | Self) -> bool:
         """
         @type other: _VersionItem
         """
@@ -59,7 +68,7 @@ class Version:
     It is just a helper to parse "." or "-" and compare taking into account integers when possible
     """
 
-    def __init__(self, value):
+    def __init__(self, value: int | str | Self):
         value = str(value)
         self._value = value
 
@@ -85,7 +94,7 @@ class Version:
             del items[-1]
         self._nonzero_items = tuple(items)
 
-    def bump(self, index):
+    def bump(self, index: int) -> Self:
         """
         :meta private:
             Bump the version
@@ -110,7 +119,7 @@ class Version:
         result = Version(v)
         return result
 
-    def upper_bound(self, index):
+    def upper_bound(self, index: int) -> Self:
         items = list(self._items[:index])
         try:
             items.append(self._items[index] + 1)
@@ -123,52 +132,52 @@ class Version:
         return result
 
     @property
-    def pre(self):
+    def pre(self) -> Self | None:
         return self._pre
 
     @property
-    def build(self):
+    def build(self) -> Self | None:
         return self._build
 
     @property
-    def main(self):
+    def main(self) -> tuple[_VersionItem, ...]:
         return self._items
 
     @property
-    def major(self):
+    def major(self) -> _VersionItem | None:
         try:
             return self.main[0]
         except IndexError:
             return None
 
     @property
-    def minor(self):
+    def minor(self) -> _VersionItem | None:
         try:
             return self.main[1]
         except IndexError:
             return None
 
     @property
-    def patch(self):
+    def patch(self) -> _VersionItem | None:
         try:
             return self.main[2]
         except IndexError:
             return None
 
     @property
-    def micro(self):
+    def micro(self) -> _VersionItem | None:
         try:
             return self.main[3]
         except IndexError:
             return None
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self._value
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self._value
 
-    def __eq__(self, other):
+    def __eq__(self, other: int | str | Self | None) -> bool:
         if other is None:
             return False
         if not isinstance(other, Version):
@@ -180,10 +189,10 @@ class Version:
             other._build,
         )
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash((self._nonzero_items, self._pre, self._build))
 
-    def __lt__(self, other):
+    def __lt__(self, other: int | str | Self | None) -> bool:
         if other is None:
             return False
         if not isinstance(other, Version):
