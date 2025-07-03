@@ -13,7 +13,7 @@ _Condition = namedtuple("_Condition", ["operator", "version"])
 
 
 class _ConditionSet:
-    def __init__(self, expression, prerelease):
+    def __init__(self, expression: str, prerelease: bool):
         expressions = expression.split()
         self.prerelease = prerelease
         self.conditions = []
@@ -25,7 +25,7 @@ class _ConditionSet:
             self.conditions.extend(self._parse_expression(e))
 
     @staticmethod
-    def _parse_expression(expression):
+    def _parse_expression(expression: str) -> list[_Condition | ConanVersion]:
         if expression == "" or expression == "*":
             return [_Condition(">=", ConanVersion("0.0.0"))]
 
@@ -60,7 +60,7 @@ class _ConditionSet:
         else:
             return [_Condition(operator, ConanVersion(version))]
 
-    def valid(self, version):
+    def valid(self, version: ConanVersion) -> bool:
         if version.pre:
             if not self.prerelease:
                 return False
@@ -84,7 +84,7 @@ class _ConditionSet:
 
 
 class VersionRange:
-    def __init__(self, expression):
+    def __init__(self, expression: str):
         self._expression = expression
         tokens = expression.split(",")
         prereleases = None
@@ -97,10 +97,10 @@ class VersionRange:
         for alternative in version_expr.split("||"):
             self.condition_sets.append(_ConditionSet(alternative, prereleases))
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self._expression
 
-    def __contains__(self, version):
+    def __contains__(self, version: ConanVersion) -> bool:
         assert isinstance(version, ConanVersion), type(version)
         for condition_set in self.condition_sets:
             if condition_set.valid(version):
