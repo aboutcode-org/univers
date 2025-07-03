@@ -15,16 +15,27 @@
 
 """
 from contextlib import contextmanager
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable, Iterator
+    from typing import Any, Callable
+    try:
+        from typing import Never
+    except ImportError:
+        from typing_extensions import Never
 
 
 @contextmanager
-def conanfile_remove_attr(conanfile, names, method):
+def conanfile_remove_attr(
+    conanfile: Any, names: Iterable[str], method: Callable[..., Any]
+) -> Iterator[Never]:
     """remove some self.xxxx attribute from the class, so it raises an exception if used
     within a given conanfile method
     """
     original_class = type(conanfile)
 
-    def _prop(attr_name):
+    def _prop(attr_name: str) -> property:
         def _m(_):
             raise ConanException(f"'self.{attr_name}' access in '{method}()' method is forbidden")
 
@@ -41,7 +52,7 @@ def conanfile_remove_attr(conanfile, names, method):
 
 
 @contextmanager
-def conanfile_exception_formatter(conanfile_name, func_name):
+def conanfile_exception_formatter(conanfile_name: str, func_name: str) -> Iterator[Never]:
     """
     Decorator to throw an exception formatted with the line of the conanfile where the error ocurrs.
     """
@@ -74,7 +85,9 @@ def conanfile_exception_formatter(conanfile_name, func_name):
         _raise_conanfile_exc(exc)
 
 
-def _format_conanfile_exception(scope, method, exception):
+def _format_conanfile_exception(
+    scope: str, method: Callable[..., Any], exception: BaseException
+) -> str:
     """
     It will iterate the traceback lines, when it finds that the source code is inside the users
     conanfile it "start recording" the messages, when the trace exits the conanfile we return
@@ -125,12 +138,12 @@ class ConanException(Exception):
         self.remote = kwargs.pop("remote", None)
         super(ConanException, self).__init__(*args, **kwargs)
 
-    def remote_message(self):
+    def remote_message(self) -> str:
         if self.remote:
             return " [Remote: {}]".format(self.remote.name)
         return ""
 
-    def __str__(self):
+    def __str__(self) -> str:
 
         msg = super(ConanException, self).__str__()
 
@@ -242,7 +255,7 @@ class UserInterfaceErrorException(RequestErrorException):
     pass
 
 
-EXCEPTION_CODE_MAPPING = {
+EXCEPTION_CODE_MAPPING: dict[ConanException, int] = {
     InternalErrorException: 500,
     RequestErrorException: 400,
     AuthenticationException: 401,
