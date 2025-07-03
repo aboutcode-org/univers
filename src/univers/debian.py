@@ -13,10 +13,19 @@ import operator as operator_module
 import re
 from functools import cmp_to_key
 from itertools import zip_longest
+from typing import TYPE_CHECKING
 
 from attr import asdict
 from attr import attrib
 from attr import attrs
+
+if TYPE_CHECKING:
+    from re import Match
+    try:
+        from typing import Self
+    except ImportError:
+        from typing_extensions import Self
+
 
 logger = logging.getLogger(__name__)
 
@@ -81,11 +90,11 @@ class Version(object):
     sorting and 'natural order sorting'.
     """
 
-    epoch = attrib(default=0)
-    upstream = attrib(default=None)
-    revision = attrib(default="0")
+    epoch: int = attrib(default=0)
+    upstream: str | None  = attrib(default=None)
+    revision: str = attrib(default="0")
 
-    def __str__(self, *args, **kwargs):
+    def __str__(self, *args, **kwargs) -> str:
         if self.epoch:
             version = f"{self.epoch}:{self.upstream}"
         else:
@@ -96,42 +105,42 @@ class Version(object):
 
         return version
 
-    def __repr__(self, *args, **kwargs):
+    def __repr__(self, *args, **kwargs) -> str:
         return str(self)
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash(self.tuple())
 
-    def __eq__(self, other):
+    def __eq__(self, other: Self) -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
         return self.tuple() == other.tuple()
 
-    def __ne__(self, other):
+    def __ne__(self, other: Self) -> bool:
         return not self.__eq__(other)
 
-    def __lt__(self, other):
+    def __lt__(self, other: Self) -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
         return eval_constraint(self, "<<", other)
 
-    def __le__(self, other):
+    def __le__(self, other: Self) -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
         return eval_constraint(self, "<=", other)
 
-    def __gt__(self, other):
+    def __gt__(self, other: Self) -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
         return eval_constraint(self, ">>", other)
 
-    def __ge__(self, other):
+    def __ge__(self, other: Self) -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
         return eval_constraint(self, ">=", other)
 
     @classmethod
-    def from_string(cls, version):
+    def from_string(cls, version: str) -> Self:
         if not version and not isinstance(version, str):
             raise ValueError('Invalid version string: "{}"'.format(version))
         version = version.strip()
@@ -154,16 +163,16 @@ class Version(object):
         return cls(epoch=epoch, upstream=upstream, revision=revision)
 
     @classmethod
-    def is_valid(cls, version):
+    def is_valid(cls, version: str) -> Match[str] | None:
         return is_valid_debian_version(version)
 
-    def compare(self, other_version):
+    def compare(self, other_version: str | Self) -> int:
         return compare_versions(self, other_version)
 
-    def to_dict(self):
+    def to_dict(self) -> dict[str, str | int | None]:
         return asdict(self)
 
-    def tuple(self):
+    def tuple(self) -> tuple[int, str | None, str]:
         return self.epoch, self.upstream, self.revision
 
 
@@ -185,7 +194,7 @@ is_valid_debian_version = re.compile(
 ).match
 
 
-def eval_constraint(version1, operator, version2):
+def eval_constraint(version1: str | Version, operator: str, version2: str | Version) -> bool:
     """
     Evaluate a versions constraint where two Debian package versions are
     compared with an operator such as < or >. Return True if the constraint is
@@ -216,21 +225,21 @@ def eval_constraint(version1, operator, version2):
     return operator(result, 0)
 
 
-def compare_versions_key(x):
+def compare_versions_key(x):  # type: ignore
     """
     Return a key version function suitable for use in sorted().
     """
     return cmp_to_key(compare_versions)(x)
 
 
-def compare_strings_key(x):
+def compare_strings_key(x):  # type: ignore
     """
     Return a key string function suitable for use in sorted().
     """
     return cmp_to_key(compare_strings)(x)
 
 
-def compare_strings(version1, version2):
+def compare_strings(version1: str, version2: str) -> int:
     """
     Compare two version strings (upstream or revision) using Debian semantics
     and return one of the following integer numbers:
@@ -305,7 +314,7 @@ def compare_strings(version1, version2):
     return 0
 
 
-def compare_versions(version1, version2):
+def compare_versions(version1: str | Version, version2: str | Version) -> int:
     """
     Compare two Version objects or strings and return one of the following
     integer numbers:
@@ -319,7 +328,7 @@ def compare_versions(version1, version2):
     return compare_version_objects(version1, version2)
 
 
-def coerce_version(value):
+def coerce_version(value: str | Version) -> Version:
     """
     Return a Version object from value.
 
@@ -331,7 +340,7 @@ def coerce_version(value):
     return value
 
 
-def compare_version_objects(version1, version2):
+def compare_version_objects(version1: Version, version2: Version) -> int:
     """
     Compare two Version objects and return one of the following
     integer numbers:
@@ -352,7 +361,7 @@ def compare_version_objects(version1, version2):
     return 0
 
 
-def get_digit_prefix(characters):
+def get_digit_prefix(characters: list[str]) -> int:
     """
     Return the digit prefix from a list of characters.
     """
@@ -362,7 +371,7 @@ def get_digit_prefix(characters):
     return value
 
 
-def get_non_digit_prefix(characters):
+def get_non_digit_prefix(characters: list[str]) -> list[str]:
     """
     Return the non-digit prefix from a list of characters.
     """
@@ -373,7 +382,7 @@ def get_non_digit_prefix(characters):
 
 
 # a mapping of characters to integers representing the Debian sort order.
-characters_order = {
+characters_order: dict[str, int] = {
     # The tilde sorts before everything.
     "~": 0,
     # The empty string sort before everything except a tilde.
