@@ -21,6 +21,7 @@ from univers.versions import RpmVersion
 from univers.versions import RubygemsVersion
 from univers.versions import SemverVersion
 from univers.versions import Version
+from univers.versions import LexicographicVersion
 
 
 def test_version():
@@ -230,3 +231,13 @@ def test_intdot_version():
     assert IntdotVersion("1.2.3.4.6-pre") <= IntdotVersion("2.2.3.4.5.pre")
     assert IntdotVersion("1.2.3.4.6-pre") <= IntdotVersion("2.2.3.4.5-10")
     assert IntdotVersion("1.2.3.4.6-pre") <= IntdotVersion("2.2.3.4.5-10")
+
+
+def test_lexicographic_version():
+    assert LexicographicVersion("abc") == LexicographicVersion("abc")
+    assert LexicographicVersion(" abc") == LexicographicVersion("abc")
+    assert LexicographicVersion("123") == LexicographicVersion(123)
+    assert LexicographicVersion("abc") > LexicographicVersion(None)
+    assert LexicographicVersion("Abc") < LexicographicVersion(None)
+    assert LexicographicVersion("123") < LexicographicVersion("bbc")
+    assert LexicographicVersion("2.3.4") > LexicographicVersion("1.2.3")
