@@ -1,6 +1,11 @@
 Changelog
 =========
 
+Version v31.0.0
+----------------
+
+- Raise instead of returning ``NotImplementedError`` in ``version_range.VersionRange`` methods. https://github.com/aboutcode-org/univers/pull/158
+
 Version v30.12.1
 ----------------
 

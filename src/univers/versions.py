@@ -124,7 +124,7 @@ class Version:
 
     def satisfies(self, constraint):
         """
-        Return True is this Version satisfies the ``constraint``
+        Return True if this Version satisfies the ``constraint``
         VersionConstraint. Satisfying means that this version is "within" the
         ``constraint``.
         """
@@ -142,6 +142,18 @@ class IntdotVersion(Version):
     @classmethod
     def is_valid(cls, string):
         return intdot.IntdotVersion.is_valid(string)
+
+
+class AllVersion(Version):
+    @classmethod
+    def is_valid(cls, string):
+        return string == "vers:all/*"
+
+
+class NoneVersion(Version):
+    @classmethod
+    def is_valid(cls, string):
+        return string == "vers:none/*"
 
 
 class GenericVersion(Version):

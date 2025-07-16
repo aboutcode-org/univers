@@ -30,6 +30,7 @@ from univers.versions import OpensslVersion
 from univers.versions import PypiVersion
 from univers.versions import RubygemsVersion
 from univers.versions import SemverVersion
+from univers.versions import Version
 
 
 class TestVersionRange(TestCase):
@@ -557,3 +558,25 @@ def test_version_range_intdot():
     assert IntdotVersion("1.3.3alpha") in intdot_range
     assert IntdotVersion("1.2.2.pre") not in intdot_range
     assert IntdotVersion("1010.23.234203.0") in IntdotVersionRange.from_string("vers:intdot/*")
+
+
+def test_version_range_all():
+    all_vers = VersionRange.from_string("vers:all/*")
+    assert all_vers.contains(Version("1.2.3"))
+    assert PypiVersion("2.0.3") in all_vers
+    # test for invalid all range specification
+    with pytest.raises(Exception):
+        VersionRange.from_string("vers:all/>1.2.3")
+    with pytest.raises(Exception):
+        VersionRange.from_string("vers:all/*|>1.2.3")
+
+
+def test_version_range_none():
+    none_vers = VersionRange.from_string("vers:none/*")
+    assert not none_vers.contains(Version("1.2.3"))
+    assert PypiVersion("2.0.3") not in none_vers
+    # test for invalid all range specification
+    with pytest.raises(Exception):
+        VersionRange.from_string("vers:none/!1.2.3")
+    with pytest.raises(Exception):
+        VersionRange.from_string("vers:none/*|>1.2.3")
