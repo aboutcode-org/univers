@@ -12,6 +12,7 @@ from univers.versions import DebianVersion
 from univers.versions import EnhancedSemanticVersion
 from univers.versions import GentooVersion
 from univers.versions import GolangVersion
+from univers.versions import IntdotVersion
 from univers.versions import MavenVersion
 from univers.versions import NginxVersion
 from univers.versions import NugetVersion
@@ -218,3 +219,14 @@ def test_golang_version():
     assert GolangVersion("v0.1.1") >= GolangVersion("v0.1.1")
     assert GolangVersion("v0.1.1") <= GolangVersion("v0.1.1")
     assert GolangVersion("v0.1.1") <= GolangVersion("v0.1.2")
+
+
+def test_intdot_version():
+    assert IntdotVersion("1.2.3.4.5") == IntdotVersion("1.2.3.4.5")
+    assert IntdotVersion("1.2.3.4.6") > IntdotVersion("1.2.3.4.5")
+    assert IntdotVersion("1.2.3.4.6") < IntdotVersion("2.2.3.4.5")
+    assert IntdotVersion("1.2.3.4.6") <= IntdotVersion("2.2.3.4.5")
+    assert IntdotVersion("1.2.3.4.6-pre") <= IntdotVersion("2.2.3.4.5")
+    assert IntdotVersion("1.2.3.4.6-pre") <= IntdotVersion("2.2.3.4.5.pre")
+    assert IntdotVersion("1.2.3.4.6-pre") <= IntdotVersion("2.2.3.4.5-10")
+    assert IntdotVersion("1.2.3.4.6-pre") <= IntdotVersion("2.2.3.4.5-10")

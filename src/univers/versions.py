@@ -12,6 +12,7 @@ from univers import arch
 from univers import debian
 from univers import gem
 from univers import gentoo
+from univers import intdot
 from univers import maven
 from univers import nuget
 from univers import rpm
@@ -131,6 +132,16 @@ class Version:
 
     def __str__(self):
         return str(self.value)
+
+
+class IntdotVersion(Version):
+    @classmethod
+    def build_value(cls, string):
+        return intdot.IntdotVersion(string)
+
+    @classmethod
+    def is_valid(cls, string):
+        return intdot.IntdotVersion.is_valid(string)
 
 
 class AllVersion(Version):
@@ -714,4 +725,5 @@ AVAILABLE_VERSIONS = [
     OpensslVersion,
     LegacyOpensslVersion,
     AlpineLinuxVersion,
+    IntdotVersion,
 ]

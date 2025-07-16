@@ -968,6 +968,11 @@ class GolangVersionRange(VersionRange):
     }
 
 
+class IntdotVersionRange(VersionRange):
+    scheme = "intdot"
+    version_class = versions.IntdotVersion
+
+
 class GenericVersionRange(VersionRange):
     scheme = "generic"
     version_class = versions.SemverVersion
@@ -1438,6 +1443,7 @@ RANGE_CLASS_BY_SCHEMES = {
     "openssl": OpensslVersionRange,
     "mattermost": MattermostVersionRange,
     "conan": ConanVersionRange,
+    "intdot": IntdotVersionRange,
     "all": AllVersionRange,
     "none": NoneVersionRange,
 }
