@@ -133,6 +133,18 @@ class Version:
         return str(self.value)
 
 
+class AllVersion(Version):
+    @classmethod
+    def is_valid(cls, string):
+        return string == "vers:all/*"
+
+
+class NoneVersion(Version):
+    @classmethod
+    def is_valid(cls, string):
+        return string == "vers:none/*"
+    
+
 class LexicographicVersion(Version):
     @classmethod
     def build_value(cls, string):
@@ -154,18 +166,6 @@ class LexicographicVersion(Version):
 
     def __eq__(self, other):
         return self.value.encode('utf-8') == other.value.encode('utf-8')
-    
-
-class AllVersion(Version):
-    @classmethod
-    def is_valid(cls, string):
-        return string == "vers:all/*"
-
-
-class NoneVersion(Version):
-    @classmethod
-    def is_valid(cls, string):
-        return string == "vers:none/*"
 
 
 class GenericVersion(Version):
