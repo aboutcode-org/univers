@@ -123,7 +123,7 @@ class Version:
 
     def satisfies(self, constraint):
         """
-        Return True is this Version satisfies the ``constraint``
+        Return True if this Version satisfies the ``constraint``
         VersionConstraint. Satisfying means that this version is "within" the
         ``constraint``.
         """
@@ -154,6 +154,18 @@ class LexicographicVersion(Version):
 
     def __eq__(self, other):
         return self.value.encode('utf-8') == other.value.encode('utf-8')
+
+
+class AllVersion(Version):
+    @classmethod
+    def is_valid(cls, string):
+        return string == "vers:all/*"
+
+
+class NoneVersion(Version):
+    @classmethod
+    def is_valid(cls, string):
+        return string == "vers:none/*"
 
 
 class GenericVersion(Version):
