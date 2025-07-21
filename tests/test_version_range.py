@@ -579,4 +579,3 @@ def test_version_range_lexicographic():
     assert LexicographicVersion(-123) in VersionRange.from_string("vers:lexicographic/<~")
     assert LexicographicVersion(None) in VersionRange.from_string("vers:lexicographic/*")
     assert LexicographicVersion("ABC") in VersionRange.from_string("vers:lexicographic/>abc|<=None")
-    
