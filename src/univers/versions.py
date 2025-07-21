@@ -144,7 +144,7 @@ class NoneVersion(Version):
     @classmethod
     def is_valid(cls, string):
         return string == "vers:none/*"
-    
+
 
 class LexicographicVersion(Version):
     @classmethod
@@ -154,18 +154,19 @@ class LexicographicVersion(Version):
     """
     Create a string, even if, e.g., an integer is given
     """
+
     @classmethod
     def normalize(cls, string):
         return remove_spaces(str(string))
 
     def __lt__(self, other):
-        return self.value.encode('utf-8') < other.value.encode('utf-8')
+        return self.value.encode("utf-8") < other.value.encode("utf-8")
 
     def __gt__(self, other):
-        return self.value.encode('utf-8') > other.value.encode('utf-8')
+        return self.value.encode("utf-8") > other.value.encode("utf-8")
 
     def __eq__(self, other):
-        return self.value.encode('utf-8') == other.value.encode('utf-8')
+        return self.value.encode("utf-8") == other.value.encode("utf-8")
 
 
 class IntdotVersion(Version):
