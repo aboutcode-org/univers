@@ -1196,6 +1196,11 @@ class NoneVersionRange(VersionRange):
     version_class = versions.NoneVersion
 
 
+class LexicographicVersionRange(VersionRange):
+    scheme = "lexicographic"
+    version_class = versions.LexicographicVersion
+
+
 def from_gitlab_native(gitlab_scheme, string):
     purl_scheme = gitlab_scheme
     if gitlab_scheme not in PURL_TYPE_BY_GITLAB_SCHEME.values():
@@ -1440,6 +1445,7 @@ RANGE_CLASS_BY_SCHEMES = {
     "conan": ConanVersionRange,
     "all": AllVersionRange,
     "none": NoneVersionRange,
+    "lexicographic": LexicographicVersionRange,
 }
 
 PURL_TYPE_BY_GITLAB_SCHEME = {
