@@ -13,6 +13,7 @@ from univers.versions import EnhancedSemanticVersion
 from univers.versions import GentooVersion
 from univers.versions import GolangVersion
 from univers.versions import IntdotVersion
+from univers.versions import LexicographicVersion
 from univers.versions import MavenVersion
 from univers.versions import NginxVersion
 from univers.versions import NugetVersion
@@ -21,7 +22,6 @@ from univers.versions import RpmVersion
 from univers.versions import RubygemsVersion
 from univers.versions import SemverVersion
 from univers.versions import Version
-from univers.versions import LexicographicVersion
 
 
 def test_version():
