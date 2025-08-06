@@ -1,0 +1,10691 @@
+[
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.34",
+        "0.1.0_alpha"
+      ]
+    },
+    "expected_output": [
+      "0.1.0_alpha",
+      "2.34"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.1.0_alpha",
+        "0.1.0_alpha"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.1.0_alpha",
+        "0.1.3_alpha"
+      ]
+    },
+    "expected_output": [
+      "0.1.0_alpha",
+      "0.1.3_alpha"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.1.3_alpha",
+        "0.1.0_alpha"
+      ]
+    },
+    "expected_output": [
+      "0.1.0_alpha",
+      "0.1.3_alpha"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.1.0_alpha2",
+        "0.1.0_alpha"
+      ]
+    },
+    "expected_output": [
+      "0.1.0_alpha",
+      "0.1.0_alpha2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.1.0_alpha",
+        "2.2.39-r1"
+      ]
+    },
+    "expected_output": [
+      "0.1.0_alpha",
+      "2.2.39-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.2.39-r1",
+        "1.0.4-r3"
+      ]
+    },
+    "expected_output": [
+      "1.0.4-r3",
+      "2.2.39-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.4-r3",
+        "1.0.4-r4"
+      ]
+    },
+    "expected_output": [
+      "1.0.4-r3",
+      "1.0.4-r4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.4-r4",
+        "1.6"
+      ]
+    },
+    "expected_output": [
+      "1.0.4-r4",
+      "1.6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.6",
+        "1.0.2"
+      ]
+    },
+    "expected_output": [
+      "1.0.2",
+      "1.6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.2",
+        "0.7-r1"
+      ]
+    },
+    "expected_output": [
+      "0.7-r1",
+      "1.0.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.7-r1",
+        "1.0.0"
+      ]
+    },
+    "expected_output": [
+      "0.7-r1",
+      "1.0.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.0",
+        "1.0.1"
+      ]
+    },
+    "expected_output": [
+      "1.0.0",
+      "1.0.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.1",
+        "1.1"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "1.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1",
+        "1.1_alpha1"
+      ]
+    },
+    "expected_output": [
+      "1.1_alpha1",
+      "1.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1_alpha1",
+        "1.2.1"
+      ]
+    },
+    "expected_output": [
+      "1.1_alpha1",
+      "1.2.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.1",
+        "1.2"
+      ]
+    },
+    "expected_output": [
+      "1.2",
+      "1.2.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2",
+        "1.3_alpha"
+      ]
+    },
+    "expected_output": [
+      "1.2",
+      "1.3_alpha"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.3_alpha",
+        "1.3_alpha2"
+      ]
+    },
+    "expected_output": [
+      "1.3_alpha",
+      "1.3_alpha2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.3_alpha2",
+        "1.3_alpha3"
+      ]
+    },
+    "expected_output": [
+      "1.3_alpha2",
+      "1.3_alpha3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.3_alpha8",
+        "0.6.0"
+      ]
+    },
+    "expected_output": [
+      "0.6.0",
+      "1.3_alpha8"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.6.0",
+        "0.6.1"
+      ]
+    },
+    "expected_output": [
+      "0.6.0",
+      "0.6.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.6.1",
+        "0.7.0"
+      ]
+    },
+    "expected_output": [
+      "0.6.1",
+      "0.7.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.7.0",
+        "0.8_beta1"
+      ]
+    },
+    "expected_output": [
+      "0.7.0",
+      "0.8_beta1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.8_beta1",
+        "0.8_beta2"
+      ]
+    },
+    "expected_output": [
+      "0.8_beta1",
+      "0.8_beta2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.8_beta4",
+        "4.8-r1"
+      ]
+    },
+    "expected_output": [
+      "0.8_beta4",
+      "4.8-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.8-r1",
+        "3.10.18-r1"
+      ]
+    },
+    "expected_output": [
+      "3.10.18-r1",
+      "4.8-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.10.18-r1",
+        "2.3.0b-r1"
+      ]
+    },
+    "expected_output": [
+      "2.3.0b-r1",
+      "3.10.18-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.3.0b-r1",
+        "2.3.0b-r2"
+      ]
+    },
+    "expected_output": [
+      "2.3.0b-r1",
+      "2.3.0b-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.3.0b-r2",
+        "2.3.0b-r3"
+      ]
+    },
+    "expected_output": [
+      "2.3.0b-r2",
+      "2.3.0b-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.3.0b-r3",
+        "2.3.0b-r4"
+      ]
+    },
+    "expected_output": [
+      "2.3.0b-r3",
+      "2.3.0b-r4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.3.0b-r4",
+        "0.12.1"
+      ]
+    },
+    "expected_output": [
+      "0.12.1",
+      "2.3.0b-r4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.12.1",
+        "0.12.2"
+      ]
+    },
+    "expected_output": [
+      "0.12.1",
+      "0.12.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.12.2",
+        "0.12.3"
+      ]
+    },
+    "expected_output": [
+      "0.12.2",
+      "0.12.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.12.3",
+        "0.12"
+      ]
+    },
+    "expected_output": [
+      "0.12",
+      "0.12.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.12",
+        "0.13_beta1"
+      ]
+    },
+    "expected_output": [
+      "0.12",
+      "0.13_beta1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.13_beta1",
+        "0.13_beta2"
+      ]
+    },
+    "expected_output": [
+      "0.13_beta1",
+      "0.13_beta2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.13_beta2",
+        "0.13_beta3"
+      ]
+    },
+    "expected_output": [
+      "0.13_beta2",
+      "0.13_beta3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.13_beta3",
+        "0.13_beta4"
+      ]
+    },
+    "expected_output": [
+      "0.13_beta3",
+      "0.13_beta4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.13_beta4",
+        "0.13_beta5"
+      ]
+    },
+    "expected_output": [
+      "0.13_beta4",
+      "0.13_beta5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.13_beta5",
+        "0.9.12"
+      ]
+    },
+    "expected_output": [
+      "0.9.12",
+      "0.13_beta5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.12",
+        "0.9.13"
+      ]
+    },
+    "expected_output": [
+      "0.9.12",
+      "0.9.13"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.13",
+        "0.9.12"
+      ]
+    },
+    "expected_output": [
+      "0.9.12",
+      "0.9.13"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.12",
+        "0.9.13"
+      ]
+    },
+    "expected_output": [
+      "0.9.12",
+      "0.9.13"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.13",
+        "0.0.16"
+      ]
+    },
+    "expected_output": [
+      "0.0.16",
+      "0.9.13"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.0.16",
+        "0.6"
+      ]
+    },
+    "expected_output": [
+      "0.0.16",
+      "0.6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.6",
+        "2.1.13-r3"
+      ]
+    },
+    "expected_output": [
+      "0.6",
+      "2.1.13-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.1.13-r3",
+        "2.1.15-r2"
+      ]
+    },
+    "expected_output": [
+      "2.1.13-r3",
+      "2.1.15-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.1.15-r2",
+        "2.1.15-r3"
+      ]
+    },
+    "expected_output": [
+      "2.1.15-r2",
+      "2.1.15-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.1.15-r3",
+        "1.2.11"
+      ]
+    },
+    "expected_output": [
+      "1.2.11",
+      "2.1.15-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.11",
+        "1.2.12.1"
+      ]
+    },
+    "expected_output": [
+      "1.2.11",
+      "1.2.12.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.12.1",
+        "1.2.13"
+      ]
+    },
+    "expected_output": [
+      "1.2.12.1",
+      "1.2.13"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.13",
+        "1.2.14-r1"
+      ]
+    },
+    "expected_output": [
+      "1.2.13",
+      "1.2.14-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.14-r1",
+        "0.7.1"
+      ]
+    },
+    "expected_output": [
+      "0.7.1",
+      "1.2.14-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.7.1",
+        "0.5.4"
+      ]
+    },
+    "expected_output": [
+      "0.5.4",
+      "0.7.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.5.4",
+        "0.7.0"
+      ]
+    },
+    "expected_output": [
+      "0.5.4",
+      "0.7.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.7.0",
+        "1.2.13"
+      ]
+    },
+    "expected_output": [
+      "0.7.0",
+      "1.2.13"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.13",
+        "1.0.8"
+      ]
+    },
+    "expected_output": [
+      "1.0.8",
+      "1.2.13"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.8",
+        "1.2.1"
+      ]
+    },
+    "expected_output": [
+      "1.0.8",
+      "1.2.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.1",
+        "0.7-r1"
+      ]
+    },
+    "expected_output": [
+      "0.7-r1",
+      "1.2.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.7-r1",
+        "2.4.32"
+      ]
+    },
+    "expected_output": [
+      "0.7-r1",
+      "2.4.32"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.4.32",
+        "2.8-r4"
+      ]
+    },
+    "expected_output": [
+      "2.4.32",
+      "2.8-r4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.8-r4",
+        "0.9.6"
+      ]
+    },
+    "expected_output": [
+      "0.9.6",
+      "2.8-r4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.6",
+        "0.2.0-r1"
+      ]
+    },
+    "expected_output": [
+      "0.2.0-r1",
+      "0.9.6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.2.0-r1",
+        "0.2.0-r1"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.2.0-r1",
+        "3.1_p16"
+      ]
+    },
+    "expected_output": [
+      "0.2.0-r1",
+      "3.1_p16"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.1_p16",
+        "3.1_p17"
+      ]
+    },
+    "expected_output": [
+      "3.1_p16",
+      "3.1_p17"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.1_p17",
+        "1.06-r6"
+      ]
+    },
+    "expected_output": [
+      "1.06-r6",
+      "3.1_p17"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.0",
+        "1.2.2-r1"
+      ]
+    },
+    "expected_output": [
+      "1.0.0",
+      "1.2.2-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.2-r1",
+        "1.2.2"
+      ]
+    },
+    "expected_output": [
+      "1.2.2",
+      "1.2.2-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.2",
+        "0.3-r1"
+      ]
+    },
+    "expected_output": [
+      "0.3-r1",
+      "1.2.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.3-r1",
+        "9.3.2-r4"
+      ]
+    },
+    "expected_output": [
+      "0.3-r1",
+      "9.3.2-r4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "9.3.2-r4",
+        "9.3.4-r2"
+      ]
+    },
+    "expected_output": [
+      "9.3.2-r4",
+      "9.3.4-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "9.3.4-r2",
+        "9.3.4"
+      ]
+    },
+    "expected_output": [
+      "9.3.4",
+      "9.3.4-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "9.3.4",
+        "9.3.2"
+      ]
+    },
+    "expected_output": [
+      "9.3.2",
+      "9.3.4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "9.3.2",
+        "9.3.4"
+      ]
+    },
+    "expected_output": [
+      "9.3.2",
+      "9.3.4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "9.3.4",
+        "1.1.3"
+      ]
+    },
+    "expected_output": [
+      "1.1.3",
+      "9.3.4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.3",
+        "2.16.1-r3"
+      ]
+    },
+    "expected_output": [
+      "1.1.3",
+      "2.16.1-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.16.1-r3",
+        "2.16.1-r3"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.16.1-r3",
+        "2.1.0-r2"
+      ]
+    },
+    "expected_output": [
+      "2.1.0-r2",
+      "2.16.1-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.1.0-r2",
+        "2.9.3-r1"
+      ]
+    },
+    "expected_output": [
+      "2.1.0-r2",
+      "2.9.3-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.9.3-r1",
+        "0.9-r1"
+      ]
+    },
+    "expected_output": [
+      "0.9-r1",
+      "2.9.3-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9-r1",
+        "0.8-r1"
+      ]
+    },
+    "expected_output": [
+      "0.8-r1",
+      "0.9-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.8-r1",
+        "1.0.6-r3"
+      ]
+    },
+    "expected_output": [
+      "0.8-r1",
+      "1.0.6-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.6-r3",
+        "0.11"
+      ]
+    },
+    "expected_output": [
+      "0.11",
+      "1.0.6-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.11",
+        "0.12"
+      ]
+    },
+    "expected_output": [
+      "0.11",
+      "0.12"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.12",
+        "1.2.1-r1"
+      ]
+    },
+    "expected_output": [
+      "0.12",
+      "1.2.1-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.1-r1",
+        "1.2.2.1"
+      ]
+    },
+    "expected_output": [
+      "1.2.1-r1",
+      "1.2.2.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.2.1",
+        "1.4.1-r1"
+      ]
+    },
+    "expected_output": [
+      "1.2.2.1",
+      "1.4.1-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.4.1-r1",
+        "1.4.1-r2"
+      ]
+    },
+    "expected_output": [
+      "1.4.1-r1",
+      "1.4.1-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.4.1-r2",
+        "1.2.2"
+      ]
+    },
+    "expected_output": [
+      "1.2.2",
+      "1.4.1-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.2",
+        "1.3"
+      ]
+    },
+    "expected_output": [
+      "1.2.2",
+      "1.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.3",
+        "1.0.3-r6"
+      ]
+    },
+    "expected_output": [
+      "1.0.3-r6",
+      "1.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.3-r6",
+        "1.0.4"
+      ]
+    },
+    "expected_output": [
+      "1.0.3-r6",
+      "1.0.4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.4",
+        "2.59"
+      ]
+    },
+    "expected_output": [
+      "1.0.4",
+      "2.59"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.59",
+        "20050718-r1"
+      ]
+    },
+    "expected_output": [
+      "2.59",
+      "20050718-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "20050718-r1",
+        "20050718-r2"
+      ]
+    },
+    "expected_output": [
+      "20050718-r1",
+      "20050718-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "20050718-r2",
+        "3.9.8-r5"
+      ]
+    },
+    "expected_output": [
+      "3.9.8-r5",
+      "20050718-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.9.8-r5",
+        "2.01.01_alpha10"
+      ]
+    },
+    "expected_output": [
+      "2.01.01_alpha10",
+      "3.9.8-r5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.01.01_alpha10",
+        "0.94"
+      ]
+    },
+    "expected_output": [
+      "0.94",
+      "2.01.01_alpha10"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.94",
+        "1.0"
+      ]
+    },
+    "expected_output": [
+      "0.94",
+      "1.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0",
+        "0.99.3.20040818"
+      ]
+    },
+    "expected_output": [
+      "0.99.3.20040818",
+      "1.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.99.3.20040818",
+        "0.7"
+      ]
+    },
+    "expected_output": [
+      "0.7",
+      "0.99.3.20040818"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.7",
+        "1.21-r1"
+      ]
+    },
+    "expected_output": [
+      "0.7",
+      "1.21-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.21-r1",
+        "0.13"
+      ]
+    },
+    "expected_output": [
+      "0.13",
+      "1.21-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.13",
+        "0.90.1-r1"
+      ]
+    },
+    "expected_output": [
+      "0.13",
+      "0.90.1-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.90.1-r1",
+        "0.10.2"
+      ]
+    },
+    "expected_output": [
+      "0.10.2",
+      "0.90.1-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.10.2",
+        "0.10.3"
+      ]
+    },
+    "expected_output": [
+      "0.10.2",
+      "0.10.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.10.3",
+        "1.6"
+      ]
+    },
+    "expected_output": [
+      "0.10.3",
+      "1.6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.6",
+        "1.39"
+      ]
+    },
+    "expected_output": [
+      "1.6",
+      "1.39"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.39",
+        "1.00_beta2"
+      ]
+    },
+    "expected_output": [
+      "1.00_beta2",
+      "1.39"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.00_beta2",
+        "0.9.2"
+      ]
+    },
+    "expected_output": [
+      "0.9.2",
+      "1.00_beta2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.2",
+        "5.94-r1"
+      ]
+    },
+    "expected_output": [
+      "0.9.2",
+      "5.94-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "5.94-r1",
+        "6.4"
+      ]
+    },
+    "expected_output": [
+      "5.94-r1",
+      "6.4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "6.4",
+        "2.6-r5"
+      ]
+    },
+    "expected_output": [
+      "2.6-r5",
+      "6.4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.6-r5",
+        "1.4"
+      ]
+    },
+    "expected_output": [
+      "1.4",
+      "2.6-r5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.4",
+        "2.8.9-r1"
+      ]
+    },
+    "expected_output": [
+      "1.4",
+      "2.8.9-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.8.9-r1",
+        "2.8.9"
+      ]
+    },
+    "expected_output": [
+      "2.8.9",
+      "2.8.9-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.8.9",
+        "1.1"
+      ]
+    },
+    "expected_output": [
+      "1.1",
+      "2.8.9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1",
+        "1.0.3-r2"
+      ]
+    },
+    "expected_output": [
+      "1.0.3-r2",
+      "1.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.3-r2",
+        "1.3.4-r3"
+      ]
+    },
+    "expected_output": [
+      "1.0.3-r2",
+      "1.3.4-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.3.4-r3",
+        "2.2"
+      ]
+    },
+    "expected_output": [
+      "1.3.4-r3",
+      "2.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.2",
+        "1.2.6"
+      ]
+    },
+    "expected_output": [
+      "1.2.6",
+      "2.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.6",
+        "7.15.1-r1"
+      ]
+    },
+    "expected_output": [
+      "1.2.6",
+      "7.15.1-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "7.15.1-r1",
+        "1.02"
+      ]
+    },
+    "expected_output": [
+      "1.02",
+      "7.15.1-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.02",
+        "1.03-r1"
+      ]
+    },
+    "expected_output": [
+      "1.02",
+      "1.03-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.03-r1",
+        "1.12.12-r2"
+      ]
+    },
+    "expected_output": [
+      "1.03-r1",
+      "1.12.12-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.12.12-r2",
+        "2.8.0.6-r1"
+      ]
+    },
+    "expected_output": [
+      "1.12.12-r2",
+      "2.8.0.6-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.8.0.6-r1",
+        "0.5.2.7"
+      ]
+    },
+    "expected_output": [
+      "0.5.2.7",
+      "2.8.0.6-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.5.2.7",
+        "4.2.52_p2-r1"
+      ]
+    },
+    "expected_output": [
+      "0.5.2.7",
+      "4.2.52_p2-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.2.52_p2-r1",
+        "4.2.52_p4-r2"
+      ]
+    },
+    "expected_output": [
+      "4.2.52_p2-r1",
+      "4.2.52_p4-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.2.52_p4-r2",
+        "1.02.07"
+      ]
+    },
+    "expected_output": [
+      "1.02.07",
+      "4.2.52_p4-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.02.07",
+        "1.02.10-r1"
+      ]
+    },
+    "expected_output": [
+      "1.02.07",
+      "1.02.10-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.02.10-r1",
+        "3.0.3-r9"
+      ]
+    },
+    "expected_output": [
+      "1.02.10-r1",
+      "3.0.3-r9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.0.3-r9",
+        "2.0.5-r1"
+      ]
+    },
+    "expected_output": [
+      "2.0.5-r1",
+      "3.0.3-r9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.0.5-r1",
+        "4.5"
+      ]
+    },
+    "expected_output": [
+      "2.0.5-r1",
+      "4.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.5",
+        "2.8.7-r1"
+      ]
+    },
+    "expected_output": [
+      "2.8.7-r1",
+      "4.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.8.7-r1",
+        "1.0.5"
+      ]
+    },
+    "expected_output": [
+      "1.0.5",
+      "2.8.7-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.5",
+        "8"
+      ]
+    },
+    "expected_output": [
+      "1.0.5",
+      "8"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "8",
+        "9"
+      ]
+    },
+    "expected_output": [
+      "8",
+      "9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "9",
+        "2.18.3-r10"
+      ]
+    },
+    "expected_output": [
+      "2.18.3-r10",
+      "9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.18.3-r10",
+        "1.05-r18"
+      ]
+    },
+    "expected_output": [
+      "1.05-r18",
+      "2.18.3-r10"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.05-r18",
+        "1.05-r19"
+      ]
+    },
+    "expected_output": [
+      "1.05-r18",
+      "1.05-r19"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.05-r19",
+        "2.2.5"
+      ]
+    },
+    "expected_output": [
+      "1.05-r19",
+      "2.2.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.2.5",
+        "2.8"
+      ]
+    },
+    "expected_output": [
+      "2.2.5",
+      "2.8"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.8",
+        "2.20.1"
+      ]
+    },
+    "expected_output": [
+      "2.8",
+      "2.20.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.20.1",
+        "2.20.3"
+      ]
+    },
+    "expected_output": [
+      "2.20.1",
+      "2.20.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.20.3",
+        "2.31"
+      ]
+    },
+    "expected_output": [
+      "2.20.3",
+      "2.31"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.31",
+        "2.34"
+      ]
+    },
+    "expected_output": [
+      "2.31",
+      "2.34"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.34",
+        "2.38"
+      ]
+    },
+    "expected_output": [
+      "2.34",
+      "2.38"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.38",
+        "20050405"
+      ]
+    },
+    "expected_output": [
+      "2.38",
+      "20050405"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "20050405",
+        "1.8"
+      ]
+    },
+    "expected_output": [
+      "1.8",
+      "20050405"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.8",
+        "2.11-r1"
+      ]
+    },
+    "expected_output": [
+      "1.8",
+      "2.11-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.11-r1",
+        "2.11"
+      ]
+    },
+    "expected_output": [
+      "2.11",
+      "2.11-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.11",
+        "0.1.6-r3"
+      ]
+    },
+    "expected_output": [
+      "0.1.6-r3",
+      "2.11"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.1.6-r3",
+        "0.47-r1"
+      ]
+    },
+    "expected_output": [
+      "0.1.6-r3",
+      "0.47-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.47-r1",
+        "0.49"
+      ]
+    },
+    "expected_output": [
+      "0.47-r1",
+      "0.49"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.49",
+        "3.6.8-r2"
+      ]
+    },
+    "expected_output": [
+      "0.49",
+      "3.6.8-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.6.8-r2",
+        "1.39"
+      ]
+    },
+    "expected_output": [
+      "1.39",
+      "3.6.8-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.39",
+        "2.43"
+      ]
+    },
+    "expected_output": [
+      "1.39",
+      "2.43"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.43",
+        "2.0.6-r1"
+      ]
+    },
+    "expected_output": [
+      "2.0.6-r1",
+      "2.43"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.0.6-r1",
+        "0.2-r6"
+      ]
+    },
+    "expected_output": [
+      "0.2-r6",
+      "2.0.6-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.2-r6",
+        "0.4"
+      ]
+    },
+    "expected_output": [
+      "0.2-r6",
+      "0.4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.4",
+        "1.0.0"
+      ]
+    },
+    "expected_output": [
+      "0.4",
+      "1.0.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.0",
+        "10-r1"
+      ]
+    },
+    "expected_output": [
+      "1.0.0",
+      "10-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "10-r1",
+        "4"
+      ]
+    },
+    "expected_output": [
+      "4",
+      "10-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4",
+        "0.7.3-r2"
+      ]
+    },
+    "expected_output": [
+      "0.7.3-r2",
+      "4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.7.3-r2",
+        "0.7.3"
+      ]
+    },
+    "expected_output": [
+      "0.7.3",
+      "0.7.3-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.7.3",
+        "1.95.8"
+      ]
+    },
+    "expected_output": [
+      "0.7.3",
+      "1.95.8"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.95.8",
+        "1.1.19"
+      ]
+    },
+    "expected_output": [
+      "1.1.19",
+      "1.95.8"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.19",
+        "1.1.5"
+      ]
+    },
+    "expected_output": [
+      "1.1.5",
+      "1.1.19"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.5",
+        "6.3.2-r1"
+      ]
+    },
+    "expected_output": [
+      "1.1.5",
+      "6.3.2-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "6.3.2-r1",
+        "6.3.3"
+      ]
+    },
+    "expected_output": [
+      "6.3.2-r1",
+      "6.3.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "6.3.3",
+        "4.17-r1"
+      ]
+    },
+    "expected_output": [
+      "4.17-r1",
+      "6.3.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.17-r1",
+        "4.18"
+      ]
+    },
+    "expected_output": [
+      "4.17-r1",
+      "4.18"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.18",
+        "4.19"
+      ]
+    },
+    "expected_output": [
+      "4.18",
+      "4.19"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.19",
+        "4.3.0"
+      ]
+    },
+    "expected_output": [
+      "4.3.0",
+      "4.19"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.3.0",
+        "4.3.2-r1"
+      ]
+    },
+    "expected_output": [
+      "4.3.0",
+      "4.3.2-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.3.2-r1",
+        "4.3.2"
+      ]
+    },
+    "expected_output": [
+      "4.3.2",
+      "4.3.2-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.3.2",
+        "0.68-r3"
+      ]
+    },
+    "expected_output": [
+      "0.68-r3",
+      "4.3.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.68-r3",
+        "1.0.0"
+      ]
+    },
+    "expected_output": [
+      "0.68-r3",
+      "1.0.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.0",
+        "1.0.1"
+      ]
+    },
+    "expected_output": [
+      "1.0.0",
+      "1.0.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.1",
+        "1.0.0"
+      ]
+    },
+    "expected_output": [
+      "1.0.0",
+      "1.0.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.0",
+        "1.0.0"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.0",
+        "1.0.1"
+      ]
+    },
+    "expected_output": [
+      "1.0.0",
+      "1.0.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.1",
+        "2.3.2-r1"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "2.3.2-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.3.2-r1",
+        "2.4.2"
+      ]
+    },
+    "expected_output": [
+      "2.3.2-r1",
+      "2.4.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.4.2",
+        "20060720"
+      ]
+    },
+    "expected_output": [
+      "2.4.2",
+      "20060720"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "20060720",
+        "3.0.20060720"
+      ]
+    },
+    "expected_output": [
+      "3.0.20060720",
+      "20060720"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.0.20060720",
+        "20060720"
+      ]
+    },
+    "expected_output": [
+      "3.0.20060720",
+      "20060720"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "20060720",
+        "1.1"
+      ]
+    },
+    "expected_output": [
+      "1.1",
+      "20060720"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1",
+        "1.1"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1",
+        "1.1.1-r1"
+      ]
+    },
+    "expected_output": [
+      "1.1",
+      "1.1.1-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.1-r1",
+        "1.1.3-r1"
+      ]
+    },
+    "expected_output": [
+      "1.1.1-r1",
+      "1.1.3-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.3-r1",
+        "1.1.3-r2"
+      ]
+    },
+    "expected_output": [
+      "1.1.3-r1",
+      "1.1.3-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.3-r2",
+        "2.1.10-r2"
+      ]
+    },
+    "expected_output": [
+      "1.1.3-r2",
+      "2.1.10-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.1.10-r2",
+        "0.7.18-r2"
+      ]
+    },
+    "expected_output": [
+      "0.7.18-r2",
+      "2.1.10-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.7.18-r2",
+        "0.17-r6"
+      ]
+    },
+    "expected_output": [
+      "0.7.18-r2",
+      "0.17-r6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.17-r6",
+        "2.6.1"
+      ]
+    },
+    "expected_output": [
+      "0.17-r6",
+      "2.6.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.6.1",
+        "2.6.3"
+      ]
+    },
+    "expected_output": [
+      "2.6.1",
+      "2.6.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.6.3",
+        "3.1.5-r2"
+      ]
+    },
+    "expected_output": [
+      "2.6.3",
+      "3.1.5-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.1.5-r2",
+        "3.4.6-r1"
+      ]
+    },
+    "expected_output": [
+      "3.1.5-r2",
+      "3.4.6-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.4.6-r1",
+        "3.4.6-r2"
+      ]
+    },
+    "expected_output": [
+      "3.4.6-r1",
+      "3.4.6-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.4.6-r2",
+        "3.4.6-r2"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.4.6-r2",
+        "2.0.33"
+      ]
+    },
+    "expected_output": [
+      "2.0.33",
+      "3.4.6-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.0.33",
+        "2.0.34"
+      ]
+    },
+    "expected_output": [
+      "2.0.33",
+      "2.0.34"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.0.34",
+        "1.8.3-r2"
+      ]
+    },
+    "expected_output": [
+      "1.8.3-r2",
+      "2.0.34"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.8.3-r2",
+        "1.8.3-r3"
+      ]
+    },
+    "expected_output": [
+      "1.8.3-r2",
+      "1.8.3-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.8.3-r3",
+        "4.1"
+      ]
+    },
+    "expected_output": [
+      "1.8.3-r3",
+      "4.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.1",
+        "8.54"
+      ]
+    },
+    "expected_output": [
+      "4.1",
+      "8.54"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "8.54",
+        "4.1.4"
+      ]
+    },
+    "expected_output": [
+      "4.1.4",
+      "8.54"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.1.4",
+        "1.2.10-r5"
+      ]
+    },
+    "expected_output": [
+      "1.2.10-r5",
+      "4.1.4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.10-r5",
+        "4.1.4-r3"
+      ]
+    },
+    "expected_output": [
+      "1.2.10-r5",
+      "4.1.4-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.1.4-r3",
+        "4.1.4-r3"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.1.4-r3",
+        "4.2.1"
+      ]
+    },
+    "expected_output": [
+      "4.1.4-r3",
+      "4.2.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.2.1",
+        "4.1.0"
+      ]
+    },
+    "expected_output": [
+      "4.1.0",
+      "4.2.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.1.0",
+        "8.11"
+      ]
+    },
+    "expected_output": [
+      "4.1.0",
+      "8.11"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "8.11",
+        "1.4.4-r1"
+      ]
+    },
+    "expected_output": [
+      "1.4.4-r1",
+      "8.11"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.4.4-r1",
+        "2.1.9.200602141850"
+      ]
+    },
+    "expected_output": [
+      "1.4.4-r1",
+      "2.1.9.200602141850"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.1.9.200602141850",
+        "1.6"
+      ]
+    },
+    "expected_output": [
+      "1.6",
+      "2.1.9.200602141850"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.6",
+        "2.5.1-r8"
+      ]
+    },
+    "expected_output": [
+      "1.6",
+      "2.5.1-r8"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.5.1-r8",
+        "2.5.1a-r1"
+      ]
+    },
+    "expected_output": [
+      "2.5.1-r8",
+      "2.5.1a-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.5.1a-r1",
+        "1.19.2-r1"
+      ]
+    },
+    "expected_output": [
+      "1.19.2-r1",
+      "2.5.1a-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.19.2-r1",
+        "0.97-r2"
+      ]
+    },
+    "expected_output": [
+      "0.97-r2",
+      "1.19.2-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.97-r2",
+        "0.97-r3"
+      ]
+    },
+    "expected_output": [
+      "0.97-r2",
+      "0.97-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.97-r3",
+        "1.3.5-r10"
+      ]
+    },
+    "expected_output": [
+      "0.97-r3",
+      "1.3.5-r10"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.3.5-r10",
+        "1.3.5-r8"
+      ]
+    },
+    "expected_output": [
+      "1.3.5-r8",
+      "1.3.5-r10"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.3.5-r8",
+        "1.3.5-r9"
+      ]
+    },
+    "expected_output": [
+      "1.3.5-r8",
+      "1.3.5-r9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.3.5-r9",
+        "1.0"
+      ]
+    },
+    "expected_output": [
+      "1.0",
+      "1.3.5-r9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0",
+        "1.1"
+      ]
+    },
+    "expected_output": [
+      "1.0",
+      "1.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1",
+        "0.9.11"
+      ]
+    },
+    "expected_output": [
+      "0.9.11",
+      "1.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.11",
+        "0.9.12"
+      ]
+    },
+    "expected_output": [
+      "0.9.11",
+      "0.9.12"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.12",
+        "0.9.13"
+      ]
+    },
+    "expected_output": [
+      "0.9.12",
+      "0.9.13"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.13",
+        "0.9.14"
+      ]
+    },
+    "expected_output": [
+      "0.9.13",
+      "0.9.14"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.14",
+        "0.9.15"
+      ]
+    },
+    "expected_output": [
+      "0.9.14",
+      "0.9.15"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.15",
+        "0.9.16"
+      ]
+    },
+    "expected_output": [
+      "0.9.15",
+      "0.9.16"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.16",
+        "0.3-r2"
+      ]
+    },
+    "expected_output": [
+      "0.3-r2",
+      "0.9.16"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.3-r2",
+        "6.3"
+      ]
+    },
+    "expected_output": [
+      "0.3-r2",
+      "6.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "6.3",
+        "6.6"
+      ]
+    },
+    "expected_output": [
+      "6.3",
+      "6.6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "6.6",
+        "6.9"
+      ]
+    },
+    "expected_output": [
+      "6.6",
+      "6.9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "6.9",
+        "0.7.2-r3"
+      ]
+    },
+    "expected_output": [
+      "0.7.2-r3",
+      "6.9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.7.2-r3",
+        "1.2.10"
+      ]
+    },
+    "expected_output": [
+      "0.7.2-r3",
+      "1.2.10"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.10",
+        "20040923-r2"
+      ]
+    },
+    "expected_output": [
+      "1.2.10",
+      "20040923-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "20040923-r2",
+        "20040401"
+      ]
+    },
+    "expected_output": [
+      "20040401",
+      "20040923-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "20040401",
+        "2.0.0_rc3-r1"
+      ]
+    },
+    "expected_output": [
+      "2.0.0_rc3-r1",
+      "20040401"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.0.0_rc3-r1",
+        "1.5"
+      ]
+    },
+    "expected_output": [
+      "1.5",
+      "2.0.0_rc3-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.5",
+        "4.4"
+      ]
+    },
+    "expected_output": [
+      "1.5",
+      "4.4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.4",
+        "1.0.1"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "4.4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.1",
+        "2.2.0"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "2.2.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.2.0",
+        "1.1.0-r2"
+      ]
+    },
+    "expected_output": [
+      "1.1.0-r2",
+      "2.2.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.0-r2",
+        "0.3"
+      ]
+    },
+    "expected_output": [
+      "0.3",
+      "1.1.0-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.3",
+        "20020207-r2"
+      ]
+    },
+    "expected_output": [
+      "0.3",
+      "20020207-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "20020207-r2",
+        "1.31-r2"
+      ]
+    },
+    "expected_output": [
+      "1.31-r2",
+      "20020207-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.31-r2",
+        "3.7"
+      ]
+    },
+    "expected_output": [
+      "1.31-r2",
+      "3.7"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.7",
+        "2.0.1"
+      ]
+    },
+    "expected_output": [
+      "2.0.1",
+      "3.7"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.0.1",
+        "2.0.2"
+      ]
+    },
+    "expected_output": [
+      "2.0.1",
+      "2.0.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.0.2",
+        "0.99.163"
+      ]
+    },
+    "expected_output": [
+      "0.99.163",
+      "2.0.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.99.163",
+        "2.6.15.20060110"
+      ]
+    },
+    "expected_output": [
+      "0.99.163",
+      "2.6.15.20060110"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.6.15.20060110",
+        "2.6.16.20060323"
+      ]
+    },
+    "expected_output": [
+      "2.6.15.20060110",
+      "2.6.16.20060323"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.6.16.20060323",
+        "2.6.19.20061214"
+      ]
+    },
+    "expected_output": [
+      "2.6.16.20060323",
+      "2.6.19.20061214"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.6.19.20061214",
+        "0.6.2-r1"
+      ]
+    },
+    "expected_output": [
+      "0.6.2-r1",
+      "2.6.19.20061214"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.6.2-r1",
+        "0.6.3"
+      ]
+    },
+    "expected_output": [
+      "0.6.2-r1",
+      "0.6.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.6.3",
+        "0.6.5"
+      ]
+    },
+    "expected_output": [
+      "0.6.3",
+      "0.6.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.6.5",
+        "1.3.5-r1"
+      ]
+    },
+    "expected_output": [
+      "0.6.5",
+      "1.3.5-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.3.5-r1",
+        "1.3.5-r4"
+      ]
+    },
+    "expected_output": [
+      "1.3.5-r1",
+      "1.3.5-r4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.3.5-r4",
+        "3.0.0-r2"
+      ]
+    },
+    "expected_output": [
+      "1.3.5-r4",
+      "3.0.0-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "20060512",
+        "1.24"
+      ]
+    },
+    "expected_output": [
+      "1.24",
+      "20060512"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.24",
+        "0.9.16-r1"
+      ]
+    },
+    "expected_output": [
+      "0.9.16-r1",
+      "1.24"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.16-r1",
+        "3.9_pre20060124"
+      ]
+    },
+    "expected_output": [
+      "0.9.16-r1",
+      "3.9_pre20060124"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.9_pre20060124",
+        "0.01"
+      ]
+    },
+    "expected_output": [
+      "0.01",
+      "3.9_pre20060124"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.01",
+        "0.06"
+      ]
+    },
+    "expected_output": [
+      "0.01",
+      "0.06"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.06",
+        "1.1.7"
+      ]
+    },
+    "expected_output": [
+      "0.06",
+      "1.1.7"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.7",
+        "6b-r7"
+      ]
+    },
+    "expected_output": [
+      "1.1.7",
+      "6b-r7"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "6b-r7",
+        "1.12-r7"
+      ]
+    },
+    "expected_output": [
+      "1.12-r7",
+      "6b-r7"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.12-r7",
+        "1.12-r8"
+      ]
+    },
+    "expected_output": [
+      "1.12-r7",
+      "1.12-r8"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.12-r8",
+        "1.1.12"
+      ]
+    },
+    "expected_output": [
+      "1.1.12",
+      "1.12-r8"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.12",
+        "1.1.13"
+      ]
+    },
+    "expected_output": [
+      "1.1.12",
+      "1.1.13"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.13",
+        "0.3"
+      ]
+    },
+    "expected_output": [
+      "0.3",
+      "1.1.13"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.3",
+        "0.5"
+      ]
+    },
+    "expected_output": [
+      "0.3",
+      "0.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.5",
+        "3.96.1"
+      ]
+    },
+    "expected_output": [
+      "0.5",
+      "3.96.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.96.1",
+        "3.97"
+      ]
+    },
+    "expected_output": [
+      "3.96.1",
+      "3.97"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.97",
+        "0.10.0-r1"
+      ]
+    },
+    "expected_output": [
+      "0.10.0-r1",
+      "3.97"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.10.0-r1",
+        "0.10.0"
+      ]
+    },
+    "expected_output": [
+      "0.10.0",
+      "0.10.0-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.10.0",
+        "0.10.1_rc1"
+      ]
+    },
+    "expected_output": [
+      "0.10.0",
+      "0.10.1_rc1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.10.1_rc1",
+        "0.9.11"
+      ]
+    },
+    "expected_output": [
+      "0.9.11",
+      "0.10.1_rc1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.11",
+        "394"
+      ]
+    },
+    "expected_output": [
+      "0.9.11",
+      "394"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "394",
+        "2.31"
+      ]
+    },
+    "expected_output": [
+      "2.31",
+      "394"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.31",
+        "1.0.1"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "2.31"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.1",
+        "1.0.1"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.1",
+        "1.0.3"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "1.0.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.3",
+        "1.0.2"
+      ]
+    },
+    "expected_output": [
+      "1.0.2",
+      "1.0.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.2",
+        "1.0.2"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.2",
+        "1.0.1"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "1.0.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.1",
+        "1.0.1"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.1",
+        "1.2.2"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "1.2.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.2",
+        "2.1.10"
+      ]
+    },
+    "expected_output": [
+      "1.2.2",
+      "2.1.10"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.1.10",
+        "1.0.1"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "2.1.10"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.1",
+        "1.0.2"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "1.0.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.2",
+        "3.5.5"
+      ]
+    },
+    "expected_output": [
+      "1.0.2",
+      "3.5.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.5.5",
+        "1.1.1"
+      ]
+    },
+    "expected_output": [
+      "1.1.1",
+      "3.5.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.1",
+        "0.9.1"
+      ]
+    },
+    "expected_output": [
+      "0.9.1",
+      "1.1.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.1",
+        "1.0.2"
+      ]
+    },
+    "expected_output": [
+      "0.9.1",
+      "1.0.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.2",
+        "1.0.1"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "1.0.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.1",
+        "1.0.2"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "1.0.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.2",
+        "1.0.1"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "1.0.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.1",
+        "1.0.1"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.1",
+        "1.0.5"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "1.0.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.5",
+        "0.8.5"
+      ]
+    },
+    "expected_output": [
+      "0.8.5",
+      "1.0.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.8.5",
+        "0.8.6-r3"
+      ]
+    },
+    "expected_output": [
+      "0.8.5",
+      "0.8.6-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.8.6-r3",
+        "2.3.17"
+      ]
+    },
+    "expected_output": [
+      "0.8.6-r3",
+      "2.3.17"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.3.17",
+        "1.10-r5"
+      ]
+    },
+    "expected_output": [
+      "1.10-r5",
+      "2.3.17"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.10-r5",
+        "1.10-r9"
+      ]
+    },
+    "expected_output": [
+      "1.10-r5",
+      "1.10-r9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.10-r9",
+        "2.0.2"
+      ]
+    },
+    "expected_output": [
+      "1.10-r9",
+      "2.0.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.0.2",
+        "1.1a"
+      ]
+    },
+    "expected_output": [
+      "1.1a",
+      "2.0.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1a",
+        "1.3a"
+      ]
+    },
+    "expected_output": [
+      "1.1a",
+      "1.3a"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.3a",
+        "1.0.2"
+      ]
+    },
+    "expected_output": [
+      "1.0.2",
+      "1.3a"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.2",
+        "1.2.2-r1"
+      ]
+    },
+    "expected_output": [
+      "1.0.2",
+      "1.2.2-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.2-r1",
+        "1.0-r1"
+      ]
+    },
+    "expected_output": [
+      "1.0-r1",
+      "1.2.2-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0-r1",
+        "0.15.1b"
+      ]
+    },
+    "expected_output": [
+      "0.15.1b",
+      "1.0-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.15.1b",
+        "1.0.1"
+      ]
+    },
+    "expected_output": [
+      "0.15.1b",
+      "1.0.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.1",
+        "1.06-r1"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "1.06-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.06-r1",
+        "1.06-r2"
+      ]
+    },
+    "expected_output": [
+      "1.06-r1",
+      "1.06-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.06-r2",
+        "0.15.1b-r2"
+      ]
+    },
+    "expected_output": [
+      "0.15.1b-r2",
+      "1.06-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.15.1b-r2",
+        "0.15.1b"
+      ]
+    },
+    "expected_output": [
+      "0.15.1b",
+      "0.15.1b-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.15.1b",
+        "2.5.7"
+      ]
+    },
+    "expected_output": [
+      "0.15.1b",
+      "2.5.7"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.5.7",
+        "1.1.2.1-r1"
+      ]
+    },
+    "expected_output": [
+      "1.1.2.1-r1",
+      "2.5.7"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.2.1-r1",
+        "0.0.31"
+      ]
+    },
+    "expected_output": [
+      "0.0.31",
+      "1.1.2.1-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.0.31",
+        "0.0.50"
+      ]
+    },
+    "expected_output": [
+      "0.0.31",
+      "0.0.50"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.0.50",
+        "0.0.16"
+      ]
+    },
+    "expected_output": [
+      "0.0.16",
+      "0.0.50"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.0.16",
+        "0.0.25"
+      ]
+    },
+    "expected_output": [
+      "0.0.16",
+      "0.0.25"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.0.25",
+        "0.17"
+      ]
+    },
+    "expected_output": [
+      "0.0.25",
+      "0.17"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.17",
+        "0.5.0"
+      ]
+    },
+    "expected_output": [
+      "0.5.0",
+      "0.17"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.5.0",
+        "1.1.2"
+      ]
+    },
+    "expected_output": [
+      "0.5.0",
+      "1.1.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.2",
+        "1.1.3"
+      ]
+    },
+    "expected_output": [
+      "1.1.2",
+      "1.1.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.3",
+        "1.1.20"
+      ]
+    },
+    "expected_output": [
+      "1.1.3",
+      "1.1.20"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.20",
+        "0.9.4"
+      ]
+    },
+    "expected_output": [
+      "0.9.4",
+      "1.1.20"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.4",
+        "0.9.5"
+      ]
+    },
+    "expected_output": [
+      "0.9.4",
+      "0.9.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.5",
+        "6.3"
+      ]
+    },
+    "expected_output": [
+      "0.9.5",
+      "6.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "6.3",
+        "6.6"
+      ]
+    },
+    "expected_output": [
+      "6.3",
+      "6.6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "6.6",
+        "6.3"
+      ]
+    },
+    "expected_output": [
+      "6.3",
+      "6.6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "6.3",
+        "6.6"
+      ]
+    },
+    "expected_output": [
+      "6.3",
+      "6.6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "6.6",
+        "1.2.12-r1"
+      ]
+    },
+    "expected_output": [
+      "1.2.12-r1",
+      "6.6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.12-r1",
+        "1.2.13"
+      ]
+    },
+    "expected_output": [
+      "1.2.12-r1",
+      "1.2.13"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.13",
+        "1.2.14"
+      ]
+    },
+    "expected_output": [
+      "1.2.13",
+      "1.2.14"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.14",
+        "1.2.15"
+      ]
+    },
+    "expected_output": [
+      "1.2.14",
+      "1.2.15"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.15",
+        "8.0.12"
+      ]
+    },
+    "expected_output": [
+      "1.2.15",
+      "8.0.12"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "8.0.12",
+        "8.0.9"
+      ]
+    },
+    "expected_output": [
+      "8.0.9",
+      "8.0.12"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "8.0.9",
+        "1.2.3-r1"
+      ]
+    },
+    "expected_output": [
+      "1.2.3-r1",
+      "8.0.9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.3-r1",
+        "1.2.4-r1"
+      ]
+    },
+    "expected_output": [
+      "1.2.3-r1",
+      "1.2.4-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.4-r1",
+        "0.1"
+      ]
+    },
+    "expected_output": [
+      "0.1",
+      "1.2.4-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.1",
+        "0.3.5"
+      ]
+    },
+    "expected_output": [
+      "0.1",
+      "0.3.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.3.5",
+        "1.5.22"
+      ]
+    },
+    "expected_output": [
+      "0.3.5",
+      "1.5.22"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.5.22",
+        "0.1.11"
+      ]
+    },
+    "expected_output": [
+      "0.1.11",
+      "1.5.22"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.1.11",
+        "0.1.12"
+      ]
+    },
+    "expected_output": [
+      "0.1.11",
+      "0.1.12"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.1.12",
+        "1.1.4.1"
+      ]
+    },
+    "expected_output": [
+      "0.1.12",
+      "1.1.4.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.4.1",
+        "1.1.0"
+      ]
+    },
+    "expected_output": [
+      "1.1.0",
+      "1.1.4.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.0",
+        "1.1.2"
+      ]
+    },
+    "expected_output": [
+      "1.1.0",
+      "1.1.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.2",
+        "1.0.3"
+      ]
+    },
+    "expected_output": [
+      "1.0.3",
+      "1.1.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.3",
+        "1.0.2"
+      ]
+    },
+    "expected_output": [
+      "1.0.2",
+      "1.0.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.2",
+        "2.6.26"
+      ]
+    },
+    "expected_output": [
+      "1.0.2",
+      "2.6.26"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.6.26",
+        "2.6.27"
+      ]
+    },
+    "expected_output": [
+      "2.6.26",
+      "2.6.27"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.6.27",
+        "1.1.17"
+      ]
+    },
+    "expected_output": [
+      "1.1.17",
+      "2.6.27"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.17",
+        "1.4.11"
+      ]
+    },
+    "expected_output": [
+      "1.1.17",
+      "1.4.11"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.4.11",
+        "22.7-r1"
+      ]
+    },
+    "expected_output": [
+      "1.4.11",
+      "22.7-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "22.7-r1",
+        "22.7.3-r1"
+      ]
+    },
+    "expected_output": [
+      "22.7-r1",
+      "22.7.3-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "22.7.3-r1",
+        "22.7"
+      ]
+    },
+    "expected_output": [
+      "22.7",
+      "22.7.3-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "22.7",
+        "2.1_pre20"
+      ]
+    },
+    "expected_output": [
+      "2.1_pre20",
+      "22.7"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.1_pre20",
+        "2.1_pre26"
+      ]
+    },
+    "expected_output": [
+      "2.1_pre20",
+      "2.1_pre26"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.1_pre26",
+        "0.2.3-r2"
+      ]
+    },
+    "expected_output": [
+      "0.2.3-r2",
+      "2.1_pre26"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.2.3-r2",
+        "0.2.2"
+      ]
+    },
+    "expected_output": [
+      "0.2.2",
+      "0.2.3-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.2.2",
+        "2.10.0"
+      ]
+    },
+    "expected_output": [
+      "0.2.2",
+      "2.10.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.10.0",
+        "2.10.1"
+      ]
+    },
+    "expected_output": [
+      "2.10.0",
+      "2.10.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.77",
+        "0.17"
+      ]
+    },
+    "expected_output": [
+      "0.17",
+      "4.77"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.17",
+        "5.1.1-r1"
+      ]
+    },
+    "expected_output": [
+      "0.17",
+      "5.1.1-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "5.1.1-r1",
+        "5.1.1-r2"
+      ]
+    },
+    "expected_output": [
+      "5.1.1-r1",
+      "5.1.1-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "5.1.1-r2",
+        "5.1.1"
+      ]
+    },
+    "expected_output": [
+      "5.1.1",
+      "5.1.1-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "5.1.1",
+        "1.2"
+      ]
+    },
+    "expected_output": [
+      "1.2",
+      "5.1.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2",
+        "5.1"
+      ]
+    },
+    "expected_output": [
+      "1.2",
+      "5.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "5.1",
+        "2.02.06"
+      ]
+    },
+    "expected_output": [
+      "2.02.06",
+      "5.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.02.06",
+        "2.02.10"
+      ]
+    },
+    "expected_output": [
+      "2.02.06",
+      "2.02.10"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.02.10",
+        "2.8.5-r3"
+      ]
+    },
+    "expected_output": [
+      "2.02.10",
+      "2.8.5-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.8.5-r3",
+        "2.8.6-r1"
+      ]
+    },
+    "expected_output": [
+      "2.8.5-r3",
+      "2.8.6-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.8.6-r1",
+        "2.8.6-r2"
+      ]
+    },
+    "expected_output": [
+      "2.8.6-r1",
+      "2.8.6-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.8.6-r2",
+        "2.02-r1"
+      ]
+    },
+    "expected_output": [
+      "2.02-r1",
+      "2.8.6-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.02-r1",
+        "1.5.0-r1"
+      ]
+    },
+    "expected_output": [
+      "1.5.0-r1",
+      "2.02-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.5.0-r1",
+        "1.5.0"
+      ]
+    },
+    "expected_output": [
+      "1.5.0",
+      "1.5.0-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.5.0",
+        "0.9.2"
+      ]
+    },
+    "expected_output": [
+      "0.9.2",
+      "1.5.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.2",
+        "8.1.2.20040524-r1"
+      ]
+    },
+    "expected_output": [
+      "0.9.2",
+      "8.1.2.20040524-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "8.1.2.20040524-r1",
+        "8.1.2.20050715-r1"
+      ]
+    },
+    "expected_output": [
+      "8.1.2.20040524-r1",
+      "8.1.2.20050715-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "8.1.2.20050715-r1",
+        "20030215"
+      ]
+    },
+    "expected_output": [
+      "8.1.2.20050715-r1",
+      "20030215"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "20030215",
+        "3.80-r4"
+      ]
+    },
+    "expected_output": [
+      "3.80-r4",
+      "20030215"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.80-r4",
+        "3.81"
+      ]
+    },
+    "expected_output": [
+      "3.80-r4",
+      "3.81"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.81",
+        "1.6d"
+      ]
+    },
+    "expected_output": [
+      "1.6d",
+      "3.81"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.6d",
+        "1.2.07.8"
+      ]
+    },
+    "expected_output": [
+      "1.2.07.8",
+      "1.6d"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.07.8",
+        "1.2.12.04"
+      ]
+    },
+    "expected_output": [
+      "1.2.07.8",
+      "1.2.12.04"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.12.04",
+        "1.2.12.05"
+      ]
+    },
+    "expected_output": [
+      "1.2.12.04",
+      "1.2.12.05"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.12.05",
+        "1.3.3"
+      ]
+    },
+    "expected_output": [
+      "1.2.12.05",
+      "1.3.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.3.3",
+        "2.6.4"
+      ]
+    },
+    "expected_output": [
+      "1.3.3",
+      "2.6.4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.6.4",
+        "2.5.2"
+      ]
+    },
+    "expected_output": [
+      "2.5.2",
+      "2.6.4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.5.2",
+        "2.6.1"
+      ]
+    },
+    "expected_output": [
+      "2.5.2",
+      "2.6.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.6.1",
+        "2.6"
+      ]
+    },
+    "expected_output": [
+      "2.6",
+      "2.6.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.6",
+        "6.5.1-r1"
+      ]
+    },
+    "expected_output": [
+      "2.6",
+      "6.5.1-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "6.5.1-r1",
+        "1.1.35-r1"
+      ]
+    },
+    "expected_output": [
+      "1.1.35-r1",
+      "6.5.1-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.35-r1",
+        "1.1.35-r2"
+      ]
+    },
+    "expected_output": [
+      "1.1.35-r1",
+      "1.1.35-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.35-r2",
+        "0.9.2"
+      ]
+    },
+    "expected_output": [
+      "0.9.2",
+      "1.1.35-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.2",
+        "1.07-r1"
+      ]
+    },
+    "expected_output": [
+      "0.9.2",
+      "1.07-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.07-r1",
+        "1.07.5"
+      ]
+    },
+    "expected_output": [
+      "1.07-r1",
+      "1.07.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.07.5",
+        "1.07"
+      ]
+    },
+    "expected_output": [
+      "1.07",
+      "1.07.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.07",
+        "1.19"
+      ]
+    },
+    "expected_output": [
+      "1.07",
+      "1.19"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.19",
+        "2.1-r2"
+      ]
+    },
+    "expected_output": [
+      "1.19",
+      "2.1-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.1-r2",
+        "2.2"
+      ]
+    },
+    "expected_output": [
+      "2.1-r2",
+      "2.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.2",
+        "1.0.4"
+      ]
+    },
+    "expected_output": [
+      "1.0.4",
+      "2.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.4",
+        "20060811"
+      ]
+    },
+    "expected_output": [
+      "1.0.4",
+      "20060811"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "20060811",
+        "20061003"
+      ]
+    },
+    "expected_output": [
+      "20060811",
+      "20061003"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "20061003",
+        "0.1_pre20060810"
+      ]
+    },
+    "expected_output": [
+      "0.1_pre20060810",
+      "20061003"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.1_pre20060810",
+        "0.1_pre20060817"
+      ]
+    },
+    "expected_output": [
+      "0.1_pre20060810",
+      "0.1_pre20060817"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.1_pre20060817",
+        "1.0.3"
+      ]
+    },
+    "expected_output": [
+      "0.1_pre20060817",
+      "1.0.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.3",
+        "1.0.2"
+      ]
+    },
+    "expected_output": [
+      "1.0.2",
+      "1.0.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.2",
+        "1.0.1"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "1.0.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.1",
+        "3.2.2-r1"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "3.2.2-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.2.2-r1",
+        "3.2.2-r2"
+      ]
+    },
+    "expected_output": [
+      "3.2.2-r1",
+      "3.2.2-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.2.2-r2",
+        "3.3.17"
+      ]
+    },
+    "expected_output": [
+      "3.2.2-r2",
+      "3.3.17"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.3.17",
+        "0.59s-r11"
+      ]
+    },
+    "expected_output": [
+      "0.59s-r11",
+      "3.3.17"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.59s-r11",
+        "0.65"
+      ]
+    },
+    "expected_output": [
+      "0.59s-r11",
+      "0.65"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.65",
+        "0.2.10-r2"
+      ]
+    },
+    "expected_output": [
+      "0.2.10-r2",
+      "0.65"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.2.10-r2",
+        "2.01"
+      ]
+    },
+    "expected_output": [
+      "0.2.10-r2",
+      "2.01"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.01",
+        "3.9.10"
+      ]
+    },
+    "expected_output": [
+      "2.01",
+      "3.9.10"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.9.10",
+        "1.2.18"
+      ]
+    },
+    "expected_output": [
+      "1.2.18",
+      "3.9.10"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.18",
+        "1.5.11-r2"
+      ]
+    },
+    "expected_output": [
+      "1.2.18",
+      "1.5.11-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.5.11-r2",
+        "1.5.13-r1"
+      ]
+    },
+    "expected_output": [
+      "1.5.11-r2",
+      "1.5.13-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.5.13-r1",
+        "1.3.12-r1"
+      ]
+    },
+    "expected_output": [
+      "1.3.12-r1",
+      "1.5.13-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.3.12-r1",
+        "2.0.1"
+      ]
+    },
+    "expected_output": [
+      "1.3.12-r1",
+      "2.0.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.0.1",
+        "2.0.2"
+      ]
+    },
+    "expected_output": [
+      "2.0.1",
+      "2.0.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.0.2",
+        "2.0.3"
+      ]
+    },
+    "expected_output": [
+      "2.0.2",
+      "2.0.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.0.3",
+        "0.2.0"
+      ]
+    },
+    "expected_output": [
+      "0.2.0",
+      "2.0.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.2.0",
+        "5.5-r2"
+      ]
+    },
+    "expected_output": [
+      "0.2.0",
+      "5.5-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "5.5-r2",
+        "5.5-r3"
+      ]
+    },
+    "expected_output": [
+      "5.5-r2",
+      "5.5-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "5.5-r3",
+        "0.25.3"
+      ]
+    },
+    "expected_output": [
+      "0.25.3",
+      "5.5-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.25.3",
+        "0.26.1-r1"
+      ]
+    },
+    "expected_output": [
+      "0.25.3",
+      "0.26.1-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.26.1-r1",
+        "5.2.1.2-r1"
+      ]
+    },
+    "expected_output": [
+      "0.26.1-r1",
+      "5.2.1.2-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "5.2.1.2-r1",
+        "5.4"
+      ]
+    },
+    "expected_output": [
+      "5.2.1.2-r1",
+      "5.4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "5.4",
+        "1.60-r11"
+      ]
+    },
+    "expected_output": [
+      "1.60-r11",
+      "5.4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.60-r11",
+        "1.60-r12"
+      ]
+    },
+    "expected_output": [
+      "1.60-r11",
+      "1.60-r12"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.60-r12",
+        "110-r8"
+      ]
+    },
+    "expected_output": [
+      "1.60-r12",
+      "110-r8"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "110-r8",
+        "0.17-r2"
+      ]
+    },
+    "expected_output": [
+      "0.17-r2",
+      "110-r8"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.17-r2",
+        "1.05-r4"
+      ]
+    },
+    "expected_output": [
+      "0.17-r2",
+      "1.05-r4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.05-r4",
+        "5.28.0"
+      ]
+    },
+    "expected_output": [
+      "1.05-r4",
+      "5.28.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "5.28.0",
+        "0.51.6-r1"
+      ]
+    },
+    "expected_output": [
+      "0.51.6-r1",
+      "5.28.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.51.6-r1",
+        "1.0.6-r6"
+      ]
+    },
+    "expected_output": [
+      "0.51.6-r1",
+      "1.0.6-r6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.6-r6",
+        "0.8.3"
+      ]
+    },
+    "expected_output": [
+      "0.8.3",
+      "1.0.6-r6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.8.3",
+        "1.42"
+      ]
+    },
+    "expected_output": [
+      "0.8.3",
+      "1.42"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.42",
+        "20030719"
+      ]
+    },
+    "expected_output": [
+      "1.42",
+      "20030719"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "20030719",
+        "4.01"
+      ]
+    },
+    "expected_output": [
+      "4.01",
+      "20030719"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.01",
+        "4.20"
+      ]
+    },
+    "expected_output": [
+      "4.01",
+      "4.20"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.20",
+        "0.20070118"
+      ]
+    },
+    "expected_output": [
+      "0.20070118",
+      "4.20"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.20070118",
+        "0.20070207_rc1"
+      ]
+    },
+    "expected_output": [
+      "0.20070118",
+      "0.20070207_rc1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.20070207_rc1",
+        "1.0"
+      ]
+    },
+    "expected_output": [
+      "0.20070207_rc1",
+      "1.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0",
+        "1.13.0"
+      ]
+    },
+    "expected_output": [
+      "1.0",
+      "1.13.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.13.0",
+        "1.13.1"
+      ]
+    },
+    "expected_output": [
+      "1.13.0",
+      "1.13.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.13.1",
+        "0.21"
+      ]
+    },
+    "expected_output": [
+      "0.21",
+      "1.13.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.21",
+        "0.3.7-r3"
+      ]
+    },
+    "expected_output": [
+      "0.3.7-r3",
+      "0.21"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.3.7-r3",
+        "0.4.10"
+      ]
+    },
+    "expected_output": [
+      "0.3.7-r3",
+      "0.4.10"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.4.10",
+        "0.5.0"
+      ]
+    },
+    "expected_output": [
+      "0.4.10",
+      "0.5.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.5.0",
+        "0.5.5"
+      ]
+    },
+    "expected_output": [
+      "0.5.0",
+      "0.5.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.5.5",
+        "0.5.7"
+      ]
+    },
+    "expected_output": [
+      "0.5.5",
+      "0.5.7"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.5.7",
+        "0.6.11-r1"
+      ]
+    },
+    "expected_output": [
+      "0.5.7",
+      "0.6.11-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.6.11-r1",
+        "2.3.30-r2"
+      ]
+    },
+    "expected_output": [
+      "0.6.11-r1",
+      "2.3.30-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.3.30-r2",
+        "3.7_p1"
+      ]
+    },
+    "expected_output": [
+      "2.3.30-r2",
+      "3.7_p1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.7_p1",
+        "1.3"
+      ]
+    },
+    "expected_output": [
+      "1.3",
+      "3.7_p1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.3",
+        "0.10.1"
+      ]
+    },
+    "expected_output": [
+      "0.10.1",
+      "1.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.10.1",
+        "4.3_p2-r1"
+      ]
+    },
+    "expected_output": [
+      "0.10.1",
+      "4.3_p2-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.3_p2-r1",
+        "4.3_p2-r5"
+      ]
+    },
+    "expected_output": [
+      "4.3_p2-r1",
+      "4.3_p2-r5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.3_p2-r5",
+        "4.4_p1-r6"
+      ]
+    },
+    "expected_output": [
+      "4.3_p2-r5",
+      "4.4_p1-r6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.4_p1-r6",
+        "4.5_p1-r1"
+      ]
+    },
+    "expected_output": [
+      "4.4_p1-r6",
+      "4.5_p1-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.5_p1-r1",
+        "4.5_p1"
+      ]
+    },
+    "expected_output": [
+      "4.5_p1",
+      "4.5_p1-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.5_p1",
+        "4.5_p1-r1"
+      ]
+    },
+    "expected_output": [
+      "4.5_p1",
+      "4.5_p1-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.5_p1-r1",
+        "4.5_p1"
+      ]
+    },
+    "expected_output": [
+      "4.5_p1",
+      "4.5_p1-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.5_p1",
+        "0.9.8c-r1"
+      ]
+    },
+    "expected_output": [
+      "0.9.8c-r1",
+      "4.5_p1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.8c-r1",
+        "0.9.8d"
+      ]
+    },
+    "expected_output": [
+      "0.9.8c-r1",
+      "0.9.8d"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.8d",
+        "2.4.4"
+      ]
+    },
+    "expected_output": [
+      "0.9.8d",
+      "2.4.4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.4.4",
+        "2.4.7"
+      ]
+    },
+    "expected_output": [
+      "2.4.4",
+      "2.4.7"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.4.7",
+        "2.0.6"
+      ]
+    },
+    "expected_output": [
+      "2.0.6",
+      "2.4.7"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.0.6",
+        "2.0.6"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.0.6",
+        "0.78-r3"
+      ]
+    },
+    "expected_output": [
+      "0.78-r3",
+      "2.0.6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.78-r3",
+        "0.3.2"
+      ]
+    },
+    "expected_output": [
+      "0.3.2",
+      "0.78-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.3.2",
+        "1.7.1-r1"
+      ]
+    },
+    "expected_output": [
+      "0.3.2",
+      "1.7.1-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.7.1-r1",
+        "2.5.9"
+      ]
+    },
+    "expected_output": [
+      "1.7.1-r1",
+      "2.5.9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.5.9",
+        "0.1.13"
+      ]
+    },
+    "expected_output": [
+      "0.1.13",
+      "2.5.9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.1.13",
+        "0.1.15"
+      ]
+    },
+    "expected_output": [
+      "0.1.13",
+      "0.1.15"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.1.15",
+        "0.4"
+      ]
+    },
+    "expected_output": [
+      "0.1.15",
+      "0.4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.4",
+        "0.9.6"
+      ]
+    },
+    "expected_output": [
+      "0.4",
+      "0.9.6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.6",
+        "2.2.0-r1"
+      ]
+    },
+    "expected_output": [
+      "0.9.6",
+      "2.2.0-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.2.0-r1",
+        "2.2.3-r2"
+      ]
+    },
+    "expected_output": [
+      "2.2.0-r1",
+      "2.2.3-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.3.1-r1",
+        "5.8.8-r2"
+      ]
+    },
+    "expected_output": [
+      "1.3.1-r1",
+      "5.8.8-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "5.8.8-r2",
+        "5.1.6-r4"
+      ]
+    },
+    "expected_output": [
+      "5.1.6-r4",
+      "5.8.8-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "5.1.6-r4",
+        "5.1.6-r6"
+      ]
+    },
+    "expected_output": [
+      "5.1.6-r4",
+      "5.1.6-r6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "5.1.6-r6",
+        "5.2.1-r3"
+      ]
+    },
+    "expected_output": [
+      "5.1.6-r6",
+      "5.2.1-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "5.2.1-r3",
+        "0.11.3"
+      ]
+    },
+    "expected_output": [
+      "0.11.3",
+      "5.2.1-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.11.3",
+        "0.11.3"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.11.3",
+        "1.10.7"
+      ]
+    },
+    "expected_output": [
+      "0.11.3",
+      "1.10.7"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.10.7",
+        "1.7-r1"
+      ]
+    },
+    "expected_output": [
+      "1.7-r1",
+      "1.10.7"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.7-r1",
+        "0.1.20"
+      ]
+    },
+    "expected_output": [
+      "0.1.20",
+      "1.7-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.1.20",
+        "0.1.23"
+      ]
+    },
+    "expected_output": [
+      "0.1.20",
+      "0.1.23"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.1.23",
+        "5b-r9"
+      ]
+    },
+    "expected_output": [
+      "0.1.23",
+      "5b-r9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "5b-r9",
+        "2.2.10"
+      ]
+    },
+    "expected_output": [
+      "2.2.10",
+      "5b-r9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.2.10",
+        "2.3.6"
+      ]
+    },
+    "expected_output": [
+      "2.2.10",
+      "2.3.6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.3.6",
+        "8.0.12"
+      ]
+    },
+    "expected_output": [
+      "2.3.6",
+      "8.0.12"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "8.0.12",
+        "2.4.3-r16"
+      ]
+    },
+    "expected_output": [
+      "2.4.3-r16",
+      "8.0.12"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.4.3-r16",
+        "2.4.4-r4"
+      ]
+    },
+    "expected_output": [
+      "2.4.3-r16",
+      "2.4.4-r4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.4.4-r4",
+        "3.0.3-r5"
+      ]
+    },
+    "expected_output": [
+      "2.4.4-r4",
+      "3.0.3-r5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.0.3-r5",
+        "3.0.6"
+      ]
+    },
+    "expected_output": [
+      "3.0.3-r5",
+      "3.0.6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.0.6",
+        "3.2.6"
+      ]
+    },
+    "expected_output": [
+      "3.0.6",
+      "3.2.6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.2.6",
+        "3.2.7"
+      ]
+    },
+    "expected_output": [
+      "3.2.6",
+      "3.2.7"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.2.7",
+        "0.3.1_rc8"
+      ]
+    },
+    "expected_output": [
+      "0.3.1_rc8",
+      "3.2.7"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.3.1_rc8",
+        "22.2"
+      ]
+    },
+    "expected_output": [
+      "0.3.1_rc8",
+      "22.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "22.2",
+        "22.3"
+      ]
+    },
+    "expected_output": [
+      "22.2",
+      "22.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "22.3",
+        "1.2.2"
+      ]
+    },
+    "expected_output": [
+      "1.2.2",
+      "22.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.2",
+        "2.04"
+      ]
+    },
+    "expected_output": [
+      "1.2.2",
+      "2.04"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.04",
+        "2.4.3-r1"
+      ]
+    },
+    "expected_output": [
+      "2.04",
+      "2.4.3-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.4.3-r1",
+        "2.4.3-r4"
+      ]
+    },
+    "expected_output": [
+      "2.4.3-r1",
+      "2.4.3-r4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.4.3-r4",
+        "0.98.6-r1"
+      ]
+    },
+    "expected_output": [
+      "0.98.6-r1",
+      "2.4.3-r4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.98.6-r1",
+        "5.7-r2"
+      ]
+    },
+    "expected_output": [
+      "0.98.6-r1",
+      "5.7-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "5.7-r2",
+        "5.7-r3"
+      ]
+    },
+    "expected_output": [
+      "5.7-r2",
+      "5.7-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "5.7-r3",
+        "5.1_p4"
+      ]
+    },
+    "expected_output": [
+      "5.1_p4",
+      "5.7-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "5.1_p4",
+        "1.0.5"
+      ]
+    },
+    "expected_output": [
+      "1.0.5",
+      "5.1_p4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.5",
+        "3.6.19-r1"
+      ]
+    },
+    "expected_output": [
+      "1.0.5",
+      "3.6.19-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.6.19-r1",
+        "3.6.19"
+      ]
+    },
+    "expected_output": [
+      "3.6.19",
+      "3.6.19-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.6.19",
+        "1.0.1"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "3.6.19"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.1",
+        "3.8"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "3.8"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.8",
+        "0.2.3"
+      ]
+    },
+    "expected_output": [
+      "0.2.3",
+      "3.8"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.2.3",
+        "1.2.15-r3"
+      ]
+    },
+    "expected_output": [
+      "0.2.3",
+      "1.2.15-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.15-r3",
+        "1.2.6-r1"
+      ]
+    },
+    "expected_output": [
+      "1.2.6-r1",
+      "1.2.15-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.6-r1",
+        "2.6.8-r2"
+      ]
+    },
+    "expected_output": [
+      "1.2.6-r1",
+      "2.6.8-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.6.8-r2",
+        "2.6.9-r1"
+      ]
+    },
+    "expected_output": [
+      "2.6.8-r2",
+      "2.6.9-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.6.9-r1",
+        "1.7"
+      ]
+    },
+    "expected_output": [
+      "1.7",
+      "2.6.9-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.7",
+        "1.7b"
+      ]
+    },
+    "expected_output": [
+      "1.7",
+      "1.7b"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.7b",
+        "1.8.4-r3"
+      ]
+    },
+    "expected_output": [
+      "1.7b",
+      "1.8.4-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.8.4-r3",
+        "1.8.5"
+      ]
+    },
+    "expected_output": [
+      "1.8.4-r3",
+      "1.8.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.8.5",
+        "1.8.5_p2"
+      ]
+    },
+    "expected_output": [
+      "1.8.5",
+      "1.8.5_p2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.8.5_p2",
+        "1.1.3"
+      ]
+    },
+    "expected_output": [
+      "1.1.3",
+      "1.8.5_p2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.3",
+        "3.0.22-r3"
+      ]
+    },
+    "expected_output": [
+      "1.1.3",
+      "3.0.22-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.0.22-r3",
+        "3.0.24"
+      ]
+    },
+    "expected_output": [
+      "3.0.22-r3",
+      "3.0.24"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.0.24",
+        "3.0.24"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.0.24",
+        "3.0.24"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.0.24",
+        "4.0.2-r5"
+      ]
+    },
+    "expected_output": [
+      "3.0.24",
+      "4.0.2-r5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.0.2-r5",
+        "4.0.3"
+      ]
+    },
+    "expected_output": [
+      "4.0.2-r5",
+      "4.0.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.0.3",
+        "0.98"
+      ]
+    },
+    "expected_output": [
+      "0.98",
+      "4.0.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.98",
+        "1.00"
+      ]
+    },
+    "expected_output": [
+      "0.98",
+      "1.00"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.00",
+        "4.1.4-r1"
+      ]
+    },
+    "expected_output": [
+      "1.00",
+      "4.1.4-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.1.4-r1",
+        "4.1.5"
+      ]
+    },
+    "expected_output": [
+      "4.1.4-r1",
+      "4.1.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.1.5",
+        "2.3"
+      ]
+    },
+    "expected_output": [
+      "2.3",
+      "4.1.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.3",
+        "2.17-r3"
+      ]
+    },
+    "expected_output": [
+      "2.3",
+      "2.17-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.17-r3",
+        "0.1.7"
+      ]
+    },
+    "expected_output": [
+      "0.1.7",
+      "2.17-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.1.7",
+        "1.11"
+      ]
+    },
+    "expected_output": [
+      "0.1.7",
+      "1.11"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.11",
+        "4.2.1-r11"
+      ]
+    },
+    "expected_output": [
+      "1.11",
+      "4.2.1-r11"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.2.1-r11",
+        "3.2.3"
+      ]
+    },
+    "expected_output": [
+      "3.2.3",
+      "4.2.1-r11"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.2.3",
+        "3.2.4"
+      ]
+    },
+    "expected_output": [
+      "3.2.3",
+      "3.2.4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.2.4",
+        "3.2.8"
+      ]
+    },
+    "expected_output": [
+      "3.2.4",
+      "3.2.8"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.2.8",
+        "3.2.9"
+      ]
+    },
+    "expected_output": [
+      "3.2.8",
+      "3.2.9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.2.9",
+        "3.2.3"
+      ]
+    },
+    "expected_output": [
+      "3.2.3",
+      "3.2.9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.2.3",
+        "3.2.4"
+      ]
+    },
+    "expected_output": [
+      "3.2.3",
+      "3.2.4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.2.4",
+        "3.2.8"
+      ]
+    },
+    "expected_output": [
+      "3.2.4",
+      "3.2.8"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.2.8",
+        "3.2.9"
+      ]
+    },
+    "expected_output": [
+      "3.2.8",
+      "3.2.9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.2.9",
+        "1.4.9-r2"
+      ]
+    },
+    "expected_output": [
+      "1.4.9-r2",
+      "3.2.9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.4.9-r2",
+        "2.9.11_pre20051101-r2"
+      ]
+    },
+    "expected_output": [
+      "1.4.9-r2",
+      "2.9.11_pre20051101-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.9.11_pre20051101-r2",
+        "2.9.11_pre20051101-r3"
+      ]
+    },
+    "expected_output": [
+      "2.9.11_pre20051101-r2",
+      "2.9.11_pre20051101-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.9.11_pre20051101-r3",
+        "2.9.11_pre20051101"
+      ]
+    },
+    "expected_output": [
+      "2.9.11_pre20051101",
+      "2.9.11_pre20051101-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.9.11_pre20051101",
+        "2.9.11_pre20061021-r1"
+      ]
+    },
+    "expected_output": [
+      "2.9.11_pre20051101",
+      "2.9.11_pre20061021-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.9.11_pre20061021-r1",
+        "2.9.11_pre20061021-r2"
+      ]
+    },
+    "expected_output": [
+      "2.9.11_pre20061021-r1",
+      "2.9.11_pre20061021-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.9.11_pre20061021-r2",
+        "5.36-r1"
+      ]
+    },
+    "expected_output": [
+      "2.9.11_pre20061021-r2",
+      "5.36-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "5.36-r1",
+        "1.0.1"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "5.36-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.1",
+        "7.0-r2"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "7.0-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "7.0-r2",
+        "2.4.5"
+      ]
+    },
+    "expected_output": [
+      "2.4.5",
+      "7.0-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.4.5",
+        "2.6.1.2"
+      ]
+    },
+    "expected_output": [
+      "2.4.5",
+      "2.6.1.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.6.1.2",
+        "2.6.1.3-r1"
+      ]
+    },
+    "expected_output": [
+      "2.6.1.2",
+      "2.6.1.3-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.6.1.3-r1",
+        "2.6.1.3"
+      ]
+    },
+    "expected_output": [
+      "2.6.1.3",
+      "2.6.1.3-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.6.1.3",
+        "2.6.1.3-r1"
+      ]
+    },
+    "expected_output": [
+      "2.6.1.3",
+      "2.6.1.3-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.6.1.3-r1",
+        "12.17.9"
+      ]
+    },
+    "expected_output": [
+      "2.6.1.3-r1",
+      "12.17.9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "12.17.9",
+        "1.1.12"
+      ]
+    },
+    "expected_output": [
+      "1.1.12",
+      "12.17.9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.12",
+        "1.1.7"
+      ]
+    },
+    "expected_output": [
+      "1.1.7",
+      "1.1.12"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.7",
+        "2.5.14"
+      ]
+    },
+    "expected_output": [
+      "1.1.7",
+      "2.5.14"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.5.14",
+        "2.6.6-r1"
+      ]
+    },
+    "expected_output": [
+      "2.5.14",
+      "2.6.6-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.6.6-r1",
+        "2.6.7"
+      ]
+    },
+    "expected_output": [
+      "2.6.6-r1",
+      "2.6.7"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.6.7",
+        "2.6.9-r1"
+      ]
+    },
+    "expected_output": [
+      "2.6.7",
+      "2.6.9-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.6.9-r1",
+        "2.6.9"
+      ]
+    },
+    "expected_output": [
+      "2.6.9",
+      "2.6.9-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.6.9",
+        "1.39"
+      ]
+    },
+    "expected_output": [
+      "1.39",
+      "2.6.9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.39",
+        "0.9"
+      ]
+    },
+    "expected_output": [
+      "0.9",
+      "1.39"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9",
+        "2.61-r2"
+      ]
+    },
+    "expected_output": [
+      "0.9",
+      "2.61-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.61-r2",
+        "4.5.14"
+      ]
+    },
+    "expected_output": [
+      "2.61-r2",
+      "4.5.14"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.5.14",
+        "4.09-r1"
+      ]
+    },
+    "expected_output": [
+      "4.09-r1",
+      "4.5.14"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.09-r1",
+        "1.3.1"
+      ]
+    },
+    "expected_output": [
+      "1.3.1",
+      "4.09-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.3.1",
+        "1.3.2-r3"
+      ]
+    },
+    "expected_output": [
+      "1.3.1",
+      "1.3.2-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.3.2-r3",
+        "1.6.8_p12-r1"
+      ]
+    },
+    "expected_output": [
+      "1.3.2-r3",
+      "1.6.8_p12-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.6.8_p12-r1",
+        "1.6.8_p9-r2"
+      ]
+    },
+    "expected_output": [
+      "1.6.8_p9-r2",
+      "1.6.8_p12-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.6.8_p9-r2",
+        "1.3.0-r1"
+      ]
+    },
+    "expected_output": [
+      "1.3.0-r1",
+      "1.6.8_p9-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.3.0-r1",
+        "3.11"
+      ]
+    },
+    "expected_output": [
+      "1.3.0-r1",
+      "3.11"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.11",
+        "3.20"
+      ]
+    },
+    "expected_output": [
+      "3.11",
+      "3.20"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.20",
+        "1.6.11-r1"
+      ]
+    },
+    "expected_output": [
+      "1.6.11-r1",
+      "3.20"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.6.11-r1",
+        "1.6.9"
+      ]
+    },
+    "expected_output": [
+      "1.6.9",
+      "1.6.11-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.6.9",
+        "5.0.5-r2"
+      ]
+    },
+    "expected_output": [
+      "1.6.9",
+      "5.0.5-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "5.0.5-r2",
+        "2.86-r5"
+      ]
+    },
+    "expected_output": [
+      "2.86-r5",
+      "5.0.5-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.86-r5",
+        "2.86-r6"
+      ]
+    },
+    "expected_output": [
+      "2.86-r5",
+      "2.86-r6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.86-r6",
+        "1.15.1-r1"
+      ]
+    },
+    "expected_output": [
+      "1.15.1-r1",
+      "2.86-r6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.15.1-r1",
+        "8.4.9"
+      ]
+    },
+    "expected_output": [
+      "1.15.1-r1",
+      "8.4.9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "8.4.9",
+        "7.6-r8"
+      ]
+    },
+    "expected_output": [
+      "7.6-r8",
+      "8.4.9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "7.6-r8",
+        "3.9.4-r2"
+      ]
+    },
+    "expected_output": [
+      "3.9.4-r2",
+      "7.6-r8"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.9.4-r2",
+        "3.9.4-r3"
+      ]
+    },
+    "expected_output": [
+      "3.9.4-r2",
+      "3.9.4-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.9.4-r3",
+        "3.9.5-r2"
+      ]
+    },
+    "expected_output": [
+      "3.9.4-r3",
+      "3.9.5-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "3.9.5-r2",
+        "1.1.9"
+      ]
+    },
+    "expected_output": [
+      "1.1.9",
+      "3.9.5-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.9",
+        "1.0.6"
+      ]
+    },
+    "expected_output": [
+      "1.0.6",
+      "1.1.9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.6",
+        "5.9"
+      ]
+    },
+    "expected_output": [
+      "1.0.6",
+      "5.9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "5.9",
+        "6.5"
+      ]
+    },
+    "expected_output": [
+      "5.9",
+      "6.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "6.5",
+        "0.40-r1"
+      ]
+    },
+    "expected_output": [
+      "0.40-r1",
+      "6.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.40-r1",
+        "2.25b-r5"
+      ]
+    },
+    "expected_output": [
+      "0.40-r1",
+      "2.25b-r5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.25b-r5",
+        "2.25b-r6"
+      ]
+    },
+    "expected_output": [
+      "2.25b-r5",
+      "2.25b-r6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.25b-r6",
+        "1.0.4"
+      ]
+    },
+    "expected_output": [
+      "1.0.4",
+      "2.25b-r6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.4",
+        "1.0.5"
+      ]
+    },
+    "expected_output": [
+      "1.0.4",
+      "1.0.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.5",
+        "1.4_p12-r2"
+      ]
+    },
+    "expected_output": [
+      "1.0.5",
+      "1.4_p12-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.4_p12-r2",
+        "1.4_p12-r5"
+      ]
+    },
+    "expected_output": [
+      "1.4_p12-r2",
+      "1.4_p12-r5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.4_p12-r5",
+        "1.1"
+      ]
+    },
+    "expected_output": [
+      "1.1",
+      "1.4_p12-r5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1",
+        "0.2.0-r1"
+      ]
+    },
+    "expected_output": [
+      "0.2.0-r1",
+      "1.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.2.0-r1",
+        "0.2.1"
+      ]
+    },
+    "expected_output": [
+      "0.2.0-r1",
+      "0.2.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.2.1",
+        "0.9.28-r1"
+      ]
+    },
+    "expected_output": [
+      "0.2.1",
+      "0.9.28-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.28-r1",
+        "0.9.28-r2"
+      ]
+    },
+    "expected_output": [
+      "0.9.28-r1",
+      "0.9.28-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.28-r2",
+        "0.9.28.1"
+      ]
+    },
+    "expected_output": [
+      "0.9.28-r2",
+      "0.9.28.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.28.1",
+        "0.9.28"
+      ]
+    },
+    "expected_output": [
+      "0.9.28",
+      "0.9.28.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.28",
+        "0.9.28.1"
+      ]
+    },
+    "expected_output": [
+      "0.9.28",
+      "0.9.28.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "103",
+        "104-r11"
+      ]
+    },
+    "expected_output": [
+      "103",
+      "104-r11"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "104-r11",
+        "104-r9"
+      ]
+    },
+    "expected_output": [
+      "104-r9",
+      "104-r11"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "104-r9",
+        "1.23-r1"
+      ]
+    },
+    "expected_output": [
+      "1.23-r1",
+      "104-r9"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.23-r1",
+        "1.23"
+      ]
+    },
+    "expected_output": [
+      "1.23",
+      "1.23-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.23",
+        "1.23-r1"
+      ]
+    },
+    "expected_output": [
+      "1.23",
+      "1.23-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.23-r1",
+        "1.0.2"
+      ]
+    },
+    "expected_output": [
+      "1.0.2",
+      "1.23-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.2",
+        "5.52-r1"
+      ]
+    },
+    "expected_output": [
+      "1.0.2",
+      "5.52-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "5.52-r1",
+        "1.2.5_rc2"
+      ]
+    },
+    "expected_output": [
+      "1.2.5_rc2",
+      "5.52-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.5_rc2",
+        "0.1"
+      ]
+    },
+    "expected_output": [
+      "0.1",
+      "1.2.5_rc2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.1",
+        "0.71-r1"
+      ]
+    },
+    "expected_output": [
+      "0.1",
+      "0.71-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.71-r1",
+        "20040406-r1"
+      ]
+    },
+    "expected_output": [
+      "0.71-r1",
+      "20040406-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "20040406-r1",
+        "2.12r-r4"
+      ]
+    },
+    "expected_output": [
+      "2.12r-r4",
+      "20040406-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.12r-r4",
+        "2.12r-r5"
+      ]
+    },
+    "expected_output": [
+      "2.12r-r4",
+      "2.12r-r5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.12r-r5",
+        "0.0.7"
+      ]
+    },
+    "expected_output": [
+      "0.0.7",
+      "2.12r-r5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.0.7",
+        "1.0.3"
+      ]
+    },
+    "expected_output": [
+      "0.0.7",
+      "1.0.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.3",
+        "1.8"
+      ]
+    },
+    "expected_output": [
+      "1.0.3",
+      "1.8"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.8",
+        "7.0.17"
+      ]
+    },
+    "expected_output": [
+      "1.8",
+      "7.0.17"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "7.0.17",
+        "7.0.174"
+      ]
+    },
+    "expected_output": [
+      "7.0.17",
+      "7.0.174"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "7.0.174",
+        "7.0.17"
+      ]
+    },
+    "expected_output": [
+      "7.0.17",
+      "7.0.174"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "7.0.17",
+        "7.0.174"
+      ]
+    },
+    "expected_output": [
+      "7.0.17",
+      "7.0.174"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "7.0.174",
+        "1.0.1"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "7.0.174"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.1",
+        "1.1.1-r3"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "1.1.1-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.1-r3",
+        "0.3.4_pre20061029"
+      ]
+    },
+    "expected_output": [
+      "0.3.4_pre20061029",
+      "1.1.1-r3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.3.4_pre20061029",
+        "0.4.0"
+      ]
+    },
+    "expected_output": [
+      "0.3.4_pre20061029",
+      "0.4.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.4.0",
+        "0.1.2"
+      ]
+    },
+    "expected_output": [
+      "0.1.2",
+      "0.4.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.1.2",
+        "1.10.2"
+      ]
+    },
+    "expected_output": [
+      "0.1.2",
+      "1.10.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.10.2",
+        "2.16"
+      ]
+    },
+    "expected_output": [
+      "1.10.2",
+      "2.16"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.16",
+        "28"
+      ]
+    },
+    "expected_output": [
+      "2.16",
+      "28"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "28",
+        "0.99.4"
+      ]
+    },
+    "expected_output": [
+      "0.99.4",
+      "28"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.99.4",
+        "1.13"
+      ]
+    },
+    "expected_output": [
+      "0.99.4",
+      "1.13"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.13",
+        "1.0.1"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "1.13"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.1",
+        "1.1.2-r2"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "1.1.2-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.2-r2",
+        "1.1.0"
+      ]
+    },
+    "expected_output": [
+      "1.1.0",
+      "1.1.2-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.0",
+        "1.1.1"
+      ]
+    },
+    "expected_output": [
+      "1.1.0",
+      "1.1.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.1",
+        "1.1.1"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.1",
+        "0.6.0"
+      ]
+    },
+    "expected_output": [
+      "0.6.0",
+      "1.1.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.6.0",
+        "6.6.3"
+      ]
+    },
+    "expected_output": [
+      "0.6.0",
+      "6.6.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "6.6.3",
+        "1.1.1"
+      ]
+    },
+    "expected_output": [
+      "1.1.1",
+      "6.6.3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.1",
+        "1.1.0"
+      ]
+    },
+    "expected_output": [
+      "1.1.0",
+      "1.1.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.0",
+        "1.1.0"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.0",
+        "0.2.0"
+      ]
+    },
+    "expected_output": [
+      "0.2.0",
+      "1.1.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.2.0",
+        "0.3.0"
+      ]
+    },
+    "expected_output": [
+      "0.2.0",
+      "0.3.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.3.0",
+        "1.1.1"
+      ]
+    },
+    "expected_output": [
+      "0.3.0",
+      "1.1.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.1",
+        "1.2.0"
+      ]
+    },
+    "expected_output": [
+      "1.1.1",
+      "1.2.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.0",
+        "1.1.0"
+      ]
+    },
+    "expected_output": [
+      "1.1.0",
+      "1.2.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.0",
+        "1.6.5"
+      ]
+    },
+    "expected_output": [
+      "1.1.0",
+      "1.6.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.6.5",
+        "1.1.0"
+      ]
+    },
+    "expected_output": [
+      "1.1.0",
+      "1.6.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.0",
+        "1.4.2"
+      ]
+    },
+    "expected_output": [
+      "1.1.0",
+      "1.4.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.4.2",
+        "1.1.1"
+      ]
+    },
+    "expected_output": [
+      "1.1.1",
+      "1.4.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.1",
+        "2.8.1"
+      ]
+    },
+    "expected_output": [
+      "1.1.1",
+      "2.8.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.8.1",
+        "1.2.0"
+      ]
+    },
+    "expected_output": [
+      "1.2.0",
+      "2.8.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.0",
+        "4.1.0"
+      ]
+    },
+    "expected_output": [
+      "1.2.0",
+      "4.1.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.1.0",
+        "0.4.1"
+      ]
+    },
+    "expected_output": [
+      "0.4.1",
+      "4.1.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.4.1",
+        "1.9.1"
+      ]
+    },
+    "expected_output": [
+      "0.4.1",
+      "1.9.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.9.1",
+        "2.1.1"
+      ]
+    },
+    "expected_output": [
+      "1.9.1",
+      "2.1.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.1.1",
+        "1.4.1"
+      ]
+    },
+    "expected_output": [
+      "1.4.1",
+      "2.1.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.4.1",
+        "0.9.1-r1"
+      ]
+    },
+    "expected_output": [
+      "0.9.1-r1",
+      "1.4.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.9.1-r1",
+        "0.8.1"
+      ]
+    },
+    "expected_output": [
+      "0.8.1",
+      "0.9.1-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.8.1",
+        "1.2.1-r1"
+      ]
+    },
+    "expected_output": [
+      "0.8.1",
+      "1.2.1-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.1-r1",
+        "1.1.0"
+      ]
+    },
+    "expected_output": [
+      "1.1.0",
+      "1.2.1-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.0",
+        "1.2.1"
+      ]
+    },
+    "expected_output": [
+      "1.1.0",
+      "1.2.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.1",
+        "1.1.0"
+      ]
+    },
+    "expected_output": [
+      "1.1.0",
+      "1.2.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.0",
+        "0.1.1"
+      ]
+    },
+    "expected_output": [
+      "0.1.1",
+      "1.1.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.1.1",
+        "1.2.1"
+      ]
+    },
+    "expected_output": [
+      "0.1.1",
+      "1.2.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.1",
+        "4.1.0"
+      ]
+    },
+    "expected_output": [
+      "1.2.1",
+      "4.1.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.1.0",
+        "0.2.1-r1"
+      ]
+    },
+    "expected_output": [
+      "0.2.1-r1",
+      "4.1.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.2.1-r1",
+        "1.1.0"
+      ]
+    },
+    "expected_output": [
+      "0.2.1-r1",
+      "1.1.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.0",
+        "2.7.11"
+      ]
+    },
+    "expected_output": [
+      "1.1.0",
+      "2.7.11"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.7.11",
+        "1.0.2-r6"
+      ]
+    },
+    "expected_output": [
+      "1.0.2-r6",
+      "2.7.11"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.2-r6",
+        "1.0.2"
+      ]
+    },
+    "expected_output": [
+      "1.0.2",
+      "1.0.2-r6"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.2",
+        "0.8"
+      ]
+    },
+    "expected_output": [
+      "0.8",
+      "1.0.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.8",
+        "1.1.1-r4"
+      ]
+    },
+    "expected_output": [
+      "0.8",
+      "1.1.1-r4"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.1.1-r4",
+        "222"
+      ]
+    },
+    "expected_output": [
+      "1.1.1-r4",
+      "222"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "222",
+        "1.0.1"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "222"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.1",
+        "1.2.12-r1"
+      ]
+    },
+    "expected_output": [
+      "1.0.1",
+      "1.2.12-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.12-r1",
+        "1.2.8"
+      ]
+    },
+    "expected_output": [
+      "1.2.8",
+      "1.2.12-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.8",
+        "1.2.9.1-r1"
+      ]
+    },
+    "expected_output": [
+      "1.2.8",
+      "1.2.9.1-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.9.1-r1",
+        "1.2.9.1"
+      ]
+    },
+    "expected_output": [
+      "1.2.9.1",
+      "1.2.9.1-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.9.1",
+        "2.31-r1"
+      ]
+    },
+    "expected_output": [
+      "1.2.9.1",
+      "2.31-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.31-r1",
+        "2.31"
+      ]
+    },
+    "expected_output": [
+      "2.31",
+      "2.31-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "2.31",
+        "1.2.3-r1"
+      ]
+    },
+    "expected_output": [
+      "1.2.3-r1",
+      "2.31"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.3-r1",
+        "1.2.3"
+      ]
+    },
+    "expected_output": [
+      "1.2.3",
+      "1.2.3-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.2.3",
+        "4.2.5"
+      ]
+    },
+    "expected_output": [
+      "1.2.3",
+      "4.2.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "4.2.5",
+        "4.3.2-r2"
+      ]
+    },
+    "expected_output": [
+      "4.2.5",
+      "4.3.2-r2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.3-r0",
+        "1.3.1-r0"
+      ]
+    },
+    "expected_output": [
+      "1.3-r0",
+      "1.3.1-r0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.3_pre1-r1",
+        "1.3.2"
+      ]
+    },
+    "expected_output": [
+      "1.3_pre1-r1",
+      "1.3.2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0_p10-r0",
+        "1.0_p9-r0"
+      ]
+    },
+    "expected_output": [
+      "1.0_p9-r0",
+      "1.0_p10-r0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "0.1.0_alpha_pre2",
+        "0.1.0_alpha"
+      ]
+    },
+    "expected_output": [
+      "0.1.0_alpha_pre2",
+      "0.1.0_alpha"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "apk",
+      "versions": [
+        "1.0.0_pre20191002222144-r0",
+        "1.0.0_pre20210530193627-r0"
+      ]
+    },
+    "expected_output": [
+      "1.0.0_pre20191002222144-r0",
+      "1.0.0_pre20210530193627-r0"
+    ]
+  }
+]
