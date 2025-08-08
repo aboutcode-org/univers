@@ -17,74 +17,41 @@
 # Many tests are ported from
 # https://github.com/NuGet/NuGet.Client/blob/dev/test/NuGet.Core.Tests/NuGet.Versioning.Test/VersionComparerTests.cs
 
-import unittest
+import json
+from pathlib import Path
 
+import pytest
+
+from tests import SchemaDrivenVersTest
 from univers.nuget import Version
 from univers.versions import NugetVersion
 
+TEST_DATA = Path(__file__).parent / "data" / "schema" / "nuget_version_cmp.json"
 
-class NuGetTest(unittest.TestCase):
-    """NuGet version tests."""
 
-    def setUp(self):
-        self.maxDiff = None  # pylint: disable=invalid-name
+class NugetVersionComp(SchemaDrivenVersTest):
+    def equality(self):
+        """Compare version1 and version2 are equal."""
+        return NugetVersion(self.input_version1) == NugetVersion(self.input_version2)
 
-    def check_order(self, comparison, first, second):
-        """Check order."""
-        comparison(NugetVersion.build_value(first), NugetVersion.build_value(second))
+    def comparison(self):
+        """Sort versions and return them in the correct order."""
+        return [str(v) for v in sorted(map(NugetVersion, self.input["versions"]))]
 
-    def test_equals(self):
-        """Test version equals."""
-        self.check_order(self.assertEqual, "1.0.0", "1.0.0")
-        self.check_order(self.assertEqual, "1.0.0-BETA", "1.0.0-beta")
-        self.check_order(self.assertEqual, "1.0.0-BETA+AA", "1.0.0-beta+aa")
-        self.check_order(self.assertEqual, "1.0.0-BETA.X.y.5.77.0+AA", "1.0.0-beta.x.y.5.77.0+aa")
-        self.check_order(self.assertEqual, "1.0.0", "1.0.0+beta")
 
-        self.check_order(self.assertEqual, "1.0", "1.0.0.0")
-        self.check_order(self.assertEqual, "1.0+test", "1.0.0.0")
-        self.check_order(self.assertEqual, "1.0.0.1-1.2.A", "1.0.0.1-1.2.A")
-        self.check_order(self.assertEqual, "1.0.01", "1.0.1.0")
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA)))
+def test_gentoo_vers_cmp(test_case):
+    avc = NugetVersionComp.from_data(data=test_case)
+    avc.assert_result()
 
-    def test_not_equals(self):
-        """Test version not equals."""
-        self.check_order(self.assertNotEqual, "1.0", "1.0.0.1")
-        self.check_order(self.assertNotEqual, "1.0+test", "1.0.0.1")
-        self.check_order(self.assertNotEqual, "1.0.0.1-1.2.A", "1.0.0.1-1.2.a.A+A")
-        self.check_order(self.assertNotEqual, "1.0.01", "1.0.1.2")
-        self.check_order(self.assertNotEqual, "0.0.0", "1.0.0")
-        self.check_order(self.assertNotEqual, "1.1.0", "1.0.0")
-        self.check_order(self.assertNotEqual, "1.0.1", "1.0.0")
-        self.check_order(self.assertNotEqual, "1.0.0-BETA", "1.0.0-beta2")
-        self.check_order(self.assertNotEqual, "1.0.0+AA", "1.0.0-beta+aa")
-        self.check_order(
-            self.assertNotEqual, "1.0.0-BETA.X.y.5.77.0+AA", "1.0.0-beta.x.y.5.79.0+aa"
-        )
 
-    def test_less(self):
-        """Test version less."""
-        self.check_order(self.assertLess, "0.0.0", "1.0.0")
-        self.check_order(self.assertLess, "1.0.0", "1.1.0")
-        self.check_order(self.assertLess, "1.0.0", "1.0.1")
-        self.check_order(self.assertLess, "1.999.9999", "2.1.1")
-        self.check_order(self.assertLess, "1.0.0-BETA", "1.0.0-beta2")
-        self.check_order(self.assertLess, "1.0.0-beta+AA", "1.0.0+aa")
-        self.check_order(self.assertLess, "1.0.0-BETA", "1.0.0-beta.1+AA")
-        self.check_order(self.assertLess, "1.0.0-BETA.X.y.5.77.0+AA", "1.0.0-beta.x.y.5.79.0+aa")
-        self.check_order(self.assertLess, "1.0.0-BETA.X.y.5.79.0+AA", "1.0.0-beta.x.y.5.790.0+abc")
+def test_NugetVersion_hash():
+    vers1 = NugetVersion("1.0.1+23")
+    vers2 = NugetVersion("1.0.1+23")
+    assert hash(vers1) == hash(vers2)
 
-        self.check_order(self.assertLess, "1.0.0", "1.0.0.1")
-        self.check_order(self.assertLess, "1.0.0.1-alpha", "1.0.0.1-pre")
-        self.check_order(self.assertLess, "1.0.0-pre", "1.0.0.1-alpha")
-        self.check_order(self.assertLess, "1.0.0", "1.0.0.1-alpha")
-        self.check_order(self.assertLess, "0.9.9.1", "1.0.0")
 
-    def test_NugetVersion_hash(self):
-        vers1 = NugetVersion("1.0.1+23")
-        vers2 = NugetVersion("1.0.1+23")
-        assert hash(vers1) == hash(vers2)
-
-    def test_nuget_semver_hash(self):
-        vers1 = Version.from_string("51.0.0+2")
-        vers2 = Version.from_string("51.0.0+2")
-        assert hash(vers1) == hash(vers2)
+def test_nuget_semver_hash():
+    vers1 = Version.from_string("51.0.0+2")
+    vers2 = Version.from_string("51.0.0+2")
+    assert hash(vers1) == hash(vers2)
