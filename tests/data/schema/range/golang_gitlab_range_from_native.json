@@ -4,7 +4,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.3.7",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.3.7"
   },
@@ -13,7 +13,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.1.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.1.0"
   },
@@ -22,7 +22,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.0.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.4"
   },
@@ -31,7 +31,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.2.8",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.2.8"
   },
@@ -40,7 +40,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v2.2.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=2.2.2"
   },
@@ -49,7 +49,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.9.8||>=1.10.0 <1.10.4||=1.11.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.9.8|>=1.10.0|<1.10.4|1.11.0"
   },
@@ -58,7 +58,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.9.8||>=1.10.0 <1.10.4||=1.11.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.9.8|>=1.10.0|<1.10.4|1.11.0"
   },
@@ -67,7 +67,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.0.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.0.1"
   },
@@ -76,7 +76,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<3.4.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<3.4.0"
   },
@@ -85,7 +85,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=3.2.0 <3.2.26||>=3.3.0 <3.3.11",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.2.0|<3.2.26|>=3.3.0|<3.3.11"
   },
@@ -94,7 +94,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<3.4.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<3.4.0"
   },
@@ -103,7 +103,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.11.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.11.0"
   },
@@ -112,7 +112,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.0.15 <0.0.17",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.0.15|<0.0.17"
   },
@@ -121,7 +121,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.0.15 <0.0.17",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.0.15|<0.0.17"
   },
@@ -130,7 +130,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.21.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.21.1"
   },
@@ -139,7 +139,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.21.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.21.1"
   },
@@ -148,7 +148,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.193.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.193.0"
   },
@@ -157,7 +157,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.3.1 <0.5.8",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.3.1|<0.5.8"
   },
@@ -166,7 +166,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.3.1 <0.5.8",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.3.1|<0.5.8"
   },
@@ -175,7 +175,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.12.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.12.5"
   },
@@ -184,7 +184,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.12.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.12.5"
   },
@@ -193,7 +193,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.12.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.12.6"
   },
@@ -202,7 +202,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.12.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.12.5"
   },
@@ -211,7 +211,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.12.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.12.0"
   },
@@ -220,7 +220,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.3.1 <0.5.8",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.3.1|<0.5.8"
   },
@@ -229,7 +229,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.12.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.12.0"
   },
@@ -238,7 +238,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.11.91",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.11.91"
   },
@@ -247,7 +247,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.12.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.12.5"
   },
@@ -256,7 +256,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.3.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.3.3"
   },
@@ -265,7 +265,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.3.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.3.3"
   },
@@ -274,7 +274,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v0.0.0-20201203163018-be400aefbc4c",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=0.0.0-20201203163018-be400aefbc4c"
   },
@@ -283,7 +283,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=0.0.0-20200220183623-bac4c82f6975",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/0.0.0-20200220183623-bac4c82f6975"
   },
@@ -292,7 +292,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=0.0.0-20220214200702-86341886e292",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=0.0.0-20220214200702-86341886e292"
   },
@@ -301,7 +301,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.16.0 <1.18.19||>=1.19.0 <1.19.11||>=1.20.0 <1.20.7||=1.21.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.16.0|<1.18.19|>=1.19.0|<1.19.11|>=1.20.0|<1.20.7|1.21.0"
   },
@@ -310,7 +310,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.20.0 <=1.20.5||>=1.19.0 <=1.19.9||<=1.18.17",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.18.17|>=1.19.0|<=1.19.9|>=1.20.0|<=1.20.5"
   },
@@ -319,7 +319,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=1.22.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.22.0"
   },
@@ -328,7 +328,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.21.0 <1.21.1||>=1.20.0 <1.20.7||>=1.19.0 <1.19.11||<1.18.19",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.18.19|>=1.19.0|<1.19.11|>=1.20.0|<1.20.7|>=1.21.0|<1.21.1"
   },
@@ -337,7 +337,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.2.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.2.0"
   },
@@ -346,7 +346,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=1.22.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.22.2"
   },
@@ -355,7 +355,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.19.15||>=1.20.0 <1.20.11||>=1.21.0 <1.21.5||>=1.22.0 <1.22.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.19.15|>=1.20.0|<1.20.11|>=1.21.0|<1.21.5|>=1.22.0|<1.22.2"
   },
@@ -364,7 +364,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=1.22.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.22.2"
   },
@@ -373,7 +373,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.15.10||>=1.16.0 <1.16.7||>=1.17.0 <1.17.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.15.10|>=1.16.0|<1.16.7|>=1.17.0|<1.17.3"
   },
@@ -382,7 +382,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.9.0 <1.9.10||>=1.10.0 <1.10.6||>=1.11.0 <1.11.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.9.0|<1.9.10|>=1.10.0|<1.10.6|>=1.11.0|<1.11.2"
   },
@@ -391,7 +391,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.11.0 <1.11.9||>=1.12.0 <1.12.7||>=1.13.0 <1.13.5||=1.14.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.11.0|<1.11.9|>=1.12.0|<1.12.7|>=1.13.0|<1.13.5|1.14.0"
   },
@@ -400,7 +400,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.0.0 <1.13.12||>=1.14.0 <1.14.8||>=1.15.0 <1.15.5||>=1.16.0 <1.16.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.0.0|<1.13.12|>=1.14.0|<1.14.8|>=1.15.0|<1.15.5|>=1.16.0|<1.16.2"
   },
@@ -409,7 +409,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.15.0 <=1.15.9||>=1.16.0 <=1.16.6||>=1.17.0 <=1.17.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.15.0|<=1.15.9|>=1.16.0|<=1.16.6|>=1.17.0|<=1.17.2"
   },
@@ -418,7 +418,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.19.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.19.3"
   },
@@ -427,7 +427,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.17.0 <1.17.16||>=1.18.0 <1.18.14||>=1.19.0 <1.19.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.17.0|<1.17.16|>=1.18.0|<1.18.14|>=1.19.0|<1.19.6"
   },
@@ -436,7 +436,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.16.0 <1.18.19||>=1.19.0 <1.19.10||>=1.20.0 <1.20.7||>=1.21.0 <1.21.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.16.0|<1.18.19|>=1.19.0|<1.19.10|>=1.20.0|<1.20.7|>=1.21.0|<1.21.1"
   },
@@ -445,7 +445,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.18.18||>=1.19.0 <1.19.10||>=1.20.0 <1.20.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.18.18|>=1.19.0|<1.19.10|>=1.20.0|<1.20.6"
   },
@@ -454,7 +454,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.6.0 <1.16.13||>=1.17.0 <1.17.9||>=1.18.0 <1.18.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.6.0|<1.16.13|>=1.17.0|<1.17.9|>=1.18.0|<1.18.6"
   },
@@ -463,7 +463,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.16.13||>=1.17.0 <1.17.9||>=1.18.0 <1.18.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.16.13|>=1.17.0|<1.17.9|>=1.18.0|<1.18.6"
   },
@@ -472,7 +472,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=1.15.9||>=1.16.0 <=1.16.6||>=1.17.0 <=1.17.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.15.9|>=1.16.0|<=1.16.6|>=1.17.0|<=1.17.2"
   },
@@ -481,7 +481,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.1.0 <=1.16.10||>=1.17.0 <=1.17.6||>=1.18.0 <=1.18.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.1.0|<=1.16.10|>=1.17.0|<=1.17.6|>=1.18.0|<=1.18.3"
   },
@@ -490,7 +490,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.17.0 <1.17.13||>=1.18.0 <1.18.10||>=1.19.0 <1.19.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.17.0|<1.17.13|>=1.18.0|<1.18.10|>=1.19.0|<1.19.3"
   },
@@ -499,7 +499,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.15.11||>=1.16.0 <1.16.9||>=1.17.0 <1.17.5||>=1.18.0 <1.18.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.15.11|>=1.16.0|<1.16.9|>=1.17.0|<1.17.5|>=1.18.0|<1.18.1"
   },
@@ -508,7 +508,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.17.0 <1.17.13||>=1.18.0 <1.18.10||>=1.19.0 <1.19.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.17.0|<1.17.13|>=1.18.0|<1.18.10|>=1.19.0|<1.19.3"
   },
@@ -517,7 +517,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=1.13.6||=1.14.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/1.13.6|1.14.2"
   },
@@ -526,7 +526,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.16.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.16.4"
   },
@@ -535,7 +535,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.8.0 <=1.14.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.8.0|<=1.14.1"
   },
@@ -544,7 +544,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.18.0 <1.18.4||>=1.17.0 <1.17.7||<1.16.11",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.16.11|>=1.17.0|<1.17.7|>=1.18.0|<1.18.4"
   },
@@ -553,7 +553,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<3.7.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<3.7.1"
   },
@@ -562,7 +562,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2021-08-11",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2021.0.0-08-11"
   },
@@ -571,7 +571,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.3.0 <v1.3.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.3.0|<1.3.2"
   },
@@ -580,7 +580,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.6.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.6.1"
   },
@@ -589,7 +589,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.3.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.3.3"
   },
@@ -598,7 +598,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.6.0 <v1.6.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.6.0|<1.6.1"
   },
@@ -607,7 +607,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.3.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.3.2"
   },
@@ -616,7 +616,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.3.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.3.2"
   },
@@ -625,7 +625,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.0.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.1"
   },
@@ -634,7 +634,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.3.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.3.3"
   },
@@ -643,7 +643,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.3.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.3.1"
   },
@@ -652,7 +652,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v20.10.9",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<20.10.9"
   },
@@ -661,7 +661,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v19.03.11",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<19.3.11"
   },
@@ -670,7 +670,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<19.03.9",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<19.3.9"
   },
@@ -679,7 +679,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.8.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.8.0"
   },
@@ -688,7 +688,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.1.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.1.1"
   },
@@ -697,7 +697,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.11.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.11.0"
   },
@@ -706,7 +706,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.1.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.1.0"
   },
@@ -715,7 +715,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v6.5.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<6.5.4"
   },
@@ -724,7 +724,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.11.1||>=0.12.0 <0.12.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.11.1|>=0.12.0|<0.12.2"
   },
@@ -733,7 +733,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.3.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.3.1"
   },
@@ -742,7 +742,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=0.6.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=0.6.0"
   },
@@ -751,7 +751,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.5.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.5.0"
   },
@@ -760,7 +760,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.6.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.6.0"
   },
@@ -769,7 +769,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=0.4.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=0.4.1"
   },
@@ -778,7 +778,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.1.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.1.0"
   },
@@ -787,7 +787,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.7.8 <=1.7.14||>=1.8.3 <=1.8.7||>=1.9.0 <=1.9.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.7.8|<=1.7.14|>=1.8.3|<=1.8.7|>=1.9.0|<=1.9.4"
   },
@@ -796,7 +796,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.1.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.1.4"
   },
@@ -805,7 +805,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.7.26",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.7.26"
   },
@@ -814,7 +814,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">v2.2.0 <v2.2.8",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>2.2.0|<2.2.8"
   },
@@ -823,7 +823,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v2.5.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=2.5.0"
   },
@@ -832,7 +832,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.4.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.4.0"
   },
@@ -841,7 +841,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.4.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.4.0"
   },
@@ -850,7 +850,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v0.30.2 <v0.34.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.30.2|<0.34.1"
   },
@@ -859,7 +859,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.34.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.34.1"
   },
@@ -868,7 +868,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.34.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.34.0"
   },
@@ -877,7 +877,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.31.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.31.0"
   },
@@ -886,7 +886,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.34.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.34.0"
   },
@@ -895,7 +895,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.38.0-beta.2 <=0.38.11-beta.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.38.0-beta.2|<=0.38.11-beta.1"
   },
@@ -904,7 +904,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.38.0-beta.2 <=0.38.11-beta.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.38.0-beta.2|<=0.38.11-beta.1"
   },
@@ -913,7 +913,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.4.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.4.1"
   },
@@ -922,7 +922,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=v1.8.17",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/1.8.17"
   },
@@ -931,7 +931,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.9.18",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.9.18"
   },
@@ -940,7 +940,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.10.0 <v1.10.8",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.10.0|<1.10.8"
   },
@@ -949,7 +949,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.10.9",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.10.9"
   },
@@ -958,7 +958,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.10.16",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.10.16"
   },
@@ -967,7 +967,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.10.12",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.10.12"
   },
@@ -976,7 +976,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.9.25",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.9.25"
   },
@@ -985,7 +985,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.9.24",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.9.24"
   },
@@ -994,7 +994,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.9.24",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.9.24"
   },
@@ -1003,7 +1003,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=v1.10.9",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/1.10.9"
   },
@@ -1012,7 +1012,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.9.17",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.9.17"
   },
@@ -1021,7 +1021,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.9.4 <v1.9.20",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.9.4|<1.9.20"
   },
@@ -1030,7 +1030,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.10.9",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.10.9"
   },
@@ -1039,7 +1039,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.9.18",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.9.18"
   },
@@ -1048,7 +1048,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.10.0 <v1.10.8",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.10.0|<1.10.8"
   },
@@ -1057,7 +1057,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.8.14",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.8.14"
   },
@@ -1066,7 +1066,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.0.0"
   },
@@ -1075,7 +1075,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.10.12",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.10.12"
   },
@@ -1084,7 +1084,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.9.25",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.9.25"
   },
@@ -1093,7 +1093,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.9.24",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.9.24"
   },
@@ -1102,7 +1102,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=v1.10.9",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/1.10.9"
   },
@@ -1111,7 +1111,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.9.17",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.9.17"
   },
@@ -1120,7 +1120,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.9.4 <v1.9.20",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.9.4|<1.9.20"
   },
@@ -1129,7 +1129,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=v1.10.9",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/1.10.9"
   },
@@ -1138,7 +1138,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.8.14",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.8.14"
   },
@@ -1147,7 +1147,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.9.18",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.9.18"
   },
@@ -1156,7 +1156,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.10.0 <v1.10.8",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.10.0|<1.10.8"
   },
@@ -1165,7 +1165,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.0.0"
   },
@@ -1174,7 +1174,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.10.12",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.10.12"
   },
@@ -1183,7 +1183,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.9.25",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.9.25"
   },
@@ -1192,7 +1192,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.9.24",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.9.24"
   },
@@ -1201,7 +1201,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=v1.10.9",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/1.10.9"
   },
@@ -1210,7 +1210,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.9.17",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.9.17"
   },
@@ -1219,7 +1219,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.9.4 <v1.9.20",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.9.4|<1.9.20"
   },
@@ -1228,7 +1228,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.9.24",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.9.24"
   },
@@ -1237,7 +1237,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.9.4 <1.9.20",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.9.4|<1.9.20"
   },
@@ -1246,7 +1246,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.19.7",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.19.7"
   },
@@ -1255,7 +1255,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.9.25",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.9.25"
   },
@@ -1264,7 +1264,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.9.18",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.9.18"
   },
@@ -1273,7 +1273,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<3.14.4||>=3.15.0 <3.15.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<3.14.4|>=3.15.0|<3.15.1"
   },
@@ -1282,7 +1282,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.13.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.13.4"
   },
@@ -1291,7 +1291,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.11.0 <0.14.8||=0.15.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.11.0|<0.14.8|0.15.0"
   },
@@ -1300,7 +1300,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.14.0 <0.15.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.14.0|<0.15.6"
   },
@@ -1309,7 +1309,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.10.0 <0.13.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.10.0|<0.13.4"
   },
@@ -1318,7 +1318,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.15.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.15.1"
   },
@@ -1327,7 +1327,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.16.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.16.4"
   },
@@ -1336,7 +1336,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.14.8||=0.15.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.14.8|0.15.0"
   },
@@ -1345,7 +1345,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.10.0 <0.13.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.10.0|<0.13.4"
   },
@@ -1354,7 +1354,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.13.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.13.4"
   },
@@ -1363,7 +1363,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.0.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.6"
   },
@@ -1372,7 +1372,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v12.1.8 || =v12.2.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=12.1.8|12.2.0"
   },
@@ -1381,7 +1381,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=12.2.0-alpha5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=12.2.0-alpha5"
   },
@@ -1390,7 +1390,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.3.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.3.1"
   },
@@ -1399,7 +1399,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2019.03.04.00",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2019.3.4+00"
   },
@@ -1408,7 +1408,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2021.02.22.00",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2021.2.22+00"
   },
@@ -1417,7 +1417,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2020.03.16.00",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2020.3.16+00"
   },
@@ -1426,7 +1426,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.0.0-20201120070457-d52dcb253c63",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.0.0-20201120070457-d52dcb253c63"
   },
@@ -1435,7 +1435,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.0.0-20201120070457-d52dcb253c63",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.0.0-20201120070457-d52dcb253c63"
   },
@@ -1444,7 +1444,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.0.0-20201119192817-4b595ed4fac7",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.0.0-20201119192817-4b595ed4fac7"
   },
@@ -1453,7 +1453,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.0.0-20201120070457-d52dcb253c63",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.0.0-20201120070457-d52dcb253c63"
   },
@@ -1462,7 +1462,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.12.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.12.2"
   },
@@ -1471,7 +1471,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.0.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.0.2"
   },
@@ -1480,7 +1480,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.0.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.0.2"
   },
@@ -1489,7 +1489,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.0.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.0.2"
   },
@@ -1498,7 +1498,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v2.0.0 <v2.0.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.0.0|<2.0.2"
   },
@@ -1507,7 +1507,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v2.0.0 <v2.0.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.0.0|<2.0.2"
   },
@@ -1516,7 +1516,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.0.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.0.2"
   },
@@ -1525,7 +1525,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v2.0.0 <v2.0.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.0.0|<2.0.2"
   },
@@ -1534,7 +1534,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.7.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.7.0"
   },
@@ -1543,7 +1543,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.28.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.28.1"
   },
@@ -1552,7 +1552,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.23.8 <1.28.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.23.8|<1.28.1"
   },
@@ -1561,7 +1561,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=1.16.7||>=1.17.0 <=1.17.1||>=1.18.0 <=1.19.8||>=1.20.0 <=1.21.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.16.7|>=1.17.0|<=1.17.1|>=1.18.0|<=1.19.8|>=1.20.0|<=1.21.2"
   },
@@ -1570,7 +1570,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.25.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.25.0"
   },
@@ -1579,7 +1579,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.14.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.14.4"
   },
@@ -1588,7 +1588,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.8.0 <v3.0.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.8.0|<3.0.0"
   },
@@ -1597,7 +1597,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.7.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.7.0"
   },
@@ -1606,7 +1606,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v4.0.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<4.0.3"
   },
@@ -1615,7 +1615,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v3.3.0 <v3.4.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.3.0|<3.4.3"
   },
@@ -1624,7 +1624,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.0.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.0.5"
   },
@@ -1633,7 +1633,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<3.0.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<3.0.0"
   },
@@ -1642,7 +1642,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<3.4.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<3.4.3"
   },
@@ -1651,7 +1651,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v4.0.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<4.0.3"
   },
@@ -1660,7 +1660,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v3.0.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<3.0.0"
   },
@@ -1669,7 +1669,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.9.0 <=v1.13.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.9.0|<=1.13.1"
   },
@@ -1678,7 +1678,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.4.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.4.3"
   },
@@ -1687,7 +1687,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.8.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.8.0"
   },
@@ -1696,7 +1696,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.6.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.6.2"
   },
@@ -1705,7 +1705,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.12.0 <=v1.12.6 || >=v1.13.0 <v1.13.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.12.0|<=1.12.6|>=1.13.0|<1.13.4"
   },
@@ -1714,7 +1714,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.7.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.7.0"
   },
@@ -1723,7 +1723,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.5.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.5.4"
   },
@@ -1732,7 +1732,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.1.0 <=v1.12.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.1.0|<=1.12.5"
   },
@@ -1741,7 +1741,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v0.9.99 <v1.12.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.9.99|<1.12.6"
   },
@@ -1750,7 +1750,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.8.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.8.0"
   },
@@ -1759,7 +1759,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.16.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.16.4"
   },
@@ -1768,7 +1768,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.7.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.7.0"
   },
@@ -1777,7 +1777,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.5.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.5.0"
   },
@@ -1786,7 +1786,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.7.6 || =v1.8.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.7.6|1.8.0"
   },
@@ -1795,7 +1795,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.1.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.1.1"
   },
@@ -1804,7 +1804,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.13.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.13.6"
   },
@@ -1813,7 +1813,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.5.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.5.1"
   },
@@ -1822,7 +1822,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.7.2 <=v1.7.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.7.2|<=1.7.3"
   },
@@ -1831,7 +1831,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.5.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.5.2"
   },
@@ -1840,7 +1840,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.11.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.11.5"
   },
@@ -1849,7 +1849,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.15.7",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.15.7"
   },
@@ -1858,7 +1858,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.11.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.11.2"
   },
@@ -1867,7 +1867,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.5.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.5.0"
   },
@@ -1876,7 +1876,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.5.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.5.1"
   },
@@ -1885,7 +1885,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.16.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.16.5"
   },
@@ -1894,7 +1894,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.7.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.7.6"
   },
@@ -1903,7 +1903,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.7.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.7.6"
   },
@@ -1912,7 +1912,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.5.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.5.1"
   },
@@ -1921,7 +1921,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.1.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.1.0"
   },
@@ -1930,7 +1930,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.1.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.1.0"
   },
@@ -1939,7 +1939,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.1.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.1.0"
   },
@@ -1948,7 +1948,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.2.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.2.0"
   },
@@ -1957,7 +1957,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.6.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.6.6"
   },
@@ -1966,7 +1966,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.7.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.7.0"
   },
@@ -1975,7 +1975,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.17.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.17.1"
   },
@@ -1984,7 +1984,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v3.2.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=3.2.0"
   },
@@ -1993,7 +1993,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.1.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.1.1"
   },
@@ -2002,7 +2002,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v0.34.0 <v0.34.2 || >=v0.35.0 <v0.35.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.34.0|<0.34.2|>=0.35.0|<0.35.2"
   },
@@ -2011,7 +2011,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v0.19.0 <v0.30.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.19.0|<0.30.0"
   },
@@ -2020,7 +2020,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.33.1||>v0.33.1 <v0.34.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.33.1|>0.33.1|<0.34.1"
   },
@@ -2029,7 +2029,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v0.26.0 <v0.30.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.26.0|<0.30.0"
   },
@@ -2038,7 +2038,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.30.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.30.0"
   },
@@ -2047,7 +2047,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=1.7.30",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.7.30"
   },
@@ -2056,7 +2056,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.7.26",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.7.26"
   },
@@ -2065,7 +2065,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.4.13",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.4.13"
   },
@@ -2074,7 +2074,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.3.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.3.0"
   },
@@ -2083,7 +2083,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.2.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.2.2"
   },
@@ -2092,7 +2092,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.6.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.6.1"
   },
@@ -2101,7 +2101,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.15.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.15.0"
   },
@@ -2110,7 +2110,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=2.0.0 <2.16.8",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.0.0|<2.16.8"
   },
@@ -2119,7 +2119,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">3.0.0 <3.5.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>3.0.0|<3.5.2"
   },
@@ -2128,7 +2128,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=3.0.0 <3.1.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.0.0|<3.1.0"
   },
@@ -2137,7 +2137,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.7.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.7.2"
   },
@@ -2146,7 +2146,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.7.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.7.2"
   },
@@ -2155,7 +2155,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.6.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.6.5"
   },
@@ -2164,7 +2164,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.8.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.8.1"
   },
@@ -2173,7 +2173,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.6.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.6.1"
   },
@@ -2182,7 +2182,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v0.7.0 <v0.7.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.7.0|<0.7.5"
   },
@@ -2191,7 +2191,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v0.7.0 <v0.7.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.7.0|<0.7.5"
   },
@@ -2200,7 +2200,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.0.5||>=2.1.0 <2.1.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.0.5|>=2.1.0|<2.1.2"
   },
@@ -2209,7 +2209,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.8.0 <=1.8.3||=1.9.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.8.0|<=1.8.3|1.9.0"
   },
@@ -2218,7 +2218,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.7.0 <=1.7.5||>=1.8.0 <=1.8.2||>1.8.3 <1.9.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.7.0|<=1.7.5|>=1.8.0|<=1.8.2|>1.8.3|<1.9.0"
   },
@@ -2227,7 +2227,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.7.0 <v1.8.6 || >=v1.9.0 <v1.9.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.7.0|<1.8.6|>=1.9.0|<1.9.3"
   },
@@ -2236,7 +2236,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.7.0 <1.10.3||>=2.0.0 <2.0.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.7.0|<1.10.3|>=2.0.0|<2.0.1"
   },
@@ -2245,7 +2245,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.7.0 <v1.8.6 || >=v1.9.0 <v1.9.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.7.0|<1.8.6|>=1.9.0|<1.9.3"
   },
@@ -2254,7 +2254,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.7.0 <=1.7.6||>=1.8.0 <=1.8.5||>=1.9.0 <=1.9.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.7.0|<=1.7.6|>=1.8.0|<=1.8.5|>=1.9.0|<=1.9.1"
   },
@@ -2263,7 +2263,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.7.0 <v1.8.6 || >=v1.9.0 <v1.9.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.7.0|<1.8.6|>=1.9.0|<1.9.3"
   },
@@ -2272,7 +2272,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.8.0 <2.0.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.8.0|<2.0.1"
   },
@@ -2281,7 +2281,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.0.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.0.3"
   },
@@ -2290,7 +2290,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.7.0 <v1.8.6 || >=v1.9.0 <v1.9.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.7.0|<1.8.6|>=1.9.0|<1.9.3"
   },
@@ -2299,7 +2299,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.7.0 <v1.7.6||>=v1.8.0 <v1.8.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.7.0|<1.7.6|>=1.8.0|<1.8.3"
   },
@@ -2308,7 +2308,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.9.0 <2.0.3||>2.0.3 <2.1.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.9.0|<2.0.3|>2.0.3|<2.1.0"
   },
@@ -2317,7 +2317,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.6.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.6.5"
   },
@@ -2326,7 +2326,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.6.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.6.5"
   },
@@ -2335,7 +2335,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.9.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.9.3"
   },
@@ -2344,7 +2344,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.6.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.6.4"
   },
@@ -2353,7 +2353,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.15.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.15.0"
   },
@@ -2362,7 +2362,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.58.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.58.2"
   },
@@ -2371,7 +2371,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.2.7",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.2.7"
   },
@@ -2380,7 +2380,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.5.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.5.2"
   },
@@ -2389,7 +2389,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v3.0.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<3.0.1"
   },
@@ -2398,7 +2398,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<5.39",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<5.39.0"
   },
@@ -2407,7 +2407,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.8.0 <=1.8.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.8.0|<=1.8.4"
   },
@@ -2416,7 +2416,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.11.0 <1.3.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.11.0|<1.3.2"
   },
@@ -2425,7 +2425,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.7.0 <1.7.2||>=1.6.0 <1.6.5||>=0.10.0 <1.5.9",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.10.0|<1.5.9|>=1.6.0|<1.6.5|>=1.7.0|<1.7.2"
   },
@@ -2434,7 +2434,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.5.0 <1.5.1||>=0.8.1 <1.2.5||>=1.3.0 <1.3.8||>=1.4.0 <1.4.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.8.1|<1.2.5|>=1.3.0|<1.3.8|>=1.4.0|<1.4.4|>=1.5.0|<1.5.1"
   },
@@ -2443,7 +2443,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">0.11.0 <1.7.6||>=1.8.0 <1.8.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>0.11.0|<1.7.6|>=1.8.0|<1.8.5"
   },
@@ -2452,7 +2452,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.7.5||>=1.8.0 <1.8.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.7.5|>=1.8.0|<1.8.4"
   },
@@ -2461,7 +2461,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.4.0 <1.8.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.4.0|<1.8.0"
   },
@@ -2470,7 +2470,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.6.6||>=1.7.0 <1.7.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.6.6|>=1.7.0|<1.7.4"
   },
@@ -2479,7 +2479,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.3.0 <1.3.6||>=1.4.0 <1.4.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.3.0|<1.3.6|>=1.4.0|<1.4.2"
   },
@@ -2488,7 +2488,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.2.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.2.0"
   },
@@ -2497,7 +2497,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.2.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.2.0"
   },
@@ -2506,7 +2506,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.0.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.0.6"
   },
@@ -2515,7 +2515,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.6.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.6.2"
   },
@@ -2524,7 +2524,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.10.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.10.1"
   },
@@ -2533,7 +2533,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.4.1 <=v1.6.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.4.1|<=1.6.2"
   },
@@ -2542,7 +2542,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.7.0 <1.8.17||>=1.9.0 <1.9.11||>=1.10.0 <1.10.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.7.0|<1.8.17|>=1.9.0|<1.9.11|>=1.10.0|<1.10.4"
   },
@@ -2551,7 +2551,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=v1.4.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/1.4.3"
   },
@@ -2560,7 +2560,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.8.0 <1.9.15||>=1.10.0 <1.10.8||>=1.11.0 <1.11.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.8.0|<1.9.15|>=1.10.0|<1.10.8|>=1.11.0|<1.11.3"
   },
@@ -2569,7 +2569,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.4.0 <=v1.5.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.4.0|<=1.5.0"
   },
@@ -2578,7 +2578,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=1.10.1||>=1.9.0 <1.9.9||<1.8.15",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.8.15|>=1.9.0|<1.9.9|1.10.1"
   },
@@ -2587,7 +2587,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.10.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.10.1"
   },
@@ -2596,7 +2596,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.4.0 <v1.4.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.4.0|<1.4.3"
   },
@@ -2605,7 +2605,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.8.0 <1.8.10||>=1.9.0 <1.9.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.8.0|<1.8.10|>=1.9.0|<1.9.5"
   },
@@ -2614,7 +2614,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.6.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.6.3"
   },
@@ -2623,7 +2623,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=1.10.1||>=1.9.0 <1.9.9||<1.8.15",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.8.15|>=1.9.0|<1.9.9|1.10.1"
   },
@@ -2632,7 +2632,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.4.0 <v1.6.6 || >=v1.7.0 <v1.7.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.4.0|<1.6.6|>=1.7.0|<1.7.4"
   },
@@ -2641,7 +2641,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.7.0 <1.7.4||>=1.6.0 <1.6.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.6.0|<1.6.6|>=1.7.0|<1.7.4"
   },
@@ -2650,7 +2650,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.6.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.6.3"
   },
@@ -2659,7 +2659,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.4.0 <=v1.6.6 || >=v1.7.0 <v1.7.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.4.0|<=1.6.6|>=1.7.0|<1.7.4"
   },
@@ -2668,7 +2668,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.6.0 <v1.6.6 || >=v1.7.0 <v1.7.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.6.0|<1.6.6|>=1.7.0|<1.7.4"
   },
@@ -2677,7 +2677,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.2.0 <1.6.6||>=1.7.0 <1.7.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.2.0|<1.6.6|>=1.7.0|<1.7.4"
   },
@@ -2686,7 +2686,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.8.15 || >=v1.9.0 <v1.9.9 || >=v1.10.0 <v1.10.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.8.15|>=1.9.0|<1.9.9|>=1.10.0|<1.10.2"
   },
@@ -2695,7 +2695,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.9.0 <v1.9.8 || >=v1.10.0 <v1.10.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.9.0|<1.9.8|>=1.10.0|<1.10.1"
   },
@@ -2704,7 +2704,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.4.1 <v1.6.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.4.1|<1.6.2"
   },
@@ -2713,7 +2713,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.7.0 <=v1.8.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.7.0|<=1.8.4"
   },
@@ -2722,7 +2722,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.7.0 <1.8.17||>=1.9.0 <1.9.11||>=1.10.0 <1.10.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.7.0|<1.8.17|>=1.9.0|<1.9.11|>=1.10.0|<1.10.4"
   },
@@ -2731,7 +2731,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.8.15 || >=v1.9.0 <v1.9.9 || >=v1.10.0 <v1.10.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.8.15|>=1.9.0|<1.9.9|>=1.10.0|<1.10.2"
   },
@@ -2740,7 +2740,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.7.14 || >=v1.8.0 <v1.8.10 || >=v1.9.0 <v1.9.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.7.14|>=1.8.0|<1.8.10|>=1.9.0|<1.9.5"
   },
@@ -2749,7 +2749,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.3.0 <v1.8.14 || >=v1.9.0 <v1.9.8 || >=v1.10.0 <v1.10.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.3.0|<1.8.14|>=1.9.0|<1.9.8|>=1.10.0|<1.10.1"
   },
@@ -2758,7 +2758,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.8.0 <v1.8.10 || >=v1.9.0 <v1.9.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.8.0|<1.8.10|>=1.9.0|<1.9.5"
   },
@@ -2767,7 +2767,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.2.0 <v1.6.10 || >=v1.7.0 <v1.7.10 || >=v1.8.0 <v1.8.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.2.0|<1.6.10|>=1.7.0|<1.7.10|>=1.8.0|<1.8.6"
   },
@@ -2776,7 +2776,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.8.15 || >=v1.9.0 <v1.9.9 || >=v1.10.0 <v1.10.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.8.15|>=1.9.0|<1.9.9|>=1.10.0|<1.10.2"
   },
@@ -2785,7 +2785,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.2.0 <v1.6.6 || >=v1.7.0 <v1.7.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.2.0|<1.6.6|>=1.7.0|<1.7.4"
   },
@@ -2794,7 +2794,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.5.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.5.0"
   },
@@ -2803,7 +2803,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.0.0 <1.0.17||>=1.1.0 <1.1.12||>=1.2.0 <1.2.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.0.0|<1.0.17|>=1.1.0|<1.1.12|>=1.2.0|<1.2.6"
   },
@@ -2812,7 +2812,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.9.2 <1.0.18||>=1.1.0 <1.1.12||>=1.2.0 <1.2.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.9.2|<1.0.18|>=1.1.0|<1.1.12|>=1.2.0|<1.2.6"
   },
@@ -2821,7 +2821,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.9.0 <1.0.18||>=1.1.0 <1.1.12||>=1.2.0 <1.2.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.9.0|<1.0.18|>=1.1.0|<1.1.12|>=1.2.0|<1.2.6"
   },
@@ -2830,7 +2830,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.10.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.10.3"
   },
@@ -2839,7 +2839,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.3.0 <1.0.18||>=1.1.0 <1.1.12||>=1.2.0 <1.2.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.3.0|<1.0.18|>=1.1.0|<1.1.12|>=1.2.0|<1.2.6"
   },
@@ -2848,7 +2848,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.0.10||>=1.1.0 <1.1.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.10|>=1.1.0|<1.1.4"
   },
@@ -2857,7 +2857,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.0.0 <1.0.3||<0.12.10",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.12.10|>=1.0.0|<1.0.3"
   },
@@ -2866,7 +2866,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.0.0 <1.0.5||<0.12.12",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.12.12|>=1.0.0|<1.0.5"
   },
@@ -2875,7 +2875,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.0.14||>=1.1.0 <1.1.8||>=1.2.0 <1.2.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.14|>=1.1.0|<1.1.8|>=1.2.0|<1.2.1"
   },
@@ -2884,7 +2884,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.9.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.9.5"
   },
@@ -2893,7 +2893,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.9.0 <0.10.6||>=0.11.0 <0.11.5||>=0.12.0 <0.12.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.9.0|<0.10.6|>=0.11.0|<0.11.5|>=0.12.0|<0.12.6"
   },
@@ -2902,7 +2902,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.9.0 <0.10.8||>=0.11.0-beta1 <0.11.7||>=0.12.0-beta1 <0.12.8",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.9.0|<0.10.8|>=0.11.0-beta1|<0.11.7|>=0.12.0-beta1|<0.12.8"
   },
@@ -2911,7 +2911,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.10.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.10.3"
   },
@@ -2920,7 +2920,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.12.17",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.12.17"
   },
@@ -2929,7 +2929,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.16.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.16.3"
   },
@@ -2938,7 +2938,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=2.0.0 <2.1.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.0.0|<2.1.6"
   },
@@ -2947,7 +2947,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v2.0.0 <=v2.1.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.0.0|<=2.1.5"
   },
@@ -2956,7 +2956,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=v2.1.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/2.1.4"
   },
@@ -2965,7 +2965,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v2.0.0 <=v2.0.13 || >=v2.1.0 <=v2.1.8 || >=v2.2.0 <=v2.2.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.0.0|<=2.0.13|>=2.1.0|<=2.1.8|>=2.2.0|<=2.2.1"
   },
@@ -2974,7 +2974,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.4.18||>=2.5.0 <2.5.12||>=2.6.0 <2.6.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.4.18|>=2.5.0|<2.5.12|>=2.6.0|<2.6.3"
   },
@@ -2983,7 +2983,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.5.10",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.5.10"
   },
@@ -2992,7 +2992,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v2.0.0 <=v2.2.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.0.0|<=2.2.4"
   },
@@ -3001,7 +3001,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.3.11 || >=v2.4.0 <v2.4.14 || >=v2.5.0 <v2.5.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.3.11|>=2.4.0|<2.4.14|>=2.5.0|<2.5.6"
   },
@@ -3010,7 +3010,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.4.18||>=2.5.0 <2.5.12||>=2.6.0 <2.6.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.4.18|>=2.5.0|<2.5.12|>=2.6.0|<2.6.3"
   },
@@ -3019,7 +3019,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v2.0.0 <=v2.1.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.0.0|<=2.1.5"
   },
@@ -3028,7 +3028,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.0.0 <=v1.6.28 || >=v2.0.0 <=v2.2.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.0.0|<=1.6.28|>=2.0.0|<=2.2.3"
   },
@@ -3037,7 +3037,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.4.16 || >=v2.5.0 <v2.5.9",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.4.16|>=2.5.0|<2.5.9"
   },
@@ -3046,7 +3046,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.4.16 || >=v2.5.0 <v2.5.9",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.4.16|>=2.5.0|<2.5.9"
   },
@@ -3055,7 +3055,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=v2.1.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/2.1.4"
   },
@@ -3064,7 +3064,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.5.10",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.5.10"
   },
@@ -3073,7 +3073,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v2.0.0 <=v2.2.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.0.0|<=2.2.3"
   },
@@ -3082,7 +3082,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v2.0.0 <=v2.2.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.0.0|<=2.2.4"
   },
@@ -3091,7 +3091,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.3.11 || >=v2.4.0 <v2.4.14 || >=v2.5.0 <v2.5.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.3.11|>=2.4.0|<2.4.14|>=2.5.0|<2.5.6"
   },
@@ -3100,7 +3100,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v2.0.0 <=v2.0.13 || >=v2.1.0 <=v2.1.8 || >=v2.2.0 <=v2.2.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.0.0|<=2.0.13|>=2.1.0|<=2.1.8|>=2.2.0|<=2.2.1"
   },
@@ -3109,7 +3109,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.2.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.2.1"
   },
@@ -3118,7 +3118,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.3.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.3.2"
   },
@@ -3127,7 +3127,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.3.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.3.2"
   },
@@ -3136,7 +3136,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v4.9.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<4.9.1"
   },
@@ -3145,7 +3145,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v3.5.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<3.5.1"
   },
@@ -3154,7 +3154,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.0.10",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.10"
   },
@@ -3163,7 +3163,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.1.25",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.1.25"
   },
@@ -3172,7 +3172,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.0.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.4"
   },
@@ -3181,7 +3181,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.33.0 <0.33.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.33.0|<0.33.6"
   },
@@ -3190,7 +3190,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.34.0 <0.34.9",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.34.0|<0.34.9"
   },
@@ -3199,7 +3199,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.33.0 <0.33.3||<0.31.12||>=0.32.0 <0.32.10",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.31.12|>=0.32.0|<0.32.10|>=0.33.0|<0.33.3"
   },
@@ -3208,7 +3208,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.7.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.7.0"
   },
@@ -3217,7 +3217,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.4.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.4.1"
   },
@@ -3226,7 +3226,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.4.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.4.1"
   },
@@ -3235,7 +3235,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.4.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.4.1"
   },
@@ -3244,7 +3244,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.4.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.4.1"
   },
@@ -3253,7 +3253,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v0.43.0 <v0.44.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.43.0|<0.44.2"
   },
@@ -3262,7 +3262,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.8.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.8.6"
   },
@@ -3271,7 +3271,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.3.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.3.0"
   },
@@ -3280,7 +3280,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.12.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.12.1"
   },
@@ -3289,7 +3289,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.1.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.1.3"
   },
@@ -3298,7 +3298,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.7.3 || >=v0.8.0 <=v0.9.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.7.3|>=0.8.0|<=0.9.0"
   },
@@ -3307,7 +3307,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v0.4.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=0.4.2"
   },
@@ -3316,7 +3316,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.0.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.0.1"
   },
@@ -3325,7 +3325,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=v3.9.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/3.9.0"
   },
@@ -3334,7 +3334,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=v1.0.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/1.0.0"
   },
@@ -3343,7 +3343,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.14.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.14.0"
   },
@@ -3352,7 +3352,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.8.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.8.6"
   },
@@ -3361,7 +3361,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.8.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.8.1"
   },
@@ -3370,7 +3370,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.8.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.8.1"
   },
@@ -3379,7 +3379,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.6.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.6.0"
   },
@@ -3388,7 +3388,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.5.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.5.0"
   },
@@ -3397,7 +3397,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.4.8 || >=v1.5.0 <v1.5.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.4.8|>=1.5.0|<1.5.4"
   },
@@ -3406,7 +3406,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.5.0 <v1.5.9",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.5.0|<1.5.9"
   },
@@ -3415,7 +3415,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.3.10 || >=v1.4.0 <v1.4.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.3.10|>=1.4.0|<1.4.4"
   },
@@ -3424,7 +3424,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.4.11 || >=v1.5.0 <v1.5.7",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.4.11|>=1.5.0|<1.5.7"
   },
@@ -3433,7 +3433,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.4.13||>=1.5.0 <1.5.10||>=1.6.0 <1.6.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.4.13|>=1.5.0|<1.5.10|>=1.6.0|<1.6.1"
   },
@@ -3442,7 +3442,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.4.12||>=1.5.0 <1.5.8",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.4.12|>=1.5.0|<1.5.8"
   },
@@ -3451,7 +3451,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.2.0 <v1.2.14 || =v1.3.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.2.0|<1.2.14|1.3.0"
   },
@@ -3460,7 +3460,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.3.9 || >=v1.4.0 <v1.4.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.3.9|>=1.4.0|<1.4.3"
   },
@@ -3469,7 +3469,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.2.0||>=1.3.0 <1.3.9||>=1.4.0 <1.4.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.2.0|>=1.3.0|<1.3.9|>=1.4.0|<1.4.3"
   },
@@ -3478,7 +3478,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.1.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.1.4"
   },
@@ -3487,7 +3487,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=4.0.0-alpha1 <=4.29.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=4.0.0-alpha1|<=4.29.2"
   },
@@ -3496,7 +3496,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.13.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.13.2"
   },
@@ -3505,7 +3505,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.12.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.12.1"
   },
@@ -3514,7 +3514,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=3.2.0 <3.6.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.2.0|<3.6.3"
   },
@@ -3523,7 +3523,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=3.1.1 <3.6.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.1.1|<3.6.4"
   },
@@ -3532,7 +3532,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=3.5.0 <3.6.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.5.0|<3.6.0"
   },
@@ -3541,7 +3541,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<3.6.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<3.6.3"
   },
@@ -3550,7 +3550,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=3.1.0 <3.2.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.1.0|<3.2.0"
   },
@@ -3559,7 +3559,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=3.7.2 <3.7.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.7.2|<3.7.4"
   },
@@ -3568,7 +3568,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=3.0.0 <3.6.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.0.0|<3.6.0"
   },
@@ -3577,7 +3577,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v3.2.0 <=v3.6.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.2.0|<=3.6.2"
   },
@@ -3586,7 +3586,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v3.7.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<3.7.3"
   },
@@ -3595,7 +3595,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v3.1.1 <=v3.6.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.1.1|<=3.6.3"
   },
@@ -3604,7 +3604,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v3.6.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=3.6.2"
   },
@@ -3613,7 +3613,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v3.5.0 <v3.7.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.5.0|<3.7.0"
   },
@@ -3622,7 +3622,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=3.1.0 <3.2.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.1.0|<3.2.0"
   },
@@ -3631,7 +3631,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v3.7.2 <=v3.7.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.7.2|<=3.7.3"
   },
@@ -3640,7 +3640,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.2.0 <v1.2.6 || >=v1.3.0 <v1.3.4 || >=v1.4.0 <v1.4.4 || >=v1.5.0 <v1.5.4 || >=v1.6.0 <v1.6.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.2.0|<1.2.6|>=1.3.0|<1.3.4|>=1.4.0|<1.4.4|>=1.5.0|<1.5.4|>=1.6.0|<1.6.3"
   },
@@ -3649,7 +3649,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.2.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.2.3"
   },
@@ -3658,7 +3658,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=v5.0.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/5.0.0"
   },
@@ -3667,7 +3667,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v5.0.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<5.0.1"
   },
@@ -3676,7 +3676,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v10.1.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<10.1.0"
   },
@@ -3685,7 +3685,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v3.3.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=3.3.1"
   },
@@ -3694,7 +3694,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v3.3.0 <v3.3.23||>=v3.4.0 <v3.4.10",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.3.0|<3.3.23|>=3.4.0|<3.4.10"
   },
@@ -3703,7 +3703,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v3.3.0 <v3.3.23 || >=v3.4.0 <v3.4.10",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.3.0|<3.3.23|>=3.4.0|<3.4.10"
   },
@@ -3712,7 +3712,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v3.3.0 <v3.3.23 || >=v3.4.0 <v3.4.10",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.3.0|<3.3.23|>=3.4.0|<3.4.10"
   },
@@ -3721,7 +3721,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v3.3.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=3.3.1"
   },
@@ -3730,7 +3730,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.1.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.1.1"
   },
@@ -3739,7 +3739,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.5.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.5.0"
   },
@@ -3748,7 +3748,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=v0.5.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/0.5.1"
   },
@@ -3757,7 +3757,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.34.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.34.0"
   },
@@ -3766,7 +3766,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.33.1 <0.37.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.33.1|<0.37.0"
   },
@@ -3775,7 +3775,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.2.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.2.0"
   },
@@ -3784,7 +3784,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.0.3||>=1.1.0 <1.1.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.3|>=1.1.0|<1.1.3"
   },
@@ -3793,7 +3793,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.8.1 <0.8.5||>=0.9.0 <0.9.4||>=0.10.0 <0.10.2||>=0.11.0 <0.11.3||>=0.12.0 <0.12.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.8.1|<0.8.5|>=0.9.0|<0.9.4|>=0.10.0|<0.10.2|>=0.11.0|<0.11.3|>=0.12.0|<0.12.1"
   },
@@ -3802,7 +3802,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.0.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.0.3"
   },
@@ -3811,7 +3811,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.0.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.0.4"
   },
@@ -3820,7 +3820,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.2.3019.52a",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.2.3019+52a"
   },
@@ -3829,7 +3829,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=v1.2.2550.20",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/1.2.2550+20"
   },
@@ -3838,7 +3838,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.0.1116.6 <=v1.2.2550.20",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.0.1116+6|<=1.2.2550+20"
   },
@@ -3847,7 +3847,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<3.5.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<3.5.1"
   },
@@ -3856,7 +3856,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<3.5.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<3.5.1"
   },
@@ -3865,7 +3865,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=3.7.2 <3.7.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.7.2|<3.7.4"
   },
@@ -3874,7 +3874,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.8.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.8.0"
   },
@@ -3883,7 +3883,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.6.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.6.3"
   },
@@ -3892,7 +3892,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.4.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.4.4"
   },
@@ -3901,7 +3901,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=1.2.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/1.2.0"
   },
@@ -3910,7 +3910,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.12.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.12.6"
   },
@@ -3919,7 +3919,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.7.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.7.1"
   },
@@ -3928,7 +3928,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.4.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.4.3"
   },
@@ -3937,7 +3937,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.0.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.0"
   },
@@ -3946,7 +3946,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=v1.0.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/1.0.0"
   },
@@ -3955,7 +3955,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=2.1.0 <2.1.3||>=3.0.0 <3.0.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.1.0|<2.1.3|>=3.0.0|<3.0.2"
   },
@@ -3964,7 +3964,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v3.0.0 <v3.0.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.0.0|<3.0.2"
   },
@@ -3973,7 +3973,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v2.0.0 <v2.1.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.0.0|<2.1.3"
   },
@@ -3982,7 +3982,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=v1.10.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/1.10.0"
   },
@@ -3991,7 +3991,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=v1.10.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/1.10.0"
   },
@@ -4000,7 +4000,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.12.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.12.2"
   },
@@ -4009,7 +4009,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=v2.0.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/2.0.1"
   },
@@ -4018,7 +4018,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v2.0.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=2.0.1"
   },
@@ -4027,7 +4027,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.0.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.0"
   },
@@ -4036,7 +4036,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.1.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.1.1"
   },
@@ -4045,7 +4045,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.1.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.1.4"
   },
@@ -4054,7 +4054,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v0.17.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=0.17.0"
   },
@@ -4063,7 +4063,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.7.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.7.1"
   },
@@ -4072,7 +4072,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=2.23.0 <2.26.1||=2.27.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.23.0|<2.26.1|2.27.0"
   },
@@ -4081,7 +4081,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v2.23.0 <v2.26.1 || =v2.27.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.23.0|<2.26.1|2.27.0"
   },
@@ -4090,7 +4090,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.11.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.11.1"
   },
@@ -4099,7 +4099,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.0.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.0.3"
   },
@@ -4108,7 +4108,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.7.13",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.7.13"
   },
@@ -4117,7 +4117,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.4.8",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.4.8"
   },
@@ -4126,7 +4126,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v0.4.6 <v0.4.8 || >=v0.5.3 <v0.5.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.4.6|<0.4.8|>=0.5.3|<0.5.5"
   },
@@ -4135,7 +4135,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=0.9.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=0.9.5"
   },
@@ -4144,7 +4144,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.7.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.7.6"
   },
@@ -4153,7 +4153,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.2.0"
   },
@@ -4162,7 +4162,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.2.0"
   },
@@ -4171,7 +4171,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.7.0 <=v1.7.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.7.0|<=1.7.1"
   },
@@ -4180,7 +4180,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.7.0 <1.7.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.7.0|<1.7.2"
   },
@@ -4189,7 +4189,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.17.0 <=v1.17.13 || >=v1.18.0 <=v1.18.10 || >=v1.19.0 <=v1.19.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.17.0|<=1.17.13|>=1.18.0|<=1.18.10|>=1.19.0|<=1.19.3"
   },
@@ -4198,7 +4198,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.2.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.2.0"
   },
@@ -4207,7 +4207,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.10.1 <v1.14.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.10.1|<1.14.0"
   },
@@ -4216,7 +4216,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.5.0 <=v1.5.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.5.0|<=1.5.4"
   },
@@ -4225,7 +4225,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.6.0 <=v1.16.13 || >=v1.17.0 <v1.17.9 || >=v1.18.0 <v1.18.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.6.0|<=1.16.13|>=1.17.0|<1.17.9|>=1.18.0|<1.18.6"
   },
@@ -4234,7 +4234,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.15.9 || >=v1.16.0 <=v1.16.6 || >=v1.17.0 <=v1.17.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.15.9|>=1.16.0|<=1.16.6|>=1.17.0|<=1.17.2"
   },
@@ -4243,7 +4243,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.10.11||>=1.11.0 <1.11.5||>=1.12.0 <1.12.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.10.11|>=1.11.0|<1.11.5|>=1.12.0|<1.12.3"
   },
@@ -4252,7 +4252,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.6.0 <=v1.6.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.6.0|<=1.6.5"
   },
@@ -4261,7 +4261,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.17.0 <v1.17.13 || >=v1.18.0 <v1.18.10 || >=v1.19.0 <v1.19.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.17.0|<1.17.13|>=1.18.0|<1.18.10|>=1.19.0|<1.19.3"
   },
@@ -4270,7 +4270,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.1.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.1.1"
   },
@@ -4279,7 +4279,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.3.0 <=v1.3.10 || >=v1.4.0 <=v1.4.12 || >=v1.5.0 <=v1.5.8 || >=v1.6.0 <=v1.6.13 || >=v1.7.0 <v1.7.14 || >=v1.8.0 <v1.8.9 || >=v1.9.0 <v1.9.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.3.0|<=1.3.10|>=1.4.0|<=1.4.12|>=1.5.0|<=1.5.8|>=1.6.0|<=1.6.13|>=1.7.0|<1.7.14|>=1.8.0|<1.8.9|>=1.9.0|<1.9.4"
   },
@@ -4288,7 +4288,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.3.0 <=v1.3.10 || >=v1.4.0 <=v1.4.12 || >=v1.5.0 <=v1.5.8 || >=v1.6.0 <=v1.6.13 || >=v1.7.0 <v1.7.14 || >=v1.8.0 <v1.8.9 || >=v1.9.0 <v1.9.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.3.0|<=1.3.10|>=1.4.0|<=1.4.12|>=1.5.0|<=1.5.8|>=1.6.0|<=1.6.13|>=1.7.0|<1.7.14|>=1.8.0|<1.8.9|>=1.9.0|<1.9.4"
   },
@@ -4297,7 +4297,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.15.11 || >=v1.16.0 <v1.16.9 || >=v1.17.0 <v1.17.5 || =v1.18.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.15.11|>=1.16.0|<1.16.9|>=1.17.0|<1.17.5|1.18.0"
   },
@@ -4306,7 +4306,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.11.9||>=1.12.0 <1.12.7||>=1.13.0 <1.13.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.11.9|>=1.12.0|<1.12.7|>=1.13.0|<1.13.5"
   },
@@ -4315,7 +4315,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.0.0 <=1.12.11||>=1.13.0 <1.13.9||>=1.14.0 <1.14.5||>=1.15.0 <1.15.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.0.0|<=1.12.11|>=1.13.0|<1.13.9|>=1.14.0|<1.14.5|>=1.15.0|<1.15.2"
   },
@@ -4324,7 +4324,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.0.0 <=1.12.11||>=1.13.0 <1.13.9||>=1.14.0 <1.14.5||>=1.15.0 <1.15.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.0.0|<=1.12.11|>=1.13.0|<1.13.9|>=1.14.0|<1.14.5|>=1.15.0|<1.15.2"
   },
@@ -4333,7 +4333,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=1.1-1.12||>=1.13.0 <1.13.11||>=1.14.0 <1.14.7||>=1.15.0 <1.15.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/1.1.0-1.12|>=1.13.0|<1.13.11|>=1.14.0|<1.14.7|>=1.15.0|<1.15.4"
   },
@@ -4342,7 +4342,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.18.0 <1.18.1||>=1.17.0 <1.17.4||>=1.16.0 <1.16.9||<1.15.12",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.15.12|>=1.16.0|<1.16.9|>=1.17.0|<1.17.4|>=1.18.0|<1.18.1"
   },
@@ -4351,7 +4351,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=1.2.0-alpha.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.2.0-alpha.5"
   },
@@ -4360,7 +4360,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.15.0 <1.15.10||>=1.16.0 <1.16.6||>=1.17.0 <1.17.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.15.0|<1.15.10|>=1.16.0|<1.16.6|>=1.17.0|<1.17.2"
   },
@@ -4369,7 +4369,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.7.6 <=v1.16.13 || >=v1.17.0 <v1.17.9 || >=v1.18.0 <v1.18.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.7.6|<=1.16.13|>=1.17.0|<1.17.9|>=1.18.0|<1.18.6"
   },
@@ -4378,7 +4378,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.16.0 <v1.18.19 || >=v1.19.0 <v1.19.10 || >=v1.20.0 <v1.20.7 || =v1.21.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.16.0|<1.18.19|>=1.19.0|<1.19.10|>=1.20.0|<1.20.7|1.21.0"
   },
@@ -4387,7 +4387,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.11.0 <v1.11.9 || >=v1.12.0 <v1.12.7 || >=v1.13.0 <v1.13.5 || =v1.14.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.11.0|<1.11.9|>=1.12.0|<1.12.7|>=1.13.0|<1.13.5|1.14.0"
   },
@@ -4396,7 +4396,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.8.0 <=v1.14.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.8.0|<=1.14.1"
   },
@@ -4405,7 +4405,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.15.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.15.4"
   },
@@ -4414,7 +4414,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.8.0 <v1.12.9",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.8.0|<1.12.9"
   },
@@ -4423,7 +4423,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.10.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.10.1"
   },
@@ -4432,7 +4432,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.28.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.28.0"
   },
@@ -4441,7 +4441,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.49.1 || =v1.0.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.49.1|1.0.0"
   },
@@ -4450,7 +4450,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.15.0 <=v1.15.9 || >=v1.16.0 <=v1.16.6 || >=v1.17.0 <=v1.17.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.15.0|<=1.15.9|>=1.16.0|<=1.16.6|>=1.17.0|<=1.17.2"
   },
@@ -4459,7 +4459,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.18.18||>=v1.19.0 <v1.19.10||>=v1.20.0 <v1.20.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.18.18|>=1.19.0|<1.19.10|>=1.20.0|<1.20.6"
   },
@@ -4468,7 +4468,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.16.13 || >=v1.17.0 <v1.17.9 || >=v1.18.0 <v1.18.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.16.13|>=1.17.0|<1.17.9|>=1.18.0|<1.18.6"
   },
@@ -4477,7 +4477,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.19.15 || >=v1.20.0 <v1.20.11 || >=v1.21.0 <v1.21.5 || >=v1.22.0 <v1.22.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.19.15|>=1.20.0|<1.20.11|>=1.21.0|<1.21.5|>=1.22.0|<1.22.2"
   },
@@ -4486,7 +4486,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.1.0 <=v1.16.10 || >=v1.17.0 <=v1.17.6 || >=v1.18.0 <=v1.18.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.1.0|<=1.16.10|>=1.17.0|<=1.17.6|>=1.18.0|<=1.18.3"
   },
@@ -4495,7 +4495,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.4.0 <1.15.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.4.0|<1.15.1"
   },
@@ -4504,7 +4504,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.31.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.31.0"
   },
@@ -4513,7 +4513,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.33.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.33.0"
   },
@@ -4522,7 +4522,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.15.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.15.1"
   },
@@ -4531,7 +4531,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=1.16.0-snapshot.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.16.0-snapshot.0"
   },
@@ -4540,7 +4540,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v0.11.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=0.11.0"
   },
@@ -4549,7 +4549,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=2.1.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/2.1.2"
   },
@@ -4558,7 +4558,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v2.7.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=2.7.0"
   },
@@ -4567,7 +4567,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.5.0"
   },
@@ -4576,7 +4576,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v2.7.0 <v2.8.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.7.0|<2.8.3"
   },
@@ -4585,7 +4585,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.26.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.26.0"
   },
@@ -4594,7 +4594,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v0.29",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=0.29.0"
   },
@@ -4603,7 +4603,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=1.5.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.5.0"
   },
@@ -4612,7 +4612,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<3.0.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<3.0.0"
   },
@@ -4621,7 +4621,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=3.0.0 <3.0.9||>=3.1.0 <3.1.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.0.0|<3.0.9|>=3.1.0|<3.1.6"
   },
@@ -4630,7 +4630,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=3.1.0 <3.1.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.1.0|<3.1.6"
   },
@@ -4639,7 +4639,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=3.0.0 <3.0.9||>=3.1.0 <3.1.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.0.0|<3.0.9|>=3.1.0|<3.1.6"
   },
@@ -4648,7 +4648,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.7.14||>=1.8.0 <1.8.7",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.7.14|>=1.8.0|<1.8.7"
   },
@@ -4657,7 +4657,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.3.0 <v2.1.11 || >=v2.2.0 <v2.2.6 || >=v2.3.0-rc1 <v2.3.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.3.0|<2.1.11|>=2.2.0|<2.2.6|>=2.3.0-rc1|<2.3.0"
   },
@@ -4666,7 +4666,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v0.5.0 <v2.1.14 || >=v2.2.0 <v2.2.8 || >=v2.3.0 <v2.3.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.5.0|<2.1.14|>=2.2.0|<2.2.8|>=2.3.0|<2.3.2"
   },
@@ -4675,7 +4675,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.5.0 <v2.1.11 || >=v2.2.0 <v2.2.6 || >=v2.3.0-rc1 <v2.3.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.5.0|<2.1.11|>=2.2.0|<2.2.6|>=2.3.0-rc1|<2.3.0"
   },
@@ -4684,7 +4684,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.1.9",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.1.9"
   },
@@ -4693,7 +4693,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.5.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.5.1"
   },
@@ -4702,7 +4702,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=1.5.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/1.5.0"
   },
@@ -4711,7 +4711,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.7.13||>=1.8.0 <1.8.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.7.13|>=1.8.0|<1.8.6"
   },
@@ -4720,7 +4720,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.1.9||>=2.2.0 <2.2.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.1.9|>=2.2.0|<2.2.4"
   },
@@ -4729,7 +4729,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v4.4.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<4.4.0"
   },
@@ -4738,7 +4738,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.13.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.13.1"
   },
@@ -4747,7 +4747,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.3.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.3.0"
   },
@@ -4756,7 +4756,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.53.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.53.3"
   },
@@ -4765,7 +4765,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.9 || >=v1.10.0 <v1.10.5 || >=v1.11.0 <v1.11.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.9.0|>=1.10.0|<1.10.5|>=1.11.0|<1.11.1"
   },
@@ -4774,7 +4774,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.9 || >=v1.10.0 <v1.10.5 || >=v1.11.0 <v1.11.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.9.0|>=1.10.0|<1.10.5|>=1.11.0|<1.11.1"
   },
@@ -4783,7 +4783,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.9 || >=v1.10.0 <=v1.10.5 || =v1.11.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.9.0|>=1.10.0|<=1.10.5|1.11.0"
   },
@@ -4792,7 +4792,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.1.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.1.0"
   },
@@ -4801,7 +4801,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.9.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.9.0"
   },
@@ -4810,7 +4810,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v0.4.0 <v0.9.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.4.0|<0.9.0"
   },
@@ -4819,7 +4819,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.9.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.9.0"
   },
@@ -4828,7 +4828,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.8.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.8.1"
   },
@@ -4837,7 +4837,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.1.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.1.1"
   },
@@ -4846,7 +4846,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.0.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.6"
   },
@@ -4855,7 +4855,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v4.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<4.0.0"
   },
@@ -4864,7 +4864,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=v3.11 || >=v4.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/3.11.0|>=4.0.0"
   },
@@ -4873,7 +4873,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.2.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.2.4"
   },
@@ -4882,7 +4882,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.2.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.2.4"
   },
@@ -4891,7 +4891,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v2.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=2.0.0"
   },
@@ -4900,7 +4900,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v3.0.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.0.0"
   },
@@ -4909,7 +4909,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=3.0.0 <3.3.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.0.0|<3.3.2"
   },
@@ -4918,7 +4918,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v0.9.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=0.9.0"
   },
@@ -4927,7 +4927,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=0.3.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=0.3.0"
   },
@@ -4936,7 +4936,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.3.21",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.3.21"
   },
@@ -4945,7 +4945,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.3.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.3.3"
   },
@@ -4954,7 +4954,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.5.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.5.0"
   },
@@ -4963,7 +4963,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.1.0"
   },
@@ -4972,7 +4972,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=1.0.0-rc2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.0.0-rc2"
   },
@@ -4981,7 +4981,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.0.0-rc8",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.0.0-rc8"
   },
@@ -4990,7 +4990,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=1.0.0-rc90",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.0.0-rc90"
   },
@@ -4999,7 +4999,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.0.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.3"
   },
@@ -5008,7 +5008,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.1.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.1.0"
   },
@@ -5017,7 +5017,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=1.0.0-rc94",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.0.0-rc94"
   },
@@ -5026,7 +5026,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.0.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.0"
   },
@@ -5035,7 +5035,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.0.0-rc8",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.0.0-rc8"
   },
@@ -5044,7 +5044,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.0.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.3"
   },
@@ -5053,7 +5053,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v0.1.1 || =v1.0.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=0.1.1|1.0.0"
   },
@@ -5062,7 +5062,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.4.7",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.4.7"
   },
@@ -5071,7 +5071,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.0.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.2"
   },
@@ -5080,7 +5080,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.0.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.1"
   },
@@ -5089,7 +5089,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v4.44.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<4.44.0"
   },
@@ -5098,7 +5098,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v4.44.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<4.44.0"
   },
@@ -5107,7 +5107,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=6.4.0||=6.3.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/6.3.0|6.4.0"
   },
@@ -5116,7 +5116,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v6.3.1 || >=v6.4.0 <v6.4.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<6.3.1|>=6.4.0|<6.4.1"
   },
@@ -5125,7 +5125,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v5.0.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<5.0.1"
   },
@@ -5134,7 +5134,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v4.2.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<4.2.2"
   },
@@ -5143,7 +5143,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v5.0.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<5.0.1"
   },
@@ -5152,7 +5152,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v4.0.0 <v4.2.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=4.0.0|<4.2.2"
   },
@@ -5161,7 +5161,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.23.0 <1.23.1||>=1.22.0 <1.22.2||>=1.21.0 <1.21.5||>=1.20.0 <1.20.6||>=1.18.0 <1.19.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.18.0|<1.19.5|>=1.20.0|<1.20.6|>=1.21.0|<1.21.5|>=1.22.0|<1.22.2|>=1.23.0|<1.23.1"
   },
@@ -5170,7 +5170,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.19.0 <1.19.6||>=1.20.0 <1.20.7||>=1.21.0 <1.21.6||>=1.22.0 <1.22.3||>=1.23.0 <1.23.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.19.0|<1.19.6|>=1.20.0|<1.20.7|>=1.21.0|<1.21.6|>=1.22.0|<1.22.3|>=1.23.0|<1.23.2"
   },
@@ -5179,7 +5179,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.18",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.18.0"
   },
@@ -5188,7 +5188,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v0.14.0 <v0.20.1 || >=v0.21.0 <v0.21.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.14.0|<0.20.1|>=0.21.0|<0.21.2"
   },
@@ -5197,7 +5197,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<7.5.11||>=8.0.0 <8.1.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<7.5.11|>=8.0.0|<8.1.6"
   },
@@ -5206,7 +5206,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<4.6.4||>=5.0.0 <5.2.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<4.6.4|>=5.0.0|<5.2.3"
   },
@@ -5215,7 +5215,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=3.0.1 <6.7.4||>=7.0.0 <7.0.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.0.1|<6.7.4|>=7.0.0|<7.0.2"
   },
@@ -5224,7 +5224,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=6.7.3 <7.4.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=6.7.3|<7.4.2"
   },
@@ -5233,7 +5233,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v2.2.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=2.2.1"
   },
@@ -5242,7 +5242,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.27.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.27.0"
   },
@@ -5251,7 +5251,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.27.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.27.0"
   },
@@ -5260,7 +5260,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=2.1.0 <2.27.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.1.0|<2.27.0"
   },
@@ -5269,7 +5269,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=v0.1.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/0.1.1"
   },
@@ -5278,7 +5278,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v2.0.10 <v2.1.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.0.10|<2.1.1"
   },
@@ -5287,7 +5287,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.47.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.47.5"
   },
@@ -5296,7 +5296,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=v0.4.23",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/0.4.23"
   },
@@ -5305,7 +5305,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v0.11.0 <v0.12.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.11.0|<0.12.1"
   },
@@ -5314,7 +5314,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.8.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.8.0"
   },
@@ -5323,7 +5323,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v0.7.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=0.7.0"
   },
@@ -5332,7 +5332,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.0.10",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.0.10"
   },
@@ -5341,7 +5341,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v0.3.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=0.3.0"
   },
@@ -5350,7 +5350,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.0.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.1"
   },
@@ -5359,7 +5359,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.0.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.0"
   },
@@ -5368,7 +5368,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.5.8",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.5.8"
   },
@@ -5377,7 +5377,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.5.8",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.5.8"
   },
@@ -5386,7 +5386,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=1.4.0||>=2.0.0 <=2.1.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/1.4.0|>=2.0.0|<=2.1.0"
   },
@@ -5395,7 +5395,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=1.4.0||>=2.0.0 <=2.0.1||=2.3.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/1.4.0|>=2.0.0|<=2.0.1|2.3.0"
   },
@@ -5404,7 +5404,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.53.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.53.1"
   },
@@ -5413,7 +5413,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.3.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.3.0"
   },
@@ -5422,7 +5422,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v0.0.15 <=v0.0.16",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.0.15|<=0.0.16"
   },
@@ -5431,7 +5431,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=7.0.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=7.0.0"
   },
@@ -5440,7 +5440,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=7.0.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=7.0.0"
   },
@@ -5449,7 +5449,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.18.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.18.0"
   },
@@ -5458,7 +5458,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.18.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.18.0"
   },
@@ -5467,7 +5467,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.8.5 || >=v0.9.0 <v0.9.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.8.5|>=0.9.0|<0.9.4"
   },
@@ -5476,7 +5476,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.8.5 || >=v0.9.0 <v0.9.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.8.5|>=0.9.0|<0.9.4"
   },
@@ -5485,7 +5485,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.2.0"
   },
@@ -5494,7 +5494,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v3.15.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<3.15.0"
   },
@@ -5503,7 +5503,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=0.7.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=0.7.0"
   },
@@ -5512,7 +5512,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.13.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.13.0"
   },
@@ -5521,7 +5521,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.2.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.2.1"
   },
@@ -5530,7 +5530,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.5.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.5.2"
   },
@@ -5539,7 +5539,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.5.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.5.4"
   },
@@ -5548,7 +5548,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.5.0 <0.5.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.5.0|<0.5.2"
   },
@@ -5557,7 +5557,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.5.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.5.1"
   },
@@ -5566,7 +5566,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.13.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.13.2"
   },
@@ -5575,7 +5575,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.0.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.2"
   },
@@ -5584,7 +5584,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.12.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.12.3"
   },
@@ -5593,7 +5593,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.0.0-20210316203340-e197800f9055",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.0.0-20210316203340-e197800f9055"
   },
@@ -5602,7 +5602,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.0.0-20210207001905-0d057c777ad6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.0.0-20210207001905-0d057c777ad6"
   },
@@ -5611,7 +5611,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2018.05.16",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2018.5.16"
   },
@@ -5620,7 +5620,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=v2021-10-10t16-53-30z",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/2021.0.0-10-10t16-53-30z"
   },
@@ -5629,7 +5629,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.0.0-20211227072318-bb97eafa8254",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.0.0-20211227072318-bb97eafa8254"
   },
@@ -5638,7 +5638,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2021-03-04t00-53-13z",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2021.0.0-03-04t00-53-13z"
   },
@@ -5647,7 +5647,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.1.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.1.0"
   },
@@ -5656,7 +5656,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.4.0 <1.5.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.4.0|<1.5.2"
   },
@@ -5665,7 +5665,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.3.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.3.0"
   },
@@ -5674,7 +5674,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.3.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.3.0"
   },
@@ -5683,7 +5683,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.3.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.3.0"
   },
@@ -5692,7 +5692,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.3.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.3.0"
   },
@@ -5701,7 +5701,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.3.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.3.0"
   },
@@ -5710,7 +5710,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.3.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.3.0"
   },
@@ -5719,7 +5719,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.3.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.3.0"
   },
@@ -5728,7 +5728,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.4.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.4.2"
   },
@@ -5737,7 +5737,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.4.0"
   },
@@ -5746,7 +5746,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.4.0"
   },
@@ -5755,7 +5755,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.4.0"
   },
@@ -5764,7 +5764,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.4.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.4.2"
   },
@@ -5773,7 +5773,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2020.8.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2020.8.1"
   },
@@ -5782,7 +5782,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.2.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.2.1"
   },
@@ -5791,7 +5791,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.34.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.34.0"
   },
@@ -5800,7 +5800,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.34.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.34.0"
   },
@@ -5809,7 +5809,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.34.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.34.0"
   },
@@ -5818,7 +5818,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v3.0.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<3.0.1"
   },
@@ -5827,7 +5827,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.1.9",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.1.9"
   },
@@ -5836,7 +5836,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.1.9",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.1.9"
   },
@@ -5845,7 +5845,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.1.9",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.1.9"
   },
@@ -5854,7 +5854,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.2.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.2.0"
   },
@@ -5863,7 +5863,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=2.0 <2.7.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.0.0|<2.7.2"
   },
@@ -5872,7 +5872,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v2.2.0 <v2.7.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.2.0|<2.7.4"
   },
@@ -5881,7 +5881,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.2.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.2.0"
   },
@@ -5890,7 +5890,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.1.9",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.1.9"
   },
@@ -5899,7 +5899,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.0.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.0.2"
   },
@@ -5908,7 +5908,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.2.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.2.0"
   },
@@ -5917,7 +5917,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.2.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.2.0"
   },
@@ -5926,7 +5926,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.2.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.2.0"
   },
@@ -5935,7 +5935,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v0.15.0 <v0.24.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.15.0|<0.24.1"
   },
@@ -5944,7 +5944,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v0.15.0 <v0.24.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.15.0|<0.24.3"
   },
@@ -5953,7 +5953,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.0.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.0.1"
   },
@@ -5962,7 +5962,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.1.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.1.0"
   },
@@ -5971,7 +5971,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v2.0.0 <v2.0.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.0.0|<2.0.1"
   },
@@ -5980,7 +5980,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.1.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.1.0"
   },
@@ -5989,7 +5989,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v2.0.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.0.1"
   },
@@ -5998,7 +5998,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.0.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.1"
   },
@@ -6007,7 +6007,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.0.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.1"
   },
@@ -6016,7 +6016,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.3.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.3.3"
   },
@@ -6025,7 +6025,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.6.0 <1.6.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.6.0|<1.6.1"
   },
@@ -6034,7 +6034,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.6.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.6.1"
   },
@@ -6043,7 +6043,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.0.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.1"
   },
@@ -6052,7 +6052,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.0.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.5"
   },
@@ -6061,7 +6061,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.0.16",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.16"
   },
@@ -6070,7 +6070,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.0.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.0.0"
   },
@@ -6079,7 +6079,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.9.3 <=0.12.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.9.3|<=0.12.0"
   },
@@ -6088,7 +6088,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=0.12.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=0.12.0"
   },
@@ -6097,7 +6097,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.9.3 <0.13.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.9.3|<0.13.0"
   },
@@ -6106,7 +6106,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v0.9.3 <=v0.13.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.9.3|<=0.13.0"
   },
@@ -6115,7 +6115,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.8.1 || =v2.0.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.8.1|2.0.0"
   },
@@ -6124,7 +6124,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v5.0.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<5.0.0"
   },
@@ -6133,7 +6133,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=6.0.0 <6.1.0||<5.1.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<5.1.6|>=6.0.0|<6.1.0"
   },
@@ -6142,7 +6142,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=3.0.0 <=3.0.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.0.0|<=3.0.1"
   },
@@ -6151,7 +6151,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<5.1.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<5.1.3"
   },
@@ -6160,7 +6160,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v3.0.0 <=v3.1.0 || >=v4.0.0 <=v4.1.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.0.0|<=3.1.0|>=4.0.0|<=4.1.0"
   },
@@ -6169,7 +6169,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<5.1.6||>=6.0.0 <6.1.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<5.1.6|>=6.0.0|<6.1.0"
   },
@@ -6178,7 +6178,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=3.0.0 <=3.0.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.0.0|<=3.0.1"
   },
@@ -6187,7 +6187,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=5.1.0 <5.1.4||>=6.0.0 <6.0.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=5.1.0|<5.1.4|>=6.0.0|<6.0.1"
   },
@@ -6196,7 +6196,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v4.1.0 <v5.1.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=4.1.0|<5.1.3"
   },
@@ -6205,7 +6205,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.0.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.0.0"
   },
@@ -6214,7 +6214,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.4.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.4.0"
   },
@@ -6223,7 +6223,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.3.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.3.0"
   },
@@ -6232,7 +6232,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.2.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.2.0"
   },
@@ -6241,7 +6241,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.18.3||>=0.19.0 <0.19.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.18.3|>=0.19.0|<0.19.2"
   },
@@ -6250,7 +6250,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.1.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.1.2"
   },
@@ -6259,7 +6259,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.23.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.23.0"
   },
@@ -6268,7 +6268,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.3.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.3.3"
   },
@@ -6277,7 +6277,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.3.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.3.3"
   },
@@ -6286,7 +6286,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.3.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.3.3"
   },
@@ -6295,7 +6295,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.3.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.3.3"
   },
@@ -6304,7 +6304,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.3.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.3.3"
   },
@@ -6313,7 +6313,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v0.3.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.3.3"
   },
@@ -6322,7 +6322,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.2.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.2.4"
   },
@@ -6331,7 +6331,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.5.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.5.2"
   },
@@ -6340,7 +6340,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<3.0.15",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<3.0.15"
   },
@@ -6349,7 +6349,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<5.1.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<5.1.1"
   },
@@ -6358,7 +6358,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=3.2.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=3.2.0"
   },
@@ -6367,7 +6367,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<5.0.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<5.0.0"
   },
@@ -6376,7 +6376,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=5.1.1 <6.0.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=5.1.1|<6.0.0"
   },
@@ -6385,7 +6385,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<7.0.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<7.0.0"
   },
@@ -6394,7 +6394,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=v1.3.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/1.3.0"
   },
@@ -6403,7 +6403,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.0.9",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.0.9"
   },
@@ -6412,7 +6412,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.18.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.18.1"
   },
@@ -6421,7 +6421,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.18.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.18.1"
   },
@@ -6430,7 +6430,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.3.0 <=v1.3.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.3.0|<=1.3.6"
   },
@@ -6439,7 +6439,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.9.8 || >=1.10.0 <1.10.3 || >=1.11.0 <1.11.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.9.8|>=1.10.0|<1.10.3|>=1.11.0|<1.11.1"
   },
@@ -6448,7 +6448,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.5.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.5.1"
   },
@@ -6457,7 +6457,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.9.8 || >=1.10.0 <1.10.4 || >=1.11.0 <1.11.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.9.8|>=1.10.0|<1.10.4|>=1.11.0|<1.11.1"
   },
@@ -6466,7 +6466,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.5.0 <=v1.5.8 || >=v1.6.0 <=v1.6.7",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.5.0|<=1.5.8|>=1.6.0|<=1.6.7"
   },
@@ -6475,7 +6475,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.11.8||>=1.12.0 <1.12.5||>=1.13.0 <1.13.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.11.8|>=1.12.0|<1.12.5|>=1.13.0|<1.13.2"
   },
@@ -6484,7 +6484,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.8.6 || >=v1.9.0 <v1.9.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.8.6|>=1.9.0|<1.9.5"
   },
@@ -6493,7 +6493,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.11.7||>=1.12.0 <1.12.4||>=1.13.0 <1.13.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.11.7|>=1.12.0|<1.12.4|>=1.13.0|<1.13.1"
   },
@@ -6502,7 +6502,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.12.0 <=1.12.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.12.0|<=1.12.1"
   },
@@ -6511,7 +6511,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.12.0 <=1.12.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.12.0|<=1.12.1"
   },
@@ -6520,7 +6520,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=1.2.10 || >=v1.3 <=v1.3.7 || >=v1.4.0 <=v1.4.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.2.10|>=1.3.0|<=1.3.7|>=1.4.0|<=1.4.3"
   },
@@ -6529,7 +6529,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.8.6||>=1.9.0 <1.9.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.8.6|>=1.9.0|<1.9.5"
   },
@@ -6538,7 +6538,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.8.0 <v1.9.6 || >=v1.10.0 <v1.10.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.8.0|<1.9.6|>=1.10.0|<1.10.2"
   },
@@ -6547,7 +6547,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.4.0 <v1.4.9 || >=v1.5.0 <v1.5.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.4.0|<1.4.9|>=1.5.0|<1.5.4"
   },
@@ -6556,7 +6556,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<0.79.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<0.79.1"
   },
@@ -6565,7 +6565,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.5.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.5.1"
   },
@@ -6574,7 +6574,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=v1.5.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.5.0"
   },
@@ -6583,7 +6583,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=0.9.0 <0.12.7",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=0.9.0|<0.12.7"
   },
@@ -6592,7 +6592,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.13.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.13.4"
   },
@@ -6601,7 +6601,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.5.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.5.2"
   },
@@ -6610,7 +6610,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<=1.16.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<=1.16.3"
   },
@@ -6619,7 +6619,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.13.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.13.6"
   },
@@ -6628,7 +6628,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.13.0",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.13.0"
   },
@@ -6637,7 +6637,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.16.11",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.16.11"
   },
@@ -6646,7 +6646,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.16.11",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.16.11"
   },
@@ -6655,7 +6655,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.16.11",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.16.11"
   },
@@ -6664,7 +6664,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.16.11",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.16.11"
   },
@@ -6673,7 +6673,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=3.0.0 <3.3.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.0.0|<3.3.2"
   },
@@ -6682,7 +6682,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=3.0.0 <3.3.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.0.0|<3.3.2"
   },
@@ -6691,7 +6691,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=3.0.0 <3.1.3",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.0.0|<3.1.3"
   },
@@ -6700,7 +6700,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<3.6.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<3.6.1"
   },
@@ -6709,7 +6709,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<3.6.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<3.6.1"
   },
@@ -6718,7 +6718,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=3.0.0 <3.3.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.0.0|<3.3.2"
   },
@@ -6727,7 +6727,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=3.0.0 <3.3.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.0.0|<3.3.2"
   },
@@ -6736,7 +6736,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=3.0 <3.5.1",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.0.0|<3.5.1"
   },
@@ -6745,7 +6745,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=2.0.0 <2.16.11||>=3.0.0 <3.3.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.0.0|<2.16.11|>=3.0.0|<3.3.2"
   },
@@ -6754,7 +6754,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<2.16.11||>=3.0.0 <3.3.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<2.16.11|>=3.0.0|<3.3.2"
   },
@@ -6763,7 +6763,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=3.0.0 <3.2.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=3.0.0|<3.2.4"
   },
@@ -6772,7 +6772,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=2.0.0 <2.16.11||>=3.0.0 <3.3.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.0.0|<2.16.11|>=3.0.0|<3.3.2"
   },
@@ -6781,7 +6781,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=2.0.0 <2.16.11||>=3.0.0 <3.3.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=2.0.0|<2.16.11|>=3.0.0|<3.3.2"
   },
@@ -6790,7 +6790,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.3 <v1.3.5",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.3.0|<1.3.5"
   },
@@ -6799,7 +6799,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.5.0 <1.5.9||>=1.6.0 <1.6.8",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.5.0|<1.5.9|>=1.6.0|<1.6.8"
   },
@@ -6808,7 +6808,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "=1.13.0||>=1.12.0 <1.12.4||<1.11.7",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.11.7|>=1.12.0|<1.12.4|1.13.0"
   },
@@ -6817,7 +6817,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.1.13 || >=v1.2.0 <v1.2.4",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.1.13|>=1.2.0|<1.2.4"
   },
@@ -6826,7 +6826,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.5.0 <1.5.9||>=1.6.0 <1.6.8",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.5.0|<1.5.9|>=1.6.0|<1.6.8"
   },
@@ -6835,7 +6835,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=v1.1 <=v1.1.6",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.1.0|<=1.1.6"
   },
@@ -6844,7 +6844,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<v1.2.2",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.2.2"
   },
@@ -6853,7 +6853,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": ">=1.1.0 <1.1.7",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/>=1.1.0|<1.1.7"
   },
@@ -6862,7 +6862,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.7.8",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.7.8"
   },
@@ -6871,7 +6871,7 @@
     "test_type": "from_native",
     "input": {
       "native_range": "<1.7.8",
-      "scheme": "go"
+      "scheme": "golang"
     },
     "expected_output": "vers:golang/<1.7.8"
   }

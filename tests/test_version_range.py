@@ -11,6 +11,7 @@ import pytest
 
 from tests import SchemaDrivenVersTest
 from univers.version_constraint import VersionConstraint
+from univers.version_range import PURL_TYPE_BY_GITLAB_SCHEME
 from univers.version_range import RANGE_CLASS_BY_SCHEMES
 from univers.version_range import InvalidVersionRange
 from univers.version_range import MattermostVersionRange
@@ -88,9 +89,11 @@ def test_conan_range_from_native(test_case):
 
 
 class TestGitlabVersionRangeNative(SchemaDrivenVersTest):
+    GITLAB_SCHEME_MAPPING = {v: k for k, v in PURL_TYPE_BY_GITLAB_SCHEME.items()}
+
     def from_native(self):
         range = from_gitlab_native(
-            gitlab_scheme=self.input["scheme"],
+            gitlab_scheme=self.GITLAB_SCHEME_MAPPING[self.input["scheme"]],
             string=self.input["native_range"],
         )
         return str(range)
