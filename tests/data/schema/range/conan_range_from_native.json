@@ -1,0 +1,3854 @@
+[
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.1.0 <=5.1.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=5.1.0|<=5.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=5.2.5",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/5.2.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.5.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<3.5.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.7",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.17.3",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.17.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.18.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=2.18.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.11.34 <2.19.3",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=1.11.34|<2.19.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<1.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.16.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.16.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.16.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<1.16.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.0 <1.17.2",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=1.0.0|<1.17.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.17.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<1.17.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.13.7||>=0.14.0 <0.14.11||>=0.15.0 <0.15.2",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<0.13.7|>=0.14.0|<0.14.11|>=0.15.0|<0.15.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=1.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=1.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.9.3",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.9.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.1.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<3.1.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.5.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=0.5.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.1.12",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=0.1.12"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.1.12",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=0.1.12"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.1.27",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=2.1.27"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.1.17 <=2.1.27",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=2.1.17|<=2.1.27"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=3.6.6",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=3.6.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=3.6.6",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=3.6.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=3.6.6",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=3.6.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=3.6.6",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=3.6.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.6.7",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<3.6.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.6.7",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<3.6.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.6.7",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<3.6.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.6.7",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.6.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2021.07.22.00",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2021.07.22.00"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.12",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<1.0.12"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.12",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<1.0.12"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.12",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<1.0.12"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.3.0 <=3.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=3.3.0|<=3.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.42.6",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.42.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=5.1.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=5.1.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=5.1.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/5.1.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=5.2.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/5.2.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.65.3",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.65.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.60.0 <=2.62.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=2.60.0|<=2.62.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.66.7||>=2.67.0 <2.67.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.66.7|>=2.67.0|<2.67.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.66.6||>=2.67.0 <2.67.3",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.66.6|>=2.67.0|<2.67.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.66.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.66.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.63.6",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.63.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=3.2",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=3.2",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.8.107",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.8.107"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.8.107",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.8.107"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.8.107",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.8.107"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.8.107",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.8.107"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.8.107",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.8.107"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.8.107",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.8.107"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.9.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.9.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=4.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/4.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.12.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=1.12.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.12.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=1.12.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.12.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=1.12.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.12.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=1.12.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.13.1-1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.13.1-1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.13.1-1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.13.1-1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.13.1-1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.13.1-1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.13.1-1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.13.1-1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.13.1-1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.13.1-1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.13.1-1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.13.1-1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.13.1-1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.13.1-1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.10.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.10.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.10.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.10.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.10.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.10.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.14.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=0.14.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.13.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=2.13.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.0.23",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.0.23"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.0.25",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.0.25"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.0.25",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.0.25"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.0 <2.0.17",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=2.0.0|<2.0.17"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.0.24",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.0.24"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.0.27",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.0.27"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.0.26",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.0.26"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.6",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.6",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=2.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=2.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=2.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=2.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2021-10-15",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2021-10-15"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=2.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.14",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=0.14"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.80.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<1.80.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.80.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<1.80.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.80.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<1.80.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.80.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<1.80.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.80.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<1.80.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.80.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<1.80.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.4.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.4.0 <3.4.2",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=3.4.0|<3.4.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.5.2",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<3.5.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.5.2",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<3.5.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.4.1 <=3.5.2",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=3.4.1|<=3.5.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.6.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.6.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.6.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.6.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.6.2",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=3.0.0|<3.6.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.6.0 <=0.6.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=0.6.0|<=0.6.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.6.0 <=0.6.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=0.6.0|<=0.6.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.3",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=7.29.0 <=7.71.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=7.29.0|<=7.71.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=7.21.0 <7.74.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=7.21.0|<7.74.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=7.41.0 <7.74.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=7.41.0|<7.74.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=7.1.1 <=7.75.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=7.1.1|<=7.75.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=7.63.0 <=7.75.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=7.63.0|<=7.75.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=7.10.4 <7.77.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=7.10.4|<7.77.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=7.73.0 <=7.78.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=7.73.0|<=7.78.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.0.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.0.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.0.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.0.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.0.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.0.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=1.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.0.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.0.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.0.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.0.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.0.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.0.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.0.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.0.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.0.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.0.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.0.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.0.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.0.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.0.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.0.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.0.8",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.0.9",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.0.9"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=0.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/0.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=0.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/0.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=0.4.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/0.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.28.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<0.28.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.28.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<0.28.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.0.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.0.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.0.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.0.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.0.90",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.0.90"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">1.5.3 <=2.0.90",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>1.5.3|<=2.0.90"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<9d",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<9d"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<9d",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<9d"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.64",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<1.64"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.1.7",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<3.1.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.6.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.6.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.20",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<0.20"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.20",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=0.20"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.20.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<0.20.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.20.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<0.20.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=0.20.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/0.20.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=3.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=3.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.0.30",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.0.30"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.1.10",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.1.10"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<4.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<4.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<4.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<4.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.9.0 <=4.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=3.9.0|<=4.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.0.0 <=4.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=4.0.0|<=4.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=4.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/4.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.9.0 <=4.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=3.9.0|<=4.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=4.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/4.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=4.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=4.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=4.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/4.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=4.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/4.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=4.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/4.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=4.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/4.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<4.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<4.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=4.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/4.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=4.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/4.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=4.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/4.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=4.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/4.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=4.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/4.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=4.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/4.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=4.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/4.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=4.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/4.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=4.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/4.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<4.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<4.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<4.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=4.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=4.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=4.0.3-35",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/4.0.3-35"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=4.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/4.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.9.0 <=4.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=3.9.0|<=4.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=4.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=4.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=4.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=4.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=4.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=4.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=4.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=4.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=4.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=4.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.5.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<4.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<1.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<1.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<1.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<1.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<1.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.9.10",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.9.10"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.9.10",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.9.10"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.9.11",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.9.11"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.9.11",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.9.11"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.9.11",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.9.11"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.9.11",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.9.11"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.9.11",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.9.11"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.9.13",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.9.13"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.9.14",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.9.14"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.10.3",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.10.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.10.3",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.10.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.1.35",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<1.1.35"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.11.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=0.11.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.12.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<0.12.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.12.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<0.12.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.12.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=0.12.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.12.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=0.12.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.12.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=0.12.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=0.12.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/0.12.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=0.12.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/0.12.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=0.12.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/0.12.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=5.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=5.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=5.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/5.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=5.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=5.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=5.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/5.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=5.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/5.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=5.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/5.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=5.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/5.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.1.0 <5.3.5||>=5.4.0 <5.4.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=5.1.0|<5.3.5|>=5.4.0|<5.4.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=5.4.3",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/5.4.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.4.0 <=5.4.3",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=5.4.0|<=5.4.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.4.0 <=5.4.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=5.4.0|<=5.4.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.4.2 <=5.4.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=5.4.2|<=5.4.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.8.3",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.8.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.7.17||>=2.8.0 <2.16.8||>=2.17.0 <2.24.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.7.17|>=2.8.0|<2.16.8|>=2.17.0|<2.24.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=4.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/4.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=6.2.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=6.2.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<6.3",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<6.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.7.2",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<3.7.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.7.3",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<3.7.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.4.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.4.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.4.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.4.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.4.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.4.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.4.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.4.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.5.2",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.5.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.5.2",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.5.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.5.2",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.5.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.4.3||>=2.5.0 <2.5.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.4.3|>=2.5.0|<2.5.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.5.7",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=2.5.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.5.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.5.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.5.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.5.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.5.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.5.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.5.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.5.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.5.7",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=2.5.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.0.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<3.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.0.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<3.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.0.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<3.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.0.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<3.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.4.3||>=2.5.0 <2.5.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.4.3|>=2.5.0|<2.5.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.4.3||>=2.5.0 <2.5.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.4.3|>=2.5.0|<2.5.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.4.3||>=2.5.0 <2.5.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.4.3|>=2.5.0|<2.5.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.4.3||>=2.5.0 <2.5.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.4.3|>=2.5.0|<2.5.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.4.3||>=2.5.0 <2.5.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.4.3|>=2.5.0|<2.5.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.4.3||>=2.5.0 <2.5.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.4.3|>=2.5.0|<2.5.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.0.5",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<3.0.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.0.5",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<3.0.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.1.2",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<3.1.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.1.2",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.1.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.1.0 <3.1.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=3.1.0|<3.1.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.3.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=2.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.5.1||>=2.0.0 <2.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=1.5.1|>=2.0.0|<2.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.3.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=2.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.3.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=2.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.1d <=1.1.1f",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=1.1.1d|<=1.1.1f"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.2 <=1.0.2v",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=1.0.2|<=1.0.2v"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.2 <=1.0.2w||>=1.1.1 <=1.1.1h",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=1.0.2|<=1.0.2w|>=1.1.1|<=1.1.1h"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.0.2s",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.0.2s"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.2 <1.0.2y||>=1.1.1 <1.1.1j",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=1.0.2|<1.0.2y|>=1.1.1|<1.1.1j"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.2 <1.0.2y||>=1.1.1 <1.1.1j",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=1.0.2|<1.0.2y|>=1.1.1|<1.1.1j"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.1 <1.1.1k",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=1.1.1|<1.1.1k"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.1h <1.1.1k",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=1.1.1h|<1.1.1k"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.1 <1.1.1l",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=1.1.1|<1.1.1l"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.2 <1.0.2za||>=1.1.1 <1.1.1l",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=1.0.2|<1.0.2za|>=1.1.1|<1.1.1l"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.2||=1.1.0||=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<1.0.2|1.1.0|3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.2 <1.1.1m||=3.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=1.0.2|<1.1.1m|3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.2 <1.0.2zd||>=1.1.0 <1.1.1n||>=3.0.0 <3.0.2",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=1.0.2|<1.0.2zd|>=1.1.0|<1.1.1n|>=3.0.0|<3.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.2 <1.0.2ze||>=1.1.1 <1.1.1o||>=3.0.0 <3.0.3",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=1.0.2|<1.0.2ze|>=1.1.1|<1.1.1o|>=3.0.0|<3.0.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.0.3",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=3.0.0|<3.0.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.0.3",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=3.0.0|<3.0.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.0.3",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=3.0.0|<3.0.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.2 <1.0.2zf||>=1.1.1 <1.1.1p||>=3.0.0 <3.0.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=1.0.2|<1.0.2zf|>=1.1.1|<1.1.1p|>=3.0.0|<3.0.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.1 <1.1.1q||>=3.0.0 <3.0.5",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=1.1.1|<1.1.1q|>=3.0.0|<3.0.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.4",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/3.0.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.0.6",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=3.0.0|<3.0.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.0.7",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=3.0.0|<3.0.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.0.7",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=3.0.0|<3.0.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <=3.0.7",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=3.0.0|<=3.0.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<8.44",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<8.44"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<10.40",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<10.40"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<10.40",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<10.40"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.15.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<3.15.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.18.3||>=3.19.0 <3.19.5||>=3.20.0 <3.20.2||>=3.21.0 <3.21.6",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<3.18.3|>=3.19.0|<3.19.5|>=3.20.0|<3.20.2|>=3.21.0|<3.21.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=1.3",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/1.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.2",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.5.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=1.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.0 <4.4.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=4.0|<4.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.0 <4.4.3",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=4.0|<4.4.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.0.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=2.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=cci.20200203",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/cci.20200203"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.27",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.27"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=2.27",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/2.27"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=8.6.11",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/8.6.11"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=5.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/5.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.9.3 <=0.13.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=0.9.3|<=0.13.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2021.02.22.00",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<2021.02.22.00"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.05.01",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<1.05.01"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.9.6",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<0.9.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.9.6",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<0.9.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=19.0.0 <=20.8.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=19.0.0|<=20.8.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.19.0 <0.30.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=0.19.0|<0.30.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.26.0 <0.30.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=0.26.0|<0.30.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.30.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<0.30.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.33.1||>0.33.1 <0.34.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<0.33.1|>0.33.1|<0.34.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.34.0 <0.34.2||>=0.35.0 <0.35.2",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=0.34.0|<0.34.2|>=0.35.0|<0.35.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.38.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<0.38.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.37.0 <0.38.2",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=0.37.0|<0.38.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.38.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<0.38.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.2||>=2.0.0 <2.0.2",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<1.0.2|>=2.0.0|<2.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.2||>=2.0.0 <2.0.2",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<1.0.2|>=2.0.0|<2.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.2||>=2.0.0 <2.0.2",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<1.0.2|>=2.0.0|<2.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=4.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/4.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<4.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.5.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<4.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.5.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<4.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.5.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<4.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.5.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<4.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.6.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<4.6.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.6.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<4.6.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.7.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<4.7.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.6.0 <4.8.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=4.6.0|<4.8.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.8.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<4.8.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=5.0.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<=5.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.0.0 <5.1.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/>=5.0.0|<5.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<5.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<5.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<5.2.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<5.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<5.4.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<5.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<5.5.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<5.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=5.3.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/5.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<5.5.1",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<5.5.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<5.5.2",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<5.5.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<5.5.0",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<5.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.3.3",
+      "scheme": "conan"
+    },
+    "expected_output": "vers:conan/<4.3.3"
+  }
+]

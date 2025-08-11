@@ -27,6 +27,12 @@ class SchemaDrivenVersTest(NamedTuple):
             return self.equality()
         elif self.test_type == "comparison":
             return self.comparison()
+        elif self.test_type == "containment":
+            return self.containment()
+        elif self.test_type == "roundtrip":
+            return self.roundtrip()
+        elif self.test_type == "from_native":
+            return self.from_native()
 
         raise Exception(f"Unknown test_type: {self.test_type}")
 
@@ -34,6 +40,15 @@ class SchemaDrivenVersTest(NamedTuple):
         raise NotImplementedError
 
     def comparison(self):
+        raise NotImplementedError
+
+    def containment(self):
+        raise NotImplementedError
+
+    def roundtrip(self):
+        raise NotImplementedError
+
+    def from_native(self):
         raise NotImplementedError
 
     @property
@@ -72,6 +87,41 @@ def get_test_data_eq(scheme, versions, output):
         "input": {
             "input_scheme": scheme,
             "versions": versions,
+        },
+        "expected_output": output,
+    }
+
+
+def get_test_data_containment(vers, version, output):
+    return {
+        "test_group": "advanced",
+        "test_type": "containment",
+        "input": {
+            "vers": vers,
+            "version": version,
+        },
+        "expected_output": output,
+    }
+
+
+def get_test_data_roundtrip(vers, output):
+    return {
+        "test_group": "advanced",
+        "test_type": "roundtrip",
+        "input": {
+            "vers": vers,
+        },
+        "expected_output": output,
+    }
+
+
+def get_test_data_from_native(native_range, schema, output):
+    return {
+        "test_group": "advanced",
+        "test_type": "from_native",
+        "input": {
+            "native_range": native_range,
+            "scheme": schema,
         },
         "expected_output": output,
     }

@@ -1,0 +1,7967 @@
+[
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.1.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=4.1.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.0 <=4.0.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.0.0|<=4.0.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.11.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.11.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.11.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<2.11.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.6.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.6.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.9.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.9.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.8.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.8.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 1.6.9",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.6.9"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<= 1.6.8",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.6.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=3.9.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=3.9.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=9.1.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=9.1.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=9.1.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=9.1.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.5.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.8.10",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.8.10"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.8.10",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.8.10"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.4.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.4.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 16.1.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=16.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 15.0.0 <= 16.1.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=15.0.0|<=16.1.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">0.12.7",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>0.12.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.12.7",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.12.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "*",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/*"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.1.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.1.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "2.1.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/2.1.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 6.1.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=6.1.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "< 6.1.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<6.1.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "*",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/*"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.4.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.4.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 3.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<= 2.1.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.1.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.0.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.0.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.4.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.4.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<3.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 2.0.1 <3.0.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.0.1|<3.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.0.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<99.999.9999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<99.999.9999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 1.0.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.0.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<= 1.0.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.0.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.5.2 || >=1.4.11 <1.5.0 || >=1.3.2 <1.4.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.3.2|<1.4.0|>=1.4.11|<1.5.0|>=1.5.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.3.0 <1.3.2 || >=1.4.0 <1.4.11 || >=1.5.0 <1.5.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.3.0|<1.3.2|>=1.4.0|<1.4.11|>=1.5.0|<1.5.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.1.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.1.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.1.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.1.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=3.2.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=3.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.7.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.7.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.6.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.6.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.0.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.0.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.0.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=3.0.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=3.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 1.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.1.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<= 1.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<2.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.2.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.2.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.15.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.15.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.4.7",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.4.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.4.7",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.4.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 1.1.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "< 1.1.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.0.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.3.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.3.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.0.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.0.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.2.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.2.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.2.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.2.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.9.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.9.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.9.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.9.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 0.5.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<= 0.3.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.3.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 1.0.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<= 1.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.9.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.9.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.9.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.9.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.30.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.30.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=v2.0.0-alpha8",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.0.0-alpha8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=v2.0.0-alpha7",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.0.0-alpha7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.3.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.3.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.3.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.3.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.6.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=4.6.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.6.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<4.6.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 2.4.24",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.4.24"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<= 2.4.23",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.4.23"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.12.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.12.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.11.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.11.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.5.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.7",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.1.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.1.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.1.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=4.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<4.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.4.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.4.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.4.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.4.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 2.3.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.3.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "< 2.3.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<2.3.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.0.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<3.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<99.999.9999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<99.999.9999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.4.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.4.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.4.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.9.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.9.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.9.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<2.9.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "~1.6.5 || >=1.7.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.6.5|<1.7.0|>=1.7.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.6.5 || >=1.7.0 <1.7.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.6.5|>=1.7.0|<1.7.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.5.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.5.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.5.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.5.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.0.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.0.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 2.0.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.0.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<  2.0.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<2.0.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.3.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.3.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.3.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.3.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.1.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.1.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.1.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.1.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.10.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.10.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.10.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.10.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.17.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=4.17.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.17.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<4.17.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.5.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.5.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.5.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.5.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.1.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.1.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<2.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.6.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.6.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.6.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.6.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.1.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.5.1 <4.0.0 || >=4.1.3 <5.0.0 || >=5.6.1 <6.0.0 || >=6.1.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.5.1|<4.0.0|>=4.1.3|<5.0.0|>=5.6.1|<6.0.0|>=6.1.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.5.1 || >=4.0.0 <4.1.3 || >=5.0.0 <5.6.1 || >=6.0.0 <6.1.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<3.5.1|>=4.0.0|<4.1.3|>=5.0.0|<5.6.1|>=6.0.0|<6.1.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "*",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/*"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.2.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.2.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.2.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.2.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.5.0 <= 3.0.0 || >=3.1.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.5.0|<=3.0.0|>=3.1.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<= 2.4.2 || >= 3.0.0 <=3.0.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.4.2|>=3.0.0|<=3.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.2.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.2.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 1.4.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.3.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.1.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.1.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "2.1.0-M1 || 2.1.0-M2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/2.1.0-M1|2.1.0-M2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.3.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.8.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.8.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.8.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.8.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.4.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.4.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.4.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.4.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.2.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=4.2.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.2.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<4.2.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.6.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.6.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.6.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<2.6.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.3.6 || >=3.8.39 <4.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.8.39|<4.0.0|>=4.3.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.5.5 <=3.8.38 || >=4.0.0 <=4.3.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.5.5|<=3.8.38|>=4.0.0|<=4.3.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 0.8.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.8.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "< 0.8.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.8.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.6.5 <2.0.0 || >= 2.1.7",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.6.5|<2.0.0|>=2.1.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.6.5 || < 2.1.7 > 2.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.6.5|>2.0.0|<2.1.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 1.7.0-alpha3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.7.0-alpha3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<= 1.7.0-alpha2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.7.0-alpha2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.1.11",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.1.11"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=3.1.10",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=3.1.10"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.29",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.0.29"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.29",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.0.29"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.0.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.0.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.0.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "> 0.9.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>0.9.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 0.2.0 <= 0.9.6 || ~0.8.0-pre",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.2.0|>=0.8.0-pre|<0.8.0|>=0.8.0|<0.8.1|<=0.9.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 1.0.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.0.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<= 1.0.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.0.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<2.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.2.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.21.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.21.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.20.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.20.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.2.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.2.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.2.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<2.2.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.1.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.1.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 2.2.x",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.2.0|<2.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "2.0.x || 2.1.x",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.0.0|<2.1.0|>=2.1.0|<2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "*",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/*"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.2.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.2.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.2.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<2.2.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.1.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.1.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "2.1.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/2.1.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.0-rc.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/3.0.0-rc.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.4.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.3.8",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.3.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.0.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.0.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.0.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.0.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.8.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.8.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.8.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<2.8.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.1.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.1.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.29.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.29.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=7.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=7.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=6.5.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=6.5.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.8.13",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.8.13"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.8.13",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.8.13"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "^2.0.18 || ^3.0.16 || ^3.1.6 || ^4.0.8 || ^5.0.0-beta.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.0.18|<3.0.0|>=3.0.16|>=3.1.6|<4.0.0|<4.0.0|>=4.0.8|>=5.0.0-beta.5|<5.0.0|<6.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.0.18 || <3.0.16 || <3.1.6 || <4.0.8 || <5.0.0-beta.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<2.0.18|<3.0.16|<3.1.6|<4.0.8|<5.0.0-beta.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0-beta.7 || >=2.0.8 <3.0.0-beta.1 || >=1.8.8 <2.0.0 || >=1.7.16 <1.8.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.7.16|<1.8.0|>=1.8.8|<2.0.0|>=2.0.8|<3.0.0-beta.1|>=3.0.0-beta.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.7.0 <1.7.16 || >=1.8.0 <1.8.8 || >=2.0.0 <2.0.8 || >=3.0.0-beta.1 <3.0.0-beta.7",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.7.0|<1.7.16|>=1.8.0|<1.8.8|>=2.0.0|<2.0.8|>=3.0.0-beta.1|<3.0.0-beta.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.2.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.2.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.2.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.2.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.3.13",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.3.13"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "7.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/7.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<= 6.5.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=6.5.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=9.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=9.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<9.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<9.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.0.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<2.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.1.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.0 <=1.1.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.1.0|<=1.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 0.0.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.0.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<= 0.0.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.0.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "> 0.0.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>0.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<= 0.0.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">3.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=3.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.78.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.78.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.4.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.4.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.4.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.4.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.1.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.1.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.0.9",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.0.9"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.4.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.4.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.5.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.5.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.5.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.5.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.6.6 <2.0.0 || >= 2.2.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.6.6|<2.0.0|>=2.2.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.6.6 || < 2.2.4 > 2.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.6.6|>2.0.0|<2.2.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 2.15.1 <= 3.0.0 || >= 3.8.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.15.1|<=3.0.0|>=3.8.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<= 2.15.0 || >= 3.0.0 <= 3.8.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.15.0|>=3.0.0|<=3.8.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.25.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.25.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.25.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<2.25.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.2.18",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.2.18"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.2.17",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.2.17"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=3.0.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=3.0.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.1.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.1.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.4.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.4.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=11.1.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=11.1.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<11.1.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<11.1.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.1.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.1.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.11.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.11.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.11.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.11.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.3.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.3.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<2.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.4.0 <=1.11.3 || >=1.12.3 <=2.2.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.4.0|<=1.11.3|>=1.12.3|<=2.2.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=6.4.9",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=6.4.9"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=6.4.8",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=6.4.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.1.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.1.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.1.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "*",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/*"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.10.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.10.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.9.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.9.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.1 || >=0.9.5 <1.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.9.5|<1.0.0|>=1.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.9.4 || 1.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.9.4|1.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.4.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.4.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.0.3 >=4.2.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=4.2.1|>=5.0.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<5.0.3 >=5.0.0 || < 4.2.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<4.2.1|>=5.0.0|<5.0.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.9.74",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.9.74"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.9.73",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.9.73"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.1.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.1.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.1.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.1.3 < 4.0.0 || >=4.1.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.1.3|<4.0.0|>=4.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "< 3.1.3  || >= 4.0.0 <4.1.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<3.1.3|>=4.0.0|<4.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.0.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.3.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.3.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 1.x",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.0.0|<2.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "*",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/*"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.10.4 <1.11.0 || >=1.16.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.10.4|<1.11.0|>=1.16.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.10.4 || >=1.11.0 <1.16.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.10.4|>=1.11.0|<1.16.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=6.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=6.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.0.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.0.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=6.5.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=6.5.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<6.5.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<6.5.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.6.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.6.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.6.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.6.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.3.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.2.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.2.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 0.0.15",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.0.15"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 0.0.10 <= 0.0.14",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.0.10|<=0.0.14"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.0.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.0.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.0.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.0.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.0.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.2.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.2.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.2.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.2.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.3.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.2.13",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.2.13"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.1.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.1.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.1.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.1.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.68.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.68.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.2.6 <2.47.0 || >2.51.0 <=2.67.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.2.6|<2.47.0|>2.51.0|<=2.67.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.7",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.1.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.1.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.1.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.7",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.0.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.0.7",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<2.0.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.7.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.7.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.6.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.6.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.3.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.3.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.3.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.3.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.4.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.4.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.4.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.4.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.1.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.1.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.1.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.1.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.38.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.38.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.37.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.37.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.26.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.26.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.26.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<2.26.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.8.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.8.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.7.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.7.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.4.16",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.4.16"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.4.16",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.4.16"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.3.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.3.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.1.13",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.1.13"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.1.12",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.1.12"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.2.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.2.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.2.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.2.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.4.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.4.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.0 <=3.4.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.0.0|<=3.4.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">0.7.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>0.7.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.7.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.7.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.1.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.1.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.1.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.1.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.10",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.1.10"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.1.9",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.1.9"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.1.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.1.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.0.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.0.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 0.5.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.5.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "0.5.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/0.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.4.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.4.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.4.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.4.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "> 3.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<= 3.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.8",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.1.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.1.8",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.1.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.23.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.23.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.23.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<3.23.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.0.3 <6.0.0 || >=6.8.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=5.0.3|<6.0.0|>=6.8.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=6.8.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=6.8.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "*",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/*"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.1.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.1.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=6.4.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=6.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=6.4.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=6.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.1.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.1.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.1.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.2.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.2.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.2.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.0.24",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.0.24"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.0.20",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.0.20"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.3.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.3.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.3.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.3.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.10.1 || >=3.10.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/3.10.1|>=3.10.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <=3.9.1 || =3.10.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.0.0|<=3.9.1|3.10.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.1.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.1.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.1.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.13.12",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.13.12"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">1.1.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>1.1.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.1.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.1.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "^1.1.7 || >= 2.0.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.1.7|<2.0.0|>=2.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.0.1 || <1.1.7",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.1.7|<2.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.4.0 <2.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.4.0|<2.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.3.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.9.7 <=2.2.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.9.7|<=2.2.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.2.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.2.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.2.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.2.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.22.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.22.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.22.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<3.22.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.0.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.0.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.4.6 < 4.0.0|| >=4.0.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.4.6|<4.0.0|>=4.0.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.4.6 || > 4.0.0 <4.0.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<3.4.6|>4.0.0|<4.0.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.8.7",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.8.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.8.7",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.8.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "*",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/*"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.1.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.1.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.6.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.6.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.6.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.6.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.9.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.9.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.9.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<3.9.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.4.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.4.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.4.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.4.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.2.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.2.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.2.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.2.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<3.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.3.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.3.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.4.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.4.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<3.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.2.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.2.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.1.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.1.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.1.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.0.32",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.0.32"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.1.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.1.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.1.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.35.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.35.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.35.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.35.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.1.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=4.1.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.1.0 <4.1.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.1.0|<4.1.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.0.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=5.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=5.0.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=5.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.4.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.4.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.20.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.20.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=3.19.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=3.19.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.1.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.1.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.1.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.1.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.2.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.2.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.2.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<3.2.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.1.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=5.1.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<5.1.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<5.1.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 0.3.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "< 0.3.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.11 <4 || >=4.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.11.0|<4.0.0|>=4.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.11 || >= 4 <4.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<3.11.0|>=4.0.0|<4.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.3.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.3.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.17.19",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=4.17.19"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.17.15 <4.17.19",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=4.17.15|<4.17.19"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=6.0.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=6.0.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=6.0.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=6.0.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.14.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.14.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.0-alpha8 <=2.0.0-rc2 || >=2.0.0 <=2.13.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.0.0-alpha8|<=2.0.0-rc2|>=2.0.0|<=2.13.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.8.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.8.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.4.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.3.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.3.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.5.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.5.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.5.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.11.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.11.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.11.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.11.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">2.3.21",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>2.3.21"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "2.3.21",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/2.3.21"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "*",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/*"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.3.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.3.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<3.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 1.4.6 < 2.0.0 || >= 2.0.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.4.6|<2.0.0|>=2.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 1.0.0 < 1.4.6 || 2.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.0.0|<1.4.6|2.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 1.x",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.0.0|<2.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.6.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.6.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.6.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.6.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=11.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=11.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<11.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<11.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "*",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/*"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.0.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.0.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.0.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.1.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.3.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.3.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.3.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.3.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.3.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.3.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.3.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.3.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 3.17.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.17.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<= 3.16.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=3.16.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.4.9",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.4.9"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.4.9",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.4.9"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.17.11",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=4.17.11"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.17.11",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<4.17.11"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.0.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.0.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.10.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.10.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.9.11",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.9.11"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.2.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.1.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.2.8",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.2.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.29.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.29.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.8.8",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.8.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.8.8",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.8.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.3.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.3.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.9.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.9.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.7.1 <=1.8.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.7.1|<=1.8.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.4.11",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.4.11"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.4.10",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.4.10"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 0.6.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.6.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<= 0.6.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.6.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=11.1.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=11.1.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<11.1.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<11.1.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=13.0.8",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=13.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<13.0.8",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<13.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.1.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=5.1.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "5.1.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/5.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.1.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.1.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.1.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.1.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.1.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.1.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.4.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.4.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.4.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.4.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.2.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.2.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.2.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.2.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.10.9",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.10.9"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.10.0 <=0.10.8",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.10.0|<=0.10.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.3.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=4.3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.3.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<4.3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.0-rc8",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.0.0-rc8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.0.0-rc7",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.0.0-rc7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.13.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.13.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.13.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.13.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.5.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.5.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<3.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=3.7.1 || >= 3.7.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=3.7.1|>=3.7.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "3.7.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/3.7.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.1.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.1.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.1.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.1.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.13.12",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.13.12"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "*",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/*"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.0.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.0.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<3.0.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.7",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.0.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.0.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.0.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.3.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.3.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "> 2.4.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>2.4.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<= 2.4.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.4.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.2.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.2.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.2.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.2.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.2.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.2.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.2.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.2.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.0.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.4.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.4.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.4.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.4.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.4.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.4.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.4.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.4.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.1.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.1.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.6.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.6.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.6.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.6.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.1.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.1.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.1.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.0.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=4.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<4.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.12.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.12.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.12.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=2.12.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.0.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.0.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">1.10.8",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>1.10.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.10.8",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.10.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "*",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/*"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.4.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.4.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.4.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.0.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=1.1.8",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=1.1.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.3.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.3.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.3.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.1.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.1.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.3.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.3.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "~0.2.2 || >=0.3.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.2.2|<0.3.0|>=0.3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.2.2 || >=0.3.0 <0.3.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.2.2|>=0.3.0|<0.3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 7.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=7.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 5.2.1 <= 6.0.0 || >=6.0.0 <= 6.0.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=5.2.1|<=6.0.0|>=6.0.0|<=6.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.0.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.0.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.4.1 <2.0.0 || >=2.17.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.4.1|<2.0.0|>=2.17.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.4.1 || >=2.0.0 <2.17.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.4.1|>=2.0.0|<2.17.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.3.16",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.3.16"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.3.16",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.3.16"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.2.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.2.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.2.4",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.2.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.2.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.2.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.2.5",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<2.2.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.2.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.0.9",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.0.9"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.9.7",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=0.9.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.9.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=0.9.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.4.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=2.4.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.4.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<2.4.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.2.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.2.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.2.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<1.2.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.0.0",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<0.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=99.999.99999",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.0.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/<3.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "^1.2.9",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.2.9|<2.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "~3.8.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=3.8.2|<3.9.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "5.0.0 - 7.2.3",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=5.0.0|<=7.2.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "2.1 || 2.6",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/2.1.0|2.6.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "1.1.2 1.2.2",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/1.1.2|1.2.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=2.1 >=1.1",
+      "scheme": "npm"
+    },
+    "expected_output": "vers:npm/>=1.1.0|<=2.1.0"
+  }
+]
