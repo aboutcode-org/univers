@@ -1,0 +1,32 @@
+[ 
+  {
+    "description": "Construct VERS range from native pypi range.",
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">= 1.0",
+      "scheme": "pypi"
+    },
+    "expected_output": "vers:pypi/>=1.0"
+  },
+  {
+    "description": "Construct VERS range from native pypi range.",
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.1.0",
+      "scheme": "pypi"
+    },
+    "expected_output": "vers:pypi/<2.1.0"
+  },
+  {
+    "description": "Construct VERS range from native pypi range.",
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "!=5",
+      "scheme": "pypi"
+    },
+    "expected_output": "vers:pypi/!=5"
+  }
+]

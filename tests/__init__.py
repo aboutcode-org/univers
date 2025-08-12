@@ -13,6 +13,7 @@ class SchemaDrivenVersTest(NamedTuple):
     test_group: str
     input: dict
     expected_output: Union[list, bool]
+    description: str = ""
 
     @classmethod
     def from_data(cls, data: dict):

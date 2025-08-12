@@ -1,0 +1,12 @@
+[
+  {
+    "description": "Test version containment for npm range with `*` operator.",
+    "test_group": "advanced",
+    "test_type": "containment",
+    "input": {
+      "vers": "vers:nginx/*",
+      "version": "1.0.0"
+    },
+    "expected_output": true
+  }
+]

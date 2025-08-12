@@ -1,0 +1,82 @@
+[
+  {
+    "description": "Construct VERS range from native openssl range.",
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "3.0.0, 1.0.1b",
+      "scheme": "openssl"
+    },
+    "expected_output": "vers:openssl/1.0.1b|3.0.0"
+  },
+  {
+    "description": "Construct VERS range from native openssl range.",
+    "test_group": "basic",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "0.9.8j",
+      "scheme": "openssl"
+    },
+    "expected_output": "vers:openssl/0.9.8j"
+  },
+  {
+    "description": "Construct VERS range from native openssl range.",
+    "test_group": "basic",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "3.0.1",
+      "scheme": "openssl"
+    },
+    "expected_output": "vers:openssl/3.0.1"
+  },
+    {
+    "description": "Construct VERS range from native openssl range.",
+    "test_group": "basic",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "1.1.1ak",
+      "scheme": "openssl"
+    },
+    "expected_output": "vers:openssl/1.1.1ak"
+  },
+  {
+    "description": "Construct VERS range from native openssl range.",
+    "test_group": "basic",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "1.1.0",
+      "scheme": "openssl"
+    },
+    "expected_output": "vers:openssl/1.1.0"
+  },
+  {
+    "description": "Construct VERS range from native openssl range.",
+    "test_group": "basic",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "3.0.2",
+      "scheme": "openssl"
+    },
+    "expected_output": "vers:openssl/3.0.2"
+  },
+  {
+    "description": "Construct VERS range from native openssl range.",
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "3.0.1, 0.9.7a",
+      "scheme": "openssl"
+    },
+    "expected_output": "vers:openssl/0.9.7a|3.0.1"
+  },
+  {
+    "description": "Construct VERS range from native openssl range.",
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "1.0.2ck, 3.1.2",
+      "scheme": "openssl"
+    },
+    "expected_output": "vers:openssl/1.0.2ck|3.1.2"
+  }
+]

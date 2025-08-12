@@ -1,5 +1,6 @@
 [
   {
+    "description": "Comparison test for Debian Version.",
     "test_group": "advanced",
     "test_type": "comparison",
     "input": {
@@ -15,6 +16,7 @@
     ]
   },
   {
+    "description": "Comparison test for Debian Version.",
     "test_group": "advanced",
     "test_type": "comparison",
     "input": {
@@ -30,6 +32,7 @@
     ]
   },
   {
+    "description": "Comparison test for Debian Version.",
     "test_group": "advanced",
     "test_type": "comparison",
     "input": {
@@ -45,6 +48,7 @@
     ]
   },
   {
+    "description": "Comparison test for Debian Version.",
     "test_group": "advanced",
     "test_type": "comparison",
     "input": {
@@ -60,6 +64,7 @@
     ]
   },
   {
+    "description": "Comparison test for Debian Version.",
     "test_group": "advanced",
     "test_type": "comparison",
     "input": {
@@ -75,6 +80,7 @@
     ]
   },
   {
+    "description": "Comparison test for Debian Version.",
     "test_group": "advanced",
     "test_type": "comparison",
     "input": {
@@ -90,6 +96,7 @@
     ]
   },
   {
+    "description": "Comparison test for Debian Version.",
     "test_group": "advanced",
     "test_type": "comparison",
     "input": {
@@ -105,6 +112,7 @@
     ]
   },
   {
+    "description": "Comparison test for Debian Version.",
     "test_group": "advanced",
     "test_type": "comparison",
     "input": {
@@ -120,6 +128,7 @@
     ]
   },
   {
+    "description": "Comparison test for Debian Version.",
     "test_group": "advanced",
     "test_type": "comparison",
     "input": {
@@ -135,6 +144,7 @@
     ]
   },
   {
+    "description": "Comparison test for Debian Version.",
     "test_group": "advanced",
     "test_type": "comparison",
     "input": {
@@ -150,6 +160,7 @@
     ]
   },
   {
+    "description": "Comparison test for Debian Version.",
     "test_group": "advanced",
     "test_type": "comparison",
     "input": {
@@ -165,6 +176,7 @@
     ]
   },
   {
+    "description": "Comparison test for Debian Version.",
     "test_group": "advanced",
     "test_type": "comparison",
     "input": {
@@ -180,6 +192,7 @@
     ]
   },
   {
+    "description": "Comparison test for Debian Version.",
     "test_group": "advanced",
     "test_type": "equality",
     "input": {
@@ -192,6 +205,7 @@
     "expected_output": true
   },
   {
+    "description": "Comparison test for Debian Version.",
     "test_group": "advanced",
     "test_type": "equality",
     "input": {
@@ -204,6 +218,7 @@
     "expected_output": true
   },
   {
+    "description": "Comparison test for Debian Version.",
     "test_group": "advanced",
     "test_type": "equality",
     "input": {
@@ -216,6 +231,7 @@
     "expected_output": false
   },
   {
+    "description": "Comparison test for Debian Version.",
     "test_group": "advanced",
     "test_type": "comparison",
     "input": {

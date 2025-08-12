@@ -1,6 +1,7 @@
 [
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "comparison",
     "input": {
       "input_scheme": "openssl",
@@ -15,7 +16,8 @@
     ]
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "equality",
     "input": {
       "input_scheme": "openssl",
@@ -27,7 +29,8 @@
     "expected_output": false
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "comparison",
     "input": {
       "input_scheme": "openssl",
@@ -42,7 +45,8 @@
     ]
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "equality",
     "input": {
       "input_scheme": "openssl",
@@ -54,7 +58,8 @@
     "expected_output": false
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "comparison",
     "input": {
       "input_scheme": "openssl",
@@ -69,7 +74,8 @@
     ]
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "equality",
     "input": {
       "input_scheme": "openssl",
@@ -81,7 +87,8 @@
     "expected_output": false
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "comparison",
     "input": {
       "input_scheme": "openssl",
@@ -96,7 +103,8 @@
     ]
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "equality",
     "input": {
       "input_scheme": "openssl",
@@ -108,7 +116,8 @@
     "expected_output": false
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "comparison",
     "input": {
       "input_scheme": "openssl",
@@ -123,7 +132,8 @@
     ]
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "equality",
     "input": {
       "input_scheme": "openssl",
@@ -135,7 +145,8 @@
     "expected_output": false
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "comparison",
     "input": {
       "input_scheme": "openssl",
@@ -150,7 +161,8 @@
     ]
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "equality",
     "input": {
       "input_scheme": "openssl",
@@ -162,7 +174,8 @@
     "expected_output": false
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "comparison",
     "input": {
       "input_scheme": "openssl",
@@ -177,7 +190,8 @@
     ]
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "equality",
     "input": {
       "input_scheme": "openssl",
@@ -189,7 +203,8 @@
     "expected_output": true
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "comparison",
     "input": {
       "input_scheme": "openssl",
@@ -204,7 +219,8 @@
     ]
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "equality",
     "input": {
       "input_scheme": "openssl",
@@ -216,7 +232,8 @@
     "expected_output": false
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "comparison",
     "input": {
       "input_scheme": "openssl",
@@ -231,7 +248,8 @@
     ]
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "equality",
     "input": {
       "input_scheme": "openssl",
@@ -243,7 +261,8 @@
     "expected_output": false
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "comparison",
     "input": {
       "input_scheme": "openssl",
@@ -258,7 +277,8 @@
     ]
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "equality",
     "input": {
       "input_scheme": "openssl",
@@ -270,7 +290,8 @@
     "expected_output": false
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "comparison",
     "input": {
       "input_scheme": "openssl",
@@ -285,7 +306,8 @@
     ]
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "equality",
     "input": {
       "input_scheme": "openssl",
@@ -297,7 +319,8 @@
     "expected_output": false
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "comparison",
     "input": {
       "input_scheme": "openssl",
@@ -312,7 +335,8 @@
     ]
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "equality",
     "input": {
       "input_scheme": "openssl",
@@ -324,7 +348,8 @@
     "expected_output": false
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "comparison",
     "input": {
       "input_scheme": "openssl",
@@ -339,7 +364,8 @@
     ]
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "equality",
     "input": {
       "input_scheme": "openssl",
@@ -351,7 +377,8 @@
     "expected_output": false
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "comparison",
     "input": {
       "input_scheme": "openssl",
@@ -366,7 +393,8 @@
     ]
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "equality",
     "input": {
       "input_scheme": "openssl",
@@ -378,7 +406,8 @@
     "expected_output": false
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "comparison",
     "input": {
       "input_scheme": "openssl",
@@ -393,7 +422,8 @@
     ]
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "equality",
     "input": {
       "input_scheme": "openssl",
@@ -405,7 +435,8 @@
     "expected_output": false
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "comparison",
     "input": {
       "input_scheme": "openssl",
@@ -420,7 +451,8 @@
     ]
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "equality",
     "input": {
       "input_scheme": "openssl",
@@ -432,7 +464,8 @@
     "expected_output": false
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "comparison",
     "input": {
       "input_scheme": "openssl",
@@ -447,7 +480,8 @@
     ]
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "equality",
     "input": {
       "input_scheme": "openssl",
@@ -459,7 +493,8 @@
     "expected_output": false
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "comparison",
     "input": {
       "input_scheme": "openssl",
@@ -474,7 +509,8 @@
     ]
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "equality",
     "input": {
       "input_scheme": "openssl",
@@ -486,7 +522,8 @@
     "expected_output": true
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "comparison",
     "input": {
       "input_scheme": "openssl",
@@ -501,7 +538,8 @@
     ]
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "equality",
     "input": {
       "input_scheme": "openssl",
@@ -513,7 +551,8 @@
     "expected_output": false
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "comparison",
     "input": {
       "input_scheme": "openssl",
@@ -528,7 +567,8 @@
     ]
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "equality",
     "input": {
       "input_scheme": "openssl",
@@ -540,7 +580,8 @@
     "expected_output": false
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "comparison",
     "input": {
       "input_scheme": "openssl",
@@ -555,7 +596,8 @@
     ]
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "equality",
     "input": {
       "input_scheme": "openssl",
@@ -567,7 +609,8 @@
     "expected_output": false
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "comparison",
     "input": {
       "input_scheme": "openssl",
@@ -582,7 +625,8 @@
     ]
   },
   {
-    "test_group": "advanced",
+    "description": "Comparison test for OpenSSL version.",
+    "test_group": "basic",
     "test_type": "equality",
     "input": {
       "input_scheme": "openssl",

@@ -13,7 +13,7 @@ from univers.versions import ConanVersion
 
 from . import SchemaDrivenVersTest
 
-TEST_DATA = Path(__file__).parent / "data" / "schema" / "conan_test.json"
+TEST_DATA = Path(__file__).parent / "data" / "schema" / "conan_version_cmp.json"
 
 
 class ConanVersionComparison(SchemaDrivenVersTest):

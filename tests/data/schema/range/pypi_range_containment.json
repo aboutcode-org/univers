@@ -1,5 +1,6 @@
 [
   {
+    "description": "Test version containment for pypi VERS range.",
     "test_group": "advanced",
     "test_type": "containment",
     "input": {
@@ -9,6 +10,7 @@
     "expected_output": true
   },
   {
+    "description": "Test version containment for pypi VERS range.",
     "test_group": "advanced",
     "test_type": "containment",
     "input": {
@@ -18,6 +20,7 @@
     "expected_output": true
   },
   {
+    "description": "Test version containment for pypi VERS range.",
     "test_group": "advanced",
     "test_type": "containment",
     "input": {
@@ -27,6 +30,7 @@
     "expected_output": true
   },
   {
+    "description": "Test version containment for pypi VERS range.",
     "test_group": "advanced",
     "test_type": "containment",
     "input": {
@@ -36,6 +40,7 @@
     "expected_output": true
   },
   {
+    "description": "Test version containment for pypi VERS range.",
     "test_group": "advanced",
     "test_type": "containment",
     "input": {
@@ -45,6 +50,7 @@
     "expected_output": true
   },
   {
+    "description": "Test version containment for pypi VERS range.",
     "test_group": "advanced",
     "test_type": "containment",
     "input": {
@@ -54,6 +60,7 @@
     "expected_output": false
   },
   {
+    "description": "Test version containment for pypi VERS range.",
     "test_group": "advanced",
     "test_type": "containment",
     "input": {
@@ -63,6 +70,7 @@
     "expected_output": false
   },
   {
+    "description": "Test version containment for pypi VERS range.",
     "test_group": "advanced",
     "test_type": "containment",
     "input": {
@@ -72,6 +80,7 @@
     "expected_output": false
   },
   {
+    "description": "Test version containment for pypi VERS range.",
     "test_group": "advanced",
     "test_type": "containment",
     "input": {
@@ -81,6 +90,7 @@
     "expected_output": false
   },
   {
+    "description": "Test version containment for pypi VERS range.",
     "test_group": "advanced",
     "test_type": "containment",
     "input": {
@@ -88,14 +98,5 @@
       "version": "2.0.3"
     },
     "expected_output": false
-  },
-    {
-    "test_group": "advanced",
-    "test_type": "containment",
-    "input": {
-      "vers": "vers:nginx/*",
-      "version": "1.0.0"
-    },
-    "expected_output": true
   }
 ]

@@ -15,7 +15,7 @@ from univers.conan.version_range import VersionRange
 from univers.version_range import ConanVersionRange
 from univers.versions import ConanVersion
 
-TEST_DATA = Path(__file__).parent / "data" / "schema" / "conan_range_test.json"
+TEST_DATA = Path(__file__).parent / "data" / "schema" / "conan_range_from_native_basic.json"
 
 values = [
     [">1.0.0", [[[">", "1.0.0"]]], ["1.0.1"], ["0.1"]],
@@ -78,15 +78,3 @@ def test_wrong_range_syntax():
     # https://github.com/conan-io/conan/issues/12692
     with pytest.raises(ConanException):
         VersionRange(">= 1.0")
-
-
-class ConanVersionRangeFromNative(SchemaDrivenVersTest):
-    @property
-    def result(self):
-        return str(ConanVersionRange.from_native(self.input_native_range))
-
-
-@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA)))
-def test_conan_version_range_parse(test_case):
-    avc = ConanVersionRangeFromNative.from_data(data=test_case)
-    avc.assert_result()

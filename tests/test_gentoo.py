@@ -14,7 +14,7 @@ import pytest
 from tests import SchemaDrivenVersTest
 from univers.versions import GentooVersion
 
-TEST_DATA = Path(__file__).parent / "data" / "schema" / "gentoo_version.json"
+TEST_DATA = Path(__file__).parent / "data" / "schema" / "gentoo_version_cmp.json"
 
 
 class GentooVersionComp(SchemaDrivenVersTest):
