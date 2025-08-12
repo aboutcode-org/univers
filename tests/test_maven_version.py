@@ -6,13 +6,36 @@
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
 
+import json
 import unittest
+from pathlib import Path
 
+import pytest
+
+from tests import SchemaDrivenVersTest
 from univers.maven import Restriction
 from univers.maven import RestrictionParseError
 from univers.maven import Version
 from univers.maven import VersionRange
 from univers.maven import VersionRangeParseError
+
+TEST_DATA = Path(__file__).parent / "data" / "schema" / "maven_version_cmp.json"
+
+
+class MavenVersionComp(SchemaDrivenVersTest):
+    def equality(self):
+        """Compare version1 and version2 are equal."""
+        return Version(self.input_version1) == Version(self.input_version2)
+
+    def comparison(self):
+        """Sort versions and return them in the correct order."""
+        return [str(v) for v in sorted(map(Version, self.input["versions"]))]
+
+
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA)))
+def test_gentoo_vers_cmp(test_case):
+    avc = MavenVersionComp.from_data(data=test_case)
+    avc.assert_result()
 
 
 class TestRestriction(unittest.TestCase):
@@ -139,21 +162,6 @@ class TestRestriction(unittest.TestCase):
 
 class TestVersion(unittest.TestCase):
     """Tests the Version object"""
-
-    def _assert_version_equal(self, v1, v2):
-        V1 = Version(v1)
-        V2 = Version(v2)
-        # test Version equal Version
-        assert V1 == V2, "%s != %s" % (V1, V2)
-        assert V2 == V1, "%s != %s" % (V2, V1)
-
-        # test str equal Version
-        assert v1 == V2, "%s != %s" % (v1, V2)
-        assert v2 == V1, "%s != %s" % (v2, V1)
-
-        # test Version equal str
-        assert V1 == v2, "%s != %s" % (V1, v2)
-        assert V2 == v1, "%s != %s" % (V2, v1)
 
     def _assert_version_order(self, v1, v2):
         V1 = Version(v1)
@@ -334,170 +342,6 @@ class TestVersion(unittest.TestCase):
         for idx, low in enumerate(unicode_version_numbers[:-1]):
             for high in unicode_version_numbers[idx + 1 :]:
                 self._assert_version_order(low, high)
-
-    def test_version_equality(self):
-        self._assert_version_equal("1", "1")
-        self._assert_version_equal("1", "1.0")
-        self._assert_version_equal("1", "1.0.0")
-        self._assert_version_equal("1.0", "1.0.0")
-        self._assert_version_equal("1", "1-0")
-        self._assert_version_equal("1", "1.0-0")
-        self._assert_version_equal("1.0", "1.0-0")
-        # no separator between number and character
-        self._assert_version_equal("1a", "1-a")
-        self._assert_version_equal("1a", "1.0-a")
-        self._assert_version_equal("1a", "1.0.0-a")
-        self._assert_version_equal("1.0a", "1-a")
-        self._assert_version_equal("1.0.0a", "1-a")
-        self._assert_version_equal("1x", "1-x")
-        self._assert_version_equal("1x", "1.0-x")
-        self._assert_version_equal("1x", "1.0.0-x")
-        self._assert_version_equal("1.0x", "1-x")
-        self._assert_version_equal("1.0.0x", "1-x")
-
-        # aliases
-        self._assert_version_equal("1ga", "1")
-        self._assert_version_equal("1final", "1")
-        self._assert_version_equal("1cr", "1rc")
-
-        # special "aliases" a, b and m for alpha, beta and milestone
-        self._assert_version_equal("1a1", "1-alpha-1")
-        self._assert_version_equal("1b2", "1-beta-2")
-        self._assert_version_equal("1m3", "1-milestone-3")
-
-        # case insensitive
-        self._assert_version_equal("1X", "1x")
-        self._assert_version_equal("1A", "1a")
-        self._assert_version_equal("1B", "1b")
-        self._assert_version_equal("1M", "1m")
-        self._assert_version_equal("1Ga", "1")
-        self._assert_version_equal("1GA", "1")
-        self._assert_version_equal("1Final", "1")
-        self._assert_version_equal("1FinaL", "1")
-        self._assert_version_equal("1FINAL", "1")
-        self._assert_version_equal("1Cr", "1Rc")
-        self._assert_version_equal("1cR", "1rC")
-        self._assert_version_equal("1m3", "1Milestone3")
-        self._assert_version_equal("1m3", "1MileStone3")
-        self._assert_version_equal("1m3", "1MILESTONE3")
-
-        # unicode
-        self._assert_version_equal("1", "1")
-        self._assert_version_equal("1", "1.0")
-        self._assert_version_equal("1", "1.0.0")
-        self._assert_version_equal("1.0", "1.0.0")
-        self._assert_version_equal("1", "1-0")
-        self._assert_version_equal("1", "1.0-0")
-        self._assert_version_equal("1.0", "1.0-0")
-
-        self._assert_version_equal("1", "1")
-        self._assert_version_equal("1", "1.0")
-        self._assert_version_equal("1", "1.0.0")
-        self._assert_version_equal("1.0", "1.0.0")
-        self._assert_version_equal("1", "1-0")
-        self._assert_version_equal("1", "1.0-0")
-        self._assert_version_equal("1.0", "1.0-0")
-
-        self._assert_version_equal("1", "1")
-        self._assert_version_equal("1", "1.0")
-        self._assert_version_equal("1", "1.0.0")
-        self._assert_version_equal("1.0", "1.0.0")
-        self._assert_version_equal("1", "1-0")
-        self._assert_version_equal("1", "1.0-0")
-        self._assert_version_equal("1.0", "1.0-0")
-
-    def test_version_compare(self):
-        self._assert_version_order("1", "2")
-        self._assert_version_order("1.5", "2")
-        self._assert_version_order("1", "2.5")
-        self._assert_version_order("1.0", "1.1")
-        self._assert_version_order("1.1", "1.2")
-        self._assert_version_order("1.0.0", "1.1")
-        self._assert_version_order("1.0.1", "1.1")
-        self._assert_version_order("1.1", "1.2.0")
-        self._assert_version_order("1.0-alpha-1", "1.0")
-        self._assert_version_order("1.0-alpha-1", "1.0-alpha-2")
-        self._assert_version_order("1.0-alpha-1", "1.0-beta-1")
-        self._assert_version_order("1.0-beta-1", "1.0-SNAPSHOT")
-        self._assert_version_order("1.0-SNAPSHOT", "1.0")
-        self._assert_version_order("1.0-alpha-1-SNAPSHOT", "1.0-alpha-1")
-        self._assert_version_order("1.0", "1.0-1")
-        self._assert_version_order("1.0-1", "1.0-2")
-        self._assert_version_order("1.0.0", "1.0-1")
-        self._assert_version_order("2.0-1", "2.0.1")
-        self._assert_version_order("2.0.1-klm", "2.0.1-lmn")
-        self._assert_version_order("2.0.1", "2.0.1-xyz")
-        self._assert_version_order("2.0.1", "2.0.1-123")
-        self._assert_version_order("2.0.1-xyz", "2.0.1-123")
-        # unicode input
-        self._assert_version_order("1", "2")
-        self._assert_version_order("1.5", "2")
-        self._assert_version_order("1", "2.5")
-        self._assert_version_order("1.0", "1.1")
-        self._assert_version_order("1.1", "1.2")
-        self._assert_version_order("1.0.0", "1.1")
-        self._assert_version_order("1.0.1", "1.1")
-        self._assert_version_order("1.1", "1.2.0")
-        self._assert_version_order("1.0-alpha-1", "1.0")
-        self._assert_version_order("1.0-alpha-1", "1.0-alpha-2")
-        self._assert_version_order("1.0-alpha-1", "1.0-beta-1")
-        self._assert_version_order("1.0-beta-1", "1.0-SNAPSHOT")
-        self._assert_version_order("1.0-SNAPSHOT", "1.0")
-        self._assert_version_order("1.0-alpha-1-SNAPSHOT", "1.0-alpha-1")
-        self._assert_version_order("1.0", "1.0-1")
-        self._assert_version_order("1.0-1", "1.0-2")
-        self._assert_version_order("1.0.0", "1.0-1")
-        self._assert_version_order("2.0-1", "2.0.1")
-        self._assert_version_order("2.0.1-klm", "2.0.1-lmn")
-        self._assert_version_order("2.0.1", "2.0.1-xyz")
-        self._assert_version_order("2.0.1", "2.0.1-123")
-        self._assert_version_order("2.0.1-xyz", "2.0.1-123")
-
-        self._assert_version_order("1", "2")
-        self._assert_version_order("1.5", "2")
-        self._assert_version_order("1", "2.5")
-        self._assert_version_order("1.0", "1.1")
-        self._assert_version_order("1.1", "1.2")
-        self._assert_version_order("1.0.0", "1.1")
-        self._assert_version_order("1.0.1", "1.1")
-        self._assert_version_order("1.1", "1.2.0")
-        self._assert_version_order("1.0-alpha-1", "1.0")
-        self._assert_version_order("1.0-alpha-1", "1.0-alpha-2")
-        self._assert_version_order("1.0-alpha-1", "1.0-beta-1")
-        self._assert_version_order("1.0-beta-1", "1.0-SNAPSHOT")
-        self._assert_version_order("1.0-SNAPSHOT", "1.0")
-        self._assert_version_order("1.0-alpha-1-SNAPSHOT", "1.0-alpha-1")
-        self._assert_version_order("1.0", "1.0-1")
-        self._assert_version_order("1.0-1", "1.0-2")
-        self._assert_version_order("1.0.0", "1.0-1")
-        self._assert_version_order("2.0-1", "2.0.1")
-        self._assert_version_order("2.0.1-klm", "2.0.1-lmn")
-        self._assert_version_order("2.0.1", "2.0.1-xyz")
-        self._assert_version_order("2.0.1", "2.0.1-123")
-        self._assert_version_order("2.0.1-xyz", "2.0.1-123")
-
-        self._assert_version_order("1", "2")
-        self._assert_version_order("1.5", "2")
-        self._assert_version_order("1", "2.5")
-        self._assert_version_order("1.0", "1.1")
-        self._assert_version_order("1.1", "1.2")
-        self._assert_version_order("1.0.0", "1.1")
-        self._assert_version_order("1.0.1", "1.1")
-        self._assert_version_order("1.1", "1.2.0")
-        self._assert_version_order("1.0-alpha-1", "1.0")
-        self._assert_version_order("1.0-alpha-1", "1.0-alpha-2")
-        self._assert_version_order("1.0-alpha-1", "1.0-beta-1")
-        self._assert_version_order("1.0-beta-1", "1.0-SNAPSHOT")
-        self._assert_version_order("1.0-SNAPSHOT", "1.0")
-        self._assert_version_order("1.0-alpha-1-SNAPSHOT", "1.0-alpha-1")
-        self._assert_version_order("1.0", "1.0-1")
-        self._assert_version_order("1.0-1", "1.0-2")
-        self._assert_version_order("1.0.0", "1.0-1")
-        self._assert_version_order("2.0-1", "2.0.1")
-        self._assert_version_order("2.0.1-klm", "2.0.1-lmn")
-        self._assert_version_order("2.0.1", "2.0.1-xyz")
-        self._assert_version_order("2.0.1", "2.0.1-123")
-        self._assert_version_order("2.0.1-xyz", "2.0.1-123")
 
     def test_compare(self):
         assert 1 < Version("1.0")

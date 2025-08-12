@@ -1,0 +1,2855 @@
+[
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.4.1||>=4.3.0 <4.3.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<3.4.1|>=4.3.0|<4.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.0.0 <4.1.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=4.0.0|<4.1.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.4.0||>=4.0.0 <4.1.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<3.4.0|>=4.0.0|<4.1.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.4.0||>=4.0.0 <4.1.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<3.4.0|>=4.0.0|<4.1.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.0-alpha0 <1.1.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.0.0-alpha0|<1.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.4.3||>=2.0.0 <2.0.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<1.4.3|>=2.0.0|<2.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=3.6.2||>=3.7.0 <=3.7.3||>=3.8.0 <=3.8.3",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<=3.6.2|>=3.7.0|<=3.7.3|>=3.8.0|<=3.8.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.10.0a <1.10.1||>=1.11.0a <1.11.2||>=1.12.0a <1.12.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.10.0a|<1.10.1|>=1.11.0a|<1.11.2|>=1.12.0a|<1.12.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.1||>=1.1.0.alpha0 <1.1.2||>=1.2.0.alpha0 <1.2.1.1||>=1.3.0.alpha0 <1.3.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<1.0.1|>=1.1.0.alpha0|<1.1.2|>=1.2.0.alpha0|<1.2.1.1|>=1.3.0.alpha0|<1.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.1||>=1.1.0 <1.1.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<1.0.1|>=1.1.0|<1.1.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.2.0.alpha0 <1.2.2||>=1.3.0.alpha0 <1.3.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.2.0.alpha0|<1.2.2|>=1.3.0.alpha0|<1.3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.11.0a <1.11.4||>=1.12.0a <1.12.2||>=1.13.0a <1.13.12||>=2.0.0a <2.0.3||>=2.1.0a <2.1.2||>=2.2.0a <2.2.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.11.0a|<1.11.4|>=1.12.0a|<1.12.2|>=1.13.0a|<1.13.12|>=2.0.0a|<2.0.3|>=2.1.0a|<2.1.2|>=2.2.0a|<2.2.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.13 <=1.0.14||=0.1.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/0.1.4|>=1.0.13|<=1.0.14"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.7.0 <0.9.13",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.7.0|<0.9.13"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.3.0 <0.3.1||>=0.2.0 <0.2.1||<0.1.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<0.1.1|>=0.2.0|<0.2.1|>=0.3.0|<0.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.1.0||>0.2.0 <0.3.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<=0.1.0|>0.2.0|<0.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.1.0 <=0.3.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.1.0|<=0.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.2.6 <1.2.8",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.2.6|<1.2.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.0 <1.1.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.0.0|<1.1.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.12.3||>2.0.0a <3.0.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<1.12.3|>2.0.0a|<3.0.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.16.0 <2.2.16",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.16.0|<2.2.16"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.0.0 <5.0.3||>=5.1.0 <5.1.1||>=5.2.0 <5.2.5||>=5.3.0 <5.3.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=5.0.0|<5.0.3|>=5.1.0|<5.1.1|>=5.2.0|<5.2.5|>=5.3.0|<5.3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.1.0 <4.2.6",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.1.0|<4.2.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.4.1||>2.0.0a <2.0.0rc3",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<1.4.1|>2.0.0a|<2.0.0rc3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">2.0.0a <2.1.2||<1.4.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<1.4.2|>2.0.0a|<2.1.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.19 <1.22",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.19|<1.22"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.0 <2.5.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.0.0|<2.5.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.14.0 <=0.14.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.14.0|<=0.14.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.12.0 <=0.14.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.12.0|<=0.14.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.3.0 <2.4.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.3.0|<2.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=5.1.3||>=6.0.0 <=6.2.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<=5.1.3|>=6.0.0|<=6.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<5.2.10||>=6.0.0 <6.4.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<5.2.10|>=6.0.0|<6.4.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.3.2||>=2.0.1 <2.1.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<1.3.2|>=2.0.1|<2.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.3.2||>=2.0.1 <2.1.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<1.3.2|>=2.0.1|<2.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0a <3.0.0.beta.3||>=2.12.0a <2.12.3||>=2.11.0a <2.11.3||>=2.10.0a <2.10.2||>=2.9.0a <2.9.4||>=2.8.0a <2.8.3||>=2.7.0a <2.7.1||>=2.5.0a <2.5.1||>=2.4.0a <2.4.6||>=2.3.0a <2.3.3||>=2.2.0a <2.2.3||>=2.1.0a <2.1.4||>=2.0.0 <2.0.5",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.0.0|<2.0.5|>=2.1.0a|<2.1.4|>=2.2.0a|<2.2.3|>=2.3.0a|<2.3.3|>=2.4.0a|<2.4.6|>=2.5.0a|<2.5.1|>=2.7.0a|<2.7.1|>=2.8.0a|<2.8.3|>=2.9.0a|<2.9.4|>=2.10.0a|<2.10.2|>=2.11.0a|<2.11.3|>=2.12.0a|<2.12.3|>=3.0.0a|<3.0.0.beta.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.0 <=2.12.4||>=3.0.0 <=4.0.0.beta7",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.0.0|<=2.12.4|>=3.0.0|<=4.0.0.beta7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.8.6||>=2.9.0 <2.9.6||>=2.10.0 <2.10.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<2.8.6|>=2.9.0|<2.9.6|>=2.10.0|<2.10.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.11.14||>=3.0.0 <3.0.5||>=3.1.0 <3.1.5",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<2.11.14|>=3.0.0|<3.0.5|>=3.1.0|<3.1.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.12.29 <=0.12.40",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.12.29|<=0.12.40"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.14.14 <=1.14.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.14.14|<=1.14.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.0.0.alpha <5.0.0.beta1.1||>=4.2.0.alpha <4.2.5.1||>=4.1.0.alpha <4.1.14.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=4.1.0.alpha|<4.1.14.1|>=4.2.0.alpha|<4.2.5.1|>=5.0.0.alpha|<5.0.0.beta1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.1.11 || >=3.2.0 <3.2.12",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0|<3.1.11|>=3.2.0|<3.2.12"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">0.5.0 <1.0.4||>=1.1.0 <1.1.3||>=1.2.0 <1.2.5",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>0.5.0|<1.0.4|>=1.1.0|<1.1.3|>=1.2.0|<1.2.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <5.2.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0|<5.2.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.0 <4.6.3",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.1.0|<4.6.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.2.10||>=2.3.0a <2.3.8||>=3.0.0a <3.0.0.rc4||>=2.4.0a <2.4.5",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<2.2.10|>=2.3.0a|<2.3.8|>=2.4.0a|<2.4.5|>=3.0.0a|<3.0.0.rc4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.0.rc1 <=1.3.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.0.0.rc1|<=1.3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.7.11||>=4.0.0 <4.0.4||>=4.1.0 <4.1.11",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<3.7.11|>=4.0.0|<4.0.4|>=4.1.0|<4.1.11"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.11.0 <=0.11.1||=0.30.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.11.0|<=0.11.1|0.30.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.7.0 <3.7.13||>=4.0.0 <4.0.5||>=4.1.0 <4.1.12",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.7.0|<3.7.13|>=4.0.0|<4.0.5|>=4.1.0|<4.1.12"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">2.2.9 <=2.5.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>2.2.9|<=2.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.6.0 <=3.0.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.6.0|<=3.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">2.2.9 <=2.5.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>2.2.9|<=2.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">2.2.9 <=2.5.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>2.2.9|<=2.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.6.0 <=3.0.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.6.0|<=3.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.6.0 <=3.0.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.6.0|<=3.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.0 <=2.6.13",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.0.0|<=2.6.13"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">2.2.9 <=2.5.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>2.2.9|<=2.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">2.2.9 <=2.5.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>2.2.9|<=2.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.6.0 <=3.0.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.6.0|<=3.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.8.11 <=0.9.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.8.11|<=0.9.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.6.0 <=3.0.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.6.0|<=3.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">2.2.9 <=2.5.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>2.2.9|<=2.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.7.6 <=3.0.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.7.6|<=3.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">2.2.9 <=2.5.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>2.2.9|<=2.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.5.3||>2.0.0 <2.0.5",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<1.5.3|>2.0.0|<2.0.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.5.5 || >=1.6.0 <1.6.8 || >=1.7.0 <1.7.7",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<1.5.5|>=1.6.0|<1.6.8|>=1.7.0|<1.7.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.0 <=2.0.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.0.0|<=2.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=7.0.0 <7.12.1||<6.25.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<6.25.1|>=7.0.0|<7.12.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.1.0 <3.1.1||>=2.7.0 <2.7.21",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.7.0|<2.7.21|>=3.1.0|<3.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.7.26||>=3.0.0 <3.6.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<2.7.26|>=3.0.0|<3.6.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=6.0.0 <6.13.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=6.0.0|<6.13.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.7.0 <2.7.23||>3.2.0 <3.2.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.7.0|<2.7.23|>3.2.0|<3.2.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.6.17||>=2.7.0 <2.7.18",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<2.6.17|>=2.7.0|<2.7.18"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=7.0.0 <7.12.1||<6.25.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<6.25.1|>=7.0.0|<7.12.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.7.0 <2.7.18",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.7.0|<2.7.18"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.7.1 <2.7.13",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.7.1|<2.7.13"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.6.17||>=2.7.0 <2.7.18",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<2.6.17|>=2.7.0|<2.7.18"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.7.0 <2.7.22||>=3.2.0 <3.2.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.7.0|<2.7.22|>=3.2.0|<3.2.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.0 <2.2.5 || >=3.0.0 <3.0.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.0.0|<2.2.5|>=3.0.0|<3.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.4.0 <1.5.4 || >=1.6 <2.0.5 || >=2.1.0 <2.1.3 || >=2.2.0 <2.2.3",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.4.0|<1.5.4|>=1.6|<2.0.5|>=2.1.0|<2.1.3|>=2.2.0|<2.2.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.2.15",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0|<3.2.15"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.4.0 <1.5.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.4.0|<1.5.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.3.0 <2.8.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.3.0|<2.8.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.0.1 <=2.6.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.0.1|<=2.6.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.1.7 <=2.6.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.1.7|<=2.6.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.1 <=2.6.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.0.1|<=2.6.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.1.2.0 <=2.6.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.1.2.0|<=2.6.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.119.0 <=0.125.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.119.0|<=0.125.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.0.17 || >=3.1.0 <3.1.8 || >=3.2.0 <3.2.8",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<3.0.17|>=3.1.0|<3.1.8|>=3.2.0|<3.2.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.1.12 || >=3.2.0 <3.2.13",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0|<3.1.12|>=3.2.0|<3.2.13"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.3.16 || >=2.4.0 <3.0.20",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<2.3.16|>=2.4.0|<3.0.20"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<5.2.4.3||>=6.0.0 <6.0.3.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<5.2.4.3|>=6.0.0|<6.0.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.1.0a <4.1.11||>=4.2.0a <4.2.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=4.1.0a|<4.1.11|>=4.2.0a|<4.2.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.0.12||>=3.1.0 <3.1.4||>=3.2.0 <3.2.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0|<3.0.12|>=3.1.0|<3.1.4|>=3.2.0|<3.2.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.2.22||>=4.0.0a <4.1.11||>=4.2.0a <4.2.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<3.2.22|>=4.0.0a|<4.1.11|>=4.2.0a|<4.2.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.0 <2.3.13||>=3.0.0 <3.0.10",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.0.0|<2.3.13|>=3.0.0|<3.0.10"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.0.10 <5.1.11",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=5.0.10|<5.1.11"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.0.5 <4.0.33",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=4.0.5|<4.0.33"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.3.0 <5.3.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=5.3.0|<5.3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.0.21 || >=4.0.0 <4.0.5",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0|<3.0.21|>=4.0.0|<4.0.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.3.0 <5.3.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=5.3.0|<5.3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=4.0.0||=1.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/1.0|4.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <5.3.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0|<5.3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.3.0 <5.3.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=5.3.0|<5.3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.0.0a <4.0.60||>=5.0.0a <5.0.22",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=4.0.0a|<4.0.60|>=5.0.0a|<5.0.22"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.2 <=3.1.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.0.2|<=3.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.2.0 <0.2.2||>=0.4.0 <0.4.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.2.0|<0.2.2|>=0.4.0|<0.4.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.4.0 <=0.5.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.4.0|<=0.5.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.0 <2.0.13||>=2.1.0 <2.1.11||>=2.2.0 <2.2.5||>=2.3.0 <2.3.10||>=2.4.0 <2.4.11||>=2.5.0 <2.5.3||>=2.6.0 <2.6.3||>=2.7.0 <2.7.8||>=2.8.0 <2.8.2||>=2.9.0 <2.9.2||>=2.10.0 <2.10.4||>=2.11.0 <2.11.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.0.0|<2.0.13|>=2.1.0|<2.1.11|>=2.2.0|<2.2.5|>=2.3.0|<2.3.10|>=2.4.0|<2.4.11|>=2.5.0|<2.5.3|>=2.6.0|<2.6.3|>=2.7.0|<2.7.8|>=2.8.0|<2.8.2|>=2.9.0|<2.9.2|>=2.10.0|<2.10.4|>=2.11.0|<2.11.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.5.5.rc1||>=2.6.0.alpha0 <2.6.6.rc1||>=2.7.0.alpha0 <2.7.0.rc1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<2.5.5.rc1|>=2.6.0.alpha0|<2.6.6.rc1|>=2.7.0.alpha0|<2.7.0.rc1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.3.2 <=2.4.3",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.3.2|<=2.4.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.3.2 <=2.4.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.3.2|<=2.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.0.rc3 <2.0.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.0.0.rc3|<2.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.0.1||>=3.0.0 <3.0.2||>=3.1.0 <3.1.2||=3.2.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<2.0.1|>=3.0.0|<3.0.2|>=3.1.0|<3.1.2|3.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.119.0 <=0.125.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.119.0|<=0.125.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.5.0 <1.9.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.5.0|<1.9.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.0.3 || >=1.1.0 <1.1.4 || >=1.2.0 <2.0.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<1.0.3|>=1.1.0|<1.1.4|>=1.2.0|<2.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.1.33 <=1.1.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.1.33|<=1.1.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.5.0 <0.5.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.5.0|<0.5.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.8.6||>=2.9.0 <2.9.6||>=2.10.0 <2.10.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<2.8.6|>=2.9.0|<2.9.6|>=2.10.0|<2.10.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.11.14||>=3.0.0 <3.0.5||>=3.1.0 <3.1.5",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<2.11.14|>=3.0.0|<3.0.5|>=3.1.0|<3.1.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.31.0 <2.31.2||>=2.32.0 <2.49.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.31.0|<2.31.2|>=2.32.0|<2.49.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.9.0||>=5.0.0 <5.2.0||>=6.0.0 <6.3.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<3.9.0|>=5.0.0|<5.2.0|>=6.0.0|<6.3.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.8.0||>=5.0.0 <5.1.0||>=6.0.0 <6.2.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<3.8.0|>=5.0.0|<5.1.0|>=6.0.0|<6.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.5.5||>=2.0.0.beta1 <2.0.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<1.5.5|>=2.0.0.beta1|<2.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.2.0 <=0.3.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.2.0|<=0.3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">0.11.0 <0.13.3",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>0.11.0|<0.13.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.0.0 <0.12.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.0.0|<0.12.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.0.0 <0.12.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.0.0|<0.12.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.0.0 <0.12.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.0.0|<0.12.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=0.14.1||>=0.15.0 <=0.15.1||>=0.16.0 <=0.16.3||>=0.17.0 <=0.17.2||=0.18.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<=0.14.1|>=0.15.0|<=0.15.1|>=0.16.0|<=0.16.3|>=0.17.0|<=0.17.2|0.18.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.0.0 <0.12.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.0.0|<0.12.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.7.0 <3.7.13||>=4.0.0 <4.0.5||>=4.1.0 <4.1.12",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.7.0|<3.7.13|>=4.0.0|<4.0.5|>=4.1.0|<4.1.12"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=9.0.0.pre1 <9.2.5",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=9.0.0.pre1|<9.2.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=8.0 <=9.2.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=8.0|<=9.2.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=8.0 <=9.2.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=8.0|<=9.2.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.0.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0|<3.0.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.0 <2.3.13||>=3.0.0 <3.0.10",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.0.0|<2.3.13|>=3.0.0|<3.0.10"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0.alpha <3.2.22.3",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0.alpha|<3.2.22.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.2.0a <3.2.20||>=4.0.0a <4.0.11||>=4.1.0a <4.1.7||>=4.2.0.a <4.2.0.beta3",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.2.0a|<3.2.20|>=4.0.0a|<4.0.11|>=4.1.0a|<4.1.7|>=4.2.0.a|<4.2.0.beta3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.0.0 <4.0.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=4.0.0|<4.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.3.18 || >=2.4.0 <3.1.12 || >=3.2.0 <3.2.13",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<2.3.18|>=2.4.0|<3.1.12|>=3.2.0|<3.2.13"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.2.17||>=4.0 <4.0.3||>=4.1.0 <4.1.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<3.2.17|>=4.0|<4.0.3|>=4.1.0|<4.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=6.0.0 <=6.0.4||>=6.1.0 <=6.1.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=6.0.0|<=6.0.4|>=6.1.0|<=6.1.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.2.0.0.alpha <3.2.22.2||>=4.0.0.0.alpha <4.1.14.2||>=4.2.0.0.alpha <4.2.5.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.2.0.0.alpha|<3.2.22.2|>=4.0.0.0.alpha|<4.1.14.2|>=4.2.0.0.alpha|<4.2.5.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.3.15 || >=2.4.0 <3.0.19 || >=3.1.0 <3.1.10 || >=3.2.0 <3.2.11",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<2.3.15|>=2.4.0|<3.0.19|>=3.1.0|<3.1.10|>=3.2.0|<3.2.11"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=6.0.0 <6.0.3.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=6.0.0|<6.0.3.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.2.0.alpha <4.2.5.1||>=4.0.0.alpha <4.1.14.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=4.0.0.alpha|<4.1.14.1|>=4.2.0.alpha|<4.2.5.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.2.16||>=4.0 <4.0.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<3.2.16|>=4.0|<4.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.3.0.alpha0 <2.3.13",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.3.0.alpha0|<2.3.13"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.0.16 || >=3.1.0 <3.1.7 || >=3.2.0 <3.2.7",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0|<3.0.16|>=3.1.0|<3.1.7|>=3.2.0|<3.2.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.0.17 || >=3.1.0 <3.1.8 || >=3.2.0 <3.2.8",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<3.0.17|>=3.1.0|<3.1.8|>=3.2.0|<3.2.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.0.0.alpha <5.0.0.beta1.1||>=4.2.0.alpha <4.2.5.1||>=4.0.0.alpha <4.1.14.1||<3.2.22.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<3.2.22.1|>=4.0.0.alpha|<4.1.14.1|>=4.2.0.alpha|<4.2.5.1|>=5.0.0.alpha|<5.0.0.beta1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0.alpha0 <3.0.12||>=3.1.0.alpha0 <3.1.4||>=3.2.0.alpha0 <3.2.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0.alpha0|<3.0.12|>=3.1.0.alpha0|<3.1.4|>=3.2.0.alpha0|<3.2.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.0.13||>=3.1.0 <3.1.5||>=3.2.0 <3.2.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<3.0.13|>=3.1.0|<3.1.5|>=3.2.0|<3.2.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.0.10",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0|<3.0.10"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.2.0.0.alpha <3.2.22.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.2.0.0.alpha|<3.2.22.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=6.0.0 <6.0.3.7||>=6.1.0 <6.1.0.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=6.0.0|<6.0.3.7|>=6.1.0|<6.1.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.2.0a <3.2.21||>=4.0.0a <4.0.11.1||>=4.1.0a <4.1.7.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.2.0a|<3.2.21|>=4.0.0a|<4.0.11.1|>=4.1.0a|<4.1.7.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0.alpha0 <3.0.11||>=3.1.0.alpha0 <3.1.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0.alpha0|<3.0.11|>=3.1.0.alpha0|<3.1.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.2.0.0 <5.2.4.6||>=6.0.0.0 <6.0.3.7||>=6.1.0.0 <6.1.3.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=5.2.0.0|<5.2.4.6|>=6.0.0.0|<6.0.3.7|>=6.1.0.0|<6.1.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.3.0 <2.3.13",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.3.0|<2.3.13"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.0.0.alpha <5.0.0.beta1.1||>=4.2.0.alpha <4.2.5.1||>=4.0.0.alpha <4.1.14.1||<3.2.22.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<3.2.22.1|>=4.0.0.alpha|<4.1.14.1|>=4.2.0.alpha|<4.2.5.1|>=5.0.0.alpha|<5.0.0.beta1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=6.0.0 <=6.0.4.1||>=6.1.0 <=6.1.4.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=6.0.0|<=6.0.4.1|>=6.1.0|<=6.1.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.6 <3.2.16||>=4.0.0.beta1 <4.0.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.6|<3.2.16|>=4.0.0.beta1|<4.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<5.2.4.6||>=5.2.5 <5.2.6||>=6.0.0 <6.0.3.7||>=6.1.0 <6.1.3.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<5.2.4.6|>=5.2.5|<5.2.6|>=6.0.0|<6.0.3.7|>=6.1.0|<6.1.3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<5.2.4.3||>=6.0.0 <6.0.3.1||=10.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<5.2.4.3|>=6.0.0|<6.0.3.1|10.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.3.18 || >=2.4.0 <3.1.12 || >=3.2.0 <3.2.13",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<2.3.18|>=2.4.0|<3.1.12|>=3.2.0|<3.2.13"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.2.16||>=4.0.0 <4.0.5||>=4.1.0 <4.1.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<3.2.16|>=4.0.0|<4.0.5|>=4.1.0|<4.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.0 <3.2.16||>=4.0.0.beta1 <4.0.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.0.0|<3.2.16|>=4.0.0.beta1|<4.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.0.0.0 <=5.2.6.1||>=6.0.0.0 <=6.0.4.5||>=6.1.0.0 <=6.1.4.5||>=7.0.0.0 <=7.0.2.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=5.0.0.0|<=5.2.6.1|>=6.0.0.0|<=6.0.4.5|>=6.1.0.0|<=6.1.4.5|>=7.0.0.0|<=7.0.2.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=6.0.0 <6.0.3.5||>=6.1.0 <6.1.2.1||=33",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=6.0.0|<6.0.3.5|>=6.1.0|<6.1.2.1|33"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.0.17 || >=3.1.0 <3.1.8 || >=3.2.0 <3.2.8",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0|<3.0.17|>=3.1.0|<3.1.8|>=3.2.0|<3.2.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.0.14||>=3.1.0 <3.1.6||>=3.2.0 <3.2.6",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<3.0.14|>=3.1.0|<3.1.6|>=3.2.0|<3.2.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<5.2.4.3||>=6.0.0 <6.0.3.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<5.2.4.3|>=6.0.0|<6.0.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.2.16||>=4.0.0 <4.0.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<3.2.16|>=4.0.0|<4.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.3.0 <1.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.3.0|<1.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.12.6||>=4.0.0 <4.3.5",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0|<3.12.6|>=4.0.0|<4.3.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=4.3.8||>=5.0.0 <=5.5.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<=4.3.8|>=5.0.0|<=5.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.3.8||>=5.0.0 <5.3.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<4.3.8|>=5.0.0|<5.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.12.6||>=4.0.0 <4.3.5",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0|<3.12.6|>=4.0.0|<4.3.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.12.2||>=4.0.0 <4.3.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0|<3.12.2|>=4.0.0|<4.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.3.11||>=5.0.0 <5.6.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<4.3.11|>=5.0.0|<5.6.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=3.12.3||>=4.0.0 <=4.3.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<=3.12.3|>=4.0.0|<=4.3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.3.12||>=5.0.0 <5.6.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<4.3.12|>=5.0.0|<5.6.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=3.12.3||>=4.0.0 <=4.3.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<=3.12.3|>=4.0.0|<=4.3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.3.0 <1.3.1 || >=1.2.0 <1.2.2 || >=1.1.0 <1.1.1 || >=1.0.0 <1.0.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.0.0|<1.0.4|>=1.1.0|<1.1.1|>=1.2.0|<1.2.2|>=1.3.0|<1.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.0.rc1 <1.1.0.rc5",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.1.0.rc1|<1.1.0.rc5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.79.0 <13.3.9||>=13.4.0 <13.4.5||>=13.5.0 <13.5.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.79.0|<13.3.9|>=13.4.0|<13.4.5|>=13.5.0|<13.5.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.1.0pre1 <2.1.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.1.0pre1|<2.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.6.0||>=1.6.2 <1.6.3",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<1.6.0|>=1.6.2|<1.6.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.7.6||>=2.0.0 <2.0.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<1.7.6|>=2.0.0|<2.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.4.0 <=0.4.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.4.0|<=0.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.119.0 <=0.125.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.119.0|<=0.125.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.1.4||>=2.2.0 <2.2.3",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<2.1.4|>=2.2.0|<2.2.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.6.12||>1.6.12 <2.0.8",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<1.6.12|>1.6.12|<2.0.8"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.3.0 <=1.4.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.3.0|<=1.4.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.0 <1.1.6 || >=1.2.0 <1.2.8 || >=1.3.0 <1.3.10 || >=1.4.0 <1.4.5 || >=1.5.0 <1.5.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.1.0|<1.1.6|>=1.2.0|<1.2.8|>=1.3.0|<1.3.10|>=1.4.0|<1.4.5|>=1.5.0|<1.5.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.4 <=1.4.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.4|<=1.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.4.0 <1.4.5 || >=1.5.0 <1.5.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.4.0|<1.4.5|>=1.5.0|<1.5.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.1.3||>=1.2.0 <1.2.5||>=1.3.0.beta <1.3.6",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<1.1.3|>=1.2.0|<1.2.5|>=1.3.0.beta|<1.3.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.4.6||>=1.5.0a <1.5.4||>=1.6.0a <1.6.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<1.4.6|>=1.5.0a|<1.5.4|>=1.6.0a|<1.6.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.4 <=2.0.5",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.0.4|<=2.0.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.0 <=1.4.3",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.1.0|<=1.4.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.6.0 <1.6.11||>=2.0.0 <2.0.6",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.6.0|<1.6.11|>=2.0.0|<2.0.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=0.8.0 <0.8.7.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.8.0|<0.8.7.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.0.0.alpha <4.2.7.1||>=5.0.0.alpha <5.0.0.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=4.0.0.alpha|<4.2.7.1|>=5.0.0.alpha|<5.0.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <4.2.11.1||>=5.0.0 <5.0.7.2||>=5.1.0 <5.1.6.2||>=5.2.0 <5.2.2.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0|<4.2.11.1|>=5.0.0|<5.0.7.2|>=5.1.0|<5.1.6.2|>=5.2.0|<5.2.2.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.0.0.0.alpha <4.1.14.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=4.0.0.0.alpha|<4.1.14.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.0.0.alpha <5.0.0.beta1.1||>=4.2.0.alpha <4.2.5.1||<4.1.14.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<4.1.14.1|>=4.2.0.alpha|<4.2.5.1|>=5.0.0.alpha|<5.0.0.beta1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<5.2.4.2||>=6.0.0 <6.0.2.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<5.2.4.2|>=6.0.0|<6.0.2.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<5.2.4.4||>=6.0.0.0 <6.0.3.3",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<5.2.4.4|>=6.0.0.0|<6.0.3.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.2.11.1||>=5.0.0 <5.0.7.2||>=5.1.0 <5.1.6.2||>=5.2.0 <5.2.2.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<4.2.11.1|>=5.0.0|<5.0.7.2|>=5.1.0|<5.1.6.2|>=5.2.0|<5.2.2.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.26.6||>=0.27.0 <0.27.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<0.26.6|>=0.27.0|<0.27.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.21.3||>0.22a",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<0.21.3|>0.22a"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "=3.0.23||=3.0.28",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/3.0.23|3.0.28"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.4 <4.0.0.beta1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.0.4|<4.0.0.beta1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0 <2.7.7",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.0|<2.7.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.8.6||>=2.9.0 <2.9.6||>=2.10.0 <2.10.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<2.8.6|>=2.9.0|<2.9.6|>=2.10.0|<2.10.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.6.1 <1.8.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.6.1|<1.8.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.6.10 <=1.6.13",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.6.10|<=1.6.13"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.8.6||>=2.9.0 <2.9.6||>=2.10.0 <2.10.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<2.8.6|>=2.9.0|<2.9.6|>=2.10.0|<2.10.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.11.14||>=3.0.0 <3.0.5||>=3.1.0 <3.1.5",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<2.11.14|>=3.0.0|<3.0.5|>=3.1.0|<3.1.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.11.12||>=3.0.0 <3.0.3||>=3.1.0 <3.1.3",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<2.11.12|>=3.0.0|<3.0.3|>=3.1.0|<3.1.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.11.13||>=3.0.0 <3.0.4||>=3.1.0 <3.1.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<2.11.13|>=3.0.0|<3.0.4|>=3.1.0|<3.1.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.2.0 <5.2.1.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=5.2.0|<5.2.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<5.2.4.2||>=6.0.0 <6.0.3.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<5.2.4.2|>=6.0.0|<6.0.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.2.0 <=5.2.6.2||>=6.0.0 <=6.0.4.6||>=6.1.0 <=6.1.4.6||>=7.0.0 <=7.0.2.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=5.2.0|<=5.2.6.2|>=6.0.0|<=6.0.4.6|>=6.1.0|<=6.1.4.6|>=7.0.0|<=7.0.2.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.1.0 <=3.1.3",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.1.0|<=3.1.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.1.3||>=4.0.0a <4.0.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<3.1.3|>=4.0.0a|<4.0.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.5 <1.5.11 || >=1.6 <1.6.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.5|<1.5.11|>=1.6|<1.6.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.6.0 <=1.6.7",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.6.0|<=1.6.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.6.6.3||>=1.6.7.rc2 <1.6.7.rc4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<1.6.6.3|>=1.6.7.rc2|<1.6.7.rc4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.5 <1.5.11 || >=1.6 <1.6.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.5|<1.5.11|>=1.6|<1.6.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.6.6.4 ||>=1.6.7.rc2 <1.6.7.rc4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<1.6.6.4|>=1.6.7.rc2|<1.6.7.rc4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.6.0.0a <1.6.7.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.6.0.0a|<1.6.7.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<1.6.6.4||>=1.6.7.rc1 <1.6.7.rc4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<1.6.6.4|>=1.6.7.rc1|<1.6.7.rc4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.6.0.rc1 <1.6.7.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.6.0.rc1|<1.6.7.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.2.0 <3.5.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.2.0|<3.5.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.12.6||>=4.0.0 <4.3.5",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0|<3.12.6|>=4.0.0|<4.3.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.3.8||>=5.0.0 <5.3.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<4.3.8|>=5.0.0|<5.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.12.6||>=4.0.0 <4.3.5",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0|<3.12.6|>=4.0.0|<4.3.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.12.2||>=4.0.0 <4.3.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0|<3.12.2|>=4.0.0|<4.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=3.12.3||>=4.0.0 <=4.3.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<=3.12.3|>=4.0.0|<=4.3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.3.12||>=5.0.0 <5.6.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<4.3.12|>=5.0.0|<5.6.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=3.12.3||>=4.0.0 <=4.3.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<=3.12.3|>=4.0.0|<=4.3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<=4.0.1||>=4.1.0 <=4.4.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<=4.0.1|>=4.1.0|<=4.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.1.0 <5.1.6.1||>=4.2.0 <4.2.11||>=5.0.0 <5.0.7.1||>=5.2.0 <5.2.1.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=4.2.0|<4.2.11|>=5.0.0|<5.0.7.1|>=5.1.0|<5.1.6.1|>=5.2.0|<5.2.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.0 <2.2.3||>=2.3.0 <2.3.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.0.0|<2.2.3|>=2.3.0|<2.3.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.2.2||>=2.3.0 <2.3.5",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<2.2.2|>=2.3.0|<2.3.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">4.0.0.beta <4.0.3 || =4.1.0.beta1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>4.0.0.beta|<4.0.3|4.1.0.beta1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.3.11||>=3.0.0 <3.0.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<2.3.11|>=3.0.0|<3.0.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=6.1.0 <=6.1.3.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=6.1.0|<=6.1.3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.2.0 <5.2.1.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=5.2.0|<5.2.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.2.0 <5.2.2.1||>=6.0.0.beta1 <6.0.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=5.2.0|<5.2.2.1|>=6.0.0.beta1|<6.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<5.2.4.3||>=6.0.0 <6.0.3.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<5.2.4.3|>=6.0.0|<6.0.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.2.17 || >=4.0.0.beta <4.0.3 || =4.1.0.beta1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<3.2.17|>=4.0.0.beta|<4.0.3|4.1.0.beta1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=6.0.0 <6.0.4.1||>=6.1.0 <6.1.4.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=6.0.0|<6.0.4.1|>=6.1.0|<6.1.4.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.0.0 <=4.2.5.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=4.0.0|<=4.2.5.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=6.0.0 <6.0.3.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=6.0.0|<6.0.3.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=6.0.0 <6.0.3.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=6.0.0|<6.0.3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.2.0 <5.2.4.5||>=6.0.0 <6.0.3.5||>=6.1.0 <6.1.2.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=4.2.0|<5.2.4.5|>=6.0.0|<6.0.3.5|>=6.1.0|<6.1.2.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.2.16||>=4.0.0.beta1 <4.0.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0|<3.2.16|>=4.0.0.beta1|<4.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.2.0 <=4.2.7",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=4.2.0|<=4.2.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.0 <1.1.6",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.1.0|<1.1.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.2.11.1||>=5.0.0 <5.0.7.2||>=5.1.0 <5.1.6.2||>=5.2.0 <5.2.2.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<4.2.11.1|>=5.0.0|<5.0.7.2|>=5.1.0|<5.1.6.2|>=5.2.0|<5.2.2.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<5.2.4.3||>=6.0.0 <6.0.3.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<5.2.4.3|>=6.0.0|<6.0.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.0 <2.3.11||>=3.0.0 <3.0.7",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.0.0|<2.3.11|>=3.0.0|<3.0.7"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<5.2.4.2||>=6.0.0 <6.0.3.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<5.2.4.2|>=6.0.0|<6.0.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.1.0 <2.3.11||>=3.0.0 <3.0.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.1.0|<2.3.11|>=3.0.0|<3.0.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.1.0 <2.2.3||>=2.3.0 <2.3.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.1.0|<2.2.3|>=2.3.0|<2.3.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.2.22.2||>=4.0.0.0 <4.1.14.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<3.2.22.2|>=4.0.0.0|<4.1.14.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=6.0.0 <6.0.3.7||>=6.1.0 <6.1.0.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=6.0.0|<6.0.3.7|>=6.1.0|<6.1.0.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.0.0 <=5.0.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=4.0.0|<=5.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.0.11||>=3.1.0 <3.1.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0|<3.0.11|>=3.1.0|<3.1.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.2.0.0 <5.2.4.6||>=6.0.0.0 <6.0.3.7||>=6.1.0.0 <6.1.3.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=5.2.0.0|<5.2.4.6|>=6.0.0.0|<6.0.3.7|>=6.1.0.0|<6.1.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.0.0 <=5.0.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=4.0.0|<=5.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.2.0 <4.2.11||>=5.0.0 <5.0.7.1||>=5.1.0 <5.1.6.1||>=5.2.0 <5.2.1.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=4.2.0|<4.2.11|>=5.0.0|<5.0.7.1|>=5.1.0|<5.1.6.1|>=5.2.0|<5.2.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=6.0.4.2 <=6.1.4.2||=7.0.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=6.0.4.2|<=6.1.4.2|7.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<5.2.4.6||>=5.2.5 <5.2.6||>=6.0.0 <6.0.3.7||>=6.1.0 <6.1.3.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<5.2.4.6|>=5.2.5|<5.2.6|>=6.0.0|<6.0.3.7|>=6.1.0|<6.1.3.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<5.2.4.3||>=6.0.0 <6.0.3.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<5.2.4.3|>=6.0.0|<6.0.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.1 <4.1.1 || >4.0 <4.0.5 || >=0.0 <3.2.18",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=0.0|<3.2.18|>4.0|<4.0.5|>=4.1|<4.1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.1.0 <1.1.6",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.1.0|<1.1.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<4.2.11.1||>=5.0.0 <5.0.7.2||>=5.1.0 <5.1.6.2||>=5.2.0 <5.2.2.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<4.2.11.1|>=5.0.0|<5.0.7.2|>=5.1.0|<5.1.6.2|>=5.2.0|<5.2.2.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.0.0 <5.2.6.2||>=6.0.0 <6.0.4.6||>=6.1.0 <6.1.4.6||>=7.0.0 <7.0.2.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=5.0.0|<5.2.6.2|>=6.0.0|<6.0.4.6|>=6.1.0|<6.1.4.6|>=7.0.0|<7.0.2.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=6.0.0 <6.0.3.5||>=6.1.0 <6.1.2.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=6.0.0|<6.0.3.5|>=6.1.0|<6.1.2.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.1.0 <2.1.3||>=2.2.0 <2.2.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.1.0|<2.1.3|>=2.2.0|<2.2.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<5.2.4.3||>=6.0.0 <6.0.3.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<5.2.4.3|>=6.0.0|<6.0.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0.beta <3.2.17",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0.beta|<3.2.17"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.3.9 <2.3.10||>=3.0.0 <3.0.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.3.9|<2.3.10|>=3.0.0|<3.0.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.0 <1.2.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.0.0|<1.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.2.0 <5.2.2.1||>=6.0.0.beta1 <6.0.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=5.2.0|<5.2.2.1|>=6.0.0.beta1|<6.0.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.3.18 || >=2.4.0 <3.0.0 || >=3.1.0 <3.1.12 || >=3.2.0 <3.2.13",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<2.3.18|>=2.4.0|<3.0.0|>=3.1.0|<3.1.12|>=3.2.0|<3.2.13"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.2.0 <4.0.3",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.2.0|<4.0.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.0.0 <2.3.13||>=3.0.0 <3.0.10",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.0.0|<2.3.13|>=3.0.0|<3.0.10"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.0.13||>=3.1.0 <3.1.5||>=3.2.0 <3.2.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0|<3.0.13|>=3.1.0|<3.1.5|>=3.2.0|<3.2.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.2.0 <5.2.4.5||>=6.0.0 <6.0.3.5||>=6.1.0 <6.1.2.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=4.2.0|<5.2.4.5|>=6.0.0|<6.0.3.5|>=6.1.0|<6.1.2.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.0.18||>=3.1.0 <3.1.9||>=3.2.0 <3.2.10",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0|<3.0.18|>=3.1.0|<3.1.9|>=3.2.0|<3.2.10"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.0.0.alpha <4.2.7.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=4.0.0.alpha|<4.2.7.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.0.13||>=3.1.0 <3.1.5||>=3.2.0 <3.2.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0|<3.0.13|>=3.1.0|<3.1.5|>=3.2.0|<3.2.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">4.0.0 <4.0.7||>4.1.0 <4.1.3",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>4.0.0|<4.0.7|>4.1.0|<4.1.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<2.3.17 || >=2.4.0 <3.1.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<2.3.17|>=2.4.0|<3.1.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=5.0.0.alpha <5.0.0.beta1.1||>=4.2.0.alpha <4.2.5.1||>=4.0.0.alpha <4.1.14.1||>=3.1.0.alpha <3.2.22.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.1.0.alpha|<3.2.22.1|>=4.0.0.alpha|<4.1.14.1|>=4.2.0.alpha|<4.2.5.1|>=5.0.0.alpha|<5.0.0.beta1.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">4.0.0 <4.0.9||>4.1.0 <4.1.5",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>4.0.0|<4.0.9|>4.1.0|<4.1.5"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">2.0.0 <3.2.19",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>2.0.0|<3.2.19"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.0.19 || >=3.1.0 <3.1.10 || >=3.2.0 <3.2.11",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<3.0.19|>=3.1.0|<3.1.10|>=3.2.0|<3.2.11"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.0.0 <3.0.4",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.0.0|<3.0.4"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<3.0.14||>=3.1.0 <3.1.6||>=3.2.0 <3.2.6",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<3.0.14|>=3.1.0|<3.1.6|>=3.2.0|<3.2.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">0.0.0a <0.6.4||>0.7.0a <0.7.3",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>0.0.0a|<0.6.4|>0.7.0a|<0.7.3"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.2 <3.5.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.2|<3.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.11 <6.3.1",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.11|<6.3.1"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=1.0.3 <3.5.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=1.0.3|<3.5.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=2.3.0 <3.9.5 || >=3.10 <3.12 || >=4.0.0.preview2 <4.0.0.rc.2",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.3.0|<3.9.5|>=3.10|<3.12|>=4.0.0.preview2|<4.0.0.rc.2"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=4.2.2 <4.3.6",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=4.2.2|<4.3.6"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": ">=3.1.4 <5.2.0",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=3.1.4|<5.2.0"
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "<0.5.1||>=0.6.0 <0.6.6",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/<0.5.1|>=0.6.0|<0.6.6"
+  }
+]

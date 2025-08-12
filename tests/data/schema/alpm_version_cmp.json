@@ -1,0 +1,608 @@
+[
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5.1",
+        "1.5.0"
+      ]
+    },
+    "expected_output": [
+      "1.5.0",
+      "1.5.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5.1",
+        "1.5"
+      ]
+    },
+    "expected_output": [
+      "1.5",
+      "1.5.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5.0-1",
+        "1.5.0-2"
+      ]
+    },
+    "expected_output": [
+      "1.5.0-1",
+      "1.5.0-2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5.0-1",
+        "1.5.1-1"
+      ]
+    },
+    "expected_output": [
+      "1.5.0-1",
+      "1.5.1-1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5.0-2",
+        "1.5.1-1"
+      ]
+    },
+    "expected_output": [
+      "1.5.0-2",
+      "1.5.1-1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5.a",
+        "1.5"
+      ]
+    },
+    "expected_output": [
+      "1.5",
+      "1.5.a"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5.b",
+        "1.5.a"
+      ]
+    },
+    "expected_output": [
+      "1.5.a",
+      "1.5.b"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5.1",
+        "1.5.b"
+      ]
+    },
+    "expected_output": [
+      "1.5.b",
+      "1.5.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "0:1.0",
+        "0:1.1"
+      ]
+    },
+    "expected_output": [
+      "0:1.0",
+      "0:1.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1:1.0",
+        "0:1.0"
+      ]
+    },
+    "expected_output": [
+      "0:1.0",
+      "1:1.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1:1.0",
+        "0:1.1"
+      ]
+    },
+    "expected_output": [
+      "0:1.1",
+      "1:1.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1:1.0",
+        "2:1.1"
+      ]
+    },
+    "expected_output": [
+      "1:1.0",
+      "2:1.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1:1.0",
+        "0:1.0-1"
+      ]
+    },
+    "expected_output": [
+      "0:1.0-1",
+      "1:1.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1:1.0-1",
+        "0:1.1-1"
+      ]
+    },
+    "expected_output": [
+      "0:1.1-1",
+      "1:1.0-1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "0:1.0",
+        "1.1"
+      ]
+    },
+    "expected_output": [
+      "0:1.0",
+      "1.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "0:1.1",
+        "1.0"
+      ]
+    },
+    "expected_output": [
+      "1.0",
+      "0:1.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1:1.0",
+        "1.0"
+      ]
+    },
+    "expected_output": [
+      "1.0",
+      "1:1.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1:1.0",
+        "1.1"
+      ]
+    },
+    "expected_output": [
+      "1.1",
+      "1:1.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1:1.1",
+        "1.1"
+      ]
+    },
+    "expected_output": [
+      "1.1",
+      "1:1.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5-1",
+        "1.5.b"
+      ]
+    },
+    "expected_output": [
+      "1.5-1",
+      "1.5.b"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5-1",
+        "1.5.1-1"
+      ]
+    },
+    "expected_output": [
+      "1.5-1",
+      "1.5.1-1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5-2",
+        "1.5.1-1"
+      ]
+    },
+    "expected_output": [
+      "1.5-2",
+      "1.5.1-1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5-2",
+        "1.5.1-2"
+      ]
+    },
+    "expected_output": [
+      "1.5-2",
+      "1.5.1-2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.0-1",
+        "1.1"
+      ]
+    },
+    "expected_output": [
+      "1.0-1",
+      "1.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.1-1",
+        "1.0"
+      ]
+    },
+    "expected_output": [
+      "1.0",
+      "1.1-1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5b-1",
+        "1.5-1"
+      ]
+    },
+    "expected_output": [
+      "1.5b-1",
+      "1.5-1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5b",
+        "1.5"
+      ]
+    },
+    "expected_output": [
+      "1.5b",
+      "1.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5b-1",
+        "1.5"
+      ]
+    },
+    "expected_output": [
+      "1.5b-1",
+      "1.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5b",
+        "1.5.1"
+      ]
+    },
+    "expected_output": [
+      "1.5b",
+      "1.5.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.0a",
+        "1.0alpha"
+      ]
+    },
+    "expected_output": [
+      "1.0a",
+      "1.0alpha"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.0alpha",
+        "1.0b"
+      ]
+    },
+    "expected_output": [
+      "1.0alpha",
+      "1.0b"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.0b",
+        "1.0beta"
+      ]
+    },
+    "expected_output": [
+      "1.0b",
+      "1.0beta"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.0beta",
+        "1.0rc"
+      ]
+    },
+    "expected_output": [
+      "1.0beta",
+      "1.0rc"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.0rc",
+        "1.0"
+      ]
+    },
+    "expected_output": [
+      "1.0rc",
+      "1.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5.0",
+        "1.5.0"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "0:1.0",
+        "0:1.0"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5.0-1",
+        "1.5.0-1"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "0:1.0",
+        "1.0"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5.b-1",
+        "1.5.b"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5",
+        "1.5-1"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5-1",
+        "1.5"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.1-1",
+        "1.1"
+      ]
+    },
+    "expected_output": true
+  }
+]

@@ -4,60 +4,38 @@
 #
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
+import json
+from pathlib import Path
+
 import pytest
 
 from univers.versions import ConanVersion
 
-v = [
-    ("1", "2"),
-    ("1.0", "1.1"),
-    ("1.0.2", "1.1.0"),
-    ("1.3", "1.22"),
-    ("1.1.3", "1.1.22"),
-    ("1.1.1.3", "1.1.1.22"),
-    ("1.1.1.1.3", "1.1.1.1.22"),
-    # Different lengths
-    ("1.0", "2"),
-    ("1.2", "1.3.1"),
-    ("1.0.2", "1.1"),
-    # Now with letters
-    ("1.1.a", "1.1.b"),
-    ("1.1.1.abc", "1.1.1.abz"),
-    ("a.b.c", "b.c"),
-    ("1.1", "1.a"),
-    ("1.1", "1.1a"),
-    ("1.1", "1.1.a"),
-    ("1.1.a", "1.2"),
-    # Arterisk are before digits
-    ("1.1*", "1.20"),
-    ("1.1.*", "1.20"),
-    ("1.2.2", "1.3.*"),
-    ("1.2.2", "1.2.3*"),
-    # build is easy
-    ("1.1+b1", "1.1+b2"),
-    ("1.1", "1.1+b2"),
-    ("1.1+b1", "1.2"),
-    ("1.1+b.3", "1.1+b.22"),
-    # pre-release is challenging
-    ("1.1-pre1", "1.1-pre2"),
-    ("1.1-alpha.3", "1.1-alpha.22"),
-    ("1.1-alpha.3+b1", "1.1-alpha.3+b2"),
-    ("1.1-alpha.1", "1.1"),
-    ("1.1", "1.2-alpha1"),
-    ("1.1-alpha.1", "1.1.0"),  # pre to the generic 1.1 is earlier than 1.1.0
-    ("1.0.0-", "1.0.0-alpha1"),
-]
+from . import SchemaDrivenVersTest
+
+TEST_DATA = Path(__file__).parent / "data" / "schema" / "conan_test.json"
 
 
-@pytest.mark.parametrize("v1, v2", v)
-def test_comparison(v1, v2):
-    v1 = ConanVersion(v1)
-    v2 = ConanVersion(v2)
-    assert v1 < v2
-    assert v2 > v1
-    assert v1 != v2
-    assert v1 <= v2
-    assert v2 >= v1
+class ConanVersionComparison(SchemaDrivenVersTest):
+    def equality(self):
+        """Compare version1 and version2 are equal."""
+        return ConanVersion(self.input_version1) == ConanVersion(self.input_version2)
+
+    def comparison(self):
+        """Sort version1 and version2 and return them in the correct order."""
+        sorts = sorted(
+            [
+                ConanVersion(self.input_version1),
+                ConanVersion(self.input_version2),
+            ]
+        )
+        return [sorts[0].string, sorts[1].string]
+
+
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA)))
+def test_conan_version_comparison(test_case):
+    avc = ConanVersionComparison.from_data(data=test_case)
+    avc.assert_result()
 
 
 def test_comparison_with_integer():
@@ -69,33 +47,6 @@ def test_comparison_with_integer():
     assert v1 <= ConanVersion("20")
     assert v1 == ConanVersion("13")
     assert v1 != ConanVersion("14")
-
-
-e = [
-    ("1", "1.0"),
-    ("1", "1.0.0"),
-    ("1.0", "1.0.0"),
-    ("1.0", "1.0.0.0"),
-    ("1-pre1", "1.0-pre1"),
-    ("1-pre1", "1.0.0-pre1"),
-    ("1.0-pre1", "1.0.0-pre1"),
-    ("1.0-pre1.0", "1.0.0-pre1"),
-    ("1-pre1+b1", "1.0-pre1+b1"),
-    ("1-pre1+b1", "1.0.0-pre1+b1"),
-    ("1.0-pre1+b1", "1.0.0-pre1+b1"),
-    ("1+b1", "1.0+b1"),
-    ("1+b1", "1.0+b1.0"),
-    ("1+b1", "1.0.0+b1"),
-    ("1.0+b1", "1.0.0+b1"),
-]
-
-
-@pytest.mark.parametrize("v1, v2", e)
-def test_equality(v1, v2):
-    v1 = ConanVersion(v1)
-    v2 = ConanVersion(v2)
-    assert v1 == v2
-    assert not v1 != v2
 
 
 def test_elem_comparison():

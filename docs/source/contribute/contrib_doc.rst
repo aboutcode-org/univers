@@ -172,8 +172,8 @@ Interspinx
 ScanCode toolkit documentation uses `Intersphinx <http://www.sphinx-doc.org/en/master/usage/extensions/intersphinx.html>`_
 to link to other Sphinx Documentations, to maintain links to other Aboutcode Projects.
 
-To link sections in the same documentation, standart reST labels are used. Refer
-`Cross-Referencing <http://www.sphinx-doc.org/en/master/usage/restructuredtext/roles.html#ref-role>`_ for more information.
+To link sections in the same documentation, standard reST labels are used. Refer
+`Cross-Referencing <http://www.sphinx-doc.org/en/master/usage/restructuredtext/roles.html>`_ for more information.
 
 For example::
 

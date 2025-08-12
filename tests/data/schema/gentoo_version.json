@@ -1,0 +1,665 @@
+[
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "4.0",
+        "4.0"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.0",
+        "1.0"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.0-r0",
+        "1.0"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.0",
+        "1.0-r0"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.0-r0",
+        "1.0-r0"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.0-r1",
+        "1.0-r1"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "6.0",
+        "5.0"
+      ]
+    },
+    "expected_output": [
+      "5.0",
+      "6.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "5.0",
+        "5"
+      ]
+    },
+    "expected_output": [
+      "5",
+      "5.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.0-r1",
+        "1.0-r0"
+      ]
+    },
+    "expected_output": [
+      "1.0-r0",
+      "1.0-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.0-r1",
+        "1.0"
+      ]
+    },
+    "expected_output": [
+      "1.0",
+      "1.0-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "999999999999999999999999999999",
+        "999999999999999999999999999998"
+      ]
+    },
+    "expected_output": [
+      "999999999999999999999999999998",
+      "999999999999999999999999999999"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.0.0",
+        "1.0"
+      ]
+    },
+    "expected_output": [
+      "1.0",
+      "1.0.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.0.0",
+        "1.0b"
+      ]
+    },
+    "expected_output": [
+      "1.0b",
+      "1.0.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1b",
+        "1"
+      ]
+    },
+    "expected_output": [
+      "1",
+      "1b"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1b_p1",
+        "1_p1"
+      ]
+    },
+    "expected_output": [
+      "1_p1",
+      "1b_p1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.1b",
+        "1.1"
+      ]
+    },
+    "expected_output": [
+      "1.1",
+      "1.1b"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "12.2.5",
+        "12.2b"
+      ]
+    },
+    "expected_output": [
+      "12.2b",
+      "12.2.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "4.0",
+        "5.0"
+      ]
+    },
+    "expected_output": [
+      "4.0",
+      "5.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "5",
+        "5.0"
+      ]
+    },
+    "expected_output": [
+      "5",
+      "5.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.0_pre2",
+        "1.0_p2"
+      ]
+    },
+    "expected_output": [
+      "1.0_pre2",
+      "1.0_p2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.0_alpha2",
+        "1.0_p2"
+      ]
+    },
+    "expected_output": [
+      "1.0_alpha2",
+      "1.0_p2"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.0_alpha1",
+        "1.0_beta1"
+      ]
+    },
+    "expected_output": [
+      "1.0_alpha1",
+      "1.0_beta1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.0_beta3",
+        "1.0_rc3"
+      ]
+    },
+    "expected_output": [
+      "1.0_beta3",
+      "1.0_rc3"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.001000000000000000001",
+        "1.001000000000000000002"
+      ]
+    },
+    "expected_output": [
+      "1.001000000000000000001",
+      "1.001000000000000000002"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.00100000000",
+        "1.0010000000000000001"
+      ]
+    },
+    "expected_output": [
+      "1.00100000000",
+      "1.0010000000000000001"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "999999999999999999999999999998",
+        "999999999999999999999999999999"
+      ]
+    },
+    "expected_output": [
+      "999999999999999999999999999998",
+      "999999999999999999999999999999"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.01",
+        "1.1"
+      ]
+    },
+    "expected_output": [
+      "1.01",
+      "1.1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.0-r0",
+        "1.0-r1"
+      ]
+    },
+    "expected_output": [
+      "1.0-r0",
+      "1.0-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.0",
+        "1.0-r1"
+      ]
+    },
+    "expected_output": [
+      "1.0",
+      "1.0-r1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.0",
+        "1.0.0"
+      ]
+    },
+    "expected_output": [
+      "1.0",
+      "1.0.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.0b",
+        "1.0.0"
+      ]
+    },
+    "expected_output": [
+      "1.0b",
+      "1.0.0"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1_p1",
+        "1b_p1"
+      ]
+    },
+    "expected_output": [
+      "1_p1",
+      "1b_p1"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1",
+        "1b"
+      ]
+    },
+    "expected_output": [
+      "1",
+      "1b"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.1",
+        "1.1b"
+      ]
+    },
+    "expected_output": [
+      "1.1",
+      "1.1b"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "12.2b",
+        "12.2.5"
+      ]
+    },
+    "expected_output": [
+      "12.2b",
+      "12.2.5"
+    ]
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1",
+        "2"
+      ]
+    },
+    "expected_output": false
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.0_alpha",
+        "1.0_pre"
+      ]
+    },
+    "expected_output": false
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.0_beta",
+        "1.0_alpha"
+      ]
+    },
+    "expected_output": false
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "0",
+        "0.0"
+      ]
+    },
+    "expected_output": false
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.0-r0",
+        "1.0-r1"
+      ]
+    },
+    "expected_output": false
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.0-r1",
+        "1.0-r0"
+      ]
+    },
+    "expected_output": false
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.0",
+        "1.0-r1"
+      ]
+    },
+    "expected_output": false
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.0-r1",
+        "1.0"
+      ]
+    },
+    "expected_output": false
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.0",
+        "1.0.0"
+      ]
+    },
+    "expected_output": false
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1_p1",
+        "1b_p1"
+      ]
+    },
+    "expected_output": false
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1b",
+        "1"
+      ]
+    },
+    "expected_output": false
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "1.1b",
+        "1.1"
+      ]
+    },
+    "expected_output": false
+  },
+  {
+    "test_group": "advanced",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "gentoo",
+      "versions": [
+        "12.2b",
+        "12.2"
+      ]
+    },
+    "expected_output": false
+  }
+]
