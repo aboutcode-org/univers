@@ -1,0 +1,5312 @@
+[
+  {
+    "test_index": 1,
+    "scheme": "npm",
+    "npm_native": ">=4.1.0",
+    "expected_vers": "vers:npm/>=4.1.0"
+  },
+  {
+    "test_index": 2,
+    "scheme": "npm",
+    "npm_native": ">=2.0.0 <=4.0.4",
+    "expected_vers": "vers:npm/>=2.0.0|<=4.0.4"
+  },
+  {
+    "test_index": 3,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 4,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 5,
+    "scheme": "npm",
+    "npm_native": ">=2.11.2",
+    "expected_vers": "vers:npm/>=2.11.2"
+  },
+  {
+    "test_index": 6,
+    "scheme": "npm",
+    "npm_native": "<2.11.2",
+    "expected_vers": "vers:npm/<2.11.2"
+  },
+  {
+    "test_index": 7,
+    "scheme": "npm",
+    "npm_native": "<=0.6.2",
+    "expected_vers": "vers:npm/<=0.6.2"
+  },
+  {
+    "test_index": 8,
+    "scheme": "npm",
+    "npm_native": ">=0.9.0",
+    "expected_vers": "vers:npm/>=0.9.0"
+  },
+  {
+    "test_index": 9,
+    "scheme": "npm",
+    "npm_native": "<=0.8.4",
+    "expected_vers": "vers:npm/<=0.8.4"
+  },
+  {
+    "test_index": 10,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 11,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 12,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 13,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 14,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 15,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 16,
+    "scheme": "npm",
+    "npm_native": ">= 1.6.9",
+    "expected_vers": "vers:npm/>=1.6.9"
+  },
+  {
+    "test_index": 17,
+    "scheme": "npm",
+    "npm_native": "<= 1.6.8",
+    "expected_vers": "vers:npm/<=1.6.8"
+  },
+  {
+    "test_index": 18,
+    "scheme": "npm",
+    "npm_native": "<=3.9.2",
+    "expected_vers": "vers:npm/<=3.9.2"
+  },
+  {
+    "test_index": 19,
+    "scheme": "npm",
+    "npm_native": ">=9.1.6",
+    "expected_vers": "vers:npm/>=9.1.6"
+  },
+  {
+    "test_index": 20,
+    "scheme": "npm",
+    "npm_native": "<=9.1.5",
+    "expected_vers": "vers:npm/<=9.1.5"
+  },
+  {
+    "test_index": 21,
+    "scheme": "npm",
+    "npm_native": ">=1.0.0",
+    "expected_vers": "vers:npm/>=1.0.0"
+  },
+  {
+    "test_index": 22,
+    "scheme": "npm",
+    "npm_native": "<=0.5.0",
+    "expected_vers": "vers:npm/<=0.5.0"
+  },
+  {
+    "test_index": 23,
+    "scheme": "npm",
+    "npm_native": ">=1.8.10",
+    "expected_vers": "vers:npm/>=1.8.10"
+  },
+  {
+    "test_index": 24,
+    "scheme": "npm",
+    "npm_native": "<1.8.10",
+    "expected_vers": "vers:npm/<1.8.10"
+  },
+  {
+    "test_index": 25,
+    "scheme": "npm",
+    "npm_native": ">=1.4.1",
+    "expected_vers": "vers:npm/>=1.4.1"
+  },
+  {
+    "test_index": 26,
+    "scheme": "npm",
+    "npm_native": "<=1.4.0",
+    "expected_vers": "vers:npm/<=1.4.0"
+  },
+  {
+    "test_index": 27,
+    "scheme": "npm",
+    "npm_native": ">= 16.1.1",
+    "expected_vers": "vers:npm/>=16.1.1"
+  },
+  {
+    "test_index": 28,
+    "scheme": "npm",
+    "npm_native": ">= 15.0.0 <= 16.1.0",
+    "expected_vers": "vers:npm/>=15.0.0|<=16.1.0"
+  },
+  {
+    "test_index": 29,
+    "scheme": "npm",
+    "npm_native": ">0.12.7",
+    "expected_vers": "vers:npm/>0.12.7"
+  },
+  {
+    "test_index": 30,
+    "scheme": "npm",
+    "npm_native": "<=0.12.7",
+    "expected_vers": "vers:npm/<=0.12.7"
+  },
+  {
+    "test_index": 31,
+    "scheme": "npm",
+    "npm_native": "*",
+    "expected_vers": "vers:npm/*"
+  },
+  {
+    "test_index": 32,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 33,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 34,
+    "scheme": "npm",
+    "npm_native": ">=2.1.5",
+    "expected_vers": "vers:npm/>=2.1.5"
+  },
+  {
+    "test_index": 35,
+    "scheme": "npm",
+    "npm_native": "2.1.4",
+    "expected_vers": "vers:npm/2.1.4"
+  },
+  {
+    "test_index": 36,
+    "scheme": "npm",
+    "npm_native": ">=1.0.0",
+    "expected_vers": "vers:npm/>=1.0.0"
+  },
+  {
+    "test_index": 37,
+    "scheme": "npm",
+    "npm_native": "<1.0.0",
+    "expected_vers": "vers:npm/<1.0.0"
+  },
+  {
+    "test_index": 38,
+    "scheme": "npm",
+    "npm_native": ">= 6.1.0",
+    "expected_vers": "vers:npm/>=6.1.0"
+  },
+  {
+    "test_index": 39,
+    "scheme": "npm",
+    "npm_native": "< 6.1.0",
+    "expected_vers": "vers:npm/<6.1.0"
+  },
+  {
+    "test_index": 40,
+    "scheme": "npm",
+    "npm_native": "*",
+    "expected_vers": "vers:npm/*"
+  },
+  {
+    "test_index": 41,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 42,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 43,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 44,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 45,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 46,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 47,
+    "scheme": "npm",
+    "npm_native": ">=1.4.0",
+    "expected_vers": "vers:npm/>=1.4.0"
+  },
+  {
+    "test_index": 48,
+    "scheme": "npm",
+    "npm_native": "<1.4.0",
+    "expected_vers": "vers:npm/<1.4.0"
+  },
+  {
+    "test_index": 49,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 50,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 51,
+    "scheme": "npm",
+    "npm_native": ">= 3.0.0",
+    "expected_vers": "vers:npm/>=3.0.0"
+  },
+  {
+    "test_index": 52,
+    "scheme": "npm",
+    "npm_native": "<= 2.1.3",
+    "expected_vers": "vers:npm/<=2.1.3"
+  },
+  {
+    "test_index": 53,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 54,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 55,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 56,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 57,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 58,
+    "scheme": "npm",
+    "npm_native": "<=0.0.5",
+    "expected_vers": "vers:npm/<=0.0.5"
+  },
+  {
+    "test_index": 59,
+    "scheme": "npm",
+    "npm_native": ">=3.4.0",
+    "expected_vers": "vers:npm/>=3.4.0"
+  },
+  {
+    "test_index": 60,
+    "scheme": "npm",
+    "npm_native": "<3.4.0",
+    "expected_vers": "vers:npm/<3.4.0"
+  },
+  {
+    "test_index": 61,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 62,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 63,
+    "scheme": "npm",
+    "npm_native": ">=3.0.2",
+    "expected_vers": "vers:npm/>=3.0.2"
+  },
+  {
+    "test_index": 64,
+    "scheme": "npm",
+    "npm_native": ">= 2.0.1 <3.0.2",
+    "expected_vers": "vers:npm/>=2.0.1|<3.0.2"
+  },
+  {
+    "test_index": 65,
+    "scheme": "npm",
+    "npm_native": "<=2.0.2",
+    "expected_vers": "vers:npm/<=2.0.2"
+  },
+  {
+    "test_index": 66,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 67,
+    "scheme": "npm",
+    "npm_native": "<99.999.9999",
+    "expected_vers": "vers:npm/<99.999.9999"
+  },
+  {
+    "test_index": 68,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 69,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 70,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 71,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 72,
+    "scheme": "npm",
+    "npm_native": ">= 1.0.4",
+    "expected_vers": "vers:npm/>=1.0.4"
+  },
+  {
+    "test_index": 73,
+    "scheme": "npm",
+    "npm_native": "<= 1.0.3",
+    "expected_vers": "vers:npm/<=1.0.3"
+  },
+  {
+    "test_index": 74,
+    "scheme": "npm",
+    "npm_native": ">=1.5.2 || >=1.4.11 <1.5.0 || >=1.3.2 <1.4.0",
+    "expected_vers": "vers:npm/>=1.3.2|<1.4.0|>=1.4.11|<1.5.0|>=1.5.2"
+  },
+  {
+    "test_index": 75,
+    "scheme": "npm",
+    "npm_native": ">=1.3.0 <1.3.2 || >=1.4.0 <1.4.11 || >=1.5.0 <1.5.2",
+    "expected_vers": "vers:npm/>=1.3.0|<1.3.2|>=1.4.0|<1.4.11|>=1.5.0|<1.5.2"
+  },
+  {
+    "test_index": 76,
+    "scheme": "npm",
+    "npm_native": ">=2.1.3",
+    "expected_vers": "vers:npm/>=2.1.3"
+  },
+  {
+    "test_index": 77,
+    "scheme": "npm",
+    "npm_native": "<=2.1.2",
+    "expected_vers": "vers:npm/<=2.1.2"
+  },
+  {
+    "test_index": 78,
+    "scheme": "npm",
+    "npm_native": "<=3.2.0",
+    "expected_vers": "vers:npm/<=3.2.0"
+  },
+  {
+    "test_index": 79,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 80,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 81,
+    "scheme": "npm",
+    "npm_native": ">=1.0.0",
+    "expected_vers": "vers:npm/>=1.0.0"
+  },
+  {
+    "test_index": 82,
+    "scheme": "npm",
+    "npm_native": "<1.0.0",
+    "expected_vers": "vers:npm/<1.0.0"
+  },
+  {
+    "test_index": 83,
+    "scheme": "npm",
+    "npm_native": ">=0.7.0",
+    "expected_vers": "vers:npm/>=0.7.0"
+  },
+  {
+    "test_index": 84,
+    "scheme": "npm",
+    "npm_native": "<=0.6.6",
+    "expected_vers": "vers:npm/<=0.6.6"
+  },
+  {
+    "test_index": 85,
+    "scheme": "npm",
+    "npm_native": ">=1.0.6",
+    "expected_vers": "vers:npm/>=1.0.6"
+  },
+  {
+    "test_index": 86,
+    "scheme": "npm",
+    "npm_native": "<=1.0.5",
+    "expected_vers": "vers:npm/<=1.0.5"
+  },
+  {
+    "test_index": 87,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 88,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 89,
+    "scheme": "npm",
+    "npm_native": ">=3.0.2",
+    "expected_vers": "vers:npm/>=3.0.2"
+  },
+  {
+    "test_index": 90,
+    "scheme": "npm",
+    "npm_native": "<=3.0.1",
+    "expected_vers": "vers:npm/<=3.0.1"
+  },
+  {
+    "test_index": 91,
+    "scheme": "npm",
+    "npm_native": ">= 1.1",
+    "expected_vers": "vers:npm/>=1.1.0"
+  },
+  {
+    "test_index": 92,
+    "scheme": "npm",
+    "npm_native": "<= 1.0",
+    "expected_vers": "vers:npm/<=1.0.0"
+  },
+  {
+    "test_index": 93,
+    "scheme": "npm",
+    "npm_native": ">=2.0.0",
+    "expected_vers": "vers:npm/>=2.0.0"
+  },
+  {
+    "test_index": 94,
+    "scheme": "npm",
+    "npm_native": "<2.0.0",
+    "expected_vers": "vers:npm/<2.0.0"
+  },
+  {
+    "test_index": 95,
+    "scheme": "npm",
+    "npm_native": "<=0.2.3",
+    "expected_vers": "vers:npm/<=0.2.3"
+  },
+  {
+    "test_index": 96,
+    "scheme": "npm",
+    "npm_native": ">=3.0.0",
+    "expected_vers": "vers:npm/>=3.0.0"
+  },
+  {
+    "test_index": 97,
+    "scheme": "npm",
+    "npm_native": "<3.0.0",
+    "expected_vers": "vers:npm/<3.0.0"
+  },
+  {
+    "test_index": 98,
+    "scheme": "npm",
+    "npm_native": ">=2.15.0",
+    "expected_vers": "vers:npm/>=2.15.0"
+  },
+  {
+    "test_index": 99,
+    "scheme": "npm",
+    "npm_native": ">=2.0.0",
+    "expected_vers": "vers:npm/>=2.0.0"
+  },
+  {
+    "test_index": 100,
+    "scheme": "npm",
+    "npm_native": ">=0.4.7",
+    "expected_vers": "vers:npm/>=0.4.7"
+  },
+  {
+    "test_index": 101,
+    "scheme": "npm",
+    "npm_native": "<0.4.7",
+    "expected_vers": "vers:npm/<0.4.7"
+  },
+  {
+    "test_index": 102,
+    "scheme": "npm",
+    "npm_native": ">= 1.1.1",
+    "expected_vers": "vers:npm/>=1.1.1"
+  },
+  {
+    "test_index": 103,
+    "scheme": "npm",
+    "npm_native": "< 1.1.1",
+    "expected_vers": "vers:npm/<1.1.1"
+  },
+  {
+    "test_index": 104,
+    "scheme": "npm",
+    "npm_native": "<=0.0.1",
+    "expected_vers": "vers:npm/<=0.0.1"
+  },
+  {
+    "test_index": 105,
+    "scheme": "npm",
+    "npm_native": ">=1.3.1",
+    "expected_vers": "vers:npm/>=1.3.1"
+  },
+  {
+    "test_index": 106,
+    "scheme": "npm",
+    "npm_native": "<=1.3.0",
+    "expected_vers": "vers:npm/<=1.3.0"
+  },
+  {
+    "test_index": 107,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 108,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 109,
+    "scheme": "npm",
+    "npm_native": ">=2.0.0",
+    "expected_vers": "vers:npm/>=2.0.0"
+  },
+  {
+    "test_index": 110,
+    "scheme": "npm",
+    "npm_native": "<=1.0.5",
+    "expected_vers": "vers:npm/<=1.0.5"
+  },
+  {
+    "test_index": 111,
+    "scheme": "npm",
+    "npm_native": ">=1.2.5",
+    "expected_vers": "vers:npm/>=1.2.5"
+  },
+  {
+    "test_index": 112,
+    "scheme": "npm",
+    "npm_native": "<=1.2.4",
+    "expected_vers": "vers:npm/<=1.2.4"
+  },
+  {
+    "test_index": 113,
+    "scheme": "npm",
+    "npm_native": ">=0.9.3",
+    "expected_vers": "vers:npm/>=0.9.3"
+  },
+  {
+    "test_index": 114,
+    "scheme": "npm",
+    "npm_native": "<0.9.3",
+    "expected_vers": "vers:npm/<0.9.3"
+  },
+  {
+    "test_index": 115,
+    "scheme": "npm",
+    "npm_native": ">= 0.5.0",
+    "expected_vers": "vers:npm/>=0.5.0"
+  },
+  {
+    "test_index": 116,
+    "scheme": "npm",
+    "npm_native": "<= 0.3.3",
+    "expected_vers": "vers:npm/<=0.3.3"
+  },
+  {
+    "test_index": 117,
+    "scheme": "npm",
+    "npm_native": ">= 1.0.1",
+    "expected_vers": "vers:npm/>=1.0.1"
+  },
+  {
+    "test_index": 118,
+    "scheme": "npm",
+    "npm_native": "<= 1.0.0",
+    "expected_vers": "vers:npm/<=1.0.0"
+  },
+  {
+    "test_index": 119,
+    "scheme": "npm",
+    "npm_native": ">=1.9.1",
+    "expected_vers": "vers:npm/>=1.9.1"
+  },
+  {
+    "test_index": 120,
+    "scheme": "npm",
+    "npm_native": "<1.9.1",
+    "expected_vers": "vers:npm/<1.9.1"
+  },
+  {
+    "test_index": 121,
+    "scheme": "npm",
+    "npm_native": "<=0.30.0",
+    "expected_vers": "vers:npm/<=0.30.0"
+  },
+  {
+    "test_index": 122,
+    "scheme": "npm",
+    "npm_native": ">=v2.0.0-alpha8",
+    "expected_vers": "vers:npm/>=2.0.0-alpha8"
+  },
+  {
+    "test_index": 123,
+    "scheme": "npm",
+    "npm_native": "<=v2.0.0-alpha7",
+    "expected_vers": "vers:npm/<=2.0.0-alpha7"
+  },
+  {
+    "test_index": 124,
+    "scheme": "npm",
+    "npm_native": ">=1.3.5",
+    "expected_vers": "vers:npm/>=1.3.5"
+  },
+  {
+    "test_index": 125,
+    "scheme": "npm",
+    "npm_native": "<1.3.5",
+    "expected_vers": "vers:npm/<1.3.5"
+  },
+  {
+    "test_index": 126,
+    "scheme": "npm",
+    "npm_native": ">=4.6.0",
+    "expected_vers": "vers:npm/>=4.6.0"
+  },
+  {
+    "test_index": 127,
+    "scheme": "npm",
+    "npm_native": "<4.6.0",
+    "expected_vers": "vers:npm/<4.6.0"
+  },
+  {
+    "test_index": 128,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 129,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 130,
+    "scheme": "npm",
+    "npm_native": ">= 2.4.24",
+    "expected_vers": "vers:npm/>=2.4.24"
+  },
+  {
+    "test_index": 131,
+    "scheme": "npm",
+    "npm_native": "<= 2.4.23",
+    "expected_vers": "vers:npm/<=2.4.23"
+  },
+  {
+    "test_index": 132,
+    "scheme": "npm",
+    "npm_native": ">=1.12.0",
+    "expected_vers": "vers:npm/>=1.12.0"
+  },
+  {
+    "test_index": 133,
+    "scheme": "npm",
+    "npm_native": "<=1.11.4",
+    "expected_vers": "vers:npm/<=1.11.4"
+  },
+  {
+    "test_index": 134,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 135,
+    "scheme": "npm",
+    "npm_native": "<=0.5.0",
+    "expected_vers": "vers:npm/<=0.5.0"
+  },
+  {
+    "test_index": 136,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 137,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 138,
+    "scheme": "npm",
+    "npm_native": ">=1.1.7",
+    "expected_vers": "vers:npm/>=1.1.7"
+  },
+  {
+    "test_index": 139,
+    "scheme": "npm",
+    "npm_native": "<=1.1.6",
+    "expected_vers": "vers:npm/<=1.1.6"
+  },
+  {
+    "test_index": 140,
+    "scheme": "npm",
+    "npm_native": ">=4.0.0",
+    "expected_vers": "vers:npm/>=4.0.0"
+  },
+  {
+    "test_index": 141,
+    "scheme": "npm",
+    "npm_native": "<4.0.0",
+    "expected_vers": "vers:npm/<4.0.0"
+  },
+  {
+    "test_index": 142,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 143,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 144,
+    "scheme": "npm",
+    "npm_native": ">=0.4.4",
+    "expected_vers": "vers:npm/>=0.4.4"
+  },
+  {
+    "test_index": 145,
+    "scheme": "npm",
+    "npm_native": "<0.4.4",
+    "expected_vers": "vers:npm/<0.4.4"
+  },
+  {
+    "test_index": 146,
+    "scheme": "npm",
+    "npm_native": ">= 2.3.3",
+    "expected_vers": "vers:npm/>=2.3.3"
+  },
+  {
+    "test_index": 147,
+    "scheme": "npm",
+    "npm_native": "< 2.3.3",
+    "expected_vers": "vers:npm/<2.3.3"
+  },
+  {
+    "test_index": 148,
+    "scheme": "npm",
+    "npm_native": ">=3.0.1",
+    "expected_vers": "vers:npm/>=3.0.1"
+  },
+  {
+    "test_index": 149,
+    "scheme": "npm",
+    "npm_native": "<3.0.1",
+    "expected_vers": "vers:npm/<3.0.1"
+  },
+  {
+    "test_index": 150,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 151,
+    "scheme": "npm",
+    "npm_native": "<99.999.9999",
+    "expected_vers": "vers:npm/<99.999.9999"
+  },
+  {
+    "test_index": 152,
+    "scheme": "npm",
+    "npm_native": ">=0.4.1",
+    "expected_vers": "vers:npm/>=0.4.1"
+  },
+  {
+    "test_index": 153,
+    "scheme": "npm",
+    "npm_native": "<=0.4.0",
+    "expected_vers": "vers:npm/<=0.4.0"
+  },
+  {
+    "test_index": 154,
+    "scheme": "npm",
+    "npm_native": "<=0.4.0",
+    "expected_vers": "vers:npm/<=0.4.0"
+  },
+  {
+    "test_index": 155,
+    "scheme": "npm",
+    "npm_native": ">=2.0.1",
+    "expected_vers": "vers:npm/>=2.0.1"
+  },
+  {
+    "test_index": 156,
+    "scheme": "npm",
+    "npm_native": "<=2.0.0",
+    "expected_vers": "vers:npm/<=2.0.0"
+  },
+  {
+    "test_index": 157,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 158,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 159,
+    "scheme": "npm",
+    "npm_native": ">=2.9.4",
+    "expected_vers": "vers:npm/>=2.9.4"
+  },
+  {
+    "test_index": 160,
+    "scheme": "npm",
+    "npm_native": "<2.9.4",
+    "expected_vers": "vers:npm/<2.9.4"
+  },
+  {
+    "test_index": 161,
+    "scheme": "npm",
+    "npm_native": "~1.6.5 || >=1.7.2",
+    "expected_vers": "vers:npm/>=1.6.5|<1.7.0|>=1.7.2"
+  },
+  {
+    "test_index": 162,
+    "scheme": "npm",
+    "npm_native": "<1.6.5 || >=1.7.0 <1.7.2",
+    "expected_vers": "vers:npm/<1.6.5|>=1.7.0|<1.7.2"
+  },
+  {
+    "test_index": 163,
+    "scheme": "npm",
+    "npm_native": ">=1.5.2",
+    "expected_vers": "vers:npm/>=1.5.2"
+  },
+  {
+    "test_index": 164,
+    "scheme": "npm",
+    "npm_native": "<=1.5.1",
+    "expected_vers": "vers:npm/<=1.5.1"
+  },
+  {
+    "test_index": 165,
+    "scheme": "npm",
+    "npm_native": ">=1.0.0",
+    "expected_vers": "vers:npm/>=1.0.0"
+  },
+  {
+    "test_index": 166,
+    "scheme": "npm",
+    "npm_native": "<1.0.0",
+    "expected_vers": "vers:npm/<1.0.0"
+  },
+  {
+    "test_index": 167,
+    "scheme": "npm",
+    "npm_native": "<=0.0.6",
+    "expected_vers": "vers:npm/<=0.0.6"
+  },
+  {
+    "test_index": 168,
+    "scheme": "npm",
+    "npm_native": ">= 2.0.5",
+    "expected_vers": "vers:npm/>=2.0.5"
+  },
+  {
+    "test_index": 169,
+    "scheme": "npm",
+    "npm_native": "<  2.0.5",
+    "expected_vers": "vers:npm/<2.0.5"
+  },
+  {
+    "test_index": 170,
+    "scheme": "npm",
+    "npm_native": ">=1.3.3",
+    "expected_vers": "vers:npm/>=1.3.3"
+  },
+  {
+    "test_index": 171,
+    "scheme": "npm",
+    "npm_native": "<1.3.3",
+    "expected_vers": "vers:npm/<1.3.3"
+  },
+  {
+    "test_index": 172,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 173,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 174,
+    "scheme": "npm",
+    "npm_native": ">=0.1.6",
+    "expected_vers": "vers:npm/>=0.1.6"
+  },
+  {
+    "test_index": 175,
+    "scheme": "npm",
+    "npm_native": "<0.1.6",
+    "expected_vers": "vers:npm/<0.1.6"
+  },
+  {
+    "test_index": 176,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 177,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 178,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 179,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 180,
+    "scheme": "npm",
+    "npm_native": ">=1.10.3",
+    "expected_vers": "vers:npm/>=1.10.3"
+  },
+  {
+    "test_index": 181,
+    "scheme": "npm",
+    "npm_native": "<=1.10.2",
+    "expected_vers": "vers:npm/<=1.10.2"
+  },
+  {
+    "test_index": 182,
+    "scheme": "npm",
+    "npm_native": ">=4.17.5",
+    "expected_vers": "vers:npm/>=4.17.5"
+  },
+  {
+    "test_index": 183,
+    "scheme": "npm",
+    "npm_native": "<4.17.5",
+    "expected_vers": "vers:npm/<4.17.5"
+  },
+  {
+    "test_index": 184,
+    "scheme": "npm",
+    "npm_native": ">=1.5.0",
+    "expected_vers": "vers:npm/>=1.5.0"
+  },
+  {
+    "test_index": 185,
+    "scheme": "npm",
+    "npm_native": "<1.5.0",
+    "expected_vers": "vers:npm/<1.5.0"
+  },
+  {
+    "test_index": 186,
+    "scheme": "npm",
+    "npm_native": ">=0.5.0",
+    "expected_vers": "vers:npm/>=0.5.0"
+  },
+  {
+    "test_index": 187,
+    "scheme": "npm",
+    "npm_native": "<0.5.0",
+    "expected_vers": "vers:npm/<0.5.0"
+  },
+  {
+    "test_index": 188,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 189,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 190,
+    "scheme": "npm",
+    "npm_native": ">=2.1.1",
+    "expected_vers": "vers:npm/>=2.1.1"
+  },
+  {
+    "test_index": 191,
+    "scheme": "npm",
+    "npm_native": "<2.1.1",
+    "expected_vers": "vers:npm/<2.1.1"
+  },
+  {
+    "test_index": 192,
+    "scheme": "npm",
+    "npm_native": ">=1.6.1",
+    "expected_vers": "vers:npm/>=1.6.1"
+  },
+  {
+    "test_index": 193,
+    "scheme": "npm",
+    "npm_native": "<1.6.1",
+    "expected_vers": "vers:npm/<1.6.1"
+  },
+  {
+    "test_index": 194,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 195,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 196,
+    "scheme": "npm",
+    "npm_native": ">=3.0.0",
+    "expected_vers": "vers:npm/>=3.0.0"
+  },
+  {
+    "test_index": 197,
+    "scheme": "npm",
+    "npm_native": "<=2.1.1",
+    "expected_vers": "vers:npm/<=2.1.1"
+  },
+  {
+    "test_index": 198,
+    "scheme": "npm",
+    "npm_native": ">=3.5.1 <4.0.0 || >=4.1.3 <5.0.0 || >=5.6.1 <6.0.0 || >=6.1.2",
+    "expected_vers": "vers:npm/>=3.5.1|<4.0.0|>=4.1.3|<5.0.0|>=5.6.1|<6.0.0|>=6.1.2"
+  },
+  {
+    "test_index": 199,
+    "scheme": "npm",
+    "npm_native": "<3.5.1 || >=4.0.0 <4.1.3 || >=5.0.0 <5.6.1 || >=6.0.0 <6.1.2",
+    "expected_vers": "vers:npm/<3.5.1|>=4.0.0|<4.1.3|>=5.0.0|<5.6.1|>=6.0.0|<6.1.2"
+  },
+  {
+    "test_index": 200,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 201,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 202,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 203,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 204,
+    "scheme": "npm",
+    "npm_native": "*",
+    "expected_vers": "vers:npm/*"
+  },
+  {
+    "test_index": 205,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 206,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 207,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 208,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 209,
+    "scheme": "npm",
+    "npm_native": ">=1.0.2",
+    "expected_vers": "vers:npm/>=1.0.2"
+  },
+  {
+    "test_index": 210,
+    "scheme": "npm",
+    "npm_native": "<1.0.2",
+    "expected_vers": "vers:npm/<1.0.2"
+  },
+  {
+    "test_index": 211,
+    "scheme": "npm",
+    "npm_native": ">=0.2.3",
+    "expected_vers": "vers:npm/>=0.2.3"
+  },
+  {
+    "test_index": 212,
+    "scheme": "npm",
+    "npm_native": "<0.2.3",
+    "expected_vers": "vers:npm/<0.2.3"
+  },
+  {
+    "test_index": 213,
+    "scheme": "npm",
+    "npm_native": ">=2.5.0 <= 3.0.0 || >=3.1.0",
+    "expected_vers": "vers:npm/>=2.5.0|<=3.0.0|>=3.1.0"
+  },
+  {
+    "test_index": 214,
+    "scheme": "npm",
+    "npm_native": "<= 2.4.2 || >= 3.0.0 <=3.0.1",
+    "expected_vers": "vers:npm/<=2.4.2|>=3.0.0|<=3.0.1"
+  },
+  {
+    "test_index": 215,
+    "scheme": "npm",
+    "npm_native": "<=0.2.1",
+    "expected_vers": "vers:npm/<=0.2.1"
+  },
+  {
+    "test_index": 216,
+    "scheme": "npm",
+    "npm_native": ">= 1.4.0",
+    "expected_vers": "vers:npm/>=1.4.0"
+  },
+  {
+    "test_index": 217,
+    "scheme": "npm",
+    "npm_native": "<=1.3.0",
+    "expected_vers": "vers:npm/<=1.3.0"
+  },
+  {
+    "test_index": 218,
+    "scheme": "npm",
+    "npm_native": ">=2.1.0",
+    "expected_vers": "vers:npm/>=2.1.0"
+  },
+  {
+    "test_index": 219,
+    "scheme": "npm",
+    "npm_native": "2.1.0-M1 || 2.1.0-M2",
+    "expected_vers": "vers:npm/2.1.0-M1|2.1.0-M2"
+  },
+  {
+    "test_index": 220,
+    "scheme": "npm",
+    "npm_native": "<=0.3.0",
+    "expected_vers": "vers:npm/<=0.3.0"
+  },
+  {
+    "test_index": 221,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 222,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 223,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 224,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 225,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 226,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 227,
+    "scheme": "npm",
+    "npm_native": ">=3.0.0",
+    "expected_vers": "vers:npm/>=3.0.0"
+  },
+  {
+    "test_index": 228,
+    "scheme": "npm",
+    "npm_native": "<=2.0.0",
+    "expected_vers": "vers:npm/<=2.0.0"
+  },
+  {
+    "test_index": 229,
+    "scheme": "npm",
+    "npm_native": ">=2.8.1",
+    "expected_vers": "vers:npm/>=2.8.1"
+  },
+  {
+    "test_index": 230,
+    "scheme": "npm",
+    "npm_native": "<=2.8.0",
+    "expected_vers": "vers:npm/<=2.8.0"
+  },
+  {
+    "test_index": 231,
+    "scheme": "npm",
+    "npm_native": ">=1.4.4",
+    "expected_vers": "vers:npm/>=1.4.4"
+  },
+  {
+    "test_index": 232,
+    "scheme": "npm",
+    "npm_native": "<1.4.4",
+    "expected_vers": "vers:npm/<1.4.4"
+  },
+  {
+    "test_index": 233,
+    "scheme": "npm",
+    "npm_native": ">=4.2.2",
+    "expected_vers": "vers:npm/>=4.2.2"
+  },
+  {
+    "test_index": 234,
+    "scheme": "npm",
+    "npm_native": "<4.2.2",
+    "expected_vers": "vers:npm/<4.2.2"
+  },
+  {
+    "test_index": 235,
+    "scheme": "npm",
+    "npm_native": ">=2.6.0",
+    "expected_vers": "vers:npm/>=2.6.0"
+  },
+  {
+    "test_index": 236,
+    "scheme": "npm",
+    "npm_native": "<2.6.0",
+    "expected_vers": "vers:npm/<2.6.0"
+  },
+  {
+    "test_index": 237,
+    "scheme": "npm",
+    "npm_native": ">=4.3.6 || >=3.8.39 <4.0.0",
+    "expected_vers": "vers:npm/>=3.8.39|<4.0.0|>=4.3.6"
+  },
+  {
+    "test_index": 238,
+    "scheme": "npm",
+    "npm_native": ">=3.5.5 <=3.8.38 || >=4.0.0 <=4.3.5",
+    "expected_vers": "vers:npm/>=3.5.5|<=3.8.38|>=4.0.0|<=4.3.5"
+  },
+  {
+    "test_index": 239,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 240,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 241,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 242,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 243,
+    "scheme": "npm",
+    "npm_native": ">= 0.8.4",
+    "expected_vers": "vers:npm/>=0.8.4"
+  },
+  {
+    "test_index": 244,
+    "scheme": "npm",
+    "npm_native": "< 0.8.4",
+    "expected_vers": "vers:npm/<0.8.4"
+  },
+  {
+    "test_index": 245,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 246,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 247,
+    "scheme": "npm",
+    "npm_native": ">=1.6.5 <2.0.0 || >= 2.1.7",
+    "expected_vers": "vers:npm/>=1.6.5|<2.0.0|>=2.1.7"
+  },
+  {
+    "test_index": 248,
+    "scheme": "npm",
+    "npm_native": "<1.6.5 || < 2.1.7 > 2.0.0",
+    "expected_vers": "vers:npm/<1.6.5|>2.0.0|<2.1.7"
+  },
+  {
+    "test_index": 249,
+    "scheme": "npm",
+    "npm_native": ">= 1.7.0-alpha3",
+    "expected_vers": "vers:npm/>=1.7.0-alpha3"
+  },
+  {
+    "test_index": 250,
+    "scheme": "npm",
+    "npm_native": "<= 1.7.0-alpha2",
+    "expected_vers": "vers:npm/<=1.7.0-alpha2"
+  },
+  {
+    "test_index": 251,
+    "scheme": "npm",
+    "npm_native": ">=3.1.11",
+    "expected_vers": "vers:npm/>=3.1.11"
+  },
+  {
+    "test_index": 252,
+    "scheme": "npm",
+    "npm_native": "<=3.1.10",
+    "expected_vers": "vers:npm/<=3.1.10"
+  },
+  {
+    "test_index": 253,
+    "scheme": "npm",
+    "npm_native": ">=1.0.29",
+    "expected_vers": "vers:npm/>=1.0.29"
+  },
+  {
+    "test_index": 254,
+    "scheme": "npm",
+    "npm_native": "<1.0.29",
+    "expected_vers": "vers:npm/<1.0.29"
+  },
+  {
+    "test_index": 255,
+    "scheme": "npm",
+    "npm_native": ">=0.0.3",
+    "expected_vers": "vers:npm/>=0.0.3"
+  },
+  {
+    "test_index": 256,
+    "scheme": "npm",
+    "npm_native": "<=0.0.2",
+    "expected_vers": "vers:npm/<=0.0.2"
+  },
+  {
+    "test_index": 257,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 258,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 259,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 260,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 261,
+    "scheme": "npm",
+    "npm_native": "> 0.9.6",
+    "expected_vers": "vers:npm/>0.9.6"
+  },
+  {
+    "test_index": 262,
+    "scheme": "npm",
+    "npm_native": ">= 0.2.0 <= 0.9.6 || ~0.8.0-pre",
+    "expected_vers": "vers:npm/>=0.2.0|>=0.8.0-pre|<0.8.0|>=0.8.0|<0.8.1|<=0.9.6"
+  },
+  {
+    "test_index": 263,
+    "scheme": "npm",
+    "npm_native": ">= 1.0.4",
+    "expected_vers": "vers:npm/>=1.0.4"
+  },
+  {
+    "test_index": 264,
+    "scheme": "npm",
+    "npm_native": "<= 1.0.3",
+    "expected_vers": "vers:npm/<=1.0.3"
+  },
+  {
+    "test_index": 265,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 266,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 267,
+    "scheme": "npm",
+    "npm_native": ">=2.0.0",
+    "expected_vers": "vers:npm/>=2.0.0"
+  },
+  {
+    "test_index": 268,
+    "scheme": "npm",
+    "npm_native": "<2.0.0",
+    "expected_vers": "vers:npm/<2.0.0"
+  },
+  {
+    "test_index": 269,
+    "scheme": "npm",
+    "npm_native": "<=0.2.0",
+    "expected_vers": "vers:npm/<=0.2.0"
+  },
+  {
+    "test_index": 270,
+    "scheme": "npm",
+    "npm_native": ">=1.21.1",
+    "expected_vers": "vers:npm/>=1.21.1"
+  },
+  {
+    "test_index": 271,
+    "scheme": "npm",
+    "npm_native": "<=1.20.0",
+    "expected_vers": "vers:npm/<=1.20.0"
+  },
+  {
+    "test_index": 272,
+    "scheme": "npm",
+    "npm_native": ">=2.2.3",
+    "expected_vers": "vers:npm/>=2.2.3"
+  },
+  {
+    "test_index": 273,
+    "scheme": "npm",
+    "npm_native": "<2.2.3",
+    "expected_vers": "vers:npm/<2.2.3"
+  },
+  {
+    "test_index": 274,
+    "scheme": "npm",
+    "npm_native": ">=0.1.1",
+    "expected_vers": "vers:npm/>=0.1.1"
+  },
+  {
+    "test_index": 275,
+    "scheme": "npm",
+    "npm_native": "<0.1.1",
+    "expected_vers": "vers:npm/<0.1.1"
+  },
+  {
+    "test_index": 276,
+    "scheme": "npm",
+    "npm_native": ">= 2.2.x",
+    "expected_vers": "vers:npm/>=2.2.0|<2.3.0"
+  },
+  {
+    "test_index": 277,
+    "scheme": "npm",
+    "npm_native": "2.0.x || 2.1.x",
+    "expected_vers": "vers:npm/>=2.0.0|<2.1.0|>=2.1.0|<2.2.0"
+  },
+  {
+    "test_index": 278,
+    "scheme": "npm",
+    "npm_native": "*",
+    "expected_vers": "vers:npm/*"
+  },
+  {
+    "test_index": 279,
+    "scheme": "npm",
+    "npm_native": ">=2.2.1",
+    "expected_vers": "vers:npm/>=2.2.1"
+  },
+  {
+    "test_index": 280,
+    "scheme": "npm",
+    "npm_native": "<2.2.1",
+    "expected_vers": "vers:npm/<2.2.1"
+  },
+  {
+    "test_index": 281,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 282,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 283,
+    "scheme": "npm",
+    "npm_native": ">=2.1.5",
+    "expected_vers": "vers:npm/>=2.1.5"
+  },
+  {
+    "test_index": 284,
+    "scheme": "npm",
+    "npm_native": "2.1.4",
+    "expected_vers": "vers:npm/2.1.4"
+  },
+  {
+    "test_index": 285,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 286,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 287,
+    "scheme": "npm",
+    "npm_native": ">=3.0.0",
+    "expected_vers": "vers:npm/>=3.0.0"
+  },
+  {
+    "test_index": 288,
+    "scheme": "npm",
+    "npm_native": "=3.0.0-rc.1",
+    "expected_vers": "vers:npm/3.0.0-rc.1"
+  },
+  {
+    "test_index": 289,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 290,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 291,
+    "scheme": "npm",
+    "npm_native": ">=0.4.0",
+    "expected_vers": "vers:npm/>=0.4.0"
+  },
+  {
+    "test_index": 292,
+    "scheme": "npm",
+    "npm_native": "<=0.3.8",
+    "expected_vers": "vers:npm/<=0.3.8"
+  },
+  {
+    "test_index": 293,
+    "scheme": "npm",
+    "npm_native": ">=0.0.6",
+    "expected_vers": "vers:npm/>=0.0.6"
+  },
+  {
+    "test_index": 294,
+    "scheme": "npm",
+    "npm_native": "<=0.0.5",
+    "expected_vers": "vers:npm/<=0.0.5"
+  },
+  {
+    "test_index": 295,
+    "scheme": "npm",
+    "npm_native": ">=2.8.1",
+    "expected_vers": "vers:npm/>=2.8.1"
+  },
+  {
+    "test_index": 296,
+    "scheme": "npm",
+    "npm_native": "<2.8.1",
+    "expected_vers": "vers:npm/<2.8.1"
+  },
+  {
+    "test_index": 297,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 298,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 299,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 300,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 301,
+    "scheme": "npm",
+    "npm_native": ">=0.1.1",
+    "expected_vers": "vers:npm/>=0.1.1"
+  },
+  {
+    "test_index": 302,
+    "scheme": "npm",
+    "npm_native": "<0.1.1",
+    "expected_vers": "vers:npm/<0.1.1"
+  },
+  {
+    "test_index": 303,
+    "scheme": "npm",
+    "npm_native": "<=0.29.0",
+    "expected_vers": "vers:npm/<=0.29.0"
+  },
+  {
+    "test_index": 304,
+    "scheme": "npm",
+    "npm_native": ">=7.0.0",
+    "expected_vers": "vers:npm/>=7.0.0"
+  },
+  {
+    "test_index": 305,
+    "scheme": "npm",
+    "npm_native": "<=6.5.3",
+    "expected_vers": "vers:npm/<=6.5.3"
+  },
+  {
+    "test_index": 306,
+    "scheme": "npm",
+    "npm_native": ">=0.8.13",
+    "expected_vers": "vers:npm/>=0.8.13"
+  },
+  {
+    "test_index": 307,
+    "scheme": "npm",
+    "npm_native": "<0.8.13",
+    "expected_vers": "vers:npm/<0.8.13"
+  },
+  {
+    "test_index": 308,
+    "scheme": "npm",
+    "npm_native": "^2.0.18 || ^3.0.16 || ^3.1.6 || ^4.0.8 || ^5.0.0-beta.5",
+    "expected_vers": "vers:npm/>=2.0.18|<3.0.0|>=3.0.16|>=3.1.6|<4.0.0|<4.0.0|>=4.0.8|>=5.0.0-beta.5|<5.0.0|<6.0.0"
+  },
+  {
+    "test_index": 309,
+    "scheme": "npm",
+    "npm_native": "<2.0.18 || <3.0.16 || <3.1.6 || <4.0.8 || <5.0.0-beta.5",
+    "expected_vers": "vers:npm/<2.0.18|<3.0.16|<3.1.6|<4.0.8|<5.0.0-beta.5"
+  },
+  {
+    "test_index": 310,
+    "scheme": "npm",
+    "npm_native": ">=3.0.0-beta.7 || >=2.0.8 <3.0.0-beta.1 || >=1.8.8 <2.0.0 || >=1.7.16 <1.8.0",
+    "expected_vers": "vers:npm/>=1.7.16|<1.8.0|>=1.8.8|<2.0.0|>=2.0.8|<3.0.0-beta.1|>=3.0.0-beta.7"
+  },
+  {
+    "test_index": 311,
+    "scheme": "npm",
+    "npm_native": ">=1.7.0 <1.7.16 || >=1.8.0 <1.8.8 || >=2.0.0 <2.0.8 || >=3.0.0-beta.1 <3.0.0-beta.7",
+    "expected_vers": "vers:npm/>=1.7.0|<1.7.16|>=1.8.0|<1.8.8|>=2.0.0|<2.0.8|>=3.0.0-beta.1|<3.0.0-beta.7"
+  },
+  {
+    "test_index": 312,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 313,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 314,
+    "scheme": "npm",
+    "npm_native": ">=1.0.1",
+    "expected_vers": "vers:npm/>=1.0.1"
+  },
+  {
+    "test_index": 315,
+    "scheme": "npm",
+    "npm_native": "<1.0.1",
+    "expected_vers": "vers:npm/<1.0.1"
+  },
+  {
+    "test_index": 316,
+    "scheme": "npm",
+    "npm_native": ">=0.2.4",
+    "expected_vers": "vers:npm/>=0.2.4"
+  },
+  {
+    "test_index": 317,
+    "scheme": "npm",
+    "npm_native": "<0.2.4",
+    "expected_vers": "vers:npm/<0.2.4"
+  },
+  {
+    "test_index": 318,
+    "scheme": "npm",
+    "npm_native": ">=1.0.0",
+    "expected_vers": "vers:npm/>=1.0.0"
+  },
+  {
+    "test_index": 319,
+    "scheme": "npm",
+    "npm_native": "<=0.3.13",
+    "expected_vers": "vers:npm/<=0.3.13"
+  },
+  {
+    "test_index": 320,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 321,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 322,
+    "scheme": "npm",
+    "npm_native": "7.0.0",
+    "expected_vers": "vers:npm/7.0.0"
+  },
+  {
+    "test_index": 323,
+    "scheme": "npm",
+    "npm_native": "<= 6.5.3",
+    "expected_vers": "vers:npm/<=6.5.3"
+  },
+  {
+    "test_index": 324,
+    "scheme": "npm",
+    "npm_native": ">=9.0.0",
+    "expected_vers": "vers:npm/>=9.0.0"
+  },
+  {
+    "test_index": 325,
+    "scheme": "npm",
+    "npm_native": "<9.0.0",
+    "expected_vers": "vers:npm/<9.0.0"
+  },
+  {
+    "test_index": 326,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 327,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 328,
+    "scheme": "npm",
+    "npm_native": ">=2.0.1",
+    "expected_vers": "vers:npm/>=2.0.1"
+  },
+  {
+    "test_index": 329,
+    "scheme": "npm",
+    "npm_native": "<2.0.1",
+    "expected_vers": "vers:npm/<2.0.1"
+  },
+  {
+    "test_index": 330,
+    "scheme": "npm",
+    "npm_native": ">=1.1.2",
+    "expected_vers": "vers:npm/>=1.1.2"
+  },
+  {
+    "test_index": 331,
+    "scheme": "npm",
+    "npm_native": ">=1.1.0 <=1.1.1",
+    "expected_vers": "vers:npm/>=1.1.0|<=1.1.1"
+  },
+  {
+    "test_index": 332,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 333,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 334,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 335,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 336,
+    "scheme": "npm",
+    "npm_native": ">= 0.0.6",
+    "expected_vers": "vers:npm/>=0.0.6"
+  },
+  {
+    "test_index": 337,
+    "scheme": "npm",
+    "npm_native": "<= 0.0.5",
+    "expected_vers": "vers:npm/<=0.0.5"
+  },
+  {
+    "test_index": 338,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 339,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 340,
+    "scheme": "npm",
+    "npm_native": "> 0.0.1",
+    "expected_vers": "vers:npm/>0.0.1"
+  },
+  {
+    "test_index": 341,
+    "scheme": "npm",
+    "npm_native": "<= 0.0.1",
+    "expected_vers": "vers:npm/<=0.0.1"
+  },
+  {
+    "test_index": 342,
+    "scheme": "npm",
+    "npm_native": ">3.0.0",
+    "expected_vers": "vers:npm/>3.0.0"
+  },
+  {
+    "test_index": 343,
+    "scheme": "npm",
+    "npm_native": "<=3.0.0",
+    "expected_vers": "vers:npm/<=3.0.0"
+  },
+  {
+    "test_index": 344,
+    "scheme": "npm",
+    "npm_native": "<=0.78.0",
+    "expected_vers": "vers:npm/<=0.78.0"
+  },
+  {
+    "test_index": 345,
+    "scheme": "npm",
+    "npm_native": ">=1.4.3",
+    "expected_vers": "vers:npm/>=1.4.3"
+  },
+  {
+    "test_index": 346,
+    "scheme": "npm",
+    "npm_native": "<1.4.3",
+    "expected_vers": "vers:npm/<1.4.3"
+  },
+  {
+    "test_index": 347,
+    "scheme": "npm",
+    "npm_native": ">=2.1.0",
+    "expected_vers": "vers:npm/>=2.1.0"
+  },
+  {
+    "test_index": 348,
+    "scheme": "npm",
+    "npm_native": "<=2.0.9",
+    "expected_vers": "vers:npm/<=2.0.9"
+  },
+  {
+    "test_index": 349,
+    "scheme": "npm",
+    "npm_native": ">=1.4.0",
+    "expected_vers": "vers:npm/>=1.4.0"
+  },
+  {
+    "test_index": 350,
+    "scheme": "npm",
+    "npm_native": "<1.4.0",
+    "expected_vers": "vers:npm/<1.4.0"
+  },
+  {
+    "test_index": 351,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 352,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 353,
+    "scheme": "npm",
+    "npm_native": ">=0.5.1",
+    "expected_vers": "vers:npm/>=0.5.1"
+  },
+  {
+    "test_index": 354,
+    "scheme": "npm",
+    "npm_native": "<0.5.1",
+    "expected_vers": "vers:npm/<0.5.1"
+  },
+  {
+    "test_index": 355,
+    "scheme": "npm",
+    "npm_native": ">=1.6.6 <2.0.0 || >= 2.2.4",
+    "expected_vers": "vers:npm/>=1.6.6|<2.0.0|>=2.2.4"
+  },
+  {
+    "test_index": 356,
+    "scheme": "npm",
+    "npm_native": "<1.6.6 || < 2.2.4 > 2.0.0",
+    "expected_vers": "vers:npm/<1.6.6|>2.0.0|<2.2.4"
+  },
+  {
+    "test_index": 357,
+    "scheme": "npm",
+    "npm_native": ">= 2.15.1 <= 3.0.0 || >= 3.8.3",
+    "expected_vers": "vers:npm/>=2.15.1|<=3.0.0|>=3.8.3"
+  },
+  {
+    "test_index": 358,
+    "scheme": "npm",
+    "npm_native": "<= 2.15.0 || >= 3.0.0 <= 3.8.2",
+    "expected_vers": "vers:npm/<=2.15.0|>=3.0.0|<=3.8.2"
+  },
+  {
+    "test_index": 359,
+    "scheme": "npm",
+    "npm_native": ">=2.25.1",
+    "expected_vers": "vers:npm/>=2.25.1"
+  },
+  {
+    "test_index": 360,
+    "scheme": "npm",
+    "npm_native": "<2.25.1",
+    "expected_vers": "vers:npm/<2.25.1"
+  },
+  {
+    "test_index": 361,
+    "scheme": "npm",
+    "npm_native": ">=2.2.18",
+    "expected_vers": "vers:npm/>=2.2.18"
+  },
+  {
+    "test_index": 362,
+    "scheme": "npm",
+    "npm_native": "<=2.2.17",
+    "expected_vers": "vers:npm/<=2.2.17"
+  },
+  {
+    "test_index": 363,
+    "scheme": "npm",
+    "npm_native": "<=3.0.5",
+    "expected_vers": "vers:npm/<=3.0.5"
+  },
+  {
+    "test_index": 364,
+    "scheme": "npm",
+    "npm_native": "<=1.1.0",
+    "expected_vers": "vers:npm/<=1.1.0"
+  },
+  {
+    "test_index": 365,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 366,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 367,
+    "scheme": "npm",
+    "npm_native": ">=1.4.1",
+    "expected_vers": "vers:npm/>=1.4.1"
+  },
+  {
+    "test_index": 368,
+    "scheme": "npm",
+    "npm_native": "<1.4.1",
+    "expected_vers": "vers:npm/<1.4.1"
+  },
+  {
+    "test_index": 369,
+    "scheme": "npm",
+    "npm_native": ">=11.1.3",
+    "expected_vers": "vers:npm/>=11.1.3"
+  },
+  {
+    "test_index": 370,
+    "scheme": "npm",
+    "npm_native": "<11.1.3",
+    "expected_vers": "vers:npm/<11.1.3"
+  },
+  {
+    "test_index": 371,
+    "scheme": "npm",
+    "npm_native": ">=1.1.1",
+    "expected_vers": "vers:npm/>=1.1.1"
+  },
+  {
+    "test_index": 372,
+    "scheme": "npm",
+    "npm_native": "<=1.1.0",
+    "expected_vers": "vers:npm/<=1.1.0"
+  },
+  {
+    "test_index": 373,
+    "scheme": "npm",
+    "npm_native": ">=1.11.4",
+    "expected_vers": "vers:npm/>=1.11.4"
+  },
+  {
+    "test_index": 374,
+    "scheme": "npm",
+    "npm_native": "<=1.11.1",
+    "expected_vers": "vers:npm/<=1.11.1"
+  },
+  {
+    "test_index": 375,
+    "scheme": "npm",
+    "npm_native": ">=2.3.1",
+    "expected_vers": "vers:npm/>=2.3.1"
+  },
+  {
+    "test_index": 376,
+    "scheme": "npm",
+    "npm_native": "<2.3.1",
+    "expected_vers": "vers:npm/<2.3.1"
+  },
+  {
+    "test_index": 377,
+    "scheme": "npm",
+    "npm_native": ">=3.0.0",
+    "expected_vers": "vers:npm/>=3.0.0"
+  },
+  {
+    "test_index": 378,
+    "scheme": "npm",
+    "npm_native": ">=1.4.0 <=1.11.3 || >=1.12.3 <=2.2.4",
+    "expected_vers": "vers:npm/>=1.4.0|<=1.11.3|>=1.12.3|<=2.2.4"
+  },
+  {
+    "test_index": 379,
+    "scheme": "npm",
+    "npm_native": ">=6.4.9",
+    "expected_vers": "vers:npm/>=6.4.9"
+  },
+  {
+    "test_index": 380,
+    "scheme": "npm",
+    "npm_native": "<=6.4.8",
+    "expected_vers": "vers:npm/<=6.4.8"
+  },
+  {
+    "test_index": 381,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 382,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 383,
+    "scheme": "npm",
+    "npm_native": ">=1.1.0",
+    "expected_vers": "vers:npm/>=1.1.0"
+  },
+  {
+    "test_index": 384,
+    "scheme": "npm",
+    "npm_native": "<1.1.0",
+    "expected_vers": "vers:npm/<1.1.0"
+  },
+  {
+    "test_index": 385,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 386,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 387,
+    "scheme": "npm",
+    "npm_native": "*",
+    "expected_vers": "vers:npm/*"
+  },
+  {
+    "test_index": 388,
+    "scheme": "npm",
+    "npm_native": "<=2.0.0",
+    "expected_vers": "vers:npm/<=2.0.0"
+  },
+  {
+    "test_index": 389,
+    "scheme": "npm",
+    "npm_native": ">=0.10.0",
+    "expected_vers": "vers:npm/>=0.10.0"
+  },
+  {
+    "test_index": 390,
+    "scheme": "npm",
+    "npm_native": "<=0.9.1",
+    "expected_vers": "vers:npm/<=0.9.1"
+  },
+  {
+    "test_index": 391,
+    "scheme": "npm",
+    "npm_native": ">=1.0.1 || >=0.9.5 <1.0.0",
+    "expected_vers": "vers:npm/>=0.9.5|<1.0.0|>=1.0.1"
+  },
+  {
+    "test_index": 392,
+    "scheme": "npm",
+    "npm_native": "<=0.9.4 || 1.0.0",
+    "expected_vers": "vers:npm/<=0.9.4|1.0.0"
+  },
+  {
+    "test_index": 393,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 394,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 395,
+    "scheme": "npm",
+    "npm_native": "<=1.4.6",
+    "expected_vers": "vers:npm/<=1.4.6"
+  },
+  {
+    "test_index": 396,
+    "scheme": "npm",
+    "npm_native": ">=5.0.3 >=4.2.1",
+    "expected_vers": "vers:npm/>=4.2.1|>=5.0.3"
+  },
+  {
+    "test_index": 397,
+    "scheme": "npm",
+    "npm_native": "<5.0.3 >=5.0.0 || < 4.2.1",
+    "expected_vers": "vers:npm/<4.2.1|>=5.0.0|<5.0.3"
+  },
+  {
+    "test_index": 398,
+    "scheme": "npm",
+    "npm_native": ">=0.9.74",
+    "expected_vers": "vers:npm/>=0.9.74"
+  },
+  {
+    "test_index": 399,
+    "scheme": "npm",
+    "npm_native": "<=0.9.73",
+    "expected_vers": "vers:npm/<=0.9.73"
+  },
+  {
+    "test_index": 400,
+    "scheme": "npm",
+    "npm_native": ">=1.1.0",
+    "expected_vers": "vers:npm/>=1.1.0"
+  },
+  {
+    "test_index": 401,
+    "scheme": "npm",
+    "npm_native": "<1.1.0",
+    "expected_vers": "vers:npm/<1.1.0"
+  },
+  {
+    "test_index": 402,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 403,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 404,
+    "scheme": "npm",
+    "npm_native": ">=3.1.3 < 4.0.0 || >=4.1.1",
+    "expected_vers": "vers:npm/>=3.1.3|<4.0.0|>=4.1.1"
+  },
+  {
+    "test_index": 405,
+    "scheme": "npm",
+    "npm_native": "< 3.1.3  || >= 4.0.0 <4.1.1",
+    "expected_vers": "vers:npm/<3.1.3|>=4.0.0|<4.1.1"
+  },
+  {
+    "test_index": 406,
+    "scheme": "npm",
+    "npm_native": ">=1.0.2",
+    "expected_vers": "vers:npm/>=1.0.2"
+  },
+  {
+    "test_index": 407,
+    "scheme": "npm",
+    "npm_native": "<=1.0.1",
+    "expected_vers": "vers:npm/<=1.0.1"
+  },
+  {
+    "test_index": 408,
+    "scheme": "npm",
+    "npm_native": ">=0.3.2",
+    "expected_vers": "vers:npm/>=0.3.2"
+  },
+  {
+    "test_index": 409,
+    "scheme": "npm",
+    "npm_native": "<0.3.2",
+    "expected_vers": "vers:npm/<0.3.2"
+  },
+  {
+    "test_index": 410,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 411,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 412,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 413,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 414,
+    "scheme": "npm",
+    "npm_native": ">= 1.x",
+    "expected_vers": "vers:npm/>=1.0.0|<2.0.0"
+  },
+  {
+    "test_index": 415,
+    "scheme": "npm",
+    "npm_native": "<1.0.0",
+    "expected_vers": "vers:npm/<1.0.0"
+  },
+  {
+    "test_index": 416,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 417,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 418,
+    "scheme": "npm",
+    "npm_native": "*",
+    "expected_vers": "vers:npm/*"
+  },
+  {
+    "test_index": 419,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 420,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 421,
+    "scheme": "npm",
+    "npm_native": ">=1.10.4 <1.11.0 || >=1.16.0",
+    "expected_vers": "vers:npm/>=1.10.4|<1.11.0|>=1.16.0"
+  },
+  {
+    "test_index": 422,
+    "scheme": "npm",
+    "npm_native": "<1.10.4 || >=1.11.0 <1.16.0",
+    "expected_vers": "vers:npm/<1.10.4|>=1.11.0|<1.16.0"
+  },
+  {
+    "test_index": 423,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 424,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 425,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 426,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 427,
+    "scheme": "npm",
+    "npm_native": ">=6.0.0",
+    "expected_vers": "vers:npm/>=6.0.0"
+  },
+  {
+    "test_index": 428,
+    "scheme": "npm",
+    "npm_native": "<=0.0.5",
+    "expected_vers": "vers:npm/<=0.0.5"
+  },
+  {
+    "test_index": 429,
+    "scheme": "npm",
+    "npm_native": ">=6.5.2",
+    "expected_vers": "vers:npm/>=6.5.2"
+  },
+  {
+    "test_index": 430,
+    "scheme": "npm",
+    "npm_native": "<6.5.2",
+    "expected_vers": "vers:npm/<6.5.2"
+  },
+  {
+    "test_index": 431,
+    "scheme": "npm",
+    "npm_native": ">=1.6.0",
+    "expected_vers": "vers:npm/>=1.6.0"
+  },
+  {
+    "test_index": 432,
+    "scheme": "npm",
+    "npm_native": "<1.6.0",
+    "expected_vers": "vers:npm/<1.6.0"
+  },
+  {
+    "test_index": 433,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 434,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 435,
+    "scheme": "npm",
+    "npm_native": "<=1.3.0",
+    "expected_vers": "vers:npm/<=1.3.0"
+  },
+  {
+    "test_index": 436,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 437,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 438,
+    "scheme": "npm",
+    "npm_native": ">=2.2.0",
+    "expected_vers": "vers:npm/>=2.2.0"
+  },
+  {
+    "test_index": 439,
+    "scheme": "npm",
+    "npm_native": "<2.2.0",
+    "expected_vers": "vers:npm/<2.2.0"
+  },
+  {
+    "test_index": 440,
+    "scheme": "npm",
+    "npm_native": ">= 0.0.15",
+    "expected_vers": "vers:npm/>=0.0.15"
+  },
+  {
+    "test_index": 441,
+    "scheme": "npm",
+    "npm_native": ">= 0.0.10 <= 0.0.14",
+    "expected_vers": "vers:npm/>=0.0.10|<=0.0.14"
+  },
+  {
+    "test_index": 442,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 443,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 444,
+    "scheme": "npm",
+    "npm_native": "<=1.0.5",
+    "expected_vers": "vers:npm/<=1.0.5"
+  },
+  {
+    "test_index": 445,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 446,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 447,
+    "scheme": "npm",
+    "npm_native": ">=3.0.0",
+    "expected_vers": "vers:npm/>=3.0.0"
+  },
+  {
+    "test_index": 448,
+    "scheme": "npm",
+    "npm_native": "<3.0.0",
+    "expected_vers": "vers:npm/<3.0.0"
+  },
+  {
+    "test_index": 449,
+    "scheme": "npm",
+    "npm_native": "<=1.0.4",
+    "expected_vers": "vers:npm/<=1.0.4"
+  },
+  {
+    "test_index": 450,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 451,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 452,
+    "scheme": "npm",
+    "npm_native": "<=0.0.2",
+    "expected_vers": "vers:npm/<=0.0.2"
+  },
+  {
+    "test_index": 453,
+    "scheme": "npm",
+    "npm_native": ">=0.2.4",
+    "expected_vers": "vers:npm/>=0.2.4"
+  },
+  {
+    "test_index": 454,
+    "scheme": "npm",
+    "npm_native": "<=0.2.3",
+    "expected_vers": "vers:npm/<=0.2.3"
+  },
+  {
+    "test_index": 455,
+    "scheme": "npm",
+    "npm_native": ">=2.3.0",
+    "expected_vers": "vers:npm/>=2.3.0"
+  },
+  {
+    "test_index": 456,
+    "scheme": "npm",
+    "npm_native": "<=2.2.13",
+    "expected_vers": "vers:npm/<=2.2.13"
+  },
+  {
+    "test_index": 457,
+    "scheme": "npm",
+    "npm_native": ">=0.1.4",
+    "expected_vers": "vers:npm/>=0.1.4"
+  },
+  {
+    "test_index": 458,
+    "scheme": "npm",
+    "npm_native": "<0.1.4",
+    "expected_vers": "vers:npm/<0.1.4"
+  },
+  {
+    "test_index": 459,
+    "scheme": "npm",
+    "npm_native": ">=2.68.0",
+    "expected_vers": "vers:npm/>=2.68.0"
+  },
+  {
+    "test_index": 460,
+    "scheme": "npm",
+    "npm_native": ">=2.2.6 <2.47.0 || >2.51.0 <=2.67.0",
+    "expected_vers": "vers:npm/>=2.2.6|<2.47.0|>2.51.0|<=2.67.0"
+  },
+  {
+    "test_index": 461,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 462,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 463,
+    "scheme": "npm",
+    "npm_native": ">=1.1.7",
+    "expected_vers": "vers:npm/>=1.1.7"
+  },
+  {
+    "test_index": 464,
+    "scheme": "npm",
+    "npm_native": "<=1.1.5",
+    "expected_vers": "vers:npm/<=1.1.5"
+  },
+  {
+    "test_index": 465,
+    "scheme": "npm",
+    "npm_native": ">=2.0.7",
+    "expected_vers": "vers:npm/>=2.0.7"
+  },
+  {
+    "test_index": 466,
+    "scheme": "npm",
+    "npm_native": "<2.0.7",
+    "expected_vers": "vers:npm/<2.0.7"
+  },
+  {
+    "test_index": 467,
+    "scheme": "npm",
+    "npm_native": ">=1.7.0",
+    "expected_vers": "vers:npm/>=1.7.0"
+  },
+  {
+    "test_index": 468,
+    "scheme": "npm",
+    "npm_native": "<=1.6.2",
+    "expected_vers": "vers:npm/<=1.6.2"
+  },
+  {
+    "test_index": 469,
+    "scheme": "npm",
+    "npm_native": ">=1.3.4",
+    "expected_vers": "vers:npm/>=1.3.4"
+  },
+  {
+    "test_index": 470,
+    "scheme": "npm",
+    "npm_native": "<=1.3.3",
+    "expected_vers": "vers:npm/<=1.3.3"
+  },
+  {
+    "test_index": 471,
+    "scheme": "npm",
+    "npm_native": ">=1.4.2",
+    "expected_vers": "vers:npm/>=1.4.2"
+  },
+  {
+    "test_index": 472,
+    "scheme": "npm",
+    "npm_native": "<1.4.2",
+    "expected_vers": "vers:npm/<1.4.2"
+  },
+  {
+    "test_index": 473,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 474,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 475,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 476,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 477,
+    "scheme": "npm",
+    "npm_native": ">=0.1.3",
+    "expected_vers": "vers:npm/>=0.1.3"
+  },
+  {
+    "test_index": 478,
+    "scheme": "npm",
+    "npm_native": "<0.1.3",
+    "expected_vers": "vers:npm/<0.1.3"
+  },
+  {
+    "test_index": 479,
+    "scheme": "npm",
+    "npm_native": ">=0.38.0",
+    "expected_vers": "vers:npm/>=0.38.0"
+  },
+  {
+    "test_index": 480,
+    "scheme": "npm",
+    "npm_native": "<=0.37.0",
+    "expected_vers": "vers:npm/<=0.37.0"
+  },
+  {
+    "test_index": 481,
+    "scheme": "npm",
+    "npm_native": ">=2.26.1",
+    "expected_vers": "vers:npm/>=2.26.1"
+  },
+  {
+    "test_index": 482,
+    "scheme": "npm",
+    "npm_native": "<2.26.1",
+    "expected_vers": "vers:npm/<2.26.1"
+  },
+  {
+    "test_index": 483,
+    "scheme": "npm",
+    "npm_native": ">=0.8.0",
+    "expected_vers": "vers:npm/>=0.8.0"
+  },
+  {
+    "test_index": 484,
+    "scheme": "npm",
+    "npm_native": "<=0.7.0",
+    "expected_vers": "vers:npm/<=0.7.0"
+  },
+  {
+    "test_index": 485,
+    "scheme": "npm",
+    "npm_native": ">=0.4.16",
+    "expected_vers": "vers:npm/>=0.4.16"
+  },
+  {
+    "test_index": 486,
+    "scheme": "npm",
+    "npm_native": "<0.4.16",
+    "expected_vers": "vers:npm/<0.4.16"
+  },
+  {
+    "test_index": 487,
+    "scheme": "npm",
+    "npm_native": ">=1.3.1",
+    "expected_vers": "vers:npm/>=1.3.1"
+  },
+  {
+    "test_index": 488,
+    "scheme": "npm",
+    "npm_native": "<1.3.1",
+    "expected_vers": "vers:npm/<1.3.1"
+  },
+  {
+    "test_index": 489,
+    "scheme": "npm",
+    "npm_native": ">=2.1.13",
+    "expected_vers": "vers:npm/>=2.1.13"
+  },
+  {
+    "test_index": 490,
+    "scheme": "npm",
+    "npm_native": "<=2.1.12",
+    "expected_vers": "vers:npm/<=2.1.12"
+  },
+  {
+    "test_index": 491,
+    "scheme": "npm",
+    "npm_native": ">=1.2.3",
+    "expected_vers": "vers:npm/>=1.2.3"
+  },
+  {
+    "test_index": 492,
+    "scheme": "npm",
+    "npm_native": "<=1.2.2",
+    "expected_vers": "vers:npm/<=1.2.2"
+  },
+  {
+    "test_index": 493,
+    "scheme": "npm",
+    "npm_native": ">=3.4.4",
+    "expected_vers": "vers:npm/>=3.4.4"
+  },
+  {
+    "test_index": 494,
+    "scheme": "npm",
+    "npm_native": ">=2.0.0 <=3.4.3",
+    "expected_vers": "vers:npm/>=2.0.0|<=3.4.3"
+  },
+  {
+    "test_index": 495,
+    "scheme": "npm",
+    "npm_native": ">0.7.0",
+    "expected_vers": "vers:npm/>0.7.0"
+  },
+  {
+    "test_index": 496,
+    "scheme": "npm",
+    "npm_native": "<=0.7.0",
+    "expected_vers": "vers:npm/<=0.7.0"
+  },
+  {
+    "test_index": 497,
+    "scheme": "npm",
+    "npm_native": ">=0.1.6",
+    "expected_vers": "vers:npm/>=0.1.6"
+  },
+  {
+    "test_index": 498,
+    "scheme": "npm",
+    "npm_native": "<0.1.6",
+    "expected_vers": "vers:npm/<0.1.6"
+  },
+  {
+    "test_index": 499,
+    "scheme": "npm",
+    "npm_native": ">=1.1.10",
+    "expected_vers": "vers:npm/>=1.1.10"
+  },
+  {
+    "test_index": 500,
+    "scheme": "npm",
+    "npm_native": "<=1.1.9",
+    "expected_vers": "vers:npm/<=1.1.9"
+  },
+  {
+    "test_index": 501,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 502,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 503,
+    "scheme": "npm",
+    "npm_native": ">=2.1.0",
+    "expected_vers": "vers:npm/>=2.1.0"
+  },
+  {
+    "test_index": 504,
+    "scheme": "npm",
+    "npm_native": "<=2.0.3",
+    "expected_vers": "vers:npm/<=2.0.3"
+  },
+  {
+    "test_index": 505,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 506,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 507,
+    "scheme": "npm",
+    "npm_native": ">= 0.5.1",
+    "expected_vers": "vers:npm/>=0.5.1"
+  },
+  {
+    "test_index": 508,
+    "scheme": "npm",
+    "npm_native": "0.5.0",
+    "expected_vers": "vers:npm/0.5.0"
+  },
+  {
+    "test_index": 509,
+    "scheme": "npm",
+    "npm_native": ">=2.4.3",
+    "expected_vers": "vers:npm/>=2.4.3"
+  },
+  {
+    "test_index": 510,
+    "scheme": "npm",
+    "npm_native": "<=2.4.2",
+    "expected_vers": "vers:npm/<=2.4.2"
+  },
+  {
+    "test_index": 511,
+    "scheme": "npm",
+    "npm_native": "> 3.0.0",
+    "expected_vers": "vers:npm/>3.0.0"
+  },
+  {
+    "test_index": 512,
+    "scheme": "npm",
+    "npm_native": "<= 3.0.0",
+    "expected_vers": "vers:npm/<=3.0.0"
+  },
+  {
+    "test_index": 513,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 514,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 515,
+    "scheme": "npm",
+    "npm_native": ">=1.1.8",
+    "expected_vers": "vers:npm/>=1.1.8"
+  },
+  {
+    "test_index": 516,
+    "scheme": "npm",
+    "npm_native": "<1.1.8",
+    "expected_vers": "vers:npm/<1.1.8"
+  },
+  {
+    "test_index": 517,
+    "scheme": "npm",
+    "npm_native": "<=1.0.0",
+    "expected_vers": "vers:npm/<=1.0.0"
+  },
+  {
+    "test_index": 518,
+    "scheme": "npm",
+    "npm_native": ">=3.23.6",
+    "expected_vers": "vers:npm/>=3.23.6"
+  },
+  {
+    "test_index": 519,
+    "scheme": "npm",
+    "npm_native": "<3.23.6",
+    "expected_vers": "vers:npm/<3.23.6"
+  },
+  {
+    "test_index": 520,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 521,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 522,
+    "scheme": "npm",
+    "npm_native": ">=5.0.3 <6.0.0 || >=6.8.6",
+    "expected_vers": "vers:npm/>=5.0.3|<6.0.0|>=6.8.6"
+  },
+  {
+    "test_index": 523,
+    "scheme": "npm",
+    "npm_native": "<=6.8.5",
+    "expected_vers": "vers:npm/<=6.8.5"
+  },
+  {
+    "test_index": 524,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 525,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 526,
+    "scheme": "npm",
+    "npm_native": "*",
+    "expected_vers": "vers:npm/*"
+  },
+  {
+    "test_index": 527,
+    "scheme": "npm",
+    "npm_native": "<=0.1.3",
+    "expected_vers": "vers:npm/<=0.1.3"
+  },
+  {
+    "test_index": 528,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 529,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 530,
+    "scheme": "npm",
+    "npm_native": ">=6.4.1",
+    "expected_vers": "vers:npm/>=6.4.1"
+  },
+  {
+    "test_index": 531,
+    "scheme": "npm",
+    "npm_native": "<=6.4.0",
+    "expected_vers": "vers:npm/<=6.4.0"
+  },
+  {
+    "test_index": 532,
+    "scheme": "npm",
+    "npm_native": ">=1.1.0",
+    "expected_vers": "vers:npm/>=1.1.0"
+  },
+  {
+    "test_index": 533,
+    "scheme": "npm",
+    "npm_native": "<1.1.0",
+    "expected_vers": "vers:npm/<1.1.0"
+  },
+  {
+    "test_index": 534,
+    "scheme": "npm",
+    "npm_native": ">=1.0.2",
+    "expected_vers": "vers:npm/>=1.0.2"
+  },
+  {
+    "test_index": 535,
+    "scheme": "npm",
+    "npm_native": "<1.0.2",
+    "expected_vers": "vers:npm/<1.0.2"
+  },
+  {
+    "test_index": 536,
+    "scheme": "npm",
+    "npm_native": ">=2.2.1",
+    "expected_vers": "vers:npm/>=2.2.1"
+  },
+  {
+    "test_index": 537,
+    "scheme": "npm",
+    "npm_native": "<=2.2.0",
+    "expected_vers": "vers:npm/<=2.2.0"
+  },
+  {
+    "test_index": 538,
+    "scheme": "npm",
+    "npm_native": "<=0.0.24",
+    "expected_vers": "vers:npm/<=0.0.24"
+  },
+  {
+    "test_index": 539,
+    "scheme": "npm",
+    "npm_native": "<=0.0.20",
+    "expected_vers": "vers:npm/<=0.0.20"
+  },
+  {
+    "test_index": 540,
+    "scheme": "npm",
+    "npm_native": ">=0.3.4",
+    "expected_vers": "vers:npm/>=0.3.4"
+  },
+  {
+    "test_index": 541,
+    "scheme": "npm",
+    "npm_native": "<=0.3.3",
+    "expected_vers": "vers:npm/<=0.3.3"
+  },
+  {
+    "test_index": 542,
+    "scheme": "npm",
+    "npm_native": "=3.10.1 || >=3.10.3",
+    "expected_vers": "vers:npm/3.10.1|>=3.10.3"
+  },
+  {
+    "test_index": 543,
+    "scheme": "npm",
+    "npm_native": ">=3.0.0 <=3.9.1 || =3.10.2",
+    "expected_vers": "vers:npm/>=3.0.0|<=3.9.1|3.10.2"
+  },
+  {
+    "test_index": 544,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 545,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 546,
+    "scheme": "npm",
+    "npm_native": ">=0.1.2",
+    "expected_vers": "vers:npm/>=0.1.2"
+  },
+  {
+    "test_index": 547,
+    "scheme": "npm",
+    "npm_native": "<=0.1.1",
+    "expected_vers": "vers:npm/<=0.1.1"
+  },
+  {
+    "test_index": 548,
+    "scheme": "npm",
+    "npm_native": "<=0.13.12",
+    "expected_vers": "vers:npm/<=0.13.12"
+  },
+  {
+    "test_index": 549,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 550,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 551,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 552,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 553,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 554,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 555,
+    "scheme": "npm",
+    "npm_native": ">1.1.5",
+    "expected_vers": "vers:npm/>1.1.5"
+  },
+  {
+    "test_index": 556,
+    "scheme": "npm",
+    "npm_native": "<=1.1.5",
+    "expected_vers": "vers:npm/<=1.1.5"
+  },
+  {
+    "test_index": 557,
+    "scheme": "npm",
+    "npm_native": "^1.1.7 || >= 2.0.1",
+    "expected_vers": "vers:npm/>=1.1.7|<2.0.0|>=2.0.1"
+  },
+  {
+    "test_index": 558,
+    "scheme": "npm",
+    "npm_native": "<2.0.1 || <1.1.7",
+    "expected_vers": "vers:npm/<1.1.7|<2.0.1"
+  },
+  {
+    "test_index": 559,
+    "scheme": "npm",
+    "npm_native": ">=2.0.0",
+    "expected_vers": "vers:npm/>=2.0.0"
+  },
+  {
+    "test_index": 560,
+    "scheme": "npm",
+    "npm_native": ">=1.4.0 <2.0.0",
+    "expected_vers": "vers:npm/>=1.4.0|<2.0.0"
+  },
+  {
+    "test_index": 561,
+    "scheme": "npm",
+    "npm_native": ">=2.3.0",
+    "expected_vers": "vers:npm/>=2.3.0"
+  },
+  {
+    "test_index": 562,
+    "scheme": "npm",
+    "npm_native": ">=0.9.7 <=2.2.2",
+    "expected_vers": "vers:npm/>=0.9.7|<=2.2.2"
+  },
+  {
+    "test_index": 563,
+    "scheme": "npm",
+    "npm_native": ">=0.2.5",
+    "expected_vers": "vers:npm/>=0.2.5"
+  },
+  {
+    "test_index": 564,
+    "scheme": "npm",
+    "npm_native": "<0.2.5",
+    "expected_vers": "vers:npm/<0.2.5"
+  },
+  {
+    "test_index": 565,
+    "scheme": "npm",
+    "npm_native": ">=3.22.1",
+    "expected_vers": "vers:npm/>=3.22.1"
+  },
+  {
+    "test_index": 566,
+    "scheme": "npm",
+    "npm_native": "<3.22.1",
+    "expected_vers": "vers:npm/<3.22.1"
+  },
+  {
+    "test_index": 567,
+    "scheme": "npm",
+    "npm_native": "<=0.0.3",
+    "expected_vers": "vers:npm/<=0.0.3"
+  },
+  {
+    "test_index": 568,
+    "scheme": "npm",
+    "npm_native": ">=3.0.0",
+    "expected_vers": "vers:npm/>=3.0.0"
+  },
+  {
+    "test_index": 569,
+    "scheme": "npm",
+    "npm_native": "<3.0.0",
+    "expected_vers": "vers:npm/<3.0.0"
+  },
+  {
+    "test_index": 570,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 571,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 572,
+    "scheme": "npm",
+    "npm_native": ">=3.4.6 < 4.0.0|| >=4.0.5",
+    "expected_vers": "vers:npm/>=3.4.6|<4.0.0|>=4.0.5"
+  },
+  {
+    "test_index": 573,
+    "scheme": "npm",
+    "npm_native": "<3.4.6 || > 4.0.0 <4.0.5",
+    "expected_vers": "vers:npm/<3.4.6|>4.0.0|<4.0.5"
+  },
+  {
+    "test_index": 574,
+    "scheme": "npm",
+    "npm_native": ">=1.8.7",
+    "expected_vers": "vers:npm/>=1.8.7"
+  },
+  {
+    "test_index": 575,
+    "scheme": "npm",
+    "npm_native": "<1.8.7",
+    "expected_vers": "vers:npm/<1.8.7"
+  },
+  {
+    "test_index": 576,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 577,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 578,
+    "scheme": "npm",
+    "npm_native": "*",
+    "expected_vers": "vers:npm/*"
+  },
+  {
+    "test_index": 579,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 580,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 581,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 582,
+    "scheme": "npm",
+    "npm_native": ">=0.1.0",
+    "expected_vers": "vers:npm/>=0.1.0"
+  },
+  {
+    "test_index": 583,
+    "scheme": "npm",
+    "npm_native": ">=1.6.1",
+    "expected_vers": "vers:npm/>=1.6.1"
+  },
+  {
+    "test_index": 584,
+    "scheme": "npm",
+    "npm_native": "<=1.6.0",
+    "expected_vers": "vers:npm/<=1.6.0"
+  },
+  {
+    "test_index": 585,
+    "scheme": "npm",
+    "npm_native": ">=3.9.0",
+    "expected_vers": "vers:npm/>=3.9.0"
+  },
+  {
+    "test_index": 586,
+    "scheme": "npm",
+    "npm_native": "<3.9.0",
+    "expected_vers": "vers:npm/<3.9.0"
+  },
+  {
+    "test_index": 587,
+    "scheme": "npm",
+    "npm_native": ">=1.4.4",
+    "expected_vers": "vers:npm/>=1.4.4"
+  },
+  {
+    "test_index": 588,
+    "scheme": "npm",
+    "npm_native": "<=1.4.3",
+    "expected_vers": "vers:npm/<=1.4.3"
+  },
+  {
+    "test_index": 589,
+    "scheme": "npm",
+    "npm_native": ">=0.2.3",
+    "expected_vers": "vers:npm/>=0.2.3"
+  },
+  {
+    "test_index": 590,
+    "scheme": "npm",
+    "npm_native": "<0.2.3",
+    "expected_vers": "vers:npm/<0.2.3"
+  },
+  {
+    "test_index": 591,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 592,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 593,
+    "scheme": "npm",
+    "npm_native": ">=3.0.0",
+    "expected_vers": "vers:npm/>=3.0.0"
+  },
+  {
+    "test_index": 594,
+    "scheme": "npm",
+    "npm_native": "<3.0.0",
+    "expected_vers": "vers:npm/<3.0.0"
+  },
+  {
+    "test_index": 595,
+    "scheme": "npm",
+    "npm_native": ">=0.3.1",
+    "expected_vers": "vers:npm/>=0.3.1"
+  },
+  {
+    "test_index": 596,
+    "scheme": "npm",
+    "npm_native": "<=0.3.0",
+    "expected_vers": "vers:npm/<=0.3.0"
+  },
+  {
+    "test_index": 597,
+    "scheme": "npm",
+    "npm_native": ">=3.4.0",
+    "expected_vers": "vers:npm/>=3.4.0"
+  },
+  {
+    "test_index": 598,
+    "scheme": "npm",
+    "npm_native": "<3.4.0",
+    "expected_vers": "vers:npm/<3.4.0"
+  },
+  {
+    "test_index": 599,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 600,
+    "scheme": "npm",
+    "npm_native": "<=2.2.4",
+    "expected_vers": "vers:npm/<=2.2.4"
+  },
+  {
+    "test_index": 601,
+    "scheme": "npm",
+    "npm_native": ">=1.1.5",
+    "expected_vers": "vers:npm/>=1.1.5"
+  },
+  {
+    "test_index": 602,
+    "scheme": "npm",
+    "npm_native": "<1.1.5",
+    "expected_vers": "vers:npm/<1.1.5"
+  },
+  {
+    "test_index": 603,
+    "scheme": "npm",
+    "npm_native": "<=0.0.32",
+    "expected_vers": "vers:npm/<=0.0.32"
+  },
+  {
+    "test_index": 604,
+    "scheme": "npm",
+    "npm_native": ">=1.1.4",
+    "expected_vers": "vers:npm/>=1.1.4"
+  },
+  {
+    "test_index": 605,
+    "scheme": "npm",
+    "npm_native": "<=1.1.3",
+    "expected_vers": "vers:npm/<=1.1.3"
+  },
+  {
+    "test_index": 606,
+    "scheme": "npm",
+    "npm_native": ">=0.35.1",
+    "expected_vers": "vers:npm/>=0.35.1"
+  },
+  {
+    "test_index": 607,
+    "scheme": "npm",
+    "npm_native": "<=0.35.0",
+    "expected_vers": "vers:npm/<=0.35.0"
+  },
+  {
+    "test_index": 608,
+    "scheme": "npm",
+    "npm_native": ">=4.1.2",
+    "expected_vers": "vers:npm/>=4.1.2"
+  },
+  {
+    "test_index": 609,
+    "scheme": "npm",
+    "npm_native": ">=3.1.0 <4.1.2",
+    "expected_vers": "vers:npm/>=3.1.0|<4.1.2"
+  },
+  {
+    "test_index": 610,
+    "scheme": "npm",
+    "npm_native": ">=5.0.2",
+    "expected_vers": "vers:npm/>=5.0.2"
+  },
+  {
+    "test_index": 611,
+    "scheme": "npm",
+    "npm_native": "<=5.0.1",
+    "expected_vers": "vers:npm/<=5.0.1"
+  },
+  {
+    "test_index": 612,
+    "scheme": "npm",
+    "npm_native": ">=1.4.0",
+    "expected_vers": "vers:npm/>=1.4.0"
+  },
+  {
+    "test_index": 613,
+    "scheme": "npm",
+    "npm_native": "<1.4.0",
+    "expected_vers": "vers:npm/<1.4.0"
+  },
+  {
+    "test_index": 614,
+    "scheme": "npm",
+    "npm_native": ">=3.20.0",
+    "expected_vers": "vers:npm/>=3.20.0"
+  },
+  {
+    "test_index": 615,
+    "scheme": "npm",
+    "npm_native": "<=3.19.3",
+    "expected_vers": "vers:npm/<=3.19.3"
+  },
+  {
+    "test_index": 616,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 617,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 618,
+    "scheme": "npm",
+    "npm_native": ">=1.1.4",
+    "expected_vers": "vers:npm/>=1.1.4"
+  },
+  {
+    "test_index": 619,
+    "scheme": "npm",
+    "npm_native": "<1.1.4",
+    "expected_vers": "vers:npm/<1.1.4"
+  },
+  {
+    "test_index": 620,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 621,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 622,
+    "scheme": "npm",
+    "npm_native": "<=1.1.1",
+    "expected_vers": "vers:npm/<=1.1.1"
+  },
+  {
+    "test_index": 623,
+    "scheme": "npm",
+    "npm_native": ">=3.2.2",
+    "expected_vers": "vers:npm/>=3.2.2"
+  },
+  {
+    "test_index": 624,
+    "scheme": "npm",
+    "npm_native": "<3.2.2",
+    "expected_vers": "vers:npm/<3.2.2"
+  },
+  {
+    "test_index": 625,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 626,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 627,
+    "scheme": "npm",
+    "npm_native": ">=1.0.0",
+    "expected_vers": "vers:npm/>=1.0.0"
+  },
+  {
+    "test_index": 628,
+    "scheme": "npm",
+    "npm_native": "<1.0.0",
+    "expected_vers": "vers:npm/<1.0.0"
+  },
+  {
+    "test_index": 629,
+    "scheme": "npm",
+    "npm_native": ">=5.1.3",
+    "expected_vers": "vers:npm/>=5.1.3"
+  },
+  {
+    "test_index": 630,
+    "scheme": "npm",
+    "npm_native": "<5.1.3",
+    "expected_vers": "vers:npm/<5.1.3"
+  },
+  {
+    "test_index": 631,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 632,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 633,
+    "scheme": "npm",
+    "npm_native": ">= 0.3.0",
+    "expected_vers": "vers:npm/>=0.3.0"
+  },
+  {
+    "test_index": 634,
+    "scheme": "npm",
+    "npm_native": "< 0.3.0",
+    "expected_vers": "vers:npm/<0.3.0"
+  },
+  {
+    "test_index": 635,
+    "scheme": "npm",
+    "npm_native": ">=3.11 <4 || >=4.5",
+    "expected_vers": "vers:npm/>=3.11.0|<4.0.0|>=4.5.0"
+  },
+  {
+    "test_index": 636,
+    "scheme": "npm",
+    "npm_native": "<3.11 || >= 4 <4.5",
+    "expected_vers": "vers:npm/<3.11.0|>=4.0.0|<4.5.0"
+  },
+  {
+    "test_index": 637,
+    "scheme": "npm",
+    "npm_native": ">=1.3.0",
+    "expected_vers": "vers:npm/>=1.3.0"
+  },
+  {
+    "test_index": 638,
+    "scheme": "npm",
+    "npm_native": "<1.3.0",
+    "expected_vers": "vers:npm/<1.3.0"
+  },
+  {
+    "test_index": 639,
+    "scheme": "npm",
+    "npm_native": ">=4.17.19",
+    "expected_vers": "vers:npm/>=4.17.19"
+  },
+  {
+    "test_index": 640,
+    "scheme": "npm",
+    "npm_native": ">=4.17.15 <4.17.19",
+    "expected_vers": "vers:npm/>=4.17.15|<4.17.19"
+  },
+  {
+    "test_index": 641,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 642,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 643,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 644,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 645,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 646,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 647,
+    "scheme": "npm",
+    "npm_native": ">=6.0.5",
+    "expected_vers": "vers:npm/>=6.0.5"
+  },
+  {
+    "test_index": 648,
+    "scheme": "npm",
+    "npm_native": "<=6.0.4",
+    "expected_vers": "vers:npm/<=6.0.4"
+  },
+  {
+    "test_index": 649,
+    "scheme": "npm",
+    "npm_native": ">=2.14.0",
+    "expected_vers": "vers:npm/>=2.14.0"
+  },
+  {
+    "test_index": 650,
+    "scheme": "npm",
+    "npm_native": ">=2.0.0-alpha8 <=2.0.0-rc2 || >=2.0.0 <=2.13.0",
+    "expected_vers": "vers:npm/>=2.0.0-alpha8|<=2.0.0-rc2|>=2.0.0|<=2.13.0"
+  },
+  {
+    "test_index": 651,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 652,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 653,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 654,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 655,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 656,
+    "scheme": "npm",
+    "npm_native": "<=0.8.0",
+    "expected_vers": "vers:npm/<=0.8.0"
+  },
+  {
+    "test_index": 657,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 658,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 659,
+    "scheme": "npm",
+    "npm_native": ">=0.4.1",
+    "expected_vers": "vers:npm/>=0.4.1"
+  },
+  {
+    "test_index": 660,
+    "scheme": "npm",
+    "npm_native": "<=0.3.6",
+    "expected_vers": "vers:npm/<=0.3.6"
+  },
+  {
+    "test_index": 661,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 662,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 663,
+    "scheme": "npm",
+    "npm_native": ">=0.5.1",
+    "expected_vers": "vers:npm/>=0.5.1"
+  },
+  {
+    "test_index": 664,
+    "scheme": "npm",
+    "npm_native": "<=0.5.0",
+    "expected_vers": "vers:npm/<=0.5.0"
+  },
+  {
+    "test_index": 665,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 666,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 667,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 668,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 669,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 670,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 671,
+    "scheme": "npm",
+    "npm_native": ">=0.11.1",
+    "expected_vers": "vers:npm/>=0.11.1"
+  },
+  {
+    "test_index": 672,
+    "scheme": "npm",
+    "npm_native": "<0.11.1",
+    "expected_vers": "vers:npm/<0.11.1"
+  },
+  {
+    "test_index": 673,
+    "scheme": "npm",
+    "npm_native": ">2.3.21",
+    "expected_vers": "vers:npm/>2.3.21"
+  },
+  {
+    "test_index": 674,
+    "scheme": "npm",
+    "npm_native": "2.3.21",
+    "expected_vers": "vers:npm/2.3.21"
+  },
+  {
+    "test_index": 675,
+    "scheme": "npm",
+    "npm_native": "*",
+    "expected_vers": "vers:npm/*"
+  },
+  {
+    "test_index": 676,
+    "scheme": "npm",
+    "npm_native": ">=3.3.1",
+    "expected_vers": "vers:npm/>=3.3.1"
+  },
+  {
+    "test_index": 677,
+    "scheme": "npm",
+    "npm_native": "<3.3.1",
+    "expected_vers": "vers:npm/<3.3.1"
+  },
+  {
+    "test_index": 678,
+    "scheme": "npm",
+    "npm_native": ">= 1.4.6 < 2.0.0 || >= 2.0.1",
+    "expected_vers": "vers:npm/>=1.4.6|<2.0.0|>=2.0.1"
+  },
+  {
+    "test_index": 679,
+    "scheme": "npm",
+    "npm_native": ">= 1.0.0 < 1.4.6 || 2.0.0",
+    "expected_vers": "vers:npm/>=1.0.0|<1.4.6|2.0.0"
+  },
+  {
+    "test_index": 680,
+    "scheme": "npm",
+    "npm_native": ">= 1.x",
+    "expected_vers": "vers:npm/>=1.0.0|<2.0.0"
+  },
+  {
+    "test_index": 681,
+    "scheme": "npm",
+    "npm_native": "<1.0.0",
+    "expected_vers": "vers:npm/<1.0.0"
+  },
+  {
+    "test_index": 682,
+    "scheme": "npm",
+    "npm_native": ">=1.6.3",
+    "expected_vers": "vers:npm/>=1.6.3"
+  },
+  {
+    "test_index": 683,
+    "scheme": "npm",
+    "npm_native": "<1.6.3",
+    "expected_vers": "vers:npm/<1.6.3"
+  },
+  {
+    "test_index": 684,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 685,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 686,
+    "scheme": "npm",
+    "npm_native": ">=11.0.0",
+    "expected_vers": "vers:npm/>=11.0.0"
+  },
+  {
+    "test_index": 687,
+    "scheme": "npm",
+    "npm_native": "<11.0.0",
+    "expected_vers": "vers:npm/<11.0.0"
+  },
+  {
+    "test_index": 688,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 689,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 690,
+    "scheme": "npm",
+    "npm_native": "*",
+    "expected_vers": "vers:npm/*"
+  },
+  {
+    "test_index": 691,
+    "scheme": "npm",
+    "npm_native": ">=1.0.6",
+    "expected_vers": "vers:npm/>=1.0.6"
+  },
+  {
+    "test_index": 692,
+    "scheme": "npm",
+    "npm_native": "<=1.0.5",
+    "expected_vers": "vers:npm/<=1.0.5"
+  },
+  {
+    "test_index": 693,
+    "scheme": "npm",
+    "npm_native": ">=1.1.1",
+    "expected_vers": "vers:npm/>=1.1.1"
+  },
+  {
+    "test_index": 694,
+    "scheme": "npm",
+    "npm_native": "<1.1.1",
+    "expected_vers": "vers:npm/<1.1.1"
+  },
+  {
+    "test_index": 695,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 696,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 697,
+    "scheme": "npm",
+    "npm_native": ">=2.3.6",
+    "expected_vers": "vers:npm/>=2.3.6"
+  },
+  {
+    "test_index": 698,
+    "scheme": "npm",
+    "npm_native": "<=2.3.5",
+    "expected_vers": "vers:npm/<=2.3.5"
+  },
+  {
+    "test_index": 699,
+    "scheme": "npm",
+    "npm_native": ">=0.3.6",
+    "expected_vers": "vers:npm/>=0.3.6"
+  },
+  {
+    "test_index": 700,
+    "scheme": "npm",
+    "npm_native": "<=0.3.5",
+    "expected_vers": "vers:npm/<=0.3.5"
+  },
+  {
+    "test_index": 701,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 702,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 703,
+    "scheme": "npm",
+    "npm_native": ">= 3.17.0",
+    "expected_vers": "vers:npm/>=3.17.0"
+  },
+  {
+    "test_index": 704,
+    "scheme": "npm",
+    "npm_native": "<= 3.16.0",
+    "expected_vers": "vers:npm/<=3.16.0"
+  },
+  {
+    "test_index": 705,
+    "scheme": "npm",
+    "npm_native": ">=0.4.9",
+    "expected_vers": "vers:npm/>=0.4.9"
+  },
+  {
+    "test_index": 706,
+    "scheme": "npm",
+    "npm_native": "<0.4.9",
+    "expected_vers": "vers:npm/<0.4.9"
+  },
+  {
+    "test_index": 707,
+    "scheme": "npm",
+    "npm_native": ">=4.17.11",
+    "expected_vers": "vers:npm/>=4.17.11"
+  },
+  {
+    "test_index": 708,
+    "scheme": "npm",
+    "npm_native": "<4.17.11",
+    "expected_vers": "vers:npm/<4.17.11"
+  },
+  {
+    "test_index": 709,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 710,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 711,
+    "scheme": "npm",
+    "npm_native": "<=0.0.6",
+    "expected_vers": "vers:npm/<=0.0.6"
+  },
+  {
+    "test_index": 712,
+    "scheme": "npm",
+    "npm_native": ">=0.10.0",
+    "expected_vers": "vers:npm/>=0.10.0"
+  },
+  {
+    "test_index": 713,
+    "scheme": "npm",
+    "npm_native": "<=0.9.11",
+    "expected_vers": "vers:npm/<=0.9.11"
+  },
+  {
+    "test_index": 714,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 715,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 716,
+    "scheme": "npm",
+    "npm_native": ">=2.2.0",
+    "expected_vers": "vers:npm/>=2.2.0"
+  },
+  {
+    "test_index": 717,
+    "scheme": "npm",
+    "npm_native": "<=2.1.1",
+    "expected_vers": "vers:npm/<=2.1.1"
+  },
+  {
+    "test_index": 718,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 719,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 720,
+    "scheme": "npm",
+    "npm_native": "<=0.2.8",
+    "expected_vers": "vers:npm/<=0.2.8"
+  },
+  {
+    "test_index": 721,
+    "scheme": "npm",
+    "npm_native": "<=0.29.0",
+    "expected_vers": "vers:npm/<=0.29.0"
+  },
+  {
+    "test_index": 722,
+    "scheme": "npm",
+    "npm_native": ">=1.8.8",
+    "expected_vers": "vers:npm/>=1.8.8"
+  },
+  {
+    "test_index": 723,
+    "scheme": "npm",
+    "npm_native": "<1.8.8",
+    "expected_vers": "vers:npm/<1.8.8"
+  },
+  {
+    "test_index": 724,
+    "scheme": "npm",
+    "npm_native": ">=2.0.0",
+    "expected_vers": "vers:npm/>=2.0.0"
+  },
+  {
+    "test_index": 725,
+    "scheme": "npm",
+    "npm_native": "<=1.3.3",
+    "expected_vers": "vers:npm/<=1.3.3"
+  },
+  {
+    "test_index": 726,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 727,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 728,
+    "scheme": "npm",
+    "npm_native": ">=1.9.0",
+    "expected_vers": "vers:npm/>=1.9.0"
+  },
+  {
+    "test_index": 729,
+    "scheme": "npm",
+    "npm_native": ">=1.7.1 <=1.8.3",
+    "expected_vers": "vers:npm/>=1.7.1|<=1.8.3"
+  },
+  {
+    "test_index": 730,
+    "scheme": "npm",
+    "npm_native": "<=0.0.0",
+    "expected_vers": "vers:npm/<=0.0.0"
+  },
+  {
+    "test_index": 731,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 732,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 733,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 734,
+    "scheme": "npm",
+    "npm_native": ">=0.4.11",
+    "expected_vers": "vers:npm/>=0.4.11"
+  },
+  {
+    "test_index": 735,
+    "scheme": "npm",
+    "npm_native": "<=0.4.10",
+    "expected_vers": "vers:npm/<=0.4.10"
+  },
+  {
+    "test_index": 736,
+    "scheme": "npm",
+    "npm_native": ">= 0.6.1",
+    "expected_vers": "vers:npm/>=0.6.1"
+  },
+  {
+    "test_index": 737,
+    "scheme": "npm",
+    "npm_native": "<= 0.6.0",
+    "expected_vers": "vers:npm/<=0.6.0"
+  },
+  {
+    "test_index": 738,
+    "scheme": "npm",
+    "npm_native": ">=11.1.4",
+    "expected_vers": "vers:npm/>=11.1.4"
+  },
+  {
+    "test_index": 739,
+    "scheme": "npm",
+    "npm_native": "<11.1.4",
+    "expected_vers": "vers:npm/<11.1.4"
+  },
+  {
+    "test_index": 740,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 741,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 742,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 743,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 744,
+    "scheme": "npm",
+    "npm_native": ">=13.0.8",
+    "expected_vers": "vers:npm/>=13.0.8"
+  },
+  {
+    "test_index": 745,
+    "scheme": "npm",
+    "npm_native": "<13.0.8",
+    "expected_vers": "vers:npm/<13.0.8"
+  },
+  {
+    "test_index": 746,
+    "scheme": "npm",
+    "npm_native": ">=5.1.2",
+    "expected_vers": "vers:npm/>=5.1.2"
+  },
+  {
+    "test_index": 747,
+    "scheme": "npm",
+    "npm_native": "5.1.1",
+    "expected_vers": "vers:npm/5.1.1"
+  },
+  {
+    "test_index": 748,
+    "scheme": "npm",
+    "npm_native": "<=1.1.5",
+    "expected_vers": "vers:npm/<=1.1.5"
+  },
+  {
+    "test_index": 749,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 750,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 751,
+    "scheme": "npm",
+    "npm_native": ">=0.1.3",
+    "expected_vers": "vers:npm/>=0.1.3"
+  },
+  {
+    "test_index": 752,
+    "scheme": "npm",
+    "npm_native": "<=0.1.2",
+    "expected_vers": "vers:npm/<=0.1.2"
+  },
+  {
+    "test_index": 753,
+    "scheme": "npm",
+    "npm_native": ">=1.4.3",
+    "expected_vers": "vers:npm/>=1.4.3"
+  },
+  {
+    "test_index": 754,
+    "scheme": "npm",
+    "npm_native": "<1.4.3",
+    "expected_vers": "vers:npm/<1.4.3"
+  },
+  {
+    "test_index": 755,
+    "scheme": "npm",
+    "npm_native": ">=1.2.4",
+    "expected_vers": "vers:npm/>=1.2.4"
+  },
+  {
+    "test_index": 756,
+    "scheme": "npm",
+    "npm_native": "<1.2.4",
+    "expected_vers": "vers:npm/<1.2.4"
+  },
+  {
+    "test_index": 757,
+    "scheme": "npm",
+    "npm_native": ">=0.10.9",
+    "expected_vers": "vers:npm/>=0.10.9"
+  },
+  {
+    "test_index": 758,
+    "scheme": "npm",
+    "npm_native": ">=0.10.0 <=0.10.8",
+    "expected_vers": "vers:npm/>=0.10.0|<=0.10.8"
+  },
+  {
+    "test_index": 759,
+    "scheme": "npm",
+    "npm_native": ">=4.3.2",
+    "expected_vers": "vers:npm/>=4.3.2"
+  },
+  {
+    "test_index": 760,
+    "scheme": "npm",
+    "npm_native": "<4.3.2",
+    "expected_vers": "vers:npm/<4.3.2"
+  },
+  {
+    "test_index": 761,
+    "scheme": "npm",
+    "npm_native": ">=2.0.0-rc8",
+    "expected_vers": "vers:npm/>=2.0.0-rc8"
+  },
+  {
+    "test_index": 762,
+    "scheme": "npm",
+    "npm_native": "<=2.0.0-rc7",
+    "expected_vers": "vers:npm/<=2.0.0-rc7"
+  },
+  {
+    "test_index": 763,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 764,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 765,
+    "scheme": "npm",
+    "npm_native": ">=1.13.2",
+    "expected_vers": "vers:npm/>=1.13.2"
+  },
+  {
+    "test_index": 766,
+    "scheme": "npm",
+    "npm_native": "<=1.13.1",
+    "expected_vers": "vers:npm/<=1.13.1"
+  },
+  {
+    "test_index": 767,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 768,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 769,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 770,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 771,
+    "scheme": "npm",
+    "npm_native": ">=3.5.0",
+    "expected_vers": "vers:npm/>=3.5.0"
+  },
+  {
+    "test_index": 772,
+    "scheme": "npm",
+    "npm_native": "<3.5.0",
+    "expected_vers": "vers:npm/<3.5.0"
+  },
+  {
+    "test_index": 773,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 774,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 775,
+    "scheme": "npm",
+    "npm_native": "<=3.7.1 || >= 3.7.3",
+    "expected_vers": "vers:npm/<=3.7.1|>=3.7.3"
+  },
+  {
+    "test_index": 776,
+    "scheme": "npm",
+    "npm_native": "3.7.2",
+    "expected_vers": "vers:npm/3.7.2"
+  },
+  {
+    "test_index": 777,
+    "scheme": "npm",
+    "npm_native": ">=0.1.2",
+    "expected_vers": "vers:npm/>=0.1.2"
+  },
+  {
+    "test_index": 778,
+    "scheme": "npm",
+    "npm_native": "<0.1.2",
+    "expected_vers": "vers:npm/<0.1.2"
+  },
+  {
+    "test_index": 779,
+    "scheme": "npm",
+    "npm_native": "<=0.13.12",
+    "expected_vers": "vers:npm/<=0.13.12"
+  },
+  {
+    "test_index": 780,
+    "scheme": "npm",
+    "npm_native": "*",
+    "expected_vers": "vers:npm/*"
+  },
+  {
+    "test_index": 781,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 782,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 783,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 784,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 785,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 786,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 787,
+    "scheme": "npm",
+    "npm_native": ">=3.0.4",
+    "expected_vers": "vers:npm/>=3.0.4"
+  },
+  {
+    "test_index": 788,
+    "scheme": "npm",
+    "npm_native": "<3.0.4",
+    "expected_vers": "vers:npm/<3.0.4"
+  },
+  {
+    "test_index": 789,
+    "scheme": "npm",
+    "npm_native": ">=1.0.7",
+    "expected_vers": "vers:npm/>=1.0.7"
+  },
+  {
+    "test_index": 790,
+    "scheme": "npm",
+    "npm_native": "<=1.0.6",
+    "expected_vers": "vers:npm/<=1.0.6"
+  },
+  {
+    "test_index": 791,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 792,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 793,
+    "scheme": "npm",
+    "npm_native": ">=1.3.1",
+    "expected_vers": "vers:npm/>=1.3.1"
+  },
+  {
+    "test_index": 794,
+    "scheme": "npm",
+    "npm_native": "<1.3.1",
+    "expected_vers": "vers:npm/<1.3.1"
+  },
+  {
+    "test_index": 795,
+    "scheme": "npm",
+    "npm_native": "> 2.4.3",
+    "expected_vers": "vers:npm/>2.4.3"
+  },
+  {
+    "test_index": 796,
+    "scheme": "npm",
+    "npm_native": "<= 2.4.3",
+    "expected_vers": "vers:npm/<=2.4.3"
+  },
+  {
+    "test_index": 797,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 798,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 799,
+    "scheme": "npm",
+    "npm_native": ">=0.2.3",
+    "expected_vers": "vers:npm/>=0.2.3"
+  },
+  {
+    "test_index": 800,
+    "scheme": "npm",
+    "npm_native": "<0.2.3",
+    "expected_vers": "vers:npm/<0.2.3"
+  },
+  {
+    "test_index": 801,
+    "scheme": "npm",
+    "npm_native": ">=1.2.4",
+    "expected_vers": "vers:npm/>=1.2.4"
+  },
+  {
+    "test_index": 802,
+    "scheme": "npm",
+    "npm_native": "<=1.2.3",
+    "expected_vers": "vers:npm/<=1.2.3"
+  },
+  {
+    "test_index": 803,
+    "scheme": "npm",
+    "npm_native": "<=1.0.2",
+    "expected_vers": "vers:npm/<=1.0.2"
+  },
+  {
+    "test_index": 804,
+    "scheme": "npm",
+    "npm_native": ">=1.4.4",
+    "expected_vers": "vers:npm/>=1.4.4"
+  },
+  {
+    "test_index": 805,
+    "scheme": "npm",
+    "npm_native": "<1.4.4",
+    "expected_vers": "vers:npm/<1.4.4"
+  },
+  {
+    "test_index": 806,
+    "scheme": "npm",
+    "npm_native": ">=1.4.3",
+    "expected_vers": "vers:npm/>=1.4.3"
+  },
+  {
+    "test_index": 807,
+    "scheme": "npm",
+    "npm_native": "<=1.4.2",
+    "expected_vers": "vers:npm/<=1.4.2"
+  },
+  {
+    "test_index": 808,
+    "scheme": "npm",
+    "npm_native": ">=2.1.0",
+    "expected_vers": "vers:npm/>=2.1.0"
+  },
+  {
+    "test_index": 809,
+    "scheme": "npm",
+    "npm_native": "<=2.0.0",
+    "expected_vers": "vers:npm/<=2.0.0"
+  },
+  {
+    "test_index": 810,
+    "scheme": "npm",
+    "npm_native": ">=0.6.0",
+    "expected_vers": "vers:npm/>=0.6.0"
+  },
+  {
+    "test_index": 811,
+    "scheme": "npm",
+    "npm_native": "<0.6.0",
+    "expected_vers": "vers:npm/<0.6.0"
+  },
+  {
+    "test_index": 812,
+    "scheme": "npm",
+    "npm_native": ">=1.1.5",
+    "expected_vers": "vers:npm/>=1.1.5"
+  },
+  {
+    "test_index": 813,
+    "scheme": "npm",
+    "npm_native": "<=1.1.4",
+    "expected_vers": "vers:npm/<=1.1.4"
+  },
+  {
+    "test_index": 814,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 815,
+    "scheme": "npm",
+    "npm_native": "<=2.0.2",
+    "expected_vers": "vers:npm/<=2.0.2"
+  },
+  {
+    "test_index": 816,
+    "scheme": "npm",
+    "npm_native": ">=4.0.0",
+    "expected_vers": "vers:npm/>=4.0.0"
+  },
+  {
+    "test_index": 817,
+    "scheme": "npm",
+    "npm_native": "<4.0.0",
+    "expected_vers": "vers:npm/<4.0.0"
+  },
+  {
+    "test_index": 818,
+    "scheme": "npm",
+    "npm_native": ">=2.12.4",
+    "expected_vers": "vers:npm/>=2.12.4"
+  },
+  {
+    "test_index": 819,
+    "scheme": "npm",
+    "npm_native": "<=2.12.3",
+    "expected_vers": "vers:npm/<=2.12.3"
+  },
+  {
+    "test_index": 820,
+    "scheme": "npm",
+    "npm_native": ">=0.0.3",
+    "expected_vers": "vers:npm/>=0.0.3"
+  },
+  {
+    "test_index": 821,
+    "scheme": "npm",
+    "npm_native": "<0.0.3",
+    "expected_vers": "vers:npm/<0.0.3"
+  },
+  {
+    "test_index": 822,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 823,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 824,
+    "scheme": "npm",
+    "npm_native": ">1.10.8",
+    "expected_vers": "vers:npm/>1.10.8"
+  },
+  {
+    "test_index": 825,
+    "scheme": "npm",
+    "npm_native": "<=1.10.8",
+    "expected_vers": "vers:npm/<=1.10.8"
+  },
+  {
+    "test_index": 826,
+    "scheme": "npm",
+    "npm_native": "*",
+    "expected_vers": "vers:npm/*"
+  },
+  {
+    "test_index": 827,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 828,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 829,
+    "scheme": "npm",
+    "npm_native": ">=1.4.2",
+    "expected_vers": "vers:npm/>=1.4.2"
+  },
+  {
+    "test_index": 830,
+    "scheme": "npm",
+    "npm_native": "<=1.4.1",
+    "expected_vers": "vers:npm/<=1.4.1"
+  },
+  {
+    "test_index": 831,
+    "scheme": "npm",
+    "npm_native": "<=1.0.2",
+    "expected_vers": "vers:npm/<=1.0.2"
+  },
+  {
+    "test_index": 832,
+    "scheme": "npm",
+    "npm_native": "<=1.1.8",
+    "expected_vers": "vers:npm/<=1.1.8"
+  },
+  {
+    "test_index": 833,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 834,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 835,
+    "scheme": "npm",
+    "npm_native": ">=0.3.3",
+    "expected_vers": "vers:npm/>=0.3.3"
+  },
+  {
+    "test_index": 836,
+    "scheme": "npm",
+    "npm_native": "<=0.3.2",
+    "expected_vers": "vers:npm/<=0.3.2"
+  },
+  {
+    "test_index": 837,
+    "scheme": "npm",
+    "npm_native": ">=0.1.1",
+    "expected_vers": "vers:npm/>=0.1.1"
+  },
+  {
+    "test_index": 838,
+    "scheme": "npm",
+    "npm_native": "<0.1.1",
+    "expected_vers": "vers:npm/<0.1.1"
+  },
+  {
+    "test_index": 839,
+    "scheme": "npm",
+    "npm_native": ">=0.3.0",
+    "expected_vers": "vers:npm/>=0.3.0"
+  },
+  {
+    "test_index": 840,
+    "scheme": "npm",
+    "npm_native": "<0.3.0",
+    "expected_vers": "vers:npm/<0.3.0"
+  },
+  {
+    "test_index": 841,
+    "scheme": "npm",
+    "npm_native": "~0.2.2 || >=0.3.2",
+    "expected_vers": "vers:npm/>=0.2.2|<0.3.0|>=0.3.2"
+  },
+  {
+    "test_index": 842,
+    "scheme": "npm",
+    "npm_native": "<0.2.2 || >=0.3.0 <0.3.2",
+    "expected_vers": "vers:npm/<0.2.2|>=0.3.0|<0.3.2"
+  },
+  {
+    "test_index": 843,
+    "scheme": "npm",
+    "npm_native": ">= 7.0.0",
+    "expected_vers": "vers:npm/>=7.0.0"
+  },
+  {
+    "test_index": 844,
+    "scheme": "npm",
+    "npm_native": ">= 5.2.1 <= 6.0.0 || >=6.0.0 <= 6.0.2",
+    "expected_vers": "vers:npm/>=5.2.1|<=6.0.0|>=6.0.0|<=6.0.2"
+  },
+  {
+    "test_index": 845,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 846,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 847,
+    "scheme": "npm",
+    "npm_native": "<=0.0.6",
+    "expected_vers": "vers:npm/<=0.0.6"
+  },
+  {
+    "test_index": 848,
+    "scheme": "npm",
+    "npm_native": ">=1.4.1 <2.0.0 || >=2.17.2",
+    "expected_vers": "vers:npm/>=1.4.1|<2.0.0|>=2.17.2"
+  },
+  {
+    "test_index": 849,
+    "scheme": "npm",
+    "npm_native": "<1.4.1 || >=2.0.0 <2.17.2",
+    "expected_vers": "vers:npm/<1.4.1|>=2.0.0|<2.17.2"
+  },
+  {
+    "test_index": 850,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 851,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 852,
+    "scheme": "npm",
+    "npm_native": ">=0.3.16",
+    "expected_vers": "vers:npm/>=0.3.16"
+  },
+  {
+    "test_index": 853,
+    "scheme": "npm",
+    "npm_native": "<0.3.16",
+    "expected_vers": "vers:npm/<0.3.16"
+  },
+  {
+    "test_index": 854,
+    "scheme": "npm",
+    "npm_native": "<=0.2.2",
+    "expected_vers": "vers:npm/<=0.2.2"
+  },
+  {
+    "test_index": 855,
+    "scheme": "npm",
+    "npm_native": "<=0.2.4",
+    "expected_vers": "vers:npm/<=0.2.4"
+  },
+  {
+    "test_index": 856,
+    "scheme": "npm",
+    "npm_native": ">=2.2.5",
+    "expected_vers": "vers:npm/>=2.2.5"
+  },
+  {
+    "test_index": 857,
+    "scheme": "npm",
+    "npm_native": "<2.2.5",
+    "expected_vers": "vers:npm/<2.2.5"
+  },
+  {
+    "test_index": 858,
+    "scheme": "npm",
+    "npm_native": "<=0.2.0",
+    "expected_vers": "vers:npm/<=0.2.0"
+  },
+  {
+    "test_index": 859,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 860,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 861,
+    "scheme": "npm",
+    "npm_native": ">=1.0.1",
+    "expected_vers": "vers:npm/>=1.0.1"
+  },
+  {
+    "test_index": 862,
+    "scheme": "npm",
+    "npm_native": "<1.0.1",
+    "expected_vers": "vers:npm/<1.0.1"
+  },
+  {
+    "test_index": 863,
+    "scheme": "npm",
+    "npm_native": "<=0.0.9",
+    "expected_vers": "vers:npm/<=0.0.9"
+  },
+  {
+    "test_index": 864,
+    "scheme": "npm",
+    "npm_native": ">=0.9.7",
+    "expected_vers": "vers:npm/>=0.9.7"
+  },
+  {
+    "test_index": 865,
+    "scheme": "npm",
+    "npm_native": "<=0.9.6",
+    "expected_vers": "vers:npm/<=0.9.6"
+  },
+  {
+    "test_index": 866,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 867,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 868,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 869,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 870,
+    "scheme": "npm",
+    "npm_native": ">=2.4.2",
+    "expected_vers": "vers:npm/>=2.4.2"
+  },
+  {
+    "test_index": 871,
+    "scheme": "npm",
+    "npm_native": "<2.4.2",
+    "expected_vers": "vers:npm/<2.4.2"
+  },
+  {
+    "test_index": 872,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 873,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 874,
+    "scheme": "npm",
+    "npm_native": ">=1.2.2",
+    "expected_vers": "vers:npm/>=1.2.2"
+  },
+  {
+    "test_index": 875,
+    "scheme": "npm",
+    "npm_native": "<1.2.2",
+    "expected_vers": "vers:npm/<1.2.2"
+  },
+  {
+    "test_index": 876,
+    "scheme": "npm",
+    "npm_native": "<0.0.0",
+    "expected_vers": "vers:npm/<0.0.0"
+  },
+  {
+    "test_index": 877,
+    "scheme": "npm",
+    "npm_native": "<=99.999.99999",
+    "expected_vers": "vers:npm/<=99.999.99999"
+  },
+  {
+    "test_index": 878,
+    "scheme": "npm",
+    "npm_native": ">=3.0.1",
+    "expected_vers": "vers:npm/>=3.0.1"
+  },
+  {
+    "test_index": 879,
+    "scheme": "npm",
+    "npm_native": "<3.0.1",
+    "expected_vers": "vers:npm/<3.0.1"
+  },
+  {
+    "test_index": 880,
+    "scheme": "npm",
+    "npm_native": "^1.2.9",
+    "expected_vers": "vers:npm/>=1.2.9|<2.0.0"
+  },
+  {
+    "test_index": 881,
+    "scheme": "npm",
+    "npm_native": "~3.8.2",
+    "expected_vers": "vers:npm/>=3.8.2|<3.9.0"
+  },
+  {
+    "test_index": 882,
+    "scheme": "npm",
+    "npm_native": "5.0.0 - 7.2.3",
+    "expected_vers": "vers:npm/>=5.0.0|<=7.2.3"
+  },
+  {
+    "test_index": 883,
+    "scheme": "npm",
+    "npm_native": "2.1 || 2.6",
+    "expected_vers": "vers:npm/2.1.0|2.6.0"
+  },
+  {
+    "test_index": 884,
+    "scheme": "npm",
+    "npm_native": "1.1.2 1.2.2",
+    "expected_vers": "vers:npm/1.1.2|1.2.2"
+  },
+  {
+    "test_index": 885,
+    "scheme": "npm",
+    "npm_native": "<=2.1 >=1.1",
+    "expected_vers": "vers:npm/>=1.1.0|<=2.1.0"
+  }
+]

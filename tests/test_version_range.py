@@ -26,18 +26,32 @@ from univers.versions import SemverVersion
 from univers.versions import Version
 
 TEST_DATA_PARENT = Path(__file__).parent / "data" / "schema" / "range"
+TEST_DATA_PARENT_GITLAB = TEST_DATA_PARENT / "gitlab"
 
-TEST_DATA_RANGE_CONTAINMENT = TEST_DATA_PARENT / "range_containment.json"
-TEST_DATA_PYPI_ROUNDTRIP = TEST_DATA_PARENT / "pypi_range_roundtrip.json"
-TEST_DATA_FROM_NATIVE = TEST_DATA_PARENT / "range_from_native.json"
-TEST_DATA_PYPI_GITLAB_FROM_NATIVE = TEST_DATA_PARENT / "pypi_gitlab_range_from_native.json"
-TEST_DATA_CONAN_GITLAB_FROM_NATIVE = TEST_DATA_PARENT / "conan_gitlab_range_from_native.json"
-TEST_DATA_NPM_GITLAB_FROM_NATIVE = TEST_DATA_PARENT / "npm_gitlab_range_from_native.json"
-TEST_DATA_GEM_GITLAB_FROM_NATIVE = TEST_DATA_PARENT / "gem_gitlab_range_from_native.json"
-TEST_DATA_GOLANG_GITLAB_FROM_NATIVE = TEST_DATA_PARENT / "golang_gitlab_range_from_native.json"
-TEST_DATA_COMPOSER_GITLAB_FROM_NATIVE = TEST_DATA_PARENT / "composer_gitlab_range_from_native.json"
-TEST_DATA_NPM_FROM_NATIVE = TEST_DATA_PARENT / "npm_range_from_native.json"
+TEST_DATA_COMPOSER_GITLAB_FROM_NATIVE = (
+    TEST_DATA_PARENT_GITLAB / "composer_gitlab_range_from_native.json"
+)
+TEST_DATA_CONAN_GITLAB_FROM_NATIVE = TEST_DATA_PARENT_GITLAB / "conan_gitlab_range_from_native.json"
+TEST_DATA_GEM_GITLAB_FROM_NATIVE = TEST_DATA_PARENT_GITLAB / "gem_gitlab_range_from_native.json"
+TEST_DATA_GOLANG_GITLAB_FROM_NATIVE = (
+    TEST_DATA_PARENT_GITLAB / "golang_gitlab_range_from_native.json"
+)
+TEST_DATA_NPM_GITLAB_FROM_NATIVE = TEST_DATA_PARENT_GITLAB / "npm_gitlab_range_from_native.json"
+TEST_DATA_PYPI_GITLAB_FROM_NATIVE = TEST_DATA_PARENT_GITLAB / "pypi_gitlab_range_from_native.json"
+
+TEST_DATA_CONAN_FROM_NATIVE_BASIC = TEST_DATA_PARENT / "conan_range_from_native_basic.json"
 TEST_DATA_CONAN_FROM_NATIVE = TEST_DATA_PARENT / "conan_range_from_native.json"
+TEST_DATA_GEM_FROM_NATIVE = TEST_DATA_PARENT / "gem_range_from_native.json"
+TEST_DATA_NGINX_FROM_NATIVE = TEST_DATA_PARENT / "nginx_range_from_native.json"
+TEST_DATA_NPM_FROM_NATIVE = TEST_DATA_PARENT / "npm_range_from_native.json"
+TEST_DATA_NUGET_FROM_NATIVE = TEST_DATA_PARENT / "nuget_range_from_native.json"
+TEST_DATA_OPENSSL_FROM_NATIVE = TEST_DATA_PARENT / "openssl_range_from_native.json"
+TEST_DATA_PYPI_FROM_NATIVE = TEST_DATA_PARENT / "pypi_range_from_native.json"
+
+TEST_DATA_NPM_CONTAINMENT = TEST_DATA_PARENT / "npm_range_containment.json"
+TEST_DATA_PYPI_CONTAINMENT = TEST_DATA_PARENT / "pypi_range_containment.json"
+
+TEST_DATA_PYPI_ROUNDTRIP = TEST_DATA_PARENT / "pypi_range_roundtrip.json"
 
 
 class TestVersionRangeContainment(SchemaDrivenVersTest):
@@ -47,7 +61,13 @@ class TestVersionRangeContainment(SchemaDrivenVersTest):
         return version in version_range
 
 
-@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_RANGE_CONTAINMENT)))
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_NPM_CONTAINMENT)))
+def test_range_containment(test_case):
+    test = TestVersionRangeContainment.from_data(data=test_case)
+    test.assert_result()
+
+
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_PYPI_CONTAINMENT)))
 def test_range_containment(test_case):
     test = TestVersionRangeContainment.from_data(data=test_case)
     test.assert_result()
@@ -70,19 +90,49 @@ class TestVersionRangeParseNative(SchemaDrivenVersTest):
         return str(range_class.from_native(self.input["native_range"]))
 
 
-@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_FROM_NATIVE)))
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_CONAN_FROM_NATIVE)))
 def test_range_from_native(test_case):
     test = TestVersionRangeParseNative.from_data(data=test_case)
     test.assert_result()
 
 
-@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_NPM_FROM_NATIVE)))
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_GEM_FROM_NATIVE)))
 def test_npm_range_from_native(test_case):
     test = TestVersionRangeParseNative.from_data(data=test_case)
     test.assert_result()
 
 
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_NGINX_FROM_NATIVE)))
+def test_conan_range_from_native(test_case):
+    test = TestVersionRangeParseNative.from_data(data=test_case)
+    test.assert_result()
+
+
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_CONAN_FROM_NATIVE_BASIC)))
+def test_conan_range_from_native(test_case):
+    test = TestVersionRangeParseNative.from_data(data=test_case)
+    test.assert_result()
+
+
 @pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_CONAN_FROM_NATIVE)))
+def test_conan_version_range_parse(test_case):
+    avc = TestVersionRangeParseNative.from_data(data=test_case)
+    avc.assert_result()
+
+
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_OPENSSL_FROM_NATIVE)))
+def test_npm_range_from_native(test_case):
+    test = TestVersionRangeParseNative.from_data(data=test_case)
+    test.assert_result()
+
+
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_NUGET_FROM_NATIVE)))
+def test_npm_range_from_native(test_case):
+    test = TestVersionRangeParseNative.from_data(data=test_case)
+    test.assert_result()
+
+
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_PYPI_FROM_NATIVE)))
 def test_conan_range_from_native(test_case):
     test = TestVersionRangeParseNative.from_data(data=test_case)
     test.assert_result()
@@ -99,7 +149,7 @@ class TestGitlabVersionRangeNative(SchemaDrivenVersTest):
         return str(range)
 
 
-@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_PYPI_GITLAB_FROM_NATIVE)))
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_COMPOSER_GITLAB_FROM_NATIVE)))
 def test_pypi_gitlab_range_from_native(test_case):
     test = TestGitlabVersionRangeNative.from_data(data=test_case)
     test.assert_result()
@@ -111,14 +161,26 @@ def test_conan_gitlab_range_from_native(test_case):
     test.assert_result()
 
 
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_GEM_GITLAB_FROM_NATIVE)))
+def test_conan_gitlab_range_from_native(test_case):
+    test = TestGitlabVersionRangeNative.from_data(data=test_case)
+    test.assert_result()
+
+
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_GOLANG_GITLAB_FROM_NATIVE)))
+def test_gem_gitlab_range_from_native(test_case):
+    test = TestGitlabVersionRangeNative.from_data(data=test_case)
+    test.assert_result()
+
+
 @pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_NPM_GITLAB_FROM_NATIVE)))
 def test_npm_gitlab_range_from_native(test_case):
     test = TestGitlabVersionRangeNative.from_data(data=test_case)
     test.assert_result()
 
 
-@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_GEM_GITLAB_FROM_NATIVE)))
-def test_gem_gitlab_range_from_native(test_case):
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_PYPI_GITLAB_FROM_NATIVE)))
+def test_npm_gitlab_range_from_native(test_case):
     test = TestGitlabVersionRangeNative.from_data(data=test_case)
     test.assert_result()
 

@@ -1,6 +1,7 @@
 [
   {
-    "test_group": "advanced",
+    "description": "Construct VERS range from native conan range.",
+    "test_group": "basic",
     "test_type": "from_native",
     "input": {
       "scheme": "conan",
@@ -9,7 +10,8 @@
     "expected_output": "vers:conan/>1.0.0"
   },
   {
-    "test_group": "advanced",
+    "description": "Construct VERS range from native conan range.",
+    "test_group": "basic",
     "test_type": "from_native",
     "input": {
       "scheme": "conan",
@@ -18,7 +20,8 @@
     "expected_output": "vers:conan/<2.0"
   },
   {
-    "test_group": "advanced",
+    "description": "Construct VERS range from native conan range.",
+    "test_group": "basic",
     "test_type": "from_native",
     "input": {
       "scheme": "conan",
@@ -27,7 +30,8 @@
     "expected_output": "vers:conan/>1|<2.0"
   },
   {
-    "test_group": "advanced",
+    "description": "Construct VERS range from native conan range.",
+    "test_group": "basic",
     "test_type": "from_native",
     "input": {
       "scheme": "conan",
@@ -36,7 +40,8 @@
     "expected_output": "vers:conan/>=2.5|<2.6-"
   },
   {
-    "test_group": "advanced",
+    "description": "Construct VERS range from native conan range.",
+    "test_group": "basic",
     "test_type": "from_native",
     "input": {
       "scheme": "conan",
@@ -45,7 +50,8 @@
     "expected_output": "vers:conan/>=2.5.1|<2.6-"
   },
   {
-    "test_group": "advanced",
+    "description": "Construct VERS range from native conan range.",
+    "test_group": "basic",
     "test_type": "from_native",
     "input": {
       "scheme": "conan",
@@ -54,7 +60,8 @@
     "expected_output": "vers:conan/>=1|<2-"
   },
   {
-    "test_group": "advanced",
+    "description": "Construct VERS range from native conan range.",
+    "test_group": "basic",
     "test_type": "from_native",
     "input": {
       "scheme": "conan",
@@ -63,7 +70,8 @@
     "expected_output": "vers:conan/>=1.2|<2-"
   },
   {
-    "test_group": "advanced",
+    "description": "Construct VERS range from native conan range.",
+    "test_group": "basic",
     "test_type": "from_native",
     "input": {
       "scheme": "conan",
@@ -72,7 +80,8 @@
     "expected_output": "vers:conan/>=1.2.3|<2-"
   },
   {
-    "test_group": "advanced",
+    "description": "Construct VERS range from native conan range.",
+    "test_group": "basic",
     "test_type": "from_native",
     "input": {
       "scheme": "conan",
@@ -81,7 +90,8 @@
     "expected_output": "vers:conan/>=0.1.2|<0.2-"
   },
   {
-    "test_group": "advanced",
+    "description": "Construct VERS range from native conan range.",
+    "test_group": "basic",
     "test_type": "from_native",
     "input": {
       "scheme": "conan",
@@ -90,7 +100,8 @@
     "expected_output": "vers:conan/1.0.0"
   },
   {
-    "test_group": "advanced",
+    "description": "Construct VERS range from native conan range.",
+    "test_group": "basic",
     "test_type": "from_native",
     "input": {
       "scheme": "conan",
@@ -99,7 +110,8 @@
     "expected_output": "vers:conan/1.0.0"
   },
   {
-    "test_group": "advanced",
+    "description": "Construct VERS range from native conan range.",
+    "test_group": "basic",
     "test_type": "from_native",
     "input": {
       "scheme": "conan",
@@ -108,7 +120,8 @@
     "expected_output": "vers:conan/>=0.0.0"
   },
   {
-    "test_group": "advanced",
+    "description": "Construct VERS range from native conan range.",
+    "test_group": "basic",
     "test_type": "from_native",
     "input": {
       "scheme": "conan",
@@ -117,7 +130,8 @@
     "expected_output": "vers:conan/1.0.0|2.1.3"
   },
   {
-    "test_group": "advanced",
+    "description": "Construct VERS range from native conan range.",
+    "test_group": "basic",
     "test_type": "from_native",
     "input": {
       "scheme": "conan",
@@ -126,7 +140,8 @@
     "expected_output": "vers:conan/>1|<2.0|>=3.2|<4-"
   },
   {
-    "test_group": "advanced",
+    "description": "Construct VERS range from native conan range.",
+    "test_group": "basic",
     "test_type": "from_native",
     "input": {
       "scheme": "conan",
@@ -135,7 +150,8 @@
     "expected_output": "vers:conan/>=0.0.0"
   },
   {
-    "test_group": "advanced",
+    "description": "Construct VERS range from native conan range.",
+    "test_group": "basic",
     "test_type": "from_native",
     "input": {
       "scheme": "conan",
@@ -144,7 +160,8 @@
     "expected_output": "vers:conan/>=0.0.0"
   },
   {
-    "test_group": "advanced",
+    "description": "Construct VERS range from native conan range.",
+    "test_group": "basic",
     "test_type": "from_native",
     "input": {
       "scheme": "conan",
@@ -153,7 +170,8 @@
     "expected_output": "vers:conan/>1|<2.0"
   },
   {
-    "test_group": "advanced",
+    "description": "Construct VERS range from native conan range.",
+    "test_group": "basic",
     "test_type": "from_native",
     "input": {
       "scheme": "conan",
@@ -162,7 +180,8 @@
     "expected_output": "vers:conan/>1|<2.0|>=3.2|<4-"
   },
   {
-    "test_group": "advanced",
+    "description": "Construct VERS range from native conan range.",
+    "test_group": "basic",
     "test_type": "from_native",
     "input": {
       "scheme": "conan",
@@ -171,7 +190,8 @@
     "expected_output": "vers:conan/>=1.1.2|<2-"
   },
   {
-    "test_group": "advanced",
+    "description": "Construct VERS range from native conan range.",
+    "test_group": "basic",
     "test_type": "from_native",
     "input": {
       "scheme": "conan",

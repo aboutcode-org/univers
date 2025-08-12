@@ -14,7 +14,7 @@ from univers.versions import InvalidVersion
 
 from . import SchemaDrivenVersTest
 
-TEST_DATA = Path(__file__).parent / "data" / "schema" / "alpine_test.json"
+TEST_DATA = Path(__file__).parent / "data" / "schema" / "alpine_version_cmp.json"
 
 
 class AlpineVersionComparison(SchemaDrivenVersTest):
