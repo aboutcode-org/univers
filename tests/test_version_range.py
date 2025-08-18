@@ -10,7 +10,6 @@ from pathlib import Path
 import pytest
 
 from tests import SchemaDrivenVersTest
-from univers.intdot import IntdotVersion
 from univers.version_constraint import VersionConstraint
 from univers.version_range import PURL_TYPE_BY_GITLAB_SCHEME
 from univers.version_range import RANGE_CLASS_BY_SCHEMES
@@ -22,6 +21,7 @@ from univers.version_range import PypiVersionRange
 from univers.version_range import VersionRange
 from univers.version_range import build_range_from_snyk_advisory_string
 from univers.version_range import from_gitlab_native
+from univers.versions import IntdotVersion
 from univers.versions import OpensslVersion
 from univers.versions import PypiVersion
 from univers.versions import SemverVersion
