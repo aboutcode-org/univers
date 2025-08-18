@@ -10,9 +10,11 @@ from pathlib import Path
 import pytest
 
 from tests import SchemaDrivenVersTest
+from univers.intdot import IntdotVersion
 from univers.version_constraint import VersionConstraint
 from univers.version_range import PURL_TYPE_BY_GITLAB_SCHEME
 from univers.version_range import RANGE_CLASS_BY_SCHEMES
+from univers.version_range import IntdotVersionRange
 from univers.version_range import InvalidVersionRange
 from univers.version_range import MattermostVersionRange
 from univers.version_range import OpensslVersionRange
