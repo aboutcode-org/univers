@@ -364,4 +364,3 @@ def test_version_range_intdot():
     assert IntdotVersion("1.3.3alpha") in intdot_range
     assert IntdotVersion("1.2.2.pre") not in intdot_range
     assert IntdotVersion("1010.23.234203.0") in IntdotVersionRange.from_string("vers:intdot/*")
-

@@ -1446,6 +1446,7 @@ RANGE_CLASS_BY_SCHEMES = {
     "all": AllVersionRange,
     "none": NoneVersionRange,
     "intdot": IntdotVersionRange,
+}
 
 PURL_TYPE_BY_GITLAB_SCHEME = {
     "gem": "gem",
