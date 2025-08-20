@@ -13,6 +13,7 @@ from tests import SchemaDrivenVersTest
 from univers.version_constraint import VersionConstraint
 from univers.version_range import PURL_TYPE_BY_GITLAB_SCHEME
 from univers.version_range import RANGE_CLASS_BY_SCHEMES
+from univers.version_range import IntdotVersionRange
 from univers.version_range import InvalidVersionRange
 from univers.version_range import MattermostVersionRange
 from univers.version_range import OpensslVersionRange
@@ -20,6 +21,7 @@ from univers.version_range import PypiVersionRange
 from univers.version_range import VersionRange
 from univers.version_range import build_range_from_snyk_advisory_string
 from univers.version_range import from_gitlab_native
+from univers.versions import IntdotVersion
 from univers.versions import OpensslVersion
 from univers.versions import PypiVersion
 from univers.versions import SemverVersion
@@ -355,3 +357,12 @@ def test_version_range_none():
         VersionRange.from_string("vers:none/!1.2.3")
     with pytest.raises(Exception):
         VersionRange.from_string("vers:none/*|>1.2.3")
+
+
+def test_version_range_intdot():
+    intdot_range = IntdotVersionRange.from_string("vers:intdot/>1.2.3.4")
+    assert IntdotVersion("1.3.3") in intdot_range
+    assert IntdotVersion("0.3.3") not in intdot_range
+    assert IntdotVersion("1.3.3alpha") in intdot_range
+    assert IntdotVersion("1.2.2.pre") not in intdot_range
+    assert IntdotVersion("1010.23.234203.0") in IntdotVersionRange.from_string("vers:intdot/*")
