@@ -386,4 +386,3 @@ def test_version_range_datetime():
         )
     )
     assert DatetimeVersion("2001-01-01T01:02:03Z") in datetime_constraints
-
