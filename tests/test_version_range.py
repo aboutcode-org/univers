@@ -13,6 +13,7 @@ from tests import SchemaDrivenVersTest
 from univers.version_constraint import VersionConstraint
 from univers.version_range import PURL_TYPE_BY_GITLAB_SCHEME
 from univers.version_range import RANGE_CLASS_BY_SCHEMES
+from univers.version_range import DatetimeVersionRange
 from univers.version_range import IntdotVersionRange
 from univers.version_range import InvalidVersionRange
 from univers.version_range import MattermostVersionRange
@@ -21,6 +22,7 @@ from univers.version_range import PypiVersionRange
 from univers.version_range import VersionRange
 from univers.version_range import build_range_from_snyk_advisory_string
 from univers.version_range import from_gitlab_native
+from univers.versions import DatetimeVersion
 from univers.versions import IntdotVersion
 from univers.versions import OpensslVersion
 from univers.versions import PypiVersion
@@ -369,6 +371,10 @@ def test_version_range_intdot():
 
 
 def test_version_range_datetime():
+    assert DatetimeVersion("2021-05-05T01:02:03.1234Z") == DatetimeVersion("2021-05-05T01:02:03.1234Z")
+    assert DatetimeVersion("2021-05-05T01:02:03.1234Z") != DatetimeVersion("2022-05-05T01:02:03.1234Z")
+    assert DatetimeVersion("2021-05-05T01:02:03.1234Z") <= DatetimeVersion("2022-05-05T01:02:03.1234Z")
+    assert DatetimeVersion("2021-05-05T01:02:03.1234Z") >= DatetimeVersion("2020-05-05T01:02:03.1234Z")
     assert DatetimeVersion("2000-01-01T01:02:03.1234Z") in DatetimeVersionRange.from_string(
         "vers:datetime/*"
     )
@@ -386,3 +392,5 @@ def test_version_range_datetime():
         )
     )
     assert DatetimeVersion("2001-01-01T01:02:03Z") in datetime_constraints
+    with pytest.raises(Exception):
+        VersionRange.from_string("vers:datetime/2025-08-25")
