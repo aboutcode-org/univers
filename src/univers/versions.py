@@ -4,6 +4,10 @@
 #
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
 import attr
 import semantic_version
 from packaging import version as packaging_version
@@ -18,6 +22,12 @@ from univers import nuget
 from univers import rpm
 from univers.conan.version import Version as conan_version
 from univers.utils import remove_spaces
+
+if TYPE_CHECKING:
+    from typing import Any
+
+    from univers.version_constraint import VersionConstraint
+
 
 """
 Version classes encapsulating the details of each version syntax.
@@ -35,7 +45,7 @@ class InvalidVersion(ValueError):
     pass
 
 
-def is_valid_alpine_version(s):
+def is_valid_alpine_version(s: str) -> bool:
     """
     Return True is the string `s` is a valid Alpine version.
     We do not support yet version strings that start with
@@ -82,7 +92,7 @@ class Version:
     # a comparable scheme-specific version object constructed from the version string
     value = attr.ib(default=None, repr=False, eq=True, order=True, hash=True)
 
-    def __attrs_post_init__(self):
+    def __attrs_post_init__(self) -> None:
         normalized_string = self.normalize(self.string)
         if not self.is_valid(normalized_string):
             raise InvalidVersion(f"{self.string!r} is not a valid {self.__class__!r}")
@@ -96,7 +106,7 @@ class Version:
         object.__setattr__(self, "value", value)
 
     @classmethod
-    def is_valid(cls, string):
+    def is_valid(cls, string) -> bool:
         """
         Return True if the ``string`` is a valid version for its scheme or False
         if not valid. The empty string, None, False and 0 are considered invalid.
@@ -105,7 +115,7 @@ class Version:
         return bool(string)
 
     @classmethod
-    def normalize(cls, string):
+    def normalize(cls, string: str) -> str:
         """
         Return a normalized version string from ``string ``. Subclass can override.
         """
@@ -113,7 +123,7 @@ class Version:
         return remove_spaces(string).lstrip("vV")
 
     @classmethod
-    def build_value(self, string):
+    def build_value(self, string: str) -> str:
         """
         Return a wrapped version "value" object for a version ``string``.
         Subclasses can override. The default is a no-op and returns the string
@@ -122,7 +132,7 @@ class Version:
         """
         return string
 
-    def satisfies(self, constraint):
+    def satisfies(self, constraint: VersionConstraint) -> bool:
         """
         Return True if this Version satisfies the ``constraint``
         VersionConstraint. Satisfying means that this version is "within" the
@@ -130,19 +140,19 @@ class Version:
         """
         return self in constraint
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str(self.value)
 
 
 class AllVersion(Version):
     @classmethod
-    def is_valid(cls, string):
+    def is_valid(cls, string: str) -> bool:
         return string == "vers:all/*"
 
 
 class NoneVersion(Version):
     @classmethod
-    def is_valid(cls, string):
+    def is_valid(cls, string: str) -> bool:
         return string == "vers:none/*"
 
 
@@ -158,7 +168,7 @@ class IntdotVersion(Version):
 
 class GenericVersion(Version):
     @classmethod
-    def is_valid(cls, string):
+    def is_valid(cls, string: str) -> bool:
         # generic implementation ...
         # TODO: Should use
         # https://github.com/repology/libversion/blob/master/doc/ALGORITHM.md#core-algorithm
@@ -179,14 +189,14 @@ class PypiVersion(Version):
     # TODO: use packvers and handle legacy versions
 
     @classmethod
-    def build_value(cls, string):
+    def build_value(cls, string: str) -> packaging_version.Version:
         """
         Return a packaging.version.LegacyVersion or packaging.version.Version
         """
         return packaging_version.Version(string)
 
     @classmethod
-    def is_valid(cls, string):
+    def is_valid(cls, string: str) -> bool:
         try:
             # Note: we consider only modern pep440 versions as valid. legacy
             # will fail validation for now.
@@ -198,7 +208,7 @@ class PypiVersion(Version):
 
 class EnhancedSemanticVersion(semantic_version.Version):
     @property
-    def precedence_key(self):
+    def precedence_key(self) -> tuple[Any, ...]:
         key = super(EnhancedSemanticVersion, self).precedence_key
         return key + (self.build or ())
 
@@ -209,11 +219,11 @@ class SemverVersion(Version):
     """
 
     @classmethod
-    def build_value(cls, string):
+    def build_value(cls, string: str) -> EnhancedSemanticVersion | semantic_version.Version:
         return EnhancedSemanticVersion.coerce(string)
 
     @classmethod
-    def is_valid(cls, string):
+    def is_valid(cls, string: str) -> bool:
         try:
             cls.build_value(string)
             return True
@@ -240,26 +250,26 @@ class SemverVersion(Version):
     def build(self):
         return self.value and self.value.build
 
-    def next_major(self):
+    def next_major(self) -> "SemverVersion":
         return self.value and SemverVersion(str(self.value.next_major()))
 
-    def next_minor(self):
+    def next_minor(self) -> "SemverVersion":
         return self.value and SemverVersion(str(self.value.next_minor()))
 
-    def next_patch(self):
+    def next_patch(self) -> "SemverVersion":
         return self.value and SemverVersion(str(self.value.next_patch()))
 
 
-def is_even(s):
+def is_even(s: str) -> bool:
     """
     Return True if the string "s" is an even number and False if this is an odd
     number. For example:
 
-    >>> is_even(4)
+    >>> is_even("4")
     True
-    >>> is_even(123)
+    >>> is_even("123")
     False
-    >>> is_even(0)
+    >>> is_even("0")
     True
     """
     return (int(s) % 2) == 0
@@ -271,7 +281,7 @@ class NginxVersion(SemverVersion):
     """
 
     @property
-    def is_stable(self):
+    def is_stable(self) -> bool:
         """
         True if this is a "stable "version
         """
@@ -286,36 +296,36 @@ class RubygemsVersion(Version):
     """
 
     @classmethod
-    def build_value(cls, string):
+    def build_value(cls, string) -> gem.GemVersion:
         return gem.GemVersion(string)
 
     @classmethod
-    def is_valid(cls, string):
+    def is_valid(cls, string) -> bool:
         return gem.GemVersion.is_correct(string)
 
 
 class ArchLinuxVersion(Version):
-    def __eq__(self, other):
+    def __eq__(self, other: "ArchLinuxVersion") -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
         return arch.vercmp(self.value, other.value) == 0
 
-    def __lt__(self, other):
+    def __lt__(self, other: "ArchLinuxVersion") -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
         return arch.vercmp(self.value, other.value) < 0
 
-    def __gt__(self, other):
+    def __gt__(self, other: "ArchLinuxVersion") -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
         return arch.vercmp(self.value, other.value) > 0
 
-    def __le__(self, other):
+    def __le__(self, other: "ArchLinuxVersion") -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
         return arch.vercmp(self.value, other.value) <= 0
 
-    def __ge__(self, other):
+    def __ge__(self, other: "ArchLinuxVersion") -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
         return arch.vercmp(self.value, other.value) >= 0
@@ -323,11 +333,11 @@ class ArchLinuxVersion(Version):
 
 class DebianVersion(Version):
     @classmethod
-    def build_value(cls, string):
+    def build_value(cls, string: str) -> debian.Version:
         return debian.Version.from_string(string)
 
     @classmethod
-    def is_valid(cls, string):
+    def is_valid(cls, string: str) -> bool:
         return debian.Version.is_valid(string)
 
 
@@ -336,11 +346,11 @@ class MavenVersion(Version):
     # https://github.com/apache/maven/tree/master/maven-artifact/src/main/java/org/apache/maven/artifact/versioning
 
     @classmethod
-    def build_value(cls, string):
+    def build_value(cls, string: str) -> maven.Version:
         return maven.Version(string)
 
     @classmethod
-    def is_valid(cls, string):
+    def is_valid(cls, string: str) -> bool:
         try:
             cls.build_value(string)
             return True
@@ -353,11 +363,11 @@ class NugetVersion(Version):
     # See https://docs.microsoft.com/en-us/nuget/concepts/package-versioning
 
     @classmethod
-    def build_value(cls, string):
+    def build_value(cls, string: str) -> nuget.Version:
         return nuget.Version.from_string(string)
 
     @classmethod
-    def is_valid(cls, string):
+    def is_valid(cls, string: str) -> bool:
         try:
             cls.build_value(string)
             return True
@@ -371,26 +381,26 @@ class RpmVersion(Version):
     """
 
     @classmethod
-    def build_value(cls, string):
+    def build_value(cls, string: str) -> rpm.RpmVersion:
         return rpm.RpmVersion.from_string(string)
 
 
 class GentooVersion(Version):
     @classmethod
-    def is_valid(cls, string):
+    def is_valid(cls, string: str) -> bool:
         return gentoo.is_valid(string)
 
-    def __eq__(self, other):
+    def __eq__(self, other: "GentooVersion") -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
         return gentoo.vercmp(self.value, other.value) == 0
 
-    def __lt__(self, other):
+    def __lt__(self, other: "GentooVersion") -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
         return gentoo.vercmp(self.value, other.value) == -1
 
-    def __gt__(self, other):
+    def __gt__(self, other: "GentooVersion") -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
         return gentoo.vercmp(self.value, other.value) == 1
@@ -398,19 +408,19 @@ class GentooVersion(Version):
 
 class AlpineLinuxVersion(GentooVersion):
     @classmethod
-    def is_valid(cls, string):
+    def is_valid(cls, string: str) -> bool:
         return is_valid_alpine_version(string) and gentoo.is_valid(string)
 
 
 class ComposerVersion(SemverVersion):
     @classmethod
-    def build_value(cls, string):
+    def build_value(cls, string: str) -> SemverVersion:
         return super().build_value(string.lstrip("vV"))
 
 
 class GolangVersion(SemverVersion):
     @classmethod
-    def build_value(cls, string):
+    def build_value(cls, string: str) -> SemverVersion:
         return super().build_value(string.lstrip("vV"))
 
 
@@ -445,11 +455,11 @@ class LegacyOpensslVersion(Version):
         object.__setattr__(self, "patch", patch)
 
     @classmethod
-    def is_valid(cls, string):
+    def is_valid(cls, string: str) -> bool:
         return bool(cls.parse(string))
 
     @classmethod
-    def parse(cls, string):
+    def parse(cls, string: str) -> bool | tuple[int, int, int, str]:
         """
         Return a four-tuple of (major, minor, build, patch) version segments where
         major, minor, build are integers and patch is a string possibly empty.
@@ -500,13 +510,13 @@ class LegacyOpensslVersion(Version):
         return major, minor, build, patch
 
     @classmethod
-    def build_value(cls, string):
+    def build_value(cls, string: str) -> "LegacyOpensslVersion":
         return cls.parse(string)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.major}.{self.minor}.{self.build}{self.patch}"
 
-    def __lt__(self, other):
+    def __lt__(self, other: "LegacyOpensslVersion") -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
         # Check if versions have the same base, and `one and only one` of them is a pre-release.
@@ -516,7 +526,7 @@ class LegacyOpensslVersion(Version):
             return self.is_prerelease()
         return self.value.__lt__(other.value)
 
-    def __gt__(self, other):
+    def __gt__(self, other: "LegacyOpensslVersion") -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
         if (self.major, self.minor, self.build) == (other.major, other.minor, other.build) and (
@@ -525,7 +535,7 @@ class LegacyOpensslVersion(Version):
             return other.is_prerelease()
         return self.value.__gt__(other.value)
 
-    def is_prerelease(self):
+    def is_prerelease(self) -> bool:
         return self.patch.startswith(("-beta", "-alpha"))
 
 
@@ -548,11 +558,11 @@ class OpensslVersion(Version):
     """
 
     @classmethod
-    def is_valid(cls, string):
+    def is_valid(cls, string: str) -> bool:
         return cls.is_valid_new(string) or cls.is_valid_legacy(string)
 
     @classmethod
-    def build_value(cls, string):
+    def build_value(cls, string: str) -> LegacyOpensslVersion | SemverVersion:
         """
         Return a wrapped version "value" object depending on
         whether version is legacy or semver.
@@ -563,7 +573,7 @@ class OpensslVersion(Version):
             return SemverVersion(string)
 
     @classmethod
-    def is_valid_new(cls, string):
+    def is_valid_new(cls, string: str) -> bool | None:
         """
         Check the validity of new Openssl Version.
 
@@ -580,17 +590,17 @@ class OpensslVersion(Version):
             return sem.major >= 3
 
     @classmethod
-    def is_valid_legacy(cls, string):
+    def is_valid_legacy(cls, string: str) -> bool:
         return LegacyOpensslVersion.is_valid(string)
 
-    def __eq__(self, other):
+    def __eq__(self, other: "OpensslVersion") -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
         if not isinstance(other.value, self.value.__class__):
             return NotImplemented
         return self.value.__eq__(other.value)
 
-    def __lt__(self, other):
+    def __lt__(self, other: "OpensslVersion") -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
         if isinstance(other.value, self.value.__class__):
@@ -598,7 +608,7 @@ class OpensslVersion(Version):
         # By construction legacy version is always behind Semver
         return isinstance(self.value, LegacyOpensslVersion)
 
-    def __gt__(self, other):
+    def __gt__(self, other: "OpensslVersion") -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
         if isinstance(other.value, self.value.__class__):
@@ -606,7 +616,7 @@ class OpensslVersion(Version):
         # By construction semver version is always ahead of legacy
         return isinstance(self.value, SemverVersion)
 
-    def __le__(self, other):
+    def __le__(self, other: "OpensslVersion") -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
         if isinstance(other.value, self.value.__class__):
@@ -614,7 +624,7 @@ class OpensslVersion(Version):
         # version value are of diff type, then legacy one is always behind semver
         return isinstance(self.value, LegacyOpensslVersion)
 
-    def __ge__(self, other):
+    def __ge__(self, other: "OpensslVersion") -> bool:
         if not isinstance(other, self.__class__):
             return NotImplemented
         if isinstance(other.value, self.value.__class__):
@@ -625,11 +635,11 @@ class OpensslVersion(Version):
 
 class ConanVersion(Version):
     @classmethod
-    def build_value(cls, string):
+    def build_value(cls, string: str) -> conan_version:
         return conan_version(string)
 
     @classmethod
-    def is_valid(cls, string):
+    def is_valid(cls, string: str) -> bool:
         try:
             cls.build_value(string)
             return True

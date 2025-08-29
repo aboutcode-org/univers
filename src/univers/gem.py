@@ -14,10 +14,22 @@
 # Originally from https://github.com/rubygems/rubygems and
 # https://github.com/coi-gov-pl/puppeter
 
+from __future__ import annotations
+
 import operator
 import re
 from collections import namedtuple
 from itertools import dropwhile
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
+    from typing import Any
+
+    try:
+        from typing import Self
+    except ImportError:
+        from typing_extensions import Self
 
 
 class InvalidRequirementError(AttributeError):
@@ -184,7 +196,7 @@ class GemVersion:
     VERSION_PATTERN = r"[0-9]+(?:\.[0-9a-zA-Z]+)*(-[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?"
     is_correct = re.compile(rf"^\s*({VERSION_PATTERN})?\s*$").match
 
-    def __init__(self, version):
+    def __init__(self, version: int | str | Self):
         """
         Construct a Version from the ``version`` string.  A version string is a
         series of digits or ASCII letters separated by dots and may contain dash
@@ -208,37 +220,37 @@ class GemVersion:
 
         self.version = version.replace("-", ".pre.")
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.original
 
     to_string = __str__
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"GemVersion({self.original!r})"
 
-    def equal_strictly(self, other):
+    def equal_strictly(self, other: Self) -> bool:
         return self.version == other.version
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash(self.canonical_segments)
 
-    def __eq__(self, other):
+    def __eq__(self, other: Self) -> bool:
         return self.canonical_segments == other.canonical_segments
 
-    def __lt__(self, other):
+    def __lt__(self, other: Self) -> bool:
         return self.__cmp__(other) < 0
 
-    def __le__(self, other):
+    def __le__(self, other: Self) -> bool:
         return self.__cmp__(other) <= 0
 
-    def __gt__(self, other):
+    def __gt__(self, other: Self) -> bool:
         return self.__cmp__(other) > 0
 
-    def __ge__(self, other):
+    def __ge__(self, other: Self) -> bool:
         return self.__cmp__(other) >= 0
 
     @property
-    def segments(self):
+    def segments(self) -> tuple[int | str, ...]:
         """
         Returns segments for this version where segments are
         ints or strings parsed from the original version string.
@@ -251,7 +263,7 @@ class GemVersion:
         return tuple(segments)
 
     @property
-    def canonical_segments(self):
+    def canonical_segments(self) -> tuple[int | str, ...]:
         """
         Returns  "canonical segments" for this version using
         the Rubygems way for canonicalization.
@@ -263,7 +275,7 @@ class GemVersion:
             canonical_segments.extend(reversed(segs))
         return tuple(canonical_segments)
 
-    def bump(self):
+    def bump(self) -> Self:
         """
         Return a new version object where the next to the last revision number
         is one greater (e.g., 5.3.1 => 5.4) i.e., incrementing this GemVersion
@@ -287,7 +299,7 @@ class GemVersion:
         segments = [str(r) for r in segments]
         return GemVersion(".".join(segments))
 
-    def release(self):
+    def release(self) -> Self:
         """
         Return a new GemVersion which is the release for this version (e.g.,
         1.2.0.a -> 1.2.0). Non-prerelease versions return themselves. A release
@@ -301,14 +313,14 @@ class GemVersion:
             return GemVersion(".".join(segments))
         return self
 
-    def prerelease(self):
+    def prerelease(self) -> bool:
         """
         Return True if this is considered as a prerelease version.
         A version is considered a prerelease if it contains a letter.
         """
         return any(not str(s).isdigit() for s in self.segments)
 
-    def split_segments(self):
+    def split_segments(self) -> tuple[list[str], list[str]]:
         """
          Return a two-tuple of segments:
         - the first is a list of numeric-only segments starting from the left
@@ -328,7 +340,7 @@ class GemVersion:
                 string_segments.append(seg)
         return numeric_segments, string_segments
 
-    def __cmp__(self, other, trace=False):
+    def __cmp__(self, other: Any, trace: bool = False) -> int | None:
         """
         Compare this version with ``other`` returning -1, 0, or 1 if the
         other version is larger, the same, or smaller than this
@@ -363,7 +375,7 @@ class GemVersion:
 
         if lhsegments == rhsegments:
             if trace:
-                print(f"    lhsegments == rhsegments: returning 0")
+                print("    lhsegments == rhsegments: returning 0")
             return 0
 
         lhsize = len(lhsegments)
@@ -410,21 +422,21 @@ class GemVersion:
 
             if lhs == rhs:
                 if trace:
-                    print(f"      lhs == rhs: continue")
+                    print("      lhs == rhs: continue")
                 continue
 
             if isinstance(lhs, str) and isinstance(rhs, int):
                 if trace:
                     print(f"      isinstance(lhs, str): {type(lhs)!r}")
                     print(f"      isinstance(rhs, int): {type(rhs)!r}")
-                    print(f"      return -1")
+                    print("      return -1")
                 return -1
 
             if isinstance(lhs, int) and isinstance(rhs, str):
                 if trace:
                     print(f"      isinstance(lhs, int): {type(lhs)!r}")
                     print(f"      isinstance(rhs, str): {type(rhs)!r}")
-                    print(f"      return 1")
+                    print("      return 1")
                 return 1
 
             result = (lhs > rhs) - (lhs < rhs)
@@ -435,7 +447,7 @@ class GemVersion:
             return result
 
         if trace:
-            print(f"  all options evaluated: return 0")
+            print("  all options evaluated: return 0")
         return 0
 
 
@@ -443,7 +455,7 @@ GemConstraint = namedtuple("GemConstraint", ["op", "version"])
 GemConstraint.to_string = lambda gc: f"{gc.op} {gc.version}"
 
 
-def sort_constraints(constraints):
+def sort_constraints(constraints: Iterable[GemVersion]) -> list[GemConstraint]:
     """
     Return a sorted sequence of unique GemConstraints.
     """
@@ -456,7 +468,7 @@ def sort_constraints(constraints):
     return consts
 
 
-def tilde_comparator(version, requirement, trace=False):
+def tilde_comparator(version: GemVersion, requirement: GemVersion, trace: bool = False) -> bool:
     """
     Return True if ``version`` GemVersion satisfies ``requirement`` GemVersion
     according to the Rubygems tilde semantics.
@@ -499,7 +511,7 @@ class GemRequirement:
     # The default requirement matches any version
     DEFAULT_CONSTRAINT = GemConstraint(">=", GemVersion(0))
 
-    def __init__(self, *requirements):
+    def __init__(self, *requirements: str):
         """
         Initialize a GemRequirement from a sequence of ``requirements``
         converted to a constraints sequence of GemConstraint.
@@ -509,16 +521,16 @@ class GemRequirement:
         else:
             self.constraints = tuple([GemRequirement.parse(r) for r in requirements])
 
-    def __str__(self):
+    def __str__(self) -> str:
         gcs = [gc.to_string() for gc in sort_constraints(self.constraints)]
         return ", ".join(gcs)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         gcs = ", ".join(repr(gc.to_string()) for gc in sort_constraints(self.constraints))
         return f"GemRequirement({gcs})"
 
     @classmethod
-    def from_string(cls, requirements):
+    def from_string(cls, requirements: str):
         """
         Return a GemRequirement build from a lockfile-style ``requirements``
         string.
@@ -532,7 +544,7 @@ class GemRequirement:
         reqs = [r.strip() for r in reqs.split(",")]
         return cls(*reqs)
 
-    def for_lockfile(self):
+    def for_lockfile(self) -> str:
         """
         Return a string representing this list of requirements suitable for use
         in a lockfile.
@@ -546,13 +558,13 @@ class GemRequirement:
         gcs = ", ".join(gcs)
         return f" ({gcs})"
 
-    def dedupe(self):
+    def dedupe(self) -> Self:
         """
         Return a new GemRequirement with sorted and unique constraints.
         """
         return GemRequirement(*sort_constraints(self.constraints))
 
-    def simplify(self):
+    def simplify(self) -> Self:
         """
         Return a new simplified GemRequirement with:
         - sorted and unique constraints.
@@ -567,7 +579,7 @@ class GemRequirement:
                 constraints.append(const)
         return GemRequirement(*sort_constraints(constraints))
 
-    def __eq__(self, other):
+    def __eq__(self, other: Any) -> bool:
         if not isinstance(other, self.__class__):
             return False
 
@@ -589,7 +601,7 @@ class GemRequirement:
                 return True
         return False
 
-    def exact(self):
+    def exact(self) -> bool:
         """
         Return True if the requirement is for only an exact version.
 
@@ -604,7 +616,7 @@ class GemRequirement:
         return len(self.constraints) == 1 and self.constraints[0].op == "="
 
     @classmethod
-    def create(cls, reqs):
+    def create(cls, reqs: str | Iterable[str]) -> Self:
         """
         Return a GemRequirement built from a single requirement string or a list
         of requirement strings.
@@ -615,7 +627,7 @@ class GemRequirement:
             return cls(reqs)
 
     @classmethod
-    def parse(cls, requirement):
+    def parse(cls, requirement: str) -> GemConstraint:
         """
         Return a GemConstraint tuple of (operator string, GemVersion object)
         parsed from a single ``requirement`` string such as "> 3.0". Also
@@ -641,7 +653,7 @@ class GemRequirement:
             op = match.group(1) if match.group(1) else "="
             return GemConstraint(op, GemVersion(match.group(2)))
 
-    def satisfied_by(self, version, trace=False):
+    def satisfied_by(self, version: str | GemVersion, trace: bool = False) -> bool:
         """
         Return True if the ``version`` GemVersion or version string or int
         satisfies all the constraints of this requirement. Raise an
@@ -674,7 +686,7 @@ class GemRequirement:
 
         return True
 
-    def tilde_requirements(self):
+    def tilde_requirements(self) -> list[GemConstraint]:
         """
         Return a sorted sequence of all pessimistic "~>" GemConstraint.
         """
@@ -682,7 +694,7 @@ class GemRequirement:
         return [gc for gc in constraints if gc.op == "~>"]
 
 
-def get_tilde_constraints(constraint):
+def get_tilde_constraints(constraint: GemConstraint) -> tuple[GemConstraint, GemConstraint]:
     """
     Return a tuple of two GemConstraint representing the lower and upper
     bound of a version range ``string`` that uses a tilde "~>" pessimistic operator.

@@ -6,16 +6,30 @@
 #
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
+from __future__ import annotations
+
 import functools
 import re
+from typing import TYPE_CHECKING
 
 import semver
 
-_PAD_WIDTH = 8
-_FAKE_PRE_WIDTH = 16
+if TYPE_CHECKING:
+    from typing import Any
+    from typing import Final
+    from typing import SupportsInt
+
+    try:
+        from typing import Self
+    except ImportError:
+        from typing_extensions import Self
 
 
-def _strip_leading_v(version):
+_PAD_WIDTH: Final[int] = 8
+_FAKE_PRE_WIDTH: Final[int] = 16
+
+
+def _strip_leading_v(version: str) -> str:
     """Strip leading v from the version, if any."""
     # Versions starting with "v" aren't valid SemVer, but we handle them just in
     # case.
@@ -25,7 +39,7 @@ def _strip_leading_v(version):
     return version
 
 
-def _remove_leading_zero(component):
+def _remove_leading_zero(component: str) -> str:
     """Remove leading zeros from a component."""
     if component[0] == ".":
         return "." + str(int(component[1:]))
@@ -33,7 +47,7 @@ def _remove_leading_zero(component):
     return str(int(component))
 
 
-def coerce(version):
+def coerce(version: str) -> str:
     """Coerce a potentially invalid semver into valid semver."""
     version = _strip_leading_v(version)
     version_pattern = re.compile(r"^(\d+)(\.\d+)?(\.\d+)?(.*)$")
@@ -49,17 +63,17 @@ def coerce(version):
     )
 
 
-def is_valid(version):
+def is_valid(version: str) -> bool:
     """Returns whether or not the version is a valid semver."""
     return semver.VersionInfo.isvalid(_strip_leading_v(version))
 
 
-def parse(version):
+def parse(version: str) -> semver.VersionInfo:
     """Parse a SemVer."""
     return semver.VersionInfo.parse(coerce(version))
 
 
-def normalize(version):
+def normalize(version: str) -> str:
     """Normalize semver version for indexing (to allow for lexical
     sorting/filtering)."""
     version = parse(version)
@@ -122,7 +136,7 @@ def normalize(version):
     return f"{core_parts}-{pre}"
 
 
-def _extract_revision(str_version):
+def _extract_revision(str_version: str) -> tuple[str, int]:
     """
     Extract revision from ``str_version`` and return a tuple of:
         (dotted version string without revision, revision integer).
@@ -149,7 +163,7 @@ class InvalidNuGetVersion(Exception):
 class Version:
     """NuGet version."""
 
-    def __init__(self, base_semver, revision=0):
+    def __init__(self, base_semver: semver.VersionInfo, revision: int = 0):
         self._base_semver = base_semver
         if self._base_semver.prerelease:
             # TODO: why lowercasing this and not the build and why here and now?
@@ -157,14 +171,14 @@ class Version:
         self._revision = revision or 0
         self._original_version = None
 
-    def __eq__(self, other):
+    def __eq__(self, other: Any) -> bool:
         return (
             isinstance(other, Version)
             and self._base_semver == other._base_semver
             and self._revision == other._revision
         )
 
-    def __lt__(self, other):
+    def __lt__(self, other: Any) -> bool:
         if not isinstance(other, Version):
             return NotImplemented
         if self._base_semver.replace(prerelease="") == other._base_semver.replace(prerelease=""):
@@ -175,7 +189,7 @@ class Version:
         # Revision is the same, so ignore it for comparison purposes.
         return self._base_semver < other._base_semver
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash(
             (
                 self._base_semver.to_tuple(),
@@ -184,7 +198,7 @@ class Version:
         )
 
     @classmethod
-    def from_string(cls, str_version):
+    def from_string(cls, str_version: str) -> Self:
         if not str_version:
             return
 
@@ -202,10 +216,15 @@ class Version:
         vers._original_version = original
         return vers
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Version<{self.to_string()}>"
 
-    def to_string(self, with_empty_revision=False, include_prerelease=True, include_build=True):
+    def to_string(
+        self,
+        with_empty_revision: bool = False,
+        include_prerelease: bool = True,
+        include_build: bool = True,
+    ) -> str:
         major = self.major or "0"
         minor = self.minor or "0"
         patch = self.patch or "0"
@@ -226,13 +245,13 @@ class Version:
 
         return f"{major}.{minor}.{patch}{revision}{prerelease}{build}"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.to_string(
             with_empty_revision=False, include_prerelease=True, include_build=True
         )
 
     @property
-    def base_version(self):
+    def base_version(self) -> str:
         """
         Return the base version dotted string composed of the four numerical
         segments including revision and ignoring prerelease and build.
@@ -242,25 +261,25 @@ class Version:
         )
 
     @property
-    def major(self):
+    def major(self) -> SupportsInt:
         return self._base_semver.major
 
     @property
-    def minor(self):
+    def minor(self) -> SupportsInt:
         return self._base_semver.minor
 
     @property
-    def patch(self):
+    def patch(self) -> SupportsInt:
         return self._base_semver.patch
 
     @property
-    def revision(self):
+    def revision(self) -> SupportsInt:
         return self._revision
 
     @property
-    def prerelease(self):
+    def prerelease(self) -> str:
         return self._base_semver.prerelease and self._base_semver.prerelease or ""
 
     @property
-    def build(self):
+    def build(self) -> str:
         return self._base_semver.build and self._base_semver.build or ""
