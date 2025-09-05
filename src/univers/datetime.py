@@ -4,8 +4,8 @@
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
 import re
-
-from datetime import datetime, timezone
+from datetime import datetime
+from datetime import timezone
 
 
 class DatetimeVersion:
@@ -27,7 +27,7 @@ class DatetimeVersion:
         # fromisoformat doesn't accept the "Z" suffix prior to 3.11, so we normalize it:
         if version.endswith("Z"):
             version = version[:-1] + "+00:00"
-        
+
         self.original = version
         self.parsed_stamp = datetime.fromisoformat(version).astimezone(timezone.utc)
 
