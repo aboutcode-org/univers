@@ -5,14 +5,14 @@
 
 import re
 
-from dateutil.parser import isoparse
+from datetime import datetime, timezone
 
 
 class DatetimeVersion:
     """
     datetime version.
 
-    The timestamp must be RFC3339-compliant, i.e., a subset of ISO8601, where the date AND time are always specified. Therefore, we can use dateutil's ISO-parser but have to check for compliance with the RFC format first via a regex.
+    The timestamp must be RFC3339-compliant, i.e., a subset of ISO8601, where the date AND time are always specified. Therefore, we cannot use an ISO-parser directly, but have to check for compliance with the RFC format via a regex.
     """
 
     VERSION_PATTERN = re.compile(
@@ -20,12 +20,16 @@ class DatetimeVersion:
     )
 
     def __init__(self, version):
+        version = str(version).strip()
         if not self.is_valid(version):
             raise InvalidVersionError(version)
 
-        version = str(version).strip()
+        # fromisoformat doesn't accept the "Z" suffix prior to 3.11, so we normalize it:
+        if version.endswith("Z"):
+            version = version[:-1] + "+00:00"
+        
         self.original = version
-        self.parsed_stamp = isoparse(version)
+        self.parsed_stamp = datetime.fromisoformat(version).astimezone(timezone.utc)
 
     def __eq__(self, other):
         return self.parsed_stamp == other.parsed_stamp
@@ -44,7 +48,7 @@ class DatetimeVersion:
 
     @classmethod
     def is_valid(cls, string):
-        return cls.VERSION_PATTERN.match(string)
+        return bool(cls.VERSION_PATTERN.fullmatch(string))
 
 
 class InvalidVersionError(ValueError):

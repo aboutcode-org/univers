@@ -383,6 +383,9 @@ def test_version_range_datetime():
     assert DatetimeVersion("2021-05-05T01:02:03.1234Z") >= DatetimeVersion(
         "2020-05-05T01:02:03.1234Z"
     )
+    assert DatetimeVersion("2021-05-05T01:02:03.1234Z") > DatetimeVersion(
+        "2020-05-05T01:02:03.1234+01:00"
+    )
     assert DatetimeVersion("2000-01-01T01:02:03.1234Z") in DatetimeVersionRange.from_string(
         "vers:datetime/*"
     )
