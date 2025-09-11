@@ -1,6 +1,12 @@
 Changelog
 =========
 
+Version v31.1.1
+----------------
+
+- Update CI, change run OS for Pypi release to 22.04
+
+
 Version v31.1.0
 ----------------
 
