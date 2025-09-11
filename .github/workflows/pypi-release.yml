@@ -1,8 +1,10 @@
 name: Release library as a PyPI wheel and sdist on tag
 
 on:
-  release:
-    types: [created]
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*.*.*"
 
 jobs:
   build-and-publish-to-pypi:
