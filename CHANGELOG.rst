@@ -1,6 +1,14 @@
 Changelog
 =========
 
+Version v31.1.0
+----------------
+
+- Introduce intdot versioning scheme
+- Add description to test fixture
+- Organize schema-based tests according to ecosystem
+- Use VERS test definition schema for tests
+
 
 Version v30.10.0
 ----------------
