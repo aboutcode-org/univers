@@ -4,7 +4,10 @@
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
 import re
-from datetime import datetime, timedelta, timezone
+from datetime import datetime
+from datetime import timedelta
+from datetime import timezone
+
 
 class DatetimeVersion:
     """
@@ -82,7 +85,6 @@ class DatetimeVersion:
 
         # canonicalize to UTC for comparisons/hashing
         self.parsed_stamp = dt.astimezone(timezone.utc)
-
 
     def __eq__(self, other):
         return self.parsed_stamp == other.parsed_stamp
