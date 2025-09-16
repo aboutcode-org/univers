@@ -60,16 +60,18 @@ class DatetimeVersion:
         else:
             micro = 0
 
+        leap_second = (second == 60)
+        if leap_second:
+            # we can't handle second=60, so we use 59 and add one second later
+            second = 59
+
+
         tz_text = m.group("tz")
-        if tz_text == "Z":
-            tzinfo = timezone.utc
-        else:
-            # tz_text is in form +HH:MM or -HH:MM
-            sign = 1 if tz_text[0] == "+" else -1
-            tzh = int(tz_text[1:3])
-            tzm = int(tz_text[4:6])
-            offset = sign * (tzh * 3600 + tzm * 60)
-            tzinfo = timezone(timedelta(seconds=offset))
+        sign = 1 if tz_text[0] == "+" else -1
+        tzh = int(tz_text[1:3])
+        tzm = int(tz_text[4:6])
+        offset = sign * (tzh * 3600 + tzm * 60)
+        tzinfo = timezone(timedelta(seconds=offset))
 
         # construct aware datetime for the exact instant
         dt = datetime(
@@ -82,6 +84,9 @@ class DatetimeVersion:
             microsecond=micro,
             tzinfo=tzinfo,
         )
+
+        if leap_second:
+            dt = dt + timedelta(seconds=1)
 
         # canonicalize to UTC for comparisons/hashing
         self.parsed_stamp = dt.astimezone(timezone.utc)
