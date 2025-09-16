@@ -60,11 +60,10 @@ class DatetimeVersion:
         else:
             micro = 0
 
-        leap_second = (second == 60)
+        leap_second = second == 60
         if leap_second:
             # we can't handle second=60, so we use 59 and add one second later
             second = 59
-
 
         tz_text = m.group("tz")
         sign = 1 if tz_text[0] == "+" else -1
