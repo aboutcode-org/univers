@@ -371,6 +371,9 @@ def test_version_range_intdot():
 
 
 def test_version_range_datetime():
+    assert DatetimeVersion("2021-05-05T01:02:03.1234+00:00") == DatetimeVersion(
+        "2021-05-05T01:02:03.1234+00:00"
+    )
     assert DatetimeVersion("2021-05-05T01:02:03.1234Z") == DatetimeVersion(
         "2021-05-05T01:02:03.1234Z"
     )

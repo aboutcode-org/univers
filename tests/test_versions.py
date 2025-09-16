@@ -240,3 +240,5 @@ def test_datetime_version():
     assert DatetimeVersion("2022-10-28T18:30:00Z") <= DatetimeVersion("2023-10-28T18:30:00Z")
     assert DatetimeVersion("2024-10-28T18:30:00Z") > DatetimeVersion("2023-10-28T18:30:00Z")
     assert DatetimeVersion("2023-10-28T19:30:00+01:00") == DatetimeVersion("2023-10-28T18:30:00Z")
+    assert not DatetimeVersion.is_valid("2023-10-28Z19:30:00+01:00")
+    assert not DatetimeVersion.is_valid("10-10-2023T19:30:00+01:00")
