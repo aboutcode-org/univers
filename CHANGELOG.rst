@@ -1,6 +1,20 @@
 Changelog
 =========
 
+Version v31.1.1
+----------------
+
+- Update CI, change run OS for Pypi release to 22.04
+
+
+Version v31.1.0
+----------------
+
+- Introduce intdot versioning scheme
+- Add description to test fixture
+- Organize schema-based tests according to ecosystem
+- Use VERS test definition schema for tests
+
 Version v31.0.0
 ----------------
 

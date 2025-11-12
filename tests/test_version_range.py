@@ -24,6 +24,7 @@ from univers.version_range import build_range_from_snyk_advisory_string
 from univers.version_range import from_gitlab_native
 from univers.versions import DatetimeVersion
 from univers.versions import IntdotVersion
+from univers.versions import LexicographicVersion
 from univers.versions import OpensslVersion
 from univers.versions import PypiVersion
 from univers.versions import SemverVersion
@@ -408,3 +409,12 @@ def test_version_range_datetime():
     assert DatetimeVersion("2001-01-01T01:02:03Z") in datetime_constraints
     with pytest.raises(Exception):
         VersionRange.from_string("vers:datetime/2025-08-25")
+
+
+def test_version_range_lexicographic():
+    assert LexicographicVersion("1.2.3") in VersionRange.from_string(
+        "vers:lexicographic/<1.2.4|>0.9"
+    )
+    assert LexicographicVersion(-123) in VersionRange.from_string("vers:lexicographic/<~")
+    assert LexicographicVersion(None) in VersionRange.from_string("vers:lexicographic/*")
+    assert LexicographicVersion("ABC") in VersionRange.from_string("vers:lexicographic/>abc|<=None")

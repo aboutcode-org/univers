@@ -14,6 +14,7 @@ from univers.versions import EnhancedSemanticVersion
 from univers.versions import GentooVersion
 from univers.versions import GolangVersion
 from univers.versions import IntdotVersion
+from univers.versions import LexicographicVersion
 from univers.versions import MavenVersion
 from univers.versions import NginxVersion
 from univers.versions import NugetVersion
@@ -242,3 +243,13 @@ def test_datetime_version():
     assert DatetimeVersion("2023-10-28T19:30:00+01:00") == DatetimeVersion("2023-10-28T18:30:00Z")
     assert not DatetimeVersion.is_valid("2023-10-28Z19:30:00+01:00")
     assert not DatetimeVersion.is_valid("10-10-2023T19:30:00+01:00")
+
+
+def test_lexicographic_version():
+    assert LexicographicVersion("abc") == LexicographicVersion("abc")
+    assert LexicographicVersion(" abc") == LexicographicVersion("abc")
+    assert LexicographicVersion("123") == LexicographicVersion(123)
+    assert LexicographicVersion("abc") > LexicographicVersion(None)
+    assert LexicographicVersion("Abc") < LexicographicVersion(None)
+    assert LexicographicVersion("123") < LexicographicVersion("bbc")
+    assert LexicographicVersion("2.3.4") > LexicographicVersion("1.2.3")
