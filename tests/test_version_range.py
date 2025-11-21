@@ -22,14 +22,11 @@ from univers.version_range import PypiVersionRange
 from univers.version_range import VersionRange
 from univers.version_range import build_range_from_snyk_advisory_string
 from univers.version_range import from_gitlab_native
-<<<<<<< HEAD
 from univers.versions import IntdotVersion
 from univers.versions import LexicographicVersion
-=======
 from univers.versions import InvalidVersion
 from univers.versions import LibversionVersion
 from univers.versions import NugetVersion
->>>>>>> 1533a12 (first libversion draft)
 from univers.versions import OpensslVersion
 from univers.versions import PypiVersion
 from univers.versions import SemverVersion
