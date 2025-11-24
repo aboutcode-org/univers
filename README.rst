@@ -120,7 +120,6 @@ and support for more package types are implemented on a continuous basis.
 
 Alternative
 ============
-
 Rather than using ecosystem-specific version schemes and code, another approach
 is to use a single procedure for all the versions as implemented in `libversion
 <https://github.com/repology/libversion>`_. ``libversion`` works in the most
@@ -128,7 +127,14 @@ common case but may not work correctly when a task that demand precise version
 comparisons such as for dependency resolution and vulnerability lookup where
 a "good enough" comparison accuracy is not acceptable. ``libversion`` does not
 handle version range notations.
+For this reason, univers adds support for libversion using a configuration option which allows users to use libversion as a fallback, i.e., in case the native version comparison fails. Usage: 
+.. code:: python
+    v3 = PypiVersion("1.2.3-invalid")
+    v4 = PypiVersion("1.2.4-invalid")
+    result = v3 < v4 # Error without fallback
 
+    config.use_libversion_fallback = True
+    result = v3 < v4 # result == True
 
 Installation
 ============

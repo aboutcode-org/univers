@@ -12,12 +12,9 @@ from univers.versions import DebianVersion
 from univers.versions import EnhancedSemanticVersion
 from univers.versions import GentooVersion
 from univers.versions import GolangVersion
-<<<<<<< HEAD
 from univers.versions import IntdotVersion
 from univers.versions import LexicographicVersion
-=======
 from univers.versions import LibversionVersion
->>>>>>> 1533a12 (first libversion draft)
 from univers.versions import MavenVersion
 from univers.versions import NginxVersion
 from univers.versions import NugetVersion
@@ -26,6 +23,7 @@ from univers.versions import RpmVersion
 from univers.versions import RubygemsVersion
 from univers.versions import SemverVersion
 from univers.versions import Version
+from univers.config import config
 
 
 def test_version():
@@ -260,3 +258,24 @@ def test_libversion_version():
     assert LibversionVersion("1.2.3-alpha") < LibversionVersion("1.2.3")
     assert LibversionVersion("1.2.3-alpha") != LibversionVersion("1.2.3-beta")
     assert LibversionVersion("1.0") == LibversionVersion("1.0.0")
+
+
+def test_libversion_fallback_config():
+    # Default: fallback disabled
+    v1 = PypiVersion("1.2.3")
+    v2 = PypiVersion("1.2.4")
+    assert v1 < v2
+
+    # Enable globally
+    config.use_libversion_fallback = True
+    v3 = PypiVersion("1.2.3-invalid")
+    v4 = PypiVersion("1.2.4-invalid")
+    assert v3 < v4  # Uses fallback if needed
+
+    # Temporarily enable fallback
+    config.use_libversion_fallback = False
+    with config.libversion_fallback(enabled=True):
+        v5 = PypiVersion("custom-1")
+        v6 = PypiVersion("custom-2")
+        assert v5 < v6  # Uses fallback if needed
+

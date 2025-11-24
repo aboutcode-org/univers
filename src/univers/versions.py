@@ -9,6 +9,7 @@ import semantic_version
 from packaging import version as packaging_version
 
 from univers import arch
+from univers.config import config
 from univers import debian
 from univers import gem
 from univers import gentoo
@@ -85,16 +86,85 @@ class Version:
 
     def __attrs_post_init__(self):
         normalized_string = self.normalize(self.string)
-        if not self.is_valid(normalized_string):
-            raise InvalidVersion(f"{self.string!r} is not a valid {self.__class__!r}")
+        
+        # Skip validation if fallback is enabled
+        if not config.use_libversion_fallback:
+            if not self.is_valid(normalized_string):
+                print("Validation - config id:", id(config), "value:", config.use_libversion_fallback)
+                raise InvalidVersion(f"{self.string!r} is not a valid {self.__class__!r}")
 
         # Set the normalized string as default value
-
         # Notes: setattr is used because this is an immutable frozen instance.
         # See https://www.attrs.org/en/stable/init.html?#post-init
         object.__setattr__(self, "normalized_string", normalized_string)
-        value = self.build_value(normalized_string)
+        
+        # Try to build value, but allow it to fail if fallback is enabled
+        try:
+            value = self.build_value(normalized_string)
+        except Exception as e:
+            if config.use_libversion_fallback:
+                # Store the normalized string as value if building fails
+                value = normalized_string
+            else:
+                raise
+        
         object.__setattr__(self, "value", value)
+
+    def __init_subclass__(cls, **kwargs):
+        """
+        Automatically wrap comparison methods in subclasses with fallback logic.
+        """
+        super().__init_subclass__(**kwargs)
+        
+        comparison_methods = ['__lt__', '__le__', '__gt__', '__ge__', '__eq__', '__ne__']
+        
+        for method_name in comparison_methods:
+            # Only wrap if the method is defined in THIS specific class
+            if method_name in cls.__dict__:
+                original_method = cls.__dict__[method_name]
+                wrapped = cls._wrap_comparison_method(original_method, method_name)
+                setattr(cls, method_name, wrapped)
+
+    @staticmethod
+    def _wrap_comparison_method(original_method, method_name):
+        """
+        Wrap a comparison method with fallback logic.
+        
+        Uses only standard library features (no external dependencies).
+        """
+        def wrapper(self, other):
+            try:
+                # Try the original comparison method
+                return original_method(self, other)
+            except (ValueError, TypeError, AttributeError) as e:
+                # If it fails and fallback is enabled, use libversion
+                if config.use_libversion_fallback:
+                    try:
+                        import libversion
+                        result = libversion.version_compare2(str(self), str(other))
+                        
+                        # Map libversion result to the appropriate comparison
+                        if method_name == '__lt__':
+                            return result < 0
+                        elif method_name == '__le__':
+                            return result <= 0
+                        elif method_name == '__gt__':
+                            return result > 0
+                        elif method_name == '__ge__':
+                            return result >= 0
+                        elif method_name == '__eq__':
+                            return result == 0
+                        elif method_name == '__ne__':
+                            return result != 0
+                    except Exception:
+                        # If fallback also fails, re-raise the original exception
+                        raise e
+                # If fallback is disabled, re-raise the original exception
+                raise
+
+        # Preserve method name
+        wrapper.__name__ = original_method.__name__
+        return wrapper
 
     @classmethod
     def is_valid(cls, string):
