@@ -9,8 +9,8 @@ from typing import Union
 
 import attr
 import semantic_version
-from packaging.specifiers import InvalidSpecifier
-from packaging.specifiers import SpecifierSet
+from packvers.specifiers import InvalidSpecifier
+from packvers.specifiers import SpecifierSet
 from semantic_version.base import AllOf
 from semantic_version.base import AnyOf
 
