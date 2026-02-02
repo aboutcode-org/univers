@@ -8,6 +8,7 @@ from univers.version_constraint import VersionConstraint
 from univers.versions import AlpineLinuxVersion
 from univers.versions import ArchLinuxVersion
 from univers.versions import ComposerVersion
+from univers.versions import DatetimeVersion
 from univers.versions import DebianVersion
 from univers.versions import EnhancedSemanticVersion
 from univers.versions import GentooVersion
@@ -231,6 +232,17 @@ def test_intdot_version():
     assert IntdotVersion("1.2.3.4.6-pre") <= IntdotVersion("2.2.3.4.5.pre")
     assert IntdotVersion("1.2.3.4.6-pre") <= IntdotVersion("2.2.3.4.5-10")
     assert IntdotVersion("1.2.3.4.6-pre") <= IntdotVersion("2.2.3.4.5-10")
+
+
+def test_datetime_version():
+    assert DatetimeVersion("2023-10-28T18:30:00Z") == DatetimeVersion("2023-10-28T18:30:00Z")
+    assert DatetimeVersion("2023-01-11T10:10:10Z") > DatetimeVersion("2023-01-10T10:10:10Z")
+    assert DatetimeVersion("2022-10-28T18:30:00Z") < DatetimeVersion("2023-10-28T18:30:00Z")
+    assert DatetimeVersion("2022-10-28T18:30:00Z") <= DatetimeVersion("2023-10-28T18:30:00Z")
+    assert DatetimeVersion("2024-10-28T18:30:00Z") > DatetimeVersion("2023-10-28T18:30:00Z")
+    assert DatetimeVersion("2023-10-28T19:30:00+01:00") == DatetimeVersion("2023-10-28T18:30:00Z")
+    assert not DatetimeVersion.is_valid("2023-10-28Z19:30:00+01:00")
+    assert not DatetimeVersion.is_valid("10-10-2023T19:30:00+01:00")
 
 
 def test_lexicographic_version():
