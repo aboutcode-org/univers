@@ -21,6 +21,10 @@ class TestPYPIVersion(TestCase):
         assert pypi_version.value == packaging_version.Version("2.4.5")
         self.assertRaises(InvalidVersion, PypiVersion, "2.//////")
 
+    def test_constructor_accepts_legacy_local(self):
+        pypi_version = PypiVersion("2.0.1rc2-git")
+        assert str(pypi_version) == "2.0.1rc2+git"
+
     def test_compare(self):
         pypi_version = PypiVersion("2.4.5")
         assert pypi_version == PypiVersion("2.4.5")

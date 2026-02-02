@@ -39,6 +39,7 @@ def test_pypi_version():
     assert PypiVersion("1.2.3") != PypiVersion("1.2.4")
     assert PypiVersion("1") == PypiVersion("1.0")
     assert PypiVersion.is_valid("1.2.3")
+    assert PypiVersion.is_valid("2.0.1rc2-git")
     assert not PypiVersion.is_valid("1.2.3a-1-a")
     assert PypiVersion.normalize("v1.2.3") == "1.2.3"
     assert PypiVersion("1").satisfies(

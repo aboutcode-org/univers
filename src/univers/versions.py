@@ -217,17 +217,51 @@ class PypiVersion(Version):
         """
         Return a packaging.version.LegacyVersion or packaging.version.Version
         """
-        return packaging_version.Version(string)
+        return cls._coerce_pep440(string)
 
     @classmethod
     def is_valid(cls, string):
         try:
             # Note: we consider only modern pep440 versions as valid. legacy
             # will fail validation for now.
-            cls.build_value(string)
+            cls._coerce_pep440(string)
             return True
         except packaging_version.InvalidVersion:
             return False
+
+    @classmethod
+    def _coerce_pep440(cls, string):
+        """
+        Return a packaging.version.Version, coercing a limited set of
+        legacy PyPI version forms that use '-' for a local version segment.
+        """
+        try:
+            return packaging_version.Version(string)
+        except packaging_version.InvalidVersion:
+            normalized = cls._normalize_legacy_local(string)
+            if normalized:
+                return packaging_version.Version(normalized)
+            raise
+
+    @classmethod
+    def _normalize_legacy_local(cls, string):
+        """
+        Normalize legacy local versions like "2.0.1rc2-git" to
+        PEP 440-compatible "2.0.1rc2+git" when safe.
+        """
+        if not string or "+" in string or "-" not in string:
+            return None
+
+        base, local = string.rsplit("-", 1)
+        if not local or not local[0].isalpha():
+            return None
+
+        candidate = f"{base}+{local}"
+        try:
+            packaging_version.Version(candidate)
+        except packaging_version.InvalidVersion:
+            return None
+        return candidate
 
 
 class EnhancedSemanticVersion(semantic_version.Version):
