@@ -14,6 +14,7 @@ from univers import debian
 from univers import gem
 from univers import gentoo
 from univers import intdot
+from univers import libversion
 from univers import maven
 from univers import nuget
 from univers import rpm
@@ -89,10 +90,10 @@ class Version:
             raise InvalidVersion(f"{self.string!r} is not a valid {self.__class__!r}")
 
         # Set the normalized string as default value
-
         # Notes: setattr is used because this is an immutable frozen instance.
         # See https://www.attrs.org/en/stable/init.html?#post-init
         object.__setattr__(self, "normalized_string", normalized_string)
+
         value = self.build_value(normalized_string)
         object.__setattr__(self, "value", value)
 
@@ -178,6 +179,16 @@ class IntdotVersion(Version):
     @classmethod
     def is_valid(cls, string):
         return intdot.IntdotVersion.is_valid(string)
+    
+
+class LibversionVersion(Version):
+    @classmethod
+    def is_valid(cls, string):
+        return libversion.LibversionVersion(string)
+
+    @classmethod
+    def build_value(cls, string):
+        return libversion.LibversionVersion(string)
 
 
 class DatetimeVersion(Version):
