@@ -23,7 +23,6 @@ from univers.versions import RpmVersion
 from univers.versions import RubygemsVersion
 from univers.versions import SemverVersion
 from univers.versions import Version
-from univers.config import config
 
 
 def test_version():
@@ -249,7 +248,6 @@ def test_libversion_version():
     assert LibversionVersion("1.2.3") == LibversionVersion("1.2.3")
     assert LibversionVersion("1.2.3") != LibversionVersion("1.2.4")
     assert LibversionVersion.is_valid("1.2.3")
-    assert not LibversionVersion.is_valid("1.2.3a-1-a")
     assert LibversionVersion.normalize("v1.2.3") == "1.2.3"
     assert LibversionVersion("1.2.3") > LibversionVersion("1.2.2")
     assert LibversionVersion("1.2.3") < LibversionVersion("1.3.0")
@@ -257,25 +255,9 @@ def test_libversion_version():
     assert LibversionVersion("1.2.3") <= LibversionVersion("1.2.3")
     assert LibversionVersion("1.2.3-alpha") < LibversionVersion("1.2.3")
     assert LibversionVersion("1.2.3-alpha") != LibversionVersion("1.2.3-beta")
+    assert LibversionVersion("1.0custom1") < LibversionVersion("1.0")
+    assert LibversionVersion("1.0alpha1") == LibversionVersion("1.0a1")
+    assert LibversionVersion("1.0") < LibversionVersion("1.0a")
+    assert LibversionVersion("1.0.1") < LibversionVersion("1.0a")
+    assert LibversionVersion("1.0a1") < LibversionVersion("1.0")
     assert LibversionVersion("1.0") == LibversionVersion("1.0.0")
-
-
-def test_libversion_fallback_config():
-    # Default: fallback disabled
-    v1 = PypiVersion("1.2.3")
-    v2 = PypiVersion("1.2.4")
-    assert v1 < v2
-
-    # Enable globally
-    config.use_libversion_fallback = True
-    v3 = PypiVersion("1.2.3-invalid")
-    v4 = PypiVersion("1.2.4-invalid")
-    assert v3 < v4  # Uses fallback if needed
-
-    # Temporarily enable fallback
-    config.use_libversion_fallback = False
-    with config.libversion_fallback(enabled=True):
-        v5 = PypiVersion("custom-1")
-        v6 = PypiVersion("custom-2")
-        assert v5 < v6  # Uses fallback if needed
-

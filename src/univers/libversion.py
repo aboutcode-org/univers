@@ -12,12 +12,14 @@ KEYWORD_PRE_RELEASE = 1
 KEYWORD_POST_RELEASE = 2
 
 METAORDER_LOWER_BOUND = 0
-METAORDER_ZERO = 1
-METAORDER_NONZERO = 2
-METAORDER_PRE_RELEASE = 3
-METAORDER_POST_RELEASE = 4
+METAORDER_PRE_RELEASE = 1
+METAORDER_ZERO = 2
+METAORDER_POST_RELEASE = 3
+METAORDER_NONZERO = 4
 METAORDER_LETTER_SUFFIX = 5
 METAORDER_UPPER_BOUND = 6
+
+_TOKEN_RE = re.compile(r"[A-Za-z]+|[0-9]+")
 
 
 class LibversionVersion:
@@ -53,21 +55,60 @@ class LibversionVersion:
             return KEYWORD_UNKNOWN
 
     @staticmethod
-    def parse_token_to_component(s):
-        if s.isalpha():
-            keyword_type = LibversionVersion.classify_keyword(s)
-            metaorder = METAORDER_PRE_RELEASE if keyword_type == KEYWORD_PRE_RELEASE else METAORDER_POST_RELEASE
-            return s, metaorder
-        else:
-            s = s.lstrip("0")
-            metaorder = METAORDER_ZERO if s == "" else METAORDER_NONZERO
-            return s, metaorder
-
-    @staticmethod
     def get_next_version_component(s):
-        components = re.split(r"[^a-zA-Z0-9]+", s)
-        for component in components:
-            yield LibversionVersion.parse_token_to_component(component)
+        tokens = list(_TOKEN_RE.finditer(s))
+        token_count = len(tokens)
+        parsed_tokens = []
+
+        prev_end = None
+        for token in tokens:
+            start, end = token.span()
+            delim_before = prev_end is not None and start > prev_end
+            parsed_tokens.append(
+                {
+                    "value": token.group(0),
+                    "is_alpha": token.group(0).isalpha(),
+                    "delim_before": delim_before,
+                    "start": start,
+                    "end": end,
+                }
+            )
+            prev_end = end
+
+        for i, token in enumerate(parsed_tokens):
+            next_token = parsed_tokens[i + 1] if i + 1 < token_count else None
+            delim_after = next_token is not None and next_token["start"] > token["end"]
+
+            if token["is_alpha"]:
+                raw_value = token["value"]
+                value = raw_value.lower()
+                keyword_type = LibversionVersion.classify_keyword(value)
+
+                is_letter_suffix = False
+                if i > 0 and not token["delim_before"]:
+                    prev_token = parsed_tokens[i - 1]
+                    if not prev_token["is_alpha"]:
+                        next_is_numeric_no_delim = (
+                            next_token is not None
+                            and not next_token["is_alpha"]
+                            and not delim_after
+                        )
+                        if not next_is_numeric_no_delim:
+                            is_letter_suffix = True
+
+                if is_letter_suffix:
+                    metaorder = METAORDER_LETTER_SUFFIX
+                elif keyword_type == KEYWORD_POST_RELEASE:
+                    metaorder = METAORDER_POST_RELEASE
+                else:
+                    metaorder = METAORDER_PRE_RELEASE
+
+                yield value, metaorder
+                continue
+
+            value = token["value"].lstrip("0")
+            metaorder = METAORDER_ZERO if value == "" else METAORDER_NONZERO
+            yield value, metaorder
 
     def compare_components(self, other):
         max_len = max(len(self.components), len(other.components))
@@ -76,8 +117,8 @@ class LibversionVersion:
             """
             Get current components or pad with zero
             """
-            c1 = self.components[i] if i < len(self.components) else ("0", METAORDER_ZERO)
-            c2 = other.components[i] if i < len(other.components) else ("0", METAORDER_ZERO)
+            c1 = self.components[i] if i < len(self.components) else ("", METAORDER_ZERO)
+            c2 = other.components[i] if i < len(other.components) else ("", METAORDER_ZERO)
 
             """
             Compare based on metaorder
@@ -107,10 +148,13 @@ class LibversionVersion:
             c2_is_alpha = c2[0].isalpha()
 
             if c1_is_alpha and c2_is_alpha:
-                if c1[0].lower() < c2[0].lower():
+                c1_letter = c1[0][0].lower() if c1[0] else ""
+                c2_letter = c2[0][0].lower() if c2[0] else ""
+                if c1_letter < c2_letter:
                     return -1
-                elif c1[0].lower() > c2[0].lower():
+                elif c1_letter > c2_letter:
                     return 1
+                continue
             elif c1_is_alpha:
                 return -1
             elif c2_is_alpha:

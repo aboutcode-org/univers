@@ -127,19 +127,16 @@ common case but may not work correctly when a task that demand precise version
 comparisons such as for dependency resolution and vulnerability lookup where
 a "good enough" comparison accuracy is not acceptable. ``libversion`` does not
 handle version range notations.
-For this reason, univers adds support for libversion using a configuration option which allows users to use libversion as a fallback, i.e., in case the native version comparison fails. Usage: 
+For this reason, univers provides a dedicated libversion scheme for users who
+explicitly choose that behavior. Usage:
 
 .. code:: python
 
-    from univers.config import config
-    from univers.versions import PypiVersion
-    
-    v3 = PypiVersion("1.2.3-invalid")
-    v4 = PypiVersion("1.2.4-invalid")
-    result = v3 < v4 # Error without fallback
+    from univers.versions import LibversionVersion
 
-    config.use_libversion_fallback = True
-    result = v3 < v4 # result == True
+    v3 = LibversionVersion("1.2.3-invalid")
+    v4 = LibversionVersion("1.2.4-invalid")
+    result = v3 < v4
 
 Installation
 ============
