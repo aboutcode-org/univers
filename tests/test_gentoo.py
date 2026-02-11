@@ -31,3 +31,10 @@ class GentooVersionComp(SchemaDrivenVersTest):
 def test_gentoo_vers_cmp(test_case):
     avc = GentooVersionComp.from_data(data=test_case)
     avc.assert_result()
+
+
+def test_gentoo_bump():
+    assert GentooVersion("2.23.3").bump() == "2.24"
+    assert GentooVersion("2.24.3").bump() == "2.25"
+    assert GentooVersion("2.25.4").bump() == "2.26"
+    assert GentooVersion("2.26.2").bump() == "2.27"

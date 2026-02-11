@@ -181,3 +181,27 @@ def vercmp(ver1, ver2):
     # Our versions had different strings but ended up being equal.
     # The revision holds the final difference.
     return cmp(rev1, rev2)
+
+
+def bump(ver):
+    """
+    Return a new version object where the next to the last revision number
+    is one greater (e.g., 5.3.1 => 5.4) i.e., incrementing this GentooVersion
+    last numeric segment.
+    """
+
+    if not ver:
+        return None
+
+    ver = remove_spaces(ver)
+    version, _ = parse_version_and_revision(ver)
+
+    segments = version.split(".")
+    segments = [int(re.sub(r"\D", "", seg)) for seg in segments if seg]
+
+    if len(segments) > 1:
+        segments.pop()
+
+    segments[-1] += 1
+    segments = [str(r) for r in segments]
+    return ".".join(segments)
