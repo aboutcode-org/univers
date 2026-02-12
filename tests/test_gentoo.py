@@ -37,4 +37,6 @@ def test_gentoo_bump():
     assert GentooVersion("2.23.3").bump() == "2.24"
     assert GentooVersion("2.24.3").bump() == "2.25"
     assert GentooVersion("2.25.4").bump() == "2.26"
-    assert GentooVersion("2.26.2").bump() == "2.27"
+    assert GentooVersion("1.3.8b").bump() == "1.4"
+    assert GentooVersion("9.9_p2").bump() == "10"
+    assert GentooVersion("0.13.4-r2").bump() == "0.14"

@@ -185,7 +185,7 @@ def vercmp(ver1, ver2):
 
 def bump(ver):
     """
-    Return a new version object where the next to the last revision number
+    Return a new version where the next to the last revision number
     is one greater (e.g., 5.3.1 => 5.4) i.e., incrementing this GentooVersion
     last numeric segment.
     """
