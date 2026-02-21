@@ -281,6 +281,48 @@ def test_PypiVersionRange_raises_ivr_for_unsupported_and_invalid_ranges(range, w
         assert expected == str(PypiVersionRange.from_native(range))
 
 
+@pytest.mark.parametrize(
+    "string, expected",
+    [
+        (  # OSSA-2016-013
+            "<=5.0.3, >=6.0.0 <=6.1.0 and ==7.0.0",
+            "vers:pypi/<=5.0.3|>=6.0.0|<=6.1.0|7.0.0",
+        ),
+        (  # OSSA-2017-005
+            "<=14.0.10, >=15.0.0 <=15.0.8, >=16.0.0 <=16.0.3",
+            "vers:pypi/<=14.0.10|>=15.0.0|<=15.0.8|>=16.0.0|<=16.0.3",
+        ),
+        (  # OSSA-2019-003
+            "<17.0.12, >=18.0.0 <18.2.2, >=19.0.0 <19.0.2",
+            "vers:pypi/<17.0.12|>=18.0.0|<18.2.2|>=19.0.0|<19.0.2",
+        ),
+        (  # OSSA-2020-006
+            "<19.3.1, >=20.0.0 <20.3.1, ==21.0.0",
+            "vers:pypi/<19.3.1|>=20.0.0|<20.3.1|21.0.0",
+        ),
+        (  # OSSA-2026-001
+            ">=10.5.0 <10.7.2, >=10.8.0 <10.9.1, >=10.10.0 <10.12.1",
+            "vers:pypi/>=10.5.0|<10.7.2|>=10.8.0|<10.9.1|>=10.10.0|<10.12.1",
+        ),
+        (  # OSSA-2021-001
+            "<16.3.3, >=17.0.0 <17.1.3, =18.0.0",
+            "vers:pypi/<16.3.3|>=17.0.0|<17.1.3|18.0.0",
+        ),
+        (  # empty string should raise InvalidVersionRange
+            "",
+            "InvalidVersionRange",
+        ),
+    ],
+)
+def test_PypiVersionRange_from_ossa_native(string, expected):
+    if expected == "InvalidVersionRange":
+        with pytest.raises(InvalidVersionRange):
+            PypiVersionRange.from_ossa_native(string)
+    else:
+        result = PypiVersionRange.from_ossa_native(string)
+        assert expected == str(result)
+
+
 def test_invert():
     vers_with_equal_operator = VersionRange.from_string("vers:gem/1.0")
     assert str(vers_with_equal_operator.invert()) == "vers:gem/!=1.0"

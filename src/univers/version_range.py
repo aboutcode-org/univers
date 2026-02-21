@@ -4,6 +4,7 @@
 #
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
+import re
 from typing import List
 from typing import Union
 
@@ -769,6 +770,71 @@ class PypiVersionRange(VersionRange):
 
         if unsupported_messages:
             raise InvalidVersionRange(*unsupported_messages)
+
+        return cls(constraints=constraints)
+
+    @classmethod
+    def from_ossa_native(cls, string):
+        """
+        Returns a PypiVersionRange built from an OpenStack Security Advisory (OSSA) version constraint ``string``.
+
+        See: https://github.com/openstack/ossa
+
+        For example::
+
+        >>> str(PypiVersionRange.from_ossa_native("<=5.0.3, >=6.0.0 <=6.1.0 and ==7.0.0"))
+        'vers:pypi/<=5.0.3|>=6.0.0|<=6.1.0|7.0.0'
+
+        >>> str(PypiVersionRange.from_ossa_native("<=14.0.10, >=15.0.0 <=15.0.8, >=16.0.0 <=16.0.3"))
+        'vers:pypi/<=14.0.10|>=15.0.0|<=15.0.8|>=16.0.0|<=16.0.3'
+
+        >>> str(PypiVersionRange.from_ossa_native("<20.2.1, >=21.0.0 <21.2.1, ==22.0.0"))
+        'vers:pypi/<20.2.1|>=21.0.0|<21.2.1|22.0.0'
+        """
+
+        # Normalize "and" keyword to comma
+        # "<=5.0.3, >=6.0.0 <=6.1.0 and ==7.0.0" -> "<=5.0.3, >=6.0.0 <=6.1.0, ==7.0.0"
+        string = string.replace(" and ", ",")
+
+        # Remove spaces around operators
+        # "<=5.0.3, >=6.0.0 <=6.1.0, ==7.0.0" -> "<=5.0.3,>=6.0.0<=6.1.0,==7.0.0"
+        string = re.sub(r"\s+([<>=!]+)", r"\1", string)
+        string = re.sub(r"([<>=!]+)\s+", r"\1", string)
+
+        # Insert comma between consecutive constraints
+        # "<=5.0.3,>=6.0.0<=6.1.0,==7.0.0" -> "<=5.0.3,>=6.0.0,<=6.1.0,==7.0.0"
+        string = re.sub(r"(\d)([<>=!])", r"\1,\2", string)
+
+        constraints = []
+        for part in string.split(","):
+
+            # Default to exact match for bare version numbers
+            # "1.16.0" -> "=1.16.0"
+            comparator = "="
+            version = part
+
+            for op, vers_op in cls.vers_by_native_comparators.items():
+                if part.startswith(op):
+                    comparator = vers_op
+                    version = part[len(op) :]
+                    break
+
+            # Handle bare "=" for exact match
+            # "=18.0.0" -> "18.0.0"
+            if version.startswith("="):
+                version = version[1:]
+
+            try:
+                constraints.append(
+                    VersionConstraint(
+                        comparator=comparator,
+                        version=cls.version_class(version),
+                    )
+                )
+            except (ValueError, TypeError) as e:
+                raise InvalidVersionRange(
+                    f"Invalid version constraint {part!r} in OSSA version string {string!r}: {e}"
+                ) from e
 
         return cls(constraints=constraints)
 
