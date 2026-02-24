@@ -1449,6 +1449,7 @@ RANGE_CLASS_BY_SCHEMES = {
     "github": GitHubVersionRange,
     "ebuild": EbuildVersionRange,
     "alpm": ArchLinuxVersionRange,
+    "apk": AlpineLinuxVersionRange,
     "nginx": NginxVersionRange,
     "openssl": OpensslVersionRange,
     "mattermost": MattermostVersionRange,
