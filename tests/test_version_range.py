@@ -13,6 +13,7 @@ from tests import SchemaDrivenVersTest
 from univers.version_constraint import VersionConstraint
 from univers.version_range import PURL_TYPE_BY_GITLAB_SCHEME
 from univers.version_range import RANGE_CLASS_BY_SCHEMES
+from univers.version_range import AlpineLinuxVersionRange
 from univers.version_range import DatetimeVersionRange
 from univers.version_range import IntdotVersionRange
 from univers.version_range import InvalidVersionRange
@@ -22,6 +23,7 @@ from univers.version_range import PypiVersionRange
 from univers.version_range import VersionRange
 from univers.version_range import build_range_from_snyk_advisory_string
 from univers.version_range import from_gitlab_native
+from univers.versions import AlpineLinuxVersion
 from univers.versions import DatetimeVersion
 from univers.versions import IntdotVersion
 from univers.versions import LexicographicVersion
@@ -205,6 +207,29 @@ def test_OpensslVersionRange_from_versions():
     assert version_range == expected
 
 
+def test_AlpineLinuxVersionRange_from_versions():
+    sequence = ["3.18.0", "2.14.9-r1", "3.0.0"]
+    expected = AlpineLinuxVersionRange(
+        constraints=(
+            VersionConstraint(comparator="=", version=AlpineLinuxVersion(string="2.14.9-r1")),
+            VersionConstraint(comparator="=", version=AlpineLinuxVersion(string="3.0.0")),
+            VersionConstraint(comparator="=", version=AlpineLinuxVersion(string="3.18.0")),
+        )
+    )
+    version_range = AlpineLinuxVersionRange.from_versions(sequence)
+    assert version_range == expected
+
+
+def test_apk_in_RANGE_CLASS_BY_SCHEMES():
+    assert RANGE_CLASS_BY_SCHEMES["apk"] is AlpineLinuxVersionRange
+
+
+def test_alpine_version_range_containment():
+    vr = AlpineLinuxVersionRange.from_string("vers:apk/>=2.14.9-r1|<3.19.0")
+    assert AlpineLinuxVersion("3.18.0") in vr
+    assert AlpineLinuxVersion("3.19.0") not in vr
+
+
 VERSION_RANGE_TESTS_BY_SCHEME = {
     "nginx": ["0.8.40+", "0.7.52-0.8.39", "0.9.10", "1.5.0+, 1.4.1+"],
     "npm": [
@@ -218,6 +243,7 @@ VERSION_RANGE_TESTS_BY_SCHEME = {
     ],
     "openssl": ["1.1.1ak", "1.1.0", "3.0.2", "3.0.1, 0.9.7a", "1.0.2ck, 3.1.2"],
     "pypi": [">= 1.0", "<2.1.0", "!=5"],
+    "apk": ["3.18.0", ">=2.14.9-r1", "<3.19.0"],
 }
 
 
