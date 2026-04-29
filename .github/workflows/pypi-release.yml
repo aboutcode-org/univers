@@ -6,6 +6,7 @@ on:
     tags:
       - "v*.*.*"
 
+jobs:
   build-pypi-distribs:
     name: Build for publishing
     runs-on: ubuntu-24.04
