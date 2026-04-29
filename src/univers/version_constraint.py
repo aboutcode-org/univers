@@ -202,6 +202,11 @@ class VersionConstraint:
         >>> assert VersionConstraint.split("<2.3") == ("<", "2.3",)
         >>> assert VersionConstraint.split(">2.3") == (">", "2.3",)
         >>> assert VersionConstraint.split("!=2.3") == ("!=", "2.3",)
+        >>> try:
+        ...     VersionConstraint.split("<<2.3")
+        ...     raise Exception("ValueError should be raised")
+        ... except ValueError:
+        ...     pass
         """
         constraint_string = remove_spaces(string)
 
@@ -212,9 +217,15 @@ class VersionConstraint:
         for comparator in COMPARATORS:
             if constraint_string.startswith(comparator):
                 # NOTE: we do not report an error if this is not valid
-                version = constraint_string.lstrip(comparator)
+                version = constraint_string[len(comparator) :]
                 if comparator == "*":
                     version = ""
+
+                # Reject malformed repeated comparator prefixes such as
+                # "<<2.3" and ">>2.3" in VERS constraints which are explicitly not supported in VERS.
+                elif version and version[0] in "<>!=*":
+                    raise ValueError(f"Unknown comparator in constraint: {constraint_string!r}")
+                
                 return comparator, version
 
         # default to equality
