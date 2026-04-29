@@ -183,7 +183,7 @@ class VersionRange:
             version_obj = cls.version_class(version)
             constraint = VersionConstraint(comparator="=", version=version_obj)
             constraints.append(constraint)
-        return cls(constraints=constraints)
+        return cls(constraints=constraints) if constraints else None
 
     def is_star(self):
         return len(self.constraints) == 1 and self.constraints[0].is_star()
