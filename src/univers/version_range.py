@@ -1016,7 +1016,7 @@ class EbuildVersionRange(VersionRange):
 
 
 class AlpineLinuxVersionRange(VersionRange):
-    scheme = "alpine"
+    scheme = "apk"
     version_class = versions.AlpineLinuxVersion
 
 
