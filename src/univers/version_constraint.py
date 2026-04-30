@@ -225,7 +225,7 @@ class VersionConstraint:
                 # "<<2.3" and ">>2.3" in VERS constraints which are explicitly not supported in VERS.
                 elif version and version[0] in "<>!=*":
                     raise ValueError(f"Unknown comparator in constraint: {constraint_string!r}")
-                
+
                 return comparator, version
 
         # default to equality

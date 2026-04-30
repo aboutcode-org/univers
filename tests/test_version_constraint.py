@@ -88,6 +88,7 @@ def test_invert_opertaion(original, inverted):
     else:
         assert constraint.invert() is None
 
+
 @pytest.mark.parametrize("spec", ["<<2.3", ">>2.3"])
 def test_invalid_vers_comparator_prefixes(spec):
     with pytest.raises(ValueError, match="Unknown comparator"):
