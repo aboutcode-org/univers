@@ -220,6 +220,13 @@ def test_AlpineLinuxVersionRange_from_versions():
     assert version_range == expected
 
 
+def test_AlpineLinuxVersionRange_has_apk_scheme():
+    sequence = ["3.18.0", "2.14.9-r1", "3.0.0"]
+    expected = "vers:apk/2.14.9-r1|3.0.0|3.18.0"
+    version_range = AlpineLinuxVersionRange.from_versions(sequence).to_string()
+    assert version_range == expected
+
+
 def test_VersionRange_from_versions_with_empty_constraints():
     sequence = []
     expected = None
