@@ -1,7 +1,7 @@
 Changelog
 =========
 
-Version v32.0.0
+Version v32.0.1
 ----------------
 
 - Add lexicographic versioning scheme https://github.com/aboutcode-org/univers/pull/160
