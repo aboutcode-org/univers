@@ -4,6 +4,7 @@
 #
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
+import re
 from typing import List
 from typing import Union
 
@@ -769,6 +770,104 @@ class PypiVersionRange(VersionRange):
 
         if unsupported_messages:
             raise InvalidVersionRange(*unsupported_messages)
+
+        return cls(constraints=constraints)
+
+    @classmethod
+    def from_ossa_native(cls, string):
+        """
+        Returns a PypiVersionRange built from an OpenStack Security Advisory (OSSA) version constraint ``string``.
+
+        See: https://github.com/openstack/ossa
+
+        For example::
+
+        >>> str(PypiVersionRange.from_ossa_native("<=5.0.3, >=6.0.0 <=6.1.0 and ==7.0.0"))
+        'vers:pypi/<=5.0.3|>=6.0.0|<=6.1.0|7.0.0'
+
+        >>> str(PypiVersionRange.from_ossa_native("<=14.0.10, >=15.0.0 <=15.0.8, >=16.0.0 <=16.0.3"))
+        'vers:pypi/<=14.0.10|>=15.0.0|<=15.0.8|>=16.0.0|<=16.0.3'
+
+        >>> str(PypiVersionRange.from_ossa_native("<20.2.1, >=21.0.0 <21.2.1, ==22.0.0"))
+        'vers:pypi/<20.2.1|>=21.0.0|<21.2.1|22.0.0'
+
+        >>> str(PypiVersionRange.from_ossa_native(">=1.15.0<1.15.2, 1.16.0"))
+        'vers:pypi/>=1.15.0|<1.15.2|1.16.0'
+        """
+
+        # Normalize "and" keyword to comma
+        # "<=5.0.3, >=6.0.0 <=6.1.0 and ==7.0.0" -> "<=5.0.3, >=6.0.0 <=6.1.0, ==7.0.0"
+        string = string.replace(" and ", ",")
+
+        # Split on commas then whitespace to get individual tokens
+        # "<=5.0.3 >=6.0.0 " -> ["<=5.0.3", ">=6.0.0"]
+        raw_tokens = [token for chunk in string.split(",") for token in chunk.split()]
+
+        if not raw_tokens:
+            raise InvalidVersionRange(f"Empty or invalid OSSA version string: {string!r}")
+
+        # Merge tokens where the operator and version are separated by a space
+        # ["<=", "5.0.3", ">=", "6.0.0"] -> ["<=5.0.3", ">=6.0.0"]
+        raw_iter = iter(raw_tokens)
+        fused_tokens = []
+        for current in raw_iter:
+            is_bare_operator = all(c in "<>=!" for c in current)
+            if is_bare_operator:
+                fused_tokens.append(current + next(raw_iter))
+            else:
+                fused_tokens.append(current)
+
+        # Split tokens that contain multiple concatenated constraints without separator
+        # ">=1.15.0<1.15.2" -> [">=1.15.0", "<1.15.2"]
+        parts = []
+        for token in fused_tokens:
+
+            token_len = len(token)
+            pos = 0
+            while pos < token_len and token[pos] in "<>=!":
+                pos += 1
+
+            segment_start = 0
+            while pos < token_len:
+                if token[pos] in "<>=!":
+                    parts.append(token[segment_start:pos])
+                    segment_start = pos
+                    while pos < token_len and token[pos] in "<>=!":
+                        pos += 1
+                else:
+                    pos += 1
+            parts.append(token[segment_start:])
+
+        constraints = []
+        for part in parts:
+
+            # Default to exact match for bare version numbers
+            # "1.16.0" -> "=1.16.0"
+            comparator = "="
+            version = part
+
+            for op, vers_op in cls.vers_by_native_comparators.items():
+                if part.startswith(op):
+                    comparator = vers_op
+                    version = part[len(op) :]
+                    break
+
+            # Handle bare "=" for exact match
+            # "=18.0.0" -> "18.0.0"
+            if version.startswith("="):
+                version = version[1:]
+
+            try:
+                constraints.append(
+                    VersionConstraint(
+                        comparator=comparator,
+                        version=cls.version_class(version),
+                    )
+                )
+            except (ValueError, TypeError) as e:
+                raise InvalidVersionRange(
+                    f"Invalid version constraint {part!r} in OSSA version string {string!r}: {e}"
+                ) from e
 
         return cls(constraints=constraints)
 
