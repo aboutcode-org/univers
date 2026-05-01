@@ -120,7 +120,6 @@ and support for more package types are implemented on a continuous basis.
 
 Alternative
 ============
-
 Rather than using ecosystem-specific version schemes and code, another approach
 is to use a single procedure for all the versions as implemented in `libversion
 <https://github.com/repology/libversion>`_. ``libversion`` works in the most
@@ -128,7 +127,16 @@ common cases but may not work correctly when a task that demand precise version
 comparisons such as for dependency resolution and vulnerability lookup where
 a "good enough" comparison accuracy is not acceptable. ``libversion`` does not
 handle version range notations.
+For this reason, univers provides a dedicated libversion scheme for users who
+explicitly choose that behavior. Usage:
 
+.. code:: python
+
+    from univers.versions import LibversionVersion
+
+    v3 = LibversionVersion("1.2.3-invalid")
+    v4 = LibversionVersion("1.2.4-invalid")
+    result = v3 < v4
 
 Installation
 ============

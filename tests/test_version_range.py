@@ -17,6 +17,7 @@ from univers.version_range import AlpineLinuxVersionRange
 from univers.version_range import DatetimeVersionRange
 from univers.version_range import IntdotVersionRange
 from univers.version_range import InvalidVersionRange
+from univers.version_range import LibversionVersionRange
 from univers.version_range import MattermostVersionRange
 from univers.version_range import OpensslVersionRange
 from univers.version_range import PypiVersionRange
@@ -27,6 +28,9 @@ from univers.versions import AlpineLinuxVersion
 from univers.versions import DatetimeVersion
 from univers.versions import IntdotVersion
 from univers.versions import LexicographicVersion
+from univers.versions import InvalidVersion
+from univers.versions import LibversionVersion
+from univers.versions import NugetVersion
 from univers.versions import OpensslVersion
 from univers.versions import PypiVersion
 from univers.versions import SemverVersion
@@ -458,3 +462,13 @@ def test_version_range_lexicographic():
     assert LexicographicVersion(-123) in VersionRange.from_string("vers:lexicographic/<~")
     assert LexicographicVersion(None) in VersionRange.from_string("vers:lexicographic/*")
     assert LexicographicVersion("ABC") in VersionRange.from_string("vers:lexicographic/>abc|<=None")
+
+
+def test_version_range_libversion():
+    assert LibversionVersion("1.2.3") in LibversionVersionRange.from_string("vers:libversion/*")
+    assert LibversionVersion("1.2.3") in LibversionVersionRange.from_string("vers:libversion/>0.9|<2.1.0-alpha")
+    assert LibversionVersion("1.0.0") in LibversionVersionRange.from_string("vers:libversion/>=1.0.0")
+    assert LibversionVersion("1.5.0") in LibversionVersionRange.from_string("vers:libversion/>=1.0.0|<=1.5.0")
+    assert not LibversionVersion("2.0.0") in LibversionVersionRange.from_string("vers:libversion/<2.0.0")
+    assert not LibversionVersion("1.2.3") in LibversionVersionRange.from_string("vers:libversion/>=1.2.4")
+    assert LibversionVersion("1.0.0") in LibversionVersionRange.from_string("vers:libversion/!=1.1.0")

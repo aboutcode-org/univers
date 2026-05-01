@@ -15,6 +15,7 @@ from univers.versions import GentooVersion
 from univers.versions import GolangVersion
 from univers.versions import IntdotVersion
 from univers.versions import LexicographicVersion
+from univers.versions import LibversionVersion
 from univers.versions import MavenVersion
 from univers.versions import NginxVersion
 from univers.versions import NugetVersion
@@ -253,3 +254,22 @@ def test_lexicographic_version():
     assert LexicographicVersion("Abc") < LexicographicVersion(None)
     assert LexicographicVersion("123") < LexicographicVersion("bbc")
     assert LexicographicVersion("2.3.4") > LexicographicVersion("1.2.3")
+
+
+def test_libversion_version():
+    assert LibversionVersion("1.2.3") == LibversionVersion("1.2.3")
+    assert LibversionVersion("1.2.3") != LibversionVersion("1.2.4")
+    assert LibversionVersion.is_valid("1.2.3")
+    assert LibversionVersion.normalize("v1.2.3") == "1.2.3"
+    assert LibversionVersion("1.2.3") > LibversionVersion("1.2.2")
+    assert LibversionVersion("1.2.3") < LibversionVersion("1.3.0")
+    assert LibversionVersion("1.2.3") >= LibversionVersion("1.2.3")
+    assert LibversionVersion("1.2.3") <= LibversionVersion("1.2.3")
+    assert LibversionVersion("1.2.3-alpha") < LibversionVersion("1.2.3")
+    assert LibversionVersion("1.2.3-alpha") != LibversionVersion("1.2.3-beta")
+    assert LibversionVersion("1.0custom1") < LibversionVersion("1.0")
+    assert LibversionVersion("1.0alpha1") == LibversionVersion("1.0a1")
+    assert LibversionVersion("1.0") < LibversionVersion("1.0a")
+    assert LibversionVersion("1.0.1") < LibversionVersion("1.0a")
+    assert LibversionVersion("1.0a1") < LibversionVersion("1.0")
+    assert LibversionVersion("1.0") == LibversionVersion("1.0.0")
