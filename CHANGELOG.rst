@@ -1,10 +1,16 @@
 Changelog
 =========
 
-Version v31.1.1
+Version v32.0.0
 ----------------
 
-- Update CI, change run OS for Pypi release to 22.04
+- Add lexicographic versioning scheme https://github.com/aboutcode-org/univers/pull/160
+- Datetime versioning scheme https://github.com/aboutcode-org/univers/pull/149
+- Add alpine in RANGE_CLASS_BY_SCHEME https://github.com/aboutcode-org/univers/pull/185
+- chore: pin workflow dependencies and publish using trusted publisher https://github.com/aboutcode-org/univers/pull/193
+- fix: return None when from_versions is called with empty constraints https://github.com/aboutcode-org/univers/pull/194
+- Raise error for deb comparators << and >> https://github.com/aboutcode-org/univers/pull/190
+- fix: use apk scheme for Alpine packages https://github.com/aboutcode-org/univers/pull/197
 
 
 Version v31.1.0
