@@ -763,3 +763,21 @@ AVAILABLE_VERSIONS = [
     DatetimeVersion,
     LexicographicVersion,
 ]
+
+
+class SwiftVersion(Version):
+    @classmethod
+    def build_value(cls, string):
+        return semantic_version.Version(string)
+
+    @classmethod
+    def is_valid(cls, string):
+        try:
+            cls.build_value(string)
+            return True
+        except ValueError:
+            return False
+
+    def next_major(self):
+        """Increase the major version and reset minor and patch."""
+        return SwiftVersion(str(self.value.next_major()))
