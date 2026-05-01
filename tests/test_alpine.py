@@ -40,6 +40,56 @@ def test_alpine_vers_cmp2(test_case):
 
 
 @pytest.mark.parametrize(
+    ("version", "expected_value"),
+    [
+        # dot immediately before revision marker (issue #59)
+        ("0.12.5.-r0", "0.12.5-r0"),
+        # dot instead of dash before revision number (issue #59)
+        ("0.8.21.r2", "0.8.21-r2"),
+        # dash as numeric version-component separator (issue #59)
+        ("1.11-20-r0", "1.11.20-r0"),
+        ("57-1-r2", "57.1-r2"),
+        # single letter + digit suffix, e.g. OpenSSH portable releases (issue #59)
+        ("1.9.5p2-r0", "1.9.5_p2-r0"),
+        ("3.3.3p1-r3", "3.3.3_p1-r3"),
+        ("6.6.2p1-r0", "6.6.2_p1-r0"),
+        ("6.6.4p1-r1", "6.6.4_p1-r1"),
+        ("6.7.1p1-r1", "6.7.1_p1-r1"),
+        # _git snapshot suffix mapped to _alpha for comparison (issue #59)
+        ("5.15.3_git20200401-r0", "5.15.3_alpha20200401-r0"),
+        ("5.15.3_git20210510-r0", "5.15.3_alpha20210510-r0"),
+    ],
+)
+def test_alpine_extended_version_formats(version, expected_value):
+    """Versions with Alpine-specific patterns must parse and normalise correctly."""
+    v = AlpineLinuxVersion(version)
+    assert v.value == expected_value
+
+
+@pytest.mark.parametrize(
+    ("smaller", "larger"),
+    [
+        # portable-release ordering: p1 < p2
+        ("1.9.5p1-r0", "1.9.5p2-r0"),
+        # git snapshot is a pre-release, comes before the stable release
+        ("5.15.3_git20200401-r0", "5.15.3-r0"),
+        # earlier git snapshot < later git snapshot
+        ("5.15.3_git20200401-r0", "5.15.3_git20210510-r0"),
+        # dash-separated version component ordering
+        ("1.11-20-r0", "1.11-21-r0"),
+        ("57-1-r2", "57-2-r0"),
+        # dot-r vs normal version
+        ("0.8.21.r2", "0.8.22-r0"),
+    ],
+)
+def test_alpine_extended_version_comparison(smaller, larger):
+    """Extended Alpine version formats must compare in the correct order."""
+    v1 = AlpineLinuxVersion(smaller)
+    v2 = AlpineLinuxVersion(larger)
+    assert v1 < v2
+
+
+@pytest.mark.parametrize(
     "test_case",
     [
         # these are the tests are not supported yet

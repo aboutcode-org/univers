@@ -4,6 +4,8 @@
 #
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
+import re
+
 import attr
 import semantic_version
 from packaging import version as packaging_version
@@ -56,6 +58,64 @@ def is_valid_alpine_version(s):
         return True
     i = int(left)
     return str(i) == left
+
+
+def _normalize_alpine_to_gentoo(string):
+    """
+    Normalize an Alpine Linux version string to a Gentoo-compatible format
+    so that Gentoo's vercmp can compare it correctly.
+
+    Alpine extends Gentoo-style versioning with additional patterns:
+    - A dot immediately before the revision marker ("0.12.5.-r0" -> "0.12.5-r0")
+    - Revision without a leading dash ("0.8.21.r2" -> "0.8.21-r2")
+    - Alpine-only suffix words: git, cvs, svn (mapped to alpha), rev/jdk (mapped to p)
+    - A single letter + digit directly after the dotted version ("1.9.5p2-r0" -> "1.9.5_p2-r0")
+    - A dash as a numeric version separator ("1.11-20-r0" -> "1.11.20-r0")
+
+    For example:
+    >>> _normalize_alpine_to_gentoo("1.9.5p2-r0")
+    '1.9.5_p2-r0'
+    >>> _normalize_alpine_to_gentoo("3.3.3p1-r3")
+    '3.3.3_p1-r3'
+    >>> _normalize_alpine_to_gentoo("5.15.3_git20200401-r0")
+    '5.15.3_alpha20200401-r0'
+    >>> _normalize_alpine_to_gentoo("1.11-20-r0")
+    '1.11.20-r0'
+    >>> _normalize_alpine_to_gentoo("57-1-r2")
+    '57.1-r2'
+    >>> _normalize_alpine_to_gentoo("0.12.5.-r0")
+    '0.12.5-r0'
+    >>> _normalize_alpine_to_gentoo("0.8.21.r2")
+    '0.8.21-r2'
+    >>> _normalize_alpine_to_gentoo("1.2.3-r1")
+    '1.2.3-r1'
+    >>> _normalize_alpine_to_gentoo("1.2.3_alpha1-r1")
+    '1.2.3_alpha1-r1'
+    """
+    # Handle ".rN" (no dash before revision): "0.8.21.r2" -> "0.8.21-r2"
+    string = re.sub(r"\.r(\d+)$", r"-r\1", string)
+
+    # Handle trailing dot before revision: "0.12.5.-r0" -> "0.12.5-r0"
+    string = re.sub(r"\.-r(\d+)$", r"-r\1", string)
+
+    # Map Alpine-only suffix words to Gentoo equivalents.
+    # Must be done before the letter+digit substitution below to avoid mangling them.
+    # _git, _cvs, _svn are snapshot/SCM builds -> treat as pre-release (alpha)
+    string = re.sub(r"_(git|cvs|svn)(\d*)", r"_alpha\2", string)
+    # _rev, _jdk -> treat as patch release (p)
+    string = re.sub(r"_(rev|jdk)(\d*)", r"_p\2", string)
+
+    # Handle single letter+digit suffix: "1.9.5p2-r0" -> "1.9.5_p2-r0"
+    # Matches a letter immediately preceded by a digit, followed by one or more
+    # digits, just before the revision marker "-rN" or end of string.
+    string = re.sub(r"(?<=\d)([a-zA-Z])(\d+)(?=-r\d|$)", r"_\1\2", string)
+
+    # Handle dash as a numeric version-component separator: "1.11-20-r0" -> "1.11.20-r0"
+    # Replaces "-N" only when N is a pure digit run not followed by the revision
+    # marker "rN" (i.e., skip "-r0", "-r1", …).
+    string = re.sub(r"-(?!r\d)(\d+)", r".\1", string)
+
+    return string
 
 
 @attr.s(frozen=True, order=True, eq=True, hash=True)
@@ -431,6 +491,11 @@ class GentooVersion(Version):
 
 
 class AlpineLinuxVersion(GentooVersion):
+    @classmethod
+    def normalize(cls, string):
+        string = super().normalize(string)
+        return _normalize_alpine_to_gentoo(string)
+
     @classmethod
     def is_valid(cls, string):
         return is_valid_alpine_version(string) and gentoo.is_valid(string)
