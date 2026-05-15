@@ -174,9 +174,7 @@ class VersionRange:
         version_range = range_class(parsed_constraints)
         canonical_vers = str(version_range)
         if canonical_vers != original_vers:
-            raise ValueError(
-                f"{original_vers!r} is not canonical. Expected {canonical_vers!r}."
-            )
+            raise ValueError(f"{original_vers!r} is not canonical. Expected {canonical_vers!r}.")
 
         return version_range
 

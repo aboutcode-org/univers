@@ -305,9 +305,7 @@ class VersionConstraint:
 
         sorted_constraints = sorted(constraints)
         if list(constraints) != sorted_constraints:
-            raise ValueError(
-                f"{constraints!r} must use canonical ordering by version"
-            )
+            raise ValueError(f"{constraints!r} must use canonical ordering by version")
 
         return validate_comparators(constraints)
 

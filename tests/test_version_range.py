@@ -102,9 +102,9 @@ def test_vers_spec_parse_cases(test_case):
     expected_output = test_case["expected_output"]
 
     assert version_range.scheme == expected_output["scheme"]
-    assert [[constraint.comparator, str(constraint.version)] for constraint in version_range.constraints] == expected_output[
-        "version_constraints"
-    ]
+    assert [
+        [constraint.comparator, str(constraint.version)] for constraint in version_range.constraints
+    ] == expected_output["version_constraints"]
 
 
 class TestVersionRangeContainment(SchemaDrivenVersTest):
