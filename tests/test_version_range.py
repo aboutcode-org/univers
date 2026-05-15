@@ -59,6 +59,52 @@ TEST_DATA_NPM_CONTAINMENT = TEST_DATA_PARENT / "npm_range_containment.json"
 TEST_DATA_PYPI_CONTAINMENT = TEST_DATA_PARENT / "pypi_range_containment.json"
 
 TEST_DATA_PYPI_ROUNDTRIP = TEST_DATA_PARENT / "pypi_range_roundtrip.json"
+TEST_DATA_VERS_PARSE_CANONICAL = TEST_DATA_PARENT / "vers_parse_canonical.json"
+
+
+def assert_parse_failure_reason(error_message, expected_reason):
+    message = error_message.lower()
+    reason = expected_reason.lower()
+
+    if "whitespace" in reason:
+        assert "whitespace" in message
+        return
+
+    if "leading pipe" in reason or "trailing pipe" in reason:
+        assert "leading or trailing pipe" in message
+        return
+
+    if "consecutive pipes" in reason:
+        assert "consecutive pipes" in message
+        return
+
+    if "sorted by version" in reason:
+        assert "canonical ordering" in message
+        return
+
+    assert reason in message
+
+
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_VERS_PARSE_CANONICAL))["tests"])
+def test_vers_spec_parse_cases(test_case):
+    vers_string = test_case["input"]
+
+    if test_case.get("expected_failure"):
+        with pytest.raises(ValueError) as error:
+            VersionRange.from_string(vers_string)
+
+        expected_failure_reason = test_case.get("expected_failure_reason")
+        if expected_failure_reason:
+            assert_parse_failure_reason(str(error.value), expected_failure_reason)
+        return
+
+    version_range = VersionRange.from_string(vers_string)
+    expected_output = test_case["expected_output"]
+
+    assert version_range.scheme == expected_output["scheme"]
+    assert [[constraint.comparator, str(constraint.version)] for constraint in version_range.constraints] == expected_output[
+        "version_constraints"
+    ]
 
 
 class TestVersionRangeContainment(SchemaDrivenVersTest):

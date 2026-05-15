@@ -1,0 +1,64 @@
+{
+  "$schema": "https://packageurl.org/schemas/vers-test.schema-0.1.json",
+  "tests": [
+    {
+      "description": "Canonical parse succeeds for an already normalized VERS.",
+      "test_group": "base",
+      "test_type": "parse",
+      "input": "vers:npm/>=1.0.0|<2.0.0",
+      "expected_output": {
+        "scheme": "npm",
+        "version_constraints": [
+          [
+            ">=",
+            "1.0.0"
+          ],
+          [
+            "<",
+            "2.0.0"
+          ]
+        ]
+      }
+    },
+    {
+      "description": "Parsing fails when ASCII whitespace is present.",
+      "test_group": "base",
+      "test_type": "parse",
+      "input": "vers:npm/>=1.0.0| <2.0.0",
+      "expected_failure": true,
+      "expected_failure_reason": "non-canonical VERS: whitespace is not permitted"
+    },
+    {
+      "description": "Parsing fails when constraints start with a pipe.",
+      "test_group": "base",
+      "test_type": "parse",
+      "input": "vers:npm/|>=1.0.0|<2.0.0",
+      "expected_failure": true,
+      "expected_failure_reason": "non-canonical VERS: leading pipe is not permitted"
+    },
+    {
+      "description": "Parsing fails when constraints end with a pipe.",
+      "test_group": "base",
+      "test_type": "parse",
+      "input": "vers:npm/>=1.0.0|<2.0.0|",
+      "expected_failure": true,
+      "expected_failure_reason": "non-canonical VERS: trailing pipe is not permitted"
+    },
+    {
+      "description": "Parsing fails when constraints contain consecutive pipes.",
+      "test_group": "base",
+      "test_type": "parse",
+      "input": "vers:npm/>=1.0.0||<2.0.0",
+      "expected_failure": true,
+      "expected_failure_reason": "non-canonical VERS: consecutive pipes are not permitted"
+    },
+    {
+      "description": "Parsing fails when constraints are not in canonical order.",
+      "test_group": "base",
+      "test_type": "parse",
+      "input": "vers:npm/>=2.0.0|<1.0.0",
+      "expected_failure": true,
+      "expected_failure_reason": "non-canonical VERS: constraints are not sorted by version"
+    }
+  ]
+}
