@@ -59,6 +59,52 @@ TEST_DATA_NPM_CONTAINMENT = TEST_DATA_PARENT / "npm_range_containment.json"
 TEST_DATA_PYPI_CONTAINMENT = TEST_DATA_PARENT / "pypi_range_containment.json"
 
 TEST_DATA_PYPI_ROUNDTRIP = TEST_DATA_PARENT / "pypi_range_roundtrip.json"
+TEST_DATA_VERS_PARSE_CANONICAL = TEST_DATA_PARENT / "vers_parse_canonical.json"
+
+
+def assert_parse_failure_reason(error_message, expected_reason):
+    message = error_message.lower()
+    reason = expected_reason.lower()
+
+    if "whitespace" in reason:
+        assert "whitespace" in message
+        return
+
+    if "leading pipe" in reason or "trailing pipe" in reason:
+        assert "leading or trailing pipe" in message
+        return
+
+    if "consecutive pipes" in reason:
+        assert "consecutive pipes" in message
+        return
+
+    if "sorted by version" in reason:
+        assert "canonical ordering" in message
+        return
+
+    assert reason in message
+
+
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_VERS_PARSE_CANONICAL))["tests"])
+def test_vers_spec_parse_cases(test_case):
+    vers_string = test_case["input"]
+
+    if test_case.get("expected_failure"):
+        with pytest.raises(ValueError) as error:
+            VersionRange.from_string(vers_string)
+
+        expected_failure_reason = test_case.get("expected_failure_reason")
+        if expected_failure_reason:
+            assert_parse_failure_reason(str(error.value), expected_failure_reason)
+        return
+
+    version_range = VersionRange.from_string(vers_string)
+    expected_output = test_case["expected_output"]
+
+    assert version_range.scheme == expected_output["scheme"]
+    assert [
+        [constraint.comparator, str(constraint.version)] for constraint in version_range.constraints
+    ] == expected_output["version_constraints"]
 
 
 class TestVersionRangeContainment(SchemaDrivenVersTest):
@@ -244,6 +290,23 @@ def test_alpine_version_range_containment():
     assert AlpineLinuxVersion("3.19.0") not in vr
 
 
+@pytest.mark.parametrize(
+    "vers, expected_error",
+    [
+        ("vers:pypi/>= 1.0", "ASCII whitespace"),
+        ("vers:pypi/|>=1.0", "leading or trailing pipe"),
+        ("vers:pypi/>=1.0|", "leading or trailing pipe"),
+        ("vers:pypi/>=1.0||<2.0", "consecutive pipes"),
+        ("vers:pypi/>=2.0|>=1.0", "canonical ordering"),
+        ("vers:pypi/>=1.0|<=1.0", "duplicated Version"),
+        ("vers:pypi/>=1.0|>2.0", "cannot be followed by"),
+    ],
+)
+def test_version_range_from_string_rejects_non_canonical_vers(vers, expected_error):
+    with pytest.raises(ValueError, match=expected_error):
+        VersionRange.from_string(vers)
+
+
 VERSION_RANGE_TESTS_BY_SCHEME = {
     "nginx": ["0.8.40+", "0.7.52-0.8.39", "0.9.10", "1.5.0+, 1.4.1+"],
     "npm": [
@@ -320,13 +383,13 @@ def test_mattermost_version_range():
         constraints=[
             VersionConstraint(comparator="=", version=SemverVersion("5.0")),
         ]
-    ) == VersionRange.from_string("vers:mattermost/5.0")
+    ) == VersionRange.from_string("vers:mattermost/5.0.0")
 
     assert MattermostVersionRange(
         constraints=[
             VersionConstraint(comparator=">=", version=SemverVersion("5.0")),
         ]
-    ) == VersionRange.from_string("vers:mattermost/>=5.0")
+    ) == VersionRange.from_string("vers:mattermost/>=5.0.0")
 
 
 def test_build_range_from_snyk_advisory_string():
@@ -453,8 +516,8 @@ def test_version_range_datetime():
 
 def test_version_range_lexicographic():
     assert LexicographicVersion("1.2.3") in VersionRange.from_string(
-        "vers:lexicographic/<1.2.4|>0.9"
+        "vers:lexicographic/>0.9|<1.2.4"
     )
     assert LexicographicVersion(-123) in VersionRange.from_string("vers:lexicographic/<~")
     assert LexicographicVersion(None) in VersionRange.from_string("vers:lexicographic/*")
-    assert LexicographicVersion("ABC") in VersionRange.from_string("vers:lexicographic/>abc|<=None")
+    assert LexicographicVersion("ABC") in VersionRange.from_string("vers:lexicographic/<=None|>abc")

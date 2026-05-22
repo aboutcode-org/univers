@@ -36,6 +36,9 @@ class IntdotVersion:
     def __ge__(self, other):
         return self.__cmp__(other) >= 0
 
+    def __str__(self):
+        return self.original
+
     @classmethod
     def is_valid(cls, string):
         return re.compile(IntdotVersion.VERSION_PATTERN).match(string)

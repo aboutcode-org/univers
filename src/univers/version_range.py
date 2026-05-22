@@ -18,6 +18,7 @@ from univers import gem
 from univers import maven
 from univers import versions
 from univers.conan.version_range import VersionRange as conan_version_range
+from univers.utils import contains_ascii_whitespace
 from univers.utils import remove_spaces
 from univers.version_constraint import VersionConstraint
 from univers.version_constraint import contains_version
@@ -108,8 +109,10 @@ class VersionRange:
                 f"{vers!r} is not a valid argument, a valid ``vers`` string argument is required."
             )
 
-        # Spaces are not significant and removed in a canonical form.
-        vers = remove_spaces(vers)
+        if contains_ascii_whitespace(vers):
+            raise ValueError(f"Invalid ASCII whitespace in VERS string: {vers!r}")
+
+        original_vers = vers
 
         # A version range specifier contains only printable ASCII letters, digits and
         # punctuation.
@@ -134,7 +137,6 @@ class VersionRange:
 
         version_class = range_class.version_class
 
-        constraints = remove_spaces(constraints)
         if not constraints:
             raise ValueError(f"{vers!r} specifies no version range constraints.")
 
@@ -149,7 +151,12 @@ class VersionRange:
 
         parsed_constraints = []
 
-        constraints = constraints.strip("|")
+        if constraints.startswith("|") or constraints.endswith("|"):
+            raise ValueError(f"{vers!r} contains a leading or trailing pipe '|'.")
+
+        if "||" in constraints:
+            raise ValueError(f"{vers!r} contains consecutive pipes '||'.")
+
         for const in constraints.split("|"):
             constraint = VersionConstraint.from_string(
                 string=const,
@@ -157,17 +164,19 @@ class VersionRange:
             )
             parsed_constraints.append(constraint)
 
-        # Constraints are sorted by version**. The canonical ordering is the versions
-        # order. The ordering of ``<version-constraint>`` is not significant otherwise
-        # but this sort order is needed when check if a version is contained in a range.
-        parsed_constraints.sort()
+        VersionConstraint.validate(parsed_constraints)
 
         if simplify:
             parsed_constraints = VersionConstraint.simplify(parsed_constraints)
         if validate:
             VersionConstraint.validate(parsed_constraints)
 
-        return range_class(parsed_constraints)
+        version_range = range_class(parsed_constraints)
+        canonical_vers = str(version_range)
+        if canonical_vers != original_vers:
+            raise ValueError(f"{original_vers!r} is not canonical. Expected {canonical_vers!r}.")
+
+        return version_range
 
     @classmethod
     def from_versions(cls, sequence):

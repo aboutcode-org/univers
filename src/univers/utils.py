@@ -9,6 +9,13 @@ def remove_spaces(string):
     return "".join(string.split())
 
 
+ASCII_WHITESPACE = frozenset(" \t\n\r\f\v")
+
+
+def contains_ascii_whitespace(string):
+    return any(character in ASCII_WHITESPACE for character in string)
+
+
 def cmp(x, y):
     """
     Replacement for built-in Python 2 function cmp that was removed in Python 3

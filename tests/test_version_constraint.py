@@ -96,3 +96,12 @@ def test_invalid_vers_comparator_prefixes(spec):
             string=spec,
             version_class=versions.SemverVersion,
         )
+
+
+@pytest.mark.parametrize("spec", [">= 2.3", "\t>=2.3", ">=2.3\n"])
+def test_invalid_vers_constraint_with_ascii_whitespace(spec):
+    with pytest.raises(ValueError, match="ASCII whitespace"):
+        VersionConstraint.from_string(
+            string=spec,
+            version_class=versions.SemverVersion,
+        )

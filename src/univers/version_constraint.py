@@ -9,6 +9,7 @@ from functools import total_ordering
 
 import attr
 
+from univers.utils import contains_ascii_whitespace
 from univers.utils import remove_spaces
 from univers.versions import Version
 
@@ -166,7 +167,10 @@ class VersionConstraint:
         Return a single VersionConstraint built from a constraint ``string`` and
         a ``version_class`` Version class.
         """
-        constraint_string = remove_spaces(string)
+        if contains_ascii_whitespace(string):
+            raise ValueError(f"Invalid ASCII whitespace in constraint: {string!r}")
+
+        constraint_string = string
 
         # A version range specifier contains only printable ASCII letters, digits and
         # punctuation.
@@ -195,7 +199,7 @@ class VersionConstraint:
 
         For example::
         >>> assert VersionConstraint.split(">=2.3") == (">=", "2.3",)
-        >>> assert VersionConstraint.split("  <   =  2 . 3  ") == ("<=", "2.3",)
+        >>> assert VersionConstraint.split("<=2.3") == ("<=", "2.3",)
         >>> assert VersionConstraint.split("2.3") == ("=", "2.3",)
         >>> assert VersionConstraint.split("*2.3") == ("*", "",)
         >>> assert VersionConstraint.split("*") == ("*", "",)
@@ -208,7 +212,10 @@ class VersionConstraint:
         ... except ValueError:
         ...     pass
         """
-        constraint_string = remove_spaces(string)
+        if contains_ascii_whitespace(string):
+            raise ValueError(f"Invalid ASCII whitespace in constraint: {string!r}")
+
+        constraint_string = string
 
         # special case for star
         if constraint_string.startswith("*"):
@@ -292,13 +299,13 @@ class VersionConstraint:
         # occur only once in any ``<version-constraint>`` of a range specifier,
         # irrespective of its comparators. Tools must report an error for duplicated
         # versions.
-        if len(set(c.version for c in constraints)) != len(constraints):
-            raise ValueError(f"{constraints!r} cannot contain duplicated Version")
+        for index, constraint in enumerate(constraints):
+            if any(constraint.version == other.version for other in constraints[index + 1 :]):
+                raise ValueError(f"{constraints!r} cannot contain duplicated Version")
 
-        # Constraints are sorted by version**. The canonical ordering is the versions
-        # order. The ordering of ``<version-constraint>`` is not significant otherwise
-        # but this sort order is needed when check if a version is contained in a range.
-        constraints.sort()
+        sorted_constraints = sorted(constraints)
+        if list(constraints) != sorted_constraints:
+            raise ValueError(f"{constraints!r} must use canonical ordering by version")
 
         return validate_comparators(constraints)
 
