@@ -98,6 +98,17 @@ class TestRestriction(unittest.TestCase):
         assert "1.3.1" not in r
         assert "2.0" not in r
 
+    def test_identical_inclusive_boundaries(self):
+        r = Restriction("[5.0,5.0]")
+        assert str(r.lower_bound) == "5.0"
+        assert r.lower_bound_inclusive
+        assert str(r.upper_bound) == "5.0"
+        assert r.upper_bound_inclusive
+
+        assert "4.0" not in r
+        assert "5.0" in r
+        assert "5.1" not in r
+
     def test_exclusive_upper_bound(self):
         r = Restriction("[1.0,2.0)")
         assert str(r.lower_bound) == "1.0"

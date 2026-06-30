@@ -36,6 +36,13 @@ def test_maven_version_range_from_native_for_pinned_version():
     )
 
 
+def test_maven_version_range_from_native_for_single_point_range():
+    version_range = MavenVersionRange.from_native("[5.0,5.0]")
+    assert version_range == MavenVersionRange(
+        constraints=(VersionConstraint(comparator="=", version=MavenVersion(string="5.0")),)
+    )
+
+
 def test_maven_version_range_from_native_for_illformed_version():
     try:
         MavenVersionRange.from_native("(1.0.0]")
