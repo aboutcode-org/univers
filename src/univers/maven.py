@@ -77,14 +77,19 @@ class Restriction(object):
         _spec = spec[1:-1].strip()
         if "," in _spec:
             lower_bound, upper_bound = _spec.split(",")
-            if lower_bound and lower_bound == upper_bound:
-                raise RestrictionParseError("Range cannot have identical boundaries: %s" % spec)
 
             self.lower_bound = Version(lower_bound) if lower_bound else None
             self.upper_bound = Version(upper_bound) if upper_bound else None
 
-            if self.lower_bound and self.upper_bound and self.upper_bound < self.lower_bound:
-                raise RestrictionParseError("Range defies version ordering: %s" % spec)
+            if self.lower_bound and self.upper_bound:
+                if self.upper_bound < self.lower_bound:
+                    raise RestrictionParseError("Range defies version ordering: %s" % spec)
+                # Identical boundaries describe a single hard requirement such as
+                # [5.0,5.0] and are only valid when both bounds are inclusive.
+                if self.upper_bound == self.lower_bound and not (
+                    self.lower_bound_inclusive and self.upper_bound_inclusive
+                ):
+                    raise RestrictionParseError("Range cannot have identical boundaries: %s" % spec)
         else:
             # single version restriction
             if not self.lower_bound_inclusive or not self.upper_bound_inclusive:
