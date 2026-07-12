@@ -9,9 +9,17 @@
 #
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
+from __future__ import annotations
+
 import re
+from typing import TYPE_CHECKING
 from typing import NamedTuple
-from typing import Union
+
+if TYPE_CHECKING:
+    try:
+        from typing import Self
+    except ImportError:
+        from typing_extensions import Self
 
 
 class RpmVersion(NamedTuple):
@@ -23,10 +31,10 @@ class RpmVersion(NamedTuple):
     version: str
     release: str
 
-    def __str__(self, *args, **kwargs):
+    def __str__(self, *args, **kwargs) -> str:
         return self.to_string()
 
-    def to_string(self):
+    def to_string(self) -> str:
         if self.release:
             vr = f"{self.version}-{self.release}"
         else:
@@ -37,28 +45,28 @@ class RpmVersion(NamedTuple):
         return vr
 
     @classmethod
-    def from_string(cls, s):
+    def from_string(cls, s: str) -> Self:
         s.strip()
         e, v, r = from_evr(s)
         return cls(e, v, r)
 
-    def __lt__(self, other):
+    def __lt__(self, other: Self | str) -> bool:
         return compare_rpm_versions(self, other) < 0
 
-    def __gt__(self, other):
+    def __gt__(self, other: Self | str) -> bool:
         return compare_rpm_versions(self, other) > 0
 
-    def __eq__(self, other):
+    def __eq__(self, other: Self | str) -> bool:
         return compare_rpm_versions(self, other) == 0
 
-    def __le__(self, other):
+    def __le__(self, other: Self | str) -> bool:
         return compare_rpm_versions(self, other) <= 0
 
-    def __ge__(self, other):
+    def __ge__(self, other: Self | str) -> bool:
         return compare_rpm_versions(self, other) >= 0
 
 
-def from_evr(s):
+def from_evr(s: str) -> tuple[int, str, str]:
     """
     Return an (E, V, R) tuple given a string by splitting
     [e:]version-release into the three possible subcomponents.
@@ -83,7 +91,7 @@ def from_evr(s):
     return e, v, r
 
 
-def compare_rpm_versions(a: Union[RpmVersion, str], b: Union[RpmVersion, str]) -> int:
+def compare_rpm_versions(a: RpmVersion | str, b: RpmVersion | str) -> int:
     """
     Compare two RPM versions ``a`` and ``b`` and return:
     -  1 if the version of a is newer than b
@@ -136,7 +144,7 @@ class Vercmp:
     R_ALPHA = re.compile(rb"^([a-zA-Z]+)(.*)$")
 
     @classmethod
-    def compare(cls, first, second):
+    def compare(cls, first: str, second: str) -> int:
         # Rpm versions can only be ascii, anything else is just ignored
         first = first.encode("ascii", "ignore")
         second = second.encode("ascii", "ignore")
@@ -236,5 +244,5 @@ class Vercmp:
         return -1
 
 
-def vercmp(first, second):
+def vercmp(first: str, second: str) -> int:
     return Vercmp.compare(first, second)

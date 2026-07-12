@@ -4,6 +4,8 @@
 #
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
+from __future__ import annotations
+
 from univers.utils import remove_spaces
 from univers.version_constraint import VersionConstraint
 from univers.versions import SemverVersion
@@ -13,7 +15,7 @@ node-semver and Rubygems semver-like related utilities.
 """
 
 
-def get_caret_constraints(string):
+def get_caret_constraints(string: str) -> tuple[VersionConstraint, VersionConstraint]:
     """
     Return a tuple of two VersionConstraint of ``SemverVersion`` representing
     the lower and upper bound of version constraint ``string`` that contains a
@@ -41,7 +43,9 @@ def get_caret_constraints(string):
     )
 
 
-def get_tilde_constraints(string, operator="~"):
+def get_tilde_constraints(
+    string: str, operator: str = "~"
+) -> tuple[VersionConstraint, VersionConstraint]:
     """
     Return a tuple of two VersionConstraint of ``SemverVersion`` representing
     the lower and upper bound of a version range ``string`` that contains a
@@ -70,7 +74,7 @@ def get_tilde_constraints(string, operator="~"):
 
 
 # FIXME: this is unlikely correct https://github.com/npm/node-semver/issues/112
-def get_pessimistic_constraints(string):
+def get_pessimistic_constraints(string: str) -> tuple[VersionConstraint, VersionConstraint]:
     """
     Return a tuple of two VersionConstraint of ``SemverVersion`` representing
     the lower and upper bound of version range ``string`` that contains a

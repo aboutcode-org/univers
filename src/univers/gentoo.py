@@ -5,6 +5,8 @@
 #
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
+from __future__ import annotations
+
 import re
 
 from univers.utils import cmp
@@ -25,12 +27,12 @@ gentoo ebuild version comparison
 """
 
 
-def is_valid(string):
+def is_valid(string: str) -> re.Match | None:
     version, _ = parse_version_and_revision(remove_spaces(string))
     return _is_gentoo_version(version)
 
 
-def parse_version_and_revision(version_string):
+def parse_version_and_revision(version_string: str) -> tuple[str, int]:
     """
     Return a tuple of (version string, revision int) given a ``version_string``.
     """
@@ -44,7 +46,7 @@ def parse_version_and_revision(version_string):
     return version, revision
 
 
-def vercmp(ver1, ver2):
+def vercmp(ver1: str, ver2: str) -> int:
     """
     Compare two versions ``ver1`` and ``ver2`` and return 0, 1, or -1 according
     to the Python 2 cmp() semantics:
