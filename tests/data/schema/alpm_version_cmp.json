@@ -1,0 +1,650 @@
+[
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5.1",
+        "1.5.0"
+      ]
+    },
+    "expected_output": [
+      "1.5.0",
+      "1.5.1"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5.1",
+        "1.5"
+      ]
+    },
+    "expected_output": [
+      "1.5",
+      "1.5.1"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5.0-1",
+        "1.5.0-2"
+      ]
+    },
+    "expected_output": [
+      "1.5.0-1",
+      "1.5.0-2"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5.0-1",
+        "1.5.1-1"
+      ]
+    },
+    "expected_output": [
+      "1.5.0-1",
+      "1.5.1-1"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5.0-2",
+        "1.5.1-1"
+      ]
+    },
+    "expected_output": [
+      "1.5.0-2",
+      "1.5.1-1"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5.a",
+        "1.5"
+      ]
+    },
+    "expected_output": [
+      "1.5",
+      "1.5.a"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5.b",
+        "1.5.a"
+      ]
+    },
+    "expected_output": [
+      "1.5.a",
+      "1.5.b"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5.1",
+        "1.5.b"
+      ]
+    },
+    "expected_output": [
+      "1.5.b",
+      "1.5.1"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "0:1.0",
+        "0:1.1"
+      ]
+    },
+    "expected_output": [
+      "0:1.0",
+      "0:1.1"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1:1.0",
+        "0:1.0"
+      ]
+    },
+    "expected_output": [
+      "0:1.0",
+      "1:1.0"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1:1.0",
+        "0:1.1"
+      ]
+    },
+    "expected_output": [
+      "0:1.1",
+      "1:1.0"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1:1.0",
+        "2:1.1"
+      ]
+    },
+    "expected_output": [
+      "1:1.0",
+      "2:1.1"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1:1.0",
+        "0:1.0-1"
+      ]
+    },
+    "expected_output": [
+      "0:1.0-1",
+      "1:1.0"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1:1.0-1",
+        "0:1.1-1"
+      ]
+    },
+    "expected_output": [
+      "0:1.1-1",
+      "1:1.0-1"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "0:1.0",
+        "1.1"
+      ]
+    },
+    "expected_output": [
+      "0:1.0",
+      "1.1"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "0:1.1",
+        "1.0"
+      ]
+    },
+    "expected_output": [
+      "1.0",
+      "0:1.1"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1:1.0",
+        "1.0"
+      ]
+    },
+    "expected_output": [
+      "1.0",
+      "1:1.0"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1:1.0",
+        "1.1"
+      ]
+    },
+    "expected_output": [
+      "1.1",
+      "1:1.0"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1:1.1",
+        "1.1"
+      ]
+    },
+    "expected_output": [
+      "1.1",
+      "1:1.1"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5-1",
+        "1.5.b"
+      ]
+    },
+    "expected_output": [
+      "1.5-1",
+      "1.5.b"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5-1",
+        "1.5.1-1"
+      ]
+    },
+    "expected_output": [
+      "1.5-1",
+      "1.5.1-1"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5-2",
+        "1.5.1-1"
+      ]
+    },
+    "expected_output": [
+      "1.5-2",
+      "1.5.1-1"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5-2",
+        "1.5.1-2"
+      ]
+    },
+    "expected_output": [
+      "1.5-2",
+      "1.5.1-2"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.0-1",
+        "1.1"
+      ]
+    },
+    "expected_output": [
+      "1.0-1",
+      "1.1"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.1-1",
+        "1.0"
+      ]
+    },
+    "expected_output": [
+      "1.0",
+      "1.1-1"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5b-1",
+        "1.5-1"
+      ]
+    },
+    "expected_output": [
+      "1.5b-1",
+      "1.5-1"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5b",
+        "1.5"
+      ]
+    },
+    "expected_output": [
+      "1.5b",
+      "1.5"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5b-1",
+        "1.5"
+      ]
+    },
+    "expected_output": [
+      "1.5b-1",
+      "1.5"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5b",
+        "1.5.1"
+      ]
+    },
+    "expected_output": [
+      "1.5b",
+      "1.5.1"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.0a",
+        "1.0alpha"
+      ]
+    },
+    "expected_output": [
+      "1.0a",
+      "1.0alpha"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.0alpha",
+        "1.0b"
+      ]
+    },
+    "expected_output": [
+      "1.0alpha",
+      "1.0b"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.0b",
+        "1.0beta"
+      ]
+    },
+    "expected_output": [
+      "1.0b",
+      "1.0beta"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.0beta",
+        "1.0rc"
+      ]
+    },
+    "expected_output": [
+      "1.0beta",
+      "1.0rc"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.0rc",
+        "1.0"
+      ]
+    },
+    "expected_output": [
+      "1.0rc",
+      "1.0"
+    ]
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5.0",
+        "1.5.0"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "0:1.0",
+        "0:1.0"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5.0-1",
+        "1.5.0-1"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "0:1.0",
+        "1.0"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5.b-1",
+        "1.5.b"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5",
+        "1.5-1"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.5-1",
+        "1.5"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for Arch Linux version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "alpm",
+      "versions": [
+        "1.1-1",
+        "1.1"
+      ]
+    },
+    "expected_output": true
+  }
+]

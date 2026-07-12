@@ -1,0 +1,173 @@
+[
+  {
+    "description": "Roundtrip test for pypi VERS range.",
+    "test_group": "advanced",
+    "test_type": "roundtrip",
+    "input": {
+      "vers": "vers:pypi/>0.0.2"
+    },
+    "expected_output": "vers:pypi/>0.0.2"
+  },
+  {
+    "description": "Roundtrip test for pypi VERS range.",
+    "test_group": "advanced",
+    "test_type": "roundtrip",
+    "input": {
+      "vers": "vers:pypi/0.0.2|0.0.6|0.0.0|0.0.1|0.0.4|0.0.5|0.0.3"
+    },
+    "expected_output": "vers:pypi/0.0.0|0.0.1|0.0.2|0.0.3|0.0.4|0.0.5|0.0.6"
+  },
+  {
+    "description": "Roundtrip test for pypi VERS range.",
+    "test_group": "advanced",
+    "test_type": "roundtrip",
+    "input": {
+      "vers": "vers:pypi/>0.0.0|>=0.0.1|0.0.2|<0.0.3|0.0.4|<0.0.5|>=0.0.6"
+    },
+    "expected_output": "vers:pypi/>0.0.0|>=0.0.1|0.0.2|<0.0.3|0.0.4|<0.0.5|>=0.0.6"
+  },
+  {
+    "description": "Roundtrip test for pypi VERS range.",
+    "test_group": "advanced",
+    "test_type": "roundtrip",
+    "input": {
+      "vers": "vers:pypi/>0.0.0|>=0.0.1|>=0.0.1|0.0.2|0.0.3|0.0.4|<0.0.5|<=0.0.6|!=0.7|8.0|>12|<15.3"
+    },
+    "expected_output": "vers:pypi/>0.0.0|>=0.0.1|>=0.0.1|0.0.2|0.0.3|0.0.4|<0.0.5|<=0.0.6|!=0.7|8.0|>12|<15.3"
+  },
+  {
+    "description": "Roundtrip test for pypi VERS range.",
+    "test_group": "advanced",
+    "test_type": "roundtrip",
+    "input": {
+      "vers": "vers:pypi/>0.0.0|>=0.0.1|0.0.2|0.0.3|0.0.4|<0.0.5|>=0.0.6|!=0.8"
+    },
+    "expected_output": "vers:pypi/>0.0.0|>=0.0.1|0.0.2|0.0.3|0.0.4|<0.0.5|>=0.0.6|!=0.8"
+  },
+  {
+    "description": "Roundtrip test for pypi VERS range.",
+    "test_group": "advanced",
+    "test_type": "roundtrip",
+    "input": {
+      "vers": "vers:pypi/>0.0.1"
+    },
+    "expected_output": "vers:pypi/>0.0.1"
+  },
+  {
+    "description": "Roundtrip test for pypi VERS range.",
+    "test_group": "advanced",
+    "test_type": "roundtrip",
+    "input": {
+      "vers": "vers:pypi/>=0.0.1"
+    },
+    "expected_output": "vers:pypi/>=0.0.1"
+  },
+  {
+    "description": "Roundtrip test for pypi VERS range.",
+    "test_group": "advanced",
+    "test_type": "roundtrip",
+    "input": {
+      "vers": "vers:pypi/<0.0.1"
+    },
+    "expected_output": "vers:pypi/<0.0.1"
+  },
+  {
+    "description": "Roundtrip test for pypi VERS range.",
+    "test_group": "advanced",
+    "test_type": "roundtrip",
+    "input": {
+      "vers": "vers:pypi/<=0.0.1"
+    },
+    "expected_output": "vers:pypi/<=0.0.1"
+  },
+  {
+    "description": "Roundtrip test for pypi VERS range.",
+    "test_group": "advanced",
+    "test_type": "roundtrip",
+    "input": {
+      "vers": "vers:pypi/0.0.1"
+    },
+    "expected_output": "vers:pypi/0.0.1"
+  },
+  {
+    "description": "Roundtrip test for pypi VERS range.",
+    "test_group": "advanced",
+    "test_type": "roundtrip",
+    "input": {
+      "vers": "vers:pypi/!=0.0.1"
+    },
+    "expected_output": "vers:pypi/!=0.0.1"
+  },
+  {
+    "description": "Roundtrip test for pypi VERS range.",
+    "test_group": "advanced",
+    "test_type": "roundtrip",
+    "input": {
+      "vers": "vers:pypi/*"
+    },
+    "expected_output": "vers:pypi/*"
+  },
+  {
+    "description": "Roundtrip test for pypi VERS range.",
+    "test_group": "advanced",
+    "test_type": "roundtrip",
+    "input": {
+      "vers": "vers:pypi/>0.0.1|<0.1"
+    },
+    "expected_output": "vers:pypi/>0.0.1|<0.1"
+  },
+  {
+    "description": "Roundtrip test for pypi VERS range.",
+    "test_group": "advanced",
+    "test_type": "roundtrip",
+    "input": {
+      "vers": "vers:pypi/>=0.0.1|<0.1"
+    },
+    "expected_output": "vers:pypi/>=0.0.1|<0.1"
+  },
+  {
+    "description": "Roundtrip test for pypi VERS range.",
+    "test_group": "advanced",
+    "test_type": "roundtrip",
+    "input": {
+      "vers": "vers:pypi/<0.0.1|>0.1"
+    },
+    "expected_output": "vers:pypi/<0.0.1|>0.1"
+  },
+  {
+    "description": "Roundtrip test for pypi VERS range.",
+    "test_group": "advanced",
+    "test_type": "roundtrip",
+    "input": {
+      "vers": "vers:pypi/<=0.0.1|>0.1"
+    },
+    "expected_output": "vers:pypi/<=0.0.1|>0.1"
+  },
+  {
+    "description": "Roundtrip test for pypi VERS range.",
+    "test_group": "advanced",
+    "test_type": "roundtrip",
+    "input": {
+      "vers": "vers:pypi/0.0.1|>0.1"
+    },
+    "expected_output": "vers:pypi/0.0.1|>0.1"
+  },
+  {
+    "description": "Roundtrip test for pypi VERS range.",
+    "test_group": "advanced",
+    "test_type": "roundtrip",
+    "input": {
+      "vers": "vers:pypi/!=0.0.1|>0.1"
+    },
+    "expected_output": "vers:pypi/!=0.0.1|>0.1"
+  },
+  {
+    "description": "Roundtrip test for pypi VERS range.",
+    "test_group": "advanced",
+    "test_type": "roundtrip",
+    "input": {
+      "vers": "vers:pypi/0.0.2|0.0.6|>=0.0.0|0.0.1|0.0.4|0.0.5|0.0.3"
+    },
+    "expected_output": "vers:pypi/>=0.0.0|0.0.1|0.0.2|0.0.3|0.0.4|0.0.5|0.0.6"
+  }
+]

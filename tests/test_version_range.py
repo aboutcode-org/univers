@@ -5,322 +5,243 @@
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
 import json
-from unittest import TestCase
+from pathlib import Path
 
 import pytest
 
+from tests import SchemaDrivenVersTest
 from univers.version_constraint import VersionConstraint
+from univers.version_range import PURL_TYPE_BY_GITLAB_SCHEME
 from univers.version_range import RANGE_CLASS_BY_SCHEMES
-from univers.version_range import ConanVersionRange
-from univers.version_range import GemVersionRange
+from univers.version_range import AlpineLinuxVersionRange
+from univers.version_range import DatetimeVersionRange
+from univers.version_range import IntdotVersionRange
 from univers.version_range import InvalidVersionRange
 from univers.version_range import MattermostVersionRange
-from univers.version_range import NpmVersionRange
-from univers.version_range import NugetVersionRange
 from univers.version_range import OpensslVersionRange
 from univers.version_range import PypiVersionRange
 from univers.version_range import VersionRange
 from univers.version_range import build_range_from_snyk_advisory_string
 from univers.version_range import from_gitlab_native
-from univers.versions import InvalidVersion
-from univers.versions import NugetVersion
+from univers.versions import AlpineLinuxVersion
+from univers.versions import DatetimeVersion
+from univers.versions import IntdotVersion
+from univers.versions import LexicographicVersion
 from univers.versions import OpensslVersion
 from univers.versions import PypiVersion
-from univers.versions import RubygemsVersion
 from univers.versions import SemverVersion
 from univers.versions import Version
 
+TEST_DATA_PARENT = Path(__file__).parent / "data" / "schema" / "range"
+TEST_DATA_PARENT_GITLAB = TEST_DATA_PARENT / "gitlab"
 
-class TestVersionRange(TestCase):
-    def test_VersionRange_afrom_string(self):
-        version_range = VersionRange.from_string("vers:pypi/>0.0.2")
-        assert version_range == PypiVersionRange(
-            constraints=[VersionConstraint(comparator=">", version=PypiVersion(string="0.0.2"))]
+TEST_DATA_COMPOSER_GITLAB_FROM_NATIVE = (
+    TEST_DATA_PARENT_GITLAB / "composer_gitlab_range_from_native.json"
+)
+TEST_DATA_CONAN_GITLAB_FROM_NATIVE = TEST_DATA_PARENT_GITLAB / "conan_gitlab_range_from_native.json"
+TEST_DATA_GEM_GITLAB_FROM_NATIVE = TEST_DATA_PARENT_GITLAB / "gem_gitlab_range_from_native.json"
+TEST_DATA_GOLANG_GITLAB_FROM_NATIVE = (
+    TEST_DATA_PARENT_GITLAB / "golang_gitlab_range_from_native.json"
+)
+TEST_DATA_NPM_GITLAB_FROM_NATIVE = TEST_DATA_PARENT_GITLAB / "npm_gitlab_range_from_native.json"
+TEST_DATA_PYPI_GITLAB_FROM_NATIVE = TEST_DATA_PARENT_GITLAB / "pypi_gitlab_range_from_native.json"
+
+TEST_DATA_CONAN_FROM_NATIVE_BASIC = TEST_DATA_PARENT / "conan_range_from_native_basic.json"
+TEST_DATA_CONAN_FROM_NATIVE = TEST_DATA_PARENT / "conan_range_from_native.json"
+TEST_DATA_GEM_FROM_NATIVE = TEST_DATA_PARENT / "gem_range_from_native.json"
+TEST_DATA_NGINX_FROM_NATIVE = TEST_DATA_PARENT / "nginx_range_from_native.json"
+TEST_DATA_NPM_FROM_NATIVE = TEST_DATA_PARENT / "npm_range_from_native.json"
+TEST_DATA_NUGET_FROM_NATIVE = TEST_DATA_PARENT / "nuget_range_from_native.json"
+TEST_DATA_OPENSSL_FROM_NATIVE = TEST_DATA_PARENT / "openssl_range_from_native.json"
+TEST_DATA_PYPI_FROM_NATIVE = TEST_DATA_PARENT / "pypi_range_from_native.json"
+
+TEST_DATA_NPM_CONTAINMENT = TEST_DATA_PARENT / "npm_range_containment.json"
+TEST_DATA_PYPI_CONTAINMENT = TEST_DATA_PARENT / "pypi_range_containment.json"
+
+TEST_DATA_PYPI_ROUNDTRIP = TEST_DATA_PARENT / "pypi_range_roundtrip.json"
+
+
+class TestVersionRangeContainment(SchemaDrivenVersTest):
+    def containment(self):
+        version_range = VersionRange.from_string(self.input["vers"])
+        version = version_range.version_class(self.input["version"])
+        return version in version_range
+
+
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_NPM_CONTAINMENT)))
+def test_range_containment(test_case):
+    test = TestVersionRangeContainment.from_data(data=test_case)
+    test.assert_result()
+
+
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_PYPI_CONTAINMENT)))
+def test_range_containment(test_case):
+    test = TestVersionRangeContainment.from_data(data=test_case)
+    test.assert_result()
+
+
+class TestVersionRangeRoundtrip(SchemaDrivenVersTest):
+    def roundtrip(self):
+        return str(VersionRange.from_string(self.input["vers"]))
+
+
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_PYPI_ROUNDTRIP)))
+def test_pypi_range_roundtrip(test_case):
+    test = TestVersionRangeRoundtrip.from_data(data=test_case)
+    test.assert_result()
+
+
+class TestVersionRangeParseNative(SchemaDrivenVersTest):
+    def from_native(self):
+        range_class = RANGE_CLASS_BY_SCHEMES[self.input["scheme"]]
+        return str(range_class.from_native(self.input["native_range"]))
+
+
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_CONAN_FROM_NATIVE)))
+def test_range_from_native(test_case):
+    test = TestVersionRangeParseNative.from_data(data=test_case)
+    test.assert_result()
+
+
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_GEM_FROM_NATIVE)))
+def test_npm_range_from_native(test_case):
+    test = TestVersionRangeParseNative.from_data(data=test_case)
+    test.assert_result()
+
+
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_NGINX_FROM_NATIVE)))
+def test_conan_range_from_native(test_case):
+    test = TestVersionRangeParseNative.from_data(data=test_case)
+    test.assert_result()
+
+
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_CONAN_FROM_NATIVE_BASIC)))
+def test_conan_range_from_native(test_case):
+    test = TestVersionRangeParseNative.from_data(data=test_case)
+    test.assert_result()
+
+
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_CONAN_FROM_NATIVE)))
+def test_conan_version_range_parse(test_case):
+    avc = TestVersionRangeParseNative.from_data(data=test_case)
+    avc.assert_result()
+
+
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_OPENSSL_FROM_NATIVE)))
+def test_npm_range_from_native(test_case):
+    test = TestVersionRangeParseNative.from_data(data=test_case)
+    test.assert_result()
+
+
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_NUGET_FROM_NATIVE)))
+def test_npm_range_from_native(test_case):
+    test = TestVersionRangeParseNative.from_data(data=test_case)
+    test.assert_result()
+
+
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_PYPI_FROM_NATIVE)))
+def test_conan_range_from_native(test_case):
+    test = TestVersionRangeParseNative.from_data(data=test_case)
+    test.assert_result()
+
+
+class TestGitlabVersionRangeNative(SchemaDrivenVersTest):
+    GITLAB_SCHEME_MAPPING = {v: k for k, v in PURL_TYPE_BY_GITLAB_SCHEME.items()}
+
+    def from_native(self):
+        range = from_gitlab_native(
+            gitlab_scheme=self.GITLAB_SCHEME_MAPPING[self.input["scheme"]],
+            string=self.input["native_range"],
         )
+        return str(range)
 
-    def test_VersionRange_to_string(self):
-        vers = "vers:pypi/0.0.2|0.0.6|>=0.0.0|0.0.1|0.0.4|0.0.5|0.0.3"
-        version_range = VersionRange.from_string(vers)
-        # note the sorting taking place
-        assert str(version_range) == "vers:pypi/>=0.0.0|0.0.1|0.0.2|0.0.3|0.0.4|0.0.5|0.0.6"
 
-    def test_VersionRange_pypi_does_not_contain_basic(self):
-        vers = "vers:pypi/0.0.2|0.0.6|>=3.0.0|0.0.1|0.0.4|0.0.5|0.0.3"
-        version_range = VersionRange.from_string(vers)
-        assert not version_range.contains(PypiVersion("2.0.3"))
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_COMPOSER_GITLAB_FROM_NATIVE)))
+def test_pypi_gitlab_range_from_native(test_case):
+    test = TestGitlabVersionRangeNative.from_data(data=test_case)
+    test.assert_result()
 
-    def test_VersionRange_does_not_contain_version_after_range(self):
-        vers = "vers:pypi/>=1.0.0|<=2.0.0"
-        version_range = VersionRange.from_string(vers)
-        assert not version_range.contains(PypiVersion("2.0.3"))
 
-    def test_VersionRange_does_not_contain_version_before_range(self):
-        vers = "vers:pypi/>=1.0.0|<=2.0.0"
-        version_range = VersionRange.from_string(vers)
-        assert not version_range.contains(PypiVersion("0.0.9"))
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_CONAN_GITLAB_FROM_NATIVE)))
+def test_conan_gitlab_range_from_native(test_case):
+    test = TestGitlabVersionRangeNative.from_data(data=test_case)
+    test.assert_result()
 
-    def test_VersionRange_does_not_contain_version_in_between(self):
-        vers = "vers:pypi/<=1.0.0|>=2.0.0"
-        version_range = VersionRange.from_string(vers)
-        assert not version_range.contains(PypiVersion("1.5"))
 
-    def test_VersionRange_does_not_contain_version_excluded(self):
-        vers = "vers:pypi/>=3.0.0|!=2.0.3"
-        version_range = VersionRange.from_string(vers)
-        assert not version_range.contains(PypiVersion("2.0.3"))
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_GEM_GITLAB_FROM_NATIVE)))
+def test_conan_gitlab_range_from_native(test_case):
+    test = TestGitlabVersionRangeNative.from_data(data=test_case)
+    test.assert_result()
 
-    def test_VersionRange_contains_version_after(self):
-        version_range = VersionRange.from_string("vers:pypi/>0.0.2")
-        assert PypiVersion("0.0.3") in version_range
 
-    def test_VersionRange_contains_version_before(self):
-        version_range = VersionRange.from_string("vers:pypi/<0.0.2")
-        assert PypiVersion("0.0.0.1") in version_range
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_GOLANG_GITLAB_FROM_NATIVE)))
+def test_gem_gitlab_range_from_native(test_case):
+    test = TestGitlabVersionRangeNative.from_data(data=test_case)
+    test.assert_result()
 
-    def test_VersionRange_contains_version_included(self):
-        vers = "vers:pypi/>=3.0.0|2.0.3"
-        version_range = VersionRange.from_string(vers)
-        assert version_range.contains(PypiVersion("2.0.3"))
 
-    def test_VersionRange_contains_version_in_between(self):
-        vers = "vers:pypi/>=1.0.0|<=2.0.0"
-        version_range = VersionRange.from_string(vers)
-        assert version_range.contains(PypiVersion("1.5"))
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_NPM_GITLAB_FROM_NATIVE)))
+def test_npm_gitlab_range_from_native(test_case):
+    test = TestGitlabVersionRangeNative.from_data(data=test_case)
+    test.assert_result()
 
-    def test_VersionRange_contains_filterd_constraint_edge_case(self):
-        vers = "vers:pypi/<=1.3.0|3.0.0"
-        version_range = VersionRange.from_string(vers)
-        assert version_range.contains(PypiVersion("1.0.0"))
 
-    def test_VersionRange_from_string_pypi(self):
-        vers = "vers:pypi/0.0.2|0.0.6|0.0.0|0.0.1|0.0.4|0.0.5|0.0.3"
-        version_range = VersionRange.from_string(vers)
-        assert version_range.scheme == "pypi"
-        # note the sorting taking place
-        expected = (
-            VersionConstraint(comparator="=", version=PypiVersion(string="0.0.0")),
-            VersionConstraint(comparator="=", version=PypiVersion(string="0.0.1")),
-            VersionConstraint(comparator="=", version=PypiVersion(string="0.0.2")),
-            VersionConstraint(comparator="=", version=PypiVersion(string="0.0.3")),
-            VersionConstraint(comparator="=", version=PypiVersion(string="0.0.4")),
-            VersionConstraint(comparator="=", version=PypiVersion(string="0.0.5")),
-            VersionConstraint(comparator="=", version=PypiVersion(string="0.0.6")),
+@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_PYPI_GITLAB_FROM_NATIVE)))
+def test_npm_gitlab_range_from_native(test_case):
+    test = TestGitlabVersionRangeNative.from_data(data=test_case)
+    test.assert_result()
+
+
+def test_OpensslVersionRange_from_versions():
+    sequence = ["3.0.0", "1.0.1b", "3.0.2", "0.9.7a ", "1.1.1ka"]
+    expected = OpensslVersionRange(
+        constraints=(
+            VersionConstraint(comparator="=", version=OpensslVersion(string="0.9.7a")),
+            VersionConstraint(comparator="=", version=OpensslVersion(string="1.0.1b")),
+            VersionConstraint(comparator="=", version=OpensslVersion(string="1.1.1ka")),
+            VersionConstraint(comparator="=", version=OpensslVersion(string="3.0.0")),
+            VersionConstraint(comparator="=", version=OpensslVersion(string="3.0.2")),
         )
-        assert version_range.constraints == expected
-        # note the sorting taking place
-        assert str(version_range) == "vers:pypi/0.0.0|0.0.1|0.0.2|0.0.3|0.0.4|0.0.5|0.0.6"
+    )
+    version_range = OpensslVersionRange.from_versions(sequence)
+    assert version_range == expected
 
-        version_range1 = VersionRange.from_string(vers, simplify=False, validate=True)
-        assert version_range1.constraints == expected
 
-        version_range2 = VersionRange.from_string(vers, simplify=True, validate=False)
-        assert version_range2.constraints == expected
-
-        version_range3 = VersionRange.from_string(vers, simplify=True, validate=True)
-        assert version_range3.constraints == expected
-
-    def test_VersionRange_from_string_pypi_complex_simplify(self):
-        vers = "vers:pypi/>0.0.0|>=0.0.1|0.0.2|<0.0.3|0.0.4|<0.0.5|>=0.0.6"
-        version_range = VersionRange.from_string(vers, simplify=True)
-        assert str(version_range) == "vers:pypi/>0.0.0|<0.0.5|>=0.0.6"
-        try:
-            version_range = VersionRange.from_string(vers, validate=True)
-            raise Exception(f"Exception not raised: {vers}")
-        except ValueError:
-            pass
-        version_range = VersionRange.from_string(vers, validate=True, simplify=True)
-        assert str(version_range) == "vers:pypi/>0.0.0|<0.0.5|>=0.0.6"
-
-    def test_VersionRange_from_string_pypi_complex_simplify_and_validate(self):
-        vers = "vers:pypi/>0.0.0|>=0.0.1|0.0.2|0.0.3|0.0.4|<0.0.5|>=0.0.6|!=0.8"
-        version_range = VersionRange.from_string(vers, simplify=True)
-        assert str(version_range) == "vers:pypi/>0.0.0|<0.0.5|>=0.0.6|!=0.8"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
-
-    def test_VersionRange_from_string_pypi_complex_simplify2(self):
-        vers = (
-            "vers:pypi/>0.0.0|>=0.0.1|>=0.0.1|0.0.2|0.0.3|0.0.4|<0.0.5|<=0.0.6|!=0.7|8.0|>12|<15.3"
+def test_AlpineLinuxVersionRange_from_versions():
+    sequence = ["3.18.0", "2.14.9-r1", "3.0.0"]
+    expected = AlpineLinuxVersionRange(
+        constraints=(
+            VersionConstraint(comparator="=", version=AlpineLinuxVersion(string="2.14.9-r1")),
+            VersionConstraint(comparator="=", version=AlpineLinuxVersion(string="3.0.0")),
+            VersionConstraint(comparator="=", version=AlpineLinuxVersion(string="3.18.0")),
         )
-        version_range = VersionRange.from_string(vers, simplify=True)
-        assert str(version_range) == "vers:pypi/>0.0.0|<=0.0.6|!=0.7|8.0|>12|<15.3"
+    )
+    version_range = AlpineLinuxVersionRange.from_versions(sequence)
+    assert version_range == expected
 
-    def test_VersionRange_from_string_pypi_simple_cases(self):
-        vers = "vers:pypi/>0.0.1"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
-        assert str(version_range) == vers
 
-        vers = "vers:pypi/>=0.0.1"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
-        assert str(version_range) == vers
+def test_AlpineLinuxVersionRange_has_apk_scheme():
+    sequence = ["3.18.0", "2.14.9-r1", "3.0.0"]
+    expected = "vers:apk/2.14.9-r1|3.0.0|3.18.0"
+    version_range = AlpineLinuxVersionRange.from_versions(sequence).to_string()
+    assert version_range == expected
 
-        vers = "vers:pypi/<0.0.1"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
-        assert str(version_range) == vers
 
-        vers = "vers:pypi/<=0.0.1"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
-        assert str(version_range) == vers
+def test_VersionRange_from_versions_with_empty_constraints():
+    sequence = []
+    expected = None
+    version_range = AlpineLinuxVersionRange.from_versions(sequence)
+    assert version_range == expected
 
-        vers = "vers:pypi/0.0.1"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
-        assert str(version_range) == vers
 
-        vers = "vers:pypi/!=0.0.1"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
-        assert str(version_range) == vers
+def test_apk_in_RANGE_CLASS_BY_SCHEMES():
+    assert RANGE_CLASS_BY_SCHEMES["apk"] is AlpineLinuxVersionRange
 
-        vers = "vers:pypi/*"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
-        assert str(version_range) == vers
 
-    def test_VersionRange_from_string_pypi_two_cases(self):
-        vers = "vers:pypi/>0.0.1|<0.1"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
-        assert str(version_range) == vers
-
-        vers = "vers:pypi/>=0.0.1|<0.1"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
-        assert str(version_range) == vers
-
-        vers = "vers:pypi/<0.0.1|>0.1"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
-        assert str(version_range) == vers
-
-        vers = "vers:pypi/<=0.0.1|>0.1"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
-        assert str(version_range) == vers
-
-        vers = "vers:pypi/0.0.1|>0.1"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
-        assert str(version_range) == vers
-
-        vers = "vers:pypi/!=0.0.1|>0.1"
-        version_range = VersionRange.from_string(vers, simplify=True, validate=True)
-        assert str(version_range) == vers
-
-    def test_GemVersionRange_from_native_range_with_pessimistic_operator(self):
-        gem_range = "~>2.0.8"
-        version_range = GemVersionRange.from_native(gem_range)
-        assert version_range.to_string() == "vers:gem/>=2.0.8|<2.1"
-        assert version_range.constraints == (
-            VersionConstraint(comparator=">=", version=RubygemsVersion(string="2.0.8")),
-            VersionConstraint(comparator="<", version=RubygemsVersion(string="2.1")),
-        )
-
-    def test_VersionRange_contains_works_for_star_range(self):
-        from univers.versions import NginxVersion
-
-        assert NginxVersion("1.0.0") in VersionRange.from_string("vers:nginx/*")
-
-    def test_NpmVersionRange_from_native_with_compatible_with_version_operator(self):
-        npm_range = "^1.2.9"
-        expected = NpmVersionRange(
-            constraints=(
-                VersionConstraint(comparator=">=", version=SemverVersion(string="1.2.9")),
-                VersionConstraint(comparator="<", version=SemverVersion(string="2.0.0")),
-            )
-        )
-        version_range = NpmVersionRange.from_native(npm_range)
-        assert version_range == expected
-
-    def test_NpmVersionRange_from_native_with_prerelease_carate_range(self):
-        npm_range = "^1.2.3-beta.1"
-        expected = NpmVersionRange(
-            constraints=(
-                VersionConstraint(comparator=">=", version=SemverVersion(string="1.2.3-beta.1")),
-                VersionConstraint(comparator="<", version=SemverVersion(string="2.0.0")),
-            )
-        )
-        version_range = NpmVersionRange.from_native(npm_range)
-        assert version_range == expected
-
-    def test_NpmVersionRange_from_native_with_prerelease_carate_range_wihtout_major(self):
-        npm_range = "^0.2.1-beta"
-        expected = NpmVersionRange(
-            constraints=(
-                VersionConstraint(comparator=">=", version=SemverVersion(string="0.2.1-beta")),
-                VersionConstraint(comparator="<", version=SemverVersion(string="0.3.0")),
-            )
-        )
-        version_range = NpmVersionRange.from_native(npm_range)
-        assert version_range == expected
-
-    def test_NpmVersionRange_from_native_with_prerelease_carate_range_wihtout_major_and_minor(self):
-        npm_range = "^0.0.2-beta"
-        expected = NpmVersionRange(
-            constraints=(
-                VersionConstraint(comparator=">=", version=SemverVersion(string="0.0.2-beta")),
-                VersionConstraint(comparator="<", version=SemverVersion(string="0.0.3")),
-            )
-        )
-        version_range = NpmVersionRange.from_native(npm_range)
-        assert version_range == expected
-
-    def test_NpmVersionRange_from_native_with_approximately_equal_to_operator(self):
-        npm_range = "~3.8.2"
-        expected = NpmVersionRange(
-            constraints=(
-                VersionConstraint(comparator=">=", version=SemverVersion(string="3.8.2")),
-                VersionConstraint(comparator="<", version=SemverVersion(string="3.9.0")),
-            )
-        )
-        version_range = NpmVersionRange.from_native(npm_range)
-        assert version_range == expected
-
-    def test_OpensslVersionRange_from_native_single_legacy(self):
-        openssl_range = "0.9.8j"
-        expected = OpensslVersionRange(
-            constraints=(
-                VersionConstraint(comparator="=", version=OpensslVersion(string="0.9.8j")),
-            )
-        )
-        version_range = OpensslVersionRange.from_native(openssl_range)
-        assert version_range == expected
-
-    def test_OpensslVersionRange_from_native_single_new_semver(self):
-        openssl_range = "3.0.1"
-        expected = OpensslVersionRange(
-            constraints=(VersionConstraint(comparator="=", version=OpensslVersion(string="3.0.1")),)
-        )
-        version_range = OpensslVersionRange.from_native(openssl_range)
-        assert version_range == expected
-
-    def test_OpensslVersionRange_from_native_mixed(self):
-        openssl_range = "3.0.0, 1.0.1b"
-        expected = OpensslVersionRange(
-            constraints=(
-                VersionConstraint(comparator="=", version=OpensslVersion(string="1.0.1b")),
-                VersionConstraint(comparator="=", version=OpensslVersion(string="3.0.0")),
-            )
-        )
-        version_range = OpensslVersionRange.from_native(openssl_range)
-        assert version_range == expected
-
-    def test_OpensslVersionRange_from_versions(self):
-        sequence = ["3.0.0", "1.0.1b", "3.0.2", "0.9.7a ", "1.1.1ka"]
-        expected = OpensslVersionRange(
-            constraints=(
-                VersionConstraint(comparator="=", version=OpensslVersion(string="0.9.7a")),
-                VersionConstraint(comparator="=", version=OpensslVersion(string="1.0.1b")),
-                VersionConstraint(comparator="=", version=OpensslVersion(string="1.1.1ka")),
-                VersionConstraint(comparator="=", version=OpensslVersion(string="3.0.0")),
-                VersionConstraint(comparator="=", version=OpensslVersion(string="3.0.2")),
-            )
-        )
-        version_range = OpensslVersionRange.from_versions(sequence)
-        assert version_range == expected
-
-    def test_nuget_version_range(self):
-        nuget_range = "[1.0.0, 2.0.0)"
-        expected = NugetVersionRange(
-            constraints=(
-                VersionConstraint(comparator=">=", version=NugetVersion(string="1.0.0")),
-                VersionConstraint(comparator="<", version=NugetVersion(string="2.0.0")),
-            )
-        )
-        version_range = NugetVersionRange.from_native(nuget_range)
-        assert version_range == expected
-        assert version_range.to_string() == "vers:nuget/>=1.0.0|<2.0.0"
+def test_alpine_version_range_containment():
+    vr = AlpineLinuxVersionRange.from_string("vers:apk/>=2.14.9-r1|<3.19.0")
+    assert AlpineLinuxVersion("3.18.0") in vr
+    assert AlpineLinuxVersion("3.19.0") not in vr
 
 
 VERSION_RANGE_TESTS_BY_SCHEME = {
@@ -336,6 +257,7 @@ VERSION_RANGE_TESTS_BY_SCHEME = {
     ],
     "openssl": ["1.1.1ak", "1.1.0", "3.0.2", "3.0.1, 0.9.7a", "1.0.2ck, 3.1.2"],
     "pypi": [">= 1.0", "<2.1.0", "!=5"],
+    "apk": ["3.18.0", ">=2.14.9-r1", "<3.19.0"],
 }
 
 
@@ -346,19 +268,6 @@ def test_all_schemes_are_tested_for_round_tripping():
         if scheme not in VERSION_RANGE_TESTS_BY_SCHEME:
             untested_schemes.append(scheme)
     assert not untested_schemes
-
-
-@pytest.mark.parametrize(
-    "scheme, native_ranges",
-    VERSION_RANGE_TESTS_BY_SCHEME.items(),
-)
-def test_from_native_and_from_string_round_trip(scheme, native_ranges):
-
-    range_class = RANGE_CLASS_BY_SCHEMES[scheme]
-    for rng in native_ranges:
-        from_native = range_class.from_native(rng)
-        from_string = range_class.from_string(from_native.to_string())
-        assert from_native == from_string
 
 
 @pytest.mark.parametrize(
@@ -384,84 +293,6 @@ def test_PypiVersionRange_raises_ivr_for_unsupported_and_invalid_ranges(range, w
             assert expected in str(ivre)
     else:
         assert expected == str(PypiVersionRange.from_native(range))
-
-
-@pytest.mark.parametrize("test_case", json.load(open("./tests/data/pypi_gitlab.json")))
-def test_pypi_gitlab_version_range_parse(test_case):
-    result = from_gitlab_native(
-        gitlab_scheme=test_case["scheme"],
-        string=test_case["gitlab_native"],
-    )
-    assert str(result) == test_case["expected_vers"]
-
-
-@pytest.mark.parametrize("test_case", json.load(open("./tests/data/conan_advisory.json")))
-def test_conan_gitlab_version_range_parse(test_case):
-    if test_case["expected_vers"] is None:
-        with pytest.raises(InvalidVersion):
-            ConanVersionRange.from_native(string=test_case["native"])
-        return
-    result = from_gitlab_native(
-        gitlab_scheme=test_case["gitlab_scheme"],
-        string=test_case["native"],
-    )
-    assert str(result) == test_case["expected_vers"]
-
-
-@pytest.mark.parametrize("test_case", json.load(open("./tests/data/npm_gitlab.json")))
-def test_npm_gitlab_version_range_parse(test_case):
-    result = from_gitlab_native(
-        gitlab_scheme=test_case["scheme"],
-        string=test_case["gitlab_native"],
-    )
-    assert str(result) == test_case["expected_vers"]
-
-
-@pytest.mark.parametrize("test_case", json.load(open("./tests/data/gem_gitlab.json")))
-def test_gem_gitlab_version_range_parse(test_case):
-    result = from_gitlab_native(
-        gitlab_scheme=test_case["scheme"],
-        string=test_case["gitlab_native"],
-    )
-    assert str(result) == test_case["expected_vers"]
-
-
-@pytest.mark.parametrize("test_case", json.load(open("./tests/data/go_gitlab.json")))
-def test_golang_gitlab_version_range_parse(test_case):
-    result = from_gitlab_native(
-        gitlab_scheme=test_case["scheme"],
-        string=test_case["gitlab_native"],
-    )
-    assert str(result) == test_case["expected_vers"]
-
-
-@pytest.mark.parametrize("test_case", json.load(open("./tests/data/composer_gitlab.json")))
-def test_composer_gitlab_version_range_parse(test_case):
-    result = from_gitlab_native(
-        gitlab_scheme=test_case["scheme"],
-        string=test_case["gitlab_native"],
-    )
-    assert str(result) == test_case["expected_vers"]
-
-
-@pytest.mark.parametrize("test_case", json.load(open("./tests/data/npm_advisory.json")))
-def test_npm_advisory_version_range_parse(test_case):
-    result = NpmVersionRange.from_native(
-        string=test_case["npm_native"],
-    )
-    assert str(result) == test_case["expected_vers"]
-
-
-@pytest.mark.parametrize("test_case", json.load(open("./tests/data/conan_advisory.json")))
-def test_conan_advisory_version_range_parse(test_case):
-    if test_case["expected_vers"] is None:
-        with pytest.raises(InvalidVersion):
-            ConanVersionRange.from_native(string=test_case["native"])
-        return
-    result = ConanVersionRange.from_native(
-        string=test_case["native"],
-    )
-    assert str(result) == test_case["expected_vers"]
 
 
 def test_invert():
@@ -569,3 +400,61 @@ def test_version_range_none():
         VersionRange.from_string("vers:none/!1.2.3")
     with pytest.raises(Exception):
         VersionRange.from_string("vers:none/*|>1.2.3")
+
+
+def test_version_range_intdot():
+    intdot_range = IntdotVersionRange.from_string("vers:intdot/>1.2.3.4")
+    assert IntdotVersion("1.3.3") in intdot_range
+    assert IntdotVersion("0.3.3") not in intdot_range
+    assert IntdotVersion("1.3.3alpha") in intdot_range
+    assert IntdotVersion("1.2.2.pre") not in intdot_range
+    assert IntdotVersion("1010.23.234203.0") in IntdotVersionRange.from_string("vers:intdot/*")
+
+
+def test_version_range_datetime():
+    assert DatetimeVersion("2021-05-05T01:02:03.1234+00:00") == DatetimeVersion(
+        "2021-05-05T01:02:03.1234+00:00"
+    )
+    assert DatetimeVersion("2021-05-05T01:02:03.1234Z") == DatetimeVersion(
+        "2021-05-05T01:02:03.1234Z"
+    )
+    assert DatetimeVersion("2021-05-05T01:02:03.1234Z") != DatetimeVersion(
+        "2022-05-05T01:02:03.1234Z"
+    )
+    assert DatetimeVersion("2021-05-05T01:02:03.1234Z") <= DatetimeVersion(
+        "2022-05-05T01:02:03.1234Z"
+    )
+    assert DatetimeVersion("2021-05-05T01:02:03.1234Z") >= DatetimeVersion(
+        "2020-05-05T01:02:03.1234Z"
+    )
+    assert DatetimeVersion("2021-05-05T01:02:03.1234Z") > DatetimeVersion(
+        "2020-05-05T01:02:03.1234+01:00"
+    )
+    assert DatetimeVersion("2000-01-01T01:02:03.1234Z") in DatetimeVersionRange.from_string(
+        "vers:datetime/*"
+    )
+    assert DatetimeVersion("2021-05-05T01:02:03Z") in DatetimeVersionRange.from_string(
+        "vers:datetime/>2021-01-01T01:02:03.1234Z|<2022-01-01T01:02:03.1234Z"
+    )
+    datetime_constraints = DatetimeVersionRange(
+        constraints=(
+            VersionConstraint(
+                comparator=">", version=DatetimeVersion(string="2000-01-01T01:02:03Z")
+            ),
+            VersionConstraint(
+                comparator="<", version=DatetimeVersion(string="2002-01-01T01:02:03Z")
+            ),
+        )
+    )
+    assert DatetimeVersion("2001-01-01T01:02:03Z") in datetime_constraints
+    with pytest.raises(Exception):
+        VersionRange.from_string("vers:datetime/2025-08-25")
+
+
+def test_version_range_lexicographic():
+    assert LexicographicVersion("1.2.3") in VersionRange.from_string(
+        "vers:lexicographic/<1.2.4|>0.9"
+    )
+    assert LexicographicVersion(-123) in VersionRange.from_string("vers:lexicographic/<~")
+    assert LexicographicVersion(None) in VersionRange.from_string("vers:lexicographic/*")
+    assert LexicographicVersion("ABC") in VersionRange.from_string("vers:lexicographic/>abc|<=None")

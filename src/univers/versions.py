@@ -13,9 +13,11 @@ import semantic_version
 from packaging import version as packaging_version
 
 from univers import arch
+from univers import datetime
 from univers import debian
 from univers import gem
 from univers import gentoo
+from univers import intdot
 from univers import maven
 from univers import nuget
 from univers import rpm
@@ -153,6 +155,49 @@ class NoneVersion(Version):
     @classmethod
     def is_valid(cls, string: str) -> bool:
         return string == "vers:none/*"
+
+
+class LexicographicVersion(Version):
+    @classmethod
+    def build_value(cls, string):
+        return str(string)
+
+    """
+    Create a string, even if, e.g., an integer is given
+    """
+
+    @classmethod
+    def normalize(cls, string):
+        return remove_spaces(str(string))
+
+    def __lt__(self, other):
+        return self.value.encode("utf-8") < other.value.encode("utf-8")
+
+    def __gt__(self, other):
+        return self.value.encode("utf-8") > other.value.encode("utf-8")
+
+    def __eq__(self, other):
+        return self.value.encode("utf-8") == other.value.encode("utf-8")
+
+
+class IntdotVersion(Version):
+    @classmethod
+    def build_value(cls, string):
+        return intdot.IntdotVersion(string)
+
+    @classmethod
+    def is_valid(cls, string):
+        return intdot.IntdotVersion.is_valid(string)
+
+
+class DatetimeVersion(Version):
+    @classmethod
+    def is_valid(cls, string):
+        return datetime.DatetimeVersion.is_valid(string)
+
+    @classmethod
+    def build_value(self, string):
+        return datetime.DatetimeVersion(string)
 
 
 class GenericVersion(Version):
@@ -724,4 +769,7 @@ AVAILABLE_VERSIONS = [
     OpensslVersion,
     LegacyOpensslVersion,
     AlpineLinuxVersion,
+    IntdotVersion,
+    DatetimeVersion,
+    LexicographicVersion,
 ]

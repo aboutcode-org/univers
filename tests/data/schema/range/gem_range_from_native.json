@@ -1,0 +1,12 @@
+[
+  {
+    "description": "Construct VERS range from native RubyGems range.",
+    "test_group": "basic",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "~>2.0.8",
+      "scheme": "gem"
+    },
+    "expected_output": "vers:gem/>=2.0.8|<2.1"
+  }
+]

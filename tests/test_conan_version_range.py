@@ -4,11 +4,18 @@
 #
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
+import json
+from pathlib import Path
+
 import pytest
 
+from tests import SchemaDrivenVersTest
 from univers.conan.errors import ConanException
 from univers.conan.version_range import VersionRange
+from univers.version_range import ConanVersionRange
 from univers.versions import ConanVersion
+
+TEST_DATA = Path(__file__).parent / "data" / "schema" / "conan_range_from_native_basic.json"
 
 values = [
     [">1.0.0", [[[">", "1.0.0"]]], ["1.0.1"], ["0.1"]],

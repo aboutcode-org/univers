@@ -1,4 +1,4 @@
-univers: mostly universal version and version ranges comparison and conversion
+univers: mostly universal version and version range comparison and conversion
 ===============================================================================
 
 |Build Status| |License| |Python 3.6+|
@@ -62,16 +62,16 @@ For each scheme, **univers** provides an implementation for:
 - converting a range back to its scheme-native range syntax and to the
   ``vers`` syntax.
 
-**univers** implements ``vers``, an experimental unified and mostly universal
+**univers** implements VERS, an experimental unified and mostly universal
 version range syntax. It can parse and convert an existing native version range
-strings to this unified syntax. For example, this means:
+string to this unified syntax. For example, this means:
 
 - converting ">=1.2.3" as used in a Python package into ``vers:pypi/>=1.2.3``,
 
 - or converting "^1.0.2" as used in an npm package dependency declaration into
   ``vers:npm/>=1.0.2|<2.0.0``
 
-The supported package ecosystems versioning schemes and underlying libraries
+The supported package ecosystem versioning schemes and underlying libraries
 include:
 
 - npm that use the "node-semver" ranges notation and the semver versions syntax
@@ -124,7 +124,7 @@ Alternative
 Rather than using ecosystem-specific version schemes and code, another approach
 is to use a single procedure for all the versions as implemented in `libversion
 <https://github.com/repology/libversion>`_. ``libversion`` works in the most
-common case but may not work correctly when a task that demand precise version
+common cases but may not work correctly when a task that demand precise version
 comparisons such as for dependency resolution and vulnerability lookup where
 a "good enough" comparison accuracy is not acceptable. ``libversion`` does not
 handle version range notations.

@@ -1,0 +1,12 @@
+[
+  {
+    "description": "Construct VERS range from native NuGet range.",
+    "test_group": "advanced",
+    "test_type": "from_native",
+    "input": {
+      "native_range": "[1.0.0, 2.0.0)",
+      "scheme": "nuget"
+    },
+    "expected_output": "vers:nuget/>=1.0.0|<2.0.0"
+  }
+]

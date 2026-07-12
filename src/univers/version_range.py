@@ -198,7 +198,7 @@ class VersionRange:
             version_obj = cls.version_class(version)
             constraint = VersionConstraint(comparator="=", version=version_obj)
             constraints.append(constraint)
-        return cls(constraints=constraints)
+        return cls(constraints=constraints) if constraints else None
 
     def is_star(self) -> bool:
         return len(self.constraints) == 1 and self.constraints[0].is_star()
@@ -985,6 +985,16 @@ class GolangVersionRange(VersionRange):
     }
 
 
+class IntdotVersionRange(VersionRange):
+    scheme = "intdot"
+    version_class = versions.IntdotVersion
+
+
+class DatetimeVersionRange(VersionRange):
+    scheme = "datetime"
+    version_class = versions.DatetimeVersion
+
+
 class GenericVersionRange(VersionRange):
     scheme = "generic"
     version_class = versions.SemverVersion
@@ -1023,7 +1033,7 @@ class EbuildVersionRange(VersionRange):
 
 
 class AlpineLinuxVersionRange(VersionRange):
-    scheme = "alpine"
+    scheme = "apk"
     version_class = versions.AlpineLinuxVersion
 
 
@@ -1211,6 +1221,11 @@ class AllVersionRange(VersionRange):
 class NoneVersionRange(VersionRange):
     scheme = "none"
     version_class = versions.NoneVersion
+
+
+class LexicographicVersionRange(VersionRange):
+    scheme = "lexicographic"
+    version_class = versions.LexicographicVersion
 
 
 def from_gitlab_native(gitlab_scheme: str, string: str) -> RangeClassType:
@@ -1480,12 +1495,16 @@ RANGE_CLASS_BY_SCHEMES: Final[dict[str, RangeClassType]] = {
     "github": GitHubVersionRange,
     "ebuild": EbuildVersionRange,
     "alpm": ArchLinuxVersionRange,
+    "apk": AlpineLinuxVersionRange,
     "nginx": NginxVersionRange,
     "openssl": OpensslVersionRange,
     "mattermost": MattermostVersionRange,
     "conan": ConanVersionRange,
     "all": AllVersionRange,
     "none": NoneVersionRange,
+    "intdot": IntdotVersionRange,
+    "datetime": DatetimeVersionRange,
+    "lexicographic": LexicographicVersionRange,
 }
 
 PURL_TYPE_BY_GITLAB_SCHEME: Final[dict[str, str]] = {
