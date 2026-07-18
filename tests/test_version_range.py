@@ -18,6 +18,7 @@ from univers.version_range import DatetimeVersionRange
 from univers.version_range import IntdotVersionRange
 from univers.version_range import InvalidVersionRange
 from univers.version_range import MattermostVersionRange
+from univers.version_range import NpmVersionRange
 from univers.version_range import OpensslVersionRange
 from univers.version_range import PypiVersionRange
 from univers.version_range import VersionRange
@@ -293,6 +294,34 @@ def test_PypiVersionRange_raises_ivr_for_unsupported_and_invalid_ranges(range, w
             assert expected in str(ivre)
     else:
         assert expected == str(PypiVersionRange.from_native(range))
+
+
+@pytest.mark.parametrize(
+    "native, expected",
+    [
+        (">=1.x", "vers:npm/>=1.0.0"),
+        ("*.x", "vers:npm/>=0.0.0"),
+        (">1.x", "vers:npm/>=2.0.0"),
+        ("<=2.x", "vers:npm/<3.0.0"),
+    ],
+)
+def test_npm_range_from_native_single_clause(native, expected):
+    # These wildcard ranges simplify to a single node-semver clause and used to
+    # raise an UnboundLocalError instead of returning a VersionRange.
+    assert str(NpmVersionRange.from_native(native)) == expected
+
+
+@pytest.mark.parametrize(
+    "native, expected",
+    [
+        ("1.x", "vers:npm/>=1.0.0|<2.0.0"),
+        ("0.x", "vers:npm/>=0.0.0|<1.0.0"),
+        ("~1.x", "vers:npm/>=1.0.0|<2.0.0"),
+        ("1.2.x - 2.0.0", "vers:npm/>=1.2.0|<=2.0.0"),
+    ],
+)
+def test_npm_range_from_native_multi_clause_still_works(native, expected):
+    assert str(NpmVersionRange.from_native(native)) == expected
 
 
 def test_invert():
