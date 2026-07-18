@@ -13,6 +13,7 @@ from packaging.specifiers import InvalidSpecifier
 from packaging.specifiers import SpecifierSet
 from semantic_version.base import AllOf
 from semantic_version.base import AnyOf
+from semantic_version.base import Range
 
 from univers import gem
 from univers import maven
@@ -324,16 +325,21 @@ def get_npm_version_constraints_from_semver_npm_spec(string, cls):
     """
     spec = semantic_version.NpmSpec(string)
     clause = spec.clause.simplify()
-    if isinstance(clause, (AnyOf, AllOf)):
-        anyof_constraints = []
-        if isinstance(clause, AnyOf):
-            for allof_clause in clause.clauses:
-                anyof_constraints.extend(get_allof_constraints(cls, allof_clause))
-        elif isinstance(clause, AllOf):
-            alloc = get_allof_constraints(cls, clause)
-            anyof_constraints.extend(alloc)
-        else:
-            raise ValueError(f"Unknown clause type: {spec!r}")
+    anyof_constraints = []
+    if isinstance(clause, AnyOf):
+        for allof_clause in clause.clauses:
+            anyof_constraints.extend(get_allof_constraints(cls, allof_clause))
+    elif isinstance(clause, AllOf):
+        anyof_constraints.extend(get_allof_constraints(cls, clause))
+    elif isinstance(clause, Range):
+        # A simplified NpmSpec can collapse to a single Range clause, for
+        # example ">=1.x" or "*.x". Handle it here so we do not fall through
+        # with an unbound result.
+        comparator = cls.vers_by_native_comparators[clause.operator]
+        version = cls.version_class(str(clause.target))
+        anyof_constraints.append(VersionConstraint(comparator=comparator, version=version))
+    else:
+        raise InvalidVersionRange(f"Unknown clause type: {clause!r}")
     return anyof_constraints
 
 
