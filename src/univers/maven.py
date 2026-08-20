@@ -33,6 +33,7 @@ QUALIFIERS = ["alpha", "beta", "milestone", "rc", "snapshot", "", "sp"]
 ALIASES = {
     "ga": "",
     "final": "",
+    "release": "",
     "cr": "rc",
 }
 
