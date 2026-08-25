@@ -248,6 +248,8 @@ class SemverVersion(Version):
 
     @classmethod
     def is_valid(cls, string):
+        if not super().is_valid(string):
+            return False
         try:
             cls.build_value(string)
             return True
@@ -325,7 +327,7 @@ class RubygemsVersion(Version):
 
     @classmethod
     def is_valid(cls, string):
-        return gem.GemVersion.is_correct(string)
+        return super().is_valid(string) and gem.GemVersion.is_correct(string)
 
 
 class ArchLinuxVersion(Version):
@@ -375,6 +377,8 @@ class MavenVersion(Version):
 
     @classmethod
     def is_valid(cls, string):
+        if not super().is_valid(string):
+            return False
         try:
             cls.build_value(string)
             return True
@@ -392,6 +396,8 @@ class NugetVersion(Version):
 
     @classmethod
     def is_valid(cls, string):
+        if not super().is_valid(string):
+            return False
         try:
             cls.build_value(string)
             return True
@@ -664,6 +670,8 @@ class ConanVersion(Version):
 
     @classmethod
     def is_valid(cls, string):
+        if not super().is_valid(string):
+            return False
         try:
             cls.build_value(string)
             return True
