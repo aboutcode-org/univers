@@ -458,3 +458,13 @@ def test_version_range_lexicographic():
     assert LexicographicVersion(-123) in VersionRange.from_string("vers:lexicographic/<~")
     assert LexicographicVersion(None) in VersionRange.from_string("vers:lexicographic/*")
     assert LexicographicVersion("ABC") in VersionRange.from_string("vers:lexicographic/>abc|<=None")
+
+
+def test_version_range_with_empty_constraints_is_invalid():
+    # https://github.com/aboutcode-org/univers/issues/203
+    with pytest.raises(ValueError):
+        VersionRange(constraints=[])
+    with pytest.raises(ValueError):
+        RANGE_CLASS_BY_SCHEMES["apache"](constraints=[])
+    with pytest.raises(ValueError):
+        VersionRange.from_string("vers:apache/")
