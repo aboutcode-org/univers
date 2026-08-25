@@ -5,6 +5,7 @@
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
 from typing import NamedTuple
+from typing import Optional
 from typing import Union
 
 
@@ -14,13 +15,26 @@ class SchemaDrivenVersTest(NamedTuple):
     input: dict
     expected_output: Union[list, bool]
     description: str = ""
+    # name of the exception class expected to be raised while computing the
+    # result, for test cases whose input is invalid
+    expected_error: Optional[str] = None
 
     @classmethod
     def from_data(cls, data: dict):
         return cls(**data)
 
     def assert_result(self):
-        assert self.result == self.expected_output
+        if self.expected_error:
+            try:
+                self.result
+            except Exception as e:
+                assert type(e).__name__ == self.expected_error
+            else:
+                raise AssertionError(
+                    f"{self.expected_error} not raised for input: {self.input!r}"
+                )
+        else:
+            assert self.result == self.expected_output
 
     @property
     def result(self):

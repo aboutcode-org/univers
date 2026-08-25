@@ -1137,7 +1137,8 @@
       "native_range": "",
       "scheme": "conan"
     },
-    "expected_output": "vers:conan/"
+    "expected_output": null,
+    "expected_error": "ValueError"
   },
   {
     "description": "Construct VERS range from native conan range.",
@@ -1437,7 +1438,8 @@
       "native_range": "",
       "scheme": "conan"
     },
-    "expected_output": "vers:conan/"
+    "expected_output": null,
+    "expected_error": "ValueError"
   },
   {
     "description": "Construct VERS range from native conan range.",
