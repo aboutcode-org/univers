@@ -253,3 +253,26 @@ def test_lexicographic_version():
     assert LexicographicVersion("Abc") < LexicographicVersion(None)
     assert LexicographicVersion("123") < LexicographicVersion("bbc")
     assert LexicographicVersion("2.3.4") > LexicographicVersion("1.2.3")
+
+
+def test_version_with_empty_string_is_invalid():
+    # https://github.com/aboutcode-org/univers/issues/204
+    # These schemes used to accept the empty string and then sort it as the
+    # minimum version (Maven, Rubygems), raise on comparison (Nuget), or
+    # both (Conan), silently corrupting downstream range logic.
+    import pytest
+
+    from univers.versions import ConanVersion
+    from univers.versions import InvalidVersion
+
+    for version_class in (
+        Version,
+        MavenVersion,
+        NugetVersion,
+        RubygemsVersion,
+        ConanVersion,
+        SemverVersion,
+        PypiVersion,
+    ):
+        with pytest.raises(InvalidVersion):
+            version_class("")
