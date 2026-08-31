@@ -170,6 +170,14 @@ def test_rpm_version():
 def test_gentoo_version():
     assert GentooVersion("1.2.3") == GentooVersion("1.2.3")
     assert GentooVersion("1.2.3") != GentooVersion("1.2.4")
+    assert GentooVersion("1.2.0-r0") < GentooVersion("1.10.0-r0")
+    assert GentooVersion("1.2.0-r0") <= GentooVersion("1.10.0-r0")
+    assert GentooVersion("1.10.0-r0") > GentooVersion("1.2.0-r0")
+    assert GentooVersion("1.10.0-r0") >= GentooVersion("1.2.0-r0")
+    assert not GentooVersion("1.10.0-r0") <= GentooVersion("1.2.0-r0")
+    assert not GentooVersion("1.2.0-r0") >= GentooVersion("1.10.0-r0")
+    assert GentooVersion("1.2.0-r0") <= GentooVersion("1.2.0-r0")
+    assert GentooVersion("1.2.0-r0") >= GentooVersion("1.2.0-r0")
     assert GentooVersion.is_valid("1.2.3")
     assert not GentooVersion.is_valid("1.2.3a-1-a")
 
@@ -181,6 +189,10 @@ def test_alpine_linux_version():
     assert AlpineLinuxVersion("1.2.3-r1") < AlpineLinuxVersion("1.2.3-r2")
     assert AlpineLinuxVersion("1.2.3-r1") >= AlpineLinuxVersion("1.2.3-r1")
     assert AlpineLinuxVersion("1.2.3-r1") <= AlpineLinuxVersion("1.2.3-r1")
+    assert AlpineLinuxVersion("1.2.0-r0") <= AlpineLinuxVersion("1.10.0-r0")
+    assert AlpineLinuxVersion("1.10.0-r0") >= AlpineLinuxVersion("1.2.0-r0")
+    assert not AlpineLinuxVersion("1.10.0-r0") <= AlpineLinuxVersion("1.2.0-r0")
+    assert not AlpineLinuxVersion("1.2.0-r0") >= AlpineLinuxVersion("1.10.0-r0")
     assert AlpineLinuxVersion.is_valid("1.2.3-r1")
     assert not AlpineLinuxVersion.is_valid("007")
 
