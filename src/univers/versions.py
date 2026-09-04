@@ -15,6 +15,7 @@ from univers import gem
 from univers import gentoo
 from univers import intdot
 from univers import maven
+from univers import nix
 from univers import nuget
 from univers import rpm
 from univers.conan.version import Version as conan_version
@@ -353,6 +354,43 @@ class ArchLinuxVersion(Version):
         if not isinstance(other, self.__class__):
             return NotImplemented
         return arch.vercmp(self.value, other.value) >= 0
+
+
+class NixVersion(Version):
+    """
+    Nix version, ordered as by Nix's ``builtins.compareVersions``.
+    Any non-empty string is a valid version and versions are totally ordered.
+    """
+
+    @classmethod
+    def normalize(cls, string):
+        # A leading "v" is significant to Nix and must not be stripped.
+        return remove_spaces(string)
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return nix.compare_versions(self.value, other.value) == 0
+
+    def __lt__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return nix.compare_versions(self.value, other.value) < 0
+
+    def __gt__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return nix.compare_versions(self.value, other.value) > 0
+
+    def __le__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return nix.compare_versions(self.value, other.value) <= 0
+
+    def __ge__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return nix.compare_versions(self.value, other.value) >= 0
 
 
 class DebianVersion(Version):

@@ -1,0 +1,16 @@
+about_resource: nix.py
+package_url: pkg:github/nixos/nix@534f199c9a34ace17d4db26fa3d377ee904bdf03
+copyright: |
+    Copyright (c) Eelco Dolstra and the Nix contributors
+
+license_expression: lgpl-2.1-or-later
+homepage_url: https://github.com/NixOS/nix
+
+notes: |
+    This is a Python port of the version comparison algorithm implemented in
+    compareVersions and componentsLT in src/libstore/names.cc of Nix, exposed
+    in the Nix language as builtins.compareVersions. The port is validated
+    against the reference implementation over an exhaustive pair fixture, see
+    tests/data/schema/nix_version_cmp.json and etc/scripts/gen_nix_version_cmp.py.
+
+notice_file: nix.py.NOTICE
