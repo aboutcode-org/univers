@@ -1025,6 +1025,11 @@ class ArchLinuxVersionRange(VersionRange):
     version_class = versions.ArchLinuxVersion
 
 
+class NixVersionRange(VersionRange):
+    scheme = "nix"
+    version_class = versions.NixVersion
+
+
 class NginxVersionRange(VersionRange):
     """
     Nginx versioning is semver for version and their own syntax for ranges as
@@ -1450,6 +1455,7 @@ RANGE_CLASS_BY_SCHEMES = {
     "ebuild": EbuildVersionRange,
     "alpm": ArchLinuxVersionRange,
     "apk": AlpineLinuxVersionRange,
+    "nix": NixVersionRange,
     "nginx": NginxVersionRange,
     "openssl": OpensslVersionRange,
     "mattermost": MattermostVersionRange,

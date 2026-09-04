@@ -113,6 +113,11 @@ include:
 - Alpine linux: handled using the base Gentoo version support and extras
   specific to Alpine.
 
+- nix: handled by the embedded `nix module
+  <https://github.com/aboutcode-org/univers/blob/main/src/univers/nix.py.ABOUT>`_,
+  a Python port of Nix's ``builtins.compareVersions`` validated against the
+  reference implementation.
+
 
 The level of support for each ecosystem may not be even for now and new schemes
 and support for more package types are implemented on a continuous basis.
