@@ -172,6 +172,14 @@ def test_gentoo_version():
     assert GentooVersion("1.2.3") != GentooVersion("1.2.4")
     assert GentooVersion.is_valid("1.2.3")
     assert not GentooVersion.is_valid("1.2.3a-1-a")
+    # ensure <= and >= use gentoo's numeric vercmp, not string comparison
+    # "1.2.0" < "1.10.0" numerically but "1.2.0" > "1.10.0" lexicographically
+    assert GentooVersion("1.2.0-r0") < GentooVersion("1.10.0-r0")
+    assert GentooVersion("1.2.0-r0") <= GentooVersion("1.10.0-r0")
+    assert GentooVersion("1.10.0-r0") > GentooVersion("1.2.0-r0")
+    assert GentooVersion("1.10.0-r0") >= GentooVersion("1.2.0-r0")
+    assert GentooVersion("1.2.0-r0") <= GentooVersion("1.2.0-r0")
+    assert GentooVersion("1.2.0-r0") >= GentooVersion("1.2.0-r0")
 
 
 def test_alpine_linux_version():
@@ -183,6 +191,14 @@ def test_alpine_linux_version():
     assert AlpineLinuxVersion("1.2.3-r1") <= AlpineLinuxVersion("1.2.3-r1")
     assert AlpineLinuxVersion.is_valid("1.2.3-r1")
     assert not AlpineLinuxVersion.is_valid("007")
+    # ensure <= and >= use gentoo's numeric vercmp, not string comparison
+    # "1.2.0" < "1.10.0" numerically but "1.2.0" > "1.10.0" lexicographically
+    assert AlpineLinuxVersion("1.2.0-r0") < AlpineLinuxVersion("1.10.0-r0")
+    assert AlpineLinuxVersion("1.2.0-r0") <= AlpineLinuxVersion("1.10.0-r0")
+    assert AlpineLinuxVersion("1.10.0-r0") > AlpineLinuxVersion("1.2.0-r0")
+    assert AlpineLinuxVersion("1.10.0-r0") >= AlpineLinuxVersion("1.2.0-r0")
+    assert AlpineLinuxVersion("1.2.0-r0") <= AlpineLinuxVersion("1.2.0-r0")
+    assert AlpineLinuxVersion("1.2.0-r0") >= AlpineLinuxVersion("1.2.0-r0")
 
 
 def test_composer_version():

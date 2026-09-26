@@ -429,6 +429,16 @@ class GentooVersion(Version):
             return NotImplemented
         return gentoo.vercmp(self.value, other.value) == 1
 
+    def __le__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return gentoo.vercmp(self.value, other.value) <= 0
+
+    def __ge__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return gentoo.vercmp(self.value, other.value) >= 0
+
 
 class AlpineLinuxVersion(GentooVersion):
     @classmethod
