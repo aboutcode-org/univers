@@ -1,6 +1,12 @@
 Changelog
 =========
 
+Next release
+------------
+
+- Fix ``VersionRange.invert()`` for enumerated ranges: a range made only of ``!=`` constraints now contains every version other than the excluded ones. https://github.com/aboutcode-org/univers/issues/214
+
+
 Version v32.0.1
 ----------------
 

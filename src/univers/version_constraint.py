@@ -517,9 +517,13 @@ def contains_version(version, constraints):
     # Split the constraint list in two sub lists:
     #   a first list where the comparator is "=" or "!="
     #   a second list where the comparator is neither "=" nor "!="
+    equality_constraints = constraints
     constraints = [c for c in constraints if c.comparator not in ("=", "!=")]
     if not constraints:
-        return False
+        # Only "=" and "!=" constraints are left. When all of them are "!=", the
+        # range is made of every version except the excluded ones, and the
+        # "tested version" was already checked against all of these above.
+        return all(c.comparator == "!=" for c in equality_constraints)
 
     # If we end up with constraints list contains only one item.
     if len(constraints) == 1:

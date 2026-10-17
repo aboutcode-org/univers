@@ -458,3 +458,44 @@ def test_version_range_lexicographic():
     assert LexicographicVersion(-123) in VersionRange.from_string("vers:lexicographic/<~")
     assert LexicographicVersion(None) in VersionRange.from_string("vers:lexicographic/*")
     assert LexicographicVersion("ABC") in VersionRange.from_string("vers:lexicographic/>abc|<=None")
+
+
+def test_range_with_only_unequal_constraints_contains_all_other_versions():
+    vers_range = VersionRange.from_string("vers:pypi/!=1.0.0|!=2.0.0")
+    version_class = vers_range.version_class
+    assert version_class("1.0.0") not in vers_range
+    assert version_class("2.0.0") not in vers_range
+    assert version_class("0.5.0") in vers_range
+    assert version_class("1.5.0") in vers_range
+    assert version_class("3.0.0") in vers_range
+
+
+def test_invert_enumerated_range_is_the_complement():
+    # https://github.com/aboutcode-org/univers/issues/214
+    vers_range = VersionRange.from_string("vers:pypi/1.0.0|2.0.0")
+    inverse = vers_range.invert()
+    assert str(inverse) == "vers:pypi/!=1.0.0|!=2.0.0"
+    version_class = vers_range.version_class
+    for version in ("0.5.0", "1.0.0", "1.5.0", "2.0.0", "3.0.0"):
+        version = version_class(version)
+        assert (version in vers_range) != (version in inverse)
+
+
+def test_invert_twice_of_enumerated_range_gives_the_same_range():
+    vers_range = VersionRange.from_string("vers:gem/1.0|2.0|3.0")
+    assert vers_range.invert().invert() == vers_range
+    inverse = vers_range.invert()
+    version_class = vers_range.version_class
+    for version in ("0.1", "1.0", "1.5", "2.0", "2.5", "3.0", "4.0"):
+        version = version_class(version)
+        assert (version in vers_range) != (version in inverse)
+
+
+def test_range_mixing_equal_and_unequal_constraints_only_contains_equal_versions():
+    vers_range = VersionRange.from_string("vers:pypi/1.0.0|!=2.0.0")
+    version_class = vers_range.version_class
+    assert version_class("1.0.0") in vers_range
+    assert version_class("2.0.0") not in vers_range
+    assert version_class("0.5.0") not in vers_range
+    assert version_class("1.5.0") not in vers_range
+    assert version_class("3.0.0") not in vers_range
