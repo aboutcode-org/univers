@@ -18,6 +18,8 @@ suffix_regexp = re.compile("^(alpha|beta|rc|pre|p)(\\d*)$")
 
 revision_regexp = re.compile(r".*(-r\d+)")
 
+slot_regexp = re.compile(r":([A-Za-z0-9_][A-Za-z0-9+_.-]*(?:/[A-Za-z0-9_][A-Za-z0-9+_.-]*)?=?|\*)$")
+
 suffix_value = {"pre": -2, "p": 1, "alpha": -4, "beta": -3, "rc": -1}
 
 """
@@ -25,22 +27,102 @@ gentoo ebuild version comparison
 """
 
 
+def parse_parts(version_string):
+    """
+    Return a tuple of (base_version, revision_int, slot_str, has_wildcard_bool).
+    """
+    if not version_string:
+        return "", 0, None, False
+
+    version = remove_spaces(version_string)
+
+    slot = None
+    if ":" in version:
+        match = slot_regexp.search(version)
+        if match:
+            slot = match.group(1)
+            version = version[: match.start()]
+        else:
+            return "", 0, None, False
+
+    wildcard = False
+    if version.endswith("*"):
+        wildcard = True
+        version = version[:-1]
+
+    revision = 0
+    match = revision_regexp.search(version)
+    if match:
+        revision = int(match.group(1)[2:])
+        version = version[: match.span(1)[0]]
+
+    return version, revision, slot, wildcard
+
+
+def strip_slot(version_string):
+    """
+    Return the version string with any slot qualifier stripped.
+    """
+    if not version_string:
+        return ""
+    version = remove_spaces(version_string)
+    if ":" in version:
+        match = slot_regexp.search(version)
+        if match:
+            return version[: match.start()]
+        return ""
+    return version
+
+
+def match_wildcard(ver1, ver2):
+    """
+    Return True if one of the versions is a Gentoo wildcard version and
+    the other matches it according to Gentoo PMS wildcard matching semantics.
+    If both are wildcards, return True only if their wildcard specifications match.
+    """
+    _, _, _, wild1 = parse_parts(ver1)
+    _, _, _, wild2 = parse_parts(ver2)
+
+    if not (wild1 or wild2):
+        return False
+
+    if wild1 and wild2:
+        s1 = strip_slot(ver1).rstrip("*")
+        s2 = strip_slot(ver2).rstrip("*")
+        return s1 == s2
+
+    wild_str = ver1 if wild1 else ver2
+    concrete_str = ver2 if wild1 else ver1
+
+    prefix = strip_slot(wild_str).rstrip("*")
+    target = strip_slot(concrete_str)
+
+    if target == prefix:
+        return True
+
+    if target.startswith(prefix):
+        next_char = target[len(prefix)]
+        if next_char in (".", "_", "-") or next_char.isalpha():
+            return True
+
+    return False
+
+
 def is_valid(string):
-    version, _ = parse_version_and_revision(remove_spaces(string))
-    return _is_gentoo_version(version)
+    if not string:
+        return False
+    version, _, _, _ = parse_parts(string)
+    if not version:
+        return False
+    return bool(_is_gentoo_version(version))
 
 
 def parse_version_and_revision(version_string):
     """
     Return a tuple of (version string, revision int) given a ``version_string``.
+    Also strips any slot or wildcard suffix so that vercmp operates cleanly.
     """
-    revision = 0
-    version = version_string
-    match = revision_regexp.search(version_string)
-    if match:
-        revision = int(match.group(1)[2:])
-        version = version_string[: match.span(1)[0]]
-
+    version, revision, _, _ = parse_parts(version_string)
     return version, revision
 
 

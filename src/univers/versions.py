@@ -414,9 +414,23 @@ class GentooVersion(Version):
     def is_valid(cls, string):
         return gentoo.is_valid(string)
 
+    @property
+    def slot(self):
+        """Return the slot string if present, else None."""
+        _, _, slot, _ = gentoo.parse_parts(self.value)
+        return slot
+
+    @property
+    def is_wildcard(self):
+        """Return True if this version ends with a wildcard '*'."""
+        _, _, _, wildcard = gentoo.parse_parts(self.value)
+        return wildcard
+
     def __eq__(self, other):
         if not isinstance(other, self.__class__):
             return NotImplemented
+        if self.is_wildcard or other.is_wildcard:
+            return gentoo.match_wildcard(self.value, other.value)
         return gentoo.vercmp(self.value, other.value) == 0
 
     def __lt__(self, other):
