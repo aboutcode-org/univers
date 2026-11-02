@@ -31,3 +31,22 @@ class GentooVersionComp(SchemaDrivenVersTest):
 def test_gentoo_vers_cmp(test_case):
     avc = GentooVersionComp.from_data(data=test_case)
     avc.assert_result()
+
+
+def test_gentoo_bump():
+    assert GentooVersion("2.23.3").bump() == GentooVersion("2.24")
+    assert GentooVersion("2.24.3").bump() == GentooVersion("2.25")
+    assert GentooVersion("2.25.4").bump() == GentooVersion("2.26")
+    assert GentooVersion("2.26.2").bump() == GentooVersion("2.27")
+    assert GentooVersion("1.0.5").bump() == GentooVersion("1.1")
+    assert GentooVersion("5.3").bump() == GentooVersion("6")
+    assert GentooVersion("5").bump() == GentooVersion("6")
+    assert GentooVersion("1.3.8b").bump() == GentooVersion("1.4")
+    assert GentooVersion("9.9_p2").bump() == GentooVersion("10")
+    assert GentooVersion("0.13.4-r2").bump() == GentooVersion("0.14")
+    assert GentooVersion("2.23.3-r1").bump() == GentooVersion("2.24")
+    # Handling slots and wildcards during bump
+    from univers import gentoo
+
+    assert gentoo.bump("3.24.48:3") == "3.25"
+    assert gentoo.bump("1.3*") == "2"
