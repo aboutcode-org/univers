@@ -429,6 +429,10 @@ class GentooVersion(Version):
             return NotImplemented
         return gentoo.vercmp(self.value, other.value) == 1
 
+    def bump(self):
+        bumped = gentoo.bump(self.value)
+        return self.__class__(bumped) if bumped else None
+
 
 class AlpineLinuxVersion(GentooVersion):
     @classmethod
