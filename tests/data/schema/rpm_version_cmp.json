@@ -1,0 +1,1521 @@
+[
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0",
+        "1.0"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0",
+        "2.0"
+      ]
+    },
+    "expected_output": [
+      "1.0",
+      "2.0"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "2.0",
+        "1.0"
+      ]
+    },
+    "expected_output": [
+      "1.0",
+      "2.0"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "2.0.1",
+        "2.0.1"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "2.0",
+        "2.0.1"
+      ]
+    },
+    "expected_output": [
+      "2.0",
+      "2.0.1"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "2.0.1",
+        "2.0"
+      ]
+    },
+    "expected_output": [
+      "2.0",
+      "2.0.1"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "2.0.1a",
+        "2.0.1a"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "2.0.1a",
+        "2.0.1"
+      ]
+    },
+    "expected_output": [
+      "2.0.1",
+      "2.0.1a"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "2.0.1",
+        "2.0.1a"
+      ]
+    },
+    "expected_output": [
+      "2.0.1",
+      "2.0.1a"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "5.5p1",
+        "5.5p1"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "5.5p1",
+        "5.5p2"
+      ]
+    },
+    "expected_output": [
+      "5.5p1",
+      "5.5p2"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "5.5p2",
+        "5.5p1"
+      ]
+    },
+    "expected_output": [
+      "5.5p1",
+      "5.5p2"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "5.5p10",
+        "5.5p10"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "5.5p1",
+        "5.5p10"
+      ]
+    },
+    "expected_output": [
+      "5.5p1",
+      "5.5p10"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "5.5p10",
+        "5.5p1"
+      ]
+    },
+    "expected_output": [
+      "5.5p1",
+      "5.5p10"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "10xyz",
+        "10.1xyz"
+      ]
+    },
+    "expected_output": [
+      "10xyz",
+      "10.1xyz"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "10.1xyz",
+        "10xyz"
+      ]
+    },
+    "expected_output": [
+      "10xyz",
+      "10.1xyz"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "xyz10",
+        "xyz10"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "xyz10",
+        "xyz10.1"
+      ]
+    },
+    "expected_output": [
+      "xyz10",
+      "xyz10.1"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "xyz10.1",
+        "xyz10"
+      ]
+    },
+    "expected_output": [
+      "xyz10",
+      "xyz10.1"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "xyz.4",
+        "xyz.4"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "xyz.4",
+        "8"
+      ]
+    },
+    "expected_output": [
+      "xyz.4",
+      "8"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "8",
+        "xyz.4"
+      ]
+    },
+    "expected_output": [
+      "xyz.4",
+      "8"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "xyz.4",
+        "2"
+      ]
+    },
+    "expected_output": [
+      "xyz.4",
+      "2"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "2",
+        "xyz.4"
+      ]
+    },
+    "expected_output": [
+      "xyz.4",
+      "2"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "5.5p2",
+        "5.6p1"
+      ]
+    },
+    "expected_output": [
+      "5.5p2",
+      "5.6p1"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "5.6p1",
+        "5.5p2"
+      ]
+    },
+    "expected_output": [
+      "5.5p2",
+      "5.6p1"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "5.6p1",
+        "6.5p1"
+      ]
+    },
+    "expected_output": [
+      "5.6p1",
+      "6.5p1"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "6.5p1",
+        "5.6p1"
+      ]
+    },
+    "expected_output": [
+      "5.6p1",
+      "6.5p1"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "6.0.rc1",
+        "6.0"
+      ]
+    },
+    "expected_output": [
+      "6.0",
+      "6.0.rc1"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "6.0",
+        "6.0.rc1"
+      ]
+    },
+    "expected_output": [
+      "6.0",
+      "6.0.rc1"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "10b2",
+        "10a1"
+      ]
+    },
+    "expected_output": [
+      "10a1",
+      "10b2"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "10a2",
+        "10b2"
+      ]
+    },
+    "expected_output": [
+      "10a2",
+      "10b2"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0aa",
+        "1.0aa"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0a",
+        "1.0aa"
+      ]
+    },
+    "expected_output": [
+      "1.0a",
+      "1.0aa"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0aa",
+        "1.0a"
+      ]
+    },
+    "expected_output": [
+      "1.0a",
+      "1.0aa"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "10.0001",
+        "10.0001"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "10.0001",
+        "10.1"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "10.1",
+        "10.0001"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "10.0001",
+        "10.0039"
+      ]
+    },
+    "expected_output": [
+      "10.0001",
+      "10.0039"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "10.0039",
+        "10.0001"
+      ]
+    },
+    "expected_output": [
+      "10.0001",
+      "10.0039"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "4.999.9",
+        "5.0"
+      ]
+    },
+    "expected_output": [
+      "4.999.9",
+      "5.0"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "5.0",
+        "4.999.9"
+      ]
+    },
+    "expected_output": [
+      "4.999.9",
+      "5.0"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "20101121",
+        "20101121"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "20101121",
+        "20101122"
+      ]
+    },
+    "expected_output": [
+      "20101121",
+      "20101122"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "20101122",
+        "20101121"
+      ]
+    },
+    "expected_output": [
+      "20101121",
+      "20101122"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "2_0",
+        "2_0"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "2.0",
+        "2_0"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "2_0",
+        "2.0"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "a",
+        "a"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "a+",
+        "a+"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "a+",
+        "a_"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "a_",
+        "a+"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "+a",
+        "+a"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "+a",
+        "_a"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "_a",
+        "+a"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "+_",
+        "+_"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "_+",
+        "+_"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "_+",
+        "_+"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "+",
+        "_"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "_",
+        "+"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0~rc1",
+        "1.0~rc1"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0~rc1",
+        "1.0"
+      ]
+    },
+    "expected_output": [
+      "1.0~rc1",
+      "1.0"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0",
+        "1.0~rc1"
+      ]
+    },
+    "expected_output": [
+      "1.0~rc1",
+      "1.0"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0~rc1",
+        "1.0~rc2"
+      ]
+    },
+    "expected_output": [
+      "1.0~rc1",
+      "1.0~rc2"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0~rc2",
+        "1.0~rc1"
+      ]
+    },
+    "expected_output": [
+      "1.0~rc1",
+      "1.0~rc2"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0~rc1~git123",
+        "1.0~rc1~git123"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0~rc1~git123",
+        "1.0~rc1"
+      ]
+    },
+    "expected_output": [
+      "1.0~rc1~git123",
+      "1.0~rc1"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0~rc1",
+        "1.0~rc1~git123"
+      ]
+    },
+    "expected_output": [
+      "1.0~rc1~git123",
+      "1.0~rc1"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0^",
+        "1.0^"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0^",
+        "1.0"
+      ]
+    },
+    "expected_output": [
+      "1.0",
+      "1.0^"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0",
+        "1.0^"
+      ]
+    },
+    "expected_output": [
+      "1.0",
+      "1.0^"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0^git1",
+        "1.0^git1"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0^git1",
+        "1.0"
+      ]
+    },
+    "expected_output": [
+      "1.0",
+      "1.0^git1"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0",
+        "1.0^git1"
+      ]
+    },
+    "expected_output": [
+      "1.0",
+      "1.0^git1"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0^git1",
+        "1.0^git2"
+      ]
+    },
+    "expected_output": [
+      "1.0^git1",
+      "1.0^git2"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0^git2",
+        "1.0^git1"
+      ]
+    },
+    "expected_output": [
+      "1.0^git1",
+      "1.0^git2"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0^git1",
+        "1.01"
+      ]
+    },
+    "expected_output": [
+      "1.0^git1",
+      "1.01"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.01",
+        "1.0^git1"
+      ]
+    },
+    "expected_output": [
+      "1.0^git1",
+      "1.01"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0^20160101",
+        "1.0^20160101"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0^20160101",
+        "1.0.1"
+      ]
+    },
+    "expected_output": [
+      "1.0^20160101",
+      "1.0.1"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0.1",
+        "1.0^20160101"
+      ]
+    },
+    "expected_output": [
+      "1.0^20160101",
+      "1.0.1"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0^20160101^git1",
+        "1.0^20160101^git1"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0^20160102",
+        "1.0^20160101^git1"
+      ]
+    },
+    "expected_output": [
+      "1.0^20160101^git1",
+      "1.0^20160102"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0^20160101^git1",
+        "1.0^20160102"
+      ]
+    },
+    "expected_output": [
+      "1.0^20160101^git1",
+      "1.0^20160102"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0~rc1^git1",
+        "1.0~rc1^git1"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0~rc1^git1",
+        "1.0~rc1"
+      ]
+    },
+    "expected_output": [
+      "1.0~rc1",
+      "1.0~rc1^git1"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0~rc1",
+        "1.0~rc1^git1"
+      ]
+    },
+    "expected_output": [
+      "1.0~rc1",
+      "1.0~rc1^git1"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0^git1~pre",
+        "1.0^git1~pre"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0^git1",
+        "1.0^git1~pre"
+      ]
+    },
+    "expected_output": [
+      "1.0^git1~pre",
+      "1.0^git1"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.0^git1~pre",
+        "1.0^git1"
+      ]
+    },
+    "expected_output": [
+      "1.0^git1~pre",
+      "1.0^git1"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version oddity, commented out in upstream rpmvercmp.at.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1b.fc17",
+        "1b.fc17"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version oddity, commented out in upstream rpmvercmp.at.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1b.fc17",
+        "1.fc17"
+      ]
+    },
+    "expected_output": [
+      "1b.fc17",
+      "1.fc17"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version oddity, commented out in upstream rpmvercmp.at.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.fc17",
+        "1b.fc17"
+      ]
+    },
+    "expected_output": [
+      "1b.fc17",
+      "1.fc17"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version oddity, commented out in upstream rpmvercmp.at.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1g.fc17",
+        "1g.fc17"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version oddity, commented out in upstream rpmvercmp.at.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1g.fc17",
+        "1.fc17"
+      ]
+    },
+    "expected_output": [
+      "1.fc17",
+      "1g.fc17"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version oddity, commented out in upstream rpmvercmp.at.",
+    "test_group": "basic",
+    "test_type": "comparison",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.fc17",
+        "1g.fc17"
+      ]
+    },
+    "expected_output": [
+      "1.fc17",
+      "1g.fc17"
+    ]
+  },
+  {
+    "description": "Comparison test for RPM version oddity, commented out in upstream rpmvercmp.at.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.1.α",
+        "1.1.α"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version oddity, commented out in upstream rpmvercmp.at.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.1.α",
+        "1.1.β"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version oddity, commented out in upstream rpmvercmp.at.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.1.β",
+        "1.1.α"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version oddity, commented out in upstream rpmvercmp.at.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.1.αα",
+        "1.1.α"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version oddity, commented out in upstream rpmvercmp.at.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.1.α",
+        "1.1.ββ"
+      ]
+    },
+    "expected_output": true
+  },
+  {
+    "description": "Comparison test for RPM version oddity, commented out in upstream rpmvercmp.at.",
+    "test_group": "basic",
+    "test_type": "equality",
+    "input": {
+      "input_scheme": "rpm",
+      "versions": [
+        "1.1.ββ",
+        "1.1.αα"
+      ]
+    },
+    "expected_output": true
+  }
+]
