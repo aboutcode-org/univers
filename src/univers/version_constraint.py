@@ -5,12 +5,43 @@
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
 import operator
+import re
 from functools import total_ordering
+from urllib.parse import quote
+from urllib.parse import unquote_to_bytes
 
 import attr
 
 from univers.utils import remove_spaces
 from univers.versions import Version
+
+VERS_VERSION_SAFE_CHARS = "/$&'()+,;:@"
+
+
+def encode_vers_version(version):
+    return quote(version, safe=VERS_VERSION_SAFE_CHARS, encoding="ascii", errors="strict")
+
+
+def decode_vers_version(version):
+    if not re.fullmatch(r"(?:[^%]|%[0-9A-Fa-f]{2})*", version):
+        raise ValueError(f"{version!r} contains invalid percent-encoding.")
+
+    try:
+        decoded = unquote_to_bytes(version).decode("ascii")
+    except UnicodeDecodeError as error:
+        raise ValueError(f"{version!r} contains non-ASCII version data.") from error
+
+    if any(
+        (ord(char) < 0x20 and char != " ") or ord(char) > 0x7E
+        for char in decoded
+    ):
+        raise ValueError(f"{version!r} contains non-canonical whitespace or non-ASCII data.")
+
+    if version != encode_vers_version(decoded):
+        raise ValueError(f"{version!r} contains non-canonical percent-encoding.")
+
+    return decoded
+
 
 try:
     # only stanadard in Python 3.10 and up
@@ -109,15 +140,16 @@ class VersionConstraint:
             return "*"
 
         if self.comparator == "=":
-            return str(self.version)
+            return encode_vers_version(str(self.version))
 
-        version = str(self.version)
+        version = encode_vers_version(str(self.version))
         return f"{self.comparator}{version}"
 
     to_string = __str__
 
     def to_dict(self):
-        return dict(comparator=self.comparator, version=str(self.version))
+        version = self.version.string if self.version is not None else str(self.version)
+        return dict(comparator=self.comparator, version=version)
 
     def __hash__(self):
         return hash(str(self))
@@ -292,8 +324,11 @@ class VersionConstraint:
         # occur only once in any ``<version-constraint>`` of a range specifier,
         # irrespective of its comparators. Tools must report an error for duplicated
         # versions.
-        if len(set(c.version for c in constraints)) != len(constraints):
-            raise ValueError(f"{constraints!r} cannot contain duplicated Version")
+        versions = []
+        for constraint in constraints:
+            if any(constraint.version == version for version in versions):
+                raise ValueError(f"{constraints!r} cannot contain duplicated Version")
+            versions.append(constraint.version)
 
         # Constraints are sorted by version**. The canonical ordering is the versions
         # order. The ordering of ``<version-constraint>`` is not significant otherwise
