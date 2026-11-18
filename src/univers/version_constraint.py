@@ -31,10 +31,7 @@ def decode_vers_version(version):
     except UnicodeDecodeError as error:
         raise ValueError(f"{version!r} contains non-ASCII version data.") from error
 
-    if any(
-        (ord(char) < 0x20 and char != " ") or ord(char) > 0x7E
-        for char in decoded
-    ):
+    if any((ord(char) < 0x20 and char != " ") or ord(char) > 0x7E for char in decoded):
         raise ValueError(f"{version!r} contains non-canonical whitespace or non-ASCII data.")
 
     if version != encode_vers_version(decoded):

@@ -113,9 +113,7 @@ class VersionRange:
             )
 
         if any(ord(char) < 0x21 or ord(char) > 0x7E for char in vers):
-            raise ValueError(
-                f"{vers!r} contains non-canonical whitespace or non-ASCII characters."
-            )
+            raise ValueError(f"{vers!r} contains non-canonical whitespace or non-ASCII characters.")
 
         uri_scheme, separator, scheme_range_spec = vers.partition(":")
         if not separator:
@@ -159,9 +157,7 @@ class VersionRange:
 
         for const in constraints.split("|"):
             if const.startswith("="):
-                raise ValueError(
-                    f"{vers!r} contains a non-canonical explicit equality comparator."
-                )
+                raise ValueError(f"{vers!r} contains a non-canonical explicit equality comparator.")
             comparator, version = VersionConstraint.split(const)
             if not version:
                 raise ValueError(f"{vers!r} contains an empty version.")

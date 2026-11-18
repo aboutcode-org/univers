@@ -48,9 +48,7 @@ def test_from_string_accepts_bare_version_as_implicit_equality():
 def test_from_string_decodes_percent_encoding_once():
     vers = VersionRange.from_string("vers:npm/1.0%252F0")
 
-    assert vers.to_dict()["constraints"] == [
-        {"comparator": "=", "version": "1.0%2F0"}
-    ]
+    assert vers.to_dict()["constraints"] == [{"comparator": "=", "version": "1.0%2F0"}]
     vers = VersionRange.from_string("vers:lexicographic/1.0%252F0")
     assert vers.to_string() == "vers:lexicographic/1.0%252F0"
 
