@@ -453,8 +453,8 @@ def test_version_range_datetime():
 
 def test_version_range_lexicographic():
     assert LexicographicVersion("1.2.3") in VersionRange.from_string(
-        "vers:lexicographic/<1.2.4|>0.9"
+        "vers:lexicographic/>0.9|<1.2.4"
     )
     assert LexicographicVersion(-123) in VersionRange.from_string("vers:lexicographic/<~")
     assert LexicographicVersion(None) in VersionRange.from_string("vers:lexicographic/*")
-    assert LexicographicVersion("ABC") in VersionRange.from_string("vers:lexicographic/>abc|<=None")
+    assert LexicographicVersion("ABC") in VersionRange.from_string("vers:lexicographic/<=None|>abc")
