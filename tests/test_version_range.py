@@ -69,13 +69,13 @@ class TestVersionRangeContainment(SchemaDrivenVersTest):
 
 
 @pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_NPM_CONTAINMENT)))
-def test_range_containment(test_case):
+def test_npm_range_containment(test_case):
     test = TestVersionRangeContainment.from_data(data=test_case)
     test.assert_result()
 
 
 @pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_PYPI_CONTAINMENT)))
-def test_range_containment(test_case):
+def test_pypi_range_containment(test_case):
     test = TestVersionRangeContainment.from_data(data=test_case)
     test.assert_result()
 
@@ -98,49 +98,43 @@ class TestVersionRangeParseNative(SchemaDrivenVersTest):
 
 
 @pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_CONAN_FROM_NATIVE)))
-def test_range_from_native(test_case):
+def test_conan_range_from_native(test_case):
     test = TestVersionRangeParseNative.from_data(data=test_case)
     test.assert_result()
 
 
 @pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_GEM_FROM_NATIVE)))
-def test_npm_range_from_native(test_case):
+def test_gem_range_from_native(test_case):
     test = TestVersionRangeParseNative.from_data(data=test_case)
     test.assert_result()
 
 
 @pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_NGINX_FROM_NATIVE)))
-def test_conan_range_from_native(test_case):
+def test_nginx_range_from_native(test_case):
     test = TestVersionRangeParseNative.from_data(data=test_case)
     test.assert_result()
 
 
 @pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_CONAN_FROM_NATIVE_BASIC)))
-def test_conan_range_from_native(test_case):
+def test_conan_range_from_native_basic(test_case):
     test = TestVersionRangeParseNative.from_data(data=test_case)
     test.assert_result()
 
 
-@pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_CONAN_FROM_NATIVE)))
-def test_conan_version_range_parse(test_case):
-    avc = TestVersionRangeParseNative.from_data(data=test_case)
-    avc.assert_result()
-
-
 @pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_OPENSSL_FROM_NATIVE)))
-def test_npm_range_from_native(test_case):
+def test_openssl_range_from_native(test_case):
     test = TestVersionRangeParseNative.from_data(data=test_case)
     test.assert_result()
 
 
 @pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_NUGET_FROM_NATIVE)))
-def test_npm_range_from_native(test_case):
+def test_nuget_range_from_native(test_case):
     test = TestVersionRangeParseNative.from_data(data=test_case)
     test.assert_result()
 
 
 @pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_PYPI_FROM_NATIVE)))
-def test_conan_range_from_native(test_case):
+def test_pypi_range_from_native(test_case):
     test = TestVersionRangeParseNative.from_data(data=test_case)
     test.assert_result()
 
@@ -157,7 +151,7 @@ class TestGitlabVersionRangeNative(SchemaDrivenVersTest):
 
 
 @pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_COMPOSER_GITLAB_FROM_NATIVE)))
-def test_pypi_gitlab_range_from_native(test_case):
+def test_composer_gitlab_range_from_native(test_case):
     test = TestGitlabVersionRangeNative.from_data(data=test_case)
     test.assert_result()
 
@@ -169,13 +163,13 @@ def test_conan_gitlab_range_from_native(test_case):
 
 
 @pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_GEM_GITLAB_FROM_NATIVE)))
-def test_conan_gitlab_range_from_native(test_case):
+def test_gem_gitlab_range_from_native(test_case):
     test = TestGitlabVersionRangeNative.from_data(data=test_case)
     test.assert_result()
 
 
 @pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_GOLANG_GITLAB_FROM_NATIVE)))
-def test_gem_gitlab_range_from_native(test_case):
+def test_golang_gitlab_range_from_native(test_case):
     test = TestGitlabVersionRangeNative.from_data(data=test_case)
     test.assert_result()
 
@@ -187,7 +181,7 @@ def test_npm_gitlab_range_from_native(test_case):
 
 
 @pytest.mark.parametrize("test_case", json.load(open(TEST_DATA_PYPI_GITLAB_FROM_NATIVE)))
-def test_npm_gitlab_range_from_native(test_case):
+def test_pypi_gitlab_range_from_native(test_case):
     test = TestGitlabVersionRangeNative.from_data(data=test_case)
     test.assert_result()
 
