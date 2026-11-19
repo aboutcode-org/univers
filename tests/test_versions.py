@@ -247,7 +247,7 @@ def test_datetime_version():
 
 def test_lexicographic_version():
     assert LexicographicVersion("abc") == LexicographicVersion("abc")
-    assert LexicographicVersion(" abc") == LexicographicVersion("abc")
+    assert LexicographicVersion(" abc") != LexicographicVersion("abc")
     assert LexicographicVersion("123") == LexicographicVersion(123)
     assert LexicographicVersion("abc") > LexicographicVersion(None)
     assert LexicographicVersion("Abc") < LexicographicVersion(None)

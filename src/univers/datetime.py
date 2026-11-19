@@ -105,6 +105,9 @@ class DatetimeVersion:
     def __ge__(self, other):
         return self.parsed_stamp >= other.parsed_stamp
 
+    def __str__(self):
+        return self.original
+
     @classmethod
     def is_valid(cls, string):
         return bool(cls.VERSION_PATTERN.fullmatch(string))

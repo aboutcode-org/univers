@@ -21,6 +21,7 @@ from univers.conan.version_range import VersionRange as conan_version_range
 from univers.utils import remove_spaces
 from univers.version_constraint import VersionConstraint
 from univers.version_constraint import contains_version
+from univers.version_constraint import decode_vers_version
 from univers.versions import AllVersion
 from univers.versions import NoneVersion
 
@@ -101,31 +102,30 @@ class VersionRange:
     def from_string(cls, vers, simplify=False, validate=False):
         """
         Return a VersionRange built from a ``vers`` version range spec string,
-        such as "vers:npm/1.2.3,>=2.0.0"
+        such as "vers:npm/1.2.3|>=2.0.0".
+
+        VERS syntax and constraints are always validated. ``validate`` is
+        retained for compatibility with callers of earlier versions.
         """
         if not vers or not isinstance(vers, str) or not vers.strip():
             raise ValueError(
                 f"{vers!r} is not a valid argument, a valid ``vers`` string argument is required."
             )
 
-        # Spaces are not significant and removed in a canonical form.
-        vers = remove_spaces(vers)
+        if any(ord(char) < 0x21 or ord(char) > 0x7E for char in vers):
+            raise ValueError(f"{vers!r} contains non-canonical whitespace or non-ASCII characters.")
 
-        # A version range specifier contains only printable ASCII letters, digits and
-        # punctuation.
-        is_ascii = len(vers) + 2 == len(ascii(vers))
-        if not is_ascii:
-            raise ValueError(f"Invalid non ASCII characters: {vers!r}")
-
-        # The URI scheme and versioning scheme are always lowercase as in  ``vers:npm``.
-        uri_scheme, _, scheme_range_spec = vers.partition(":")
-        uri_scheme = uri_scheme.lower()
-
+        uri_scheme, separator, scheme_range_spec = vers.partition(":")
+        if not separator:
+            raise ValueError(f"{vers!r} must start with the 'vers:' URI scheme.")
         if uri_scheme != "vers":
             raise ValueError(f"{vers!r} must start with the 'vers:' URI scheme.")
 
-        versioning_scheme, _, constraints = scheme_range_spec.partition("/")
-        versioning_scheme = versioning_scheme.lower()
+        versioning_scheme, separator, constraints = scheme_range_spec.partition("/")
+        if not separator:
+            raise ValueError(f"{vers!r} must contain a type and constraints separated by '/'.")
+        if versioning_scheme != versioning_scheme.lower():
+            raise ValueError(f"{vers!r} contains a non-lowercase VERS type.")
         range_class = RANGE_CLASS_BY_SCHEMES.get(versioning_scheme)
         if not range_class:
             raise ValueError(
@@ -134,13 +134,19 @@ class VersionRange:
 
         version_class = range_class.version_class
 
-        constraints = remove_spaces(constraints)
         if not constraints:
             raise ValueError(f"{vers!r} specifies no version range constraints.")
 
+        if constraints.startswith("|"):
+            raise ValueError(f"{vers!r} has a leading pipe in its constraints.")
+        if constraints.endswith("|"):
+            raise ValueError(f"{vers!r} has a trailing pipe in its constraints.")
+        if "||" in constraints:
+            raise ValueError(f"{vers!r} has consecutive pipes in its constraints.")
+
         # There is only one star: "*" must only occur once and alone in a range,
         # without any other constraint or version.
-        if constraints.startswith("*"):
+        if "*" in constraints:
             if constraints != "*":
                 raise ValueError(f"{vers!r} contains an invalid '*' constraint.")
             return range_class(
@@ -149,23 +155,26 @@ class VersionRange:
 
         parsed_constraints = []
 
-        constraints = constraints.strip("|")
         for const in constraints.split("|"):
-            constraint = VersionConstraint.from_string(
-                string=const,
+            if const.startswith("="):
+                raise ValueError(f"{vers!r} contains a non-canonical explicit equality comparator.")
+            comparator, version = VersionConstraint.split(const)
+            if not version:
+                raise ValueError(f"{vers!r} contains an empty version.")
+            version = decode_vers_version(version)
+            constraint = VersionConstraint(
+                comparator=comparator,
+                version=version_class(version),
                 version_class=version_class,
             )
             parsed_constraints.append(constraint)
 
-        # Constraints are sorted by version**. The canonical ordering is the versions
-        # order. The ordering of ``<version-constraint>`` is not significant otherwise
-        # but this sort order is needed when check if a version is contained in a range.
-        parsed_constraints.sort()
+        if parsed_constraints != sorted(parsed_constraints):
+            raise ValueError(f"{vers!r} has constraints that are not sorted by version.")
 
+        VersionConstraint.validate(list(parsed_constraints))
         if simplify:
             parsed_constraints = VersionConstraint.simplify(parsed_constraints)
-        if validate:
-            VersionConstraint.validate(parsed_constraints)
 
         return range_class(parsed_constraints)
 

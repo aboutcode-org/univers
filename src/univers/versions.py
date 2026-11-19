@@ -158,7 +158,7 @@ class LexicographicVersion(Version):
 
     @classmethod
     def normalize(cls, string):
-        return remove_spaces(str(string))
+        return str(string)
 
     def __lt__(self, other):
         return self.value.encode("utf-8") < other.value.encode("utf-8")
