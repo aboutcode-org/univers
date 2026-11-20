@@ -5,8 +5,11 @@
 # Visit https://aboutcode.org and https://github.com/aboutcode-org/univers for support and download.
 
 from univers.version_constraint import VersionConstraint
+from univers.version_range import InvalidVersionRange
 from univers.version_range import MavenVersionRange
+from univers.version_range import NugetVersionRange
 from univers.versions import MavenVersion
+from univers.versions import NugetVersion
 
 
 def test_maven_version_range_from_native_with_lower_inclusive():
@@ -34,6 +37,23 @@ def test_maven_version_range_from_native_for_pinned_version():
     assert version_range == MavenVersionRange(
         constraints=(VersionConstraint(comparator="=", version=MavenVersion(string="1.0.0")),)
     )
+
+
+def test_maven_version_range_from_native_for_soft_requirement():
+    version_range = MavenVersionRange.from_native("1.0.0")
+    assert version_range == MavenVersionRange(
+        constraints=(VersionConstraint(comparator="=", version=MavenVersion(string="1.0.0")),)
+    )
+    assert str(version_range) == "vers:maven/1.0.0"
+    assert MavenVersion("1.0.0") in version_range
+    assert MavenVersion("2.0.0") not in version_range
+
+
+def test_maven_version_range_from_native_for_unbounded_range():
+    for native in ("(,)", "[,]"):
+        version_range = MavenVersionRange.from_native(native)
+        assert str(version_range) == "vers:maven/*"
+        assert MavenVersion("1.0.0") in version_range
 
 
 def test_maven_version_range_from_native_for_illformed_version():
@@ -73,3 +93,19 @@ def test_maven_version_range_from_native_for_multiple_pinned_versions_and_a_rang
             VersionConstraint(comparator="<", version=MavenVersion(string="2.15.0")),
         )
     )
+
+
+def test_nuget_version_range_from_native_for_bare_version_is_minimum_version():
+    version_range = NugetVersionRange.from_native("1.0")
+    assert str(version_range) == "vers:nuget/>=1.0.0"
+    assert NugetVersion("2.0") in version_range
+    assert NugetVersion("0.9") not in version_range
+
+
+def test_nuget_version_range_from_native_for_unbounded_range_is_invalid():
+    for native in ("(,)", "[,]", "(, )"):
+        try:
+            NugetVersionRange.from_native(native)
+            assert False, "should have raised an exception"
+        except InvalidVersionRange:
+            pass

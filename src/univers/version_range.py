@@ -790,14 +790,33 @@ class MavenVersionRange(VersionRange):
 
         string = "".join(string.split(" "))
 
-        restrictions = maven.VersionRange(string).restrictions
+        maven_range = maven.VersionRange(string)
+
+        # A bare version such as "1.0" is a Maven "soft" requirement: the
+        # version Maven picks when nothing else conflicts. Treat it as that
+        # exact version, like a bare version in other schemes.
+        if maven_range.version:
+            return cls(
+                constraints=[
+                    VersionConstraint(
+                        comparator="=", version=cls.version_class(str(maven_range.version))
+                    )
+                ]
+            )
+
         constraints = []
 
-        for restriction in restrictions:
+        for restriction in maven_range.restrictions:
             lower_bound = restriction.lower_bound
             upper_bound = restriction.upper_bound
             lower_inclusive = restriction.lower_bound_inclusive
             upper_inclusive = restriction.upper_bound_inclusive
+
+            if lower_bound is None and upper_bound is None:
+                # "(,)" has no bounds: it matches every version.
+                return cls(
+                    constraints=[VersionConstraint(comparator="*", version_class=cls.version_class)]
+                )
 
             if lower_bound == upper_bound:
                 constraints.append(
@@ -848,6 +867,25 @@ class NugetVersionRange(MavenVersionRange):
 
     scheme = "nuget"
     version_class = versions.NugetVersion
+
+    @classmethod
+    def from_native(cls, string):
+        """
+        Return a VersionRange built from a NuGet version range ``string``.
+        See https://learn.microsoft.com/en-us/nuget/concepts/package-versioning#version-ranges
+        """
+        stripped = "".join(string.split())
+        # Unlike Maven, a bare NuGet version is a minimum version: "1.0" means ">=1.0".
+        if stripped and stripped[0] not in "[(":
+            return cls(
+                constraints=[
+                    VersionConstraint(comparator=">=", version=cls.version_class(stripped))
+                ]
+            )
+        # NuGet does not allow a range without any bound such as "(,)".
+        if stripped.replace(",", "") in ("()", "[]", "(]", "[)"):
+            raise InvalidVersionRange(f"NuGet range has no bounds: {string!r}")
+        return super().from_native(string)
 
 
 class ComposerVersionRange(VersionRange):
