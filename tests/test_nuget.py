@@ -40,7 +40,7 @@ class NugetVersionComp(SchemaDrivenVersTest):
 
 
 @pytest.mark.parametrize("test_case", json.load(open(TEST_DATA)))
-def test_gentoo_vers_cmp(test_case):
+def test_nuget_vers_cmp(test_case):
     avc = NugetVersionComp.from_data(data=test_case)
     avc.assert_result()
 

@@ -33,7 +33,7 @@ class MavenVersionComp(SchemaDrivenVersTest):
 
 
 @pytest.mark.parametrize("test_case", json.load(open(TEST_DATA)))
-def test_gentoo_vers_cmp(test_case):
+def test_maven_vers_cmp(test_case):
     avc = MavenVersionComp.from_data(data=test_case)
     avc.assert_result()
 
