@@ -419,7 +419,7 @@ class Version(object):
         return self.__cmp__(other) == 0
 
     def __hash__(self):
-        return hash(self._unparsed)
+        return hash(self._parsed)
 
     def __lt__(self, other):
         return self.__cmp__(other) < 0
@@ -493,9 +493,14 @@ class Version(object):
 
     def _normalize(self, l):
         for item in l[::-1]:
-            if not item:
+            if isinstance(item, list):
+                self._normalize(item)
+                if item:
+                    break
                 l.pop()
-            elif not isinstance(item, list):
+            elif not item:
+                l.pop()
+            else:
                 break
         return l
 

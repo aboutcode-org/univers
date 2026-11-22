@@ -354,6 +354,23 @@ class TestVersion(unittest.TestCase):
         self.assertRaises(RuntimeError, v._list_compare, v, 1.0)
         self.assertRaises(RuntimeError, v._string_compare, v, 1.0)
 
+    def test_version_hash_is_consistent_with_equality(self):
+        equal_pairs = (
+            ("1", "1.0"),
+            ("1", "1.0.0"),
+            ("1-2", "1-2-0"),
+        )
+        for left, right in equal_pairs:
+            first = Version(left)
+            second = Version(right)
+            assert first == second
+            assert hash(first) == hash(second)
+            assert len({first, second}) == 1
+
+    def test_normalize_is_recursive(self):
+        assert Version("1-2-0")._parsed == (1, (2,))
+        assert Version("1-2")._parsed == (1, (2,))
+
 
 class TestVersionRange(unittest.TestCase):
     def test_no_lower_limit(self):
