@@ -743,6 +743,34 @@ class ConanVersion(Version):
         return self.value and self.value.bump(index)
 
 
+class AutoconfVersion(Version):
+    """
+    Version comparison scheme used in GNU Autoconf's AX_COMPARE_VERSION macro.
+
+    Separators ``-``, ``_``, and ``.`` are treated Same.
+    An empty string is treated as version ``0``.
+    """
+
+    @classmethod
+    def build_value(cls, string):
+        if not string:
+            return (0,)
+
+        string = string.replace("-", ".").replace("_", ".")
+        parts = string.split(".")
+
+        return tuple(int(p) for p in parts if p)
+
+    @classmethod
+    def is_valid(cls, string):
+        try:
+            cls.build_value(string)
+            return True
+        except (ValueError, TypeError):
+            return False
+
+
+
 AVAILABLE_VERSIONS = [
     SemverVersion,
     GolangVersion,
@@ -762,4 +790,5 @@ AVAILABLE_VERSIONS = [
     IntdotVersion,
     DatetimeVersion,
     LexicographicVersion,
+    AutoconfVersion,
 ]
